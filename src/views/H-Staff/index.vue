@@ -1,5 +1,5 @@
 <template>
-  <div>123456</div>
+  <div>第二次测试123456</div>
 </template>
 
 <script>
