@@ -1,6 +1,9 @@
 <template>
   <div class="login">
+    
     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="0px" class="loginForm">
+      <img src="
+      " alt="">
       <h1 class="loginTitle">医疗安全信息管理系统</h1>
       <el-form-item prop="name">
         <el-input type="text" v-model="ruleForm.name" placeholder="请输入账号" autocomplete="off"></el-input>
@@ -110,20 +113,23 @@ export default {
   flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
+  background-color: #666ee8;
+
   height: 100%;
-  background-image: url('../../../public/img/background.jpeg');
-  background-size: 100% 100%;
+  // background-image: url('../../../public/img/background.jpeg');
+  // background-size: 100% 100%;
   &Form {
     -webkit-border-radius: 20px;
-    border-radius: 20px;
+    border-radius: 5px;
     -moz-border-radius: 20px;
     background-clip: padding-box;
     margin: 180px auto;
-    width: 350px;
+    width: 48%;
+    height: 70%;
     padding: 35px 50px 20px 50px;
-    background-image: linear-gradient(to right, rgba(	245,245,220,0.9), rgba(255,255,224,0.85));
-    border: 1px solid #eaeaea;
-    // box-shadow: 0 0 5px #AFEEEE; 
+    background-image: linear-gradient(to right, #ffffff, #ffffff);
+    border: 1px solid #ffffff;
+    box-shadow: 0 0 10px #474747; 
   }
   &Title {
     margin: 0 0 20px 0;
