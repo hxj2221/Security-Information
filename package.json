@@ -39,6 +39,7 @@
   "devDependencies": {
     "@types/chai": "^4.1.0",
     "@types/mocha": "^5.2.4",
+    "@types/node": "^14.14.16",
     "@vue/cli-plugin-babel": "^4.0.0",
     "@vue/cli-plugin-eslint": "^4.0.0",
     "@vue/cli-plugin-pwa": "^4.0.0",

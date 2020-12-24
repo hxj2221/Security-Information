@@ -1,0 +1,23 @@
+{
+  "id": "2289774",
+  "name": "hospital",
+  "font_family": "iconfont",
+  "css_prefix_text": "el-icon-hospital-password",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "17606301",
+      "name": "导出",
+      "font_class": "export",
+      "unicode": "e6a2",
+      "unicode_decimal": 59042
+    },
+    {
+      "icon_id": "7964497",
+      "name": "密码",
+      "font_class": "mima",
+      "unicode": "e62f",
+      "unicode_decimal": 58927
+    }
+  ]
+}

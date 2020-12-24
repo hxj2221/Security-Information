@@ -122,7 +122,7 @@ export default {
       height: 100%;
       padding: 10px;
       // border: 2px solid blue;
-      background-color: #ffffff;
+      background-color: #f2f2f2;
       overflow: auto;
       display: flex;
       flex-flow: column nowrap;
