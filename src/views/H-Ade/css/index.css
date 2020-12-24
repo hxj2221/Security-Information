@@ -223,15 +223,40 @@
   font-weight: 700;
   color: #333;
   margin-bottom: 10px;
+  text-align: left;
 }
 .cent_info .has-gutter tr th{
   background-color: #fff;
 }
-.cent_info .box .el-row .el-col{
+.cent_info .box{
+  text-align: left;
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  line-height: 30px;
+}
+.cent_info .box .box_con{
+  border: 1px solid #e4e4e4;
+  width: 33.3333%;
+}
+.cent_info .box .box_con .tit{
+  border-right: 1px solid #e4e4e4;
+  width: 50%;
+  display: inline-block;
+  background-color: #f2f2f2;
+}
+.cent_info .box .box_con1{
+  width: 100%;
   border: 1px solid #e4e4e4;
 }
-.cent_info .box .el-row .el-col p span{
-  border-left: 1px solid #e4e4e4;
-  margin-left: 43px;
+.cent_info .box .box_con1 .tit{
+  border-right: 1px solid #e4e4e4;
+  width: 16.55%;
+  display: inline-block;
+  background-color: #f2f2f2;
 }
+
+
+
 

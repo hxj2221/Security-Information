@@ -43,19 +43,63 @@
     <div class="cent_info">
       <p>基本信息</p>
       <div class="box">
-        <el-row>
-          <el-col :span="8">
-            <p>患者姓名:<span>薛小刚</span></p>
-          </el-col>
-          <el-col :span="8">
-            <p>性别/年龄：<span>男/35</span></p>
-          </el-col>
-          <el-col :span="8">
-            <p>住院号:<span>1018769</span></p>
-          </el-col>
-        </el-row>
+        <div class="box_con">
+          <span class="tit">患者姓名：</span>
+          <span class="con">薛小刚</span>
+        </div>
+        <div class="box_con">
+          <span class="tit">性别/年龄：</span>
+          <span class="con">男/35</span>
+        </div>
+        <div class="box_con">
+          <span class="tit">住院号：</span>
+          <span class="con">1018769</span>
+        </div>
       </div>
-      
+      <div class="box">
+        <div class="box_con">
+          <span class="tit">入院日期：</span>
+          <span class="con">2020-12-02</span>
+        </div>
+        <div class="box_con">
+          <span class="tit">科室：</span>
+          <span class="con">门诊室</span>
+        </div>
+        <div class="box_con">
+          <span class="tit">床号：</span>
+          <span class="con">08</span>
+        </div>
+      </div>
+      <div class="box">
+        <div class="box_con1">
+          <span class="tit">不良发生时间</span>
+          <span class="con">2020-12-02</span>
+        </div>
+      </div>
+      <div class="box">
+        <div class="box_con1">
+          <span class="tit">不良报告时间</span>
+          <span class="con">2020-12-02</span>
+        </div>
+      </div>
+      <div class="box">
+        <div class="box_con1">
+          <span class="tit">主管医师</span>
+          <span class="con"></span>
+        </div>
+      </div>
+      <div class="box">
+        <div class="box_con1">
+          <span class="tit">主管护师</span>
+          <span class="con"></span>
+        </div>
+      </div>
+      <div class="box">
+        <div class="box_con1">
+          <span class="tit">在场相关人员</span>
+          <span class="con"></span>
+        </div>
+      </div>
     </div>
 
   </div>

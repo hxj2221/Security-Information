@@ -30,7 +30,7 @@
       </el-table-column>
     </el-table>
     <!-- 查看 -->
-    <el-dialog :visible.sync="dialogVisible" width="60%" >
+    <el-dialog :visible.sync="dialogVisible" width="75%" >
       <check-bad></check-bad>      
     </el-dialog>
   </div>
