@@ -40,8 +40,13 @@ hr {
 /* 表单搜索样式 */
 .seach {
     float: left;
+    margin-left: 15px;
 }
 
+.block>.el-input{
+    margin-right: 15px;
+    margin-left:15px;
+}
 .block {
     overflow: hidden;
     display: flex;
