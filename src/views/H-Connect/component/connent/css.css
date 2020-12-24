@@ -43,10 +43,11 @@ hr {
     margin-left: 15px;
 }
 
-.block>.el-input{
+.block>.el-input {
     margin-right: 15px;
-    margin-left:15px;
+    margin-left: 15px;
 }
+
 .block {
     overflow: hidden;
     display: flex;
@@ -61,17 +62,18 @@ hr {
     line-height: 40px;
 }
 
-.el-input{
-    width:160px;
+.el-input {
+    width: 160px;
     margin-left: 10px;
     margin-right: 10px;
 }
 
 /* 表单表格样式 */
-.myTable{
+.myTable {
     /* padding-bottom: 50px; */
     margin-bottom: 30px;
 }
+
 .el-table td,
 .el-table th {
     text-align: center !important;
@@ -81,14 +83,17 @@ hr {
     font-size: 10px;
     padding-left: 8px;
 }
+
 /* 分页 */
-.paging{
-   overflow: hidden;
-   margin: 0 15px;
+.paging {
+    overflow: hidden;
+    margin: 0 15px;
 }
-.paging>.block{
+
+.paging>.block {
     float: right;
 }
-.el-input{
+
+.el-input {
     display: inline-block;
 }

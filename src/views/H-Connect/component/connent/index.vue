@@ -6,7 +6,11 @@
         <h6>医患沟通记录</h6>
       </div>
       <div class="top_right">
-        <el-button type="primary" size="small" icon="el-icon-plus" @click="addRecord"
+        <el-button
+          type="primary"
+          size="small"
+          icon="el-icon-plus"
+          @click="addRecord"
           >新增记录</el-button
         >
         <el-button size="small" icon="el-icon-d-arrow-right">导出</el-button>
@@ -14,9 +18,9 @@
     </div>
     <hr />
     <!-- 表单部分 -->
-    <div class="Tableall" >
+    <div class="Tableall">
       <!-- 表单搜素部分 -->
-      <div class="seach"    >
+      <div class="seach">
         <p>沟通日期</p>
         <div class="block">
           <el-date-picker
@@ -35,27 +39,28 @@
             maxlength="10"
             placeholder="输入患者姓名"
           ></el-input>
-          <el-button type="primary" icon="el-icon-search" size="small" 
+          <el-button type="primary" icon="el-icon-search" size="small"
             >搜索</el-button
           >
         </div>
       </div>
       <!-- 表单表格部分 -->
-      <div class="myTable"><!--  -->
+      <div class="myTable">
+        <!--  -->
         <el-table :data="tableData" style="width: 100%">
-          <el-table-column label="序号" width="60px" >
+          <el-table-column label="序号" width="60px">
             <template slot-scope="scope">
               <span>{{ scope.row.num }}</span>
             </template>
           </el-table-column>
 
-          <el-table-column label="记录编号"  > 
+          <el-table-column label="记录编号">
             <template slot-scope="scope">
               <span>{{ scope.row.jlbh }}</span>
             </template>
           </el-table-column>
 
-          <el-table-column label="患者姓名" width="100px" >
+          <el-table-column label="患者姓名" width="100px">
             <template slot-scope="scope">
               <span>{{ scope.row.name }}</span>
             </template>
@@ -85,7 +90,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="主要沟通事项" width="80px" >
+          <el-table-column label="主要沟通事项" width="80px">
             <template slot-scope="scope">
               <el-popover trigger="hover" placement="top">
                 <p>{{ scope.row.zygtsx }}</p>
@@ -205,25 +210,25 @@ export default {
       seachTime: "", //选择时间
       input: "", //input内容
       // 分页
-        currentPage4: 4
+      currentPage4: 4,
     };
   },
   methods: {
-      handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
-      },
-      handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
-      },
-      // 新增记录
-      addRecord(){
-        this.$emit('abcClick')
-      },
-      // 记录详情
-      details(){
-        console.log(12)
-        this.$emit('abClick')
-      }
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+    },
+    // 新增记录
+    addRecord() {
+      this.$emit("abcClick");
+    },
+    // 记录详情
+    details() {
+      console.log(12);
+      this.$emit("abClick");
+    },
   },
 };
 </script>

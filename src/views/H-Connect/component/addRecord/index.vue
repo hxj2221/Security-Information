@@ -234,7 +234,9 @@
     <!-- 固定定位按钮 -->
     <div class="button">
       <div class="button_stlye">
-        <el-button size="small" icon="el-icon-back" @click="mysubmit">返回</el-button>
+        <el-button size="small" icon="el-icon-back" @click="mysubmit"
+          >返回</el-button
+        >
         <el-button
           type="primary"
           size="small"

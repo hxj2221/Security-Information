@@ -1,6 +1,10 @@
 <template>
   <div>
-    <Connent v-show="isShow" @abcClick="myClick1" @abClick="mydetails"></Connent>
+    <Connent
+      v-show="isShow"
+      @abcClick="myClick1"
+      @abClick="mydetails"
+    ></Connent>
     <Add @abcClick="myClick" v-show="isShows"></Add>
     <Form v-show="isdetails"></Form>
   </div>
@@ -19,14 +23,13 @@ export default {
   props: {},
   data() {
     return {
-      isShow: true,//首页
-      isShows: false,//新建
-      isdetails: false,//详情
+      isShow: true, //首页
+      isShows: false, //新建
+      isdetails: false, //详情
     };
   },
   methods: {
     myClick() {
-      
       this.isShow = !this.isShow;
       this.isShows = !this.isShows;
     },
@@ -35,8 +38,8 @@ export default {
       this.isShows = !this.isShows;
     },
     mydetails() {
-      console.log('hhh')
-      this.isShow=false
+      console.log("hhh");
+      this.isShow = false;
       this.isdetails = !this.isdetails;
     },
   },
