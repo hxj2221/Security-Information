@@ -11,7 +11,7 @@
       <nav-bar></nav-bar>
       <!-- 内容 -->
       <div class="ctnBodyContent">
-        <div :class="['ctnBodyContentTitle', {'ctnBodyContentTitleFold': isFold}, 'easeInOut']">    
+        <!-- <div :class="['ctnBodyContentTitle', {'ctnBodyContentTitleFold': isFold}, 'easeInOut']">    
           <el-breadcrumb separator="/" class="breadCrumb">
             <el-breadcrumb-item><strong>{{$route.name}}</strong></el-breadcrumb-item>
           </el-breadcrumb>   
@@ -28,7 +28,7 @@
             @close="handleClose(tag)">
             {{tag.name}}
           </el-tag>        
-        </div>
+        </div> -->
         <!-- 该部分为主要数据展示 -->
         <div class="childContent">
           <router-view v-if="isRouterAlive"></router-view>
@@ -122,7 +122,7 @@ export default {
       height: 100%;
       padding: 10px;
       // border: 2px solid blue;
-      background-color: #f0f2f5;
+      background-color: #f2f2f2;
       overflow: auto;
       display: flex;
       flex-flow: column nowrap;
