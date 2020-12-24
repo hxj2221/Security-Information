@@ -73,7 +73,7 @@ export default class UpdateVuex extends Vue{
 <style lang="less" scoped>
 .updateVuex {
   min-width: 200px;
-  border: 2px solid rgba(173,216,230, 0.6);
+  border: 2px solid rgb(255, 255, 255);
   padding: 20px;
 }
 

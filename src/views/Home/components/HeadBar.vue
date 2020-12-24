@@ -16,14 +16,17 @@
       <el-dropdown>
         <span>
           <p class="headEndCtx">
+             <el-avatar :src="avatarUrl" :alt="'头像'"></el-avatar>
             <span v-html="admin">{{admin}}</span>
-            <el-avatar :src="avatarUrl" :alt="'头像'"></el-avatar>
-            <i class="el-icon-caret-bottom el-icon--right" style="font-size:15px; height: 1px"></i>
+           
+            <!-- <i class="el-icon-caret-bottom el-icon--right" style="font-size:15px; height: 1px"></i> -->
           </p>
         </span>      
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item @click.native="dialogVisible = true">编辑</el-dropdown-item>
-          <el-dropdown-item @click.native="logOut">退出登录</el-dropdown-item>
+          <el-dropdown-item @click.native="dialogVisible = true">个人信息</el-dropdown-item>
+          <el-dropdown-item @click.native="logOut">修改密码</el-dropdown-item>
+           <el-dropdown-item @click.native="logOut">消息通知</el-dropdown-item>
+            <el-dropdown-item @click.native="logOut">退出系统</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -83,15 +86,18 @@ export default class HeadBar extends Vue {
   display: flex;
   flex-flow: row nowrap;
   line-height: 50px;
-  // background-color: #20B2AA;
-  background-image: linear-gradient(to right,rgba(0,128,128, 0.8), rgba(255,248,220, 1));
+  background-color: #002140;
+  // background-image: linear-gradient(to right,rgba(0,128,128, 0.8), rgba(255,248,220, 1));
+  // border-bottom: 10px solid rgb(168, 82, 82);
 
   &Start {
     width: 198px;
+    background: #fdfeff;
     font-weight: bold;
-    border-right: 2px solid #2F4F4F;     
-    background-image:-webkit-linear-gradient(left,	#e6e5e3,#FFF8DC); 
-    -webkit-background-clip:text; 
+    border-right: 2px solid #002140;     
+    // background-image:-webkit-linear-gradient(left,	#ffffff,#ffffff); 
+    color: #000000;
+   background-clip:text; 
     -webkit-text-fill-color:transparent; 
   }
 
@@ -127,7 +133,7 @@ export default class HeadBar extends Vue {
         width: 30px;
         height: 30px;
         border-radius: 15px;
-        background-image: linear-gradient(to right, rgba(0,255,255,0.4), rgba(0,206,209,1));       
+        // background-image: linear-gradient(to right,#002140, #002140);       
       }
     }
   }

@@ -6,9 +6,9 @@
     @open="handleOpen"
     @close="handleClose"
     @select="handleSelect"
-    background-color="#2F4F4F"
-    text-color="#FFF"
-    active-text-color="#ffd04b"
+    background-color="#001529"
+    text-color="#CCCCCC"
+    active-text-color="#0079fe"
     unique-opened
     :collapse="isFold"
     router>
@@ -66,6 +66,7 @@ export default class NavBar extends Vue {
   min-width: 200px;
   min-height: 400px;
   text-align: left;
+  background: #001529;
 }
 
 .el-menu--collapse {
@@ -74,9 +75,9 @@ export default class NavBar extends Vue {
 }
 
 .subMenu {
-  background-color: rgba(	0,128,128, 0.3) !important;
+  background-color: #000c17 !important;
   &:hover {
-     background-color: rgba(0,128,128, 0.7) !important;
+     background-color: #000c17 !important;
   }
 }
 

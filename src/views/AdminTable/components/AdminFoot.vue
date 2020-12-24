@@ -30,7 +30,7 @@ export default class AdminFoot extends Vue{
 .foot {
   flex: 0 0 50px;
   width: 100%;
-  background-color:rgba(	176,196,222, 0.8);
+  background-color:rgb(255, 255, 255);
 }
 
 .el-pagination {
