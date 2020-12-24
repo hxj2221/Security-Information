@@ -9,7 +9,8 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 import 'font-awesome/css/font-awesome.css'
-
+// 引入公共样式
+// import iconFont from "./assets/css/iconfont.css"
 // 引入axios
 import axios from "axios"
 import VueAxios from "vue-axios"

@@ -117,24 +117,31 @@ export default class HeadBar extends Vue {
   }
 
   &End {
-    width: 200px;
+    width: 210px;
     border-left: 2px solid black;
 
     &Ctx {
+      // color: ;
       display: flex;
       justify-content: center;
       align-items: center;
       font-size: 1.5rem;
       font-weight: bold;
-      width: 100%;
+      width: 98%;
+    
       // border: 1px solid yellow;
 
       img {
         width: 30px;
         height: 30px;
         border-radius: 15px;
+        
         // background-image: linear-gradient(to right,#002140, #002140);       
       }
+    }
+    span{
+  // padding-left: 2px;
+  color: #fdfeff;
     }
   }
 }
