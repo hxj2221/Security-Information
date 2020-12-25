@@ -30,7 +30,7 @@
       </el-table-column>
     </el-table>
     <!-- 查看 -->
-    <el-dialog :visible.sync="dialogVisible" width="75%" >
+    <el-dialog :visible.sync="dialogVisible" width="50%" >
       <check-bad></check-bad>      
     </el-dialog>
   </div>
@@ -158,7 +158,7 @@ import CheckBad from './see'
           depart: '外科',
           person: '王冕'
         }, ],
-        dialogVisible:true
+        dialogVisible:false
       };
     },
     methods: {
