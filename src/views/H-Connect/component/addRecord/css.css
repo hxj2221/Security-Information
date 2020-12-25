@@ -16,6 +16,7 @@
 
 .top>h4 {
     float: left;
+    color: #666EE8;
     /* color: #409EFF; */
 }
 
@@ -60,7 +61,9 @@
 .enclosure_top_left {
     float: left;
 }
-
+.enclosure_top_left>h5{
+    color: #666EE8;
+}
 .enclosure_top_right {
     float: right;
 }
@@ -88,7 +91,9 @@
     float: left;
     margin-bottom: 15px;
 }
-
+.relation_top>h5{
+    color: #666EE8;
+}
 .el-table {
     margin-bottom: 20px;
 }
