@@ -77,6 +77,11 @@
   width: 588px;
 }
 
+/* 分页 */
+.page{
+  text-align: right;
+}
+
  /* 新增弹框 */
 .form {
   font-size: 24px;
@@ -84,16 +89,16 @@
   color: #666EE8;
   padding-top: -20px;
 }
+.form h2{
+  text-align: left;
+}
 .form .el-form-item .el-input{
   width: 217px;
 }
 .form .age{
   display: inline-block;
 }
-.form .age .el-input{
-  width: 160px;
-}
-.form .age .el-cascader .el-input--suffix{
+.form .age .el-select .el-input--suffix{
   width: 60px;
 }
 .form .sel .el-input--suffix{
@@ -105,6 +110,7 @@
   font-weight: 700;
   color: #666EE8;
   margin: 0 0 10px;
+  text-align: left;
 }
 .el-table thead{
   color: #000;

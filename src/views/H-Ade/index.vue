@@ -13,7 +13,7 @@
     <!-- 表格内容 -->
     <table-data :tableData='tableData'></table-data>
     <!-- 分页 -->
-    <div class="block">
+    <div class="block page">
       <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
         :current-page.sync="currentPage2" :page-sizes="[10, 20, 30, 40]" :page-size="10"
         layout="sizes, prev, pager, next" :total="1000">
@@ -37,7 +37,7 @@
   // import AdminHead from './components/AdminHead'
   import './css/index.css'
   // 引入不良事件记录
-  import TableData from './components/recordTable';
+  import TableData from './components/Table';
   import BLadd from './components/BLadd';
   import FormSearch from './components/search'
   export default {

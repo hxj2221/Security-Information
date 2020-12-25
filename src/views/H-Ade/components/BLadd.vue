@@ -31,16 +31,23 @@
           </el-col>
           <el-col :span="8">
             <el-form-item label="性别" required>
-              <el-cascader :options="options2" v-model="add.sex" filterable>
-              </el-cascader>
+              <el-select v-model="add.sex" placeholder="男">
+                    <el-option label="男" value="1"></el-option>
+                    <el-option label="女" value="2"></el-option>
+                    <el-option label="未知" value="3"></el-option>
+                  </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="年龄">
               <div class="age">
-                <el-input v-model.number="add.age"></el-input>
-                <el-cascader :options="options3" v-model="add.Age" placeholder="岁" filterable>
-                </el-cascader>
+                <el-input placeholder="请输入内容" v-model.number="add.age" class="input-with-select">
+                  <el-select v-model="add.Age" slot="prepend" placeholder="岁">
+                    <el-option label="岁" value="1"></el-option>
+                    <el-option label="月" value="2"></el-option>
+                    <el-option label="天" value="3"></el-option>
+                  </el-select>
+                </el-input>
               </div>
             </el-form-item>
           </el-col>
@@ -145,7 +152,7 @@
     <!-- 关联 -->
     <div class="table">
       <h2>关联患者信息（调用HIS）</h2>
-      <el-table  :data="tableData">
+      <el-table :data="tableData">
         <el-table-column type="index" label="序号">
         </el-table-column>
         <el-table-column prop="name" label="姓名">
@@ -171,7 +178,7 @@
       <div class="add">
         <i class="el-icon-circle-plus-outline"><span>添加患者信息</span></i>
       </div>
-      
+
 
     </div>
   </div>
@@ -283,26 +290,6 @@
           value: '7',
           label: '其他'
         }, ],
-        options2: [{
-          value: '1',
-          label: '男'
-        }, {
-          value: '2',
-          label: '女'
-        }, {
-          value: '3',
-          label: '未知'
-        }],
-        options3: [{
-          value: '1',
-          label: '岁'
-        }, {
-          value: '2',
-          label: '月'
-        }, {
-          value: '3',
-          label: '天'
-        }],
         options4: [{
           value: '选项1',
           label: 'A级：客观环境或条件可能引发不良事件（隐患）'
@@ -347,12 +334,10 @@
       handleClick(row) {
         console.log(row);
       },
-      
+
     },
   }
 </script>
 <style>
-.el-dialog__body{
-  padding-top: 0;
-}
+
 </style>
