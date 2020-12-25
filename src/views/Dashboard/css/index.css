@@ -1,0 +1,121 @@
+/* box */
+/* 左边 */
+.box{
+  border: 2px solid #f2f2f2;
+  margin: 10px auto 40px;
+  width: 97%;
+  height: 152px;
+  display: flex;
+  justify-content: space-between;
+}
+.box .left{
+  display: flex;
+}
+.box .left .img{
+  width: 56px;
+  height: 56px;
+  margin: 20px 20px 0 ;
+}
+.box .left .title{
+  font-size: 20px;
+  color: #333333;
+  text-align: left;
+}
+.box .left .title p{
+  margin-top: 30px;
+}
+.box .left .title p:first-child span{
+  color: #0000006D;
+  font-size: 14px;
+  margin-left: 20px;
+  
+}
+.box .left .title p:last-child{
+  color: #FB528B;
+  /* line-height: 60px; */
+}
+/* 右边 */
+.box .right .dashRow[data-v-5b204ecd]{
+  margin-bottom: 0;
+}
+.box .right .dashRow .dashRowItem[data-v-5b204ecd]{
+  width: auto;
+  text-align: none;
+  border-radius: 0;
+  box-shadow: none;
+  border-color:#fff;
+}
+.box .right .dashRow .dashRowItem .el-card__body{
+  border-right: 1px solid #f2f2f2;
+  padding-right: 20px;
+  margin-top: 20px;
+}
+.box .right .dashRow .last .el-card__body{
+  border-right: none;
+}
+.box .right .dashRow .dashRowItemTitle{
+  font-size: 14px;
+  color: #0000006D;
+}
+/* box1 */
+.box1{
+  width: 97%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+.box1 .dashRow .dashRowItem{
+  width: 22%;
+  box-shadow: none;
+  border: none;
+}
+.box1 .dashRow .dashRowItem .el-card__body{
+  font-size: 44px;
+  color: #333333;
+  padding: 30px;
+}
+.box1 .dashRow .dashRowItem:nth-child(2) .el-card__body .dashRowItemKey{
+  background-color: #fff0f0;
+}
+.box1 .dashRow .dashRowItem:nth-child(3) .el-card__body .dashRowItemKey{
+  background-color: #eafaf5;
+}
+.box1 .dashRow .dashRowItem:last-child .el-card__body .dashRowItemKey{
+  background-color: #fffae9;
+}
+.box1 .dashRow .dashRowItem .el-card__body p{
+  font-size: 14px;
+  color: #666666;
+  font-weight: 700;
+  font-style: normal;
+}
+/* box2 */
+.box2{
+  width: 97%;
+  padding: 0 20px;
+}
+.box2 .bg{
+  background-color: #fff;
+  padding: 0 20px;
+}
+.box2 .bg .tit{
+  display: flex;
+  justify-content: space-between;
+  color: #333333;
+  font-size: 16px;
+  height: 56px;
+  align-items: center;
+  border-bottom: 1px solid #e9e9e9;
+}
+.box2 .bg .tit span:last-child{
+  font-size: 13px;
+  color: #1890FF;
+}
+.box2 .bg .con .con_info .info{
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.0470588235294118);;
+}
+.box2 .bg .con .con_info .info .info_detail{
+  display: flex;
+  justify-content: space-around;
+}
+
