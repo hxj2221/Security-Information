@@ -1,0 +1,49 @@
+body{
+  position: relative;
+}
+.conserve{
+  position: fixed;
+  bottom: 0px;
+  text-align: right;
+  background-color: rgb(255, 255, 255);
+  padding: 30px 0 0 0px;
+  width: 77%;
+  z-index: 9999999999999999;
+  box-shadow: 2px 0 10px 0px rgba(134, 134, 134, 0.445);
+}
+.conserve button{
+  margin-right: 3%;
+  width: 8%;
+  border: none;
+  background: none
+
+}
+.conserve  :first-child {
+  background-color: #666ee8;
+  color: #000;
+  border: 1px solid #666ee8;
+}
+.conserve  :first-child span{
+  background-color: #666ee8;
+  color: rgb(255, 255, 255);
+  border: none;
+}
+.conserve :last-child{
+  background-color: #FFF;
+  border: 1px solid #949aef;
+  color: #6f77e9;
+}
+.conserve :last-child span{
+  background-color: #FFF;
+  border:1px solid #FFF;
+  color: #6f77e9;
+}
+.conserve button .el-icon-hospital-passwordai207{
+  background: none;
+  color: #6f77e9;
+  border: none;
+}
+.conserve button .el-icon-hospital-passwordbaocun{
+  background: none;
+color: #FFF;
+}

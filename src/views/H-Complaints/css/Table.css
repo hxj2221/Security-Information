@@ -1,0 +1,17 @@
+.cell{
+    color: #000000;
+    /* background-color: #c2c5f6; */
+}
+.el-button--small{
+    color: #666ee8;
+}
+.el-table__header{
+    background-color: #c2c5f6;
+}
+.el-table__header-wrapper{
+  background-color: #c2c5f6;
+}
+el-table-column{
+  background-color: #c2c5f6;
+  
+}

@@ -1,0 +1,80 @@
+.addcom .addcom-top{
+    color: #666ee8;
+    text-align: left;
+    margin-left: 30px;
+    font-size: 18px;
+    padding-top: 20px;
+
+}
+.addcom{
+    padding:  0px 20px;
+    margin-bottom: 160px;
+}
+.addcom .el-button{
+    border: none;
+}
+.addcom .row-bg{
+    margin-top: 30px;
+}
+/* 基本信息 */
+.addcom-form-basic{
+    text-align: left;
+}
+.addcom-form-basic .input-with-select{
+    width: 60%;
+}
+.addcom-form-basic .row-bg .grid-content span{
+    font-size: 12px;
+}
+.addcom-form-basic .row-bg .grid-content span span{
+    color: red;
+}
+/* 经办人 */
+.addcom .Addcom-agent{
+    margin: 30px 0px;
+    text-align: left;
+    color: #666ee8;
+    font-size: 18px;
+
+}
+.addcom .Addcom-agent h4{
+    margin-left: 30px;
+}
+.Addcom-agent .row-bg .grid-content span{
+    font-size: 12px;
+    color: black;
+}
+.Addcom-agent .row-bg .grid-content span span{
+    color: red;
+}
+/* HIS */
+.addcom .addcom-relevance{
+    margin: 30px 0px;
+    text-align: left;
+    color: #666ee8;
+    font-size: 18px;
+}
+.addcom .addcom-relevance h4{
+    margin-left: 30px;
+}
+.addcom .addcom-relevance div .addrelevance{
+    text-align: center;
+    background-color: #666ee8;
+    border: none;
+}
+.addcom .requirement .el-dialog__header{
+    border-bottom: 0.5px solid rgba(187, 187, 187, 0.376);
+    background-color: #f2f2f2;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 900;
+}
+.addcom .requirement{
+    font-size: 12px;
+    text-align: left;
+    line-height: 30px;
+}
+
+.el-table__row{
+    border: none;
+}
