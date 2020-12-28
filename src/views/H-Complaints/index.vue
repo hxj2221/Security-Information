@@ -10,26 +10,23 @@
           slot="buttom"
           >新增</el-button
         >
+        <el-button
+          icon="iconfont el-icon-hospital-passwordexport"
+          class="exportcomplaint"
+          slot="export"
+          @click="exportcom()"
+          >导出</el-button
+        >
       </Complaintslist>
       <Addcom v-show="add">
-        <Conserve>
-          <el-button
-            type="primary"
-            icon="iconfont el-icon-hospital-passwordbaocun"
-            class="keep"
-            solt="keep"
-            @click="keepform"
-            >保存</el-button
-          >
-        </Conserve>
       </Addcom>
       <Look v-show="look">
-        <div slot="buttom">
-          <el-button
+        <el-button
             type="primary"
             icon="iconfont el-icon-hospital-passworddayin"
             class="printing"
-            @click="stamp"
+            slot="stamp"
+            @click="stamp()"
             >打印调查表</el-button
           >
           <el-button
@@ -37,10 +34,10 @@
             icon="iconfont el-icon-hospital-passwordai207"
             class="return"
             style="border: 1px solid #949aef"
-            @click="back"
+            slot="back"
+            @click="backss()"
             >返回</el-button
           >
-        </div>
       </Look>
     </div>
   </div>
@@ -52,9 +49,10 @@ import Addcom from "../H-Complaints/components/addcom";
 import Look from "../H-Complaints/components/Look";
 import Read from "../H-Complaints/components/read";
 import Conserve from "../H-Complaints/components/conserve";
+import Table from "../H-Complaints/components/Tables";
 
 export default {
-  components: { Complaintslist, Addcom, Look, Read, Conserve },
+  components: { Complaintslist, Addcom, Look, Read,Conserve },
 
   data() {
     return {
@@ -65,15 +63,21 @@ export default {
   },
 
   methods: {
+    looks() {
+      console.log(1);
+    },
     keepform() {
       this.list = true;
       this.add = false;
       this.look = false;
+      console.log(1);
     },
     // 打印
-    stamp() {},
+    stamp() {
+      console.log(1)
+    },
     // 返回
-    back() {
+    backss() {
       this.list = true;
       this.add = false;
       this.look = false;
@@ -83,15 +87,27 @@ export default {
       this.add = true;
       this.look = false;
     },
+    // 导出事件
+    exportcom(){
+console.log(1)
+    },
     // 搜索事件
     clicks() {
       // 将标准时间转为年月日
       var stime = new Date(this.complaintsate[0]);
       var StartTime =
-        stime.getFullYear() + "-" + (stime.getMonth() + 1) + "-" + stime.getDate();
+        stime.getFullYear() +
+        "-" +
+        (stime.getMonth() + 1) +
+        "-" +
+        stime.getDate();
       var etime = new Date(this.complaintsate[1]);
       var EndTime =
-        etime.getFullYear() + "-" + (etime.getMonth() + 1) + "-" + etime.getDate();
+        etime.getFullYear() +
+        "-" +
+        (etime.getMonth() + 1) +
+        "-" +
+        etime.getDate();
     },
     // 设置表头颜色
     getRowClass({ rowIndex }) {

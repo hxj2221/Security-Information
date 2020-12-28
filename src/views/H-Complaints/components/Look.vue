@@ -4,13 +4,15 @@
       <div class="look-top">
         <span>投诉详情-调查中</span>
         <div>
-            <slot name="buttom">
+            <slot name="stamp">
           <el-button
             type="primary"
             icon="iconfont el-icon-hospital-passworddayin"
             class="printing"
             >打印调查表</el-button
           >
+          </slot>
+          <slot name="back">
           <el-button
             type="primary"
             icon="iconfont el-icon-hospital-passwordai207"
