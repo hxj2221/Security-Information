@@ -1,11 +1,12 @@
 <template>
-  <div class="all">
+  <div class="addRecord_all">
     <!-- top -->
-    <div class="top">
+    <div class=" addRecord_top">
       <h4>基本信息</h4>
     </div>
     <!-- 表单 -->
-    <div class="myform">
+
+    <div class="addRecord_myform">
       <el-form ref="form" :model="form">
         <el-row :gutter="20">
           <el-col :span="8">
@@ -64,24 +65,26 @@
               <el-input
                 type="textarea"
                 v-model="form.desc"
+                max="200"
+                min="10"
               ></el-input> </el-form-item
           ></el-col>
         </el-row>
       </el-form>
     </div>
     <!-- 表格  附件信息 -->
-    <div class="enclosure">
-      <div class="enclosure_top">
-        <div class="enclosure_top_left">
+    <div class="addRecord_enclosure">
+      <div class="addRecord_enclosure_top">
+        <div class="addRecord_enclosure_top_left">
           <h5>附件信息</h5>
         </div>
-        <div class="enclosure_top_right">
+        <div class="addRecord_enclosure_top_right">
           <el-button type="primary" size="small" icon="el-icon-plus"
             >主要按钮</el-button
           >
         </div>
       </div>
-      <div class="enclosure_content">
+      <div class="addRecord_enclosure_content">
         <el-table :data="tableData" style="width: 100%">
           <el-table-column label="ID">
             <template slot-scope="scope">
@@ -139,7 +142,7 @@
           </el-table-column>
         </el-table>
       </div>
-      <div class="enclosure_paging">
+      <div class="addRecord_enclosure_paging">
         <div class="block">
           <el-pagination
             @size-change="handleSizeChange"
@@ -154,18 +157,18 @@
       </div>
     </div>
     <!-- 表格  关联投诉信息 -->
-    <div class="relation">
-      <div class="relation_top">
+    <div class="addRecord_relation">
+      <div class="addRecord_relation_top">
         <h5>关联投诉信息</h5>
       </div>
-      <div class="relation_content">
+      <div class="addRecord_relation_content">
         <el-table :data="tableData1" style="width: 100%">
-          <el-table-column label="序号">
+          <el-table-column label="序号" width="50px">
             <template slot-scope="scope">
               <span style="margin-left: 10px">{{ scope.row.id }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="事件编码" width="80px">
+          <el-table-column label="事件编码">
             <template slot-scope="scope">
               <span style="margin-left: 10px">{{ scope.row.sjbm }}</span>
             </template>
@@ -176,12 +179,12 @@
               <span style="margin-left: 10px">{{ scope.row.name }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="姓别">
+          <el-table-column label="姓别" width="50px">
             <template slot-scope="scope">
               <span style="margin-left: 10px">{{ scope.row.sex }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="年龄">
+          <el-table-column label="年龄" width="50px">
             <template slot-scope="scope">
               <span style="margin-left: 10px">{{ scope.row.age }}</span>
             </template>
@@ -201,7 +204,7 @@
               <span style="margin-left: 10px">{{ scope.row.xxly }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="投诉时间" width="80px">
+          <el-table-column label="投诉时间" >
             <template slot-scope="scope">
               <span style="margin-left: 10px">{{ scope.row.date }}</span>
             </template>
@@ -232,7 +235,7 @@
       </div>
     </div>
     <!-- 固定定位按钮 -->
-    <div class="button">
+    <div class="addRecord_button">
       <div class="button_stlye">
         <el-button size="small" icon="el-icon-back" @click="mysubmit"
           >返回</el-button

@@ -1,0 +1,40 @@
+.columnList_all {
+    width: 100%;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgb(184, 183, 183);
+    padding-bottom: 50px;
+}
+
+/* top */
+.columnList_top {
+    overflow: hidden;
+    margin: 0 20px;
+    padding: 40px 0;
+}
+
+.columnList_top_left {
+    float: left;
+}
+
+.columnList_top_right {
+    float: right;
+}
+
+hr {
+    margin: 0 15px 20px;
+    font-weight: 400;
+    background-color: #e6e0e0;
+    border: none;
+    height: 2px;
+
+}
+
+/* table */
+.columnList_table {
+    margin: 0 20px;
+}
+
+.columnList_table>.el-table .el-button:last-child {
+    color: #f00;
+}

@@ -66,52 +66,154 @@
       <el-row :gutter="20">
         <el-col :span="16">
           <div class="bg">
-            <div class="tit">
-              <span>进行中的事件</span>
-              <span>全部事件</span>
-            </div>
-            <div class="con">
-              <div class="con_info">
-                <div class="info">
-                  <div class="info_detail">
-                    <p>投诉人：薛大刚</p>
-                    <p><span>●</span>调查中</p>
-                  </div>
-                  <div class="info_detail">
-                    <p>截止日期：2020-11-22 00:00 </p>
-                    <p><span>●</span>调查中</p>
-                  </div>
-                  <div class="info_detail">
-                    <p>事件性质：投诉</p>
-                    <p><span>●</span>患者：薛小刚</p>
+            <div class="left">
+              <div class="tit">
+                <span>进行中的事件</span>
+                <span>全部事件</span>
+              </div>
+              <div class="cent">
+                <div class="con">
+                  <div class="con_info">
+                    <div class="info">
+                      <div class="info_detail">
+                        <p>投诉人：薛大刚</p>
+                        <p><span>●</span>调查中</p>
+                      </div>
+                      <div class="info_detail">
+                        <p>截止日期：2020-11-22 00:00 </p>
+                        <p><i class="fa fa-user-circle" aria-hidden="true"></i></p>
+                      </div>
+                      <div class="info_detail">
+                        <p>事件性质：投诉</p>
+                        <p>患者：薛小刚</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="info">
-                  <div></div>
+                <div class="con">
+                  <div class="con_info">
+                    <div class="info">
+                      <div class="info_detail">
+                        <p>投诉人：薛大刚</p>
+                        <p><span>●</span>调查中</p>
+                      </div>
+                      <div class="info_detail">
+                        <p>截止日期：2020-11-22 00:00 </p>
+                        <p><i class="fa fa-user-circle" aria-hidden="true"></i></p>
+                      </div>
+                      <div class="info_detail">
+                        <p>事件性质：投诉</p>
+                        <p>患者：薛小刚</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="con_info">
-                <div class="info">
-                  <div></div>
+              <div class="cent">
+                <div class="con">
+                  <div class="con_info">
+                    <div class="info">
+                      <div class="info_detail">
+                        <p>投诉人：薛大刚</p>
+                        <p><span>●</span>调查中</p>
+                      </div>
+                      <div class="info_detail">
+                        <p>截止日期：2020-11-22 00:00 </p>
+                        <p><i class="fa fa-user-circle" aria-hidden="true"></i></p>
+                      </div>
+                      <div class="info_detail">
+                        <p>事件性质：投诉</p>
+                        <p>患者：薛小刚</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="info">
-                  <div></div>
+                <div class="con">
+                  <div class="con_info">
+                    <div class="info">
+                      <div class="info_detail">
+                        <p>投诉人：薛大刚</p>
+                        <p><span>●</span>调查中</p>
+                      </div>
+                      <div class="info_detail">
+                        <p>截止日期：2020-11-22 00:00 </p>
+                        <p><i class="fa fa-user-circle" aria-hidden="true"></i></p>
+                      </div>
+                      <div class="info_detail">
+                        <p>事件性质：投诉</p>
+                        <p>患者：薛小刚</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
               </div>
-              <div class="con_info">
-                <div class="info">
-                  <div></div>
+              <div class="cent">
+                <div class="con">
+                  <div class="con_info">
+                    <div class="info">
+                      <div class="info_detail">
+                        <p>投诉人：薛大刚</p>
+                        <p><span>●</span>调查中</p>
+                      </div>
+                      <div class="info_detail">
+                        <p>截止日期：2020-11-22 00:00 </p>
+                        <p><i class="fa fa-user-circle" aria-hidden="true"></i></p>
+                      </div>
+                      <div class="info_detail">
+                        <p>事件性质：投诉</p>
+                        <p>患者：薛小刚</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="info">
-                  <div></div>
+                <div class="con">
+                  <div class="con_info">
+                    <div class="info">
+                      <div class="info_detail">
+                        <p>投诉人：薛大刚</p>
+                        <p><span>●</span>调查中</p>
+                      </div>
+                      <div class="info_detail">
+                        <p>截止日期：2020-11-22 00:00 </p>
+                        <p><i class="fa fa-user-circle" aria-hidden="true"></i></p>
+                      </div>
+                      <div class="info_detail">
+                        <p>事件性质：投诉</p>
+                        <p>患者：薛小刚</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
               </div>
             </div>
           </div>
-
         </el-col>
         <el-col :span="8">
-
+          <div class="bg">
+            <div class="tit">风险指数</div>
+            <div class="dashRow">
+              <div class="dashRowGraph">
+                <radar-chart></radar-chart>
+              </div>
+              <div class="last dashRow">
+                <el-card class="dashRowItem" shadow="always">
+                <p class="dashRowItemTitle"><span class="person">●</span>个人</p>
+                {{person}}
+              </el-card>
+              <el-card class="dashRowItem" shadow="always">
+                <p class="dashRowItemTitle"><span class="depart">●</span>部门</p>
+                {{depart}}
+              </el-card>
+              <el-card class="dashRowItem" shadow="always">
+                <p class="dashRowItemTitle"><span class="system">●</span>系统</p>
+                {{system}}
+              </el-card>
+              </div>
+              
+            </div>
+          </div>
         </el-col>
       </el-row>
     </div>
@@ -184,6 +286,10 @@
     ApprovalRequired: string = "0"
     NeedInvestigation: string = "8"
     InProgress: string = "23"
+    // box2里面的内容
+    person:string='0'
+    depart:string='3'
+    system:string='26'
   }
 </script>
 
@@ -217,8 +323,8 @@
         line-height: 40px;
         border-radius: 10px;
         background-color: white;
-        box-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
-        border-color: rgba(0, 0, 0, .05);
+        // box-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
+        // border-color: rgba(0, 0, 0, .05);
 
         &Title {
           color: rgb(113, 125, 126)
@@ -267,11 +373,12 @@
       }
 
       &Graph {
-        width: 30%;
+        width: 100%;
         padding: 10px;
         // background-color: white;
-        box-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
+        // box-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
         border-color: rgba(0, 0, 0, .5);
+        text-align: center;
       }
 
       @media screen and (max-width:1000px) {

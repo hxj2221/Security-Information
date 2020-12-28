@@ -1,75 +1,79 @@
 <template>
-  <div class="all">
-    <div class="top">
-      <div class="top_button">
-        <div class="top_button_left">
-          <el-button size="small">医院沟通记录</el-button>
+  <div class="lookForm_all">
+    <div class="lookForm_all_in">
+      <div class="lookForm_top">
+        <div class="lookForm_top_button">
+          <div class="lookForm_top_button_left">
+            <el-button size="small">医院沟通记录</el-button>
+          </div>
+          <div class="lookForm_top_button_right">
+            <el-button size="small" icon="el-icon-printer">打印</el-button>
+            <el-button size="small" icon="el-icon-back" @click="upper"
+              >返回</el-button
+            >
+          </div>
         </div>
-        <div class="top_button_right">
-          <el-button size="small" icon="el-icon-printer">打印</el-button>
-          <el-button size="small" icon="el-icon-back">返回</el-button>
-        </div>
-      </div>
-      <div class="top_content">
-        <el-row :gutter="20" v-for="(item, index) in content" :key="index">
-          <el-col :span="8">
-            <p>{{ item.name }}</p>
-            <p>{{ item.names }}</p>
-          </el-col>
-          <el-col :span="7" :offset="9">
-            <p>{{ item.bh }}</p>
-            <p>{{ item.bhs }}</p>
-          </el-col>
-        </el-row>
-      </div>
-    </div>
-    <hr />
-    <div class="center">
-      <div class="center_top">
-        <div class="center_top_left">
-          <h6>医患沟通记录</h6>
-        </div>
-        <div class="center_top_right">
-          <p>记录时间：<span>2020-11-18 13:30:26</span></p>
+        <div class="lookForm_top_content">
+          <el-row :gutter="20" v-for="(item, index) in content" :key="index">
+            <el-col :span="8">
+              <p>{{ item.name }}</p>
+              <p>{{ item.names }}</p>
+            </el-col>
+            <el-col :span="8" :offset="8">
+              <p>{{ item.bh }}</p>
+              <p>{{ item.bhs }}</p>
+            </el-col>
+          </el-row>
         </div>
       </div>
-      <div class="center_form">
-        <table border="1" cellspacing="0">
-          <tr v-for="(item, index) in table" :key="index">
-            <th>{{ item.top }}</th>
-            <td>{{ item.content }}</td>
-          </tr>
-          <tr>
-            <th>沟通记录</th>
-            <td>
-              <li>这是一个记录XXXXXX</li>
-              <li>这是一个记录XXXXXX</li>
-              <li>这是一个记录XXXXXX</li>
-            </td>
-          </tr>
-        </table>
+      <hr />
+      <div class="lookForm_center">
+        <div class="lookForm_center_top">
+          <div class="lookForm_center_top_left">
+            <h6>医患沟通记录</h6>
+          </div>
+          <div class="lookForm_center_top_right">
+            <p>记录时间：<span>2020-11-18 13:30:26</span></p>
+          </div>
+        </div>
+        <div class="lookForm_center_form">
+          <table border="1" cellspacing="0">
+            <tr v-for="(item, index) in table" :key="index">
+              <th>{{ item.top }}</th>
+              <td>{{ item.content }}</td>
+            </tr>
+            <tr>
+              <th>沟通记录</th>
+              <td>
+                <li>这是一个记录XXXXXX</li>
+                <li>这是一个记录XXXXXX</li>
+                <li>这是一个记录XXXXXX</li>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
-    </div>
-    <hr />
-    <div class="bottom">
-      <div class="bottom_top">
-        <h6>附件信息</h6>
-      </div>
-      <div class="bottom_form">
-        <table border="1" cellspacing="0">
-          <tr>
-            <th>文件1</th>
-            <td>查看</td>
-            <th>文件2</th>
-            <td>查看</td>
-            <th>文件3</th>
-            <td>查看</td>
-          </tr>
-          <tr>
-            <th>文件4</th>
-            <td>查看</td>
-          </tr>
-        </table>
+      <hr />
+      <div class="lookForm_bottom">
+        <div class="lookForm_bottom_top">
+          <h6>附件信息</h6>
+        </div>
+        <div class="lookForm_bottom_form">
+          <table border="1" cellspacing="0">
+            <tr>
+              <th>文件1</th>
+              <td>查看</td>
+              <th>文件2</th>
+              <td>查看</td>
+              <th>文件3</th>
+              <td>查看</td>
+            </tr>
+            <tr>
+              <th>文件4</th>
+              <td>查看</td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -110,7 +114,11 @@ export default {
       ],
     };
   },
-  methods: {},
+  methods: {
+    upper() {
+      this.$emit("upper");
+    },
+  },
 };
 </script>
 <style scoped>
