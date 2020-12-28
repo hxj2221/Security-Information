@@ -35,15 +35,15 @@
     margin: 0 20px;
 }
 
-.el-form {
+.addArticle_content >.el-form {
     overflow: hidden;
 }
 
-.el-form>.el-form-item {
+.addArticle_content >.el-form>.el-form-item {
     overflow: hidden;
 }
 
-.el-form-item__label {
+.addArticle_content >.el-form .el-form-item__label {
     margin-right: 40px;
 }
 .addArticle_content{

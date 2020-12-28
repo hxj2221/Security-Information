@@ -56,7 +56,7 @@
         </el-table>
         <!-- 选择器 -->
         <div class="articleList_table_table_select">
-          <el-select v-model="value5" placeholder="请选择">
+          <el-select v-model="value5" placeholder="请选择" @change="dilog">
             <el-option
               v-for="item in name"
               :key="item.value"
@@ -64,14 +64,45 @@
               :value="item.value"
             >
             </el-option>
+            <!-- <el-option
+              label="移至栏目"
+
+              value="移至栏目"
+            ></el-option>
+            <el-option label="删除" value="删除"></el-option> -->
           </el-select>
+        </div>
+        <!-- 弹框 -->
+        <div class="articleList_table_table_select">
+          <el-dialog
+            :title="dlog"
+            :visible.sync="dialogVisible"
+            width="30%"
+            :before-close="handleClose"
+          >
+            <!-- <span>这是一段信息</span> -->
+            <div>
+              <p v-if="isShow">确定删除所选文章</p>
+              <div class="block" v-else>
+                <el-cascader
+                  v-model="valueHover"
+                  :options="optionsHover"
+                  :props="{ expandTrigger: 'hover' }"
+                ></el-cascader>
+              </div>
+            </div>
+            <span slot="footer" class="dialog-footer">
+              <el-button @click="dialogVisible = false">取 消</el-button>
+              <el-button type="primary" @click="dialogVisible = false"
+                >确 定</el-button
+              >
+            </span>
+          </el-dialog>
         </div>
 
         <!-- 分页 -->
         <div class="articleList_table_table_paging">
           <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
             :current-page.sync="currentPage1"
             :page-size="100"
             layout="total, prev, pager, next"
@@ -86,11 +117,14 @@
 
 <script>
 import "@/views/H-Articlelist/component/articleList/css.css";
+
 export default {
   components: {},
   props: {},
   data() {
     return {
+      //弹框部分
+      dialogVisible: false,
       // 搜索部分
       value: [],
       options: [
@@ -395,15 +429,135 @@ export default {
       value5: "",
       name: [
         {
-          value: "选项1",
+          value: "1",
           label: "移至栏目",
         },
         {
-          value: "选项2",
+          value: "2",
           label: "删除",
         },
       ],
       currentPage1: 5,
+      // 弹框
+      dlog: "",
+      valueHover: [],
+      optionsHover: [
+        {
+          value: "zhinan",
+          label: "指南",
+          children: [
+            {
+              value: "shejiyuanze",
+              label: "设计原则",
+              children: [
+                {
+                  value: "yizhi",
+                  label: "一致",
+                },
+                {
+                  value: "kekong",
+                  label: "可控",
+                },
+              ],
+            },
+            {
+              value: "daohang",
+              label: "导航",
+              children: [
+                {
+                  value: "cexiangdaohang",
+                  label: "侧向导航",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          value: "zujian",
+          label: "组件",
+          children: [
+            {
+              value: "basic",
+              label: "Basic",
+              children: [
+                {
+                  value: "layout",
+                  label: "Layout 布局",
+                },
+                {
+                  value: "color",
+                  label: "Color 色彩",
+                },
+              ],
+            },
+            {
+              value: "form",
+              label: "Form",
+              children: [
+                {
+                  value: "radio",
+                  label: "Radio 单选框",
+                },
+                {
+                  value: "checkbox",
+                  label: "Checkbox 多选框",
+                },
+                {
+                  value: "time-picker",
+                  label: "TimePicker 时间选择器",
+                },
+                {
+                  value: "date-picker",
+                  label: "DatePicker 日期选择器",
+                },
+              ],
+            },
+            {
+              value: "data",
+              label: "Data",
+              children: [
+                {
+                  value: "table",
+                  label: "Table 表格",
+                },
+                {
+                  value: "tag",
+                  label: "Tag 标签",
+                },
+              ],
+            },
+            {
+              value: "notice",
+              label: "Notice",
+              children: [
+                {
+                  value: "alert",
+                  label: "Alert 警告",
+                },
+              ],
+            },
+            {
+              value: "navigation",
+              label: "Navigation",
+              children: [
+                {
+                  value: "menu",
+                  label: "NavMenu 导航菜单",
+                },
+              ],
+            },
+            {
+              value: "others",
+              label: "Others",
+            },
+          ],
+        },
+        {
+          value: "ziyuan",
+          label: "资源",
+        },
+      ],
+      isShow:false
     };
   },
   methods: {
@@ -419,6 +573,25 @@ export default {
     },
     myAdd() {
       this.$router.push("/Addarticle");
+    },
+    // 弹框
+    handleClose(done) {
+      this.$confirm("确认关闭？")
+        .then((_) => {
+          done();
+        })
+        .catch((_) => {});
+    },
+    dilog(e) {
+      this.dialogVisible = !this.dialogVisible;
+      console.log(e);
+      if (e == 1) {
+        this.dlog = this.name[0].label;
+        this.isShow=false
+      } else {
+        this.dlog = this.name[1].label;
+         this.isShow=true
+      }
     },
   },
 };

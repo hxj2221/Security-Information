@@ -1,19 +1,19 @@
 <template>
   <div class="lookForm_all">
-    <div class="all_in">
-      <div class="top">
-        <div class="top_button">
-          <div class="top_button_left">
+    <div class="lookForm_all_in">
+      <div class="lookForm_top">
+        <div class="lookForm_top_button">
+          <div class="lookForm_top_button_left">
             <el-button size="small">医院沟通记录</el-button>
           </div>
-          <div class="top_button_right">
+          <div class="lookForm_top_button_right">
             <el-button size="small" icon="el-icon-printer">打印</el-button>
             <el-button size="small" icon="el-icon-back" @click="upper"
               >返回</el-button
             >
           </div>
         </div>
-        <div class="top_content">
+        <div class="lookForm_top_content">
           <el-row :gutter="20" v-for="(item, index) in content" :key="index">
             <el-col :span="8">
               <p>{{ item.name }}</p>
@@ -27,16 +27,16 @@
         </div>
       </div>
       <hr />
-      <div class="center">
-        <div class="center_top">
-          <div class="center_top_left">
+      <div class="lookForm_center">
+        <div class="lookForm_center_top">
+          <div class="lookForm_center_top_left">
             <h6>医患沟通记录</h6>
           </div>
-          <div class="center_top_right">
+          <div class="lookForm_center_top_right">
             <p>记录时间：<span>2020-11-18 13:30:26</span></p>
           </div>
         </div>
-        <div class="center_form">
+        <div class="lookForm_center_form">
           <table border="1" cellspacing="0">
             <tr v-for="(item, index) in table" :key="index">
               <th>{{ item.top }}</th>
@@ -54,11 +54,11 @@
         </div>
       </div>
       <hr />
-      <div class="bottom">
-        <div class="bottom_top">
+      <div class="lookForm_bottom">
+        <div class="lookForm_bottom_top">
           <h6>附件信息</h6>
         </div>
-        <div class="bottom_form">
+        <div class="lookForm_bottom_form">
           <table border="1" cellspacing="0">
             <tr>
               <th>文件1</th>
