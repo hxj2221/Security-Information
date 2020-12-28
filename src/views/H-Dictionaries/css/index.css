@@ -1,0 +1,112 @@
+.all {
+  background: #ffffff;
+  /* width: 98%; */
+  padding: 0 20px;
+}
+/* 顶部导航 */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 84px;
+  border-bottom: 2px solid #cccccc;
+}
+.nav>ul{
+  list-style: none;
+  font-size: 14px;
+  display: flex;
+  border: 1px solid #cccccc;
+}
+.nav>ul>li{
+  width: 102px;
+  border: 1px solid #cccccc;
+  border-start-end-radius: 5px;
+  height: 36px;
+  line-height: 36px;
+  cursor: pointer;
+  color: #cccccc;
+}
+.nav>ul>.bgColor:first-child{
+  background-color: #666EE8;
+  color: #ffffff;
+  border-color: #666EE8;
+}
+.bgColor{
+  background-color: #666EE8;
+  color: #ffffff !important;
+  border-color: #666EE8;
+}
+.nav>i{
+  width: 110px;
+  height: 36px;
+  background-color: #666EE8;
+  font-size: 14px;
+  color: #ffffff;
+  line-height: 36px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.nav>i span{
+  padding-left: 10px;
+}
+/* 侧边导航 */
+.side_nav{
+  /* display: flex;
+  justify-content: space-between; */
+  margin-top: 15px;
+}
+.side_nav .left{
+  margin-right: 25px;
+}
+.side_nav .left ul li{
+  list-style: none;
+  font-size: 14px;
+  color: #333333;
+  width: 180px;
+  height: 44px;
+  border: 1px solid #f0f1fd;
+  line-height: 44px;
+}
+.side_nav .left ul li:hover{
+  color: #ffffff;
+  background-color: #666EE8;
+}
+.side_nav .right .search{
+  width: 367px;
+  height: 36px;
+  margin-bottom: 25px;
+}
+.side_nav .right .search .el-input .el-input__inner{
+  border-right: none;
+}
+.side_nav .right .search .btn{
+  background-color: #666EE8;
+  border-color: #666EE8;
+  color: #ffffff;
+}
+.side_nav .right .el-table thead tr th{
+  background-color: #666EE866;
+  color: #333333;
+}
+.el-table .el-button--text{
+  color: #666EE8;
+  padding: 0 5px;
+}
+/* 分页 */
+.block{
+  margin-top: 105px;
+ padding-bottom: 117px;
+  text-align: right;
+}
+/* 新增 */
+.el-form .el-form-item__content{
+  display: inline-block;
+  width: 80%;
+  height: 200px;
+}
+.el-form .dialog-footer .el-button--primary{
+  background-color: #666EE8;
+}
+.el-dialog__header{
+  text-align: left;
+}
