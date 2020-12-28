@@ -19,7 +19,7 @@ export default class LineChart extends Vue{
     this.chart.setOption({
       tooltip:{},
       legend: {
-        data: ['预算分配', '实际开销'],
+        // data: ['预算分配', '实际开销'],
       },
       grid:{top:'25%',left:'25%',right:'25%',bottom:'25%'},
       radar: {
@@ -34,25 +34,29 @@ export default class LineChart extends Vue{
         },
         radius: '60%',
         indicator: [
-          { name: '销售', max: 6500},
-          { name: '管理', max: 16000},
-          { name: '信息技术', max: 30000},
-          { name: '客服', max: 38000},
-          { name: '研发', max: 52000},
-          { name: '市场', max: 25000}
+          { name: '急诊', max: 6500},
+          { name: '手术', max: 16000},
+          { name: 'xx', max: 30000},
+          { name: 'xx', max: 38000},
+          { name: 'xx', max: 52000},
+          { name: 'xx', max: 25000}
         ]
       },
       series: [{
-        name: '预算 vs 开销',
+        // name: '预算 vs 开销',
         type: 'radar',
         // areaStyle: {normal: {}},
         data : [{
           value : [4300, 10000, 28000, 35000, 50000, 19000],
-          name : '预算分配'
+          name : '个人'
+        },
+        {
+          value : [4800, 12000, 28000, 33000, 44000, 20000],
+          name : '部门'
         },
         {
           value : [5000, 14000, 28000, 31000, 42000, 21000],
-          name : '实际开销'
+          name : '系统'
         }]
       }]
     })
