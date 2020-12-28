@@ -1,5 +1,5 @@
 <template>
-  <div class="all">
+  <div class="connent_all">
     <!-- 头部内容 -->
     <div class="top">
       <div class="top_left">
@@ -104,7 +104,7 @@
           <el-table-column label="操作">
             <template>
               <el-link type="primary" @click="details">记录详情</el-link>
-              <el-link type="primary">投诉详情</el-link>
+              <el-link type="primary" @click="complaint">投诉详情</el-link>
             </template>
           </el-table-column>
         </el-table>
@@ -229,6 +229,10 @@ export default {
       console.log(12);
       this.$emit("abClick");
     },
+    //投诉详情
+    complaint(){
+      this.$router.push('/Complaints')
+    }
   },
 };
 </script>

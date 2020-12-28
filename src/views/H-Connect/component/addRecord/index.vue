@@ -1,5 +1,5 @@
 <template>
-  <div class="all">
+  <div class="addRecord_all">
     <!-- top -->
     <div class="top">
       <h4>基本信息</h4>
@@ -64,6 +64,8 @@
               <el-input
                 type="textarea"
                 v-model="form.desc"
+                max="200"
+                min="10"
               ></el-input> </el-form-item
           ></el-col>
         </el-row>
@@ -160,12 +162,12 @@
       </div>
       <div class="relation_content">
         <el-table :data="tableData1" style="width: 100%">
-          <el-table-column label="序号">
+          <el-table-column label="序号" width="50px">
             <template slot-scope="scope">
               <span style="margin-left: 10px">{{ scope.row.id }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="事件编码" width="80px">
+          <el-table-column label="事件编码">
             <template slot-scope="scope">
               <span style="margin-left: 10px">{{ scope.row.sjbm }}</span>
             </template>
@@ -176,12 +178,12 @@
               <span style="margin-left: 10px">{{ scope.row.name }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="姓别">
+          <el-table-column label="姓别" width="50px">
             <template slot-scope="scope">
               <span style="margin-left: 10px">{{ scope.row.sex }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="年龄">
+          <el-table-column label="年龄" width="50px">
             <template slot-scope="scope">
               <span style="margin-left: 10px">{{ scope.row.age }}</span>
             </template>
@@ -201,7 +203,7 @@
               <span style="margin-left: 10px">{{ scope.row.xxly }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="投诉时间" width="80px">
+          <el-table-column label="投诉时间" >
             <template slot-scope="scope">
               <span style="margin-left: 10px">{{ scope.row.date }}</span>
             </template>

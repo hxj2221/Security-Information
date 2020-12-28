@@ -1,0 +1,70 @@
+.articleList_all {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgb(184, 183, 183);
+    padding-bottom: 50px;
+}
+
+/*  top*/
+.articleList_top {
+    overflow: hidden;
+    padding: 20px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 3px rgb(184, 183, 183);
+    margin-bottom: 20px;
+}
+
+.articleList_top_left {
+    float: left;
+}
+
+.articleList_top_right {
+    float: right;
+}
+
+/* table */
+.articleList_table {
+    overflow: hidden;
+    margin: 0 20px;
+}
+
+/* table 搜索部分 */
+.articleList_table_search {
+    float: right;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.articleList_table_search>.el-cascader {
+    margin-right: 10px;
+}
+
+.articleList_table_search>.el-input {
+    width: auto;
+}
+
+/* table  表格部分 */
+.articleList_table_table {}
+
+.articleList_table_table>.el-table {
+    margin-bottom: 20px;
+}
+
+.articleList_table_table_select {
+    overflow: hidden;
+}
+
+.articleList_table_table_select>.el-select {
+    float: left;
+}
+
+.articleList_table_table_paging {
+    overflow: hidden;
+}
+
+.articleList_table_table_paging>.el-pagination {
+    float: right;
+}
