@@ -1,4 +1,4 @@
-.all {
+.connent_all {
     width: 100%;
     height: 100%;
     background: #fff;
@@ -24,7 +24,12 @@
 .top_right {
     float: right;
 }
-
+.top_right>.el-button:first-child{
+    color: #fff;
+}
+.Tableall>.seach>.block>.el-button{
+    color: #fff;
+}
 hr {
     margin: 0 15px 20px;
     font-weight: 400;

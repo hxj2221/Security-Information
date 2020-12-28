@@ -10,7 +10,7 @@
         <el-input type="text" class="logininput" v-model="ruleForm.name" placeholder="请输入账号" autocomplete="off"  prefix-icon="el-icon-s-custom"></el-input>
       </el-form-item>
       <el-form-item prop="pass">
-        <el-input type="password" class="logininput" v-model="ruleForm.pass" placeholder="请输入密码" autocomplete="off" prefix-icon="el-icon-warning"></el-input>
+        <el-input type="password" class="logininput" v-model="ruleForm.pass" placeholder="请输入密码" autocomplete="off" prefix-icon="iconfont el-icon-hospital-passwordmima"></el-input>
       </el-form-item>
       <el-form-item prop="pass">
        <!-- <el-input type="select" v-model="ruleForm.hospital" placeholder="请输入密码" autocomplete="off" prefix-icon="el-icon-office-building"></el-input> -->
@@ -69,7 +69,7 @@ export default {
             if (code === 0) {
               sessionStorage.setItem('name', this.ruleForm.name)
               sessionStorage.setItem('pass', this.ruleForm.pass)
-              this.$router.push('/dashboard')
+              this.$router.push('/Complaints')
               this.$store.dispatch('app/UpdateRememberPass', this.remember)
             } else {
               this.$message({

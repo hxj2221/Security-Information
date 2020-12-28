@@ -1,4 +1,4 @@
-.all {
+.addRecord_all {
     width: 100%;
     height: 100%;
     background: #fff;
@@ -67,7 +67,9 @@
 .enclosure_top_right {
     float: right;
 }
-
+.enclosure_top_right>.el-button{
+    color: #fff;
+}
 .enclosure_content {
     margin-bottom: 20px;
 }
@@ -93,6 +95,9 @@
 }
 .relation_top>h5{
     color: #666EE8;
+}
+.relation_content>.el-button{
+    color: #fff;
 }
 .el-table {
     margin-bottom: 20px;
@@ -124,4 +129,7 @@
 .button_stlye>button {
     float: right;
     margin-left: 20px;
+}
+.button_stlye>button:last-child{
+    color: #fff;
 }
