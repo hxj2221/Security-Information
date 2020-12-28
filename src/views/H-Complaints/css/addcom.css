@@ -63,6 +63,7 @@
     border: none;
 }
 .addcom .requirement .el-dialog__header{
+    color: #00004f;
     border-bottom: 0.5px solid rgba(187, 187, 187, 0.376);
     background-color: #f2f2f2;
     font-size: 16px;
@@ -75,6 +76,6 @@
     line-height: 30px;
 }
 
-.el-table__row{
+.addcom .el-table__row{
     border: none;
 }

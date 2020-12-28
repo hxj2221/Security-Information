@@ -1,17 +1,20 @@
-.cell{
+.Complaints-content{
+  width: 100%;
+}
+.Complaints-content .cell{
     color: #000000;
     /* background-color: #c2c5f6; */
 }
-.el-button--small{
+.Complaints-content .el-button--small{
     color: #666ee8;
 }
-.el-table__header{
+.Complaints-content .el-table__header{
     background-color: #c2c5f6;
 }
-.el-table__header-wrapper{
+.Complaints-content .el-table__header-wrapper{
   background-color: #c2c5f6;
 }
-el-table-column{
+.Complaints-content el-table-column{
   background-color: #c2c5f6;
   
 }

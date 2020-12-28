@@ -305,7 +305,8 @@
         </span>
       </el-dialog>
     </div>
-    <Conserve></Conserve>
+    <Conserve>
+    </Conserve>
      </div>
   </div>
 </template>
@@ -407,6 +408,10 @@ export default {
   },
 
   methods: {
+    //保存提交事件
+    keepform(){
+
+    },
     // 弹窗点击事件
     handleClose(done) {
       this.$confirm("确认关闭？")
