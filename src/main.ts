@@ -22,6 +22,12 @@ Mock.bootstrap()
 // 引入dialog可移动
 import './directives.js'
 
+// echarts表格
+import echarts from "echarts";
+Vue.prototype.$echarts = echarts;
+
+
+
 Vue.use(ElementUI)
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false

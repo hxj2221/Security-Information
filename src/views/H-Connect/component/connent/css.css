@@ -6,6 +6,7 @@
     box-shadow: 0 0 2px rgb(184, 183, 183);
     padding-bottom: 50px;
 }
+
 /* 头部样式 */
 .connent_top {
     overflow: hidden;
@@ -16,28 +17,30 @@
 .connent_top_left {
     float: left;
 }
-.connent_top_left>h6{
+
+.connent_top_left>h6 {
     color: #666EE8;
 }
 
 .connent_top_right {
     float: right;
 }
-.connent_top_right>.el-button:first-child{
-    color: #fff;
-}
-.connent_Tableall>.seach>.block>.el-button{
+
+.connent_top_right>.el-button:first-child {
     color: #fff;
 }
 
-hr {
-    margin: 0 15px 20px;
-    font-weight: 400;
-    background-color: #e6e0e0;
-    border: none;
+.connent_Tableall>.seach>.block>.el-button {
+    color: #fff;
+}
+
+.connent_hr {
+    margin: 0 20px;
+    width: 97%;
     height: 2px;
-    margin: 0 auto;
-
+    background-color:#ebe9e9;
+    border: none;
+    margin-bottom: 20px;
 }
 
 /* 表单样式 */
@@ -52,7 +55,7 @@ hr {
     margin-left: 15px;
 }
 
- .connent_Tableall .block>.el-input {
+.connent_Tableall .block>.el-input {
     margin-right: 15px;
     margin-left: 15px;
 }
@@ -88,9 +91,10 @@ hr {
     text-align: center !important;
 }
 
-.connent_myTable .el-table-column .el-link {
+.connent_myTable .el-table .el-link {
     font-size: 10px;
     padding-left: 8px;
+    padding-right: 10px;
 }
 
 /* 分页 */

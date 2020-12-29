@@ -16,7 +16,7 @@
         <el-button size="small" icon="el-icon-d-arrow-right">导出</el-button>
       </div>
     </div>
-    <hr />
+    <hr class="connent_hr" />
     <!-- 表单部分 -->
     <div class="connent_Tableall">
       <!-- 表单搜素部分 -->
@@ -103,8 +103,12 @@
 
           <el-table-column label="操作">
             <template>
-              <el-link type="primary" @click="details">记录详情</el-link>
-              <el-link type="primary" @click="complaint">投诉详情</el-link>
+              <el-link type="primary" :underline="false" @click="details"
+                >记录详情</el-link
+              >
+              <el-link type="primary" :underline="false" @click="complaint"
+                >投诉详情</el-link
+              >
             </template>
           </el-table-column>
         </el-table>
@@ -112,15 +116,7 @@
       <!-- 分页 -->
       <div class="connent_paging">
         <div class="block">
-          <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page="currentPage4"
-            :page-sizes="[100, 200, 300, 400]"
-            :page-size="100"
-            layout="total, sizes, prev, pager, next, jumper"
-            :total="400"
-          >
+          <el-pagination layout="prev, pager, next" :total="1000">
           </el-pagination>
         </div>
       </div>
@@ -210,7 +206,7 @@ export default {
       seachTime: "", //选择时间
       input: "", //input内容
       // 分页
-      currentPage4: 1,
+      // currentPage4: 1,
     };
   },
   methods: {
@@ -230,9 +226,9 @@ export default {
       this.$emit("abClick");
     },
     //投诉详情
-    complaint(){
-      this.$router.push('/Complaints')
-    }
+    complaint() {
+      this.$router.push("/Complaints");
+    },
   },
 };
 </script>

@@ -1,14 +1,18 @@
 .Forget_all {
     width: 100%;
-    height: 800px;
+    /* height: 1000px; */
+    height: 100%;
     background: #666ee8;
-    position: relative;
+    /* position: relative; */
+    overflow: hidden;
 }
 
 .Forget_img {
-    position: absolute;
+    /* position: absolute;
     top: 10px;
-    right: 10px;
+    right: 10px; */
+    float: right;
+    text-align: right;
     width: 43px;
     height: 36.99px;
     padding-top: 5px;
@@ -18,25 +22,27 @@
 
 /* content */
 .Forget_content {
-    width: 50%;
-    height: 60%;
+    width:45%;
+    /* height: 70%; */
     background-color: #fff;
-    margin: 0 auto;
+    /* line-height: 100%; */
+    margin: 10% auto 13%;
+    /* margin: 0 auto; */
     border-radius: 5px;
     box-shadow: 0px 2px 10px rgb(0 0 0 / 35%);;
-    position: absolute;
+    /* position: absolute;
     top: 150px;
-    left: 400px;
+    left: 400px; */
 }
 .Forget_content_content{
-    width: 50%;
+    width:50%;
     height: 70%;
     margin:  0 auto;
 
 }
 .Forget_content_content>h1{
     text-align: left;
-    padding: 40px 0 20px;
+    padding: 60px 0 20px;
 }
 .Forget_content_content >.el-form>.el-form-item{
     overflow: hidden;
@@ -62,4 +68,7 @@
     width: 100%;
     color: #fff;
     margin-bottom: 20px;
+}
+.Forget_content_content>.el-link{
+    margin-bottom: 60px;
 }

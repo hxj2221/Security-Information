@@ -1,23 +1,25 @@
-.all {
+.allManage {
   background: #ffffff;
-  /* width: 98%; */
+  width: 1240px;
   padding: 0 20px;
+  margin: 0 auto;
 }
 /* 顶部导航 */
-.nav {
+.allManage>.nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 84px;
   border-bottom: 2px solid #cccccc;
+  margin-bottom: 20px;
 }
-.nav>ul{
+.allManage>.nav>ul{
   list-style: none;
   font-size: 14px;
   display: flex;
   border: 1px solid #cccccc;
 }
-.nav>ul>li{
+.allManage>.nav>ul>li{
   width: 102px;
   border: 1px solid #cccccc;
   border-start-end-radius: 5px;
@@ -26,17 +28,17 @@
   cursor: pointer;
   color: #cccccc;
 }
-.nav>ul>.bgColor:first-child{
+.allManage>.nav>ul>.bgColor:first-child{
   background-color: #666EE8;
   color: #ffffff;
   border-color: #666EE8;
 }
-.bgColor{
+.allManage>.nav>ul>.bgColor{
   background-color: #666EE8;
   color: #ffffff !important;
   border-color: #666EE8;
 }
-.nav>i{
+.allManage>.nav>i{
   width: 110px;
   height: 36px;
   background-color: #666EE8;
@@ -46,19 +48,18 @@
   border-radius: 5px;
   cursor: pointer;
 }
-.nav>i span{
+.allManage>.nav>i span{
   padding-left: 10px;
 }
-/* 侧边导航 */
-.side_nav{
-  /* display: flex;
-  justify-content: space-between; */
-  margin-top: 15px;
+/* 内容 */
+.allManage>.content{
+  display: flex;
 }
-.side_nav .left{
+/* 侧边导航 */
+.allManage>.content>.left{
   margin-right: 25px;
 }
-.side_nav .left ul li{
+.allManage>.content>.left ul li{
   list-style: none;
   font-size: 14px;
   color: #333333;
@@ -67,33 +68,34 @@
   border: 1px solid #f0f1fd;
   line-height: 44px;
 }
-.side_nav .left ul li:hover{
+.allManage>.content>.left ul li:hover{
   color: #ffffff;
   background-color: #666EE8;
 }
-.side_nav .right .search{
+/* 右边内容 */
+/* 搜索 */
+.allManage>.content>.right>.search{
   width: 367px;
   height: 36px;
   margin-bottom: 25px;
+  margin-left: 0;
 }
-.side_nav .right .search .el-input .el-input__inner{
-  border-right: none;
-}
-.side_nav .right .search .btn{
+
+.allManage>.content>.right>.search>.el-input-group__append{
   background-color: #666EE8;
   border-color: #666EE8;
   color: #ffffff;
 }
-.side_nav .right .el-table thead tr th{
-  background-color: #666EE866;
-  color: #333333;
+/* 表格 */
+.allManage>.content>.right{
+  width: 985px;
+  text-align: left;
 }
-.el-table .el-button--text{
-  color: #666EE8;
-  padding: 0 5px;
+.has-gutter tr th{
+  background-color: #666EE866;
 }
 /* 分页 */
-.block{
+.allManage .block{
   margin-top: 105px;
  padding-bottom: 117px;
   text-align: right;
