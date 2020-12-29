@@ -1,41 +1,10 @@
 <template>
-  <div>
-    <el-table class="elTable"  :data="tableData" style="width: 96%">
-      <el-table-column type="index" label="序号" width="80">
-      </el-table-column>
-      <el-table-column prop="serialNum" label="事件编码" width="150">
-      </el-table-column>
-      <el-table-column prop="name" label="患者姓名" width="120">
-      </el-table-column>
-      <el-table-column prop="sex" label="性别" width="80">
-      </el-table-column>
-      <el-table-column prop="age" label="年龄" width="80">
-      </el-table-column>
-      <el-table-column prop="date" label="事发日期" width="180">
-      </el-table-column>
-      <el-table-column prop="place" label="发生场所" width="170">
-      </el-table-column>
-      <el-table-column prop="level" label="轻重程度" width="120">
-      </el-table-column>
-      <el-table-column prop="date1" label="上报时间" width="180">
-      </el-table-column>
-      <el-table-column prop="depart" label="患者科室" width="170">
-      </el-table-column>
-      <el-table-column prop="person" label="上报人" width="120">
-      </el-table-column>
-      <el-table-column label="操作" width="100">
-        <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-    <!-- 查看 -->
-    <el-dialog :visible.sync="dialogVisible" width="50%" >
-      <div class="top">
+  <div class="detail">
+    <div class="top">
       <span class="left">投诉案件调查表</span>
       <div class="right">
         <i class="el-icon-printer"><span>打印记录表</span></i>
-        <i class="fa fa-reply fa-2" aria-hidden="true" @click="dialogVisible=false"><span>返回</span></i>
+        <i class="fa fa-reply fa-2" aria-hidden="true" @click="back()"><span>返回</span></i>
       </div>
     </div>
     <div class="head-txt">
@@ -154,7 +123,7 @@
           <span class="tit">不良事件描述</span>
           <span class="con">患者术后7天出院，局部肿痛，复诊医生告知骨折部位错位需二次手术。家属对此质疑，要求医院承担二次手术费用。1月22日6PM医患双方在场封存病历原件。</span>
         </div>
-      </div>   
+      </div>
     </div>
     <!-- 关联患者信息 -->
     <div class="cent_info">
@@ -206,147 +175,23 @@
         </div>
       </div>
     </div>
-    </el-dialog>
   </div>
 </template>
 
 <script>
-
   export default {
-    components: {
-      
-    },
-    props: {
-      data:Array
-    },
+    components: {},
+    props: {},
     data() {
-      return {
-        tableData: [{
-          serialNum: '202011151036',
-          name: '王小虎',
-          sex: '男',
-          age: '45',
-          date: '2016-05-02 13:20:13',
-          place: '外科',
-          level: 'A',
-          date1: '2019-11-12 12:08:12',
-          depart: '外科',
-          person: '王冕'
-        }, {
-          serialNum: '202011151036',
-          name: '王小虎',
-          sex: '男',
-          age: '45',
-          date: '2016-05-02 13:20:13',
-          place: '外科',
-          level: 'A',
-          date1: '2019-11-12 12:08:12',
-          depart: '外科',
-          person: '王冕'
-        }, {
-          serialNum: '202011151036',
-          name: '王小虎',
-          sex: '男',
-          age: '45',
-          date: '2016-05-02 13:20:13',
-          place: '外科',
-          level: 'A',
-          date1: '2019-11-12 12:08:12',
-          depart: '外科',
-          person: '王冕'
-        }, {
-          serialNum: '202011151036',
-          name: '王小虎',
-          sex: '男',
-          age: '45',
-          date: '2016-05-02 13:20:13',
-          place: '外科',
-          level: 'A',
-          date1: '2019-11-12 12:08:12',
-          depart: '外科',
-          person: '王冕'
-        }, {
-          serialNum: '202011151036',
-          name: '王小虎',
-          sex: '男',
-          age: '45',
-          date: '2016-05-02 13:20:13',
-          place: '外科',
-          level: 'A',
-          date1: '2019-11-12 12:08:12',
-          depart: '外科',
-          person: '王冕'
-        }, {
-          serialNum: '202011151036',
-          name: '王小虎',
-          sex: '男',
-          age: '45',
-          date: '2016-05-02 13:20:13',
-          place: '外科',
-          level: 'A',
-          date1: '2019-11-12 12:08:12',
-          depart: '外科',
-          person: '王冕'
-        }, {
-          serialNum: '202011151036',
-          name: '王小虎',
-          sex: '男',
-          age: '45',
-          date: '2016-05-02 13:20:13',
-          place: '外科',
-          level: 'A',
-          date1: '2019-11-12 12:08:12',
-          depart: '外科',
-          person: '王冕'
-        }, {
-          serialNum: '202011151036',
-          name: '王小虎',
-          sex: '男',
-          age: '45',
-          date: '2016-05-02 13:20:13',
-          place: '外科',
-          level: 'A',
-          date1: '2019-11-12 12:08:12',
-          depart: '外科',
-          person: '王冕'
-        }, {
-          serialNum: '202011151036',
-          name: '王小虎',
-          sex: '男',
-          age: '45',
-          date: '2016-05-02 13:20:13',
-          place: '外科',
-          level: 'A',
-          date1: '2019-11-12 12:08:12',
-          depart: '外科',
-          person: '王冕'
-        }, {
-          serialNum: '202011151036',
-          name: '王小虎',
-          sex: '男',
-          age: '45',
-          date: '2016-05-02 13:20:13',
-          place: '外科',
-          level: 'A',
-          date1: '2019-11-12 12:08:12',
-          depart: '外科',
-          person: '王冕'
-        }, ],
-        dialogVisible:false
-      };
+      return {};
     },
     methods: {
-      // 查看
-      handleClick(row) {
-        console.log(row);
-        this.dialogVisible=true
-      },
+      back(){
+        console.log(1)
+        this.$emit("pageDetail")
+      }
     },
   }
 </script>
 <style>
-  /*  表格 */
-  .elTable {
-    margin: 0 30px;
-  }
 </style>
