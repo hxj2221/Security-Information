@@ -1,5 +1,5 @@
 <template>
-  <div class="addAll" v-show="AddShow">
+  <div class="addAll">
     <!-- 新增 -->
     <div class="form">
       <h2>基本信息</h2>
@@ -196,8 +196,6 @@
     },
     data() {
       return {
-        // 是否显示
-        AddShow: true,
         add: {
           // 事件编号
           number: 'BL202011150001',
@@ -339,13 +337,11 @@
       // 提交
       sure() {
         console.log('1');
-        this.AddShow = !this.AddShow
-        this.$emit('Main')
+        this.$emit('pageAdd')
       },
       // 返回
       back(){
-        this.AddShow = !this.AddShow
-        this.$emit('Main')
+        this.$emit('pageAdd')
       },
       // 查看
       handleClick(row) {

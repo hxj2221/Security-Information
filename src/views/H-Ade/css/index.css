@@ -1,9 +1,11 @@
 .all {
-  background-color: #fff;
+  /* background-color: #fff; */
   text-align: left;
+  padding-bottom: 100px;
+  
 }
-.Main{
-  padding-bottom: 74px;
+.main{
+  background-color: #fff;
 }
 /* 头部 */
 .header {
@@ -74,24 +76,25 @@
   border-color: #666EE8;
 }
 
-.el-pagination {
-  margin: 20px 0;
-  text-align: right;
-}
-
 .sel {
   width: 588px;
+}
+/*  */
+.elTable{
+  padding: 0 20px;
 }
 
 /* 分页 */
 .page {
   text-align: right;
+  margin: 20px 0;
 }
 
 /* 新增 */
 .addAll {
   padding-bottom: 114px;
   position: relative;
+  background-color: #fff;
 }
 
 .form {
@@ -203,6 +206,13 @@
 
 
 /* 查看不良事件详情 */
+.detail{
+  padding: 20px;
+  background-color: #fff;
+  width: 756px;
+  font-size: 14px;
+  margin: 0 auto;
+}
 .top {
   display: flex;
   justify-content: space-between;
@@ -220,6 +230,7 @@
   padding: 0 10px;
   cursor: pointer;
   margin: 0 10px;
+  font-size: 14px;
 }
 
 .top .left:hover {
@@ -266,11 +277,14 @@
 
 /* 基本信息 */
 .cent_info {
-  padding: 20px 10px 50px;
   text-align: left;
   border-bottom: 2px solid #f2f2f2;
+  width: 717px;
+  margin: 19px auto;
 }
-
+.cent_info .tit{
+  width: 120px;
+}
 .cent_info>p {
   font-weight: 700;
   color: #333;
@@ -284,7 +298,6 @@
 
 .cent_info .box {
   display: flex;
-  width: 100%;
 }
 
 .cent_info .box .box_con {
@@ -294,37 +307,32 @@
 }
 
 .cent_info .box .box_con .tit {
-  width: 120px;
   border-right: 1px solid #e4e4e4;
-  padding-left: 5px;
+  padding: 5px;
   background: #f2f2f2;
 }
 
 .cent_info .box .box_con .con {
-  padding-left: 5px;
+  padding: 5px;
   width: 119px;
 }
 
 .cent_info .box .box_con1 {
-  width: 100%;
   display: flex;
   border: 1px solid #e4e4e4;
 }
 
 .cent_info .box .box_con1 .tit {
-  width: 120px;
   border-right: 1px solid #e4e4e4;
-  padding-left: 5px;
+  padding: 5px;
   background: #f2f2f2;
+  width: 109px;
+  
 }
 
 .cent_info .box .box_con1 .con {
-  padding-left: 5px;
-  width: 729px;
-}
-
-.cent_info .box:last-child .box_con1 .tit {
-  width: 120px;
+  padding: 5px;
+  width: 591px;
 }
 
 .cent_info:last-child {
