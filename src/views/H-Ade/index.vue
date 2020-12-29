@@ -1,5 +1,5 @@
 <template>
-  <div class="all">
+  <div>
     <!-- 主页面 -->
     <main-page v-show="MainShow" @pageAdd="add()" @pageDetail="Details()" ></main-page>
     <!-- 增加 -->
