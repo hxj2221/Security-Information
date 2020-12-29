@@ -1,4 +1,4 @@
-.all {
+.category_all {
     width: 100%;
     height: 100%;
     background: #fff;
@@ -9,20 +9,20 @@
 }
 
 /* 头部样式 */
-.top {
+.category_top {
     padding: 20px 15px;
     overflow: hidden;
 }
 
-.top_left {
+.category_top_left {
     float: left;
 }
 
-.top_right {
+.category_top_right {
     float: right;
 }
 
-.top_right>.el-select {
+.category_top_right>.el-select {
     margin-right: 5px;
 }
 
@@ -36,7 +36,7 @@ hr {
 }
 
 /* 选择筛选部分样式 */
-.screen {
+.category_screen {
     /* display: flex;
     justify-content: space-around; */
     overflow: hidden;
@@ -44,50 +44,50 @@ hr {
     display: flex;
     justify-content: space-around;
 }
-.screen p{
+.category_screen p{
     float: left;
     font-size: 12px;
     line-height: 32px;
 }
 /* 筛选投诉类别样式 */
-.screen .el-input{
+.category_screen .el-input{
     margin-left: 4px;
     height:32px;
   }
- .screen .el-input__inner{
+ .category_screen .el-input__inner{
     margin-left: 4px;
     height:32px;
   }
-.screen  .el-input--suffix .el-input__inner{
+.category_screen  .el-input--suffix .el-input__inner{
     width:120px!important;
     margin-left: 4px;
     height:32px;
   }
- .screen .el-input__icon{
+ .category_screen .el-input__icon{
     height:116%;
   }
 /* one */
-.screen_one{
+.category_screen_one{
     float: left;
     
     
 }
 /* two */
-.screen_two{
+.category_screen_two{
     float: left;
 }
 /* three */
-.screen_three{
+.category_screen_three{
 float: left;
 }
 /* four */
-.screen_four{
+.category_screen_four{
     float: left;
 }
-.el-date-editor.el-input, .el-date-editor.el-input__inner {
+.category_screen_four .el-date-editor .el-input, .el-date-editor.el-input__inner {
     width: 240px;
 }
-.screen>.el-button{
+.category_screen>.el-button{
     float: left;
     height: 32px;
 }

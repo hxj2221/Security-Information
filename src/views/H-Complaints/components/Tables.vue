@@ -17,11 +17,13 @@
         <el-table-column prop="Complaint_Time" label="投诉时间"> </el-table-column>
         <el-table-column prop="Deparment " label="流转部门"> </el-table-column>
         <el-table-column prop="Event_State" label="事件状态"> </el-table-column>
+        <slot name="column">
         <el-table-column fixed="right" label="操作" width="150%">
           <el-button type="text" size="small">查看</el-button>
           <el-button type="text" size="small">医患记录</el-button>
           <el-button type="text" size="small">操作</el-button>
         </el-table-column>
+        </slot>
       </el-table>
     </div>
   </div>

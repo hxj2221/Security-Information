@@ -8,10 +8,11 @@
           >新增</el-button
         >
         </slot>
-        
+         <slot name="export">
         <el-button icon="iconfont el-icon-hospital-passwordexport" class="exportcomplaint"
           >导出</el-button
         >
+        </slot>
       </div>
       <div class="Complaints-screen clearfix">
         <el-form ref="form" :model="form" label-width="80px">
@@ -57,7 +58,11 @@
           @click="clicks"
         ></el-button>
       </div>
-    <Tables></Tables>
+      <slot name="table">
+        <Tables>
+        </Tables>
+      </slot>
+    
       <div class="Complaints-footer">
         <el-pagination
           :page-size="20"

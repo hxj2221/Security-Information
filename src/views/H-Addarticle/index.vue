@@ -23,7 +23,6 @@
             v-model="ruleForm.value"
             :options="rules.options"
             :props="{ expandTrigger: 'hover' }"
-            @change="handleChange"
           ></el-cascader>
         </el-form-item>
 
@@ -86,7 +85,7 @@
             multiple
             :limit="3"
             :on-exceed="handleExceed"
-            :file-list="fileList1"
+            :file-list="rules.fileList1"
           >
             <el-button size="small" type="primary">点击上传</el-button>
             <div slot="tip" class="el-upload__tip">

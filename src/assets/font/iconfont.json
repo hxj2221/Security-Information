@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "9874468",
+      "name": "KHCFDC_打印",
+      "font_class": "dayin",
+      "unicode": "e6c8",
+      "unicode_decimal": 59080
+    },
+    {
       "icon_id": "17606297",
       "name": "保存",
       "font_class": "baocun",

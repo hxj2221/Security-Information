@@ -1,11 +1,11 @@
 <template>
   <div class="connent_all">
     <!-- 头部内容 -->
-    <div class="top">
-      <div class="top_left">
+    <div class="connent_top">
+      <div class="connent_top_left">
         <h6>医患沟通记录</h6>
       </div>
-      <div class="top_right">
+      <div class="connent_top_right">
         <el-button
           type="primary"
           size="small"
@@ -18,7 +18,7 @@
     </div>
     <hr />
     <!-- 表单部分 -->
-    <div class="Tableall">
+    <div class="connent_Tableall">
       <!-- 表单搜素部分 -->
       <div class="seach">
         <p>沟通日期</p>
@@ -45,7 +45,7 @@
         </div>
       </div>
       <!-- 表单表格部分 -->
-      <div class="myTable">
+      <div class="connent_myTable">
         <!--  -->
         <el-table :data="tableData" style="width: 100%">
           <el-table-column label="序号" width="60px">
@@ -110,7 +110,7 @@
         </el-table>
       </div>
       <!-- 分页 -->
-      <div class="paging">
+      <div class="connent_paging">
         <div class="block">
           <el-pagination
             @size-change="handleSizeChange"
@@ -210,7 +210,7 @@ export default {
       seachTime: "", //选择时间
       input: "", //input内容
       // 分页
-      currentPage4: 4,
+      currentPage4: 1,
     };
   },
   methods: {

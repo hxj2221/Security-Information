@@ -47,8 +47,6 @@
 }
 
 /* table  表格部分 */
-.articleList_table_table {}
-
 .articleList_table_table>.el-table {
     margin-bottom: 20px;
 }
@@ -68,3 +66,4 @@
 .articleList_table_table_paging>.el-pagination {
     float: right;
 }
+

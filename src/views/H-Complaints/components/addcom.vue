@@ -305,7 +305,25 @@
         </span>
       </el-dialog>
     </div>
-    <Conserve></Conserve>
+    <Conserve>
+      <el-button
+          type="primary"
+          icon="iconfont el-icon-hospital-passwordbaocun"
+          class="keep"
+          slot="keep"
+          @click="keepform()"
+          >保存</el-button
+        >
+        <el-button
+          type="primary"
+          icon="iconfont el-icon-hospital-passwordai207"
+          class="return"
+          style="border: 1px solid #949aef"
+          slot="back"
+          @click="back()"
+          >返回</el-button
+        >
+    </Conserve>
      </div>
   </div>
 </template>
@@ -407,6 +425,13 @@ export default {
   },
 
   methods: {
+    //保存提交事件
+    keepform(){
+console.log(1)
+    },
+     back() {
+      this.$router.go(-1);
+    },
     // 弹窗点击事件
     handleClose(done) {
       this.$confirm("确认关闭？")

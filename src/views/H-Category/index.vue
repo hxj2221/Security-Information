@@ -1,12 +1,12 @@
 <template>
-  <div class="all">
+  <div class="category_all">
     <!-- 头部 -->
-    <div class="top">
-      <div class="top_left">
+    <div class="category_top">
+      <div class="category_top_left">
         <h6>投诉类别与科室统计</h6>
       </div>
       <!-- 头部下拉框 -->
-      <div class="top_right">
+      <div class="category_top_right">
         <el-select v-model="value" placeholder="选择统计维度">
           <el-option
             v-for="item in options"
@@ -21,9 +21,9 @@
     </div>
     <hr />
     <!-- 选择筛选部分 -->
-    <div class="screen">
+    <div class="category_screen">
       <!-- 筛选投诉类别 -->
-      <div class="screen_one">
+      <div class="category_screen_one">
         <p>投诉类别</p>
         <el-select v-model="catone" placeholder="请选择" :span="8">
           <el-option
@@ -35,7 +35,7 @@
           </el-option>
         </el-select>
       </div>
-      <div class="screen_two">
+      <div class="category_screen_two">
         <p>投诉科室</p>
         <el-select v-model="deptwo" placeholder="请选择">
           <el-option
@@ -47,7 +47,7 @@
           </el-option>
         </el-select>
       </div>
-      <div class="screen_three">
+      <div class="category_screen_three">
         <el-select v-model="datthree" placeholder="请选择">
           <el-option
             v-for="item in date"
@@ -58,7 +58,7 @@
           </el-option>
         </el-select>
       </div>
-      <div class="screen_four">
+      <div class="category_screen_four">
         <div class="block">
           <el-date-picker
             v-model="value2"

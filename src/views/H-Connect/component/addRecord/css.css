@@ -10,101 +10,104 @@
 }
 
 /* top */
-.top {
+.addRecord_top {
     overflow: hidden;
 }
 
-.top>h4 {
+.addRecord_top>h4 {
     float: left;
     color: #666EE8;
     /* color: #409EFF; */
 }
 
 /* 表单 */
-.myform {
+.addRecord_myform {
     margin: 0 20px;
     margin-bottom: 20px;
 }
 
-.el-input {
+.addRecord_myform .el-from .el-input {
     margin: 0;
     display: block !important;
     width: 218px;
 }
 
-.el-row {
+.addRecord_myform .el-form .el-row {
     display: flex;
     justify-content: space-between;
 }
-
-.el-input__icon {
+.addRecord_myform .el-date-editor{
+    display: block;
+    width: auto;
+}
+.addRecord_myform .el-date-picker .el-input__icon {
     /* 控制日期图标 */
     height: 150%;
 }
 
-.el-select {
+.addRecord_myform .el-select {
     display: block;
 }
 
 /* 表格1  附件信息样式 */
-.enclosure {
+.addRecord_enclosure {
     margin: 0 20px;
     overflow: hidden;
     margin-bottom: 20px;
 }
 
-.enclosure_top {
+.addRecord_enclosure_top {
     overflow: hidden;
     margin-bottom: 15px;
 }
 
-.enclosure_top_left {
+.addRecord_enclosure_top_left {
     float: left;
 }
-.enclosure_top_left>h5{
+.addRecord_enclosure_top_left>h5{
     color: #666EE8;
 }
-.enclosure_top_right {
+.addRecord_enclosure_top_right {
     float: right;
 }
-.enclosure_top_right>.el-button{
+.addRecord_enclosure_top_right>.el-button{
     color: #fff;
 }
-.enclosure_content {
+.addRecord_enclosure_content {
     margin-bottom: 20px;
 }
 
-.enclosure_paging {
+.addRecord_enclosure_paging {
     float: right;
 }
 
-.el-pagination__editor {
+.addRecord_enclosure_paging .block .el-pagination__editor {
     display: inline-block;
 }
 
 /* 表格2  关联投诉信息样式 */
-.relation {
+.addRecord_relation {
     overflow: hidden;
     margin-bottom: 50px;
     margin: 0 20px;
 }
 
-.relation_top {
+.addRecord_relation_top {
     float: left;
     margin-bottom: 15px;
 }
-.relation_top>h5{
+.addRecord_relation_top>h5{
     color: #666EE8;
 }
-.relation_content>.el-button{
+.addRecord_relation_content>.el-button{
     color: #fff;
 }
-.el-table {
+.addRecord_relation_content .el-table {
     margin-bottom: 20px;
 }
 
 /* 固定定位按钮 样式*/
-.button {
+.addRecord_button {
     width: 100%;
     height: 50px;
     /* position: relative; */
@@ -114,7 +117,7 @@
 
 }
 
-.button_stlye {
+.addRecord_button >.button_stlye {
     width: 70%;
     height: 50px;
     border-radius: 5px;
@@ -126,10 +129,10 @@
     margin-bottom: 0;
 }
 
-.button_stlye>button {
+.addRecord_button >.button_stlye>button {
     float: right;
     margin-left: 20px;
 }
-.button_stlye>button:last-child{
+.addRecord_button >.button_stlye>button:last-child{
     color: #fff;
 }

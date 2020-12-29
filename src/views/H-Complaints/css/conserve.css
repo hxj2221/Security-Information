@@ -14,36 +14,36 @@ body{
 .conserve button{
   margin-right: 3%;
   width: 8%;
-  border: none;
-  background: none
 
 }
-.conserve  :first-child {
+.conserve .return .el-icon-hospital-passwordai207{
+  background: none;
+  color: #6f77e9;
+  border: none;
+}
+.conserve .keep .el-icon-hospital-passwordbaocun{
+  background: none;
+color: #FFF;
+}
+.conserve  .keep{
   background-color: #666ee8;
   color: #000;
   border: 1px solid #666ee8;
 }
-.conserve  :first-child span{
+.conserve .keep span{
   background-color: #666ee8;
   color: rgb(255, 255, 255);
   border: none;
 }
-.conserve :last-child{
+.conserve .return{
   background-color: #FFF;
   border: 1px solid #949aef;
   color: #6f77e9;
 }
-.conserve :last-child span{
+.conserve .return span{
   background-color: #FFF;
-  border:1px solid #FFF;
   color: #6f77e9;
 }
-.conserve button .el-icon-hospital-passwordai207{
-  background: none;
-  color: #6f77e9;
-  border: none;
-}
-.conserve button .el-icon-hospital-passwordbaocun{
-  background: none;
-color: #FFF;
+.addcom .el-button {
+  /* border: none; */
 }
