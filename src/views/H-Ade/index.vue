@@ -44,7 +44,7 @@
     data() {
       return {
         // 主页
-        MainShow:false,
+        MainShow:true,
         // 新增
         AddShow: false,
         // 检索
