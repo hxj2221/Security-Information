@@ -15,6 +15,7 @@
 }
 
 .addRecord_top>h4 {
+    padding: 20px;
     float: left;
     color: #666EE8;
     /* color: #409EFF; */
@@ -40,11 +41,14 @@
     display: block;
     width: auto;
 }
-.addRecord_myform .el-date-picker .el-input__icon {
+.addRecord_myform  .el-form .el-date-editor .el-input__icon {
     /* 控制日期图标 */
-    height: 150%;
+    /* height: 150%; */
+    line-height: 120px;
 }
-
+.addRecord_myform .el-select .el-input .el-input__suffix{
+    height: 110px;
+}
 .addRecord_myform .el-select {
     display: block;
 }
@@ -76,7 +80,13 @@
 .addRecord_enclosure_content {
     margin-bottom: 20px;
 }
-
+.addRecord_enclosure_content .el-table td,
+.el-table th {
+    text-align: center !important;
+}
+.addRecord_enclosure_content .el-table .el-link{
+    margin-right: 10px;
+}
 .addRecord_enclosure_paging {
     float: right;
 }
@@ -98,6 +108,9 @@
 }
 .addRecord_relation_top>h5{
     color: #666EE8;
+}
+.addRecord_relation_content .el-table td,.el-table th{
+    text-align: center ;
 }
 .addRecord_relation_content>.el-button{
     color: #fff;

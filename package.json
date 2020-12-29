@@ -15,7 +15,7 @@
     "axios-mock-adapter": "^1.17.0",
     "compression-webpack-plugin": "^3.0.0",
     "core-js": "^3.3.2",
-    "echarts": "^3.5.2",
+    "echarts": "^3.8.5",
     "element-ui": "^2.12.0",
     "file-saver": "^2.0.2",
     "jszip": "^3.2.2",

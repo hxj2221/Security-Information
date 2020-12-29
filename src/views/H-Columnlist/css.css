@@ -34,7 +34,10 @@ hr {
 .columnList_table {
     margin: 0 20px;
 }
-
+.columnList_table .el-table td,
+.el-table th{
+    text-align: center;
+}
 .columnList_table>.el-table .el-button:last-child {
     color: #f00;
 }
