@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="look">
+      <slot name="title">
       <div class="look-top">
         <span>投诉详情-调查中</span>
         <div>
@@ -24,6 +25,8 @@
         </div>
         <div style="border-bottom: 2px solid #cccccc70; width: 100%; height: 30px"></div>
       </div>
+      </slot>
+      <slot name="content">
       <ul
         class="infinite-list"
         style="overflow: auto; height: 760px"
@@ -326,6 +329,7 @@
           </div>
         </div>
       </ul>
+      </slot>
     </div>
   </div>
 </template>

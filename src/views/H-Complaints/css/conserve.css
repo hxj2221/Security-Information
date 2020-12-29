@@ -8,7 +8,7 @@ body{
   background-color: rgb(255, 255, 255);
   padding: 30px 0 0 0px;
   width: 77%;
-  z-index: 9999999999999999;
+  z-index: 99;
   box-shadow: 2px 0 10px 0px rgba(134, 134, 134, 0.445);
 }
 .conserve button{

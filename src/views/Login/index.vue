@@ -16,7 +16,7 @@ export default {
   props:{},
   data(){
     return {
-      isShow:true
+      isShow:true,
     }
   },
 methods:{
@@ -26,6 +26,9 @@ methods:{
   forgetLogin(){
     this.isShow=!this.isShow
   }
+},
+created() {
+  console.log( document.body.clientHeight)
 },
 }
 </script>

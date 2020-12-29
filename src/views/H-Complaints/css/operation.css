@@ -1,0 +1,160 @@
+/* 置顶标题 */
+.operation .operation-top {
+    color: #333333;
+    padding: 30px 1%;
+    /* margin-left: 1%; */
+    border-radius: 5px;
+    text-align: left;
+    width: 98%;
+    background-color: #ffffff;
+    height: 50px;
+    box-shadow: 1px 0 10px rgba(143, 143, 143, 0.521);
+
+}
+
+.operation .operation-top>span {
+    border-left: 6px solid #666ee8;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 50px;
+    padding-left: 10px;
+}
+
+.operation .operation-top div {
+    position: relative;
+}
+
+.operation .operation-top div .records {
+    right: 260px;
+    top: -45px;
+    position: absolute;
+    background: none;
+    color: #6f77e9;
+    border: 1px solid #949aef;
+    font-weight: 900;
+}
+
+.operation .operation-top div .records span {
+    font-size: 14px;
+    background-color: none;
+    color: #6f77e9;
+    font-weight: 900;
+}
+
+.operation .operation-top div .detail {
+    right: 120px;
+    top: -45px;
+    position: absolute;
+    background: none;
+    color: #6f77e9;
+    border: 1px solid #949aef;
+    font-weight: 900;
+}
+
+.operation .operation-top div .detail span {
+    font-size: 14px;
+    background-color: none;
+    color: #6f77e9;
+    font-weight: 900;
+}
+
+.operation .operation-top div .return {
+    top: 0;
+    right: 10px;
+    top: -45px;
+    position: absolute;
+    background-color: none;
+    border: 1px solid #949aef;
+    color: #6f77e9;
+    font-weight: 900;
+    background: none;
+}
+
+.operation .operation-top div .return span {
+    font-size: 14px;
+    background-color: none;
+    color: #6f77e9;
+}
+
+/* 基本信息 */
+.operation .operation-content .infinite-list .box-Information {
+    text-align: left;
+
+}
+
+.operation .operation-content .infinite-list .box-Information .box-content {
+    margin: 0px 5% 0 5%;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    text-align: left;
+
+}
+
+.operation .operation-content .infinite-list .box-Information .box-content span {
+    font-size: 14px;
+    display: flex;
+    border: 1px solid #e0e2fa;
+    line-height: 30px;
+    padding-left: 40px;
+    border-bottom: none;
+
+}
+
+.operation .operation-content .infinite-list .box-Information .box-content .label {
+    line-height: 30px;
+    border-right: none;
+    padding-left: 20px;
+    border-bottom: none;
+}
+
+.operation .operation-content .infinite-list .box-Information .box-top .grid-content span {
+    line-height: 80px;
+    border-right: none;
+    border-bottom: none;
+    color: #666ee8;
+    margin-left: 10px;
+}
+
+/* 科室反馈 */
+/* 基本信息 */
+.operation .operation-content .infinite-list .box-feedback {
+
+    text-align: left;
+}
+
+.operation .operation-content .infinite-list .box-feedback .el-select {
+    width: 100%;
+    margin-left: 10px;
+}
+
+.operation .operation-content .infinite-list .box-feedback .label {
+    font-size: 12px;
+    text-align: left;
+    margin-left: 10px;
+    line-height: 30px;
+}
+
+.operation .operation-content .infinite-list .box-feedback .box-top .grid-content .feedback-title {
+    line-height: 50px;
+    border-right: none;
+    border-bottom: none;
+    color: #666ee8;
+    margin-left: 10px;
+}
+.operation .operation-content .infinite-list .box-feedback .el-textarea {
+  
+    margin-left: 10px;
+}
+body{
+    position: relative;
+}
+.operation .dialog{
+    width: 62%;
+    position: fixed;
+    right:90px;
+    position: fixed;
+    top:190px; 
+    background-color: #e2dede;
+    z-index: 99999;
+}

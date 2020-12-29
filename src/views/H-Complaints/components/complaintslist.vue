@@ -59,8 +59,7 @@
         ></el-button>
       </div>
       <slot name="table">
-        <Tables>
-        </Tables>
+     
       </slot>
     
       <div class="Complaints-footer">
