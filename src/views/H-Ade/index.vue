@@ -1,36 +1,30 @@
 <template>
-  <div class="all">
-    <!-- 头部 -->
-    <div class="header">
-      <h4>不良事件</h4>
-      <div class="btn">
-        <i class="el-icon-circle-plus-outline" @click="dialogVisible = true">&nbsp;<span>新增不良</span></i>
-        <i class="fa fa-sign-in" aria-hidden="true">&nbsp;&nbsp;&nbsp;&nbsp;<span>导出</span></i>
+    <div class="all" >
+      <div class="Main" v-show="MainShow">
+        <!-- 头部 -->
+      <div class="header">
+        <h4>不良事件</h4>
+        <div class="btn">
+          <i class="el-icon-circle-plus-outline" @click="Add()">&nbsp;<span>新增不良</span></i>
+          <i class="fa fa-sign-in" aria-hidden="true">&nbsp;&nbsp;&nbsp;&nbsp;<span>导出</span></i>
+        </div>
       </div>
-    </div>
-    <!-- 检索 -->
-    <form-search :search="FormSearch"></form-search>
-    <!-- 表格内容 -->
-    <table-data :tableData='tableData'></table-data>
-    <!-- 分页 -->
-    <div class="block page">
-      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
-        :current-page.sync="currentPage2" :page-sizes="[10, 20, 30, 40]" :page-size="10"
-        layout="sizes, prev, pager, next" :total="1000">
-      </el-pagination>
-    </div>
-    <!-- 新增弹框 -->
-    <el-dialog :visible.sync="dialogVisible" width="60%" >
-      <BLadd></BLadd>
-      <div>
-        <span slot="footer" class="dialog-footer">
-        <i class="fa fa-file-o fa-2" aria-hidden="true" @click="dialogVisible = false"><span>提交</span></i>
-        <i class="fa fa-reply fa-2" aria-hidden="true" @click="dialogVisible = false"><span>返回</span></i>
-      </span>
+      <!-- 检索 -->
+      <form-search :search="FormSearch"></form-search>
+      <!-- 表格内容 -->
+      <table-data :tableData='tableData'></table-data>
+      <!-- 分页 -->
+      <div class="block page">
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+          :current-page.sync="currentPage2" :page-sizes="[10, 20, 30, 40]" :page-size="10"
+          layout="sizes, prev, pager, next" :total="1000">
+        </el-pagination>
       </div>
-      
-    </el-dialog>
+      </div>
+    <!-- 新增不良 -->
+    <BLadd v-show="AddShow" @Main="MainPage()"></BLadd>
   </div>
+
 </template>
 
 <script>
@@ -49,18 +43,29 @@
 
     data() {
       return {
+        // 主页
+        MainShow:false,
+        // 新增
+        AddShow: false,
         // 检索
-        FormSearch:{},
+        FormSearch: {},
         // 表格
         tableData: [],
         // 分页
         currentPage2: 5,
-        // 新增弹框
-        dialogVisible: false,
       };
     },
 
     methods: {
+      // 让主页面显示
+      MainPage(){
+        this.MainShow=true
+      },
+      // 新增
+      Add() {
+        this.AddShow = !this.AddShow
+        this.MainShow=!this.MainShow
+      },
       // 分页 
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
@@ -68,7 +73,7 @@
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
       },
-      
+
     },
   };
 </script>

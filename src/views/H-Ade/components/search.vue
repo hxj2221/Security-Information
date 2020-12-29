@@ -1,5 +1,5 @@
 <template>
-   <div>
+   <div class="searchAll">
      <el-form ref="form" :model="search" label-width="90px">
       <el-form-item label="患者姓名">
         <el-input v-model="search.name" placeholder="请输入内容"></el-input>

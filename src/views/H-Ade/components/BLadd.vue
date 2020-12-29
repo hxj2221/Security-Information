@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="addAll" v-show="AddShow">
     <!-- 新增 -->
     <div class="form">
       <h2>基本信息</h2>
@@ -32,10 +32,10 @@
           <el-col :span="8">
             <el-form-item label="性别" required>
               <el-select v-model="add.sex" placeholder="男">
-                    <el-option label="男" value="1"></el-option>
-                    <el-option label="女" value="2"></el-option>
-                    <el-option label="未知" value="3"></el-option>
-                  </el-select>
+                <el-option label="男" value="1"></el-option>
+                <el-option label="女" value="2"></el-option>
+                <el-option label="未知" value="3"></el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="8">
@@ -121,28 +121,28 @@
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-form-item style="width:100%" label="入院诊断" required>
+            <el-form-item style="width:90%" label="入院诊断" required>
               <el-input type="textarea" v-model="add.desc"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-form-item style="width:100%" label="诊疗经过" required>
+            <el-form-item style="width:90%" label="诊疗经过" required>
               <el-input type="textarea" v-model="add.desc1"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-form-item style="width:100%" label="患者目前情况" required>
+            <el-form-item style="width:90%" label="患者目前情况" required>
               <el-input type="textarea" v-model="add.desc2"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-form-item style="width:100%" label="不良事件描述" required>
+            <el-form-item style="width:90%" label="不良事件描述" required>
               <el-input type="textarea" v-model="add.desc3"></el-input>
             </el-form-item>
           </el-col>
@@ -178,10 +178,14 @@
       <div class="add">
         <i class="el-icon-circle-plus-outline"><span>添加患者信息</span></i>
       </div>
-
-
+    </div>
+    <!-- 底部按钮 -->
+    <div class="root">
+      <i class="fa fa-file-o fa-2" aria-hidden="true" @click="sure()"><span>提交</span></i>
+      <i class="fa fa-reply fa-2" aria-hidden="true" @click="back()"><span>返回</span></i>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -192,6 +196,8 @@
     },
     data() {
       return {
+        // 是否显示
+        AddShow: true,
         add: {
           // 事件编号
           number: 'BL202011150001',
@@ -329,7 +335,18 @@
         }, ],
       };
     },
-    methoods: {
+    methods: {
+      // 提交
+      sure() {
+        console.log('1');
+        this.AddShow = !this.AddShow
+        this.$emit('Main')
+      },
+      // 返回
+      back(){
+        this.AddShow = !this.AddShow
+        this.$emit('Main')
+      },
       // 查看
       handleClick(row) {
         console.log(row);
