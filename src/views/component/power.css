@@ -1,0 +1,61 @@
+.staffheadThre {
+    display: flex;
+    font-size: 14px;
+    color: #cccccc;
+    padding-top: 30px;
+    padding-left: 60px;
+}
+
+.staff:hover {
+    background-color: #666ee8;
+}
+
+.staff:visited {
+    background-color: #666ee8;
+}
+
+.staff {
+    border-left: 2px solid #ccc;
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.staffDepart:hover {
+    background-color: #666ee8;
+}
+
+.staffDepart {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.staffRole:hover {
+    background-color: #666ee8;
+}
+
+.staffRole {
+    border-right: 2px solid #ccc;
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.staffAdd {
+    color: #fff;
+    background: #666ee8;
+    border-radius: 5px;
+    position: absolute;
+    left: 85%;
+}
+
+.staffAdd :hover {
+    color: none;
+}
+
+.staffWidhr {
+    width: 92%;
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 12px;
+}

@@ -1,0 +1,191 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.departalBg {
+    background-color: #fff;
+    height: 80%;
+    margin-left: -20px;
+}
+
+.departheadThre {
+    display: flex;
+    font-size: 14px;
+    color: #cccccc;
+    padding-top: 30px;
+    padding-left: 60px;
+}
+
+.departStaf:hover {
+    background-color: #666ee8;
+}
+
+.departStaf {
+    border-left: 2px solid #ccc;
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.departList:hover {
+    background-color: #666ee8;
+}
+
+.departList {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.departRole:hover {
+    background-color: #666ee8;
+}
+
+.departRole {
+    border-right: 2px solid #ccc;
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.departAdd {
+    color: #fff;
+    background: #666ee8;
+    border-radius: 5px;
+    position: absolute;
+    left: 85%;
+}
+
+.departAdd :hover {
+    color: none;
+}
+
+.departWidhr {
+    width: 92%;
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 12px;
+}
+
+.departIptsech {
+    display: flex;
+    /* justify-content: center; */
+    margin-left: 45px;
+    margin-bottom: 20px;
+}
+
+.departNameipt {
+    width: 18vw;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin-left: 4%;
+}
+
+.departNamesch {
+    font-size: 14px;
+    color: #fff;
+    background-color: #666ee8;
+    border-radius: 5px;
+}
+
+.departEdit {
+    width: 45px;
+}
+
+.departEdit span {
+    margin-left: -30%;
+}
+
+.departDel span {
+    margin-left: -30%;
+}
+
+.departDel {
+    width: 45px;
+}
+
+.el-table::before {
+    height: 0px;
+}
+
+.departaddalBg {
+    background-color: #fff;
+    height: 65%;
+    margin-left: -20px;
+    width: 81%;
+}
+
+.departaddThre {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #cccccc;
+    padding-top: 30px;
+    padding-left: 60px;
+}
+
+.departaddSpan {
+    color: #000;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.departaddgr:hover {
+    background-color: #666ee8;
+}
+
+.departaddgr {
+    border-left: 2px solid #ccc;
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.departaddb:hover {
+    background-color: #666ee8;
+}
+
+.departaddb {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.departaddWidhr {
+    margin-top: 15px;
+    margin-bottom: 12px;
+    background-color: #ccc;
+    height: 1px;
+    border: none;
+}
+
+.departaddF {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.departaddFlex {
+    display: flex;
+    flex-wrap: wrap;
+    width: 270px;
+    height: 100px
+}
+
+.departaddP {
+    font-size: 16px;
+}
+
+.departadda {
+    width: 250px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    height: 40px;
+}
+
+.departaddFlex2 {
+    display: flex;
+    flex-wrap: wrap;
+    width: 270px;
+    margin-top: 50px;
+}

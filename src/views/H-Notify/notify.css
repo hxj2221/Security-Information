@@ -1,0 +1,109 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.notifyalBg {
+    background-color: #fff;
+    height: 65%;
+    margin-left: -20px;
+    width: 81%;
+}
+
+.notifyThre {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #cccccc;
+    padding-top: 30px;
+    padding-left: 60px;
+}
+
+.notifySpan {
+    color: #000;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.notifygr:hover {
+    background-color: #666ee8;
+}
+
+.notifygr {
+    border-left: 2px solid #ccc;
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.notifyb:hover {
+    background-color: #666ee8;
+}
+
+.notifyb {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.notifyc:hover {
+    background-color: #666ee8;
+}
+
+.notifyc {
+    border-right: 2px solid #ccc;
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.notifyWidhr {
+    margin-top: 15px;
+    margin-bottom: 12px;
+    background-color: #ccc;
+    height: 1px;
+    border: none;
+}
+
+.notifyF {
+    display: flex;
+    margin-left: 2%;
+    height: 80%;
+    margin-top: 7%;
+}
+
+.notifyTab {
+    width: 90%;
+    height: 60%;
+    border-collapse: collapse;
+}
+
+.notifyTd {
+    border-bottom: #ccc 2px solid;
+}
+
+.notifyTddiv {
+    display: flex;
+    justify-content: flex-start;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.notifyHead {
+    color: #000;
+    font-size: 20px;
+    height: 30px;
+}
+
+.notifyMain {
+    margin-left: 70px;
+    color: #000;
+    font-size: 12px;
+}
+
+.notifyClick {
+    color: #409eff;
+    font-size: 14px;
+    margin-right: 12px;
+    text-decoration: none;
+    cursor: pointer;
+}

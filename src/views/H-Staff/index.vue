@@ -1,240 +1,426 @@
 <template>
-  <div class="alBg">
-    <div class="headThre">
-      <span class="staf">员工列表</span>
-      <span class="depart">科室列表</span>
-      <span class="role">角色列表</span>
-    </div>
-    <span class="staffadd">新增</span>
-    <hr class="widhr" />
-    <div class="straffsssele">
-      <span class="staffss">所属科室</span>
-      <el-select v-model="value" placeholder="请选择" class="staffsel">
-        <el-option
-          v-for="item in options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
+  <div>
+    <div class="staffalBg" v-if="staffvue">
+      <headpow></headpow>
+      <div class="staffIptsech">
+        <span class="staffBelong">所属科室</span>
+        <el-select
+          v-model="staffbeldepart"
+          placeholder="请选择"
+          class="staffSel"
         >
-        </el-option>
-      </el-select>
-    </div>
-    <input
-      type="text"
-      name="员工姓名"
-      value=""
-      placeholder="员工姓名"
-      class="staffnameipt"
-    />
-    <span class="staffNamesch">搜索</span>
-    <div>
-      <el-table :data="tableData" style="width: 100%">
+          <el-option
+            v-for="item in optionbeldepart"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select>
+        <el-input
+          v-model="search"
+          class="staffNameipt"
+          placeholder="请输入内容"
+        ></el-input>
+        <el-button class="staffNamesch" icon="el-icon-search">搜索</el-button>
+      </div>
+      <el-table
+        :data="tables"
+        tooltip-effect="dark"
+        ref="dormitoryTable"
+        stripe
+        style="width: 96%; margin-left: 4%"
+        :header-cell-style="{ background: '#C2C5F6' }"
+        :cell-style="{ background: '#fff' }"
+      >
         <el-table-column
-          type="index"
-          :index="indexMethod"
           label="序号"
           width="50"
+          type="index"
+          :index="indexMethod"
+        >
+        </el-table-column>
+        <el-table-column prop="staffjobNum" label="工号" width="100">
+        </el-table-column>
+        <el-table-column prop="staffName" label="员工姓名" width="120">
+        </el-table-column>
+        <el-table-column prop="staffGen" label="员工性别" width="100">
+        </el-table-column>
+        <el-table-column prop="staffAge" label="员工年龄" width="100">
+        </el-table-column>
+        <el-table-column prop="staffPhone" label="手机号码" width="150">
+        </el-table-column>
+        <el-table-column prop="staffKs" label="所属科室" width="120">
+        </el-table-column>
+        <el-table-column prop="staffJs" label="角色" width="120">
+        </el-table-column>
+        <el-table-column
+          prop="staffCreapeo"
+          label="创建人员"
+          width="120"
         ></el-table-column>
-        <el-table-column prop="jobNum" label="工号" width="70">
-        </el-table-column>
-        <el-table-column prop="staffname" label="员工姓名" width="100">
-        </el-table-column>
-        <el-table-column prop="staffgen" label="员工性别" width="80">
-        </el-table-column>
-        <el-table-column prop="staffage" label="员工年龄" width="80">
-        </el-table-column>
-        <el-table-column prop="staffphone" label="手机号码" width="130">
-        </el-table-column>
-        <el-table-column prop="staffks" label="所属科室" width="100">
-        </el-table-column>
-        <el-table-column prop="staffrole" label="角色" width="100">
-        </el-table-column>
-        <el-table-column prop="staffcreatetime" label="创建时间" width="180">
-        </el-table-column>
-        <el-table-column prop="staffcreatepeop" label="创建人员" width="80">
-        </el-table-column>
-        <el-table-column prop="status" label="员工状态">
+
+        <el-table-column
+          prop="staffCreat"
+          label="创建时间"
+          width="150"
+        ></el-table-column>
+        <el-table-column label="员工状态" width="100">
           <template slot-scope="scope">
             <el-switch
-              :active-value="1"
-              :inactive-value="0"
               v-model="scope.row.status"
-              active-color="#000"
-              inactive-color="#fff"
+              :active-value="1"
+              :inactive-value="2"
+              active-color="#02538C"
+              inactive-color="#B9B9B9"
+              @change="changeSwitch($event, scope.row)"
             ></el-switch>
           </template>
-        </el-table-column>
-        <el-table-column label="操作"
-          ><el-button size="mini">编辑</el-button
-          ><el-button size="mini" type="danger"
-            >删除</el-button
           ></el-table-column
         >
+
+        <el-table-column label="操作" width="120">
+          <template slot-scope="scope">
+            <el-button
+              class="staffFotedit"
+              size="mini"
+              @click="handleEdit(scope.$index, scope.row)"
+              >编辑</el-button
+            >
+            <el-button
+              class="staffFotdel"
+              size="mini"
+              type="danger"
+              @click="handleDelete(scope.$index, tables)"
+              >删除</el-button
+            >
+          </template>
+        </el-table-column>
       </el-table>
+      <el-pagination
+        layout="total, prev, pager, next, jumper"
+        :total="dormitory.length"
+      >
+      </el-pagination>
     </div>
+    <!--新增-->
+    <Staff v-show="add"></Staff>
+    <!-- 编辑 -->
+    <el-dialog
+      title="编辑"
+      :visible.sync="editFormVisible"
+      :close-on-click-modal="true"
+      :append-to-body="true"
+    >
+      <!--editForm表单提交的数据-->
+      <el-form :model="editForm" label-width="80px" ref="editForm">
+        <el-form-item prop="staffjobNum" label="工号" width="100">
+          <el-input
+            v-model="editForm.staffjobNum"
+            auto-complete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item prop="staffName" label="员工姓名" width="120">
+          <el-input v-model="editForm.staffName" auto-complete="off"></el-input>
+        </el-form-item>
+        <el-form-item prop="staffGen" label="员工性别" width="100">
+          <el-input v-model="editForm.staffGen" auto-complete="off"></el-input>
+        </el-form-item>
+        <el-form-item prop="staffAge" label="员工年龄" width="100">
+          <el-input v-model="editForm.staffAge" auto-complete="off"></el-input>
+        </el-form-item>
+        <el-form-item prop="staffPhone" label="手机号码" width="150">
+          <el-input
+            v-model="editForm.staffPhone"
+            auto-complete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item prop="staffKs" label="所属科室" width="120">
+          <el-input v-model="editForm.staffKs" auto-complete="off"></el-input>
+        </el-form-item>
+        <el-form-item prop="staffJs" label="角色" width="120">
+          <el-input v-model="editForm.staffJs" auto-complete="off"></el-input>
+        </el-form-item>
+        <el-form-item prop="staffCreapeo" label="创建人员" width="120">
+          <el-input
+            v-model="editForm.staffCreapeo"
+            auto-complete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item prop="staffCreat" label="创建时间" width="150">
+          <el-input
+            v-model="editForm.staffCreat"
+            auto-complete="off"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 
 <script>
+import Staff from "./component/add";
+import headpow from "../component/power";
 export default {
-  components: {},
-
+  components: { Staff, headpow },
   data() {
     return {
-      options: [
+      add: false,
+      currentPage: 0,
+      total: 0, //总条数
+      page: 1, //初始显示第几页
+      pageSize: 5, //每页显示多少数据
+      staffbeldepart: "",
+      dialogVisible: false,
+      staffvue: true,
+      currentRow: [], //选中的值
+      editFormVisible: false, //设置默认弹出框  为false
+      editForm: {
+        staffjobNum: "",
+        staffName: "",
+        staffGen: "",
+        staffAge: "",
+        staffPhone: "",
+        staffKs: "",
+        staffJs: "",
+        staffCreapeo: "",
+        staffCreat: "",
+      },
+
+      optionbeldepart: [
         {
           value: "选项1",
-          label: "测试1",
+          label: "全科",
         },
         {
           value: "选项2",
-          label: "测试2",
+          label: "儿科",
         },
         {
           value: "选项3",
-          label: "测试3",
+          label: "内科",
         },
       ],
-      value: "",
-      tableData: [
+
+      dormitory: [
         {
-          jobNum: "1001",
-          staffname: "王小虎",
-          staffgen: "男",
-          staffage: "35",
-          staffphone: "15512312345",
-          staffks: "内科",
-          staffrole: "医护人员",
-          staffcreatetime: "2020-12-22 16:45:50",
-          staffcreatepeop: "李四",
-          status: 0,
+          staffjobNum: "10001",
+          staffGen: "男",
+          staffAge: "45",
+          staffPhone: "13412312345",
+          staffName: "王小虎",
+          staffKs: "内科",
+          staffJs: "医生",
+          staffCreapeo: "王a",
+          staffCreat: "2020-12-20 16:13:16",
+          status: "1",
+          zip: 200333,
         },
         {
-          jobNum: "1001",
-          staffname: "王小虎",
-          staffgen: "男",
-          staffage: "35",
-          staffphone: "15512312345",
-          staffks: "内科",
-          staffrole: "医护人员",
-          staffcreatetime: "2020-12-22 16:45:50",
-          staffcreatepeop: "李四",
+          staffjobNum: "10001",
+          staffGen: "男",
+          staffAge: "45",
+          staffName: "王小虎",
+          staffPhone: "13412312345",
+          staffKs: "内科",
+          staffJs: "管理员",
+          staffCreapeo: "王b",
+          staffCreat: "2020-12-21 16:13:16",
           status: 1,
+          zip: 200333,
+        },
+        {
+          staffjobNum: "10001",
+          staffGen: "男",
+          staffAge: "45",
+          staffName: "王小虎",
+          staffPhone: "13412312345",
+          staffKs: "内科",
+          staffJs: "医生,护士",
+          staffCreapeo: "王c",
+          staffCreat: "2020-12-22 16:13:16",
+          status: 1,
+          zip: 200333,
+        },
+        {
+          staffjobNum: "10001",
+          staffGen: "男",
+          staffAge: "45",
+          staffName: "王小虎",
+          staffPhone: "13412312345",
+          staffKs: "内科",
+          staffJs: "医生,护士",
+          staffCreapeo: "王d",
+          staffCreat: "2020-12-23 16:13:16",
+          status: 0,
+          zip: 200333,
+        },
+        {
+          staffjobNum: "10001",
+          staffGen: "男",
+          staffAge: "45",
+          staffName: "王小虎",
+          staffPhone: "13412312345",
+          staffKs: "内科",
+          staffJs: "管理员",
+          staffCreapeo: "王e",
+          staffCreat: "2020-12-24 16:13:16",
+          status: 1,
+          zip: 200333,
+        },
+        {
+          staffjobNum: "10001",
+          staffGen: "男",
+          staffAge: "45",
+          staffName: "王小虎",
+          staffPhone: "13412312345",
+          staffKs: "内科",
+          staffJs: "管理员",
+          staffCreapeo: "王f",
+          staffCreat: "2020-12-25 16:13:16",
+          status: 1,
+          zip: 200333,
+        },
+        {
+          staffjobNum: "10001",
+          staffGen: "男",
+          staffAge: "45",
+          staffName: "王小虎",
+          staffPhone: "13412312345",
+          staffKs: "内科",
+          staffJs: "管理员",
+          staffCreapeo: "王g",
+          staffCreat: "2020-12-26 16:13:16",
+          status: 1,
+          zip: 200333,
+        },
+        {
+          staffjobNum: "10001",
+          staffGen: "男",
+          staffAge: "45",
+          staffName: "王小虎",
+          staffPhone: "13412312345",
+          staffKs: "内科",
+          staffJs: "管理员",
+          staffCreapeo: "王h",
+          staffCreat: "2020-12-27 16:13:16",
+          status: 1,
+          zip: 200333,
+        },
+        {
+          staffjobNum: "10001",
+          staffGen: "男",
+          staffAge: "45",
+          staffName: "王小虎",
+          staffPhone: "13412312345",
+          staffKs: "内科",
+          staffJs: "管理员",
+          staffCreapeo: "王i",
+          staffCreat: "2020-12-28 16:13:16",
+          status: 1,
+          zip: 200333,
+        },
+        {
+          staffjobNum: "10001",
+          staffGen: "女",
+          staffAge: "45",
+          staffName: "王小虎",
+          staffPhone: "13412312345",
+          staffKs: "内科",
+          staffJs: "医生,护士",
+          staffCreapeo: "王j",
+          staffCreat: "2020-12-29 16:13:16",
+          status: 0,
+          zip: 200333,
         },
       ],
+
+      search: "",
     };
   },
 
+  computed: {
+    // 搜索
+    tables() {
+      const search = this.search;
+      if (search) {
+        return this.dormitory.filter((data) => {
+          return Object.keys(data).some((key) => {
+            return String(data[key]).toLowerCase().indexOf(search) > -1;
+          });
+        });
+      }
+      return this.dormitory;
+    },
+  },
   methods: {
+    // 新增
+    fathpowadd() {
+      this.staffvue = false;
+      this.add = true;
+    },
+    // 子的
+    fathstaffno() {
+      this.add = false;
+      this.staffvue = true;
+    },
+    fathstaffyes() {
+      setTimeout(() => {
+        this.add = false;
+        this.staffvue = true;
+      }, 3000);
+    },
+    // 序号
     indexMethod(index) {
-      return index * 2;
+      return index * 1;
+    },
+    // switch开关
+    changeSwitch(val, row) {
+      console.log(row.status);
+      if (row.status == 1) {
+        this.$message({
+          type: "success",
+          message: "员工启用成功",
+        });
+      } else {
+        this.$message({
+          type: "success",
+          message: "员工停用成功",
+        });
+      }
+    },
+    // 编辑
+    handleEdit(index, row) {
+      this.editFormVisible = true;
+      this.editForm = Object.assign({}, row); //重点
+      console.log(this.editForm);
+    },
+    //删除：
+    handleDelete(index, row) {
+      console.log(index, row);
+      this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          this.$message({
+            type: "success",
+            message: "删除成功!",
+            delete: row.splice(index, 1),
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+          });
+        });
     },
   },
 };
 </script>
 
-<style lang="less" scoped>
-* {
-  margin: 0;
-  padding: 0;
-}
-.alBg {
-  background-color: #fff;
-  height: 95%;
-  margin-left: -20px;
-}
-.headThre {
-  display: flex;
-  font-size: 14px;
-  color: #cccccc;
-  padding-top: 30px;
-  padding-left: 60px;
-}
-
-.staf:hover {
-  background-color: #666ee8;
-}
-.staf {
-  text-align: center;
-  line-height: 27px;
-  width: 5vw;
-  border-left: 2px solid #ccc;
-  border-top: 2px solid #ccc;
-  border-bottom: 2px solid #ccc;
-  border-radius: 5px;
-}
-
-.depart:hover {
-  background-color: #666ee8;
-}
-.depart {
-  text-align: center;
-  line-height: 27px;
-  width: 5vw;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-}
-
-.role:hover {
-  background-color: #666ee8;
-}
-.role {
-  text-align: center;
-  line-height: 27px;
-  width: 5vw;
-  border-right: 2px solid #ccc;
-  border-top: 2px solid #ccc;
-  border-bottom: 2px solid #ccc;
-  border-radius: 5px;
-}
-.staffadd {
-  color: #fff;
-  font-size: 14px;
-  background-color: #666ee8;
-  text-align: center;
-  line-height: 43px;
-  width: 7vw;
-  border-radius: 5px;
-  position: absolute;
-  left: 87%;
-  top: 12%;
-  height: 3vw;
-}
-.widhr {
-  width: 90%;
-  margin: auto;
-  margin-top: 15px;
-  margin-bottom: 12px;
-}
-.staffss {
-  font-size: 14px;
-  color: #000;
-  margin-top: 12px;
-}
-.staffsel {
-  width: 10vw;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-}
-
-.straffsssele {
-  display: flex;
-  margin-left: 5%;
-}
-.staffnameipt {
-  width: 18vw;
-  height: 3vw;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  margin-left: 4%;
-}
-.staffNamesch {
-  font-size: 14px;
-  color: #fff;
-  background-color: #666ee8;
-  width: 5vw;
-  height: 3.2vw;
-  line-height: 47px;
-  border-radius: 5px;
-}
+<style>
+@import "staff.css";
 </style>
