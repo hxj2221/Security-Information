@@ -1,0 +1,71 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.personalBg {
+    background-color: #fff;
+    height: 65%;
+    margin-left: -20px;
+    width: 81%;
+}
+
+.personF {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.personFlex {
+    display: flex;
+    flex-wrap: wrap;
+    width: 270px;
+    height: 100px
+}
+
+.personFlexadre {
+    display: flex;
+    flex-wrap: wrap;
+    width: 595px;
+    height: 100px
+}
+
+.personP {
+    font-size: 16px;
+}
+
+.persona {
+    width: 250px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    height: 40px;
+}
+
+.personage {
+    width: 130px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.personSelage {
+    width: 116px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.personade {
+    width: 115vw;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    height: 40px;
+}
+
+.personfot {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #cccccc;
+    padding-top: 30px;
+    padding-left: 35px;
+}

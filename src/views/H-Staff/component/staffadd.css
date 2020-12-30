@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.staffaddalBg {
+    background-color: #fff;
+    height: 65%;
+    margin-left: -20px;
+    width: 81%;
+}
+
+.staffThre {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #cccccc;
+    padding-top: 30px;
+    padding-left: 60px;
+}
+
+.staffSpan {
+    color: #000;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.staffgr {
+    border-left: 2px solid #ccc;
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    border-radius: 5px;
+    width: 74px;
+    height: 36px;
+}
+
+.staffgr:hover {
+    background-color: #666ee8;
+}
+
+.staffb {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    width: 74px;
+    height: 36px;
+}
+
+.staffb:hover {
+    background-color: #666ee8;
+}
+
+.staffWidhr {
+    margin-top: 15px;
+    margin-bottom: 12px;
+    background-color: #ccc;
+    height: 1px;
+    border: none;
+}
+
+.staffF {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.staffFlex {
+    display: flex;
+    flex-wrap: wrap;
+    width: 270px;
+    height: 100px;
+}
+
+.staffFlex2 {
+    display: flex;
+    flex-wrap: wrap;
+    width: 270px;
+    height: 100px;
+    margin-top: 50px;
+}
+
+.staffFlexadre {
+    display: flex;
+    flex-wrap: wrap;
+    width: 595px;
+    height: 100px;
+}
+
+.staffP {
+    font-size: 16px;
+}
+
+.staffa {
+    width: 250px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    height: 40px;
+}
+
+.staffage {
+    width: 130px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.staffSelage {
+    width: 116px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.staffade {
+    width: 115vw;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    height: 40px;
+}

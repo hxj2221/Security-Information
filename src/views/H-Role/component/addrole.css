@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.roleaddalBg {
+    background-color: #fff;
+    height: 65%;
+    margin-left: -20px;
+    width: 81%;
+}
+
+.roleaddThre {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #cccccc;
+    padding-top: 30px;
+    padding-left: 60px;
+}
+
+.roleaddSpan {
+    color: #000;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.roleaddgr:hover {
+    background-color: #666ee8;
+}
+
+.roleaddgr {
+    border-left: 2px solid #ccc;
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.roleaddb:hover {
+    background-color: #666ee8;
+}
+
+.roleaddb {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.roleaddWidhr {
+    margin-top: 15px;
+    margin-bottom: 12px;
+    background-color: #ccc;
+    height: 1px;
+    border: none;
+}
+
+.roleaddF {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.roleaddFlex {
+    display: flex;
+    flex-wrap: wrap;
+    width: 270px;
+    height: 100px
+}
+
+.roleaddP {
+    font-size: 16px;
+}
+
+.roleadda {
+    width: 250px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    height: 40px;
+}
+
+.roleaddFlex2 {
+    display: flex;
+    flex-wrap: wrap;
+    width: 270px;
+    margin-top: 50px;
+}
+
+.roleaddFlex3 {
+    display: flex;
+    flex-wrap: wrap;
+    width: 270px;
+    height: 100px
+}
+
+
+/*  */
+
+.roleF {
+    /* display: flex; */
+    margin-left: 9%;
+    /* height: 80%; */
+    margin-top: 2%;
+    width: 75%;
+}
+
+.roleTab {
+    width: 75%;
+    height: 60%;
+    font-size: 20px;
+    font-weight: bold;
+    border-collapse: collapse;
+}
+
+.roleTd {
+    border-bottom: #ccc 2px solid;
+}
+
+.roleTddiv {
+    display: flex;
+    justify-content: flex-start;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.roleHead {
+    color: #ccc;
+    font-size: 14px;
+    height: 30px;
+}
+
+.roleMain {
+    margin-left: 10px;
+    color: #000;
+    font-size: 12px;
+}
+
+.roleClick {
+    color: #409eff;
+    font-size: 14px;
+    margin-right: 12px;
+    text-decoration: none;
+    cursor: pointer;
+}
