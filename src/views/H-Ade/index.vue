@@ -11,7 +11,7 @@
 
 <script>
   // import AdminHead from './components/AdminHead'
-  import './css/index.css'
+  import './css/Ade.css'
   import MainPage from './components/MainPage'
   import AddAde from './components/AddAde'
   import Detail from './components/Detail'

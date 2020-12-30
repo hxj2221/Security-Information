@@ -4,121 +4,87 @@
     <div class="form">
       <h2>基本信息</h2>
       <el-form :model="add">
-        <el-row :gutter="20">
-          <el-col :span="8">
-            <el-form-item label="业务编号">
-              <el-input v-model="add.number" :disabled="true" autocomplete="off"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="不良类型" required>
-              <el-cascader :options="options" v-model="add.mold" filterable>
-              </el-cascader>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="不良发生地点" required>
-              <el-cascader :options="options1" v-model="add.address" filterable>
-              </el-cascader>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row :gutter="20">
-          <el-col :span="8">
-            <el-form-item label="患者姓名" required>
-              <el-input v-model="add.name" autocomplete="off"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="性别" required>
-              <el-select v-model="add.sex" placeholder="男">
-                <el-option label="男" value="1"></el-option>
-                <el-option label="女" value="2"></el-option>
-                <el-option label="未知" value="3"></el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="年龄">
-              <div class="age">
-                <el-input placeholder="请输入内容" v-model.number="add.age" class="input-with-select">
-                  <el-select v-model="add.Age" slot="prepend" placeholder="岁">
-                    <el-option label="岁" value="1"></el-option>
-                    <el-option label="月" value="2"></el-option>
-                    <el-option label="天" value="3"></el-option>
-                  </el-select>
-                </el-input>
-              </div>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row :gutter="20">
-          <el-col :span="8">
-            <el-form-item label="入院日期" required>
-              <el-date-picker v-model="add.date" type="datetime" placeholder="选择日期时间">
-              </el-date-picker>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="科室" required>
-              <el-input v-model="add.depart" autocomplete="off"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="床号" required>
-              <el-input v-model="add.bedNum" autocomplete="off"></el-input>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row :gutter="20">
-          <el-col :span="8">
-            <el-form-item label="住院号" required>
-              <el-input v-model="add.hospitalNum" autocomplete="off"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="不良发生时间" required>
-              <el-date-picker v-model="add.date1" type="datetime" placeholder="选择日期时间">
-              </el-date-picker>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="报告时间" required>
-              <el-date-picker v-model="add.date2" type="datetime" placeholder="选择日期时间">
-              </el-date-picker>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row :gutter="20">
-          <el-col :span="8">
-            <el-form-item label="主管医师" required>
-              <el-input v-model="add.physician" autocomplete="off"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="主管护士" required>
-              <el-input v-model="add.nurse" autocomplete="off"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="在场相关人员" required>
-              <el-input v-model="add.stakeholders" autocomplete="off"></el-input>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row :gutter="20">
-          <el-col :span="8">
-            <el-form-item label="上报人" required>
-              <el-input v-model="add.ReportPerson" autocomplete="off"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="16">
-            <el-form-item label="轻重程度" required>
-              <el-cascader class="sel" :options="options4" v-model="add.value1">
-              </el-cascader>
-            </el-form-item>
-          </el-col>
-        </el-row>
+        <div class="form_con">
+          <el-form-item label="业务编号">
+            <el-input v-model="add.number" :disabled="true" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="不良类型" required>
+            <el-cascader :options="options" v-model="add.mold" filterable>
+            </el-cascader>
+          </el-form-item>
+          <el-form-item label="不良发生地点" required>
+            <el-cascader :options="options1" v-model="add.address" filterable>
+            </el-cascader>
+          </el-form-item>
+        </div>
+        <div class="form_con">
+          <el-form-item label="患者姓名" required>
+            <el-input v-model="add.name" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="性别" required>
+            <el-select v-model="add.sex" placeholder="男">
+              <el-option label="男" value="1"></el-option>
+              <el-option label="女" value="2"></el-option>
+              <el-option label="未知" value="3"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="年龄">
+            <div class="age">
+              <el-input placeholder="请输入内容" v-model.number="add.age" class="input-with-select">
+                <el-select v-model="add.Age" slot="prepend" placeholder="岁">
+                  <el-option label="岁" value="1"></el-option>
+                  <el-option label="月" value="2"></el-option>
+                  <el-option label="天" value="3"></el-option>
+                </el-select>
+              </el-input>
+            </div>
+          </el-form-item>
+        </div>
+        <div class="form_con">
+          <el-form-item label="入院日期" required>
+            <el-date-picker v-model="add.date" type="datetime" placeholder="选择日期时间">
+            </el-date-picker>
+          </el-form-item>
+          <el-form-item label="科室" required>
+            <el-input v-model="add.depart" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="床号" required>
+            <el-input v-model="add.bedNum" autocomplete="off"></el-input>
+          </el-form-item>
+        </div>
+        <div class="form_con">
+          <el-form-item label="住院号" required>
+            <el-input v-model="add.hospitalNum" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="不良发生时间" required>
+            <el-date-picker v-model="add.date1" type="datetime" placeholder="选择日期时间">
+            </el-date-picker>
+          </el-form-item>
+          <el-form-item label="报告时间" required>
+            <el-date-picker v-model="add.date2" type="datetime" placeholder="选择日期时间">
+            </el-date-picker>
+          </el-form-item>
+        </div>
+        <div class="form_con">
+          <el-form-item label="主管医师" required>
+            <el-input v-model="add.physician" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="主管护士" required>
+            <el-input v-model="add.nurse" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="在场相关人员" required>
+            <el-input v-model="add.stakeholders" autocomplete="off"></el-input>
+          </el-form-item>
+        </div>
+        <div class="form_con">
+          <el-form-item label="上报人" required>
+            <el-input v-model="add.ReportPerson" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="轻重程度" required>
+            <el-cascader class="sel" :options="options4" v-model="add.value1">
+            </el-cascader>
+          </el-form-item>
+        </div>
         <el-row>
           <el-col :span="24">
             <el-form-item style="width:90%" label="入院诊断" required>
@@ -340,7 +306,7 @@
         this.$emit('pageAdd')
       },
       // 返回
-      back(){
+      back() {
         this.$emit('pageAdd')
       },
       // 查看

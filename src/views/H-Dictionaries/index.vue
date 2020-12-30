@@ -80,7 +80,7 @@
 
 <script>
   // 引入css样式
-  import './css/index.css'
+  import './css/Dictionaries.css'
   // import AdminHead from './components/AdminHead'
 
   export default {
