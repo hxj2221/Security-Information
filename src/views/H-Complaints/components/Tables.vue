@@ -84,7 +84,7 @@ export default {
     // 设置表头颜色
     getRowClass({ rowIndex }) {
       if (rowIndex == 0) {
-        return "background:#c2c5f6";
+        return "background:#c2c5f6;color:#000";
       } else {
         return "";
       }

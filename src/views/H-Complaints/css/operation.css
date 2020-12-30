@@ -146,15 +146,55 @@
   
     margin-left: 10px;
 }
+/* 提交按钮 */
+.operation .operation-content .infinite-list .box-button{
+ 
+    margin: 10px 5%;
+    text-align: left;
+}
+.operation .operation-content .infinite-list .box-button .el-button{
+ background-color: #666ee8;
+ border: none;
+}
+/* 投诉详情 */
 body{
     position: relative;
 }
 .operation .dialog{
-    width: 62%;
+    width:55%;
+    height: 590px;
     position: fixed;
-    right:90px;
+    right:4.7%;
     position: fixed;
-    top:190px; 
-    background-color: #e2dede;
+    top:196px; 
+    background-color: #f1f1f1;
     z-index: 99999;
+    padding-bottom: 170px;
+    box-shadow: 2px 0 10px #8f8f8fde;
+}
+/* 上传附件 */
+.operation>.upfile{
+    color: #666666;
+}
+.operation .upfile .uploadfile .el-input__inner {
+    position: absolute;
+    opacity: 0;
+    border: none;
+    z-index: 2;
+    bottom:-20px;
+    left: 0;
+}
+
+.operation .upfile .el-dialog__body{
+    position: relative;
+}
+
+.operation .upfile .uploadfiles{
+    background-color: #FFF;
+    color: #666666ab;
+    border: 1px solid #666666ab;
+    z-index: 1;
+    position: absolute;
+    bottom: 18%;
+    left: 25%;
 }

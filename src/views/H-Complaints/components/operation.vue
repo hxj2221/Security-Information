@@ -152,6 +152,7 @@
                       type="textarea"
                       v-model="reason"
                       placeholder="请填写投诉原因"
+                      autosize
                     ></el-input></div
                 ></el-col>
               </el-row>
@@ -168,7 +169,7 @@
                 >
                 <el-col :span="2" :pull="1"
                   ><div class="grid-content bg-purple">
-                    <el-button type="primary" icon="el-icon-circle-plus" @click="upfile()"
+                    <el-button type="primary" icon="el-icon-circle-plus" @click="upfile()" style="background-color: #666ee8;border:none"
                       >上传附件</el-button
                     >
                   </div></el-col
@@ -177,7 +178,11 @@
               <el-row type="flex" class="row-bg" justify="space-between">
                 <el-col :span="22" :push="1"
                   ><div class="grid-content bg-purple">
-                    <el-table :data="filelist" style="width: 100%">
+                    <el-table
+                      :data="filelist"
+                      style="width: 100%"
+                      :header-cell-style="getRowClass"
+                    >
                       <el-table-column prop="ID" label="ID" width="width">
                       </el-table-column>
                       <el-table-column prop="filename" label="文件名" width="width">
@@ -211,464 +216,506 @@
               </el-row>
             </div>
           </div>
+          <!-- 提交 -->
+          <div class="box-button">
+            <slot name="submit">
+            <el-button type="primary" icon='el-icon-finished'>确认提交</el-button>
+               </slot>
+          </div>
         </ul>
       </div>
       <!-- 投诉详情 -->
       <el-row>
-  <el-col :span="12"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="12"><div class="grid-content bg-purple-light"> <div v-show="dialogVisibless" class="dialog" >
-        <Look>
-          <div slot="title"></div>
-          <div slot="content">
-            <ul
-              class="infinite-list"
-              style="overflow: auto; height:800px"
-              infinite-scroll-immediate
-            >
-              <div class="look-content">
-                <div class="look-content-title">
-                  <span>投诉事件调查表</span>
-                </div>
-                <!-- 标题 -->
-                <div class="look-content-top">
-                  <el-row type="flex" class="row-bg" justify="center">
-                    <el-col :span="6"
-                      ><div class="grid-content bg-purple">
-                        <span><span>医院名称：</span>第二人民医院</span>
-                      </div></el-col
-                    >
-                    <el-col :span="6"
-                      ><div class="grid-content bg-purple-light"></div
-                    ></el-col>
-                    <el-col :span="6"
-                      ><div class="grid-content bg-purple">
-                        <span><span>事件编号：</span>TS202011150001</span>
-                      </div></el-col
-                    >
-                  </el-row>
-                  <el-row type="flex" class="row-bg" justify="center">
-                    <el-col :span="6"
-                      ><div class="grid-content bg-purple">
-                        <span><span>投诉日期：</span>2020-11-15</span>
-                      </div></el-col
-                    >
-                    <el-col :span="6"
-                      ><div class="grid-content bg-purple-light"></div
-                    ></el-col>
-                    <el-col :span="6"
-                      ><div class="grid-content bg-purple">
-                        <span><span>事发日期：</span>2020-11-08</span>
-                      </div></el-col
-                    >
-                  </el-row>
-                  <el-row type="flex" class="row-bg" justify="center">
-                    <el-col :span="6"
-                      ><div class="grid-content bg-purple">
-                        <span><span>事件性质：</span>投诉</span>
-                      </div></el-col
-                    >
-                    <el-col :span="6"
-                      ><div class="grid-content bg-purple-light"></div
-                    ></el-col>
-                    <el-col :span="6"
-                      ><div class="grid-content bg-purple">
-                        <span><span>事件状态：</span>待审批</span>
-                      </div></el-col
-                    >
-                  </el-row>
-                  <hr />
-                </div>
-                <div class="look-content-box">
-                  <!-- 内容标题 -->
+        <el-col :span="12"><div class="grid-content bg-purple"></div></el-col>
+        <el-col :span="12"
+          ><div class="grid-content bg-purple-light">
+            <div v-show="dialogVisibless" class="dialog">
+              <Look>
+                <div slot="title"></div>
+                <div slot="content">
+                  <ul
+                    class="infinite-list"
+                    style="overflow: auto; height: 740px; width: 100%"
+                    infinite-scroll-immediate
+                  >
+                    <div class="look-content">
+                      <div class="look-content-title">
+                        <span>投诉事件调查表</span>
+                      </div>
+                      <!-- 标题 -->
+                      <div class="look-content-top">
+                        <el-row type="flex" class="row-bg" justify="center">
+                          <el-col :span="6"
+                            ><div class="grid-content bg-purple">
+                              <span><span>医院名称：</span>第二人民医院</span>
+                            </div></el-col
+                          >
+                          <el-col :span="6"
+                            ><div class="grid-content bg-purple-light"></div
+                          ></el-col>
+                          <el-col :span="6"
+                            ><div class="grid-content bg-purple">
+                              <span><span>事件编号：</span>TS202011150001</span>
+                            </div></el-col
+                          >
+                        </el-row>
+                        <el-row type="flex" class="row-bg" justify="center">
+                          <el-col :span="6"
+                            ><div class="grid-content bg-purple">
+                              <span><span>投诉日期：</span>2020-11-15</span>
+                            </div></el-col
+                          >
+                          <el-col :span="6"
+                            ><div class="grid-content bg-purple-light"></div
+                          ></el-col>
+                          <el-col :span="6"
+                            ><div class="grid-content bg-purple">
+                              <span><span>事发日期：</span>2020-11-08</span>
+                            </div></el-col
+                          >
+                        </el-row>
+                        <el-row type="flex" class="row-bg" justify="center">
+                          <el-col :span="6"
+                            ><div class="grid-content bg-purple">
+                              <span><span>事件性质：</span>投诉</span>
+                            </div></el-col
+                          >
+                          <el-col :span="6"
+                            ><div class="grid-content bg-purple-light"></div
+                          ></el-col>
+                          <el-col :span="6"
+                            ><div class="grid-content bg-purple">
+                              <span><span>事件状态：</span>待审批</span>
+                            </div></el-col
+                          >
+                        </el-row>
+                        <hr />
+                      </div>
+                      <div class="look-content-box">
+                        <!-- 内容标题 -->
 
-                  <!-- 科室调查 -->
-                  <div class="box-contents">
-                    <div class="box-top">
-                      <el-row type="flex" class="row-bg" justify="space-between">
-                        <el-col :span="3" :push="2"
-                          ><div class="grid-content bg-purple">
-                            <span><b>科室调查</b></span>
-                          </div></el-col
-                        >
-                        <el-col :span="3"
-                          ><div class="grid-content bg-purple-light"></div
-                        ></el-col>
-                        <el-col :span="9" :pull="1"
-                          ><div class="grid-content bg-purple">
-                            <span><b>下发时间：</b>2020-11-18 13:30:26</span>
-                          </div></el-col
-                        >
-                      </el-row>
-                    </div>
-                    <div class="box-content">
-                      <el-row>
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple">
-                            <span class="label">参与调查科室：</span>
-                          </div></el-col
-                        >
-                        <el-col :span="20">
-                          <div class="grid-content bg-purple-light">
-                            <span>心血管内科、血液科</span>
-                          </div></el-col
-                        >
-                      </el-row>
-                    </div>
-                    <div class="box-content-child">
-                      <el-row v-for="item in list" :key="item.name">
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple">
-                            <span class="label">{{ item.label }}：</span>
-                          </div></el-col
-                        >
-                        <el-col :span="20">
-                          <div class="grid-content bg-purple-light">
-                            <span class="value">{{ item.value }}</span>
-                          </div></el-col
-                        >
-                      </el-row>
-                      <div class="file">
-                        <el-row>
-                          <el-col :span="4"
-                            ><div class="grid-content bg-purple">
-                              <span class="filename">文件名</span>
-                            </div></el-col
-                          >
-                          <el-col :span="4"
-                            ><div class="grid-content bg-purple">
-                              <span class="filedetaile">查看</span>
-                            </div></el-col
-                          >
-                          <el-col :span="4"
-                            ><div class="grid-content bg-purple">
-                              <span class="filename">文件名</span>
-                            </div></el-col
-                          >
-                          <el-col :span="4"
-                            ><div class="grid-content bg-purple">
-                              <span class="filedetaile">查看</span>
-                            </div></el-col
-                          >
-                          <el-col :span="4"
-                            ><div class="grid-content bg-purple">
-                              <span class="filename">文件名</span>
-                            </div></el-col
-                          >
-                          <el-col :span="4"
-                            ><div class="grid-content bg-purple">
-                              <span class="filedetaile">查看</span>
-                            </div></el-col
-                          >
-                        </el-row>
+                        <!-- 科室调查 -->
+                        <div class="box-contents">
+                          <div class="box-top">
+                            <el-row type="flex" class="row-bg" justify="space-between">
+                              <el-col :span="3" :push="2"
+                                ><div class="grid-content bg-purple">
+                                  <span><b>科室调查</b></span>
+                                </div></el-col
+                              >
+                              <el-col :span="3"
+                                ><div class="grid-content bg-purple-light"></div
+                              ></el-col>
+                              <el-col :span="9" :pull="1"
+                                ><div class="grid-content bg-purple">
+                                  <span><b>下发时间：</b>2020-11-18 13:30:26</span>
+                                </div></el-col
+                              >
+                            </el-row>
+                          </div>
+                          <div class="box-content">
+                            <el-row>
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple">
+                                  <span class="label">参与调查科室：</span>
+                                </div></el-col
+                              >
+                              <el-col :span="20">
+                                <div class="grid-content bg-purple-light">
+                                  <span>心血管内科、血液科</span>
+                                </div></el-col
+                              >
+                            </el-row>
+                          </div>
+                          <div class="box-content-child">
+                            <el-row v-for="item in list" :key="item.name">
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple">
+                                  <span class="label">{{ item.label }}：</span>
+                                </div></el-col
+                              >
+                              <el-col :span="20">
+                                <div class="grid-content bg-purple-light">
+                                  <span class="value">{{ item.value }}</span>
+                                </div></el-col
+                              >
+                            </el-row>
+                            <div class="file">
+                              <el-row>
+                                <el-col :span="4"
+                                  ><div class="grid-content bg-purple">
+                                    <span class="filename">文件名</span>
+                                  </div></el-col
+                                >
+                                <el-col :span="4"
+                                  ><div class="grid-content bg-purple">
+                                    <span class="filedetaile">查看</span>
+                                  </div></el-col
+                                >
+                                <el-col :span="4"
+                                  ><div class="grid-content bg-purple">
+                                    <span class="filename">文件名</span>
+                                  </div></el-col
+                                >
+                                <el-col :span="4"
+                                  ><div class="grid-content bg-purple">
+                                    <span class="filedetaile">查看</span>
+                                  </div></el-col
+                                >
+                                <el-col :span="4"
+                                  ><div class="grid-content bg-purple">
+                                    <span class="filename">文件名</span>
+                                  </div></el-col
+                                >
+                                <el-col :span="4"
+                                  ><div class="grid-content bg-purple">
+                                    <span class="filedetaile">查看</span>
+                                  </div></el-col
+                                >
+                              </el-row>
+                            </div>
+                            <div
+                              style="
+                                border-bottom: 0.5px solid #797979;
+                                width: 100%;
+                                margin-bottom: 20px;
+                              "
+                            ></div>
+                          </div>
+                          <div class="box-content-child">
+                            <el-row v-for="item in list" :key="item.name">
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple">
+                                  <span class="label">{{ item.label }}：</span>
+                                </div></el-col
+                              >
+                              <el-col :span="20">
+                                <div class="grid-content bg-purple-light">
+                                  <span class="value">{{ item.value }}</span>
+                                </div></el-col
+                              >
+                            </el-row>
+                            <div class="file">
+                              <el-row>
+                                <el-col :span="4"
+                                  ><div class="grid-content bg-purple">
+                                    <span class="filename">文件名</span>
+                                  </div></el-col
+                                >
+                                <el-col :span="4"
+                                  ><div class="grid-content bg-purple">
+                                    <span class="filedetaile">查看</span>
+                                  </div></el-col
+                                >
+                                <el-col :span="4"
+                                  ><div class="grid-content bg-purple">
+                                    <span class="filename">文件名</span>
+                                  </div></el-col
+                                >
+                                <el-col :span="4"
+                                  ><div class="grid-content bg-purple">
+                                    <span class="filedetaile">查看</span>
+                                  </div></el-col
+                                >
+                                <el-col :span="4"
+                                  ><div class="grid-content bg-purple">
+                                    <span class="filename">文件名</span>
+                                  </div></el-col
+                                >
+                                <el-col :span="4"
+                                  ><div class="grid-content bg-purple">
+                                    <span class="filedetaile">查看</span>
+                                  </div></el-col
+                                >
+                              </el-row>
+                            </div>
+                            <div
+                              style="
+                                border-bottom: 0.5px solid #797979;
+                                width: 100%;
+                                margin-bottom: 20px;
+                              "
+                            ></div>
+                          </div>
+                          <hr />
+                        </div>
+                        <!-- 投诉人信息 -->
+                        <div class="box-Information">
+                          <div class="box-top">
+                            <el-row type="flex" class="row-bg" justify="space-between">
+                              <el-col :span="3" :push="2"
+                                ><div class="grid-content bg-purple">
+                                  <span><b>投诉人信息</b></span>
+                                </div></el-col
+                              >
+                            </el-row>
+                          </div>
+                          <div class="box-content">
+                            <el-row>
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple">
+                                  <span class="label">投诉人姓名：</span>
+                                </div></el-col
+                              >
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple-light">
+                                  <span class="value">张大牛</span>
+                                </div></el-col
+                              >
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple"></div>
+                                <span class="label">性别：</span></el-col
+                              >
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple-light">
+                                  <span class="value">男</span>
+                                </div></el-col
+                              >
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple"></div>
+                                <span class="label">年龄：</span></el-col
+                              >
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple-light">
+                                  <span class="value">65</span>
+                                </div></el-col
+                              >
+                            </el-row>
+                            <el-row>
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple">
+                                  <span class="label">投诉人姓名：</span>
+                                </div></el-col
+                              >
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple-light">
+                                  <span class="value">张大牛</span>
+                                </div></el-col
+                              >
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple"></div>
+                                <span class="label">性别：</span></el-col
+                              >
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple-light">
+                                  <span class="value">男</span>
+                                </div></el-col
+                              >
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple"></div>
+                                <span class="label">年龄：</span></el-col
+                              >
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple-light">
+                                  <span class="value">65</span>
+                                </div></el-col
+                              >
+                            </el-row>
+                            <el-row>
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple">
+                                  <span class="label">所在病区</span>
+                                </div></el-col
+                              >
+                              <el-col :span="20"
+                                ><div class="grid-content bg-purple-light">
+                                  <span class="value">二楼</span>
+                                </div></el-col
+                              >
+                            </el-row>
+                            <el-row>
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple">
+                                  <span class="label">所在病区</span>
+                                </div></el-col
+                              >
+                              <el-col :span="20"
+                                ><div class="grid-content bg-purple-light">
+                                  <span class="value">二楼</span>
+                                </div></el-col
+                              >
+                            </el-row>
+                            <el-row>
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple">
+                                  <span class="label">所在病区</span>
+                                </div></el-col
+                              >
+                              <el-col :span="20"
+                                ><div class="grid-content bg-purple-light">
+                                  <span class="value">二楼</span>
+                                </div></el-col
+                              >
+                            </el-row>
+                            <div
+                              style="
+                                border-bottom: 0.5px solid #797979;
+                                width: 100%;
+                                margin-bottom: 20px;
+                              "
+                            ></div>
+                          </div>
+                          <hr />
+                        </div>
+                        <!-- 患者信息 -->
+                        <div class="box-Information">
+                          <div class="box-top">
+                            <el-row type="flex" class="row-bg" justify="space-between">
+                              <el-col :span="3" :push="2"
+                                ><div class="grid-content bg-purple">
+                                  <span><b>患者信息</b></span>
+                                </div></el-col
+                              >
+                            </el-row>
+                          </div>
+                          <div class="box-content">
+                            <el-row>
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple">
+                                  <span class="label">投诉人姓名：</span>
+                                </div></el-col
+                              >
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple-light">
+                                  <span class="value">张大牛</span>
+                                </div></el-col
+                              >
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple"></div>
+                                <span class="label">性别：</span></el-col
+                              >
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple-light">
+                                  <span class="value">男</span>
+                                </div></el-col
+                              >
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple"></div>
+                                <span class="label">年龄：</span></el-col
+                              >
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple-light">
+                                  <span class="value">65</span>
+                                </div></el-col
+                              >
+                            </el-row>
+                            <el-row>
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple">
+                                  <span class="label">投诉人姓名：</span>
+                                </div></el-col
+                              >
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple-light">
+                                  <span class="value">张大牛</span>
+                                </div></el-col
+                              >
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple"></div>
+                                <span class="label">性别：</span></el-col
+                              >
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple-light">
+                                  <span class="value">男</span>
+                                </div></el-col
+                              >
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple"></div>
+                                <span class="label">年龄：</span></el-col
+                              >
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple-light">
+                                  <span class="value">65</span>
+                                </div></el-col
+                              >
+                            </el-row>
+                            <el-row>
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple">
+                                  <span class="label">所在病区</span>
+                                </div></el-col
+                              >
+                              <el-col :span="20"
+                                ><div class="grid-content bg-purple-light">
+                                  <span class="value">二楼</span>
+                                </div></el-col
+                              >
+                            </el-row>
+                            <el-row>
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple">
+                                  <span class="label">所在病区</span>
+                                </div></el-col
+                              >
+                              <el-col :span="20"
+                                ><div class="grid-content bg-purple-light">
+                                  <span class="value">二楼</span>
+                                </div></el-col
+                              >
+                            </el-row>
+                            <el-row>
+                              <el-col :span="4"
+                                ><div class="grid-content bg-purple">
+                                  <span class="label">所在病区</span>
+                                </div></el-col
+                              >
+                              <el-col :span="20"
+                                ><div class="grid-content bg-purple-light">
+                                  <span class="value">二楼</span>
+                                </div></el-col
+                              >
+                            </el-row>
+                            <div
+                              style="
+                                border-bottom: 0.5px solid #797979;
+                                width: 100%;
+                                margin-bottom: 20px;
+                              "
+                            ></div>
+                          </div>
+                        </div>
                       </div>
-                      <div
-                        style="
-                          border-bottom: 0.5px solid #797979;
-                          width: 100%;
-                          margin-bottom: 20px;
-                        "
-                      ></div>
                     </div>
-                    <div class="box-content-child">
-                      <el-row v-for="item in list" :key="item.name">
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple">
-                            <span class="label">{{ item.label }}：</span>
-                          </div></el-col
-                        >
-                        <el-col :span="20">
-                          <div class="grid-content bg-purple-light">
-                            <span class="value">{{ item.value }}</span>
-                          </div></el-col
-                        >
-                      </el-row>
-                      <div class="file">
-                        <el-row>
-                          <el-col :span="4"
-                            ><div class="grid-content bg-purple">
-                              <span class="filename">文件名</span>
-                            </div></el-col
-                          >
-                          <el-col :span="4"
-                            ><div class="grid-content bg-purple">
-                              <span class="filedetaile">查看</span>
-                            </div></el-col
-                          >
-                          <el-col :span="4"
-                            ><div class="grid-content bg-purple">
-                              <span class="filename">文件名</span>
-                            </div></el-col
-                          >
-                          <el-col :span="4"
-                            ><div class="grid-content bg-purple">
-                              <span class="filedetaile">查看</span>
-                            </div></el-col
-                          >
-                          <el-col :span="4"
-                            ><div class="grid-content bg-purple">
-                              <span class="filename">文件名</span>
-                            </div></el-col
-                          >
-                          <el-col :span="4"
-                            ><div class="grid-content bg-purple">
-                              <span class="filedetaile">查看</span>
-                            </div></el-col
-                          >
-                        </el-row>
-                      </div>
-                      <div
-                        style="
-                          border-bottom: 0.5px solid #797979;
-                          width: 100%;
-                          margin-bottom: 20px;
-                        "
-                      ></div>
-                    </div>
-                    <hr />
-                  </div>
-                  <!-- 投诉人信息 -->
-                  <div class="box-Information">
-                    <div class="box-top">
-                      <el-row type="flex" class="row-bg" justify="space-between">
-                        <el-col :span="3" :push="2"
-                          ><div class="grid-content bg-purple">
-                            <span><b>投诉人信息</b></span>
-                          </div></el-col
-                        >
-                      </el-row>
-                    </div>
-                    <div class="box-content">
-                      <el-row>
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple">
-                            <span class="label">投诉人姓名：</span>
-                          </div></el-col
-                        >
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple-light">
-                            <span class="value">张大牛</span>
-                          </div></el-col
-                        >
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple"></div>
-                          <span class="label">性别：</span></el-col
-                        >
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple-light">
-                            <span class="value">男</span>
-                          </div></el-col
-                        >
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple"></div>
-                          <span class="label">年龄：</span></el-col
-                        >
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple-light">
-                            <span class="value">65</span>
-                          </div></el-col
-                        >
-                      </el-row>
-                      <el-row>
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple">
-                            <span class="label">投诉人姓名：</span>
-                          </div></el-col
-                        >
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple-light">
-                            <span class="value">张大牛</span>
-                          </div></el-col
-                        >
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple"></div>
-                          <span class="label">性别：</span></el-col
-                        >
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple-light">
-                            <span class="value">男</span>
-                          </div></el-col
-                        >
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple"></div>
-                          <span class="label">年龄：</span></el-col
-                        >
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple-light">
-                            <span class="value">65</span>
-                          </div></el-col
-                        >
-                      </el-row>
-                      <el-row>
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple">
-                            <span class="label">所在病区</span>
-                          </div></el-col
-                        >
-                        <el-col :span="20"
-                          ><div class="grid-content bg-purple-light">
-                            <span class="value">二楼</span>
-                          </div></el-col
-                        >
-                      </el-row>
-                      <el-row>
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple">
-                            <span class="label">所在病区</span>
-                          </div></el-col
-                        >
-                        <el-col :span="20"
-                          ><div class="grid-content bg-purple-light">
-                            <span class="value">二楼</span>
-                          </div></el-col
-                        >
-                      </el-row>
-                      <el-row>
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple">
-                            <span class="label">所在病区</span>
-                          </div></el-col
-                        >
-                        <el-col :span="20"
-                          ><div class="grid-content bg-purple-light">
-                            <span class="value">二楼</span>
-                          </div></el-col
-                        >
-                      </el-row>
-                      <div
-                        style="
-                          border-bottom: 0.5px solid #797979;
-                          width: 100%;
-                          margin-bottom: 20px;
-                        "
-                      ></div>
-                    </div>
-                    <hr />
-                  </div>
-                  <!-- 患者信息 -->
-                  <div class="box-Information">
-                    <div class="box-top">
-                      <el-row type="flex" class="row-bg" justify="space-between">
-                        <el-col :span="3" :push="2"
-                          ><div class="grid-content bg-purple">
-                            <span><b>患者信息</b></span>
-                          </div></el-col
-                        >
-                      </el-row>
-                    </div>
-                    <div class="box-content">
-                      <el-row>
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple">
-                            <span class="label">投诉人姓名：</span>
-                          </div></el-col
-                        >
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple-light">
-                            <span class="value">张大牛</span>
-                          </div></el-col
-                        >
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple"></div>
-                          <span class="label">性别：</span></el-col
-                        >
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple-light">
-                            <span class="value">男</span>
-                          </div></el-col
-                        >
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple"></div>
-                          <span class="label">年龄：</span></el-col
-                        >
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple-light">
-                            <span class="value">65</span>
-                          </div></el-col
-                        >
-                      </el-row>
-                      <el-row>
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple">
-                            <span class="label">投诉人姓名：</span>
-                          </div></el-col
-                        >
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple-light">
-                            <span class="value">张大牛</span>
-                          </div></el-col
-                        >
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple"></div>
-                          <span class="label">性别：</span></el-col
-                        >
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple-light">
-                            <span class="value">男</span>
-                          </div></el-col
-                        >
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple"></div>
-                          <span class="label">年龄：</span></el-col
-                        >
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple-light">
-                            <span class="value">65</span>
-                          </div></el-col
-                        >
-                      </el-row>
-                      <el-row>
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple">
-                            <span class="label">所在病区</span>
-                          </div></el-col
-                        >
-                        <el-col :span="20"
-                          ><div class="grid-content bg-purple-light">
-                            <span class="value">二楼</span>
-                          </div></el-col
-                        >
-                      </el-row>
-                      <el-row>
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple">
-                            <span class="label">所在病区</span>
-                          </div></el-col
-                        >
-                        <el-col :span="20"
-                          ><div class="grid-content bg-purple-light">
-                            <span class="value">二楼</span>
-                          </div></el-col
-                        >
-                      </el-row>
-                      <el-row>
-                        <el-col :span="4"
-                          ><div class="grid-content bg-purple">
-                            <span class="label">所在病区</span>
-                          </div></el-col
-                        >
-                        <el-col :span="20"
-                          ><div class="grid-content bg-purple-light">
-                            <span class="value">二楼</span>
-                          </div></el-col
-                        >
-                      </el-row>
-                      <div
-                        style="
-                          border-bottom: 0.5px solid #797979;
-                          width: 100%;
-                          margin-bottom: 20px;
-                        "
-                      ></div>
-                    </div>
-                  </div>
+                  </ul>
                 </div>
-              </div>
-            </ul>
-          </div>
-        </Look>
-      </div></div></el-col>
-</el-row>
-     
+              </Look>
+            </div></div
+        ></el-col>
+      </el-row>
+      <!-- 上传文件弹窗 -->
+      <div class="upfile">
+      <el-dialog
+        title="提示"
+        :visible.sync="upfiles"
+        width="30%"
+        :before-close="Close"
+      >
+         <!-- <div class="input-box">
+          <span><span style="color:red">*</span>文件标题</span> <el-input v-model="filetitle" placeholder='请输入文件标题'></el-input>
+       </div>
+       <br>
+        <div class="input-box">
+          <span><span style="color:red">*</span>文件标题</span> <el-input v-model="filetitle" placeholder='请输入文件标题'></el-input>
+       </div> -->
+       <el-form ref="form" label-width="80px">
+         <el-form-item label="文件标题 ">
+           <el-input v-model="filetitle" placeholder='请输入文件标题'></el-input>
+         </el-form-item>
+         <el-form-item label="文件描述">
+         <el-input type="textarea" v-model="filedescribe" placeholder='请输入文件描述'></el-input>
+         </el-form-item>
+         <el-form-item label="上传附件" class="uploadfile" >
+           <el-input v-model="uploadfile" type="file" style="border: none;" class="uploadfile"></el-input>
+           
+         </el-form-item>
+       </el-form>
+       <el-button type="primary" icon='el-icon-upload' class="uploadfiles">上传文件</el-button>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="upfiles = false">取 消</el-button>
+          <el-button type="primary" @click="upfiles = false">确 定</el-button>
+        </span>
+      </el-dialog>
+    </div>
     </div>
   </div>
 </template>
@@ -681,6 +728,11 @@ export default {
   },
   data() {
     return {
+      uploadfile:'',//上传附件
+      filedescribe:'',//文件描述
+      form:'',
+      filetitle:'',//文件标题
+      upfiles:false,
       list: [
         {
           label: "调查科室",
@@ -799,13 +851,30 @@ export default {
     handleClose() {
       this.dialogVisibless = false;
     },
+    Close(){
+this.upfiles=false
+    },
     //   投诉详情
     detaile() {
-      this.dialogVisibless = true;
+      if (this.dialogVisibless != true) {
+        this.dialogVisibless = true;
+      } else {
+        this.dialogVisibless = false;
+      }
     },
     //   上传文件弹窗
 
-    upfile() {},
+    upfile() {
+      this.upfiles=true
+    },
+    // 设置表头颜色
+    getRowClass({ rowIndex }) {
+      if (rowIndex == 0) {
+        return "background:#c2c5f6;color:#000";
+      } else {
+        return "";
+      }
+    },
   },
   created() {},
 };

@@ -132,7 +132,6 @@
     display: flex;
     border: 1px solid #797979;
     line-height: 30px;
-    padding-left: 30px;
 
 
 }
@@ -142,7 +141,6 @@
 
     border-right: none;
     background: #f2f2f2;
-    padding-left: 20px;
 }
 
 /* 调查科室分步 */
@@ -229,9 +227,11 @@
     border-left: none;
     line-height: 30px;
     border-bottom: none;
+    padding-left: 10px;
 
 }
 .look .look-content .look-content-box .box-Information > .box-content .value{
     line-height: 30px;
     border-bottom: none;
+    padding-left: 10px;
 }
