@@ -30,14 +30,47 @@ hr {
 
 }
 
+/* 弹框 */
+.dialog_div {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.dialog_div span {
+    line-height: 40px;
+}
+
+.dialog_div_select {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.dialog_div_title{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.dialog_div_title>.el-input{
+    width: 80%;
+}
+.dialog_div_z{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.dialog_div_z>.el-input{
+    width: 80%;
+}
 /* table */
 .columnList_table {
     margin: 0 20px;
 }
+
 .columnList_table .el-table td,
-.el-table th{
+.el-table th {
     text-align: center;
 }
+
 .columnList_table>.el-table .el-button:last-child {
     color: #f00;
 }
