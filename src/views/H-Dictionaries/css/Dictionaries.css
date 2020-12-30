@@ -5,7 +5,7 @@
   margin: 0 auto;
 }
 /* 顶部导航 */
-.allManage>.nav {
+.allManage .allManage_nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -13,13 +13,13 @@
   border-bottom: 2px solid #cccccc;
   margin-bottom: 20px;
 }
-.allManage>.nav>ul{
+.allManage .allManage_nav  .nav_list{
   list-style: none;
   font-size: 14px;
   display: flex;
   border: 1px solid #cccccc;
 }
-.allManage>.nav>ul>li{
+.allManage .allManage_nav  .nav_list .list{
   width: 102px;
   border: 1px solid #cccccc;
   border-start-end-radius: 5px;
@@ -28,17 +28,17 @@
   cursor: pointer;
   color: #cccccc;
 }
-.allManage>.nav>ul>.bgColor:first-child{
+.allManage .allManage_nav .nav_list .bgColor:first-child{
   background-color: #666EE8;
   color: #ffffff;
   border-color: #666EE8;
 }
-.allManage>.nav>ul>.bgColor{
+.allManage .allManage_nav  .nav_list .bgColor{
   background-color: #666EE8;
   color: #ffffff !important;
   border-color: #666EE8;
 }
-.allManage>.nav>i{
+.allManage .allManage_nav i{
   width: 110px;
   height: 36px;
   background-color: #666EE8;
@@ -48,18 +48,18 @@
   border-radius: 5px;
   cursor: pointer;
 }
-.allManage>.nav>i span{
+.allManage .allManage_nav i span{
   padding-left: 10px;
 }
 /* 内容 */
-.allManage>.content{
+.allManage>.allManage_cont{
   display: flex;
 }
 /* 侧边导航 */
-.allManage>.content>.left{
-  margin-right: 25px;
+.allManage>.allManage_cont .left{
+  margin-right: 49px;
 }
-.allManage>.content>.left ul li{
+.allManage>.allManage_cont .left  .side_nav .side_nav_list{
   list-style: none;
   font-size: 14px;
   color: #333333;
@@ -68,31 +68,35 @@
   border: 1px solid #f0f1fd;
   line-height: 44px;
 }
-.allManage>.content>.left ul li:hover{
+.allManage .allManage_cont .left  .side_nav .side_nav_list:hover{
   color: #ffffff;
   background-color: #666EE8;
 }
 /* 右边内容 */
 /* 搜索 */
-.allManage>.content>.right>.search{
+.allManage .allManage_cont .right .search{
   width: 367px;
   height: 36px;
   margin-bottom: 25px;
   margin-left: 0;
 }
-
-.allManage>.content>.right>.search>.el-input-group__append{
+.allManage .allManage_cont .right .search .el-input-group__append{
   background-color: #666EE8;
   border-color: #666EE8;
   color: #ffffff;
 }
 /* 表格 */
-.allManage>.content>.right{
+.allManage .allManage_cont .right{
   width: 985px;
   text-align: left;
 }
-.has-gutter tr th{
+.allManage .allManage_cont .right .right_con .el-table__header-wrapper .el-table__header .has-gutter tr th{
   background-color: #666EE866;
+  color: #333333;
+  text-align: left;
+}
+.allManage .allManage_cont .right .right_con .el-table__body-wrapper .el-table__body .el-table__row td{
+  text-align: left;
 }
 /* 分页 */
 .allManage .block{
@@ -101,14 +105,7 @@
   text-align: right;
 }
 /* 新增 */
-.el-form .el-form-item__content{
-  display: inline-block;
-  width: 80%;
-  height: 200px;
-}
-.el-form .dialog-footer .el-button--primary{
-  background-color: #666EE8;
-}
-.el-dialog__header{
+.allManage .newly {
   text-align: left;
 }
+
