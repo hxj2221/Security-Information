@@ -102,12 +102,11 @@
     <!-- 底部 -->
     <div class="addArticle_bottom">
       <div class="addArticle_bottom_stlye">
-        <el-button size="small" icon="el-icon-back" @click="myreturn"
+        <el-button  icon="el-icon-back" @click="myreturn"
           >返回</el-button
         >
         <el-button
           type="primary"
-          size="small"
           icon="el-icon-document-checked"
           @click="mysubmit"
           >提交</el-button
