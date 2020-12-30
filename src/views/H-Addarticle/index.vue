@@ -34,11 +34,12 @@
           ></el-input>
         </el-form-item>
         <el-form-item label="文章详情" prop="desc">
-          <el-input
+          <!-- <el-input
             type="textarea"
             :rows="5"
             v-model="ruleForm.details"
-          ></el-input>
+          ></el-input> -->
+          <Tinymce></Tinymce>
         </el-form-item>
         <el-form-item label="是否置顶" prop="resource">
           <el-radio-group v-model="ruleForm.resource">
@@ -119,8 +120,11 @@
 <script>
 // import AdminHead from './components/AdminHead'
 import "@/views/H-Addarticle/css.css";
+import Tinymce from '@/views/Tinymce/index.vue'
 export default {
-  components: {},
+  components: {
+    Tinymce
+  },
 
   data() {
     return {

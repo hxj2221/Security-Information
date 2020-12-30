@@ -119,7 +119,9 @@
 import "@/views/H-Articlelist/component/articleList/css.css";
 
 export default {
-  components: {},
+  components: {
+  
+  },
   props: {},
   data() {
     return {

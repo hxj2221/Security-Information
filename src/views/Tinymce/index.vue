@@ -1,55 +1,54 @@
 <template>
   <div class="tiny">
     <!-- 标题 -->
-    <h2>{{ msg }}</h2>
+    <!-- <h2>{{ msg }}</h2> -->
     <!-- 富文本编辑器组件 -->
-    <tinymce-editor ref="editor"
+    <tinymce-editor
+      ref="editor"
       class="tinyEditor"
       :value="msg"
       :disabled="disabled"
-      @onClick="onClick">
+    >
     </tinymce-editor>
     <!-- 功能按钮 -->
     <div class="tinyFooter">
-      <el-button type="primary" size="medium" plain @click="clear">清空内容</el-button>
+      <!-- <el-button type="primary" size="medium" plain @click="clear">清空内容</el-button> -->
       <el-button type="info" size="medium" plain @click="disabled = !disabled">禁用</el-button>
     </div>   
   </div>
 </template>
 
 <script>
-import TinymceEditor from '@/components/TinymceEditor'
+import TinymceEditor from "@/components/TinymceEditor";
 export default {
   components: {
-    TinymceEditor
+    TinymceEditor,
   },
-  data () {
+  data() {
     return {
-      msg: 'Welcome to Use Tinymce Editor',
-      disabled: false
-    }
+      msg: "",
+      disabled: false,
+    };
   },
   methods: {
     // 鼠标单击的事件
-    onClick (e, editor) {
-      console.log('Element clicked')
-      console.log(e)
-      console.log(editor)
-    },
+    // onClick(e, editor) {
+    //   // console.log("Element clicked");
+    //   // console.log(e);
+    //   // console.log(editor);
+    // },
     // 清空内容
-    clear () {
-      this.$refs.editor.clear()
-    }
-  }
-}
+   
+  },
+};
 </script>
 
 <style lang="less" scoped>
 .tiny {
-  width: 100%;
+  width: 60%;
   min-height: 85%;
   margin: 20px 0;
-  border: 1px solid rgba(173,216,230, 1);
+  border: 1px solid rgba(173, 216, 230, 1);
   background-color: #fff;
   overflow: auto;
   display: flex;
@@ -58,12 +57,16 @@ export default {
   align-items: center;
 
   &Editor {
-    width: 80%;
+    width: 96%;
+    // margin-bottom: 20px;
+    padding: 20px;
   }
 
   &Footer {
-    width: 80%;
-    // border: 1px solid red;
+    width: 96%;
+    padding: 10px 0 10px;
+    
+margin-right: 10px;
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-end;
