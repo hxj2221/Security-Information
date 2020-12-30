@@ -2,18 +2,18 @@
   <div>
     <div class="allManage">
       <!-- 顶部导航 -->
-      <div class="nav">
-        <ul>
-          <li v-for="(item,index) in Nav" :key="item.index" v-bind:class="{bgColor:index==nowIndex}"
+      <div class="allManage_nav">
+        <ul class="nav_list">
+          <li class="list" v-for="(item,index) in Nav" :key="item.index" v-bind:class="{bgColor:index==nowIndex}"
             @click="change(index)">{{item.name}}</li>
         </ul>
         <i class="el-icon-circle-plus-outline" @click="increase()"><span>新增</span></i>
       </div>
-      <div class="content">
+      <div class="allManage_cont">
         <!-- 侧边导航 -->
         <div class="left">
-          <ul>
-            <li v-for="item in SideNav" :key="item.index">{{item.name}}</li>
+          <ul class="side_nav">
+            <li class="side_nav_list" v-for="item in SideNav" :key="item.index">{{item.name}}</li>
           </ul>
         </div>
         <!-- 右边内容 -->
@@ -21,16 +21,16 @@
           <el-input placeholder="请输入内容" v-model="input3" class="input-with-select search">
             <el-button slot="append" icon="el-icon-search"></el-button>
           </el-input>
-          <el-table class="right_con" ref="singleTable" :data="tableData">
-            <el-table-column type="index" label="序号">
+          <el-table class="right_con" ref="singleTable" :data="tableData" style="width:100%">
+            <el-table-column type="index" label="序号" width="90">
             </el-table-column>
-            <el-table-column property="field" label="字段">
+            <el-table-column property="field" label="字段" width="350">
             </el-table-column>
-            <el-table-column property="date" label="创建时间">
+            <el-table-column property="date" label="创建时间" width="180">
             </el-table-column>
-            <el-table-column property="name" label="创建人">
+            <el-table-column property="name" label="创建人" width="180">
             </el-table-column>
-            <el-table-column label="操作">
+            <el-table-column label="操作" width="180">
               <template slot-scope="scope">
                 <el-button type="text" size="small" @click="edit()">编辑</el-button>
                 <el-button @click.native.prevent="deleteRow(scope.$index, tableData)" type="text" size="small">删除
@@ -40,16 +40,15 @@
           </el-table>
         </div>
       </div>
-
       <!-- 分页 -->
       <div class="block">
         <el-pagination :page-size="20" :pager-count="11" layout="prev, pager, next" :total="1000">
         </el-pagination>
       </div>
       <!-- 新增 -->
-      <el-dialog title="新增字段" :visible.sync="dialogFormVisible">
-        <el-form :model="form">
-          <el-form-item label="字段信息" required>
+      <el-dialog class="newly" title="新增字段" :visible.sync="dialogFormVisible">
+        <el-form class="newly_con" :model="form">
+          <el-form-item class="info" label="字段信息" required>
             <el-input type="textarea" :rows="8" placeholder="请输入内容" v-model="form.name">
             </el-input>
           </el-form-item>

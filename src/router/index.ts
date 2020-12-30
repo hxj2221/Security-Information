@@ -165,6 +165,24 @@ const asyncRoutes = [
       }
     ]
   }, 
+  
+  {
+    path: '/',
+    component: Home,
+    name: '文件库',
+    iconCls: 'el-icon-share',
+    leaf: false,
+    children: [
+      {
+        name: '文件列表',
+        path: '/form',
+        component: () => import('../views/H-Files/index.vue'),
+        meta: {
+          roles: ['admin']
+        }
+      }
+    ]
+  },
   {
     path: '/',
     component: Home,
@@ -264,40 +282,6 @@ const asyncRoutes = [
       }
     ]
   },
-  // {
-  //   path: '/',
-  //   component: Home,
-  //   name: '',
-  //   iconCls: 'el-icon-share',
-  //   leaf: true,
-  //   children: [
-  //     {
-  //       name: 'Form表单',
-  //       path: '/form',
-  //       component: () => import('../views/Form/index.vue'),
-  //       meta: {
-  //         roles: ['admin']
-  //       }
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '/',
-  //   component: Home,
-  //   name: '',
-  //   iconCls: 'el-icon-star-on',
-  //   leaf: true,
-  //   children: [
-  //     {
-  //       name: 'Vuex使用',
-  //       path: '/vuex',
-  //       component: () => import('../views/VuexRelated/index.vue'),
-  //       meta: {
-  //         roles: ['admin']
-  //       }
-  //     }
-  //   ]
-  // },
  
   // {
   //   path: '/',
