@@ -9,7 +9,7 @@
         <el-button
           type="primary"
           size="small"
-          icon="el-icon-plus"
+          icon="el-icon-circle-plus-outline"
           @click="addRecord"
           >新增记录</el-button
         >

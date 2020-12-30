@@ -79,8 +79,8 @@
           <h5>附件信息</h5>
         </div>
         <div class="addRecord_enclosure_top_right">
-          <el-button type="primary" size="small" icon="el-icon-plus"
-            >主要按钮</el-button
+          <el-button type="primary" size="small" icon="el-icon-circle-plus-outline"
+            >上传附件</el-button
           >
         </div>
       </div>
@@ -229,7 +229,7 @@
             </template>
           </el-table-column>
         </el-table>
-        <el-button type="primary" size="small" icon="el-icon-plusF"
+        <el-button type="primary" size="small" icon="el-icon-circle-plus-outline"
           >添加投诉信息</el-button
         >
       </div>
@@ -237,12 +237,11 @@
     <!-- 固定定位按钮 -->
     <div class="addRecord_button">
       <div class="button_stlye">
-        <el-button size="small" icon="el-icon-back" @click="mysubmit"
+        <el-button icon="el-icon-back" @click="mysubmit"
           >返回</el-button
         >
         <el-button
           type="primary"
-          size="small"
           icon="el-icon-document-checked"
           @click="mysubmit"
           >提交</el-button
