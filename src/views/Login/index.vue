@@ -1,5 +1,5 @@
 <template>
-<div>
+<div style="height:100%">
 <Login v-if="isShow" @forgetPass='forgetPass'></Login>
 <Forget v-else @forgetLogin='forgetLogin'></Forget>
 </div>
