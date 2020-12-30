@@ -11,7 +11,12 @@
 
 <script>
   // import AdminHead from './components/AdminHead'
-  import './css/Ade.css'
+  // 主页面样式
+  import './css/MainPage.css'
+  // 新增样式
+  import './css/AddAde.css'
+  // 详情样式
+  import './css/Detail.css'
   import MainPage from './components/MainPage'
   import AddAde from './components/AddAde'
   import Detail from './components/Detail'

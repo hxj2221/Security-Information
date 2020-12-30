@@ -1,10 +1,10 @@
 <template>
   <div class="addAll">
     <!-- 新增 -->
-    <div class="form">
+    <div class="formBasics">
       <h2>基本信息</h2>
-      <el-form :model="add">
-        <div class="form_con">
+      <el-form class="form_con" :model="add">
+        <div class="info">
           <el-form-item label="业务编号">
             <el-input v-model="add.number" :disabled="true" autocomplete="off"></el-input>
           </el-form-item>
@@ -17,7 +17,7 @@
             </el-cascader>
           </el-form-item>
         </div>
-        <div class="form_con">
+        <div class="info">
           <el-form-item label="患者姓名" required>
             <el-input v-model="add.name" autocomplete="off"></el-input>
           </el-form-item>
@@ -29,18 +29,16 @@
             </el-select>
           </el-form-item>
           <el-form-item label="年龄">
-            <div class="age">
-              <el-input placeholder="请输入内容" v-model.number="add.age" class="input-with-select">
+              <el-input placeholder="请输入内容" v-model.number="add.age" class="input-with-select inp">
                 <el-select v-model="add.Age" slot="prepend" placeholder="岁">
                   <el-option label="岁" value="1"></el-option>
                   <el-option label="月" value="2"></el-option>
                   <el-option label="天" value="3"></el-option>
                 </el-select>
               </el-input>
-            </div>
           </el-form-item>
         </div>
-        <div class="form_con">
+        <div class="info">
           <el-form-item label="入院日期" required>
             <el-date-picker v-model="add.date" type="datetime" placeholder="选择日期时间">
             </el-date-picker>
@@ -52,7 +50,7 @@
             <el-input v-model="add.bedNum" autocomplete="off"></el-input>
           </el-form-item>
         </div>
-        <div class="form_con">
+        <div class="info">
           <el-form-item label="住院号" required>
             <el-input v-model="add.hospitalNum" autocomplete="off"></el-input>
           </el-form-item>
@@ -65,7 +63,7 @@
             </el-date-picker>
           </el-form-item>
         </div>
-        <div class="form_con">
+        <div class="info">
           <el-form-item label="主管医师" required>
             <el-input v-model="add.physician" autocomplete="off"></el-input>
           </el-form-item>
@@ -76,13 +74,15 @@
             <el-input v-model="add.stakeholders" autocomplete="off"></el-input>
           </el-form-item>
         </div>
-        <div class="form_con">
+        <div class="info info_last">
           <el-form-item label="上报人" required>
             <el-input v-model="add.ReportPerson" autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item label="轻重程度" required>
-            <el-cascader class="sel" :options="options4" v-model="add.value1">
-            </el-cascader>
+          <el-form-item class="last" label="轻重程度" required label-width="180">
+            <el-select v-model="add.value1" placeholder="请选择">
+              <el-option v-for="item in options4" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
           </el-form-item>
         </div>
         <el-row>
@@ -116,9 +116,9 @@
       </el-form>
     </div>
     <!-- 关联 -->
-    <div class="table">
+    <div class="table_info">
       <h2>关联患者信息（调用HIS）</h2>
-      <el-table :data="tableData">
+      <el-table class="info" :data="tableData">
         <el-table-column type="index" label="序号">
         </el-table-column>
         <el-table-column prop="name" label="姓名">

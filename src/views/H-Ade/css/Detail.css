@@ -1,0 +1,133 @@
+/* 查看不良事件详情 */
+.AdeDetail{
+  padding: 20px;
+  background-color: #fff;
+  width: 756px;
+  font-size: 14px;
+  margin: 0 auto 100px;
+}
+.AdeDetail .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 36px;
+  border-color: #666EE8;
+  color: #666EE8;
+  font-weight: 700;
+}
+
+.AdeDetail .top .left {
+  border: 1px solid #666EE8;
+  line-height: 36px;
+  border-radius: 5px;
+  padding: 0 10px;
+  cursor: pointer;
+  margin: 0 10px;
+  font-size: 14px;
+}
+
+.AdeDetail .top .left:hover {
+  color: #fff;
+  background-color: #666EE8;
+}
+
+.AdeDetail .top .right i {
+  border: 1px solid #666EE8;
+  line-height: 36px;
+  border-radius: 5px;
+  padding: 0 10px;
+  cursor: pointer;
+  margin: 0 10px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.AdeDetail .top .right i:hover {
+  color: #fff;
+  background-color: #666EE8;
+}
+
+.AdeDetail .top .right>i>span {
+  padding: 0 5px;
+  font-size: 14px;
+}
+
+.AdeDetail .top .right>i:last-child {
+  font-size: 15px;
+  padding: 0 32px;
+}
+
+.AdeDetail .head-txt {
+  padding: 20px 10px;
+  border-bottom: 2px solid #f2f2f2;
+}
+
+.AdeDetail .head-txt .txt {
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* 基本信息 */
+.AdeDetail .cent_info {
+  text-align: left;
+  width: 717px;
+  margin: 19px auto;
+}
+.AdeDetail .cent_info .tit{
+  width: 120px;
+}
+.AdeDetail .cent_info>p {
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.AdeDetail .cent_info .has-gutter tr th {
+  background-color: #fff;
+}
+
+.AdeDetail .cent_info .box {
+  display: flex;
+}
+
+.AdeDetail .cent_info .box .box_con {
+  width: 33.33%;
+  display: flex;
+  border: 1px solid #e4e4e4;
+}
+
+.AdeDetail .cent_info .box .box_con .tit {
+  border-right: 1px solid #e4e4e4;
+  padding: 5px;
+  background: #f2f2f2;
+}
+
+.AdeDetail .cent_info .box .box_con .con {
+  padding: 5px;
+  width: 119px;
+}
+
+.AdeDetail .cent_info .box .box_con1 {
+  display: flex;
+  border: 1px solid #e4e4e4;
+}
+
+.AdeDetail .cent_info .box .box_con1 .tit {
+  border-right: 1px solid #e4e4e4;
+  padding: 5px;
+  background: #f2f2f2;
+  width: 109px;
+  
+}
+
+.AdeDetail .cent_info .box .box_con1 .con {
+  padding: 5px;
+  width: 590px;
+}
+
+.AdeDetail .cent_info:last-child {
+  border-top: 1px solid #f2f2f2;
+  padding-top: 14px;
+}
