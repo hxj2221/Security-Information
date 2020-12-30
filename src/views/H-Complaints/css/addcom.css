@@ -64,11 +64,16 @@
 }
 .addcom .requirement .el-dialog__header{
     color: #00004f;
-    border-bottom: 0.5px solid rgba(187, 187, 187, 0.376);
+    /* border-bottom: 0.5px solid rgba(187, 187, 187, 0.376); */
     background-color: #f2f2f2;
     font-size: 16px;
     text-align: center;
     font-weight: 900;
+}
+.addcom .requirement .el-dialog__wrapper{
+    width: 100%;
+    height: 100%;
+    z-index: 9999999999999999999999999999999999999999999999999999999;
 }
 .addcom .requirement{
     font-size: 12px;
@@ -79,3 +84,4 @@
 .addcom .el-table__row{
     border: none;
 }
+

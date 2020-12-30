@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="mainBl">
     <!-- 头部按钮 -->
     <div class="header">
       <h4>不良事件</h4>
@@ -65,7 +65,7 @@
       </el-table-column>
     </el-table>
     <!-- 分页 -->
-    <div class="page">
+    <div class="paging">
       <el-pagination :page-size="20" :pager-count="11" layout="prev, pager, next" :total="1000">
       </el-pagination>
     </div>
@@ -78,67 +78,67 @@
     props: {},
     data() {
       return {
-        // 检索
-        search: {
-          name: '',
-          way: '',
-          state: '',
-          date: '',
-          options: [{
-            value: '选项1',
-            label: '急诊'
-          }, {
-            value: '选项2',
-            label: '门诊'
-          }, {
-            value: '选项3',
-            label: '病房部'
-          }, {
-            value: '选项4',
-            label: '手术室'
-          }, {
-            value: '选项5',
-            label: '医技检查室'
-          }, {
-            value: '选项6',
-            label: '后勤区域'
-          }, {
-            value: '选项7',
-            label: '其他'
-          }],
-          value: '',
-          options1: [{
-            value: '选项1',
-            label: 'A级：客观环境或条件可能引发不良事件（隐患）'
-          }, {
-            value: '选项2',
-            label: 'B级：发生但未累及患者'
-          }, {
-            value: '选项3',
-            label: 'C级：累及到患者，但没有造成伤害'
-          }, {
-            value: '选项4',
-            label: 'D级：累及到患者，需要进行监测以确保患者不被伤害，或需通过干预阻止伤害发生'
-          }, {
-            value: '选项5',
-            label: 'E级：造成患者暂时性伤害，并需要进行治疗或干预'
-          }, {
-            value: '选项6',
-            label: 'F级：造成患者暂时性伤害，并需要住院或延长住院时间'
-          }, {
-            value: '选项7',
-            label: 'G级：造成患者永久性伤害'
-          }, {
-            value: '选项8',
-            label: 'H级：导致患者需要治疗挽救生命'
-          }, {
-            value: '选项9',
-            label: 'I级：导致患者死亡'
-          }, ],
-          value1: ''
-        },
-        // 内容
-        tableData: [{
+          // 检索
+      search: {
+        name: '',
+        way: '',
+        state: '',
+        date: '',
+        options: [{
+          value: '选项1',
+          label: '急诊'
+        }, {
+          value: '选项2',
+          label: '门诊'
+        }, {
+          value: '选项3',
+          label: '病房部'
+        }, {
+          value: '选项4',
+          label: '手术室'
+        }, {
+          value: '选项5',
+          label: '医技检查室'
+        }, {
+          value: '选项6',
+          label: '后勤区域'
+        }, {
+          value: '选项7',
+          label: '其他'
+        }],
+        value: '',
+        options1: [{
+          value: '选项1',
+          label: 'A级：客观环境或条件可能引发不良事件（隐患）'
+        }, {
+          value: '选项2',
+          label: 'B级：发生但未累及患者'
+        }, {
+          value: '选项3',
+          label: 'C级：累及到患者，但没有造成伤害'
+        }, {
+          value: '选项4',
+          label: 'D级：累及到患者，需要进行监测以确保患者不被伤害，或需通过干预阻止伤害发生'
+        }, {
+          value: '选项5',
+          label: 'E级：造成患者暂时性伤害，并需要进行治疗或干预'
+        }, {
+          value: '选项6',
+          label: 'F级：造成患者暂时性伤害，并需要住院或延长住院时间'
+        }, {
+          value: '选项7',
+          label: 'G级：造成患者永久性伤害'
+        }, {
+          value: '选项8',
+          label: 'H级：导致患者需要治疗挽救生命'
+        }, {
+          value: '选项9',
+          label: 'I级：导致患者死亡'
+        }, ],
+        value1: ''
+      },
+      // 内容
+      tableData: [{
           serialNum: '202011151036',
           name: '王小虎',
           sex: '男',
@@ -253,7 +253,7 @@
     },
     methods: {
       // 新增
-      Add() {
+      Add(){
         this.$emit('pageAdd')
       },
       // 查看

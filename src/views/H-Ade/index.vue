@@ -1,5 +1,5 @@
 <template>
-  <div class="all">
+  <div>
     <!-- 主页面 -->
     <main-page v-show="MainShow" @pageAdd="add()" @pageDetail="Details()" ></main-page>
     <!-- 增加 -->
@@ -11,7 +11,7 @@
 
 <script>
   // import AdminHead from './components/AdminHead'
-  import './css/index.css'
+  import './css/Ade.css'
   import MainPage from './components/MainPage'
   import AddAde from './components/AddAde'
   import Detail from './components/Detail'

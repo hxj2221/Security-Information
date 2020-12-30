@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="all">
+    <div class="allManage">
       <!-- 顶部导航 -->
       <div class="nav">
         <ul>
@@ -9,50 +9,41 @@
         </ul>
         <i class="el-icon-circle-plus-outline" @click="increase()"><span>新增</span></i>
       </div>
-      <!-- 侧边导航 -->
-      <div class="side_nav">
-        <el-row :gutter="20">
-          <el-col :span="4" :offset="0">
-            <div class="left">
-              <ul>
-                <li v-for="item in SideNav" :key="item.index">{{item.name}}</li>
-              </ul>
-            </div>
-          </el-col>
-          <el-col :span="20" :offset="0">
-            <div class="right">
-              <div class="search">
-                <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
-                  <el-button class="btn" slot="append" icon="el-icon-search"></el-button>
-                </el-input>
-              </div>
-              <hr>
-              <el-table ref="singleTable" :data="tableData" style="width: 100%;margin-top: 25px;">
-                <el-table-column type="index" label="序号" width="80">
-                </el-table-column>
-                <el-table-column property="field" label="字段" width="300">
-                </el-table-column>
-                <el-table-column property="date" label="创建时间" width="300">
-                </el-table-column>
-                <el-table-column property="name" label="创建人" width="200">
-                </el-table-column>
-                <el-table-column label="操作">
-                  <template slot-scope="scope">
-                    <el-button type="text" size="small" @click="edit()">编辑</el-button>
-                    <el-button @click="handleClick(scope.row)" type="text" size="small">删除</el-button>
-                  </template>
-                </el-table-column>
-              </el-table>
-
-            </div>
-          </el-col>
-        </el-row>
+      <div class="content">
+        <!-- 侧边导航 -->
+        <div class="left">
+          <ul>
+            <li v-for="item in SideNav" :key="item.index">{{item.name}}</li>
+          </ul>
+        </div>
+        <!-- 右边内容 -->
+        <div class="right">
+          <el-input placeholder="请输入内容" v-model="input3" class="input-with-select search">
+            <el-button slot="append" icon="el-icon-search"></el-button>
+          </el-input>
+          <el-table class="right_con" ref="singleTable" :data="tableData">
+            <el-table-column type="index" label="序号">
+            </el-table-column>
+            <el-table-column property="field" label="字段">
+            </el-table-column>
+            <el-table-column property="date" label="创建时间">
+            </el-table-column>
+            <el-table-column property="name" label="创建人">
+            </el-table-column>
+            <el-table-column label="操作">
+              <template slot-scope="scope">
+                <el-button type="text" size="small" @click="edit()">编辑</el-button>
+                <el-button @click.native.prevent="deleteRow(scope.$index, tableData)" type="text" size="small">删除
+                </el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
       </div>
+
       <!-- 分页 -->
       <div class="block">
-        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
-          :current-page="currentPage4" :page-sizes="[10, 20, 30, 40]" :page-size="100"
-          layout="total, sizes, prev, pager, next, jumper" :total="40">
+        <el-pagination :page-size="20" :pager-count="11" layout="prev, pager, next" :total="1000">
         </el-pagination>
       </div>
       <!-- 新增 -->
@@ -89,7 +80,7 @@
 
 <script>
   // 引入css样式
-  import './css/index.css'
+  import './css/Dictionaries.css'
   // import AdminHead from './components/AdminHead'
 
   export default {
@@ -183,7 +174,7 @@
           name: '',
         },
         dialogFormVisible: false,
-        dialogVisible:false,
+        dialogVisible: false,
       };
     },
 
@@ -194,12 +185,12 @@
       },
       // 表格操作
       // 编辑
-      edit(){
-        this.dialogVisible=!this.dialogVisible
+      edit() {
+        this.dialogVisible = !this.dialogVisible
       },
       // 删除
-      handleClick(row) {
-        console.log(row);
+      deleteRow(index, rows) {
+        rows.splice(index, 1);
       },
       // 分页
       handleSizeChange(val) {

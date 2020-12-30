@@ -1,14 +1,10 @@
-.all {
-  /* background-color: #fff; */
-  text-align: left;
-  padding-bottom: 100px;
-  
-}
-.main{
+.mainBl {
   background-color: #fff;
+  text-align: left;
+  padding-bottom: 1px;
 }
 /* 头部 */
-.header {
+.mainBl>.header {
   height: 60px;
   display: flex;
   justify-content: space-between;
@@ -17,11 +13,11 @@
   padding: 0 20px;
 }
 
-.header h4 {
+.mainBl>.header>h4 {
   color: #666EE8;
 }
 
-.btn i {
+.mainBl>.header>.btn>i {
   width: 110px;
   height: 36px;
   background-color: #666EE8;
@@ -35,43 +31,43 @@
   cursor: pointer;
 }
 
-.btn i:first-child:hover {
+.mainBl>.header>.btn>i:first-child:hover {
   background-color: #666EE866;
 }
 
-.btn i:last-child {
+.mainBl>.header>.btn>i:last-child {
   background-color: #fff;
   border: 1px solid #666EE8;
   color: #666EE8;
   margin: 0;
 }
 
-.btn i:last-child:hover {
+.mainBl>.header>.btn>i:last-child:hover {
   background-color: #666EE8;
   color: #fff;
 }
 
-.btn i span {
+.mainBl>.header>.btn>i>span {
   font-size: 14px;
 }
 
 /* 检索 */
-.searchAll .el-form {
+.mainBl>.searchAll>.el-form {
   padding: 15px 0 0;
   text-align: left;
 }
 
-.el-form-item {
+.mainBl>.searchAll>.el-form>.el-form-item {
   display: inline-block;
 }
 
-.search {
+.mainBl>.searchAll>.el-form>.search {
   margin-left: 27px;
   background-color: #666EE8;
   border-color: #666EE8;
 }
 
-.search:hover {
+.mainBl>.searchAll>.el-form>.search:hover {
   background-color: #666EE8;
   border-color: #666EE8;
 }
@@ -80,21 +76,24 @@
   width: 588px;
 }
 /*  */
-.elTable{
+.mainBl>.elTable{
   padding: 0 20px;
 }
 
 /* 分页 */
-.page {
+.mainBl>.paging {
   text-align: right;
-  margin: 20px 0;
+  margin: 20px 0 100px;
 }
 
 /* 新增 */
 .addAll {
+  width: 1240px;
   padding-bottom: 114px;
   position: relative;
   background-color: #fff;
+  text-align: left;
+  margin: 0 auto;
 }
 
 .form {
@@ -110,19 +109,19 @@
   text-align: left;
   font-size: 24px;
 }
-
+.form .form_con{
+  display: flex;
+}
+.form .form_con .el-form-item:nth-child(2){
+  margin: 0 164px;
+} 
 .form .el-form-item .el-input {
   width: 217px;
 }
 
-.form .age {
-  display: inline-block;
-}
-
 .form .age .el-select .el-input--suffix {
   width: 60px;
-}
-
+} 
 .form .sel .el-input--suffix {
   width: 96%;
 }
@@ -170,7 +169,7 @@
 
 /* 新增不良底部固定按钮 */
 .root{
-  width: 85%;
+  width: 1240px;
   height: 59px;
   position: fixed;
   bottom: 0;
@@ -211,7 +210,7 @@
   background-color: #fff;
   width: 756px;
   font-size: 14px;
-  margin: 0 auto;
+  margin: 0 auto 100px;
 }
 .top {
   display: flex;

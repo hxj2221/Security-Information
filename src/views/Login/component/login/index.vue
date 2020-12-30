@@ -85,6 +85,7 @@ import { asyncRoutes } from "@/router/index";
 export default {
   data() {
     return {
+      height:0,
       options: [
         {
           id: 1,
@@ -162,6 +163,12 @@ export default {
       this.$store.dispatch("app/UpdateIsFold", true); // 移动端打开则折叠侧边栏
     }
   },
+  created() {
+    // this.height=document.body.clientHeight
+    // var heights=document.getElementsByClassName('login')
+  //  var div_height = window.screen.availHeight;
+	// $(".login").height(div_height);
+  },
 };
 </script>
 
@@ -179,7 +186,7 @@ export default {
   position: relative;
   height: 100%;
   // background-image: url('../../../public/img/background.jpeg');
-  // background-size: 100% 100%;
+  background-size: 100% 100%;
   &Form {
     -webkit-border-radius: 20px;
     border-radius: 5px;
