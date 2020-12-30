@@ -1,5 +1,5 @@
 <template>
-  <div class="detail">
+  <div class="AdeDetail">
     <div class="top">
       <span class="left">投诉案件调查表</span>
       <div class="right">

@@ -1,0 +1,112 @@
+/* 新增 */
+.addAll {
+  width: 1240px;
+  padding-bottom: 114px;
+  position: relative;
+  background-color: #fff;
+  text-align: left;
+  margin: 0 auto;
+}
+
+.addAll .formBasics {
+  font-size: 24px;
+  font-weight: 700;
+  color: #666EE8;
+  width: 96%;
+  padding-left: 2%;
+  padding-top: 27px;
+}
+
+.addAll .formBasics h2 {
+  text-align: left;
+  font-size: 24px;
+  padding-bottom: 10px;
+}
+.addAll .formBasics .form_con .info{
+  display: flex;
+}
+.addAll .formBasics .form_con .info .el-form-item:nth-child(2){
+  margin: 0 164px;
+}
+.addAll .formBasics .form_con .info .el-form-item .el-input{
+  width: 217px;
+}
+.addAll .formBasics .form_con .info .el-form-item .inp .el-select .el-input {
+  width: 60px;
+}
+.addAll .formBasics .form_con .info .last .el-select .el-input{
+  width: 562px;
+}
+
+/* 关联患者信息 */
+.addAll .table_info {
+  padding-left: 2%;
+  width: 96%;
+}
+
+.addAll .table_info h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #666EE8;
+  margin: 0 0 10px;
+  text-align: left;
+}
+.addAll .table_info .info .el-table__header-wrapper .el-table__header .has-gutter tr th{
+  background-color: #666EE866;
+  color: #333333;
+  text-align: center;
+}
+.addAll .table_info .info .el-table__body-wrapper .el-table__body .el-table__row td {
+  text-align: center;
+}
+.addAll .table_info .add {
+  width: 10%;
+  height: 44px;
+  background-color: #28D094;
+  border-radius: 5px;
+  color: #fff;
+  line-height: 44px;
+  text-align: center;
+  padding: 0 20px;
+  margin: 20px auto;
+  font-size: 14px
+} 
+.addAll .table_info .add i span {
+  padding-left: 10px;
+}
+
+/* 新增不良底部固定按钮 */
+.addAll .root{
+  width: 1240px;
+  height: 59px;
+  position: fixed;
+  bottom: 0;
+  background-color: #fff;
+  box-shadow: 0px 5px 30px rgba(204, 204, 204, 1);
+  text-align: right;
+  line-height: 59px;
+  cursor: pointer;
+  z-index: 9999;
+}
+.addAll .root i {
+  width: 111px;
+  height: 36px;
+  background-color: #666EE8;
+  color: #fff;
+  text-align: center;
+  line-height: 36px;
+  margin: 0 10px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.addAll .root i>span {
+  padding-left: 10px;
+  font-weight: 700;
+}
+
+.addAll .rooti:last-child {
+  color: #666EE8;
+  background-color: #fff;
+  border: 1px solid #666EE8;
+}
