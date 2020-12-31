@@ -44,14 +44,22 @@
           <el-table-column prop="name" label="发布人" show-overflow-tooltip>
           </el-table-column>
           <el-table-column label="操作">
-            <el-button @click="handleClick" type="text" size="small"
-              >查看</el-button
-            >
-            -<el-button type="text" size="small" @click="edit">编辑</el-button>
-            -
-            <el-button type="text" size="small" style="color: red"
-              >删除</el-button
-            >
+            <template slot-scope="scope">
+              <el-button @click="handleClick" type="text" size="small"
+                >查看</el-button
+              >
+              -<el-button type="text" size="small" @click="edit"
+                >编辑</el-button
+              >
+              -
+              <el-button
+                type="text"
+                size="small"
+                style="color: red"
+                @click="handleDelete(scope.$index, tableData)"
+                >删除</el-button
+              >
+            </template>
           </el-table-column>
         </el-table>
         <!-- 选择器 -->
@@ -106,7 +114,7 @@
             :current-page.sync="currentPage1"
             :page-size="100"
             layout="total, prev, pager, next"
-            :total="1000"
+            :total="tableData.length"
           >
           </el-pagination>
         </div>
@@ -119,9 +127,7 @@
 import "@/views/H-Articlelist/component/articleList/css.css";
 
 export default {
-  components: {
-  
-  },
+  components: {},
   props: {},
   data() {
     return {
@@ -559,10 +565,18 @@ export default {
           label: "资源",
         },
       ],
-      isShow:false
+      isShow: false,
     };
   },
   methods: {
+    handleDelete(index, item) {
+      item.splice(index,1)
+       this.$message({
+          showClose: true,
+          message: '删除成功',
+          type: 'success'
+        });
+    },
     //级选择器
     handleChange() {},
     //   点击查看
@@ -576,6 +590,7 @@ export default {
     myAdd() {
       this.$router.push("/Addarticle");
     },
+
     // 弹框
     handleClose(done) {
       this.$confirm("确认关闭？")
@@ -589,10 +604,10 @@ export default {
       console.log(e);
       if (e == 1) {
         this.dlog = this.name[0].label;
-        this.isShow=false
+        this.isShow = false;
       } else {
         this.dlog = this.name[1].label;
-         this.isShow=true
+        this.isShow = true;
       }
     },
   },

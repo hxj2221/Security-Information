@@ -1,7 +1,7 @@
 <template>
   <div class="addRecord_all">
     <!-- top -->
-    <div class=" addRecord_top">
+    <div class="addRecord_top">
       <h4>基本信息</h4>
     </div>
     <!-- 表单 -->
@@ -79,11 +79,67 @@
           <h5>附件信息</h5>
         </div>
         <div class="addRecord_enclosure_top_right">
-          <el-button type="primary" size="small" icon="el-icon-circle-plus-outline"
+          <el-button
+            type="primary"
+            size="small"
+            icon="el-icon-circle-plus-outline"
+            @click="dialogVisible = true"
             >上传附件</el-button
           >
         </div>
       </div>
+      <!-- 弹框 -->
+      <div class="addRecord_enclosure_dialog">
+        <el-dialog
+          title="上传文件"
+          :visible.sync="dialogVisible"
+          width="30%"
+          :before-close="handleClose"
+        >
+          <div class="addRecord_enclosure_dialog_div">
+            <el-form ref="form" :model="dialogForm">
+              <el-form-item label="上传文件">
+                <el-input
+                  v-model="dialogForm.name"
+                  placeholder="请输入文件标题"
+                ></el-input>
+              </el-form-item>
+              <el-form-item label="文件描述">
+                <el-input
+                  type="textarea"
+                  v-model="dialogForm.desc"
+                  placeholder="请输入文件描述"
+                ></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-upload
+                  class="upload-demo"
+                  action="https://jsonplaceholder.typicode.com/posts/"
+                  :on-preview="handlePreview"
+                  :on-remove="handleRemove"
+                  :before-remove="beforeRemove"
+                  multiple
+                  :limit="3"
+                  :on-exceed="handleExceed"
+                  :file-list="fileList"
+                >
+                  <el-button size="small" type="primary">点击上传</el-button>
+                  <div slot="tip" class="el-upload__tip">
+                    只能上传jpg/png文件，且不超过500kb
+                  </div>
+                </el-upload>
+              </el-form-item>
+            </el-form>
+          </div>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="dialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="dialogVisible = false"
+              >确 定</el-button
+            >
+          </span>
+        </el-dialog>
+      </div>
+      <!--主要表格 -->
       <div class="addRecord_enclosure_content">
         <el-table :data="tableData" style="width: 100%">
           <el-table-column label="ID">
@@ -135,13 +191,14 @@
               >
               <el-link
                 type="danger"
-                @click="handleDelete(scope.$index, scope.row)"
+                @click="handleDelete(scope.$index, tableData)"
                 >删除</el-link
               >
             </template>
           </el-table-column>
         </el-table>
       </div>
+      <!-- 分页 -->
       <div class="addRecord_enclosure_paging">
         <div class="block">
           <el-pagination
@@ -150,7 +207,7 @@
             :current-page.sync="currentPage"
             :page-size="100"
             layout="total, prev, pager, next"
-            :total="1000"
+            :total="tableData.length"
           >
           </el-pagination>
         </div>
@@ -204,7 +261,7 @@
               <span style="margin-left: 10px">{{ scope.row.xxly }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="投诉时间" >
+          <el-table-column label="投诉时间">
             <template slot-scope="scope">
               <span style="margin-left: 10px">{{ scope.row.date }}</span>
             </template>
@@ -229,7 +286,10 @@
             </template>
           </el-table-column>
         </el-table>
-        <el-button type="primary" size="small" icon="el-icon-circle-plus-outline"
+        <el-button
+          type="primary"
+          size="small"
+          icon="el-icon-circle-plus-outline"
           >添加投诉信息</el-button
         >
       </div>
@@ -237,9 +297,7 @@
     <!-- 固定定位按钮 -->
     <div class="addRecord_button">
       <div class="button_stlye">
-        <el-button icon="el-icon-back" @click="mysubmit"
-          >返回</el-button
-        >
+        <el-button icon="el-icon-back" @click="mysubmit">返回</el-button>
         <el-button
           type="primary"
           icon="el-icon-document-checked"
@@ -342,6 +400,18 @@ export default {
           type: "处理中",
         },
       ],
+      // 弹框
+      dialogVisible: false,
+      dialogForm: {
+        desc: "",
+        name: "",
+      },
+      fileList: [
+        {
+          name: "file.jpg",
+          url: "../name.jpg",
+        },
+      ],
     };
   },
   methods: {
@@ -350,7 +420,12 @@ export default {
       console.log(index, row);
     },
     handleDelete(index, row) {
-      console.log(index, row);
+      row.splice(index, 1);
+      this.$message({
+          showClose: true,
+          message: '删除成功',
+          type: 'success'
+        });
     },
     // 分页
     handleSizeChange(val) {
@@ -366,6 +441,30 @@ export default {
     mysubmit() {
       console.log("哈哈");
       this.$emit("abcClick");
+    },
+    // 弹框
+    handleClose(done) {
+      this.$confirm("确认关闭？")
+        .then((_) => {
+          done();
+        })
+        .catch((_) => {});
+    },
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePreview(file) {
+      console.log(file);
+    },
+    handleExceed(files, fileList) {
+      this.$message.warning(
+        `当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${
+          files.length + fileList.length
+        } 个文件`
+      );
+    },
+    beforeRemove(file, fileList) {
+      return this.$confirm(`确定移除 ${file.name}？`);
     },
   },
 };

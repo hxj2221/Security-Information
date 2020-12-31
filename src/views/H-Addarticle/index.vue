@@ -62,7 +62,7 @@
             :file-list="rules.fileList"
             list-type="picture"
           >
-            <el-button size="small" type="primary">点击上传</el-button>
+            <el-button size="small" type="primary">上传封面</el-button>
             <div slot="tip" class="el-upload__tip">
               只能上传jpg/png文件，且不超过500kb
             </div>
@@ -88,7 +88,7 @@
             :on-exceed="handleExceed"
             :file-list="rules.fileList1"
           >
-            <el-button size="small" type="primary">点击上传</el-button>
+            <el-button size="small" type="primary">上传附件</el-button>
             <div slot="tip" class="el-upload__tip">
               只能上传jpg/png文件，且不超过500kb
             </div>
@@ -109,7 +109,7 @@
           type="primary"
           icon="el-icon-document-checked"
           @click="mysubmit"
-          >提交</el-button
+          >确定</el-button
         >
       </div>
     </div>

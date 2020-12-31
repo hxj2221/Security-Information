@@ -102,9 +102,14 @@
           <el-table-column prop="other" label="其他"> </el-table-column>
         </el-table>
       </div>
+      <!-- 分页 -->
       <div class="category_statistics_paging">
         <div class="block">
-          <el-pagination layout="prev, pager, next" :total="1000">
+          <el-pagination
+            :current-page.sync="currentPage"
+            layout="total,prev, pager, next"
+            :total="tableData.length"
+          >
           </el-pagination>
         </div>
       </div>
@@ -276,6 +281,7 @@ export default {
           other: "12",
         },
       ],
+      currentPage: 1,
     };
   },
 
