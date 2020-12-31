@@ -213,7 +213,7 @@ export default {
       seachTime: "", //选择时间
       input: "", //input内容
       // 分页
-      currentPage4: 1,
+      currentPage: 1,
     };
   },
   methods: {

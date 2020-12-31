@@ -76,9 +76,17 @@
 }
 .addRecord_enclosure_top_right>.el-button{
     color: #fff;
+    background: #666ee8;
+}
+.addRecord_relation_content >.el-button{
+    background: #666ee8;
 }
 .addRecord_enclosure_content {
     margin-bottom: 20px;
+}
+.addRecord_enclosure_content .el-table th{
+    background-color: #666EE866;
+    color: #515A6E;
 }
 .addRecord_enclosure_content .el-table td,
 .el-table th {
@@ -127,6 +135,10 @@
 .addRecord_relation_top>h5{
     color: #666EE8;
 }
+.addRecord_relation_content .el-table th{
+    background-color: #666EE866;
+    color: #515A6E;
+}
 .addRecord_relation_content .el-table td,.el-table th{
     text-align: center ;
 }
@@ -163,7 +175,9 @@
 .addRecord_button >.button_stlye>button {
     float: right;
     margin-left: 20px;
+   
 }
 .addRecord_button >.button_stlye>button:last-child{
     color: #fff;
+    background: #666ee8;
 }
