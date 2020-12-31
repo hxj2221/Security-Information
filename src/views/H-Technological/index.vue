@@ -1,12 +1,17 @@
 <template>
-  <div></div>
+  <div>
+    <flowMain/>
+  </div>
 </template>
 
 <script>
 // import AdminHead from './components/AdminHead'
-
+import { jsPlumb } from 'jsplumb'
+import flowMain from './components/flowMain'
 export default {
-  components: {},
+  components: {
+    flowMain
+  },
 
   data() {
     return {

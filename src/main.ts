@@ -26,7 +26,8 @@ import './directives.js'
 import echarts from "echarts";
 Vue.prototype.$echarts = echarts;
 
-
+import jsPlumb from 'jsplumb'
+Vue.prototype.$jsPlumb = jsPlumb.jsPlumb
 
 Vue.use(ElementUI)
 Vue.use(VueAxios, axios)
