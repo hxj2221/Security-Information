@@ -72,10 +72,29 @@
         </el-table-column>
         <el-table-column prop="name" label="修改人员"> </el-table-column>
         <el-table-column label="操作">
-          <el-button type="text" size="small"  @click="dialogVisible = true">编辑</el-button>
-          <el-button type="text" size="small">删除</el-button>
+          <template slot-scope="scope">
+            <el-button type="text" size="small" @click="dialogVisible = true"
+              >编辑</el-button
+            >
+            <el-button
+              type="text"
+              size="small"
+              @click="handDel(scope.$index, tableData)"
+              >删除</el-button
+            >
+          </template>
         </el-table-column>
       </el-table>
+      <!-- 分页 -->
+      <div class="columnList_table_paging">
+        <el-pagination
+          :current-page.sync="currentPage1"
+          :page-size="100"
+          layout="total, prev, pager, next"
+          :total="tableData.length"
+        >
+        </el-pagination>
+      </div>
     </div>
   </div>
 </template>
@@ -141,6 +160,7 @@ export default {
       value: "",
       input: "",
       input1: "",
+      currentPage1:1
     };
   },
 
@@ -154,6 +174,14 @@ export default {
           done();
         })
         .catch((_) => {});
+    },
+    handDel(i, row) {
+      row.splice(i, 1);
+       this.$message({
+          showClose: true,
+          message: '删除成功',
+          type: 'success'
+        });
     },
   },
 };

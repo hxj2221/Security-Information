@@ -95,6 +95,24 @@
     display: inline-block;
 }
 
+
+.addRecord_enclosure_dialog_div >.el-form{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.addRecord_enclosure_dialog_div >.el-form .el-textarea{
+    width: 80%;
+}
+.addRecord_enclosure_dialog_div >.el-form .el-input{
+    width: 80%;
+}
+.addRecord_enclosure_dialog_div >.el-form{
+    overflow: hidden;
+}
+.addRecord_enclosure_dialog_div >.el-form .el-upload{
+ float: left;
+}
 /* 表格2  关联投诉信息样式 */
 .addRecord_relation {
     overflow: hidden;

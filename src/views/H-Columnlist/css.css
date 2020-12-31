@@ -64,6 +64,7 @@ hr {
 /* table */
 .columnList_table {
     margin: 0 20px;
+overflow: hidden;
 }
 
 .columnList_table .el-table td,
@@ -73,4 +74,9 @@ hr {
 
 .columnList_table>.el-table .el-button:last-child {
     color: #f00;
+}
+/* 分页 */
+.columnList_table_paging{
+    float:right;
+    margin-top: 20px;
 }
