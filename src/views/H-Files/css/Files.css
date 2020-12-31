@@ -78,7 +78,7 @@
 }
 
 /* 新增分类 */
-.newly{
+.newlyFiles{
   width: 92%;
   background-color: #ffffff;
   text-align: left;
@@ -86,7 +86,7 @@
   height: 970px;
 }
 /* 头部 */
-.newly .head{
+.newlyFiles .head{
   display: flex;
   justify-content: space-between;
   height: 83px;
@@ -94,16 +94,16 @@
   padding: 0 20px;
   border-bottom: 2px solid #f2f2f2;
 }
-.newly .head .title{
+.newlyFiles .head .title{
   font-size: 18px;
   color: #333333;
 }
-.newly .head .push_btn{
+.newlyFiles .head .push_btn{
   font-size: 14px;
   color: #ffffff;
   cursor: pointer;
 }
-.newly .head .push_btn i{
+.newlyFiles .head .push_btn i{
   width: 110px;
   height: 36px;
   background-color: #666ee8;
@@ -111,10 +111,10 @@
   text-align: center;
   line-height: 36px;
 }
-.newly .head .push_btn i span{
+.newlyFiles .head .push_btn i span{
   padding-left: 10px;
 }
-.newly .head .push_btn .back{
+.newlyFiles .head .push_btn .back{
   width: 111px;
   height: 35px;
   line-height: 35px;
@@ -128,26 +128,26 @@
   font-weight: 700;
 }
 /* 内容 */
-.newly .newlyContent{
+.newlyFiles .newlyContent{
   padding: 20px 30px;
 }
-.newly .newlyContent .el-table .el-table__header-wrapper .el-table__header .has-gutter tr th{
+.newlyFiles .newlyContent .el-table .el-table__header-wrapper .el-table__header .has-gutter tr th{
   background-color: #666ee866;
   color: #333333;
   text-align: center;
 }
-.newly .newlyContent .el-table .el-table__body-wrapper .el-table__body .el-table__row td{
+.newlyFiles .newlyContent .el-table .el-table__body-wrapper .el-table__body .el-table__row td{
   text-align: center;
 }
 /* 分页 */
-.newly .pagenum{
+.newlyFiles .pagenum{
   text-align: right;
   padding: 20px 0;
 }
 /* 新增分类弹框 */
-.newly .newlyClassify .one_level{
+.newlyFiles .newlyClassify .one_level{
   padding-left: 30px;
 }
-.newly .newlyClassify .foot{
+.newlyFiles .newlyClassify .foot{
   text-align: right;
 }

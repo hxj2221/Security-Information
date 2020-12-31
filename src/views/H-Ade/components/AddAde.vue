@@ -29,13 +29,15 @@
             </el-select>
           </el-form-item>
           <el-form-item label="年龄">
-              <el-input placeholder="请输入内容" v-model.number="add.age" class="input-with-select inp">
+            <el-input placeholder="请输入内容" v-model.number="add.age" class="input-with-select inp">
+              <template slot="append">
                 <el-select v-model="add.Age" slot="prepend" placeholder="岁">
                   <el-option label="岁" value="1"></el-option>
                   <el-option label="月" value="2"></el-option>
                   <el-option label="天" value="3"></el-option>
                 </el-select>
-              </el-input>
+              </template>
+            </el-input>
           </el-form-item>
         </div>
         <div class="info">

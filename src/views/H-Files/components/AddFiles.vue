@@ -1,5 +1,5 @@
 <template>
-  <div class="newly">
+  <div class="newlyFiles">
     <!-- 头部 -->
     <div class="head">
       <h4 class="title">编辑分类</h4>

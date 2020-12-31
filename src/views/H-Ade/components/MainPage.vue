@@ -70,7 +70,7 @@
     </el-table>
     <!-- 分页 -->
     <div class="paging">
-      <el-pagination :page-size="20" :pager-count="11" layout="prev, pager, next" :total="1000">
+      <el-pagination :page-size="10" :pager-count="11" layout="prev, pager, next" :total="500">
       </el-pagination>
     </div>
   </div>
