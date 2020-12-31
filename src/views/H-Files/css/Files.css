@@ -144,3 +144,10 @@
   text-align: right;
   padding: 20px 0;
 }
+/* 新增分类弹框 */
+.newly .newlyClassify .one_level{
+  padding-left: 30px;
+}
+.newly .newlyClassify .foot{
+  text-align: right;
+}

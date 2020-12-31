@@ -170,8 +170,8 @@
           classify: '分类1',
           name: '王小虎',
         }],
-        filesIsShow:false,
-        addIsShow:true
+        filesIsShow:true,
+        addIsShow:false
       };
     },
     methods: {
