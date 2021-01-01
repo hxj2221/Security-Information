@@ -1,15 +1,6 @@
 <template>
   <div class="notifyalBg">
-    <!-- <div class="notifyThre">
-      <span class="notifySpan">消息通知</span>
-      <div>
-        <el-button class="notifygr">个人信息</el-button>
-        <el-button class="notifyb">账户管理</el-button>
-        <el-button class="notifyc">消息通知</el-button>
-      </div>
-    </div>
-    <hr class="notifyWidhr" /> -->
-    <userthre></userthre>
+    <userthre :headTitle="pageTitle"></userthre>
     <div class="notifyF">
       <table class="notifyTab">
         <tr>
@@ -155,7 +146,9 @@ export default {
   components: { userthre },
 
   data() {
-    return {};
+    return {
+      pageTitle: "消息通知",
+    };
   },
 
   methods: {},

@@ -1,15 +1,6 @@
 <template>
   <div class="accountalBg">
-    <!-- <div class="accountThre">
-      <span class="accountSpan">账户管理</span>
-      <div>
-        <el-button class="accountgr">个人信息</el-button>
-        <el-button class="accountb">账户管理</el-button>
-        <el-button class="accountc">消息通知</el-button>
-      </div>
-    </div>
-    <hr class="accountWidhr" /> -->
-    <userthre></userthre>
+    <userthre :headTitle="pageTitle"></userthre>
     <div class="accountF">
       <table class="accountTab" border="1" bordercolor="#ccc">
         <tr>
@@ -19,7 +10,7 @@
             </div>
             <div style="display: flex; justify-content: space-between">
               <p class="accountMain">177****1234</p>
-              <p class="accountClick" @click="phonesafebtn">更改</p>
+              <p class="accountClick" @click="phoneyz = true">更改</p>
             </div>
           </td>
         </tr>
@@ -30,7 +21,7 @@
             </div>
             <div style="display: flex; justify-content: space-between">
               <p class="accountMain">123456789@gmail.com</p>
-              <p class="accountClick" @click="emailsafebtn">绑定</p>
+              <p class="accountClick" @click="emailyz = true">绑定</p>
             </div>
           </td>
         </tr>
@@ -41,7 +32,7 @@
             </div>
             <div style="display: flex; justify-content: space-between">
               <p class="accountMain">已设置，可通过账户密码登录</p>
-              <p class="accountClick" @click="pwdsafebtn">更改</p>
+              <p class="accountClick" @click="pwdyz = true">更改</p>
             </div>
           </td>
         </tr>
@@ -52,264 +43,277 @@
             </div>
             <div style="display: flex; justify-content: space-between">
               <p class="accountMain"><i class="el-icon-s-comment"></i>晚风</p>
-              <p class="accountClick" @click="wxsafebtn">解绑</p>
+              <p class="accountClick" @click="wxbtn = true">解绑</p>
             </div>
           </td>
         </tr>
       </table>
-      <!-- 手机号验证下一步 -->
-      <div class="account-safe-phones" v-if="phonebind">
+      <!-- 手机验证 -->
+      <el-dialog
+        title="身份验证"
+        :close-on-click-modal="false"
+        :visible.sync="phoneyz"
+      >
         <div>
-          <p class="account-safe-bindphone">身份验证</p>
-          <p class="account-safe-bindphone2">
+          <p class="account-change-bindphone2">
             为了你的账户安全，请验证身份。验证成功后进行下一步操作。
           </p>
           <div>
             <input
-              class="account-safe-phoneaccount"
+              class="account-change-phoneaccount"
               type="text"
               placeholder="请输入手机号"
               maxlength="11"
-              v-model="phonetwo"
+              v-model="phone"
             />
           </div>
           <div>
             <input
-              class="account-safe-phoncode"
+              class="account-change-phoncode"
               type="text"
               placeholder="请输入验证码"
-              v-model="bindphonecode"
+              v-model="phonecode"
             />
-            <button class="account-safe-phonehq" id="one" :disabled="phonedd">
+            <button class="account-change-phonehq" id="one" :disabled="phonedd">
               {{ phonecodeTxt }}
             </button>
           </div>
           <div>
-            <button class="account-safe-phonelogin" @click="phoneno">
+            <button class="account-change-phoneclick" @click="phoneno">
               取消
             </button>
-            <button class="account-safe-phonelogin" @click="phoneyes">
+            <button class="account-change-phoneclick" @click="phoneyes">
               验证
             </button>
           </div>
         </div>
-      </div>
+        <el-dialog
+          :close-on-click-modal="false"
+          width="30%"
+          title="更改手机号码"
+          :visible.sync="phonenew"
+          append-to-body
+        >
+          <div>
+            <p class="account-new-change">更改手机号</p>
+            <div>
+              <input
+                class="account-new-changeimp"
+                type="text"
+                placeholder="请输入手机号"
+                maxlength="11"
+                v-model="changephone"
+              />
+            </div>
+            <div>
+              <input
+                class="account-new-acccode"
+                type="text"
+                placeholder="请输入验证码"
+                v-model="changephonecode"
+              />
+              <button class="account-new-hqcode" id="one" :disabled="phonedd">
+                {{ phonecodeTxt }}
+              </button>
+            </div>
+            <div>
+              <button class="account-new-click" @click="phonenewyes">
+                确认
+              </button>
+            </div>
+          </div>
+        </el-dialog>
+      </el-dialog>
 
-      <!-- 手机号绑定 -->
-      <div class="account-new-phones" v-if="phonenewbind">
-        <div>
-          <p class="account-new-bindphone">更改手机号</p>
-          <div>
-            <input
-              class="account-new-phoneaccount"
-              type="text"
-              placeholder="请输入手机号"
-              maxlength="11"
-              v-model="phonetwo"
-            />
-          </div>
-          <div>
-            <input
-              class="account-new-phoncode"
-              type="text"
-              placeholder="请输入验证码"
-              v-model="bindphonecode"
-            />
-            <button class="account-new-phonehq" id="one" :disabled="phonedd">
-              {{ phonecodeTxt }}
-            </button>
-          </div>
-          <div>
-            <button class="account-new-phonelogin" @click="phonenewno">
-              取消
-            </button>
-            <button class="account-new-phonelogin" @click="phonenewyes">
-              确认
-            </button>
-          </div>
-        </div>
-      </div>
       <!-- 邮箱的验证 -->
-      <div class="account-safe-phones" v-if="emailbind">
+      <el-dialog
+        title="身份验证"
+        :close-on-click-modal="false"
+        :visible.sync="emailyz"
+      >
         <div>
-          <p class="account-safe-bindphone">邮箱验证</p>
-          <p class="account-safe-bindphone2">
+          <p class="account-change-bindphone2">
             为了你的账户安全，请验证身份。验证成功后进行下一步操作。
           </p>
           <div>
             <input
-              class="account-safe-phoneaccount"
+              class="account-change-phoneaccount"
               type="text"
               placeholder="请输入手机号"
               maxlength="11"
-              v-model="phonetwo"
+              v-model="emailphone"
             />
           </div>
           <div>
             <input
-              class="account-safe-phoncode"
+              class="account-change-phoncode"
               type="text"
               placeholder="请输入验证码"
-              v-model="bindphonecode"
+              v-model="emailphonecode"
             />
-            <button class="account-safe-phonehq" id="one" :disabled="phonedd">
+            <button class="account-change-phonehq" id="one" :disabled="phonedd">
               {{ phonecodeTxt }}
             </button>
           </div>
           <div>
-            <button class="account-safe-phonelogin" @click="emailno">
+            <button class="account-change-phoneclick" @click="emailno">
               取消
             </button>
-            <button class="account-safe-phonelogin" @click="emailyes">
+            <button class="account-change-phoneclick" @click="emailyes">
               验证
             </button>
           </div>
         </div>
-      </div>
-      <!-- 新邮箱 -->
-      <div class="account-safe-phones" v-if="emailnewbind">
-        <div>
-          <p class="account-safe-bindphone">邮箱绑定</p>
+        <!-- 新邮箱 -->
+        <el-dialog
+          :close-on-click-modal="false"
+          width="30%"
+          title="更改邮箱"
+          append-to-body
+          :visible.sync="emailnew"
+        >
           <div>
-            <input
-              class="account-safe-phoneaccount"
-              type="text"
-              placeholder="请输入邮箱"
-              maxlength="11"
-              v-model="phonetwo"
-            />
+            <p class="account-new-change">邮箱绑定</p>
+            <div>
+              <input
+                class="account-new-changeimp"
+                type="text"
+                placeholder="请输入邮箱"
+                maxlength="11"
+                v-model="newemail"
+              />
+            </div>
+            <div>
+              <input
+                class="account-new-acccode"
+                type="text"
+                placeholder="请输入验证码"
+                v-model="newemailcode"
+              />
+              <button class="account-new-hqcode" id="one" :disabled="phonedd">
+                {{ phonecodeTxt }}
+              </button>
+            </div>
+            <div>
+              <button class="account-new-click" @click="emailnewyes">
+                确认
+              </button>
+            </div>
           </div>
-          <div>
-            <input
-              class="account-safe-phoncode"
-              type="text"
-              placeholder="请输入验证码"
-              v-model="bindphonecode"
-            />
-            <button class="account-safe-phonehq" id="one" :disabled="phonedd">
-              {{ phonecodeTxt }}
-            </button>
-          </div>
-          <div>
-            <button class="account-safe-phonelogin" @click="emailnewno">
-              取消
-            </button>
-            <button class="account-safe-phonelogin" @click="emailnewyes">
-              验证
-            </button>
-          </div>
-        </div>
-      </div>
+        </el-dialog>
+      </el-dialog>
       <!-- 密码更改 -->
-      <div class="account-safe-phones" v-if="pwdbind">
+      <el-dialog
+        title="身份验证"
+        :close-on-click-modal="false"
+        :visible.sync="pwdyz"
+      >
         <div>
-          <p class="account-safe-bindphone">修改密码</p>
-          <p class="account-safe-bindphone2">
+          <p class="account-change-bindphone2">
             为了你的账户安全，请验证身份。验证成功后进行下一步操作。
           </p>
           <div>
             <input
-              class="account-safe-phoneaccount"
+              class="account-change-phoneaccount"
               type="text"
               placeholder="请输入手机号"
               maxlength="11"
-              v-model="phonetwo"
+              v-model="pwdphone"
             />
           </div>
           <div>
             <input
-              class="account-safe-phoncode"
+              class="account-change-phoncode"
               type="text"
               placeholder="请输入验证码"
-              v-model="bindphonecode"
+              v-model="pwdphonecode"
             />
-            <button class="account-safe-phonehq" id="one" :disabled="phonedd">
+            <button class="account-change-phonehq" id="one" :disabled="phonedd">
               {{ phonecodeTxt }}
             </button>
           </div>
           <div>
-            <button class="account-safe-phonelogin" @click="pwdno">取消</button>
-            <button class="account-safe-phonelogin" @click="pwdyes">
-              验证
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- 新密码 -->
-      <div class="account-safe-phones" v-if="pwdnewbind">
-        <div>
-          <p class="account-safe-bindphone">修改密码</p>
-          <div>
-            <input
-              class="account-safe-phoneaccount"
-              type="text"
-              placeholder="请输入密码"
-              maxlength="11"
-              v-model="phonetwo"
-            />
-          </div>
-          <div>
-            <input
-              class="account-safe-phoncode"
-              type="text"
-              placeholder="请输入密码"
-              v-model="bindphonecode"
-            />
-          </div>
-          <div>
-            <button class="account-safe-phonelogin" @click="pwdnewno">
+            <button class="account-change-phoneclick" @click="pwdno">
               取消
             </button>
-            <button class="account-safe-phonelogin" @click="pwdnewyes">
+            <button class="account-change-phoneclick" @click="pwdyes">
               验证
             </button>
           </div>
         </div>
-      </div>
+        <!-- 新密码 -->
+        <el-dialog
+          :close-on-click-modal="false"
+          width="30%"
+          title="修改密码"
+          :visible.sync="pwdnew"
+          append-to-body
+        >
+          <div>
+            <p class="account-new-change">修改密码</p>
+            <div>
+              <input
+                class="account-new-changeimp"
+                type="text"
+                placeholder="请输入密码"
+                v-model="newpwd"
+              />
+            </div>
+            <div>
+              <input
+                class="account-new-changeimp"
+                type="text"
+                placeholder="请再次输入密码"
+                v-model="newpwds"
+              />
+            </div>
+            <div>
+              <button class="account-new-click" @click="pwdnewyes">验证</button>
+            </div>
+          </div>
+        </el-dialog>
+      </el-dialog>
       <!-- 微信 -->
-      <div class="account-safe-phones" v-if="wxbind">
+      <el-dialog
+        title="身份验证"
+        :close-on-click-modal="false"
+        :visible.sync="wxbtn"
+      >
         <div>
-          <p class="account-safe-bindphone">微信解绑</p>
-          <p class="account-safe-bindphone2">
+          <p class="account-change-bindphone2">
             为了你的账户安全，请验证身份。验证成功后进行下一步操作。
           </p>
           <div>
             <input
-              class="account-safe-phoneaccount"
+              class="account-change-phoneaccount"
               type="text"
               placeholder="请输入手机号"
               maxlength="11"
-              v-model="phonetwo"
+              v-model="wxphone"
             />
           </div>
           <div>
             <input
-              class="account-safe-phoncode"
+              class="account-change-phoncode"
               type="text"
               placeholder="请输入验证码"
-              v-model="bindphonecode"
+              v-model="wxphonecode"
             />
-            <button class="account-safe-phonehq" id="one" :disabled="phonedd">
+            <button class="account-change-phonehq" id="one" :disabled="phonedd">
               {{ phonecodeTxt }}
             </button>
           </div>
           <div>
-            <button class="account-safe-phonelogin" @click="wxno">取消</button>
-            <button class="account-safe-phonelogin" @click="wxyes">验证</button>
+            <button class="account-change-phoneclick" @click="wxno">
+              取消
+            </button>
+            <button class="account-change-phoneclick" @click="wxyes">
+              验证
+            </button>
           </div>
         </div>
-      </div>
-      <!-- 解绑微信 -->
-      <div class="account-safe-phones" v-if="wxnobind">
-        <div>
-          <p class="account-safe-bindphone">解绑</p>
-          <p class="account-safe-bindphone2">您确定要解绑微信吗</p>
-        </div>
-        <div>
-          <button class="account-safe-phonelogin" @click="wxnono">取消</button>
-          <button class="account-safe-phonelogin" @click="wxnoyes">确认</button>
-        </div>
-      </div>
+        <!-- 解绑微信 -->
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -321,90 +325,100 @@ export default {
 
   data() {
     return {
-      phonebind: false,
-      phonenewbind: false,
-      emailbind: false,
-      emailnewbind: false,
-      pwdbind: false,
-      pwdnewbind: false,
-      wxbind: false,
-      wxnobind: false,
+      pageTitle: "账户管理",
+      phone: "",
+      phonecode: "",
+      changephone: "",
+      changephonecode: "",
+      emailphone: "",
+      emailphonecode: "",
+      newemail: "",
+      newemailcode: "",
+      pwdphone: "",
+      pwdphonecode: "",
+      newpwd: "",
+      newpwds: "",
+      wxphone: "",
+      wxphonecode: "",
+      phonedd: "",
+      phoneyz: false,
+      phonenew: false,
+      emailyz: false,
+      emailnew: false,
+      pwdyz: false,
+      pwdnew: false,
+      wxbtn: false,
+      wxnewbtn: false,
       phonecodeTxt: "获取验证码",
     };
   },
 
   methods: {
     // 手机
-    phonesafebtn() {
-      this.phonebind = !this.phonebind;
+    phoneyes() {
+      this.phonenew = true;
+      this.phoneyz = false;
     },
     phoneno() {
-      this.phonebind = !this.phonebind;
+      this.phoneyz = false;
     },
-    phoneyes() {
-      this.phonebind = !this.phonebind;
-      this.phonenewbind = !this.phonenewbind;
-    },
+
     //新手机
     phonenewyes() {
-      this.phonenewbind = !this.phonenewbind;
+      this.phonenew = false;
     },
     phonenewno() {
-      this.phonenewbind = !this.phonenewbind;
+      this.phonenew = false;
     },
     // 邮箱
-    emailsafebtn() {
-      this.emailbind = !this.emailbind;
-    },
     emailno() {
-      this.emailbind = !this.emailbind;
+      this.emailyz = false;
     },
     emailyes() {
-      this.emailbind = !this.emailbind;
-      this.emailnewbind = !this.emailnewbind;
+      this.emailyz = false;
+      this.emailnew = true;
     },
     // 新邮箱
     emailnewyes() {
-      this.emailnewbind = !this.emailnewbind;
+      this.emailnew = false;
     },
-    emailnewno() {
-      this.emailnewbind = !this.emailnewbind;
-    },
+
     // 密码
-    pwdsafebtn() {
-      this.pwdbind = !this.pwdbind;
-    },
     pwdyes() {
-      this.pwdbind = !this.pwdbind;
-      this.pwdnewbind = !this.pwdnewbind;
+      this.pwdyz = false;
+      this.pwdnew = true;
     },
     pwdno() {
-      this.pwdbind = !this.pwdbind;
+      this.pwdyz = false;
     },
     // 新密码
     pwdnewyes() {
-      this.pwdnewbind = !this.pwdnewbind;
-    },
-    pwdnewno() {
-      this.pwdnewbind = !this.pwdnewbind;
+      this.pwdnew = false;
     },
     // 解绑微信
-    wxsafebtn() {
-      this.wxbind = !this.wxbind;
-    },
     wxno() {
-      this.wxbind = !this.wxbind;
-    },
-    wxyes() {
-      this.wxbind = !this.wxbind;
-      this.wxnobind = !this.wxnobind;
+      this.wxbtn = false;
     },
     // 解绑
-    wxnono() {
-      this.wxnobind = !this.wxnobind;
-    },
-    wxnoyes() {
-      this.wxnobind = !this.wxnobind;
+    wxyes() {
+      this.wxbtn = false;
+      this.$confirm("你确定要解绑微信吗？", "解绑微信", {
+        confirmButtonText: "确认",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          this.$message({
+            type: "success",
+            message: "解绑成功!",
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消解绑",
+          });
+        });
     },
   },
 };

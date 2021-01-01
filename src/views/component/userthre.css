@@ -1,66 +1,66 @@
-* {
-    padding: 0;
-    margin: 0;
-}
-
-.powerheadThre {
+.userthreThre {
     display: flex;
+    justify-content: space-between;
     font-size: 14px;
     color: #cccccc;
     padding-top: 30px;
     padding-left: 60px;
-    justify-content: flex-start;
 }
 
-.powerheadThre>>>.el-button+.el-button {
+.userthreSpan {
+    padding-left: 5px;
+    color: #000;
+    border-left: 5px solid #666ee8;
+    font-size: 1em;
+    font-weight: 700;
+    height: 28px;
+}
+
+.userthrehead {
+    margin-right: 30px;
+}
+
+.userthrehead>>>.el-button+.el-button {
     margin: 0;
 }
 
-.powerStaff {
+.userthregr:hover {
+    background-color: #666ee8;
+}
+
+.userthregr {
     border-left: 2px solid #ccc;
     border-top: 2px solid #ccc;
     border-bottom: 2px solid #ccc;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
+    width: 99px;
+    height: 42px;
 }
 
-.powerStaff:hover {
+.userthreb:hover {
     background-color: #666ee8;
 }
 
-.powerDepart {
+.userthreb {
+    border: 2px solid #ccc;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: 99px;
+    height: 42px;
+}
+
+.userthrec:hover {
+    background-color: #666ee8;
+}
+
+.userthrec {
     border: 2px solid #ccc;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
 
-.powerDepart:hover {
-    background-color: #666ee8;
-}
-
-.powerRole {
-    border: 2px solid #ccc;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
-
-.powerRole:hover {
-    background-color: #666ee8;
-}
-
-.powerAdd {
-    color: #fff;
-    background: #666ee8;
-    border-radius: 5px;
-    position: absolute;
-    left: 88%;
-}
-
-.powerAdd :hover {
-    color: none;
-}
-
-.powerWidhr {
+.userthreWidhr {
     width: 92%;
     margin: auto;
     margin-top: 15px;

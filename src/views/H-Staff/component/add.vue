@@ -1,179 +1,215 @@
 <template>
-  <div class="staffaddalBg">
+  <div class="addstaffall">
+    <!-- top -->
     <div class="staffThre">
-      <span class="staffSpan">个人信息</span>
-      <div>
+      <span class="staffSpan">新增员工信息</span>
+      <div style="padding-right: 30px">
         <el-button class="staffgr" @click="staffaddvueyes">保存</el-button>
         <el-button class="staffb" @click="staffaddvueno">返回</el-button>
       </div>
     </div>
     <hr class="staffWidhr" />
-    <div class="staffF">
-      <div class="staffFlex">
-        <p class="staffP">员工编号</p>
-        <el-input
-          class="staffa"
-          v-model="staffNumInput"
-          placeholder="1001"
-          :disabled="true"
-        ></el-input>
-      </div>
-      <div class="staffFlex">
-        <p class="staffP">员工姓名</p>
-        <el-input
-          class="staffa"
-          v-model="staffNameipt"
-          placeholder="请输入内容"
-        ></el-input>
-      </div>
-
-      <div class="staffFlex">
-        <p class="staffP">员工年龄</p>
-        <div>
-          <el-input
-            class="staffage"
-            v-model="staffAgeipt"
-            placeholder="请输入内容"
-          ></el-input>
-          <el-select
-            v-model="staffAgesel"
-            placeholder="请选择"
-            class="staffSelage"
-          >
-            <el-option
-              v-for="item in optionAge"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            >
-            </el-option>
-          </el-select>
-        </div>
-      </div>
-      <div class="staffFlex">
-        <p class="staffP">性别</p>
-        <el-select v-model="staffgensel" placeholder="请选择" class="staffa">
-          <el-option
-            v-for="item in optiongen"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          >
-          </el-option>
-        </el-select>
-      </div>
-      <div class="staffFlex">
-        <p class="staffP">手机号码</p>
-        <el-input
-          class="staffa"
-          v-model="staffPhoneipt"
-          placeholder="请输入内容"
-        ></el-input>
-      </div>
-      <div class="staffFlex">
-        <p class="staffP">电子邮箱</p>
-        <el-input
-          class="staffa"
-          v-model="staffEmailipt"
-          placeholder="请输入内容"
-        ></el-input>
-      </div>
-      <div class="staffFlex">
-        <p class="staffP">证件号码</p>
-        <el-input
-          class="staffa"
-          v-model="staffCardipt"
-          placeholder="请输入内容"
-        ></el-input>
-      </div>
-
-      <div class="staffFlex">
-        <p class="staffP">职位</p>
-        <el-input
-          class="staffa"
-          v-model="staffPositioniPt"
-          placeholder="请输入内容"
-        ></el-input>
-      </div>
-      <div class="staffFlex">
-        <p class="staffP">地址</p>
-        <el-cascader
-          class="staffa"
-          v-model="cityvalue"
-          :options="city"
-          placeholder="请输入内容"
-          @change="handleChange"
-        ></el-cascader>
-      </div>
-
-      <div class="staffFlexadre">
-        <p class="staffP">详细地址</p>
-        <el-input
-          class="staffade"
-          v-model="staffaddreiPt"
-          placeholder="请输入内容"
-        ></el-input>
-      </div>
-      <div class="staffFlex"></div>
-      <div class="staffFlex">
-        <p class="staffP">所属科室</p>
-        <el-select v-model="staffdepart" placeholder="请选择" class="staffa">
-          <el-option
-            v-for="item in optiondepart"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          >
-          </el-option>
-        </el-select>
-      </div>
-      <div class="staffFlex">
-        <p class="staffP">角色</p>
-        <el-select
-          v-model="staffrolesel"
-          multiple
-          collapse-tags
-          placeholder="请选择"
-          class="staffa"
-        >
-          <el-option
-            v-for="item in optionrole"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          >
-          </el-option>
-        </el-select>
-      </div>
-      <div class="staffFlex"></div>
-      <div class="staffFlex"></div>
-      <div class="staffFlex">
-        <p class="staffP">密码</p>
-        <el-input
-          class="staffa"
-          v-model="staffpwdiPt"
-          placeholder="请输入密码"
-        ></el-input>
-      </div>
-      <div class="staffFlex2">
-        <p class="staffP">员工状态</p>
-        <el-switch
-          v-model="valuestatus"
-          :active-value="1"
-          :inactive-value="2"
-          active-color="#13ce66"
-          inactive-color="#ff4949"
-        >
-        </el-switch>
-      </div>
-      <div class="staffFlex"></div>
-      <div class="staffFlex"></div>
+    <!-- add -->
+    <div class="addmain">
+      <el-form ref="form">
+        <el-row :gutter="20">
+          <el-col :span="8">
+            <el-form-item label="员工编号" disabled>
+              <el-input
+                class="dialog-input-text"
+                type="input"
+                autosize
+                placeholder="10001"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="员工姓名" required>
+              <el-input
+                class="dialog-input-text"
+                type="input"
+                autosize
+                v-model="staffNameipt"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="员工年龄" required> </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="性别" required>
+              <el-select
+                class="dialog-input-text"
+                type="input"
+                autosize
+                v-model="staffgensel"
+                style="margin-top: 6px"
+                placeholder="请选择"
+              >
+                <el-option
+                  v-for="item in optiongen"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="20">
+          <el-col :span="8">
+            <el-form-item label="手机号码" required>
+              <el-input
+                class="dialog-input-text"
+                type="input"
+                autosize
+                v-model="staffPhoneipt"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="电子邮箱" required>
+              <el-input
+                class="dialog-input-text"
+                type="input"
+                autosize
+                v-model="staffEmailipt"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="证件号码" required>
+              <el-input
+                class="dialog-input-text"
+                type="input"
+                autosize
+                v-model="staffCardipt"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="职位" required>
+              <el-input
+                class="dialog-input-text"
+                type="input"
+                autosize
+                v-model="staffPositioniPt"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="20">
+          <el-col :span="8">
+            <el-form-item label="地址" required>
+              <el-cascader
+                class="dialog-input-text"
+                type="input"
+                autosize
+                style="
+                  display: block;
+                  position: relative;
+                  font-size: 14px;
+                  line-height: 40px;
+                "
+                v-model="cityvalue"
+                :options="city"
+                placeholder="请输入内容"
+              ></el-cascader>
+            </el-form-item>
+          </el-col>
+          <el-col :span="16">
+            <el-form-item label="详细地址" required>
+              <el-input
+                class="dialog-input-text"
+                type="input"
+                autosize
+                v-model="staffaddreiPt"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8"> </el-col>
+        </el-row>
+        <el-row :gutter="20">
+          <el-col :span="8">
+            <el-form-item class="ssks" label="所属科室" required>
+              <el-select
+                class="dialog-input-text"
+                type="input"
+                autosize
+                v-model="staffdepart"
+                style="margin-top: 6px"
+                placeholder="请选择"
+              >
+                <el-option
+                  v-for="item in optiondepart"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="角色" required>
+              <el-select
+                class="dialog-input-text"
+                type="input"
+                autosize
+                style="margin-top: 6px"
+                v-model="staffrolesel"
+                multiple
+                placeholder="请选择"
+              >
+                <el-option
+                  v-for="item in optionrole"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8"> </el-col>
+          <el-col :span="8"> </el-col>
+        </el-row>
+        <el-row :gutter="20">
+          <el-col :span="8">
+            <el-form-item label="密码" required>
+              <el-input
+                class="dialog-input-text"
+                type="input"
+                autosize
+                v-model="staffpwdiPt"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item style="margin-top: 40px" label="员工状态">
+              <el-switch
+                v-model="valuestatus"
+                :active-value="1"
+                :inactive-value="2"
+                active-color="#13ce66"
+                inactive-color="#ff4949"
+              >
+              </el-switch>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8"> </el-col>
+          <el-col :span="8"> </el-col>
+        </el-row>
+      </el-form>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  components: {},
+  props: {},
   data() {
     return {
       staffNumInput: "",
@@ -191,6 +227,23 @@ export default {
       valuestatus: 1,
       staffpwdiPt: "",
       cityvalue: [],
+      staffAgesel: "",
+      staffgensel: "",
+      optiongen: [
+        {
+          value: "选项1",
+          label: "男",
+        },
+        {
+          value: "选项2",
+          label: "女",
+        },
+        {
+          value: "选项3",
+          label: "未知",
+        },
+      ],
+      cityvalue: [],
       city: [
         {
           cityvalue: "zhinan",
@@ -201,20 +254,6 @@ export default {
               label: "绍兴",
             },
           ],
-        },
-      ],
-      optionAge: [
-        {
-          value: "选项1",
-          label: "岁",
-        },
-        {
-          value: "选项2",
-          label: "月",
-        },
-        {
-          value: "选项3",
-          label: "天",
         },
       ],
       optiondepart: [
@@ -229,20 +268,6 @@ export default {
         {
           value: "选项3",
           label: "内科",
-        },
-      ],
-      optiongen: [
-        {
-          value: "选项1",
-          label: "男",
-        },
-        {
-          value: "选项2",
-          label: "女",
-        },
-        {
-          value: "选项3",
-          label: "未知",
         },
       ],
       optionrole: [
@@ -312,7 +337,6 @@ export default {
   },
 };
 </script>
-
 <style scoped>
-@import "staffadd.css";
+@import "add.css";
 </style>

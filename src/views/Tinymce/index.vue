@@ -13,8 +13,10 @@
     <!-- 功能按钮 -->
     <div class="tinyFooter">
       <!-- <el-button type="primary" size="medium" plain @click="clear">清空内容</el-button> -->
-      <el-button type="info" size="medium" plain @click="disabled = !disabled">禁用</el-button>
-    </div>   
+      <el-button type="info" size="medium" plain @click="disabled = !disabled"
+        >禁用</el-button
+      >
+    </div>
   </div>
 </template>
 
@@ -38,7 +40,6 @@ export default {
     //   // console.log(editor);
     // },
     // 清空内容
-   
   },
 };
 </script>
@@ -65,8 +66,8 @@ export default {
   &Footer {
     width: 96%;
     padding: 10px 0 10px;
-    
-margin-right: 10px;
+
+    margin-right: 10px;
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-end;

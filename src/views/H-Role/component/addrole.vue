@@ -1,112 +1,122 @@
 <template>
-  <div>
-    <div class="roleaddalBg">
-      <div class="roleaddThre">
-        <span class="roleaddSpan">个人信息</span>
-        <div>
-          <el-button class="roleaddgr" @click="roleaddvueyes">保存</el-button>
-          <el-button class="roleaddb" @click="roleaddvueno">返回</el-button>
-        </div>
-      </div>
-      <hr class="roleaddWidhr" />
-      <div class="roleaddF">
-        <div class="roleaddFlex">
-          <p class="roleaddP">角色编号</p>
-          <el-input
-            class="roleadda"
-            placeholder="1000030"
-            :disabled="true"
-          ></el-input>
-        </div>
-        <div class="roleaddFlex">
-          <p class="roleaddP">角色名称</p>
-          <el-input
-            class="roleadda"
-            v-model="roleNameipt"
-            placeholder="请输入内容"
-            @change="jsmc"
-          ></el-input>
-        </div>
-        <div class="roleaddFlex2">
-          <p class="roleaddP">角色状态</p>
-          <el-switch
-            v-model="valuestatus"
-            :active-value="1"
-            :inactive-value="2"
-            active-color="#13ce66"
-            inactive-color="#ff4949"
-          >
-          </el-switch>
-        </div>
-        <div class="roleaddFlex"></div>
-        <div class="roleaddFlex3">
-          <p class="roleaddP">角色描述</p>
-          <el-input
-            class="roleadda"
-            v-model="rolecreate"
-            placeholder="请输入内容"
-          ></el-input>
-        </div>
-        <div class="roleaddFlex"></div>
-        <div class="roleaddFlex"></div>
-        <div class="roleaddFlex"></div>
-      </div>
+  <div class="addstaffall">
+    <div class="roleaddThre">
+      <span class="roleaddSpan">新增角色信息</span>
       <div>
-        <p
-          style="
-            display: flex;
-            margin-left: 15px;
-            font-size: 20px;
-            color: #858bed;
-            font-weight: bold;
-          "
-        >
-          权限分配
-        </p>
-        <div class="roleF">
-          <table class="roleTab">
-            <tr style="background-color: #c2c5f6; display: flex">
-              <td style="margin-left: 12px">
+        <el-button class="roleaddgr" @click="roleaddvueyes">保存</el-button>
+        <el-button class="roleaddb" @click="roleaddvueno">返回</el-button>
+      </div>
+    </div>
+    <hr class="roleaddWidhr" />
+    <div class="addmain">
+      <el-form ref="form">
+        <el-row :gutter="20">
+          <el-col :span="8">
+            <el-form-item label="角色编号" disabled>
+              <el-input
+                class="dialog-input-text"
+                type="input"
+                autosize
+                placeholder="10001"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="角色名称" required>
+              <el-input
+                class="dialog-input-text"
+                type="input"
+                autosize
+                v-model="roleNameipt"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item style="margin-top: 40px" label="角色状态">
+              <el-switch
+                v-model="valuestatus"
+                :active-value="1"
+                :inactive-value="2"
+                active-color="#13ce66"
+                inactive-color="#ff4949"
+              >
+              </el-switch>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8"> </el-col>
+        </el-row>
+        <el-row :gutter="20">
+          <el-col :span="16">
+            <el-form-item label="角色描述" required>
+              <el-input
+                class="dialog-input-text"
+                type="input"
+                autosize
+                v-model="rolecreate"
+                placeholder="请输入内容"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8"> </el-col>
+          <el-col :span="8"> </el-col>
+        </el-row>
+      </el-form>
+    </div>
+    <div>
+      <p
+        style="
+          display: flex;
+          margin-left: 15px;
+          font-size: 20px;
+          color: #858bed;
+          font-weight: bold;
+        "
+      >
+        权限分配
+      </p>
+      <div class="roleF">
+        <table class="roleTab">
+          <tr style="background-color: #c2c5f6">
+            <td style="margin-left: 83px">
+              <input
+                type="checkbox"
+                id="all-checked"
+                :checked="isAllChecked()"
+                @change="changeAllChecked($event)"
+              /><span style="font-size: 14px; margin-left: 5px">模块</span>
+              <span style="font-size: 14px; margin-left: 42px">功能</span>
+            </td>
+          </tr>
+          <tr v-for="data in datas" :key="data.id">
+            <td class="roleTd">
+              <span style="font-size: 14px">
                 <input
                   type="checkbox"
-                  id="all-checked"
-                  :checked="isAllChecked()"
-                  @change="changeAllChecked($event)"
-                /><span style="font-size: 14px; margin-left: 5px">模块</span>
-                <span style="font-size: 14px; margin-left: 42px">功能</span>
-              </td>
-            </tr>
-            <tr v-for="data in datas" :key="data.id">
-              <td class="roleTd">
-                <span style="font-size: 14px">
-                  <input
-                    type="checkbox"
-                    value=""
-                    :id="data.listTitle"
-                    :checked="isTitleChecked(data)"
-                    @change="changeTitleChecked(data, $event)"
-                  />
-                  {{ data.listTitle }}
-                </span>
+                  value=""
+                  :id="data.listTitle"
+                  :checked="isTitleChecked(data)"
+                  @change="changeTitleChecked(data, $event)"
+                />
+                {{ data.listTitle }}
+              </span>
 
-                <span
-                  v-for="item in data.name"
-                  :key="item.id"
-                  style="font-size: 14px; margin-left: 30px"
-                >
-                  <input
-                    type="checkbox"
-                    :value="item"
-                    v-model="data.selected"
-                    :id="item.id"
-                    @click="changesonc(item)"
-                  />
-                  {{ item.name }}
-                </span>
-              </td>
-            </tr>
-          </table>
-        </div>
+              <span
+                v-for="item in data.name"
+                :key="item.id"
+                style="font-size: 14px; margin-left: 30px"
+              >
+                <input
+                  type="checkbox"
+                  :value="item"
+                  v-model="data.selected"
+                  :id="item.id"
+                  @click="changesonc(item)"
+                />
+                {{ item.name }}
+              </span>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>

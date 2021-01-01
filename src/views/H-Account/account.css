@@ -10,199 +10,14 @@
     width: 81%;
 }
 
-.accountThre {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    color: #cccccc;
-    padding-top: 30px;
-    padding-left: 60px;
-}
-
-.accountSpan {
-    color: #000;
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.accountgr:hover {
-    background-color: #666ee8;
-}
-
-.accountgr {
-    border-left: 2px solid #ccc;
-    border-top: 2px solid #ccc;
-    border-bottom: 2px solid #ccc;
-    border-radius: 5px;
-}
-
-.accountb:hover {
-    background-color: #666ee8;
-}
-
-.accountb {
-    border: 2px solid #ccc;
-    border-radius: 5px;
-}
-
-.accountc:hover {
-    background-color: #666ee8;
-}
-
-.accountc {
-    border-right: 2px solid #ccc;
-    border-top: 2px solid #ccc;
-    border-bottom: 2px solid #ccc;
-    border-radius: 5px;
-}
-
-.accountWidhr {
-    margin-top: 15px;
-    margin-bottom: 12px;
-    background-color: #ccc;
-    height: 1px;
-    border: none;
-}
-
-.accountF {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    width: 100%;
-}
-
-.account-safe-phones {
-    width: 49%;
-    background-color: #ccc;
-    height: 20vw;
-    /* position: absolute; */
-    /* left: 36vw; */
-    /* top: 13vw; */
-    margin-top: -350px;
-}
-
-.account-safe-bindphone {
-    text-align: left;
-    padding-top: 2vw;
-    font-size: 20px;
-    padding-left: 45px;
-}
-
-.account-safe-bindphone2 {
-    font-size: 13px;
-    padding-left: 45px;
-}
-
-.account-safe-phoneaccount {
-    border: 0px;
-    border-bottom: 1px solid #3299cc;
-    width: 60%;
-    margin-bottom: 20px;
-    height: 25px;
-    margin-left: 9%;
-    background: #ccc;
-    margin-top: 8%;
-}
-
-.account-safe-phoncode {
-    border: 0px;
-    border-bottom: 1px solid #3299cc;
-    width: 46%;
-    height: 25px;
-    margin-left: 10%;
-    background: #ccc;
-    margin-bottom: 20px;
-}
-
-.account-safe-phonehq {
-    border: none;
-    border-radius: 5px;
-    background: #3299cc;
-    color: #fff;
-    height: 2vw;
-}
-
-.account-safe-phonelogin {
-    width: 100px;
-    height: 40px;
-    border-radius: 10px;
-    margin-left: 10%;
-    margin-top: 1%;
-    background-color: #3299cc;
-    border: 0px;
-    color: #fff;
-    margin-bottom: 20px;
-}
-
-
-/* 第二个 */
-
-.account-new-phones {
-    width: 30%;
-    background-color: white;
-    height: 27vw;
-    border-radius: 5vw;
-    position: absolute;
-    left: 36vw;
-    top: 19vw;
-}
-
-.account-new-bindphone {
-    text-align: center;
-    padding-top: 2vw;
-    font-size: 20px;
-    padding-left: 45px;
-}
-
-.account-new-bindphone2 {
-    font-size: 13px;
-    padding-left: 45px;
-}
-
-.account-new-phoneaccount {
-    border: 0px;
-    border-bottom: 1px solid #3299cc;
-    width: 60%;
-    margin-bottom: 20px;
-    height: 25px;
-    margin-left: 9%;
-    margin-top: 8%;
-}
-
-.account-new-phoncode {
-    border: 0px;
-    border-bottom: 1px solid #3299cc;
-    width: 46%;
-    height: 25px;
-    margin-left: 10%;
-    margin-bottom: 20px;
-}
-
-.account-new-phonehq {
-    border: none;
-    border-radius: 5px;
-    background: #3299cc;
-    color: #fff;
-    height: 2vw;
-}
-
-.account-new-phonelogin {
-    width: 100px;
-    height: 40px;
-    border-radius: 10px;
-    margin-left: 10%;
-    margin-top: 1%;
-    background-color: #3299cc;
-    border: 0px;
-    color: #fff;
-    margin-bottom: 20px;
-}
-
 .accountF {
     display: flex;
     margin-left: 2%;
     height: 80%;
     margin-top: 7%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .accountTab {
@@ -240,4 +55,105 @@
     margin-right: 12px;
     text-decoration: none;
     cursor: pointer;
+}
+
+
+/* 身份验证 */
+
+
+/* .account-change-bindphone {
+    text-align: left;
+    padding-top: 2vw;
+    font-size: 20px;
+    padding-left: 45px;
+} */
+
+.account-change-bindphone2 {
+    font-size: 13px;
+    padding-left: 45px;
+}
+
+.account-change-phoneaccount {
+    border: 0px;
+    border-bottom: 1px solid #3299cc;
+    width: 60%;
+    margin-bottom: 20px;
+    height: 25px;
+    margin-left: 9%;
+    margin-top: 8%;
+}
+
+.account-change-phoncode {
+    border: 0px;
+    border-bottom: 1px solid #3299cc;
+    width: 52%;
+    height: 25px;
+    margin-left: 10%;
+    margin-bottom: 20px;
+}
+
+.account-change-phonehq {
+    border: none;
+    border-radius: 5px;
+    background: #3299cc;
+    color: #fff;
+    height: 2vw;
+}
+
+.account-change-phoneclick {
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    margin-left: 10%;
+    margin-top: 1%;
+    background-color: #3299cc;
+    border: 0px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+
+/* 更换 */
+
+.account-new-change {
+    text-align: center;
+    font-size: 20px;
+}
+
+.account-new-changeimp {
+    border: 0px;
+    border-bottom: 1px solid #3299cc;
+    width: 60%;
+    margin-bottom: 20px;
+    height: 25px;
+    margin-left: 20%;
+    margin-top: 8%;
+}
+
+.account-new-acccode {
+    border: 0px;
+    border-bottom: 1px solid #3299cc;
+    width: 46%;
+    height: 25px;
+    margin-left: 20%;
+    margin-bottom: 20px;
+}
+
+.account-new-hqcode {
+    border: none;
+    border-radius: 5px;
+    background: #3299cc;
+    color: #fff;
+    height: 2vw;
+}
+
+.account-new-click {
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    margin-left: 18%;
+    background-color: #3299cc;
+    border: 0px;
+    color: #fff;
+    margin-bottom: 20px;
 }
