@@ -35,7 +35,7 @@
         </el-form-item>
         <el-form-item prop="pass">
           <!-- <el-input type="select" v-model="ruleForm.hospital" placeholder="请输入密码" autocomplete="off" prefix-icon="el-icon-office-building"></el-input> -->
-          <el-select
+          <!-- <el-select
             v-model="ruleForm.hospital"
             placeholder="请选择所属医院"
             prefix-icon="el-icon-office-building"
@@ -47,7 +47,16 @@
               :label="item.name"
               :value="item.name"
             ></el-option>
-          </el-select>
+          </el-select> -->
+
+          <img
+            src="http://bt1.wlqqlp.com:8082/api/login/captcha"
+            alt=""
+            @click="reloadcode()"
+            style="height: 40px;"
+            class="imgcode"
+          />
+          <el-input placeholder="请输入验证码" v-model="ruleForm.hospital" style="width:45%;margin-left:20px;"></el-input>
         </el-form-item>
         <div class="loginRem">
           <el-checkbox
@@ -81,11 +90,14 @@
 import service from "@/service/index";
 import { mapGetters, mapActions } from "vuex";
 import { asyncRoutes } from "@/router/index";
+import {Login} from '@/network/Login'
 
 export default {
+   inject: ['reload'],
   data() {
     return {
-      height:0,
+      src:"http://bt1.wlqqlp.com:8082/api/login/captcha",
+      height: 0,
       options: [
         {
           id: 1,
@@ -103,47 +115,75 @@ export default {
   },
 
   methods: {
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          let params = Object.assign({}, this.ruleForm);
-          this.logining = true;
-          service
-            .login(params)
-            .then((res) => {
-              let { code, msg = "", result = {} } = res["data"];
-              if (code === 0) {
-                sessionStorage.setItem("name", this.ruleForm.name);
-                sessionStorage.setItem("pass", this.ruleForm.pass);
-                this.$router.push("/Complaints");
-                this.$store.dispatch("app/UpdateRememberPass", this.remember);
-              } else {
-                this.$message({
-                  message: msg,
-                  type: "error",
-                  duration: 1000,
-                });
-              }
-              this.logining = false;
-            })
-            .catch((err) => {
-              this.$message({
-                message: err,
-                type: "error",
-                duration: 1000,
-              });
-              console.log(err);
-            });
-        } else {
-          this.$message({
-            message: "error submit!!",
-            type: "error",
-            duration: 1000,
-          });
-          return false;
-        }
-      });
+    reloadcode() {
+      // var verify = document.getElementsByClassName("imgcode");
+      // console.log(verify)
+      // verify.setAttribute(
+      //   "src",
+      //   "http://bt1.wlqqlp.com:8082/api/login/captcha?" + Math.random()
+      // );
+      //这里必须加入随机数不然地址相同我发重新加载
+      // $('.imgcode').attr('http://bt1.wlqqlp.com:8082/api/login/captcha='+Math.random());
+        var verifyimg = $(".imgcode").attr("src");
+            $(".imgcode").attr("src", verifyimg.replace(/\?.*$/, '') + '?' + Math.random());
     },
+    submitForm(ruleForm){
+      let params={
+        account:this.ruleForm.name,
+        password:this.ruleForm.pass,
+        captcha:this.ruleForm.hospital
+      }
+      console.log(params)
+      Login(params).then(res=>{
+        // console.log(res.data.data)
+        if(res.data.data.msg="登录成功"){
+          this.$router.push("/Complaints");
+        }else{
+          
+        }
+      })
+    },
+    // submitForm(formName) {
+    //   this.$refs[formName].validate((valid) => {
+    //     if (valid) {
+    //       let params = Object.assign({}, this.ruleForm);
+    //       this.logining = true;
+    //       service
+    //         .login(params)
+    //         .then((res) => {
+    //           let { code, msg = "", result = {} } = res["data"];
+    //           if (code === 0) {
+    //             sessionStorage.setItem("name", this.ruleForm.name);
+    //             sessionStorage.setItem("pass", this.ruleForm.pass);
+    //             this.$router.push("/Complaints");
+    //             this.$store.dispatch("app/UpdateRememberPass", this.remember);
+    //           } else {
+    //             this.$message({
+    //               message: msg,
+    //               type: "error",
+    //               duration: 1000,
+    //             });
+    //           }
+    //           this.logining = false;
+    //         })
+    //         .catch((err) => {
+    //           this.$message({
+    //             message: err,
+    //             type: "error",
+    //             duration: 1000,
+    //           });
+    //           console.log(err);
+    //         });
+    //     } else {
+    //       this.$message({
+    //         message: "error submit!!",
+    //         type: "error",
+    //         duration: 1000,
+    //       });
+    //       return false;
+    //     }
+    //   });
+    // },
 
     // 判断是否是移动端打开
     _isMobile() {
@@ -166,8 +206,8 @@ export default {
   created() {
     // this.height=document.body.clientHeight
     // var heights=document.getElementsByClassName('login')
-  //  var div_height = window.screen.availHeight;
-	// $(".login").height(div_height);
+    //  var div_height = window.screen.availHeight;
+    // $(".login").height(div_height);
   },
 };
 </script>

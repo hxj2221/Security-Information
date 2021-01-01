@@ -76,9 +76,17 @@
 }
 .addRecord_enclosure_top_right>.el-button{
     color: #fff;
+    background: #666ee8;
+}
+.addRecord_relation_content >.el-button{
+    background: #666ee8;
 }
 .addRecord_enclosure_content {
     margin-bottom: 20px;
+}
+.addRecord_enclosure_content .el-table th{
+    background-color: #666EE866;
+    color: #515A6E;
 }
 .addRecord_enclosure_content .el-table td,
 .el-table th {
@@ -95,6 +103,24 @@
     display: inline-block;
 }
 
+
+.addRecord_enclosure_dialog_div >.el-form{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.addRecord_enclosure_dialog_div >.el-form .el-textarea{
+    width: 80%;
+}
+.addRecord_enclosure_dialog_div >.el-form .el-input{
+    width: 80%;
+}
+.addRecord_enclosure_dialog_div >.el-form{
+    overflow: hidden;
+}
+.addRecord_enclosure_dialog_div >.el-form .el-upload{
+ float: left;
+}
 /* 表格2  关联投诉信息样式 */
 .addRecord_relation {
     overflow: hidden;
@@ -108,6 +134,10 @@
 }
 .addRecord_relation_top>h5{
     color: #666EE8;
+}
+.addRecord_relation_content .el-table th{
+    background-color: #666EE866;
+    color: #515A6E;
 }
 .addRecord_relation_content .el-table td,.el-table th{
     text-align: center ;
@@ -145,7 +175,9 @@
 .addRecord_button >.button_stlye>button {
     float: right;
     margin-left: 20px;
+   
 }
 .addRecord_button >.button_stlye>button:last-child{
     color: #fff;
+    background: #666ee8;
 }

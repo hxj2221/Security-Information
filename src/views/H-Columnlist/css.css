@@ -20,7 +20,9 @@
 .columnList_top_right {
     float: right;
 }
-
+.columnList_top_right>.el-button:first-child{
+    background: #666ee8;
+}
 hr {
     margin: 0 15px 20px;
     font-weight: 400;
@@ -64,8 +66,12 @@ hr {
 /* table */
 .columnList_table {
     margin: 0 20px;
+overflow: hidden;
 }
-
+.columnList_table .el-table th{
+    background-color: #666EE866;
+    color: #515A6E;
+}
 .columnList_table .el-table td,
 .el-table th {
     text-align: center;
@@ -73,4 +79,9 @@ hr {
 
 .columnList_table>.el-table .el-button:last-child {
     color: #f00;
+}
+/* 分页 */
+.columnList_table_paging{
+    float:right;
+    margin-top: 20px;
 }

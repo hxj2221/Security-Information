@@ -1,11 +1,32 @@
 <template>
   <div id="app">
     <transition>
-      <router-view />
+      <router-view v-if="alive" />
     </transition>
   </div>
 </template>
-
+<script>
+export default {
+  data() {
+    return {
+        alive: true
+    }
+  },
+  provide() {
+    return {
+      reload: this.reload
+    }
+  },
+  methods: {
+    reload() {
+      this.alive= false
+      this.$nextTick(() => {
+        this.alive = true
+      })
+    }
+  }
+}
+</script>
 <style lang="less">
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;

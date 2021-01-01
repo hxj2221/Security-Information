@@ -93,10 +93,10 @@
 .allManage .allManage_cont .right .right_con .el-table__header-wrapper .el-table__header .has-gutter tr th{
   background-color: #666EE866;
   color: #333333;
-  text-align: left;
+  text-align: center;
 }
 .allManage .allManage_cont .right .right_con .el-table__body-wrapper .el-table__body .el-table__row td{
-  text-align: left;
+  text-align: center;
 }
 /* 分页 */
 .allManage .block{

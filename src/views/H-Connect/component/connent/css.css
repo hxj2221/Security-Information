@@ -28,10 +28,14 @@
 
 .connent_top_right>.el-button:first-child {
     color: #fff;
+    
+    background-color: #666EE8;
 }
 
 .connent_Tableall>.seach>.block>.el-button {
     color: #fff;
+    
+    background-color: #666EE8;
 }
 
 .connent_hr {
@@ -53,6 +57,7 @@
 .connent_Tableall .seach {
     float: left;
     margin-left: 15px;
+    margin-bottom: 20px;
 }
 
 .connent_Tableall .block>.el-input {
@@ -85,7 +90,10 @@
     /* padding-bottom: 50px; */
     margin-bottom: 30px;
 }
-
+.connent_myTable .el-table th{
+    color: #000;
+    background-color: #666EE866
+}
 .connent_myTable .el-table td,
 .el-table th {
     text-align: center !important;

@@ -16,8 +16,8 @@ import axios from "axios"
 import VueAxios from "vue-axios"
 
 // 引入mock
-import Mock from './mock'
-Mock.bootstrap()
+// import Mock from './mock'
+// Mock.bootstrap()
 
 // 引入dialog可移动
 import './directives.js'
@@ -26,7 +26,8 @@ import './directives.js'
 import echarts from "echarts";
 Vue.prototype.$echarts = echarts;
 
-
+import jsPlumb from 'jsplumb'
+Vue.prototype.$jsPlumb = jsPlumb.jsPlumb
 
 Vue.use(ElementUI)
 Vue.use(VueAxios, axios)

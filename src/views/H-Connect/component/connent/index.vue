@@ -116,7 +116,14 @@
       <!-- 分页 -->
       <div class="connent_paging">
         <div class="block">
-          <el-pagination layout="prev, pager, next" :total="1000">
+         <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page.sync="currentPage"
+            :page-size="100"
+            layout="total, prev, pager, next"
+            :total="tableData.length"
+          >
           </el-pagination>
         </div>
       </div>
@@ -206,7 +213,7 @@ export default {
       seachTime: "", //选择时间
       input: "", //input内容
       // 分页
-      // currentPage4: 1,
+      currentPage: 1,
     };
   },
   methods: {
@@ -228,6 +235,16 @@ export default {
     //投诉详情
     complaint() {
       this.$router.push("/Complaints");
+    },
+    // 分页
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+    },
+    handleSee(index, row) {
+      console.log(index, row);
     },
   },
 };

@@ -82,7 +82,11 @@
 .addArticle_content .upload-demo {
     float: left;
 }
-
+.addArticle_content >.el-form  .el-button{
+background: #fff;
+color: #515A6E;
+border-color: rgba(220, 222, 226, 1);
+}
 .addArticle_content .el-switch {
     float: left;
     display: block;
@@ -117,4 +121,5 @@
 }
 .addArticle_bottom_stlye>button:last-child{
     color: #fff;
+    background: #666ee8;
 }

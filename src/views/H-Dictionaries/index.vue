@@ -18,7 +18,7 @@
         </div>
         <!-- 右边内容 -->
         <div class="right">
-          <el-input placeholder="请输入内容" v-model="input3" class="input-with-select search">
+          <el-input placeholder="请输入内容" v-model="search" class="input-with-select search">
             <el-button slot="append" icon="el-icon-search"></el-button>
           </el-input>
           <el-table class="right_con" ref="singleTable" :data="tableData" style="width:100%">
@@ -63,7 +63,7 @@
       <el-dialog title="编辑字段" :visible.sync="dialogVisible">
         <el-form :model="form">
           <el-form-item label="字段信息" required>
-            <el-input type="textarea" :rows="8" placeholder="请输入内容" v-model="form.name">
+            <el-input type="textarea" placeholder="请输入内容" v-model="form.name">
             </el-input>
           </el-form-item>
         </el-form>
@@ -125,7 +125,7 @@
           name: '治疗意见'
         }, ],
         // 搜索框
-        input3: '',
+        search: '',
         // 表格
         tableData: [{
           field: '口头陈诉',
@@ -168,7 +168,7 @@
           date: '2019-11-12 12:08:12',
           name: '王小虎',
         }],
-        currentPage4: 4,
+        // 编辑
         form: {
           name: '',
         },
@@ -191,18 +191,10 @@
       deleteRow(index, rows) {
         rows.splice(index, 1);
       },
-      // 分页
-      handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
-      },
-      handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
-      },
       // 新增
       increase() {
         this.dialogFormVisible = !this.dialogFormVisible
-      }
-
+      },
     },
   };
 </script>
