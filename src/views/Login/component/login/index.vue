@@ -56,7 +56,7 @@
             style="height: 40px;"
             class="imgcode"
           />
-          <el-input placeholder="请输入验证码" style="width:45%;margin-left:20px;"></el-input>
+          <el-input placeholder="请输入验证码" v-model="ruleForm.hospital" style="width:45%;margin-left:20px;"></el-input>
         </el-form-item>
         <div class="loginRem">
           <el-checkbox
@@ -90,6 +90,7 @@
 import service from "@/service/index";
 import { mapGetters, mapActions } from "vuex";
 import { asyncRoutes } from "@/router/index";
+import {Login} from '@/network/Login'
 
 export default {
    inject: ['reload'],
@@ -126,47 +127,63 @@ export default {
         var verifyimg = $(".imgcode").attr("src");
             $(".imgcode").attr("src", verifyimg.replace(/\?.*$/, '') + '?' + Math.random());
     },
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          let params = Object.assign({}, this.ruleForm);
-          this.logining = true;
-          service
-            .login(params)
-            .then((res) => {
-              let { code, msg = "", result = {} } = res["data"];
-              if (code === 0) {
-                sessionStorage.setItem("name", this.ruleForm.name);
-                sessionStorage.setItem("pass", this.ruleForm.pass);
-                this.$router.push("/Complaints");
-                this.$store.dispatch("app/UpdateRememberPass", this.remember);
-              } else {
-                this.$message({
-                  message: msg,
-                  type: "error",
-                  duration: 1000,
-                });
-              }
-              this.logining = false;
-            })
-            .catch((err) => {
-              this.$message({
-                message: err,
-                type: "error",
-                duration: 1000,
-              });
-              console.log(err);
-            });
-        } else {
-          this.$message({
-            message: "error submit!!",
-            type: "error",
-            duration: 1000,
-          });
-          return false;
+    submitForm(ruleForm){
+      let params={
+        account:this.ruleForm.name,
+        password:this.ruleForm.pass,
+        captcha:this.ruleForm.hospital
+      }
+      console.log(params)
+      Login(params).then(res=>{
+        // console.log(res.data.data)
+        if(res.data.data.msg="登录成功"){
+          this.$router.push("/Complaints");
+        }else{
+          
         }
-      });
+      })
     },
+    // submitForm(formName) {
+    //   this.$refs[formName].validate((valid) => {
+    //     if (valid) {
+    //       let params = Object.assign({}, this.ruleForm);
+    //       this.logining = true;
+    //       service
+    //         .login(params)
+    //         .then((res) => {
+    //           let { code, msg = "", result = {} } = res["data"];
+    //           if (code === 0) {
+    //             sessionStorage.setItem("name", this.ruleForm.name);
+    //             sessionStorage.setItem("pass", this.ruleForm.pass);
+    //             this.$router.push("/Complaints");
+    //             this.$store.dispatch("app/UpdateRememberPass", this.remember);
+    //           } else {
+    //             this.$message({
+    //               message: msg,
+    //               type: "error",
+    //               duration: 1000,
+    //             });
+    //           }
+    //           this.logining = false;
+    //         })
+    //         .catch((err) => {
+    //           this.$message({
+    //             message: err,
+    //             type: "error",
+    //             duration: 1000,
+    //           });
+    //           console.log(err);
+    //         });
+    //     } else {
+    //       this.$message({
+    //         message: "error submit!!",
+    //         type: "error",
+    //         duration: 1000,
+    //       });
+    //       return false;
+    //     }
+    //   });
+    // },
 
     // 判断是否是移动端打开
     _isMobile() {
