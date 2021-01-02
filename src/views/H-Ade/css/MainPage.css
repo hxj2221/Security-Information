@@ -3,6 +3,8 @@
   text-align: left;
   padding-bottom: 1px;
   padding:0 20px;
+  width: 96%;
+  margin: 0 auto;
 }
 /* 头部 */
 .mainBl>.header {
