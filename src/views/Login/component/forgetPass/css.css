@@ -58,10 +58,16 @@
     width: 69%;
     margin-right: 1%;
 }
-.Forgetcode .el-button{
+.Forgetcode .Forgetcode_button{
     width: 30%;
     background-color: #666ee8;
     color: #fff;
+}
+.Forgetcode .Forgetcode_button1{
+    background-color: rgb(235, 232, 232);
+    /* width: 38%; */
+    /* background-color: rgb(197, 193, 193);
+    color: #000; */
 }
 .Forget_content_content>.el-button{
     background-color: #666ee8;
