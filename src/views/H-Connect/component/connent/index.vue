@@ -48,7 +48,7 @@
       <div class="connent_myTable">
         <!--  -->
         <el-table :data="tableData" style="width: 100%">
-          <el-table-column label="序号" width="60px">
+          <el-table-column label="序号" >
             <template slot-scope="scope">
               <span>{{ scope.row.num }}</span>
             </template>
@@ -60,19 +60,19 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="患者姓名" width="100px">
+          <el-table-column label="患者姓名" >
             <template slot-scope="scope">
               <span>{{ scope.row.name }}</span>
             </template>
           </el-table-column>
 
-          <el-table-column label="主持人" width="100px">
+          <el-table-column label="主持人">
             <template slot-scope="scope">
               <span>{{ scope.row.zcr }}</span>
             </template>
           </el-table-column>
 
-          <el-table-column label="记录人" width="100px">
+          <el-table-column label="记录人" >
             <template slot-scope="scope">
               <span>{{ scope.row.jlr }}</span>
             </template>
@@ -90,7 +90,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="主要沟通事项" width="80px">
+          <el-table-column label="主要沟通事项" >
             <template slot-scope="scope">
               <el-popover trigger="hover" placement="top">
                 <p>{{ scope.row.zygtsx }}</p>

@@ -127,63 +127,70 @@ export default {
         var verifyimg = $(".imgcode").attr("src");
             $(".imgcode").attr("src", verifyimg.replace(/\?.*$/, '') + '?' + Math.random());
     },
-    submitForm(ruleForm){
-      let params={
-        account:this.ruleForm.name,
-        password:this.ruleForm.pass,
-        captcha:this.ruleForm.hospital
-      }
-      console.log(params)
-      Login(params).then(res=>{
-        // console.log(res.data.data)
-        if(res.data.data.msg="登录成功"){
-          this.$router.push("/Complaints");
-        }else{
-          
-        }
-      })
-    },
-    // submitForm(formName) {
-    //   this.$refs[formName].validate((valid) => {
-    //     if (valid) {
-    //       let params = Object.assign({}, this.ruleForm);
-    //       this.logining = true;
-    //       service
-    //         .login(params)
-    //         .then((res) => {
-    //           let { code, msg = "", result = {} } = res["data"];
-    //           if (code === 0) {
-    //             sessionStorage.setItem("name", this.ruleForm.name);
-    //             sessionStorage.setItem("pass", this.ruleForm.pass);
-    //             this.$router.push("/Complaints");
-    //             this.$store.dispatch("app/UpdateRememberPass", this.remember);
-    //           } else {
-    //             this.$message({
-    //               message: msg,
-    //               type: "error",
-    //               duration: 1000,
-    //             });
-    //           }
-    //           this.logining = false;
-    //         })
-    //         .catch((err) => {
-    //           this.$message({
-    //             message: err,
-    //             type: "error",
-    //             duration: 1000,
-    //           });
-    //           console.log(err);
-    //         });
-    //     } else {
-    //       this.$message({
-    //         message: "error submit!!",
-    //         type: "error",
-    //         duration: 1000,
-    //       });
-    //       return false;
-    //     }
-    //   });
+    // submitForm(ruleForm){
+    //   let params={
+    //     account:this.ruleForm.name,
+    //     password:this.ruleForm.pass,
+    //     captcha:this.ruleForm.hospital
+    //   }
+    //   console.log(params)
+    //   Login(params).then(res=>{
+    //     // console.log(res.data.data)
+    //     if(res.data.msg=="登录成功"){
+    //         this.$message('登录成功')
+    //         this.$router.push('/dashboard').catch(err => {});
+    //         this.$store.dispatch("app/UpdateRememberPass", this.remember);
+    //       }else if(this.ruleForm.hospital==''||this.ruleForm.hospital==null){
+    //         this.$message("验证码不能为空")
+    //       }else if(this.ruleForm.hospital!==this.captcha){
+    //         this.$message("验证码错误")
+    //       }
+    //       else{
+    //         this.$message('登录失败')
+    //       }
+    //   })
     // },
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          let params = Object.assign({}, this.ruleForm);
+          this.logining = true;
+          service
+            .login(params)
+            .then((res) => {
+              let { code, msg = "", result = {} } = res["data"];
+              if (code === 0) {
+                sessionStorage.setItem("name", this.ruleForm.name);
+                sessionStorage.setItem("pass", this.ruleForm.pass);
+                this.$router.push("/Complaints");
+                this.$store.dispatch("app/UpdateRememberPass", this.remember);
+              } else {
+                this.$message({
+                  message: msg,
+                  type: "error",
+                  duration: 1000,
+                });
+              }
+              this.logining = false;
+            })
+            .catch((err) => {
+              this.$message({
+                message: err,
+                type: "error",
+                duration: 1000,
+              });
+              console.log(err);
+            });
+        } else {
+          this.$message({
+            message: "error submit!!",
+            type: "error",
+            duration: 1000,
+          });
+          return false;
+        }
+      });
+    },
 
     // 判断是否是移动端打开
     _isMobile() {
