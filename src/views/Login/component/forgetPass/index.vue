@@ -7,14 +7,14 @@
     <div class="Forget_content">
       <div class="Forget_content_content">
         <h1>找回密码</h1>
-        <el-form :model="ruleForm">
+        <el-form>
           <el-form-item prop="name">
             <el-input
               type="text"
               placeholder="请输入账号"
               autocomplete="off"
               prefix-icon="el-icon-s-custom"
-              v-model="ruleForm.name"
+              v-model="name"
             ></el-input>
           </el-form-item>
           <el-form-item prop="code" class="Forgetcode">
@@ -22,17 +22,17 @@
               type="text"
               prefix-icon="el-icon-chat-line-square"
               placeholder="请输入验证码"
-              v-model="ruleForm.code"
+              v-model="code"
             >
             </el-input>
-            <el-button>发送验证码 </el-button>
+            <el-button @click="failyz">发送验证码 </el-button>
           </el-form-item>
           <el-form-item prop="newPassword">
             <el-input
               type="password"
               prefix-icon="el-icon-lock"
               placeholder="请输入密码"
-              v-model="ruleForm.newpassword"
+              v-model="newpassword"
             >
             </el-input>
           </el-form-item>
@@ -41,7 +41,7 @@
               type="password"
               prefix-icon="el-icon-lock"
               placeholder="请输入密码"
-              v-model="ruleForm.newpassword1"
+              v-model="newpassword1"
             >
             </el-input>
           </el-form-item>
@@ -56,16 +56,34 @@
 </template>
 
 <script>
+import service from "@/service/index";
 import "@/views/Login/component/forgetPass/css.css";
+import { wjpwd } from "../../../../network/wj.js";
 export default {
   components: {},
   props: {},
   data() {
     return {
-      ruleForm: [{ name: "", code: "", newpassword: "", newpassword1: "" }],
+      name: "",
+      code: "",
+      newpassword: "",
+      newpassword1: "",
     };
   },
   methods: {
+    failyz() {
+      let data = {
+        Phone: this.name,
+        Pcaptcha: this.code,
+        Password: this.newpassword,
+        Passwords: this.newpassword1,
+        // token: "000sss1cassaf456dsa23",
+      };
+      console.log(data);
+      wjpwd(data).then((res) => {
+        console.log(res.data);
+      });
+    },
     forgetLogin() {
       this.$emit("forgetLogin");
     },
@@ -73,5 +91,4 @@ export default {
 };
 </script>
 <style scoped>
-
 </style>
