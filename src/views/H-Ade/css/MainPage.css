@@ -2,9 +2,11 @@
   background-color: #fff;
   text-align: left;
   padding-bottom: 1px;
-  padding:0 20px;
+  padding:0 20px 50px;
   width: 96%;
   margin: 0 auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
 }
 /* 头部 */
 .mainBl>.header {
@@ -83,7 +85,8 @@
 /* 分页 */
 .mainBl>.paging {
   text-align: right;
-  margin: 20px 0 100px;
+  margin: 40px 0;
+
 }
 
 
