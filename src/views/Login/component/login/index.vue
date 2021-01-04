@@ -120,6 +120,8 @@ export default {
 
   methods: {
     reloadcode() {
+        var verifyimg = $(".imgcode").attr("src");
+            $(".imgcode").attr("src", verifyimg.replace(/\?.*$/, '') + '?' + Math.random());
       // var verify = document.getElementsByClassName("imgcode");
       // console.log(verify)
       // verify.setAttribute(
@@ -143,6 +145,11 @@ export default {
     //   console.log(params)
     //   Login(params).then(res=>{
     //     // console.log(res.data.data)
+    //     if(res.data.data.msg="登录成功"){
+    //       this.$router.push("/Complaints");
+    //     }else{
+          
+    //     }
     //     if(res.data.msg=="登录成功"){
     //         this.$message('登录成功')
     //         this.$router.push('/dashboard').catch(err => {});
@@ -298,9 +305,9 @@ export default {
     color: rgba(102, 110, 232, 0.0980392156862745);
   }
   .hospital-top {
-    position: absolute;
+     position: absolute;
     top: 10px;
-    right: 10px;
+    left: 10px;
     width: 43px;
     height: 36.99px;
     padding-top: 5px;

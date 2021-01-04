@@ -7,6 +7,7 @@
     background-color: #fff;
     height: 80%;
     margin-left: -20px;
+    width: 96%;
 }
 
 .departheadThre {
@@ -72,6 +73,15 @@
     /* justify-content: center; */
     margin-left: 45px;
     margin-bottom: 20px;
+}
+
+.departtable {
+    table-layout: fixed;
+    /* margin: auto; */
+    margin-left: 2%;
+    text-align: center;
+    /* margin-left: -1px; */
+    width: 96%;
 }
 
 .departNameipt {
