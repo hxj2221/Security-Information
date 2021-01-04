@@ -8,11 +8,7 @@
       <div class="Forget_content_content">
         <h1>找回密码</h1>
         <el-form>
-<<<<<<< HEAD
-          <el-form-item prop="name" :model="ruleForm">
-=======
           <el-form-item prop="ruleForm">
->>>>>>> 60c845e06f57fe148d7b7e29eb9a1c89f67569df
             <el-input
               type="text"
               placeholder="请输入账号"
