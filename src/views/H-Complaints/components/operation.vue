@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="operation" style="min-height:800px;">
+    <div class="operation" style="min-height: 800px">
       <div class="operation-top">
         <span>投诉详情-调查中</span>
         <div>
@@ -15,6 +15,7 @@
               icon="el-icon-s-order"
               class="detail"
               slot="reference"
+              @click="drawer = true"
               >投诉详情</el-button
             >
           </slot>
@@ -29,6 +30,15 @@
           </slot>
         </div>
       </div>
+      <el-drawer title="快捷查看" :visible.sync="drawer" :with-header="false" size='55%'>
+      
+          <ul class="infinite-list"  style="overflow:auto;height:870px;texr-aligin:center">
+             <Look  style="width:100%; margin:0px 0px;padding:0px 0px">
+          <div slot="title"></div>
+          </Look>
+          </ul>
+        
+      </el-drawer>
       <div class="operation-content">
         <!-- 基本信息 -->
         <div class="box-Information">
@@ -388,7 +398,7 @@
         <div class="box-button">
           <slot name="submit">
             <el-button type="primary" icon="el-icon-finished">确认提交</el-button>
-             <el-button type="primary">下发</el-button>
+            <el-button type="primary">下发</el-button>
           </slot>
         </div>
       </div>
@@ -444,6 +454,7 @@ export default {
   },
   data() {
     return {
+      drawer: false,
       uploadfile: "", //上传附件
       filedescribe: "", //文件描述
       form: "",

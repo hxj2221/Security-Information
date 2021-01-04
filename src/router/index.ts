@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import VueRouter, { RawLocation }  from 'vue-router'
+import VueRouter, { RawLocation } from 'vue-router'
 import Login from '../views/Login/index.vue'
 import Home from '../views/Home/index.vue'
 import store from '@/store'
@@ -10,7 +10,7 @@ import { generateRoutes } from './permission'
  */
 const routerPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location: RawLocation) {
-  return (<any>(routerPush.call(this, location))).catch((error: any)=> error)
+  return (<any>(routerPush.call(this, location))).catch((error: any) => error)
 }
 
 Vue.use(VueRouter)
@@ -37,7 +37,7 @@ const routes = [
         component: () => import('../views/Dashboard/index.vue')
       }
     ]
-  }, 
+  },
   {
     path: '/',
     component: Home,
@@ -46,7 +46,7 @@ const routes = [
     leaf: true,
     hidden: true,  // 路由是否在侧边导航栏中显示
     children: [
-     
+
       {
         name: '404页面',
         path: '/404',
@@ -110,7 +110,7 @@ const asyncRoutes = [
         }
       }
     ]
-  }, 
+  },
   {
     path: '/',
     component: Home,
@@ -128,7 +128,7 @@ const asyncRoutes = [
         }
       }
     ]
-  }, 
+  },
   {
     path: '/',
     component: Home,
@@ -164,8 +164,8 @@ const asyncRoutes = [
         }
       }
     ]
-  }, 
-  
+  },
+
   {
     path: '/',
     component: Home,
@@ -213,6 +213,15 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Role',
         component: () => import('../views/H-Role/index.vue'),
+        meta: {
+          roles: ['admin']
+        }
+      },
+      {
+        name: '编辑权限',
+        iconCls: 'el-icon-help',
+        path: '/Edit',
+        component: () => import('../views/H-Edit/index.vue'),
         meta: {
           roles: ['admin']
         }
@@ -282,7 +291,7 @@ const asyncRoutes = [
       }
     ]
   },
- 
+
   // {
   //   path: '/',
   //   component: Home,

@@ -7,8 +7,8 @@
     <div class="Forget_content">
       <div class="Forget_content_content">
         <h1>找回密码</h1>
-        <el-form :model="ruleForm">
-          <el-form-item prop="name">
+        <el-form>
+          <el-form-item prop="ruleForm">
             <el-input
               type="text"
               placeholder="请输入账号"
@@ -25,13 +25,18 @@
               v-model="ruleForm.code"
             >
             </el-input>
-            <el-button>发送验证码 </el-button>
+            <el-button v-show="show" @click="getCode" class="Forgetcode_button"
+              >发送验证码
+            </el-button>
+            <el-button v-show="!show" class="Forgetcode_button1"
+              >{{ count }}秒重发</el-button
+            >
           </el-form-item>
           <el-form-item prop="newPassword">
             <el-input
               type="password"
               prefix-icon="el-icon-lock"
-              placeholder="请输入密码"
+              placeholder="请输入新密码"
               v-model="ruleForm.newpassword"
             >
             </el-input>
@@ -40,13 +45,13 @@
             <el-input
               type="password"
               prefix-icon="el-icon-lock"
-              placeholder="请输入密码"
-              v-model="ruleForm.newpassword1"
+              placeholder="请输入再次输入密码"
+              v-model="newpassword1"
             >
             </el-input>
           </el-form-item>
         </el-form>
-        <el-button> 确定 </el-button>
+        <el-button @click="failyz"> 确定 </el-button>
         <el-link :underline="false" type="primary" @click="forgetLogin"
           >已有账号，去登录</el-link
         >
@@ -56,22 +61,93 @@
 </template>
 
 <script>
+import service from "@/service/index";
 import "@/views/Login/component/forgetPass/css.css";
+import { wjpwd } from "../../../../network/wj";
+import qs from "qs";
 export default {
   components: {},
   props: {},
   data() {
     return {
-      ruleForm: [{ name: "", code: "", newpassword: "", newpassword1: "" }],
+      ruleForm: { name: "", code: "", newpassword: "", newpassword1: "" },
+      name: "",
+      code: "",
+      newpassword: "",
+      newpassword1: "",
+      // 验证码
+      show: true,
+      count: "",
+      timer: null,
     };
   },
   methods: {
+    // failyz() {
+    //   let data = {
+    //     Phone: this.name,
+    //     Pcaptcha: this.code,
+    //     Password: this.newpassword,
+    //     Passwords: this.newpassword1,
+    //   };
+    //   wjpwd(qs.stringify(data)).then((res) => {
+    //     console.log(res);
+    //   });
+    // },
+    failyz() {
+      let data = {
+        phone: this.name,
+        pcaptcha: this.code,
+        password: this.newpassword,
+        passwords: this.newpassword1,
+      };
+      wjpwd(qs.stringify(data)).then((res) => {
+        console.log(res);
+      });
+    },
+
     forgetLogin() {
       this.$emit("forgetLogin");
+    },
+    //获取验证码
+    getCode() {
+      if (/^1[34578]\d{9}$/.test(this.name) == "") {
+        this.$message.error("手机号错误或为空，请重新输入");
+      } else {
+        const TIME_COUNT = 60;
+        if (!this.timer) {
+          this.count = TIME_COUNT;
+          this.show = false;
+          this.timer = setInterval(() => {
+            if (this.count > 0 && this.count <= TIME_COUNT) {
+              this.count--;
+            } else {
+              this.show = true;
+              clearInterval(this.timer);
+              this.timer = null;
+            }
+          }, 1000);
+        }
+      }
+    },
+    //确定
+    determine() {
+      if (this.name == "") {
+        this.$message.error("手机号为空");
+      } else if (this.code == "") {
+        this.$message.error("验证码为空");
+      } else if (this.newpassword == "") {
+        this.$message.error("新密码为空");
+      } else if (this.newpassword1 == "") {
+        this.$message.error("密码为空");
+      } else if (this.newpassword != this.newpassword1) {
+        this.$message.error("两次输入密码不同，请确认后重新输入");
+        this.newpassword1 == " ";
+      } else {
+        this.$emit("forgetLogin");
+      }
     },
   },
 };
 </script>
 <style scoped>
-
 </style>

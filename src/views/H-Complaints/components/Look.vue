@@ -524,7 +524,7 @@
                   >
                   <el-col :span="4"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">2020-11-15 10:34:56</span>
+                      <span class="value">2020-11-15</span>
                     </div></el-col
                   >
                 </el-row>
