@@ -34,7 +34,27 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="员工年龄" required> </el-form-item>
+            <el-form-item label="年龄" required>
+              <el-input placeholder="请输入内容" v-model="staffAgeipt" class="">
+                <template slot="append">
+                  <el-select
+                    type="input"
+                    style="width: 90px"
+                    autosize
+                    v-model="staffAgesel"
+                    placeholder="请选择"
+                  >
+                    <el-option
+                      v-for="item in optionages"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                    >
+                    </el-option>
+                  </el-select>
+                </template>
+              </el-input>
+            </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="性别" required>
@@ -43,7 +63,7 @@
                 type="input"
                 autosize
                 v-model="staffgensel"
-                style="margin-top: 6px"
+                style="margin-top: 40px"
                 placeholder="请选择"
               >
                 <el-option
@@ -138,7 +158,7 @@
                 type="input"
                 autosize
                 v-model="staffdepart"
-                style="margin-top: 6px"
+                style="margin-top: 40px"
                 placeholder="请选择"
               >
                 <el-option
@@ -157,7 +177,7 @@
                 class="dialog-input-text"
                 type="input"
                 autosize
-                style="margin-top: 6px"
+                style="margin-top: 40px"
                 v-model="staffrolesel"
                 multiple
                 placeholder="请选择"
@@ -229,6 +249,20 @@ export default {
       cityvalue: [],
       staffAgesel: "",
       staffgensel: "",
+      optionages: [
+        {
+          value: "选项1",
+          label: "岁",
+        },
+        {
+          value: "选项2",
+          label: "月",
+        },
+        {
+          value: "选项3",
+          label: "天",
+        },
+      ],
       optiongen: [
         {
           value: "选项1",

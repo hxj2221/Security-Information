@@ -8,7 +8,11 @@
       <div class="Forget_content_content">
         <h1>找回密码</h1>
         <el-form>
+<<<<<<< HEAD
+          <el-form-item prop="name" :model="ruleForm">
+=======
           <el-form-item prop="ruleForm">
+>>>>>>> 60c845e06f57fe148d7b7e29eb9a1c89f67569df
             <el-input
               type="text"
               placeholder="请输入账号"
@@ -46,12 +50,12 @@
               type="password"
               prefix-icon="el-icon-lock"
               placeholder="请输入再次输入密码"
-              v-model="ruleForm.newpassword1"
+              v-model="newpassword1"
             >
             </el-input>
           </el-form-item>
         </el-form>
-        <el-button @click="determine"> 确定 </el-button>
+        <el-button @click="failyz"> 确定 </el-button>
         <el-link :underline="false" type="primary" @click="forgetLogin"
           >已有账号，去登录</el-link
         >
@@ -63,13 +67,18 @@
 <script>
 import service from "@/service/index";
 import "@/views/Login/component/forgetPass/css.css";
-import { wjpwd } from "../../../../network/wj.js";
+import { wjpwd } from "../../../../network/wj";
+import qs from "qs";
 export default {
   components: {},
   props: {},
   data() {
     return {
       ruleForm: { name: "", code: "", newpassword: "", newpassword1: "" },
+      name: "",
+      code: "",
+      newpassword: "",
+      newpassword1: "",
       // 验证码
       show: true,
       count: "",
@@ -77,25 +86,35 @@ export default {
     };
   },
   methods: {
+    // failyz() {
+    //   let data = {
+    //     Phone: this.name,
+    //     Pcaptcha: this.code,
+    //     Password: this.newpassword,
+    //     Passwords: this.newpassword1,
+    //   };
+    //   wjpwd(qs.stringify(data)).then((res) => {
+    //     console.log(res);
+    //   });
+    // },
     failyz() {
       let data = {
-        Phone: this.name,
-        Pcaptcha: this.code,
-        Password: this.newpassword,
-        Passwords: this.newpassword1,
-        // token: "000sss1cassaf456dsa23",
+        phone: this.name,
+        pcaptcha: this.code,
+        password: this.newpassword,
+        passwords: this.newpassword1,
       };
-      console.log(data);
-      wjpwd(data).then((res) => {
-        console.log(res.data);
+      wjpwd(qs.stringify(data)).then((res) => {
+        console.log(res);
       });
     },
+
     forgetLogin() {
       this.$emit("forgetLogin");
     },
-    // 获取验证码
+    //获取验证码
     getCode() {
-      if (/^1[34578]\d{9}$/.test(this.ruleForm.name) == "") {
+      if (/^1[34578]\d{9}$/.test(this.name) == "") {
         this.$message.error("手机号错误或为空，请重新输入");
       } else {
         const TIME_COUNT = 60;
@@ -114,19 +133,19 @@ export default {
         }
       }
     },
-    // 确定
+    //确定
     determine() {
-      if (this.ruleForm.name == "") {
+      if (this.name == "") {
         this.$message.error("手机号为空");
-      } else if (this.ruleForm.code == "") {
+      } else if (this.code == "") {
         this.$message.error("验证码为空");
-      } else if (this.ruleForm.newpassword == "") {
+      } else if (this.newpassword == "") {
         this.$message.error("新密码为空");
-      } else if (this.ruleForm.newpassword1 == "") {
+      } else if (this.newpassword1 == "") {
         this.$message.error("密码为空");
-      } else if (this.ruleForm.newpassword != this.ruleForm.newpassword1) {
+      } else if (this.newpassword != this.newpassword1) {
         this.$message.error("两次输入密码不同，请确认后重新输入");
-        this.ruleForm.newpassword1 == " ";
+        this.newpassword1 == " ";
       } else {
         this.$emit("forgetLogin");
       }

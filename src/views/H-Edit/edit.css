@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 .addstaffall {
     width: 100%;
     height: 100%;
@@ -7,10 +12,7 @@
     padding-bottom: 150px;
 }
 
-
-/* top */
-
-.staffThre {
+.roleaddThre {
     display: flex;
     justify-content: space-between;
     font-size: 14px;
@@ -19,7 +21,7 @@
     padding-left: 60px;
 }
 
-.staffSpan {
+.roleaddSpan {
     padding-left: 5px;
     color: #000;
     border-left: 5px solid #666ee8;
@@ -28,40 +30,37 @@
     height: 28px;
 }
 
-.staffgr {
+.roleaddgr:hover {
+    background-color: #666ee8;
+}
+
+.roleaddgr {
     border-left: 2px solid #ccc;
     border-top: 2px solid #ccc;
     border-bottom: 2px solid #ccc;
     border-radius: 5px;
-    width: 74px;
-    height: 36px;
+    width: 70px;
+    height: 40px;
 }
 
-.staffgr:hover {
+.roleaddb:hover {
     background-color: #666ee8;
 }
 
-.staffb {
+.roleaddb {
     border: 2px solid #ccc;
     border-radius: 5px;
-    width: 74px;
-    height: 36px;
+    width: 70px;
+    height: 40px;
 }
 
-.staffb:hover {
-    background-color: #666ee8;
-}
-
-.staffWidhr {
+.roleaddWidhr {
     margin-top: 15px;
     margin-bottom: 12px;
     background-color: #ccc;
     height: 1px;
     border: none;
 }
-
-
-/* add */
 
 .addmain {
     margin: 0 20px;
@@ -85,7 +84,7 @@
 }
 
 .addmain .el-select .el-input .el-input__suffix {
-    /* height: 110px; */
+    height: 110px;
 }
 
 .addmain .el-select {
@@ -93,27 +92,55 @@
 }
 
 .el-select__tags {
-    top: 67%
+    top: 67%;
 }
 
 
-/* 边框 */
+/*  */
 
-.dialog-input-text .el-input__inner {
-    -webkit-appearance: none;
-    background-color: #FFF;
-    background-image: none;
-    border-radius: 4px;
-    border: 2px solid #DCDFE6;
-    box-sizing: border-box;
-    color: #606266;
-    display: inline-block;
-    font-size: inherit;
-    height: 40px;
-    line-height: 40px;
-    outline: 0;
-    padding: 0 15px;
-    -webkit-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
-    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
-    width: 100%;
+.roleF {
+    display: flex;
+    margin-left: 9%;
+    /* height: 80%; */
+    margin-top: 2%;
+    width: 75%;
+}
+
+.roleTab {
+    width: 75%;
+    height: 60%;
+    font-size: 20px;
+    font-weight: bold;
+    border-collapse: collapse;
+}
+
+.roleTd {
+    border-bottom: #ccc 2px solid;
+}
+
+.roleTddiv {
+    display: flex;
+    justify-content: flex-start;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.roleHead {
+    color: #ccc;
+    font-size: 14px;
+    height: 30px;
+}
+
+.roleMain {
+    margin-left: 10px;
+    color: #000;
+    font-size: 12px;
+}
+
+.roleClick {
+    color: #409eff;
+    font-size: 14px;
+    margin-right: 12px;
+    text-decoration: none;
+    cursor: pointer;
 }
