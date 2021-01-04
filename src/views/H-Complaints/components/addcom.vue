@@ -197,7 +197,7 @@
         <h4>关联患者信息(调用HIS)</h4>
         <el-table
           :data="data"
-          style="width: 94%; margin-left: 3%; margin-top: 20px; margin-bottom: 20px;"
+          style="width: 94%; margin-left: 3%; margin-top: 20px; margin-bottom: 20px"
           :header-cell-style="getRowClass"
         >
           <el-table-column prop="name" label="序号"> </el-table-column>
@@ -207,9 +207,18 @@
           <el-table-column prop="name" label="序号"> </el-table-column>
           <el-table-column prop="name" label="序号"> </el-table-column>
           <el-table-column prop="name" label="序号"> </el-table-column>
-          <el-table-column fixed="right" label="操作" width="100%" style="border-bottom:none">
-            <template >
-              <el-button type="text" size="small" @click="handleClick() " style="border-bottom:none"
+          <el-table-column
+            fixed="right"
+            label="操作"
+            width="100%"
+            style="border-bottom: none"
+          >
+            <template>
+              <el-button
+                type="text"
+                size="small"
+                @click="handleClick()"
+                style="border-bottom: none"
                 >取消关联</el-button
               >
             </template>
@@ -223,8 +232,7 @@
       </div>
       <!-- 弹窗 -->
       <div class="requirement">
-        <slot name="dialog">
-        </slot>
+        <slot name="dialog"> </slot>
       </div>
       <slot name="conserve"> </slot>
     </div>
@@ -240,7 +248,7 @@ export default {
   data() {
     return {
       agree: "", //同意要求
-    
+
       data: [
         {
           name: 1,
@@ -335,13 +343,13 @@ export default {
     back() {
       this.$router.go(0);
     },
-   
+
     //表格点击事件
     handleClick() {},
     // 设置表头颜色
     getRowClass({ rowIndex }) {
       if (rowIndex == 0) {
-        return "background:#c2c5f6";
+        return "background:#c2c5f6;color:#000";
       } else {
         return "";
       }
