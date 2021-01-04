@@ -26,10 +26,7 @@
       </div>
       <el-table
         :data="tables"
-        tooltip-effect="dark"
-        ref="dormitoryTable"
-        stripe
-        style="width: 96%; margin-left: 4%"
+        style="width: 99%; margin-left: 1%"
         :header-cell-style="{ background: '#C2C5F6' }"
         :cell-style="{ background: '#fff' }"
       >

@@ -192,7 +192,18 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="8"> </el-col>
+          <el-col :span="8">
+            <el-form-item style="margin-top: 40px" label="科室负责人">
+              <el-switch
+                v-model="valueksstatus"
+                :active-value="0"
+                :inactive-value="1"
+                active-color="#13ce66"
+                inactive-color="#ff4949"
+              >
+              </el-switch>
+            </el-form-item>
+          </el-col>
           <el-col :span="8"> </el-col>
         </el-row>
         <el-row :gutter="20">
@@ -244,6 +255,7 @@ export default {
       staffaddreiPt: "",
       staffdepart: "",
       staffrolesel: "",
+      valueksstatus: 0,
       valuestatus: 1,
       staffpwdiPt: "",
       cityvalue: [],

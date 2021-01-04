@@ -13,38 +13,20 @@
       <el-table
         :data="tables"
         tooltip-effect="dark"
-        ref="dormitoryTable"
-        stripe
         height="61.7%"
-        style="width: 74%; margin-left: 10%"
+        style="width: 90%; margin-left: 5%"
         :header-cell-style="{ background: '#C2C5F6' }"
         :cell-style="{ background: '#fff' }"
       >
-        <el-table-column
-          label="序号"
-          width="50"
-          type="index"
-          :index="indexMethod"
-        >
+        <el-table-column label="序号" type="index" :index="indexMethod">
         </el-table-column>
-        <el-table-column prop="rolejobNum" label="角色编号" width="100">
-        </el-table-column>
-        <el-table-column prop="roleName" label="角色名称" width="120">
-        </el-table-column>
-        <el-table-column prop="rolenumber" label="员工数量" width="100">
-        </el-table-column>
-        <el-table-column
-          prop="roleCreapeo"
-          label="创建人员"
-          width="120"
-        ></el-table-column>
+        <el-table-column prop="rolejobNum" label="角色编号"> </el-table-column>
+        <el-table-column prop="roleName" label="角色名称"> </el-table-column>
+        <el-table-column prop="rolenumber" label="员工数量"> </el-table-column>
+        <el-table-column prop="roleCreapeo" label="创建人员"></el-table-column>
 
-        <el-table-column
-          prop="roleCreat"
-          label="创建时间"
-          width="150"
-        ></el-table-column>
-        <el-table-column label="角色状态" width="100">
+        <el-table-column prop="roleCreat" label="创建时间"></el-table-column>
+        <el-table-column label="角色状态">
           <template slot-scope="scope">
             <el-switch
               v-model="scope.row.status"
@@ -58,7 +40,7 @@
           ></el-table-column
         >
 
-        <el-table-column label="操作" width="120">
+        <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button
               class="roleEdit"
