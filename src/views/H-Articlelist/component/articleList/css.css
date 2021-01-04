@@ -1,13 +1,15 @@
 .articleList_all {
     width: 100%;
-    height: 100%;
+    height: 750px;
     background: #fff;
     border-radius: 5px;
     box-shadow: 0 0 2px rgb(184, 183, 183);
     padding-bottom: 50px;
 }
 
+
 /*  top*/
+
 .articleList_top {
     overflow: hidden;
     padding: 20px 20px;
@@ -23,17 +25,22 @@
 .articleList_top_right {
     float: right;
 }
-.articleList_top_right >.el-button{
+
+.articleList_top_right>.el-button {
     background: #666ee8;
 }
 
+
 /* table */
+
 .articleList_table {
     overflow: hidden;
     margin: 0 20px;
 }
 
+
 /* table 搜索部分 */
+
 .articleList_table_search {
     float: right;
     display: flex;
@@ -49,15 +56,19 @@
     width: auto;
 }
 
+
 /* table  表格部分 */
-.articleList_table_table .el-table th{
+
+.articleList_table_table .el-table th {
     background-color: #666EE866;
     color: #515A6E;
 }
+
 .articleList_table_table .el-table td,
-.el-table th{
+.el-table th {
     text-align: center;
 }
+
 .articleList_table_table>.el-table {
     margin-bottom: 20px;
 }
@@ -77,4 +88,3 @@
 .articleList_table_table_paging>.el-pagination {
     float: right;
 }
-

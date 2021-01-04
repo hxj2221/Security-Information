@@ -1,12 +1,15 @@
 .columnList_all {
     width: 100%;
+    height: 750px;
     background: #fff;
     border-radius: 5px;
     box-shadow: 0 0 2px rgb(184, 183, 183);
     padding-bottom: 50px;
 }
 
+
 /* top */
+
 .columnList_top {
     overflow: hidden;
     margin: 0 20px;
@@ -20,19 +23,22 @@
 .columnList_top_right {
     float: right;
 }
-.columnList_top_right>.el-button:first-child{
+
+.columnList_top_right>.el-button:first-child {
     background: #666ee8;
 }
+
 hr {
     margin: 0 15px 20px;
     font-weight: 400;
     background-color: #e6e0e0;
     border: none;
     height: 2px;
-
 }
 
+
 /* 弹框 */
+
 .dialog_div {
     width: 90%;
     margin: 0 auto;
@@ -47,31 +53,40 @@ hr {
     justify-content: space-between;
     margin-bottom: 20px;
 }
-.dialog_div_title{
+
+.dialog_div_title {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
 }
-.dialog_div_title>.el-input{
+
+.dialog_div_title>.el-input {
     width: 80%;
 }
-.dialog_div_z{
+
+.dialog_div_z {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
 }
-.dialog_div_z>.el-input{
+
+.dialog_div_z>.el-input {
     width: 80%;
 }
+
+
 /* table */
+
 .columnList_table {
     margin: 0 20px;
-overflow: hidden;
+    overflow: hidden;
 }
-.columnList_table .el-table th{
+
+.columnList_table .el-table th {
     background-color: #666EE866;
     color: #515A6E;
 }
+
 .columnList_table .el-table td,
 .el-table th {
     text-align: center;
@@ -80,8 +95,11 @@ overflow: hidden;
 .columnList_table>.el-table .el-button:last-child {
     color: #f00;
 }
+
+
 /* 分页 */
-.columnList_table_paging{
-    float:right;
+
+.columnList_table_paging {
+    float: right;
     margin-top: 20px;
 }
