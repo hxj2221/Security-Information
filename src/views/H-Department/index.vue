@@ -12,41 +12,24 @@
       </div>
       <el-table
         :data="tables"
-        tooltip-effect="dark"
-        ref="dormitoryTable"
-        stripe
-        height="70.4%"
-        style="width: 80%; margin-left: 10%"
+        class="departtable"
         :header-cell-style="{ background: '#C2C5F6' }"
         :cell-style="{ background: '#fff' }"
       >
-        <el-table-column
-          label="序号"
-          width="50"
-          type="index"
-          :index="indexMethod"
-        >
+        <el-table-column label="序号" type="index" :index="indexMethod">
         </el-table-column>
-        <el-table-column prop="departjobNum" label="科室编号" width="100">
+        <el-table-column prop="departjobNum" label="科室编号">
         </el-table-column>
-        <el-table-column prop="departName" label="科室名称" width="120">
-        </el-table-column>
-        <el-table-column prop="departGen" label="员工数量" width="100">
-        </el-table-column>
-        <el-table-column prop="departAge" label="上级科室" width="100">
-        </el-table-column>
+        <el-table-column prop="departName" label="科室名称"> </el-table-column>
+        <el-table-column prop="departGen" label="员工数量"> </el-table-column>
+        <el-table-column prop="departAge" label="上级科室"> </el-table-column>
         <el-table-column
           prop="departCreapeo"
           label="创建人员"
-          width="120"
         ></el-table-column>
 
-        <el-table-column
-          prop="departCreat"
-          label="创建时间"
-          width="150"
-        ></el-table-column>
-        <el-table-column label="科室状态" width="100">
+        <el-table-column prop="departCreat" label="创建时间"></el-table-column>
+        <el-table-column label="科室状态">
           <template slot-scope="scope">
             <el-switch
               v-model="scope.row.status"
@@ -60,7 +43,7 @@
           ></el-table-column
         >
 
-        <el-table-column label="操作" width="120">
+        <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button
               class="departEdit"
