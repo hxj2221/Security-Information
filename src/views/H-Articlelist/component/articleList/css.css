@@ -1,6 +1,7 @@
 .articleList_all {
     width: 100%;
-    height: 750px;
+    min-height: 750px;
+    /* height: 750px; */
     background: #fff;
     border-radius: 5px;
     box-shadow: 0 0 2px rgb(184, 183, 183);

@@ -77,6 +77,7 @@
 </template>
 
 <script>
+import {AdeList} from '@/network/H-Ade'
   export default {
     components: {},
     props: {},
@@ -265,6 +266,8 @@
         console.log(row);
         this.$emit('pageDetail')
       },
+      // 不良列表
+      
     },
   }
 </script>
