@@ -26,7 +26,31 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="员工年龄" required> </el-form-item>
+            <el-form-item label="年龄">
+              <el-input
+                placeholder="请输入内容"
+                v-model="personAgeipt"
+                class=""
+              >
+                <template slot="append">
+                  <el-select
+                    type="input"
+                    style="width: 90px"
+                    autosize
+                    v-model="personagesel"
+                    placeholder="请选择"
+                  >
+                    <el-option
+                      v-for="item in optionages"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                    >
+                    </el-option>
+                  </el-select>
+                </template>
+              </el-input>
+            </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="性别" required>
@@ -35,7 +59,7 @@
                 type="input"
                 autosize
                 v-model="persongensel"
-                style="margin-top: 6px"
+                style="margin-top: 40px"
                 placeholder="请选择"
               >
                 <el-option
@@ -104,9 +128,10 @@
                   font-size: 14px;
                   line-height: 40px;
                 "
-                v-model="cityvalue"
-                :options="city"
-                placeholder="请输入内容"
+                :options="options"
+                v-model="selectedOptions"
+                @change="handleChange"
+                :separator="' '"
               ></el-cascader>
             </el-form-item>
           </el-col>
@@ -125,7 +150,7 @@
       </el-form>
     </div>
     <div style="display: flex; margin-top: 50px; margin-left: 35px">
-      <el-button class="persongr"
+      <el-button class="persongr" @click="personsave"
         ><i class="iconfont el-icon-icon-fanhui"></i> 保存</el-button
       >
       <el-button class="personb">返回</el-button>
@@ -135,6 +160,9 @@
 
 <script>
 import userthre from "../component/userthre";
+import { changeinfor } from "../../network/information";
+import options from "./coun.js";
+import qs from "qs";
 export default {
   components: { userthre },
 
@@ -142,25 +170,15 @@ export default {
     return {
       pageTitle: "个人信息",
       personNameipt: "",
-      persongensel: "",
       personAgeipt: "",
+      personagesel: "",
+      persongensel: "",
       personPhoneipt: "",
       personEmailipt: "",
       personCardipt: "",
       personPositioniPt: "",
-      cityvalue: [],
-      city: [
-        {
-          cityvalue: "zhinan",
-          label: "浙江",
-          children: [
-            {
-              cityvalue: "shejiyuanze",
-              label: "绍兴",
-            },
-          ],
-        },
-      ],
+      selectedOptions: [],
+      options: options,
       personaddreiPt: "",
       optiongen: [
         {
@@ -176,10 +194,55 @@ export default {
           label: "未知",
         },
       ],
+      optionages: [
+        {
+          value: "选项1",
+          label: "岁",
+        },
+        {
+          value: "选项2",
+          label: "月",
+        },
+        {
+          value: "选项3",
+          label: "天",
+        },
+      ],
     };
   },
 
-  methods: {},
+  methods: {
+    personsave() {
+      console.log(
+        this.personNameipt +
+          this.personAgeipt +
+          this.personagesel +
+          this.persongensel +
+          this.personPhoneipt +
+          this.personEmailipt +
+          this.personCardipt +
+          this.personPositioniPt +
+          this.selectedOptions +
+          this.personaddreiPt
+      );
+      let data = {
+        name: this.personNameipt,
+        age: this.personAgeipt + this.personAgeel,
+        sex: this.persongensel,
+        phone: this.personPhoneipt,
+        email: this.personEmailipt,
+        cardnumber: this.personCardipt,
+        position: this.personPositioniPt,
+        address: this.personaddreiPt,
+      };
+      changeinfor(qs.stringify(data)).then((result) => {
+        console.log(data);
+      });
+    },
+    handleChange(value) {
+      console.log(value);
+    },
+  },
 };
 </script>
 

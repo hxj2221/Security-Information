@@ -53,10 +53,14 @@
             src="http://bt1.wlqqlp.com:8082/api/login/captcha"
             alt=""
             @click="reloadcode()"
-            style="height: 40px;"
+            style="height: 40px"
             class="imgcode"
           />
-          <el-input placeholder="请输入验证码" v-model="ruleForm.hospital" style="width:45%;margin-left:20px;"></el-input>
+          <el-input
+            placeholder="请输入验证码"
+            v-model="ruleForm.hospital"
+            style="width: 45%; margin-left: 20px"
+          ></el-input>
         </el-form-item>
         <div class="loginRem">
           <el-checkbox
@@ -90,13 +94,13 @@
 import service from "@/service/index";
 import { mapGetters, mapActions } from "vuex";
 import { asyncRoutes } from "@/router/index";
-import {Login} from '@/network/Login'
+import { Login } from "@/network/Login";
 
 export default {
-   inject: ['reload'],
+  inject: ["reload"],
   data() {
     return {
-      src:"http://bt1.wlqqlp.com:8082/api/login/captcha",
+      src: "http://bt1.wlqqlp.com:8082/api/login/captcha",
       height: 0,
       options: [
         {
@@ -124,8 +128,11 @@ export default {
       // );
       //这里必须加入随机数不然地址相同我发重新加载
       // $('.imgcode').attr('http://bt1.wlqqlp.com:8082/api/login/captcha='+Math.random());
-        var verifyimg = $(".imgcode").attr("src");
-            $(".imgcode").attr("src", verifyimg.replace(/\?.*$/, '') + '?' + Math.random());
+      var verifyimg = $(".imgcode").attr("src");
+      $(".imgcode").attr(
+        "src",
+        verifyimg.replace(/\?.*$/, "") + "?" + Math.random()
+      );
     },
     // submitForm(ruleForm){
     //   let params={
