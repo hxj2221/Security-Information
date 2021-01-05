@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import {AdeList,badType,Weight} from '@/network/H-Ade'
+import {AdeList,badType,Weight} from '@/network/Ade'
   export default {
     components: {},
     props: {},
