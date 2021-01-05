@@ -25,10 +25,10 @@ export function Weight() {
 }
 
 // 添加不良
-export function Add(a) {
+export function Add(add) {
     return request({
         method: 'post',
         url: '/api/bad/bad_add',
-        data: a
+        data: add
     })
 }
