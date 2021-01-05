@@ -19,7 +19,8 @@
                 class="dialog-input-text"
                 type="input"
                 autosize
-                placeholder="10001"
+                disabled="disabled"
+                v-model="staffemployee"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -35,7 +36,8 @@
           </el-col>
           <el-col :span="8">
             <el-form-item label="年龄" required>
-              <el-input placeholder="请输入内容" v-model="staffAgeipt" class="">
+              <el-input type="number" v-model="staffAgeipt"></el-input>
+              <!-- <el-input placeholder="请输入内容" v-model="staffAgeipt" class="">
                 <template slot="append">
                   <el-select
                     type="input"
@@ -53,7 +55,7 @@
                     </el-option>
                   </el-select>
                 </template>
-              </el-input>
+              </el-input> -->
             </el-form-item>
           </el-col>
           <el-col :span="8">
@@ -69,7 +71,7 @@
                 <el-option
                   v-for="item in optiongen"
                   :key="item.value"
-                  :label="item.label"
+                  :label="item.value"
                   :value="item.value"
                 >
                 </el-option>
@@ -134,7 +136,7 @@
                 "
                 v-model="cityvalue"
                 :options="city"
-                placeholder="请输入内容"
+                placeholder="请选择内容"
               ></el-cascader>
             </el-form-item>
           </el-col>
@@ -238,29 +240,33 @@
 </template>
 
 <script>
+// 添加员工，调后台
+import { Aepyee } from "@/network/Sta.js";
+
+import qs from "qs";
 export default {
   components: {},
   props: {},
   data() {
     return {
-      staffNumInput: "",
-      staffNameipt: "",
-      staffAgeipt: "",
-      staffAgesel: "",
-      staffgensel: "",
-      staffPhoneipt: "",
-      staffEmailipt: "",
-      staffCardipt: "",
-      staffPositioniPt: "",
-      staffaddreiPt: "",
-      staffdepart: "",
-      staffrolesel: "",
-      valueksstatus: 0,
-      valuestatus: 1,
-      staffpwdiPt: "",
-      cityvalue: [],
-      staffAgesel: "",
-      staffgensel: "",
+      staffemployee: "", // 员工编号
+      // staffNumInput: "",
+      staffNameipt: "12", // 姓名
+      staffAgeipt: "12", //年龄
+      // staffAgesel: "", //年龄岁月天
+      staffgensel: "", //性别
+      staffPhoneipt: "123", //手机号
+      staffEmailipt: "12", //电子邮箱
+      staffCardipt: "12", //证件号码
+      staffPositioniPt: "", //职位
+      staffaddreiPt: "12", //详细地址
+      staffdepart: "12", //所属科室
+      staffrolesel: "12", //角色
+      valueksstatus: 0, //科室负责人
+      valuestatus: 1, //员工状态
+      staffpwdiPt: "", //密码
+      cityvalue: [], //地址
+      //年龄循环
       optionages: [
         {
           value: "选项1",
@@ -275,33 +281,46 @@ export default {
           label: "天",
         },
       ],
+      // 性别循环
       optiongen: [
+        
         {
-          value: "选项1",
-          label: "男",
+          value: "男",
+          label: "1",
         },
         {
-          value: "选项2",
-          label: "女",
+          value: "女",
+          label: "0",
         },
         {
-          value: "选项3",
-          label: "未知",
+          value: "未知",
+          label: "2",
         },
       ],
-      cityvalue: [],
+      // 地址循环
       city: [
         {
-          cityvalue: "zhinan",
+          value: "浙江",
           label: "浙江",
           children: [
             {
-              cityvalue: "shejiyuanze",
+              value: "绍兴",
               label: "绍兴",
             },
           ],
         },
+        {
+          value:'河南',
+          label:'河南',
+          children:[
+            {
+              value:'郑州',
+              label:'郑州'
+            }
+          ]
+        }
       ],
+      // 科室
       optiondepart: [
         {
           value: "选项1",
@@ -316,6 +335,7 @@ export default {
           label: "内科",
         },
       ],
+      // 角色
       optionrole: [
         {
           value: "选项1",
@@ -345,33 +365,53 @@ export default {
     };
   },
   methods: {
+    // 保存
     staffaddvueyes() {
-      const loading = this.$loading({
-        lock: true,
-        text: "保存中",
-        spinner: "el-icon-loading",
-        background: "rgba(0, 0, 0, 0.7)",
+      let params = {
+        account: this.staffNameipt,
+        password: this.staffpwdiPt,
+        name: this.staffNameipt,
+        sex: this.staffgensel,
+        email	: this.staffEmailipt,
+        phone: this.staffPhoneipt,
+        address: this.cityvalue,
+        eraddress: this.staffaddreiPt,
+        position: this.staffPositioniPt,
+        age: this.staffAgeipt,
+        specific_age: this.staffAgeipt,
+        cardnumber: this.staffCardipt,
+        head_department:this.valueksstatus
+      };
+      console.log(params)
+      Aepyee(qs.stringify(params)).then((res) => {
+        console.log(res);
       });
-      setTimeout(() => {
-        loading.close();
-      }, 2000);
-      console.log(
-        this.staffNumInput,
-        this.staffNameipt,
-        this.staffAgeipt,
-        this.staffAgesel,
-        this.staffPhoneipt,
-        this.staffEmailipt,
-        this.staffCardipt,
-        this.staffPositioniPt,
-        this.staffaddreiPt,
-        this.staffdepart,
-        this.staffrolesel,
-        this.valuestatus,
-        this.staffpwdiPt,
-        this.cityvalue
-      );
-      this.$parent.fathstaffyes();
+      // const loading = this.$loading({
+      //   lock: true,
+      //   text: "保存中",
+      //   spinner: "el-icon-loading",
+      //   background: "rgba(0, 0, 0, 0.7)",
+      // });
+      // setTimeout(() => {
+      //   loading.close();
+      // }, 2000);
+      // console.log(
+      //   this.staffNumInput,
+      //   this.staffNameipt,
+      //   this.staffAgeipt,
+      //   this.staffAgesel,
+      //   this.staffPhoneipt,
+      //   this.staffEmailipt,
+      //   this.staffCardipt,
+      //   this.staffPositioniPt,
+      //   this.staffaddreiPt,
+      //   this.staffdepart,
+      //   this.staffrolesel,
+      //   this.valuestatus,
+      //   this.staffpwdiPt,
+      //   this.cityvalue
+      // );
+      // this.$parent.fathstaffyes();
     },
     handleChange(cityvalue) {
       console.log(cityvalue);
