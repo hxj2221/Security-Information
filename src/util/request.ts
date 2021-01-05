@@ -11,7 +11,7 @@ export interface AjaxResponse {
 }
 
 // baseURL根据实际进行定义
-const baseURL = process.env.VUE_APP_URL;
+const baseURL = 'http://bt1.wlqqlp.com:8082/';
 
 // 创建axios实例
 const service = axios.default.create({
@@ -47,10 +47,9 @@ service.interceptors.response.use((response: AxiosResponse) => {
     return { code: 100 }
   } else{
     let res = response.data;
-    // let { code, msg, token = null } = res;
-    // if (token) {
-    //   localStorage.setItem('token', token)
-    // }
+    if (response.data.token) {
+      localStorage.setItem('token', response.data.token)
+    }
     // if (code === -1) {
     //   MessageBox.alert(msg, {
     //     confirmButtonText: '重新登录',

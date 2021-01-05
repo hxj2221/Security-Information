@@ -58,23 +58,6 @@ const routes = [
 
 // 需根据权限进行动态生成的路由
 const asyncRoutes = [
-  // {
-  //   path: '/',
-  //   component: Home,
-  //   name: '',
-  //   iconCls: 'el-icon-s-grid',
-  //   leaf: true,
-  //   children: [
-  //     {
-  //       name: '表格',
-  //       path: '/admin',
-  //       component: () => import('../views/AdminTable/index.vue'),
-  //       meta: {
-  //         roles: ['admin', 'editor']  // 该部分和权限相关
-  //       }
-  //     }
-  //   ]
-  // },
   {
     path: '/',
     component: Home,
@@ -281,7 +264,7 @@ const asyncRoutes = [
         }
       },
       {
-        name: '流程管理',
+        name: '基本设置',
         iconCls: 'el-icon-help',
         path: '/Technological',
         component: () => import('../views/H-Technological/index.vue'),
@@ -291,24 +274,6 @@ const asyncRoutes = [
       }
     ]
   },
-
-  // {
-  //   path: '/',
-  //   component: Home,
-  //   name: '',
-  //   iconCls: 'el-icon-edit-outline',
-  //   leaf: true,
-  //   children: [
-  //     {
-  //       name: '富文本',
-  //       path: '/tiny',
-  //       component: () => import('../views/Tinymce/index.vue'),
-  //       meta: {
-  //         roles: ['admin', 'editor']
-  //       }
-  //     }
-  //   ]
-  // },
   {
     path: '*',
     redirect: '/404',  // 重定向到404页面
@@ -317,7 +282,7 @@ const asyncRoutes = [
 ]
 
 const router = new VueRouter({
-  // mode: 'history',
+  mode: 'history',
   base: process.env.BASE_URL,
   routes
 })
@@ -325,12 +290,12 @@ const router = new VueRouter({
 var flag = true  // 页面刷新标志
 router.beforeEach((to, from, next) => {
   if (to.path == '/login') {
-    sessionStorage.removeItem('name');
-    sessionStorage.removeItem('pass');
+    sessionStorage.removeItem('account');
+    sessionStorage.removeItem('password');
     store.dispatch('app/ResetRouter');  // 全局路由tag重置
     flag = true
   }
-  let admin = <String>sessionStorage.getItem('name');
+  let admin = <String>sessionStorage.getItem('account');
   if (!admin && to.path !== '/login') {
     next({ path: '/login' })
   } else {
@@ -338,7 +303,7 @@ router.beforeEach((to, from, next) => {
     if (flag && to.path !== '/login') {
       flag = false
       router['options'].routes = routes
-      let generateAsyncRoutes = generateRoutes(asyncRoutes, <string>sessionStorage.getItem('name'))  // 根据登录角色生成动态路由
+      let generateAsyncRoutes = generateRoutes(asyncRoutes, <string>sessionStorage.getItem('account'))  // 根据登录角色生成动态路由
       router.addRoutes(generateAsyncRoutes)
       router['options'].routes = router['options'].routes.concat(generateAsyncRoutes)
       next({ ...to, replace: true })  // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
