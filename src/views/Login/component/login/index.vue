@@ -60,6 +60,7 @@
             placeholder="请输入验证码"
             v-model="ruleForm.hospital"
             style="width: 45%; margin-left: 20px"
+            class="codeinput"
           ></el-input>
         </el-form-item>
         <div class="loginRem">
@@ -120,21 +121,8 @@ export default {
 
   methods: {
     reloadcode() {
-        var verifyimg = $(".imgcode").attr("src");
-            $(".imgcode").attr("src", verifyimg.replace(/\?.*$/, '') + '?' + Math.random());
-      // var verify = document.getElementsByClassName("imgcode");
-      // console.log(verify)
-      // verify.setAttribute(
-      //   "src",
-      //   "http://bt1.wlqqlp.com:8082/api/login/captcha?" + Math.random()
-      // );
-      //这里必须加入随机数不然地址相同我发重新加载
-      // $('.imgcode').attr('http://bt1.wlqqlp.com:8082/api/login/captcha='+Math.random());
       var verifyimg = $(".imgcode").attr("src");
-      $(".imgcode").attr(
-        "src",
-        verifyimg.replace(/\?.*$/, "") + "?" + Math.random()
-      );
+      $(".imgcode").attr("src", verifyimg.replace(/\?.*$/, "") + "?" + Math.random());
     },
     // submitForm(ruleForm){
     //   let params={
@@ -148,7 +136,7 @@ export default {
     //     if(res.data.data.msg="登录成功"){
     //       this.$router.push("/Complaints");
     //     }else{
-          
+
     //     }
     //     if(res.data.msg=="登录成功"){
     //         this.$message('登录成功')
@@ -305,7 +293,7 @@ export default {
     color: rgba(102, 110, 232, 0.0980392156862745);
   }
   .hospital-top {
-     position: absolute;
+    position: absolute;
     top: 10px;
     left: 10px;
     width: 43px;
@@ -319,6 +307,15 @@ export default {
     display: flex;
     justify-content: space-between;
     margin: 10px 30px 20px;
+    margin-top: 80px;
+  }
+  .imgcode{
+    position: absolute;
+    left: 25px;
+  }
+  .codeinput{
+    position: absolute;
+    left: 190px;
   }
 }
 </style>

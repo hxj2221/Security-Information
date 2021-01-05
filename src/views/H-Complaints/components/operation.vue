@@ -46,7 +46,7 @@
             <el-row type="flex" class="row-bg" justify="space-between">
               <el-col :span="7" :push="1"
                 ><div class="grid-content bg-purple">
-                  <span><b>投诉人信息</b></span>
+                  <span><b>基本信息</b></span>
                 </div></el-col
               >
             </el-row>
@@ -55,30 +55,30 @@
             <el-row>
               <el-col :span="4"
                 ><div class="grid-content bg-purple">
-                  <span class="label">投诉人姓名：</span>
+                  <span class="label">事件编号：</span>
                 </div></el-col
               >
               <el-col :span="4"
                 ><div class="grid-content bg-purple-light">
-                  <span class="value">张大牛</span>
-                </div></el-col
-              >
-              <el-col :span="4"
-                ><div class="grid-content bg-purple"></div>
-                <span class="label">性别：</span></el-col
-              >
-              <el-col :span="4"
-                ><div class="grid-content bg-purple-light">
-                  <span class="value">男</span>
+                  <span class="value">TS11545414544145</span>
                 </div></el-col
               >
               <el-col :span="4"
                 ><div class="grid-content bg-purple"></div>
-                <span class="label">年龄：</span></el-col
+                <span class="label">事件状态：</span></el-col
               >
               <el-col :span="4"
                 ><div class="grid-content bg-purple-light">
-                  <span class="value">65</span>
+                  <span class="value">调查中</span>
+                </div></el-col
+              >
+              <el-col :span="4"
+                ><div class="grid-content bg-purple"></div>
+                <span class="label">投诉科室：</span></el-col
+              >
+              <el-col :span="4"
+                ><div class="grid-content bg-purple-light">
+                  <span class="value">心血管内科/血液科</span>
                 </div></el-col
               >
             </el-row>
