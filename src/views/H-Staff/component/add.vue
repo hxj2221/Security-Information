@@ -71,7 +71,7 @@
                 <el-option
                   v-for="item in optiongen"
                   :key="item.value"
-                  :label="item.value"
+                  :label="item.label"
                   :value="item.value"
                 >
                 </el-option>
@@ -251,21 +251,21 @@ export default {
     return {
       staffemployee: "", // 员工编号
       // staffNumInput: "",
-      staffNameipt: "12", // 姓名
-      staffAgeipt: "12", //年龄
+      staffNameipt: "ww", // 姓名
+      staffAgeipt: "21", //年龄
       // staffAgesel: "", //年龄岁月天
       staffgensel: "", //性别
-      staffPhoneipt: "123", //手机号
-      staffEmailipt: "12", //电子邮箱
-      staffCardipt: "12", //证件号码
-      staffPositioniPt: "", //职位
-      staffaddreiPt: "12", //详细地址
-      staffdepart: "12", //所属科室
-      staffrolesel: "12", //角色
-      valueksstatus: 0, //科室负责人
-      valuestatus: 1, //员工状态
-      staffpwdiPt: "", //密码
-      cityvalue: [], //地址
+      staffPhoneipt: "15839435805", //手机号
+      staffEmailipt: "3187755914@qq.com", //电子邮箱
+      staffCardipt: "412723200008203820", //证件号码
+      staffPositioniPt: "12", //职位
+      staffaddreiPt: "", //详细地址
+      staffdepart: "", //所属科室
+      staffrolesel: "", //角色
+      valueksstatus: "", //科室负责人
+      valuestatus: "", //员工状态
+      staffpwdiPt: "12345", //密码
+      cityvalue:'', //地址
       //年龄循环
       optionages: [
         {
@@ -285,16 +285,16 @@ export default {
       optiongen: [
         
         {
-          value: "男",
-          label: "1",
+          value: "1",
+          label: "男",
         },
         {
-          value: "女",
-          label: "0",
+          value: "0",
+          label: "女",
         },
         {
-          value: "未知",
-          label: "2",
+          value: "2",
+          label: "未知",
         },
       ],
       // 地址循环
@@ -368,7 +368,6 @@ export default {
     // 保存
     staffaddvueyes() {
       let params = {
-        account: this.staffNameipt,
         password: this.staffpwdiPt,
         name: this.staffNameipt,
         sex: this.staffgensel,
@@ -380,10 +379,13 @@ export default {
         age: this.staffAgeipt,
         specific_age: this.staffAgeipt,
         cardnumber: this.staffCardipt,
-        head_department:this.valueksstatus
+        head_department:this.valueksstatus,
+        status:this.valuestatus
+        // department_id:this.
       };
-      console.log(params)
-      Aepyee(qs.stringify(params)).then((res) => {
+    //  let par=qs.stringify(params)
+     console.log(params)
+      Aepyee(params).then((res) => {
         console.log(res);
       });
       // const loading = this.$loading({

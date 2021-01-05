@@ -10,3 +10,10 @@ export function Aepyee(a) {
         data: a
     })
 }
+// 员工列表
+export function stList(){
+    return request({
+        method:'get',
+        url:"api/Employees/index",
+    })
+}
