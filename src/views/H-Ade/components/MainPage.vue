@@ -40,7 +40,7 @@
     </div>
     <!-- 内容 -->
     <el-table class="elTable" :data="tableData">
-      <el-table-column type="index" label="序号">
+      <el-table-column prop="order" label="序号">
       </el-table-column>
       <el-table-column prop="serialNum" label="事件编码">
       </el-table-column>
@@ -77,7 +77,8 @@
 </template>
 
 <script>
-import {AdeList,badType,Weight} from '@/network/Ade'
+import service from "@/service/index";
+// import {AdeList,badType,Weight} from '@/network/Ade'
   export default {
     components: {},
     props: {},
@@ -160,17 +161,23 @@ import {AdeList,badType,Weight} from '@/network/Ade'
     },
     created(){
       // 不良列表
-      AdeList().then(res=>{
-        console.log(res.data)
+      service.AdeList().then(res=>{
+        console.log(res)
+        if (res.code===20010) {
+          
+        } else {
+          
+        }
       })
       // 不良类型
-      badType().then(res=>{
-        console.log(res)
-      })
-      // 轻重程度
-      Weight().then(res=>{
-        console.log(res)
-      })
+      // badType().then(res=>{
+      //   console.log(res)
+      // })
+      // // 轻重程度
+      // Weight().then(res=>{
+      //   console.log(res)
+      // })
+      
     }
   }
 </script>
