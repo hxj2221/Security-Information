@@ -17,7 +17,7 @@
           <el-input
             type="text"
             class="logininput"
-            v-model="ruleForm.name"
+            v-model="ruleForm.account"
             placeholder="请输入账号"
             autocomplete="off"
             prefix-icon="el-icon-s-custom"
@@ -27,7 +27,7 @@
           <el-input
             type="password"
             class="logininput"
-            v-model="ruleForm.pass"
+            v-model="ruleForm.password"
             placeholder="请输入密码"
             autocomplete="off"
             prefix-icon="iconfont el-icon-hospital-passwordmima"
@@ -58,7 +58,7 @@
           />
           <el-input
             placeholder="请输入验证码"
-            v-model="ruleForm.hospital"
+            v-model="ruleForm.captcha"
             style="width: 45%; margin-left: 20px"
             class="codeinput"
           ></el-input>
@@ -111,9 +111,9 @@ export default {
       ],
       logining: false,
       ruleForm: {
-        name: "admin",
-        pass: "admin",
-        hospital: "",
+        account: "admin",
+        password: "admin",
+        captcha: "",
       },
       remember: true,
     };
@@ -124,71 +124,31 @@ export default {
       var verifyimg = $(".imgcode").attr("src");
       $(".imgcode").attr("src", verifyimg.replace(/\?.*$/, "") + "?" + Math.random());
     },
-    // submitForm(ruleForm){
-    //   let params={
-    //     account:this.ruleForm.name,
-    //     password:this.ruleForm.pass,
-    //     captcha:this.ruleForm.hospital
-    //   }
-    //   console.log(params)
-    //   Login(params).then(res=>{
-    //     // console.log(res.data.data)
-    //     if(res.data.data.msg="登录成功"){
-    //       this.$router.push("/Complaints");
-    //     }else{
-
-    //     }
-    //     if(res.data.msg=="登录成功"){
-    //         this.$message('登录成功')
-    //         this.$router.push('/dashboard').catch(err => {});
-    //         this.$store.dispatch("app/UpdateRememberPass", this.remember);
-    //       }else if(this.ruleForm.hospital==''||this.ruleForm.hospital==null){
-    //         this.$message("验证码不能为空")
-    //       }else if(this.ruleForm.hospital!==this.captcha){
-    //         this.$message("验证码错误")
-    //       }
-    //       else{
-    //         this.$message('登录失败')
-    //       }
-    //   })
-    // },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          let params = Object.assign({}, this.ruleForm);
+          let params =this.ruleForm;
           this.logining = true;
-          service
-            .login(params)
-            .then((res) => {
-              let { code, msg = "", result = {} } = res["data"];
-              if (code === 0) {
-                sessionStorage.setItem("name", this.ruleForm.name);
-                sessionStorage.setItem("pass", this.ruleForm.pass);
-                this.$router.push("/Complaints");
-                this.$store.dispatch("app/UpdateRememberPass", this.remember);
-              } else {
-                this.$message({
-                  message: msg,
-                  type: "error",
-                  duration: 1000,
-                });
-              }
-              this.logining = false;
+          service.login(params).then((res) => {
+            console.log(res)
+           
+            if(res.code===20010){
+                sessionStorage.setItem("account", this.ruleForm.account);
+                sessionStorage.setItem("password", this.ruleForm.password);
+                //  sessionStorage.setItem("token", res.data.data.token);
+                 this.$router.push("/dashboard");
+               
+            }
+            else{
+
+            }
+               
+            
             })
             .catch((err) => {
-              this.$message({
-                message: err,
-                type: "error",
-                duration: 1000,
-              });
-              console.log(err);
+               this.logining = false;
             });
         } else {
-          this.$message({
-            message: "error submit!!",
-            type: "error",
-            duration: 1000,
-          });
           return false;
         }
       });
