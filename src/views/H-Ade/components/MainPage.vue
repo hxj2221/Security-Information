@@ -58,7 +58,7 @@
       </el-table-column>
       <el-table-column prop="date1" label="上报时间" width="150">
       </el-table-column>
-      <el-table-column prop="depart" label="患者科室" >
+      <el-table-column prop="depart"  label="患者科室" >
       </el-table-column>
       <el-table-column prop="person" label="上报人" >
       </el-table-column>
@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import {AdeList} from '@/network/H-Ade'
+import {AdeList,badType,Weight} from '@/network/Ade'
   export default {
     components: {},
     props: {},
@@ -143,117 +143,7 @@ import {AdeList} from '@/network/H-Ade'
           value1: ''
         },
         // 内容
-        tableData: [{
-          serialNum: '202011151036',
-          name: '王小虎',
-          sex: '男',
-          age: '45',
-          date: '2016-05-02 13:20:13',
-          place: '外科',
-          level: 'A',
-          date1: '2019-11-12 12:08:12',
-          depart: '外科',
-          person: '王冕'
-        }, {
-          serialNum: '202011151036',
-          name: '王小虎',
-          sex: '男',
-          age: '45',
-          date: '2016-05-02 13:20:13',
-          place: '外科',
-          level: 'A',
-          date1: '2019-11-12 12:08:12',
-          depart: '外科',
-          person: '王冕'
-        }, {
-          serialNum: '202011151036',
-          name: '王小虎',
-          sex: '男',
-          age: '45',
-          date: '2016-05-02 13:20:13',
-          place: '外科',
-          level: 'A',
-          date1: '2019-11-12 12:08:12',
-          depart: '外科',
-          person: '王冕'
-        }, {
-          serialNum: '202011151036',
-          name: '王小虎',
-          sex: '男',
-          age: '45',
-          date: '2016-05-02 13:20:13',
-          place: '外科',
-          level: 'A',
-          date1: '2019-11-12 12:08:12',
-          depart: '外科',
-          person: '王冕'
-        }, {
-          serialNum: '202011151036',
-          name: '王小虎',
-          sex: '男',
-          age: '45',
-          date: '2016-05-02 13:20:13',
-          place: '外科',
-          level: 'A',
-          date1: '2019-11-12 12:08:12',
-          depart: '外科',
-          person: '王冕'
-        }, {
-          serialNum: '202011151036',
-          name: '王小虎',
-          sex: '男',
-          age: '45',
-          date: '2016-05-02 13:20:13',
-          place: '外科',
-          level: 'A',
-          date1: '2019-11-12 12:08:12',
-          depart: '外科',
-          person: '王冕'
-        }, {
-          serialNum: '202011151036',
-          name: '王小虎',
-          sex: '男',
-          age: '45',
-          date: '2016-05-02 13:20:13',
-          place: '外科',
-          level: 'A',
-          date1: '2019-11-12 12:08:12',
-          depart: '外科',
-          person: '王冕'
-        }, {
-          serialNum: '202011151036',
-          name: '王小虎',
-          sex: '男',
-          age: '45',
-          date: '2016-05-02 13:20:13',
-          place: '外科',
-          level: 'A',
-          date1: '2019-11-12 12:08:12',
-          depart: '外科',
-          person: '王冕'
-        }, {
-          serialNum: '202011151036',
-          name: '王小虎',
-          sex: '男',
-          age: '45',
-          date: '2016-05-02 13:20:13',
-          place: '外科',
-          level: 'A',
-          date1: '2019-11-12 12:08:12',
-          depart: '外科',
-          person: '王冕'
-        }, {
-          serialNum: '202011151036',
-          name: '王小虎',
-          sex: '男',
-          age: '45',
-          date: '2016-05-02 13:20:13',
-          place: '外科',
-          level: 'A',
-          date1: '2019-11-12 12:08:12',
-          depart: '外科',
-          person: '王冕'
-        }, ],
+        tableData: [],
       };
     },
     methods: {
@@ -266,9 +156,22 @@ import {AdeList} from '@/network/H-Ade'
         console.log(row);
         this.$emit('pageDetail')
       },
-      // 不良列表
       
     },
+    created(){
+      // 不良列表
+      AdeList().then(res=>{
+        console.log(res.data)
+      })
+      // 不良类型
+      badType().then(res=>{
+        console.log(res)
+      })
+      // 轻重程度
+      Weight().then(res=>{
+        console.log(res)
+      })
+    }
   }
 </script>
 <style>
