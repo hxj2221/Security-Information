@@ -26,5 +26,11 @@ export default  {
 
   deleteAdminList: async (params: any) => {
     return await service.delete(`${baseUrl}admin`, { params }).then(res => res).catch(err => err)
-  }
+  },
+
+  // 不良事件列表
+  AdeList: async () => {
+    return await service.get(`${baseUrl}api/bad/lists`).then(res => res).catch(err => err)
+  },
+
 }

@@ -37,28 +37,28 @@
           :index="indexMethod"
         >
         </el-table-column>
-        <el-table-column prop="staffjobNum" label="工号" width="100">
+        <el-table-column prop="job_number" label="工号" width="100">
         </el-table-column>
-        <el-table-column prop="staffName" label="员工姓名" width="120">
+        <el-table-column prop="name" label="员工姓名" width="120">
         </el-table-column>
-        <el-table-column prop="staffGen" label="员工性别" width="100">
+        <el-table-column prop="sex" label="员工性别" width="100">
         </el-table-column>
-        <el-table-column prop="staffAge" label="员工年龄" width="100">
+        <el-table-column prop="age" label="员工年龄" width="100">
         </el-table-column>
-        <el-table-column prop="staffPhone" label="手机号码" width="150">
+        <el-table-column prop="phone" label="手机号码" width="150">
         </el-table-column>
         <el-table-column prop="staffKs" label="所属科室" width="120">
         </el-table-column>
         <el-table-column prop="staffJs" label="角色" width="120">
         </el-table-column>
         <el-table-column
-          prop="staffCreapeo"
+          prop="name"
           label="创建人员"
           width="120"
         ></el-table-column>
 
         <el-table-column
-          prop="staffCreat"
+          prop="create_time"
           label="创建时间"
           width="150"
         ></el-table-column>
@@ -96,7 +96,7 @@
       </el-table>
       <el-pagination
         layout="total, prev, pager, next, jumper"
-        :total="dormitory.length"
+        :total="tables.length"
       >
       </el-pagination>
     </div>
@@ -158,6 +158,9 @@
 <script>
 import Staff from "./component/add";
 import headpow from "../component/power";
+
+//接口
+import { stList } from "@/network/Sta.js";
 export default {
   components: { Staff, headpow },
   data() {
@@ -199,156 +202,44 @@ export default {
         },
       ],
 
-      dormitory: [
-        {
-          staffjobNum: "10001",
-          staffGen: "男",
-          staffAge: "45",
-          staffPhone: "13412312345",
-          staffName: "王小虎",
-          staffKs: "内科",
-          staffJs: "医生",
-          staffCreapeo: "王a",
-          staffCreat: "2020-12-20 16:13:16",
-          status: "1",
-          zip: 200333,
-        },
-        {
-          staffjobNum: "10001",
-          staffGen: "男",
-          staffAge: "45",
-          staffName: "王小虎",
-          staffPhone: "13412312345",
-          staffKs: "内科",
-          staffJs: "管理员",
-          staffCreapeo: "王b",
-          staffCreat: "2020-12-21 16:13:16",
-          status: 1,
-          zip: 200333,
-        },
-        {
-          staffjobNum: "10001",
-          staffGen: "男",
-          staffAge: "45",
-          staffName: "王小虎",
-          staffPhone: "13412312345",
-          staffKs: "内科",
-          staffJs: "医生,护士",
-          staffCreapeo: "王c",
-          staffCreat: "2020-12-22 16:13:16",
-          status: 1,
-          zip: 200333,
-        },
-        {
-          staffjobNum: "10001",
-          staffGen: "男",
-          staffAge: "45",
-          staffName: "王小虎",
-          staffPhone: "13412312345",
-          staffKs: "内科",
-          staffJs: "医生,护士",
-          staffCreapeo: "王d",
-          staffCreat: "2020-12-23 16:13:16",
-          status: 0,
-          zip: 200333,
-        },
-        {
-          staffjobNum: "10001",
-          staffGen: "男",
-          staffAge: "45",
-          staffName: "王小虎",
-          staffPhone: "13412312345",
-          staffKs: "内科",
-          staffJs: "管理员",
-          staffCreapeo: "王e",
-          staffCreat: "2020-12-24 16:13:16",
-          status: 1,
-          zip: 200333,
-        },
-        {
-          staffjobNum: "10001",
-          staffGen: "男",
-          staffAge: "45",
-          staffName: "王小虎",
-          staffPhone: "13412312345",
-          staffKs: "内科",
-          staffJs: "管理员",
-          staffCreapeo: "王f",
-          staffCreat: "2020-12-25 16:13:16",
-          status: 1,
-          zip: 200333,
-        },
-        {
-          staffjobNum: "10001",
-          staffGen: "男",
-          staffAge: "45",
-          staffName: "王小虎",
-          staffPhone: "13412312345",
-          staffKs: "内科",
-          staffJs: "管理员",
-          staffCreapeo: "王g",
-          staffCreat: "2020-12-26 16:13:16",
-          status: 1,
-          zip: 200333,
-        },
-        {
-          staffjobNum: "10001",
-          staffGen: "男",
-          staffAge: "45",
-          staffName: "王小虎",
-          staffPhone: "13412312345",
-          staffKs: "内科",
-          staffJs: "管理员",
-          staffCreapeo: "王h",
-          staffCreat: "2020-12-27 16:13:16",
-          status: 1,
-          zip: 200333,
-        },
-        {
-          staffjobNum: "10001",
-          staffGen: "男",
-          staffAge: "45",
-          staffName: "王小虎",
-          staffPhone: "13412312345",
-          staffKs: "内科",
-          staffJs: "管理员",
-          staffCreapeo: "王i",
-          staffCreat: "2020-12-28 16:13:16",
-          status: 1,
-          zip: 200333,
-        },
-        {
-          staffjobNum: "10001",
-          staffGen: "女",
-          staffAge: "45",
-          staffName: "王小虎",
-          staffPhone: "13412312345",
-          staffKs: "内科",
-          staffJs: "医生,护士",
-          staffCreapeo: "王j",
-          staffCreat: "2020-12-29 16:13:16",
-          status: 0,
-          zip: 200333,
-        },
+      tables: [
+        // {
+        //   staffjobNum: "10001",
+        //   staffGen: "男",
+        //   staffAge: "45",
+        //   staffPhone: "13412312345",
+        //   staffName: "王小虎",
+        //   staffKs: "内科",
+        //   staffJs: "医生",
+        //   staffCreapeo: "王a",
+        //   staffCreat: "2020-12-20 16:13:16",
+        //   status: "1",
+        //   zip: 200333,
+        // },
       ],
 
       search: "",
     };
   },
-
+  created() {
+    stList().then((res) => {
+      console.log(res);
+      this.tables = res.data.data;
+    });
+  },
   computed: {
     // 搜索
-    tables() {
-      const search = this.search;
-      if (search) {
-        return this.dormitory.filter((data) => {
-          return Object.keys(data).some((key) => {
-            return String(data[key]).toLowerCase().indexOf(search) > -1;
-          });
-        });
-      }
-      return this.dormitory;
-    },
+    // tables() {
+    //   const search = this.search;
+    //   if (search) {
+    //     return this.dormitory.filter((data) => {
+    //       return Object.keys(data).some((key) => {
+    //         return String(data[key]).toLowerCase().indexOf(search) > -1;
+    //       });
+    //     });
+    //   }
+    //   return this.dormitory;
+    // },
   },
   methods: {
     // 新增

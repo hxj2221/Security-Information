@@ -62,8 +62,10 @@
 
 <script>
 import service from "@/service/index";
+// 引用css
 import "@/views/Login/component/forgetPass/css.css";
-import { FPW, PCode } from "../../../../network/FPassword";
+// 调用接口
+import { FPW, PCode } from "@/network/Login.js";
 import qs from "qs";
 export default {
   components: {},
