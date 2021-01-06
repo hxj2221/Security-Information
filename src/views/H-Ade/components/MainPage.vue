@@ -160,10 +160,10 @@ import service from "@/service/index";
     },
     created(){
       // 不良列表
-    //  service.AdeList().then(res=>{
-    //     console.log(res)
+     service.AdeList().then(res=>{
+        console.log(res)
        
-    //   })
+      })
     //   // 不良类型
     //   service.badType().then(res=>{
     //     console.log(res)
