@@ -156,11 +156,11 @@
 </template>
 
 <script>
+import service from "@/service/index";
 import Staff from "./component/add";
 import headpow from "../component/power";
-
 //接口
-import { stList } from "@/network/Sta.js";
+// import { stList } from "@/network/Sta.js";
 export default {
   components: { Staff, headpow },
   data() {
@@ -222,10 +222,14 @@ export default {
     };
   },
   created() {
-    stList().then((res) => {
-      console.log(res);
-      this.tables = res.data.data;
-    });
+    service.staffList().then(res=>{
+      console.log(res.data)
+      this.tables=res.data
+    })
+    // stList().then((res) => {
+    //   console.log(res);
+    //   this.tables = res.data.data;
+    // });
   },
   computed: {
     // 搜索

@@ -32,5 +32,17 @@ export default  {
   AdeList: async () => {
     return await service.get(`${baseUrl}api/bad/lists`).then(res => res).catch(err => err)
   },
-
+  // 不良事件轻重程度
+  Weight: async () => {
+    return await service.get(`${baseUrl}api/bad/lists`).then(res => res).catch(err => err)
+  },
+  // 不良类型
+  badType: async () => {
+    return await service.get(`${baseUrl}api/bad/lists`).then(res => res).catch(err => err)
+  },
+  // 员工管理
+  // 员工列表显示
+  staffList: async () => {
+    return await service.get(`${baseUrl}api/Employees/index`).then(res => res).catch(err => err)
+  },
 }
