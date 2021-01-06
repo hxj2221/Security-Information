@@ -158,6 +158,7 @@ import Read from "../H-Complaints/components/read";
 import Conserve from "../H-Complaints/components/conserve";
 import Table from "../H-Complaints/components/Tables";
 import Operation from "../H-Complaints/components/operation";
+import service from "@/service/index";
 
 export default {
   components: { Complaintslist, Addcom, Look, Read, Conserve, Table, Operation },
@@ -252,6 +253,23 @@ export default {
       }
     },
   },
+  created(){
+    service.ComList().then((res) => {
+      console.log(res)
+              // if (res.code === 20010) {
+              //   sessionStorage.setItem("account", this.ruleForm.account);
+              //   sessionStorage.setItem("password", this.ruleForm.password);
+              //   this.$router.push("/dashboard");
+              // } else {
+              //    this.$message({
+              //     message: res.msg,
+              //     type: "error",
+              //     duration: 1000,
+              //   });
+              //   this.logining = false;
+              // }
+            })
+  }
 };
 </script>
 

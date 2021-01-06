@@ -7,18 +7,19 @@ const qs = require('qs')
 const baseUrl = '/'
 
 export default  {
+  // 登录
   login: async (params: Object) => {
     return await service.post(`${baseUrl}api/login/login`, params).then(res => res).catch(err => err)
   },
-
-  getAdminList: async (params: any) => {
-    return await service.get(`${baseUrl}admin`, {params}).then(res => res.data).catch(err => err)
+// 投诉列表
+  ComList: async () => {
+    return await service.get(`${baseUrl}api/tsevent/lists`).then(res => res).catch(err => err)
   },
-
-  postAdminList: async (params: any) => {
+// 添加投诉
+  AddCom: async (params: any) => {
     return await service.post(`${baseUrl}admin`, { params }).then(res => res).catch(err => err)
   },
-
+// 
   putAdminList: async (params: any) => {
     return await service.put(`${baseUrl}admin`, { params }).then(res => res).catch(err => err)
   },

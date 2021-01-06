@@ -51,15 +51,14 @@
 
           <img
             src="http://bt1.wlqqlp.com:8082/api/login/captcha"
-            alt=""
+             title="看不清？点击切换"
             @click="reloadcode()"
-            style="height: 40px"
-            class="imgcode"
-          />
+            style="height:40px"
+            class="imgcode" />
+           
           <el-input
             placeholder="请输入验证码"
             v-model="ruleForm.captcha"
-            style="width: 45%; margin-left: 20px"
             class="codeinput"
           ></el-input>
         </el-form-item>
@@ -127,26 +126,26 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          let params =this.ruleForm;
+          let params = this.ruleForm;
           this.logining = true;
           service.login(params).then((res) => {
-            console.log(res)
-           
-            if(res.code===20010){
+              if (res.code === 20010) {
+                 localStorage.setItem('token', res.data.token)
                 sessionStorage.setItem("account", this.ruleForm.account);
                 sessionStorage.setItem("password", this.ruleForm.password);
-                //  sessionStorage.setItem("token", res.data.data.token);
-                 this.$router.push("/dashboard");
-               
-            }
-            else{
-
-            }
-               
-            
+                this.$router.push("/dashboard");
+                   
+              } else {
+                 this.$message({
+                  message: res.msg,
+                  type: "error",
+                  duration: 1000,
+                });
+                this.logining = false;
+              }
             })
             .catch((err) => {
-               this.logining = false;
+              this.logining = false;
             });
         } else {
           return false;
@@ -269,13 +268,21 @@ export default {
     margin: 10px 30px 20px;
     margin-top: 80px;
   }
-  .imgcode{
+  .imgcode {
     position: absolute;
     left: 25px;
+    // width: 120px;
   }
-  .codeinput{
+  .codeinput {
     position: absolute;
-    left: 190px;
+    right: 25px;
+    width: 40%;
+  }
+  .clickcode{
+    font-size:6px;
+    position: absolute;
+     left: 155px;
+     color: #666ee8;
   }
 }
 </style>
