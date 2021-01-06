@@ -110,8 +110,8 @@ export default {
       ],
       logining: false,
       ruleForm: {
-        account: "admin",
-        password: "admin",
+        account: "",
+        password: "",
         captcha: "",
       },
       remember: true,
