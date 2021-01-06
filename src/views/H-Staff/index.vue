@@ -62,10 +62,10 @@
           label="创建时间"
           width="150"
         ></el-table-column>
-        <el-table-column label="员工状态" width="100">
-          <template slot-scope="scope">
+        <el-table-column label="员工状态" width="100" prop="status">
+          <template>
             <el-switch
-              v-model="scope.row.status"
+              v-model="status"
               :active-value="1"
               :inactive-value="2"
               active-color="#02538C"
