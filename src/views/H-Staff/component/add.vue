@@ -11,7 +11,7 @@
     <hr class="staffWidhr" />
     <!-- add -->
     <div class="addmain">
-      <el-form ref="form">
+      <el-form ref="form" :model="addStaff">
         <el-row :gutter="20">
           <el-col :span="8">
             <el-form-item label="员工编号" disabled>
@@ -20,7 +20,7 @@
                 type="input"
                 autosize
                 disabled="disabled"
-                v-model="staffemployee"
+                v-model="addStaff.staffemployee"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -30,13 +30,13 @@
                 class="dialog-input-text"
                 type="input"
                 autosize
-                v-model="staffNameipt"
+                v-model="addStaff.name"
               ></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="年龄" required>
-              <el-input type="number" v-model="staffAgeipt"></el-input>
+              <el-input type="number" v-model="addStaff.age"></el-input>
               <!-- <el-input placeholder="请输入内容" v-model="staffAgeipt" class="">
                 <template slot="append">
                   <el-select
@@ -64,7 +64,7 @@
                 class="dialog-input-text"
                 type="input"
                 autosize
-                v-model="staffgensel"
+                v-model="addStaff.sex"
                 style="margin-top: 40px"
                 placeholder="请选择"
               >
@@ -86,7 +86,7 @@
                 class="dialog-input-text"
                 type="input"
                 autosize
-                v-model="staffPhoneipt"
+                v-model="addStaff.phone"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -96,7 +96,7 @@
                 class="dialog-input-text"
                 type="input"
                 autosize
-                v-model="staffEmailipt"
+                v-model="addStaff.email"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -106,7 +106,7 @@
                 class="dialog-input-text"
                 type="input"
                 autosize
-                v-model="staffCardipt"
+                v-model="addStaff.cardnumber"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -116,7 +116,7 @@
                 class="dialog-input-text"
                 type="input"
                 autosize
-                v-model="staffPositioniPt"
+                v-model="addStaff.position"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -134,7 +134,7 @@
                   font-size: 14px;
                   line-height: 40px;
                 "
-                v-model="cityvalue"
+                v-model="addStaff.address"
                 :options="city"
                 placeholder="请选择内容"
               ></el-cascader>
@@ -146,7 +146,7 @@
                 class="dialog-input-text"
                 type="input"
                 autosize
-                v-model="staffaddreiPt"
+                v-model="addStaff.eraddress"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -159,7 +159,7 @@
                 class="dialog-input-text"
                 type="input"
                 autosize
-                v-model="staffdepart"
+                v-model="addStaff.staffdepart"
                 style="margin-top: 40px"
                 placeholder="请选择"
               >
@@ -180,7 +180,7 @@
                 type="input"
                 autosize
                 style="margin-top: 40px"
-                v-model="staffrolesel"
+                v-model="addStaff.staffrolesel"
                 multiple
                 placeholder="请选择"
               >
@@ -197,7 +197,7 @@
           <el-col :span="8">
             <el-form-item style="margin-top: 40px" label="科室负责人">
               <el-switch
-                v-model="valueksstatus"
+                v-model="addStaff.head_department"
                 :active-value="0"
                 :inactive-value="1"
                 active-color="#13ce66"
@@ -215,14 +215,14 @@
                 class="dialog-input-text"
                 type="input"
                 autosize
-                v-model="staffpwdiPt"
+                v-model="addStaff.password"
               ></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item style="margin-top: 40px" label="员工状态">
               <el-switch
-                v-model="valuestatus"
+                v-model="addStaff.status"
                 :active-value="1"
                 :inactive-value="2"
                 active-color="#13ce66"
@@ -244,28 +244,32 @@
 import { Aepyee } from "@/network/Sta.js";
 
 import qs from "qs";
+import service from '@/service/index';
 export default {
   components: {},
   props: {},
   data() {
     return {
-      staffemployee: "", // 员工编号
-      // staffNumInput: "",
-      staffNameipt: "ww", // 姓名
-      staffAgeipt: "21", //年龄
-      // staffAgesel: "", //年龄岁月天
-      staffgensel: "", //性别
-      staffPhoneipt: "15839435805", //手机号
-      staffEmailipt: "3187755914@qq.com", //电子邮箱
-      staffCardipt: "412723200008203820", //证件号码
-      staffPositioniPt: "12", //职位
-      staffaddreiPt: "", //详细地址
-      staffdepart: "", //所属科室
-      staffrolesel: "", //角色
-      valueksstatus: "", //科室负责人
-      valuestatus: "", //员工状态
-      staffpwdiPt: "12345", //密码
-      cityvalue:'', //地址
+      addStaff:{
+        staffemployee: "", // 员工编号
+        // staffNumInput: "",
+        name: "ww", // 姓名
+        age: "21", //年龄
+        // staffAgesel: "", //年龄岁月天
+        sex: "", //性别
+        phone: "15839435805", //手机号
+        email: "3187755914@qq.com", //电子邮箱
+        cardnumber: "412723200008203820", //证件号码
+        position: "12", //职位
+        eraddress: "", //详细地址
+        staffdepart: "", //所属科室
+        staffrolesel: "", //角色
+        head_department: "", //科室负责人
+        status: "", //员工状态
+        password: "", //密码
+        address:"", //地址
+      },
+      
       //年龄循环
       optionages: [
         {
@@ -367,25 +371,8 @@ export default {
   methods: {
     // 保存
     staffaddvueyes() {
-      let params = {
-        password: this.staffpwdiPt,
-        name: this.staffNameipt,
-        sex: this.staffgensel,
-        email	: this.staffEmailipt,
-        phone: this.staffPhoneipt,
-        address: this.cityvalue,
-        eraddress: this.staffaddreiPt,
-        position: this.staffPositioniPt,
-        age: this.staffAgeipt,
-        specific_age: this.staffAgeipt,
-        cardnumber: this.staffCardipt,
-        head_department:this.valueksstatus,
-        status:this.valuestatus
-        // department_id:this.
-      };
-    //  let par=qs.stringify(params)
-     console.log(params)
-      Aepyee(params).then((res) => {
+      let params = this.addStaff
+      service.staffAdd(qs.stringify(params)).then((res) => {
         console.log(res);
       });
       // const loading = this.$loading({

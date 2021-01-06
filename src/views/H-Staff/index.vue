@@ -34,7 +34,7 @@
           label="序号"
           width="50"
           type="index"
-          :index="indexMethod"
+          
         >
         </el-table-column>
         <el-table-column prop="job_number" label="工号" width="100">
@@ -47,9 +47,9 @@
         </el-table-column>
         <el-table-column prop="phone" label="手机号码" width="150">
         </el-table-column>
-        <el-table-column prop="staffKs" label="所属科室" width="120">
+        <el-table-column prop="department[0].title" label="所属科室" width="120">
         </el-table-column>
-        <el-table-column prop="staffJs" label="角色" width="120">
+        <el-table-column prop="auth_grouap[0].title" label="角色" width="120">
         </el-table-column>
         <el-table-column
           prop="name"
@@ -111,56 +111,60 @@
     >
       <!--editForm表单提交的数据-->
       <el-form :model="editForm" label-width="80px" ref="editForm">
-        <el-form-item prop="staffjobNum" label="工号" width="100">
+        <el-form-item label="工号" width="100">
           <el-input
-            v-model="editForm.staffjobNum"
+            v-model="editForm.job_number"
             auto-complete="off"
           ></el-input>
         </el-form-item>
-        <el-form-item prop="staffName" label="员工姓名" width="120">
-          <el-input v-model="editForm.staffName" auto-complete="off"></el-input>
+        <el-form-item  label="员工姓名" width="120">
+          <el-input v-model="editForm.name" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item prop="staffGen" label="员工性别" width="100">
-          <el-input v-model="editForm.staffGen" auto-complete="off"></el-input>
+        <el-form-item  label="员工性别" width="100">
+          <el-input v-model="editForm.sex" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item prop="staffAge" label="员工年龄" width="100">
-          <el-input v-model="editForm.staffAge" auto-complete="off"></el-input>
+        <el-form-item  label="员工年龄" width="100">
+          <el-input v-model="editForm.age" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item prop="staffPhone" label="手机号码" width="150">
+        <el-form-item label="手机号码" width="150">
           <el-input
-            v-model="editForm.staffPhone"
+            v-model="editForm.phone"
             auto-complete="off"
           ></el-input>
         </el-form-item>
-        <el-form-item prop="staffKs" label="所属科室" width="120">
-          <el-input v-model="editForm.staffKs" auto-complete="off"></el-input>
+        <el-form-item  label="所属科室" width="120">
+          <el-input v-model="editForm.department" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item prop="staffJs" label="角色" width="120">
-          <el-input v-model="editForm.staffJs" auto-complete="off"></el-input>
+        <el-form-item label="角色" width="120">
+          <el-input v-model="editForm.auth_grouap" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item prop="staffCreapeo" label="创建人员" width="120">
+        <el-form-item  label="创建人员" width="120">
           <el-input
-            v-model="editForm.staffCreapeo"
+            v-model="editForm.user"
             auto-complete="off"
           ></el-input>
         </el-form-item>
-        <el-form-item prop="staffCreat" label="创建时间" width="150">
+        <el-form-item  label="创建时间" width="150">
           <el-input
-            v-model="editForm.staffCreat"
+            v-model="editForm.create_time"
             auto-complete="off"
           ></el-input>
         </el-form-item>
       </el-form>
+       <div slot="footer" class="dialog-footer">
+          <el-button @click="editFormVisible = false">取 消</el-button>
+          <el-button type="primary" @click="sure()">确 定</el-button>
+        </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
+import service from "@/service/index";
 import Staff from "./component/add";
 import headpow from "../component/power";
-
 //接口
-import { stList } from "@/network/Sta.js";
+// import { stList } from "@/network/Sta.js";
 export default {
   components: { Staff, headpow },
   data() {
@@ -176,16 +180,16 @@ export default {
       currentRow: [], //选中的值
       editFormVisible: false, //设置默认弹出框  为false
       editForm: {
-        staffjobNum: "",
-        staffName: "",
-        staffGen: "",
-        staffAge: "",
-        staffPhone: "",
-        staffKs: "",
-        staffJs: "",
-        staffCreapeo: "",
-        staffCreat: "",
-      },
+        job_number:'',//工号
+        name:'',//姓名
+        sex:'',//性别
+        age:'',//年龄
+        phone:'',//手机号
+        department:'',//科室
+        auth_grouap:'',//员工
+        user:'',//创建人
+        create_time:'',//创建时间
+      }, //编辑
 
       optionbeldepart: [
         {
@@ -201,31 +205,19 @@ export default {
           label: "内科",
         },
       ],
-
-      tables: [
-        // {
-        //   staffjobNum: "10001",
-        //   staffGen: "男",
-        //   staffAge: "45",
-        //   staffPhone: "13412312345",
-        //   staffName: "王小虎",
-        //   staffKs: "内科",
-        //   staffJs: "医生",
-        //   staffCreapeo: "王a",
-        //   staffCreat: "2020-12-20 16:13:16",
-        //   status: "1",
-        //   zip: 200333,
-        // },
-      ],
-
+      tables: [],
       search: "",
     };
   },
   created() {
-    stList().then((res) => {
-      console.log(res);
-      this.tables = res.data.data;
-    });
+    service.staffList().then(res=>{
+      // console.log(res.data)
+      this.tables=res.data
+    })
+    // stList().then((res) => {
+    //   console.log(res);
+    //   this.tables = res.data.data;
+    // });
   },
   computed: {
     // 搜索
@@ -259,9 +251,9 @@ export default {
       }, 3000);
     },
     // 序号
-    indexMethod(index) {
-      return index * 1;
-    },
+    // indexMethod(index) {
+    //   return index * 1;
+    // },
     // switch开关
     changeSwitch(val, row) {
       console.log(row.status);
@@ -281,29 +273,46 @@ export default {
     handleEdit(index, row) {
       this.editFormVisible = true;
       this.editForm = Object.assign({}, row); //重点
-      console.log(this.editForm);
+      console.log(Object.assign({}, row))
+      this.editForm.department=this.tables[index].department[0].title
+      this.editForm.auth_grouap=this.tables[index].auth_grouap[0].title      
+    },
+    // 编辑确定
+    sure(){
+      let params=this.editForm
+      console.log(params)
+      // service.staffEdit(params).then(res=>{
+      //   console.log(res)
+      // })
     },
     //删除：
     handleDelete(index, row) {
-      console.log(index, row);
-      this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-      })
-        .then(() => {
-          this.$message({
-            type: "success",
-            message: "删除成功!",
-            delete: row.splice(index, 1),
-          });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除",
-          });
-        });
+      let params={
+        id:this.tables.index
+      }
+      console.log(params)
+      // service.staffDel(params).then(res=>{
+      //   console.log(res)
+      // })
+      // console.log(index, row);
+      // this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+      //   confirmButtonText: "确定",
+      //   cancelButtonText: "取消",
+      //   type: "warning",
+      // })
+      //   .then(() => {
+      //     this.$message({
+      //       type: "success",
+      //       message: "删除成功!",
+      //       delete: row.splice(index, 1),
+      //     });
+      //   })
+      //   .catch(() => {
+      //     this.$message({
+      //       type: "info",
+      //       message: "已取消删除",
+      //     });
+      //   });
     },
   },
 };

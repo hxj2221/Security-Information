@@ -29,6 +29,7 @@
   </div>
 </template>
 <script>
+import service from "@/service/index";
 
 export default {
   components: {},
@@ -90,6 +91,22 @@ export default {
       }
     },
   },
+  created () {
+     service.ComList().then((res) => {
+      console.log(res);
+      if (res.code === 20010) {
+      } 
+      else {
+        this.$message({
+          message: res.msg,
+          type: "error",
+          duration: 1000,
+        });
+        this.$router.push("/login");
+        localStorage.clear();
+      }
+    });
+  }
 };
 </script>
 

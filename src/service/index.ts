@@ -7,18 +7,19 @@ const qs = require('qs')
 const baseUrl = '/'
 
 export default  {
+  // 登录
   login: async (params: Object) => {
     return await service.post(`${baseUrl}api/login/login`, params).then(res => res).catch(err => err)
   },
-
-  getAdminList: async (params: any) => {
-    return await service.get(`${baseUrl}admin`, {params}).then(res => res.data).catch(err => err)
+// 投诉列表
+  ComList: async () => {
+    return await service.get(`${baseUrl}api/tsevent/lists`).then(res => res).catch(err => err)
   },
-
-  postAdminList: async (params: any) => {
+// 添加投诉
+  AddCom: async (params: any) => {
     return await service.post(`${baseUrl}admin`, { params }).then(res => res).catch(err => err)
   },
-
+// 
   putAdminList: async (params: any) => {
     return await service.put(`${baseUrl}admin`, { params }).then(res => res).catch(err => err)
   },
@@ -31,5 +32,29 @@ export default  {
   AdeList: async () => {
     return await service.get(`${baseUrl}api/bad/lists`).then(res => res).catch(err => err)
   },
-
+  // 不良事件轻重程度
+  Weight: async () => {
+    return await service.get(`${baseUrl}api/bad/lists`).then(res => res).catch(err => err)
+  },
+  // 不良类型
+  badType: async () => {
+    return await service.get(`${baseUrl}api/bad/lists`).then(res => res).catch(err => err)
+  },
+  // 员工管理
+  // 员工列表显示
+  staffList: async () => {
+    return await service.get(`${baseUrl}api/Employees/index`).then(res => res).catch(err => err)
+  },
+  // 员工添加
+  staffAdd: async (params:Object) => {
+    return await service.post(`${baseUrl}api/Employees/add`,{params}).then(res => res).catch(err => err)
+  },
+  // 员工编辑
+  staffEdit: async (params:Object) => {
+    return await service.post(`${baseUrl}api/Employees/edit`,{params}).then(res => res).catch(err => err)
+  },
+  // 员工删除
+  staffDel: async (params:Object) => {
+    return await service.post(`${baseUrl}api/Employees/del`,{params}).then(res => res).catch(err => err)
+  },
 }

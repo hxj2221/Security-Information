@@ -234,23 +234,10 @@ export default {
       console.log(1);
     },
     // 搜索事件
-    clicks() {
-      // 将标准时间转为年月日
-      var stime = new Date(this.complaintsate[0]);
-      var StartTime =
-        stime.getFullYear() + "-" + (stime.getMonth() + 1) + "-" + stime.getDate();
-      var etime = new Date(this.complaintsate[1]);
-      var EndTime =
-        etime.getFullYear() + "-" + (etime.getMonth() + 1) + "-" + etime.getDate();
-    },
-    // 设置表头颜色
-    getRowClass({ rowIndex }) {
-      if (rowIndex == 0) {
-        return "background:#c2c5f6";
-      } else {
-        return "";
-      }
-    },
+   
+  },
+  created() {
+   
   },
 };
 </script>

@@ -21,11 +21,15 @@ const service = axios.default.create({
 })
 
 service.interceptors.request.use((config: AxiosRequestConfig) => {
+  console.log(config)
+  console.log(localStorage.getItem('token'))
   if (localStorage.getItem('token')) {
-    config.headers.token = localStorage.getItem('token');  //让请求头携带验证token
-    config.headers.admin = localStorage.getItem('user'); // 让每个请求携带自定义token 请根据实际情况自行修改
-  }
   
+    config.headers.token = localStorage.getItem('token');  //让请求头携带验证token
+    // config.headers.admin = localStorage.getItem('user'); // 让每个请求携带自定义token 请根据实际情况自行修改
+  
+
+  }
   return config
 }, (err: any) => {
   Message({
@@ -37,7 +41,7 @@ service.interceptors.request.use((config: AxiosRequestConfig) => {
 });
 
 service.interceptors.response.use((response: AxiosResponse) => {
-  console.log(response)
+  // console.log(response)
   if (response.status !== 200) {
     Message({
       message: `请求错误，${String(response.status)}`,
@@ -48,7 +52,8 @@ service.interceptors.response.use((response: AxiosResponse) => {
   } else{
     let res = response.data;
     if (response.data.token) {
-      localStorage.setItem('token', response.data.token)
+      
+      // localStorage.setItem('token', response.data.token)
     }
     // if (code === -1) {
     //   MessageBox.alert(msg, {

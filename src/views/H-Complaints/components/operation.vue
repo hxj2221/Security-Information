@@ -30,7 +30,7 @@
           </slot>
         </div>
       </div>
-      <el-drawer title="快捷查看" :visible.sync="drawer" :with-header="false" size='55%'>
+      <el-drawer title="快捷查看" :visible.sync="drawer" :with-header="false" size='59%'>
       
           <ul class="infinite-list"  style="overflow:auto;height:870px;texr-aligin:center">
              <Look  style="width:100%; margin:0px 0px;padding:0px 0px">

@@ -71,7 +71,7 @@ const asyncRoutes = [
         path: '/Complaints',
         component: () => import('../views/H-Complaints/index.vue'),
         meta: {
-          roles: ['admin']
+          roles: ['admin','admin1','admin2','admin3']
         }
       },
       {
@@ -80,7 +80,7 @@ const asyncRoutes = [
         path: '/Ade',
         component: () => import('../views/H-Ade/index.vue'),
         meta: {
-          roles: ['admin', 'editor']
+          roles: ['admin','admin1','admin2','admin3']
         }
       },
       {
@@ -89,7 +89,7 @@ const asyncRoutes = [
         path: '/Connect',
         component: () => import('../views/H-Connect/index.vue'),
         meta: {
-          roles: ['admin', 'editor']
+            roles: ['admin','admin1','admin2','admin3']
         }
       }
     ]
@@ -107,7 +107,7 @@ const asyncRoutes = [
         path: '/Category',
         component: () => import('../views/H-Category/index.vue'),
         meta: {
-          roles: ['admin']
+            roles: ['admin','admin1','admin2','admin3']
         }
       }
     ]
@@ -125,7 +125,7 @@ const asyncRoutes = [
         path: '/Articlelist',
         component: () => import('../views/H-Articlelist/index.vue'),
         meta: {
-          roles: ['admin']
+            roles: ['admin','admin1','admin2','admin3']
         }
       },
       {
@@ -134,7 +134,7 @@ const asyncRoutes = [
         path: '/Addarticle',
         component: () => import('../views/H-Addarticle/index.vue'),
         meta: {
-          roles: ['admin']
+            roles: ['admin','admin1','admin2','admin3']
         }
       },
       {
@@ -143,7 +143,7 @@ const asyncRoutes = [
         path: '/Columnlist',
         component: () => import('../views/H-Columnlist/index.vue'),
         meta: {
-          roles: ['admin']
+            roles: ['admin','admin1','admin2','admin3']
         }
       }
     ]
@@ -161,7 +161,7 @@ const asyncRoutes = [
         path: '/form',
         component: () => import('../views/H-Files/index.vue'),
         meta: {
-          roles: ['admin']
+            roles: ['admin','admin1','admin2','admin3']
         }
       }
     ]
@@ -179,7 +179,7 @@ const asyncRoutes = [
         path: '/Staff',
         component: () => import('../views/H-Staff/index.vue'),
         meta: {
-          roles: ['admin']
+            roles: ['admin','admin1','admin2','admin3']
         }
       },
       {
@@ -188,7 +188,7 @@ const asyncRoutes = [
         path: '/Department',
         component: () => import('../views/H-Department/index.vue'),
         meta: {
-          roles: ['admin']
+            roles: ['admin','admin1','admin2','admin3']
         }
       },
       {
@@ -197,7 +197,7 @@ const asyncRoutes = [
         path: '/Role',
         component: () => import('../views/H-Role/index.vue'),
         meta: {
-          roles: ['admin']
+            roles: ['admin','admin1','admin2','admin3']
         }
       },
       {
@@ -206,7 +206,7 @@ const asyncRoutes = [
         path: '/Edit',
         component: () => import('../views/H-Edit/index.vue'),
         meta: {
-          roles: ['admin']
+            roles: ['admin','admin1','admin2','admin3']
         }
       }
     ]
@@ -224,7 +224,7 @@ const asyncRoutes = [
         path: '/Personal',
         component: () => import('../views/H-Personal/index.vue'),
         meta: {
-          roles: ['admin']
+            roles: ['admin','admin1','admin2','admin3']
         }
       },
       {
@@ -233,7 +233,7 @@ const asyncRoutes = [
         path: '/Account',
         component: () => import('../views/H-Account/index.vue'),
         meta: {
-          roles: ['admin']
+            roles: ['admin','admin1','admin2','admin3']
         }
       },
       {
@@ -242,7 +242,7 @@ const asyncRoutes = [
         path: '/Notify',
         component: () => import('../views/H-Notify/index.vue'),
         meta: {
-          roles: ['admin']
+            roles: ['admin','admin1','admin2','admin3']
         }
       }
     ]
@@ -260,7 +260,7 @@ const asyncRoutes = [
         path: '/Dictionaries',
         component: () => import('../views/H-Dictionaries/index.vue'),
         meta: {
-          roles: ['admin']
+            roles: ['admin','admin1','admin2','admin3']
         }
       },
       {
@@ -269,7 +269,7 @@ const asyncRoutes = [
         path: '/Technological',
         component: () => import('../views/H-Technological/index.vue'),
         meta: {
-          roles: ['admin']
+            roles: ['admin','admin1','admin2','admin3']
         }
       }
     ]

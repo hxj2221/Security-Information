@@ -78,7 +78,6 @@
 
 <script>
 import service from "@/service/index";
-import {AdeList,badType,Weight} from '@/network/Ade'
   export default {
     components: {},
     props: {},
@@ -161,18 +160,18 @@ import {AdeList,badType,Weight} from '@/network/Ade'
     },
     created(){
       // 不良列表
-     AdeList().then(res=>{
+     service.AdeList().then(res=>{
         console.log(res)
        
       })
-      // 不良类型
-      // badType().then(res=>{
-      //   console.log(res)
-      // })
-      // // 轻重程度
-      // Weight().then(res=>{
-      //   console.log(res)
-      // })
+    //   // 不良类型
+    //   service.badType().then(res=>{
+    //     console.log(res)
+    //   })
+    //   // // 轻重程度
+    //   service.Weight().then(res=>{
+    //     console.log(res)
+    //   })
       
     }
   }
