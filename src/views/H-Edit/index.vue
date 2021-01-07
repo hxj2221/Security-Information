@@ -1,141 +1,49 @@
 <template>
-  <div class="addstaffall">
-    <div class="roleaddThre">
-      <span class="roleaddSpan">编辑角色信息</span>
-      <div style="margin-right: 10px">
-        <el-button class="roleaddgr" @click="roleaddvueyes">保存</el-button>
-        <el-button class="roleaddb" @click="roleaddvueno">返回</el-button>
+  <div>
+    <div class="H-edit">
+      <div class="edit-top">
+        <el-button type="primary" @click="add">添加权限</el-button>
       </div>
-    </div>
-    <hr class="roleaddWidhr" />
-    <div class="addmain">
-      <el-form ref="form">
-        <el-row :gutter="20">
-          <el-col :span="8">
-            <el-form-item label="角色编号" disabled>
-              <el-input
-                class="dialog-input-text"
-                type="input"
-                autosize
-                placeholder="不支持修改"
-              ></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="角色名称" required>
-              <el-input
-                class="dialog-input-text"
-                type="input"
-                autosize
-                v-model="roleNameipt"
-              ></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item style="margin-top: 40px" label="角色状态">
-              <el-switch
-                v-model="valuestatus"
-                :active-value="1"
-                :inactive-value="2"
-                active-color="#13ce66"
-                inactive-color="#ff4949"
-              >
-              </el-switch>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8"> </el-col>
-        </el-row>
-        <el-row :gutter="20">
-          <el-col :span="16">
-            <el-form-item label="角色描述" required>
-              <el-input
-                class="dialog-input-text"
-                type="input"
-                autosize
-                v-model="rolecreate"
-                placeholder="请输入内容"
-              ></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8"> </el-col>
-          <el-col :span="8"> </el-col>
-        </el-row>
-      </el-form>
-    </div>
-    <div>
-      <p
-        style="
-          display: flex;
-          margin-left: 15px;
-          font-size: 20px;
-          color: #858bed;
-          font-weight: bold;
-        "
+      <el-table
+        :data="tableData"
+        style="width: 100%; margin-bottom: 20px"
+        :header-cell-style="getRowClass"
+        row-key="id"
+        border
+        default-expand-all
+        :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
       >
-        权限分配
-      </p>
-      <div class="roleF">
-        <table class="roleTab">
-          <tr style="background-color: #c2c5f6">
-            <td style="margin-left: 83px">
-              <input
-                type="checkbox"
-                id="all-checked"
-                :checked="isAllChecked()"
-                @change="changeAllChecked($event)"
-              /><span style="font-size: 14px; margin-left: 5px">模块</span>
-              <span style="font-size: 14px; margin-left: 42px">功能</span>
-            </td>
-          </tr>
-          <tr v-for="data in datas" :key="data.id">
-            <td class="roleTd">
-              <span style="font-size: 14px">
-                <input
-                  type="checkbox"
-                  value=""
-                  :id="data.listTitle"
-                  :checked="isTitleChecked(data)"
-                  @change="changeTitleChecked(data, $event)"
-                />
-                {{ data.listTitle }}
-              </span>
+        <el-table-column type="selection" width="55"> </el-table-column>
+        <el-table-column prop="date" label="名称" width="180"> </el-table-column>
 
-              <span
-                v-for="item in data.name"
-                :key="item.id"
-                style="font-size: 14px; margin-left: 30px"
-              >
-                <input
-                  type="checkbox"
-                  :value="item"
-                  v-model="data.selected"
-                  :id="item.id"
-                  @click="changesonc(item)"
-                />
-                {{ item.name }}
-              </span>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <div style="margin-top: 100px">
-      <p
-        style="
-          display: flex;
-          margin-left: 15px;
-          font-size: 20px;
-          color: #858bed;
-          font-weight: bold;
-        "
-      >
-        查看权限
-      </p>
-      <div style="margin-left: 160px; margin-top: 40px; display: flex">
-        <el-radio-group v-model="radio" @change="radiochange">
-          <el-radio :label="3">本科室</el-radio>
-          <el-radio :label="6">全部</el-radio>
-        </el-radio-group>
+        <el-table-column prop="address" label="备注"> </el-table-column>
+        <el-table-column fixed="right" label="操作" width="400">
+          <template slot-scope="scope">
+            <el-button @click="handleClick(scope.row)" type="text" size="small"
+              >添加子级</el-button
+            >
+            <el-button type="text" size="small">编辑</el-button>
+            <el-button type="text" size="small">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div>
+        <el-dialog
+          title="添加权限"
+          :visible.sync="dialogVisible"
+          width="width"
+          :before-close="dialogBeforeClose">
+          <div>
+            <div>
+              <span>权限名：</span> <el-input v-model="name" placeholder="请输入权限名" style="width:70%"></el-input>
+            </div>
+           
+          </div>
+          <div slot="footer">
+            <el-button @click="dialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+          </div>
+        </el-dialog>
       </div>
     </div>
   </div>
@@ -145,168 +53,63 @@
 export default {
   data() {
     return {
-      radio: 3,
-      rolecreate: "",
-      roleNameipt: "",
-      valuestatus: 1,
-      datas: [
+      name:'',//权限名
+      dialogVisible:false,
+      tableData: [
         {
-          listTitle: "模块1",
           id: 1,
-          selected: [],
-          name: [
-            {
-              name: "功能11",
-              id: 11,
-              info: 0,
-            },
-            {
-              name: "功能12",
-              id: 12,
-              info: 0,
-            },
-            {
-              name: "功能13",
-              id: 13,
-              info: 0,
-            },
-            {
-              name: "功能14",
-              id: 14,
-              info: 0,
-            },
-            {
-              name: "功能15",
-              id: 15,
-              info: 0,
-            },
-          ],
+          date: "首页",
+          name: "王小虎",
+          address: "这是首页权限",
+          value: true,
         },
         {
-          listTitle: "模块2",
           id: 2,
-          selected: [],
-          name: [
-            {
-              name: "功能21",
-              id: 21,
-              info: 0,
-            },
-            {
-              name: "功能22",
-              id: 22,
-              info: 0,
-            },
-            {
-              name: "功能23",
-              id: 23,
-              info: 0,
-            },
-            {
-              name: "功能24",
-              id: 24,
-              info: 0,
-            },
-            {
-              name: "功能25",
-              id: 25,
-              info: 0,
-            },
-          ],
+          date: "2016-05-04",
+          name: "登录",
+          address: "登录 ",
+          value: true,
         },
         {
-          listTitle: "模块3",
           id: 3,
-          selected: [],
-          name: [
+          date: "业务处理",
+          name: "业务处理",
+          address: "业务处理 ",
+          value: true,
+          children: [
             {
-              name: "功能31",
               id: 31,
-              info: 0,
+              date: "投诉事件",
+              name: "投诉事件",
+              address: "投诉事件 ",
+              value: true,
             },
             {
-              name: "功能32",
               id: 32,
-              info: 0,
-            },
-            {
-              name: "功能33",
-              id: 33,
-              info: 0,
-            },
-            {
-              name: "功能34",
-              id: 34,
-              info: 0,
-            },
-            {
-              name: "功能35",
-              id: 35,
-              info: 0,
-            },
-          ],
-        },
-        {
-          listTitle: "模块4",
-          id: 4,
-          selected: [],
-          name: [
-            {
-              name: "功能41",
-              id: 41,
-              info: 0,
-            },
-            {
-              name: "功能42",
-              id: 42,
-              info: 0,
-            },
-            {
-              name: "功能43",
-              id: 43,
-              info: 0,
-            },
-            {
-              name: "功能44",
-              id: 44,
-              info: 0,
-            },
-            {
-              name: "功能45",
-              id: 45,
-              info: 0,
-            },
-          ],
-        },
-        {
-          listTitle: "模块5",
-          id: 5,
-          selected: [],
-          name: [
-            {
-              name: "功能51",
-              id: 51,
-              info: 0,
-            },
-            {
-              name: "功能52",
-              id: 52,
-              info: 0,
-            },
-            {
-              name: "功能53",
-              id: 53,
-              info: 0,
-            },
-            {
-              name: "功能54",
-              id: 54,
-              info: 0,
-            },
-            {
-              name: "功能55",
-              id: 55,
-              info: 0,
+              date: "不良事件",
+              name: "王小虎",
+              address: "不良事件 ",
+              value: true,
+              children: [
+                {
+                  id: 42,
+                  date: "添加不良",
+                  name: "添加不良",
+                  address: "添加不良 ",
+                },
+                {
+                  id: 424,
+                  date: "删除",
+                  name: "删除",
+                  address: "删除 ",
+                },
+                {
+                  id: 7245,
+                  date: "查看",
+                  name: "查看",
+                  address: "查看 ",
+                },
+              ],
             },
           ],
         },
@@ -314,72 +117,23 @@ export default {
     };
   },
   methods: {
-    radiochange() {
-      console.log(this.radio);
+    // 添加权限
+    add(){
+      this.dialogVisible=true
     },
-    //   保存
-    roleaddvueyes() {
-      const loading = this.$loading({
-        lock: true,
-        text: "保存中",
-        spinner: "el-icon-loading",
-        background: "rgba(0, 0, 0, 0.7)",
-      });
-      setTimeout(() => {
-        loading.close();
-      }, 2000);
-      console.log();
-      this.$router.push("/Role");
+    dialogBeforeClose(){
+       this.dialogVisible=false
     },
-    // 取消
-    roleaddvueno() {
-      this.$router.push("/Role");
-    },
-    //   模块功能
-    isTitleChecked(data) {
-      var _selected = data.selected;
-      var _name = data.name;
-      // 验证selected中是否含有全部的item的id 如果是 证明title要选中
-      return _name.every(function (item) {
-        return _selected.indexOf(item) != -1;
-      });
-    },
-    changeTitleChecked(data, event) {
-      if (event.target.checked === true) {
-        data.name.forEach(function (item) {
-          data.selected.indexOf(item) === -1 && data.selected.push(item);
-        });
-        console.log(data.name);
+    handleClick() {},
+      getRowClass({ rowIndex }) {
+      if (rowIndex == 0) {
+        return "background:#c2c5f6;color:#000";
       } else {
-        data.selected = [];
+        return "";
       }
-    },
-    changeAllChecked(event) {
-      if (event.target.checked === true) {
-        this.datas.forEach(function (data) {
-          data.name.forEach(function (item) {
-            data.selected.indexOf(item) === -1 && data.selected.push(item);
-          });
-          console.log(data.id);
-        });
-      } else {
-        this.datas.forEach(function (data) {
-          data.selected = [];
-        });
-      }
-    },
-    isAllChecked() {
-      return this.datas.every(function (data) {
-        return data.selected.length === data.name.length;
-      });
-    },
-    changesonc(e) {
-      console.log(e);
-    },
-    jsmc() {
-      console.log(this.roleNameipt);
     },
   },
+
 };
 </script>
 
