@@ -23,16 +23,19 @@
 import service from "@/service/index";
 export default {
   data() {
-    return {};
+    return {
+      all:{}
+    };
   },
   methods: {
     staffadd() {
       service.getrole().then((res) => {
-        console.log(res.data.auth_grouap);
-        console.log(res.data.department);
+      this.all=res.data
+         this.bus.$emit("ReceiveMessage", this.all)
+        this.$parent.fathpowadd();
+         
 
       });
-      this.$parent.fathpowadd();
     },
     staff() {
       this.$router.push("/Staff");

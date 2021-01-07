@@ -165,9 +165,9 @@
               >
                 <el-option
                   v-for="item in optiondepart"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
+                  :key="item.id"
+                  :label="item.title"
+                  :value="item.id"
                 >
                 </el-option>
               </el-select>
@@ -186,9 +186,9 @@
               >
                 <el-option
                   v-for="item in optionrole"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
+                  :key="item.id"
+                  :label="item.title"
+                  :value="item.id"
                 >
                 </el-option>
               </el-select>
@@ -253,20 +253,20 @@ export default {
       addStaff: {
         staffemployee: "", // 员工编号
         // staffNumInput: "",
-        name: "ww", // 姓名
+        name: "哈哈哈", // 姓名
         age: "21", //年龄
         // staffAgesel: "", //年龄岁月天
         sex: "", //性别
-        phone: "15839435805", //手机号
-        email: "3187755914@qq.com", //电子邮箱
-        cardnumber: "412723200008203820", //证件号码
+        phone: "15139435805", //手机号
+        email: "3187755913@qq.com", //电子邮箱
+        cardnumber: "422723200008203820", //证件号码
         position: "12", //职位
         eraddress: "", //详细地址
         staffdepart: "", //所属科室
         staffrolesel: "", //角色
         head_department: "", //科室负责人
         status: "", //员工状态
-        password: "", //密码
+        password: "123qwe", //密码
         address: "", //地址
       },
 
@@ -324,47 +324,9 @@ export default {
         },
       ],
       // 科室
-      optiondepart: [
-        {
-          value: "选项1",
-          label: "全科",
-        },
-        {
-          value: "选项2",
-          label: "儿科",
-        },
-        {
-          value: "选项3",
-          label: "内科",
-        },
-      ],
+      optiondepart: [],
       // 角色
-      optionrole: [
-        {
-          value: "选项1",
-          label: "管理员",
-        },
-        {
-          value: "选项2",
-          label: "医生",
-        },
-        {
-          value: "选项3",
-          label: "护士",
-        },
-        {
-          value: "选项4",
-          label: "专家",
-        },
-        {
-          value: "选项5",
-          label: "前台",
-        },
-        {
-          value: "选项6",
-          label: "财务",
-        },
-      ],
+      optionrole: [],
     };
   },
   methods: {
@@ -377,7 +339,7 @@ export default {
         sex: this.addStaff.sex,
         email: this.addStaff.email,
         phone: this.addStaff.phone,
-        address:"one",
+        address: "one",
         eraddress: "oen",
         position: this.addStaff.position,
         age: this.addStaff.age,
@@ -386,39 +348,25 @@ export default {
         head_department: this.addStaff.head_department,
         status: this.addStaff.status,
         department_id: this.addStaff.head_department,
-        role_id:"1",
+        role_id: "1",
       };
       console.log(data);
       service.staffAdd(data).then((res) => {
         console.log(res);
+        if ((res.msg = "员工信息添加成功")) {
+          const loading = this.$loading({
+            lock: true,
+            text: "保存中",
+            spinner: "el-icon-loading",
+            background: "rgba(0, 0, 0, 0.7)",
+          });
+          setTimeout(() => {
+            loading.close();
+          }, 2000);
+          this.$parent.fathstaffyes();
+        }
+        //  if(res.)
       });
-       
-      // const loading = this.$loading({
-      //   lock: true,
-      //   text: "保存中",
-      //   spinner: "el-icon-loading",
-      //   background: "rgba(0, 0, 0, 0.7)",
-      // });
-      // setTimeout(() => {
-      //   loading.close();
-      // }, 2000);
-      // console.log(
-      //   this.staffNumInput,
-      //   this.staffNameipt,
-      //   this.staffAgeipt,
-      //   this.staffAgesel,
-      //   this.staffPhoneipt,
-      //   this.staffEmailipt,
-      //   this.staffCardipt,
-      //   this.staffPositioniPt,
-      //   this.staffaddreiPt,
-      //   this.staffdepart,
-      //   this.staffrolesel,
-      //   this.valuestatus,
-      //   this.staffpwdiPt,
-      //   this.cityvalue
-      // );
-      // this.$parent.fathstaffyes();
     },
     handleChange(cityvalue) {
       console.log(cityvalue);
@@ -428,9 +376,14 @@ export default {
       this.$parent.fathstaffno();
     },
   },
-  created(){
-    
-  }
+  created() {
+    // 获取到的科室和角色
+    let self = this;
+    this.bus.$on("ReceiveMessage", function (item) {
+      self.optionrole = item.auth_grouap;
+      self.optiondepart = item.department;
+    });
+  },
 };
 </script>
 <style scoped>

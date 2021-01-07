@@ -26,6 +26,12 @@ import './directives.js'
 import echarts from "echarts";
 Vue.prototype.$echarts = echarts;
 
+// 建立中转站，实现组件与组件之间的传值
+let bus = new Vue()
+Vue.prototype.bus = bus
+
+
+
 import jsPlumb from 'jsplumb'
 Vue.prototype.$jsPlumb = jsPlumb.jsPlumb
 
