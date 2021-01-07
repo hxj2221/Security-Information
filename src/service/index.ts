@@ -15,13 +15,13 @@ export default  {
   ComList: async () => {
     return await service.get(`${baseUrl}api/tsevent/lists`).then(res => res).catch(err => err)
   },
-// 添加投诉
-  AddCom: async (params: any) => {
-    return await service.post(`${baseUrl}admin`, { params }).then(res => res).catch(err => err)
+// 获取添加投诉列表信息
+  AddCom: async () => {
+    return await service.get(`${baseUrl}api/tsevent/add`).then(res => res).catch(err => err)
   },
-// 
-  putAdminList: async (params: any) => {
-    return await service.put(`${baseUrl}admin`, { params }).then(res => res).catch(err => err)
+// 添加投诉
+ AddComponent: async (params: any) => {
+    return await service.post(`${baseUrl}api/tsevent/add`, params ).then(res => res).catch(err => err)
   },
 
   deleteAdminList: async (params: any) => {
