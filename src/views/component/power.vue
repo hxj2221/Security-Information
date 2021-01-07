@@ -20,12 +20,18 @@
 </template>
 
 <script>
+import service from "@/service/index";
 export default {
   data() {
     return {};
   },
   methods: {
     staffadd() {
+      service.getrole().then((res) => {
+        console.log(res.data.auth_grouap);
+        console.log(res.data.department);
+
+      });
       this.$parent.fathpowadd();
     },
     staff() {
