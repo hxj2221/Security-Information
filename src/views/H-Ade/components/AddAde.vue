@@ -7,19 +7,19 @@ import service from '@/service/index';
       <el-form class="form_con" ref="addAde" :model="addAde">
         <div class="info">
           <el-form-item label="业务编号">
-            <el-input v-model="addAde.number" :disabled="true" autocomplete="off"></el-input>
+            <el-input v-model="addAde.event_num" :disabled="true" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="不良类型" required>
-              <el-select v-model="addAde.evrnt_type" >
+              <el-select v-model="addAde.event_type" >   
                 <el-option v-for="item in options"
-                  :key="item.value" :label="item.label" :value="item.value">
+                  :key="item.id" :label="item.title" :value="item.id">
                 </el-option>
               </el-select>
           </el-form-item>
           <el-form-item label="不良发生地点" required>
             <el-select v-model="addAde.occur_scene" >
                 <el-option v-for="item in options1"
-                  :key="item.value" :label="item.label" :value="item.value">
+                  :key="item.id" :label="item.title" :value="item.id">
                 </el-option>
               </el-select>
           </el-form-item>
@@ -36,7 +36,7 @@ import service from '@/service/index';
             </el-select>
           </el-form-item>
           <el-form-item label="年龄">
-            <el-input placeholder="请输入内容" v-model.number="addAde.age" class="input-with-select inp">
+            <el-input placeholder="请输入内容" v-model="addAde.age" class="input-with-select inp">
               <template slot="append">
                 <el-select v-model="addAde.specific_age" slot="prepend" placeholder="岁">
                   <el-option label="岁" value="1"></el-option>
@@ -89,7 +89,7 @@ import service from '@/service/index';
           </el-form-item>
           <el-form-item class="last" label="轻重程度" required label-width="180">
             <el-select v-model="addAde.degree_weight_id" placeholder="请选择">
-              <el-option v-for="item in options4" :key="item.value" :label="item.label" :value="item.value">
+              <el-option v-for="item in options4" :key="item.id" :label="item.title" :value="item.id">
               </el-option>
             </el-select>
           </el-form-item>
@@ -156,7 +156,7 @@ import service from '@/service/index';
     </div>
     <!-- 底部按钮 -->
     <div class="root">
-      <i class="fa fa-file-o fa-2" aria-hidden="true" @click="sure('addAde')"><span>提交</span></i>
+      <i class="fa fa-file-o fa-2" aria-hidden="true" @click="sure()"><span>提交</span></i>
       <i class="fa fa-reply fa-2" aria-hidden="true" @click="back()"><span>返回</span></i>
     </div>
   </div>
@@ -165,6 +165,7 @@ import service from '@/service/index';
 
 <script>
 import service from '@/service/index'
+import qs from 'qs'
   export default {
     components: {},
     props: {
@@ -172,9 +173,9 @@ import service from '@/service/index'
     },
     data() {
       return {
-        addAde: {
-          number: 'BL202011150001',// 事件编号
-          evrnt_type: '',// 不良类型
+        addAde:{
+          event_num: 'BL202011150001',// 事件编号
+          event_type: '',// 不良类型
           occur_scene: '',// 发生地点
           patient_name:'',//患者姓名
           sex: '',// 性别
@@ -196,90 +197,9 @@ import service from '@/service/index'
           patient_situation: '',// 患者目前情况
           event_describe: '',// 不良事件描述
         },
-        options: [{
-          value: '选项1',
-          label: '医疗'
-        }, {
-          value: '选项2',
-          label: '输血不良事件'
-        }, {
-          value: '选项3',
-          label: '器械'
-        }, {
-          value: '选项4',
-          label: '护理不良事件'
-        }, {
-          value: '选项5',
-          label: '药品类'
-        }, {
-          value: '选项6',
-          label: '医技类'
-        }, {
-          value: '选项7',
-          label: '后勤类'
-        }, {
-          value: '选项8',
-          label: '安全类'
-        }, {
-          value: '选项9',
-          label: '信息类'
-        }, {
-          value: '选项10',
-          label: '暴力事件'
-        }, {
-          value: '选项11',
-          label: '其他管理类'
-        }],
-        options1: [{
-          value: '1',
-          label: '急诊'
-        }, {
-          value: '2',
-          label: '门诊'
-        }, {
-          value: '3',
-          label: '病房部'
-        }, {
-          value: '4',
-          label: '手术室'
-        }, {
-          value: '5',
-          label: '医技检查室'
-        }, {
-          value: '6',
-          label: '后勤区域'
-        }, {
-          value: '7',
-          label: '其他'
-        }, ],
-        options4: [{
-          value: '选项1',
-          label: 'A级：客观环境或条件可能引发不良事件（隐患）'
-        }, {
-          value: '选项2',
-          label: 'B级：发生但未累及患者'
-        }, {
-          value: '选项3',
-          label: 'C级：累及到患者，但没有造成伤害'
-        }, {
-          value: '选项4',
-          label: 'D级：累及到患者，需要进行监测以确保患者不被伤害，或需通过干预阻止伤害发生'
-        }, {
-          value: '选项5',
-          label: 'E级：造成患者暂时性伤害，并需要进行治疗或干预'
-        }, {
-          value: '选项6',
-          label: 'F级：造成患者暂时性伤害，并需要住院或延长住院时间'
-        }, {
-          value: '选项7',
-          label: 'G级：造成患者永久性伤害'
-        }, {
-          value: '选项8',
-          label: 'H级：导致患者需要治疗挽救生命'
-        }, {
-          value: '选项9',
-          label: 'I级：导致患者死亡'
-        }, ],
+        options: [],
+        options1: [],
+        options4: [],
         tableData: [{
           name: '王小虎',
           sex: '男',
@@ -293,46 +213,14 @@ import service from '@/service/index'
     },
     methods: {
       // 提交
-      sure(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            let params=this.addAde
-            console.log(params)
-            service.badAdd(params).then(res=>{
-              console.log(res)
-            })
-          } 
+      sure() {
+        let params=this.addAde
+        service.badAdd(params).then(res=>{
+          console.log(res)
+          if(res.code==20010){
+            this.$emit('pageAdd')
+          }
         });
-        // let params={
-        //   evrnt_type:this.addAde.evrnt_type,
-        //   occur_scene:this.addAde.occur_scene,
-        //   occur_time:this.addAde.occur_time,
-        //   create_uid:this.addAde.create_uid,
-        //   create_time:this.addAde.create_time,
-        //   update_time:this.addAde.update_time,
-        //   patient_name:this.addAde.patient_name,
-        //   sex:this.addAde.sex,
-        //   age:this.addAde.age,
-        //   degree_weight_id:this.addAde.degree_weight_id,
-        //   specific_age:this.addAde.specific_age,
-        //   admission_id:this.addAde.admission_id,
-        //   nurse_uid:this.addAde.nurse_uid,
-        //   Indications_uid:this.addAde.Indications_uid,
-        //   stakeholder:this.addAde.stakeholder,
-        //   department_id:this.addAde.department_id,
-        //   hospitalized_time:this.addAde.hospitalized_time,
-        //   bed_number:this.addAde.bed_number,
-        //   admitting_diagnosis:this.addAde.admitting_diagnosis,
-        //   patient_situation:this.addAde.patient_situation,
-        //   diagnosis_process:this.addAde.diagnosis_process,
-        //   event_describe:this.addAde.event_describe,
-        // }
-        // console.log(params)
-        // service.badAdd(params).then(res=>{
-        //   console.log(res)
-        // })
-        // this.$emit('pageAdd')
-
       },
       // 返回
       back() {
@@ -344,6 +232,31 @@ import service from '@/service/index'
         console.log(row);
       },
 
+    },
+    created(){
+      service.badType().then(res=>{
+        console.log(res)
+        this.options=res.choice_type
+        this.options1=res.address
+        this.options4=res.degree_weight
+      })
+    },
+    filters: {
+        addAde: function (value) {
+            let date = new Date(value);
+            let y = date.getFullYear();
+            let MM = date.getMonth() + 1;
+            MM = MM < 10 ? ('0' + MM) : MM;
+            let d = date.getDate();
+            d = d < 10 ? ('0' + d) : d;
+            let h = date.getHours();
+            h = h < 10 ? ('0' + h) : h;
+            let m = date.getMinutes();
+            m = m < 10 ? ('0' + m) : m;
+            let s = date.getSeconds();
+            s = s < 10 ? ('0' + s) : s;
+            return y + '-' + MM + '-' + d + ' ' + h + ':' + m + ':' + s;
+        }
     },
   }
 </script>

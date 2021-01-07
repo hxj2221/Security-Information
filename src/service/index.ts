@@ -33,21 +33,21 @@ export default  {
     return await service.get(`${baseUrl}api/bad/lists`).then(res => res).catch(err => err)
   },
   // 不良新增
-  badAdd: async (params:Object) => {
+  badAdd: async (params:any) => {
     return await service.post(`${baseUrl}api/bad/bad_add`,params).then(res => res).catch(err => err)
   },
   // 不良事件轻重程度
   // Weight: async () => {
   //   return await service.get(`${baseUrl}api/bad/lists`).then(res => res).catch(err => err)
   // },
-  // // 不良类型类型
-  // badType: async () => {
-  //   return await service.get(`${baseUrl}api/bad/lists`).then(res => res).catch(err => err)
-  // },
+  // 不良类型类型
+  badType: async () => {
+    return await service.get(`${baseUrl}api/bad/choice_type`).then(res => res).catch(err => err)
+  },
   // 不良查看
-  // badSee: async (params:Object) => {
-  //   return await service.get(`${baseUrl}api/bad/bad_info`,params).then(res => res).catch(err => err)
-  // },
+  badSee: async (params:any) => {
+    return await service.get(`${baseUrl}api/bad/bad_info`,{params}).then(res => res).catch(err => err)
+  },
   // 员工管理
   // 员工列表显示
   staffList: async () => {
