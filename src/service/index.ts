@@ -55,14 +55,14 @@ export default  {
   },
   // 员工添加
   staffAdd: async (params:Object) => {
-    return await service.post(`${baseUrl}api/Employees/add`,{params}).then(res => res).catch(err => err)
+    return await service.post(`${baseUrl}api/Employees/add`,params).then(res => res).catch(err => err)
   },
   // 员工编辑
   staffEdit: async (params:Object) => {
-    return await service.post(`${baseUrl}api/Employees/edit`,{params}).then(res => res).catch(err => err)
+    return await service.post(`${baseUrl}api/Employees/edit`,params).then(res => res).catch(err => err)
   },
   // 员工删除
   staffDel: async (params:Object) => {
-    return await service.post(`${baseUrl}api/Employees/del`,{params}).then(res => res).catch(err => err)
+    return await service.post(`${baseUrl}api/Employees/del`,params).then(res => res).catch(err => err)
   },
 }
