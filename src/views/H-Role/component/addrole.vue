@@ -119,6 +119,25 @@
         </table>
       </div>
     </div>
+    <div style="margin-top: 100px">
+      <p
+        style="
+          display: flex;
+          margin-left: 15px;
+          font-size: 20px;
+          color: #858bed;
+          font-weight: bold;
+        "
+      >
+        查看权限
+      </p>
+      <div style="margin-left: 160px; margin-top: 40px; display: flex">
+        <el-radio-group v-model="radio" @change="radiochange">
+          <el-radio :label="3">本科室</el-radio>
+          <el-radio :label="6">全部</el-radio>
+        </el-radio-group>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -126,6 +145,7 @@
 export default {
   data() {
     return {
+      radio: 3,
       rolecreate: "",
       roleNameipt: "",
       valuestatus: 1,
@@ -307,6 +327,10 @@ export default {
       }, 2000);
       console.log();
       this.$parent.fathroleyes();
+    },
+    // 查看权限
+    radiochange() {
+      console.log(this.radio);
     },
     // 取消
     roleaddvueno() {

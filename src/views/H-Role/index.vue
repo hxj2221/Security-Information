@@ -105,6 +105,7 @@
 <script>
 import headpow from "../component/power";
 import addrole from "./component/addrole";
+import { getrole } from "../../network/H-role";
 export default {
   components: { headpow, addrole },
   data() {
@@ -119,48 +120,29 @@ export default {
         roleName: "",
         roleCreapeo: "",
       },
-      dormitory: [
-        {
-          rolejobNum: "10001",
-          rolenumber: "120",
-          roleName: "管理员",
-          roleCreapeo: "王a",
-          roleCreat: "2020-12-20 16:13:16",
-          status: "1",
-          zip: 200333,
-        },
-        {
-          rolejobNum: "10001",
-          rolenumber: "120",
-          roleName: "管理员",
-          roleCreapeo: "王b",
-          roleCreat: "2020-12-20 16:13:16",
-          status: "1",
-          zip: 200333,
-        },
-        {
-          rolejobNum: "10001",
-          rolenumber: "120",
-          roleName: "管理员",
-          roleCreapeo: "王c",
-          roleCreat: "2020-12-20 16:13:16",
-          status: "1",
-          zip: 200333,
-        },
-        {
-          rolejobNum: "10001",
-          rolenumber: "120",
-          roleName: "管理员",
-          roleCreapeo: "王d",
-          roleCreat: "2020-12-20 16:13:16",
-          status: "1",
-          zip: 200333,
-        },
-      ],
+      dormitory: [],
       search: "",
     };
   },
-
+  created() {
+    $.ajax({
+      url: "http://bt1.wlqqlp.com:8082/api/part/authgroup",
+      type: "get",
+      dataType: "json",
+      headers: {
+        token:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjE1LCJpYXQiOjE2MDk5MTUwNDYsImp0aSI6ImE1Y2M1MTJjZTJhYmJkMjFiN2RmNzMxNzkyZGIyZTc5In0.gHTJUmJk0G0iaOKcQCJwDCk7nonBZ7QsDXKV6vIYYwU",
+      },
+      success(e) {
+        console.log(e);
+        this.dormitory = e.data.data;
+        console.log(dormitory);
+      },
+    });
+    // getrole().then((res) => {
+    //   console.log(res);
+    // });
+  },
   computed: {
     // 搜索
     tables() {

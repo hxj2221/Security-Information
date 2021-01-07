@@ -73,7 +73,7 @@
               @change="changeSwitch($event, scope.row)"
             ></el-switch>
           </template>
-          ></el-table-column
+          </el-table-column
         >
 
         <el-table-column label="操作" width="120">

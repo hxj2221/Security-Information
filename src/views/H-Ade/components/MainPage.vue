@@ -40,27 +40,27 @@
     </div>
     <!-- 内容 -->
     <el-table class="elTable" :data="tableData">
-      <el-table-column prop="order" label="序号">
+      <el-table-column prop="id" label="序号">
       </el-table-column>
       <el-table-column prop="serialNum" label="事件编码">
       </el-table-column>
-      <el-table-column prop="name" label="患者姓名">
+      <el-table-column prop="patient_name" label="患者姓名">
       </el-table-column>
       <el-table-column prop="sex" label="性别">
       </el-table-column>
       <el-table-column prop="age" label="年龄">
       </el-table-column>
-      <el-table-column prop="date" label="事发日期" width="150" >
+      <el-table-column prop="occur_time" label="事发日期" width="150" >
       </el-table-column>
-      <el-table-column prop="place" label="发生场所" >
+      <el-table-column prop="occur_scene" label="发生场所" >
       </el-table-column>
-      <el-table-column prop="level" label="轻重程度" >
+      <el-table-column prop="degree_weight_id" label="轻重程度" >
       </el-table-column>
-      <el-table-column prop="date1" label="上报时间" width="150">
+      <el-table-column prop="create_time" label="上报时间" width="150">
       </el-table-column>
-      <el-table-column prop="depart"  label="患者科室" >
+      <el-table-column prop="department_id"  label="患者科室" >
       </el-table-column>
-      <el-table-column prop="person" label="上报人" >
+      <el-table-column prop="create_uid" label="上报人" >
       </el-table-column>
       <el-table-column label="操作" >
         <template slot-scope="scope">
@@ -78,7 +78,6 @@
 
 <script>
 import service from "@/service/index";
-import {AdeList,badType,Weight} from '@/network/Ade'
   export default {
     components: {},
     props: {},
@@ -154,25 +153,31 @@ import {AdeList,badType,Weight} from '@/network/Ade'
       },
       // 查看
       handleClick(row) {
-        console.log(row);
-        this.$emit('pageDetail')
+        // this.$emit('pageDetail')
+        let param={
+          id:row.id
+        }
+        console.log(param)
+        service.badSee(param).then(res=>{
+          console.log(res)
+        })
       },
       
     },
     created(){
       // 不良列表
-     AdeList().then(res=>{
-        console.log(res)
-       
+     service.AdeList().then(res=>{
+        // console.log(res)
+        this.tableData=res.data
       })
-      // 不良类型
-      // badType().then(res=>{
-      //   console.log(res)
-      // })
-      // // 轻重程度
-      // Weight().then(res=>{
-      //   console.log(res)
-      // })
+    //   // 不良类型
+    //   service.badType().then(res=>{
+    //     console.log(res)
+    //   })
+    //   // // 轻重程度
+    //   service.Weight().then(res=>{
+    //     console.log(res)
+    //   })
       
     }
   }

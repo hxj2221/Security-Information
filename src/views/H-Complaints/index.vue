@@ -22,9 +22,17 @@
           <Table>
             <div slot="column">
               <el-table-column fixed="right" label="操作" width="150%">
-                <el-button type="text" size="small" @click="looks()">查看</el-button>
-                <el-button type="text" size="small" @click="record()">医患记录</el-button>
-                <el-button type="text" size="small" @click="handle()">操作</el-button>
+                <template slot-scope="scope">
+                  <el-button type="text" size="small" @click="looks(scope.row)"
+                    >查看</el-button
+                  >
+                  <el-button type="text" size="small" @click="record(scope.row)"
+                    >医患记录</el-button
+                  >
+                  <el-button type="text" size="small" @click="handle(scope.row)"
+                    >操作</el-button
+                  >
+                </template>
               </el-table-column>
             </div>
           </Table>
@@ -88,14 +96,14 @@
           </el-dialog>
         </div>
         <div slot="conserve">
-          <Conserve>
+          <!-- <Conserve>
             <el-button
               type="primary"
               icon="iconfont el-icon-hospital-passwordbaocun"
               class="keep"
               slot="keep"
               @click="keepform()"
-              >保存</el-button
+              >提交</el-button
             >
             <el-button
               type="primary"
@@ -106,7 +114,7 @@
               @click="backss()"
               >返回</el-button
             >
-          </Conserve>
+          </Conserve> -->
         </div>
       </Addcom>
       <!-- 查看 -->
@@ -158,6 +166,8 @@ import Read from "../H-Complaints/components/read";
 import Conserve from "../H-Complaints/components/conserve";
 import Table from "../H-Complaints/components/Tables";
 import Operation from "../H-Complaints/components/operation";
+// 添加投诉
+import service from "@/service/index";
 
 export default {
   components: { Complaintslist, Addcom, Look, Read, Conserve, Table, Operation },
@@ -174,13 +184,16 @@ export default {
   },
 
   methods: {
-    handle() {
+    // 操作页面
+    handle(index) {
+      console.log(index);
       this.list = false;
       this.add = false;
       this.look = false;
       this.operations = true;
     },
-    records() {
+    records(index) {
+      console.log(index);
       //跳转到医患记录
       this.$router.push("/Connect");
     },
@@ -197,7 +210,8 @@ export default {
       this.$router.push("/Connect");
     },
     // 查看详情
-    looks() {
+    looks(index) {
+      console.log(index);
       this.list = false;
       this.add = false;
       this.look = true;
@@ -221,24 +235,22 @@ export default {
       this.look = false;
       this.operations = false;
     },
-    // 添加
+    // 添加投诉
     addcomsss() {
       this.list = false;
       this.add = true;
       this.look = false;
       this.dialogVisible = true;
       this.operations = false;
+     
     },
     // 导出事件
     exportcom() {
       console.log(1);
     },
     // 搜索事件
-   
   },
-  created() {
-   
-  },
+  created() {},
 };
 </script>
 
