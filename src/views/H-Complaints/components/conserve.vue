@@ -6,7 +6,7 @@
           type="primary"
           icon="iconfont el-icon-hospital-passwordbaocun"
           class="keep"
-          >保存</el-button
+          >提交</el-button
         >
       </slot>
       <slot name="back">

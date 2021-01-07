@@ -21,8 +21,7 @@ const service = axios.default.create({
 })
 
 service.interceptors.request.use((config: AxiosRequestConfig) => {
-  console.log(config)
-  console.log(localStorage.getItem('token'))
+  
   if (localStorage.getItem('token')) {
   
     config.headers.token = localStorage.getItem('token');  //让请求头携带验证token
