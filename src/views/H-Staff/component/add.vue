@@ -244,13 +244,13 @@
 import { Aepyee } from "@/network/Sta.js";
 
 import qs from "qs";
-import service from '@/service/index';
+import service from "@/service/index";
 export default {
   components: {},
   props: {},
   data() {
     return {
-      addStaff:{
+      addStaff: {
         staffemployee: "", // 员工编号
         // staffNumInput: "",
         name: "ww", // 姓名
@@ -267,9 +267,9 @@ export default {
         head_department: "", //科室负责人
         status: "", //员工状态
         password: "", //密码
-        address:"", //地址
+        address: "", //地址
       },
-      
+
       //年龄循环
       optionages: [
         {
@@ -287,7 +287,6 @@ export default {
       ],
       // 性别循环
       optiongen: [
-        
         {
           value: "1",
           label: "男",
@@ -314,15 +313,15 @@ export default {
           ],
         },
         {
-          value:'河南',
-          label:'河南',
-          children:[
+          value: "河南",
+          label: "河南",
+          children: [
             {
-              value:'郑州',
-              label:'郑州'
-            }
-          ]
-        }
+              value: "郑州",
+              label: "郑州",
+            },
+          ],
+        },
       ],
       // 科室
       optiondepart: [
@@ -371,10 +370,29 @@ export default {
   methods: {
     // 保存
     staffaddvueyes() {
-      let params = this.addStaff
-      service.staffAdd(qs.stringify(params)).then((res) => {
+      // let params = this.addStaff
+      let data = {
+        name: this.addStaff.name,
+        password: this.addStaff.password,
+        sex: this.addStaff.sex,
+        email: this.addStaff.email,
+        phone: this.addStaff.phone,
+        address:"one",
+        eraddress: "oen",
+        position: this.addStaff.position,
+        age: this.addStaff.age,
+        // specific_age: this.addStaff.age,
+        cardnumber: this.addStaff.cardnumber,
+        head_department: this.addStaff.head_department,
+        status: this.addStaff.status,
+        department_id: this.addStaff.head_department,
+        role_id:"1",
+      };
+      console.log(data);
+      service.staffAdd(data).then((res) => {
         console.log(res);
       });
+       
       // const loading = this.$loading({
       //   lock: true,
       //   text: "保存中",
@@ -410,6 +428,9 @@ export default {
       this.$parent.fathstaffno();
     },
   },
+  created(){
+    
+  }
 };
 </script>
 <style scoped>

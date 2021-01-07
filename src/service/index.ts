@@ -46,8 +46,8 @@ export default  {
     return await service.get(`${baseUrl}api/Employees/index`).then(res => res).catch(err => err)
   },
   // 员工添加
-  staffAdd: async (params:Object) => {
-    return await service.post(`${baseUrl}api/Employees/add`,{params}).then(res => res).catch(err => err)
+  staffAdd: async (data:any) => {
+    return await service.post(`${baseUrl}api/Employees/add`,data).then(res => res).catch(err => err)
   },
   // 员工编辑
   staffEdit: async (params:Object) => {
@@ -56,5 +56,9 @@ export default  {
   // 员工删除
   staffDel: async (params:Object) => {
     return await service.post(`${baseUrl}api/Employees/del`,{params}).then(res => res).catch(err => err)
+  },
+  //
+  getrole: async (params:Object) => {
+    return await service.get(`${baseUrl}api/Employees/add`).then(res => res).catch(err => err)
   },
 }
