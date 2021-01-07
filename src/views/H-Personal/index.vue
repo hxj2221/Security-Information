@@ -160,7 +160,8 @@
 
 <script>
 import userthre from "../component/userthre";
-import { changeinfor } from "../../network/information";
+import { changeinfor } from "../../network/H-person";
+import { personxq } from "../../network/H-person";
 import options from "./coun.js";
 import qs from "qs";
 export default {
@@ -210,7 +211,21 @@ export default {
       ],
     };
   },
-
+  // 个人信息数据
+  created() {
+    let data = {};
+    personxq().then((res) => {
+      console.log(res);
+      this.personNameipt = res.data.data.name;
+      this.personAgeipt = res.data.data.age;
+      this.personPhoneipt = res.data.data.phone;
+      this.personEmailipt = res.data.data.email;
+      this.personCardipt = res.data.data.cardnumber;
+      this.personPositioniPt = res.data.data.position;
+      this.personaddreiPt = res.data.data.eraddress;
+      this.persongensel = res.data.data.sex;
+    });
+  },
   methods: {
     personsave() {
       console.log(

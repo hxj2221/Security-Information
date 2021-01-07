@@ -8,6 +8,9 @@
       <el-button class="powerRole" style="margin-left: -5px" @click="role"
         >角色列表</el-button
       >
+      <el-button class="powerRole" style="margin-left: -5px" @click="editpow"
+        >编辑权限</el-button
+      >
       <el-button class="powerAdd" icon="el-icon-zoom-in" @click="staffadd"
         >新增</el-button
       >
@@ -39,6 +42,9 @@ export default {
     },
     role() {
       this.$router.push("/Role");
+    },
+    editpow() {
+      this.$router.push("/Edit");
     },
   },
 };

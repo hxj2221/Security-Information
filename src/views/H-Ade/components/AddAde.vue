@@ -1,25 +1,32 @@
+import service from '@/service/index';
 <template>
   <div class="addAll">
     <!-- 新增 -->
     <div class="formBasics">
       <h2>基本信息</h2>
-      <el-form class="form_con" :model="add">
+      <el-form class="form_con" ref="addAde" :model="add">
         <div class="info">
           <el-form-item label="业务编号">
             <el-input v-model="add.number" :disabled="true" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="不良类型" required>
-            <el-cascader :options="options" v-model="add.mold" filterable>
-            </el-cascader>
+              <el-select v-model="add.evrnt_type" >
+                <el-option v-for="item in options"
+                  :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
           </el-form-item>
           <el-form-item label="不良发生地点" required>
-            <el-cascader :options="options1" v-model="add.address" filterable>
-            </el-cascader>
+            <el-select v-model="add.occur_scene" >
+                <el-option v-for="item in options1"
+                  :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
           </el-form-item>
         </div>
         <div class="info">
           <el-form-item label="患者姓名" required>
-            <el-input v-model="add.name" autocomplete="off"></el-input>
+            <el-input v-model="add.patient_name" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="性别" required>
             <el-select v-model="add.sex" placeholder="男">
@@ -31,7 +38,7 @@
           <el-form-item label="年龄">
             <el-input placeholder="请输入内容" v-model.number="add.age" class="input-with-select inp">
               <template slot="append">
-                <el-select v-model="add.Age" slot="prepend" placeholder="岁">
+                <el-select v-model="add.specific_age" slot="prepend" placeholder="岁">
                   <el-option label="岁" value="1"></el-option>
                   <el-option label="月" value="2"></el-option>
                   <el-option label="天" value="3"></el-option>
@@ -42,46 +49,46 @@
         </div>
         <div class="info">
           <el-form-item label="入院日期" required>
-            <el-date-picker v-model="add.date" type="datetime" placeholder="选择日期时间">
+            <el-date-picker v-model="add.hospitalized_time" type="datetime" placeholder="选择日期时间">
             </el-date-picker>
           </el-form-item>
           <el-form-item label="科室" required>
-            <el-input v-model="add.depart" autocomplete="off"></el-input>
+            <el-input v-model="add.department_id" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="床号" required>
-            <el-input v-model="add.bedNum" autocomplete="off"></el-input>
+            <el-input v-model="add.bed_number" autocomplete="off"></el-input>
           </el-form-item>
         </div>
         <div class="info">
           <el-form-item label="住院号" required>
-            <el-input v-model="add.hospitalNum" autocomplete="off"></el-input>
+            <el-input v-model="add.admission_id" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="不良发生时间" required>
-            <el-date-picker v-model="add.date1" type="datetime" placeholder="选择日期时间">
+            <el-date-picker v-model="add.occur_time" type="datetime" placeholder="选择日期时间">
             </el-date-picker>
           </el-form-item>
           <el-form-item label="报告时间" required>
-            <el-date-picker v-model="add.date2" type="datetime" placeholder="选择日期时间">
+            <el-date-picker v-model="add.create_time" type="datetime" placeholder="选择日期时间">
             </el-date-picker>
           </el-form-item>
         </div>
         <div class="info">
           <el-form-item label="主管医师" required>
-            <el-input v-model="add.physician" autocomplete="off"></el-input>
+            <el-input v-model="add.Indications_uid" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="主管护士" required>
-            <el-input v-model="add.nurse" autocomplete="off"></el-input>
+            <el-input v-model="add.nurse_uid" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="在场相关人员" required>
-            <el-input v-model="add.stakeholders" autocomplete="off"></el-input>
+            <el-input v-model="add.stakeholder" autocomplete="off"></el-input>
           </el-form-item>
         </div>
         <div class="info info_last">
           <el-form-item label="上报人" required>
-            <el-input v-model="add.ReportPerson" autocomplete="off"></el-input>
+            <el-input v-model="add.create_uid" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item class="last" label="轻重程度" required label-width="180">
-            <el-select v-model="add.value1" placeholder="请选择">
+            <el-select v-model="add.degree_weight_id" placeholder="请选择">
               <el-option v-for="item in options4" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
@@ -90,28 +97,28 @@
         <el-row>
           <el-col :span="24">
             <el-form-item style="width:90%" label="入院诊断" required>
-              <el-input type="textarea" v-model="add.desc"></el-input>
+              <el-input type="textarea" v-model="add.admitting_diagnosis"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
             <el-form-item style="width:90%" label="诊疗经过" required>
-              <el-input type="textarea" v-model="add.desc1"></el-input>
+              <el-input type="textarea" v-model="add.diagnosis_process"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
             <el-form-item style="width:90%" label="患者目前情况" required>
-              <el-input type="textarea" v-model="add.desc2"></el-input>
+              <el-input type="textarea" v-model="add.patient_situation"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
             <el-form-item style="width:90%" label="不良事件描述" required>
-              <el-input type="textarea" v-model="add.desc3"></el-input>
+              <el-input type="textarea" v-model="add.event_describe"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -157,6 +164,7 @@
 </template>
 
 <script>
+import service from '@/service/index'
   export default {
     components: {},
     props: {
@@ -165,46 +173,28 @@
     data() {
       return {
         add: {
-          // 事件编号
-          number: 'BL202011150001',
-          // 不良类型
-          mold: '',
-          address: '',
-          // 性别
-          sex: '',
-          // 年龄
-          age: '',
-          Age: '',
-          // 入院日期
-          date: '',
-          // 科室
-          depart: '',
-          // 床号
-          bedNum: '',
-          // 住院号
-          hospitalNum: '',
-          // 不良发生时间
-          date1: '',
-          // 报告时间
-          date2: '',
-          // 主管医师
-          physician: '',
-          // 主管护士
-          nurse: '',
-          // 在场相关人员
-          stakeholders: '',
-          // 上报人
-          ReportPerson: '',
-          // 轻重程度
-          value1: '',
-          // 入院诊断
-          desc: '',
-          // 诊疗经过
-          desc1: '',
-          // 患者目前情况
-          desc2: '',
-          // 不良事件描述
-          desc3: '',
+          number: 'BL202011150001',// 事件编号
+          evrnt_type: '',// 不良类型
+          occur_scene: '',// 发生地点
+          patient_name:'',//患者姓名
+          sex: '',// 性别
+          age: '', // 年龄
+          specific_age: '',//年龄类别
+          hospitalized_time: '',// 入院日期
+          department_id: '',// 科室
+          bed_number: '',// 床号
+          admission_id: '',// 住院号
+          occur_time: '',// 不良发生时间
+          create_time: '',// 报告时间
+          Indications_uid: '',// 主管医师
+          nurse_uid: '',// 主管护士
+          stakeholder: '',// 在场相关人员
+          create_uid: '',// 上报人
+          degree_weight_id: '',// 轻重程度
+          admitting_diagnosis: '',// 入院诊断
+          diagnosis_process: '',// 诊疗经过
+          patient_situation: '',// 患者目前情况
+          event_describe: '',// 不良事件描述
         },
         options: [{
           value: '选项1',
@@ -303,14 +293,44 @@
     },
     methods: {
       // 提交
-      sure() {
-        console.log('1');
-        this.$emit('pageAdd')
+      sure(addAde) {
+        let params={
+          evrnt_type:this.add.evrnt_type,
+          occur_scene:this.add.occur_scene,
+          occur_time:this.add.occur_time,
+          create_uid:this.add.create_uid,
+          create_time:this.add.create_time,
+          update_time:this.add.update_time,
+          patient_name:this.add.patient_name,
+          sex:this.add.sex,
+          age:this.add.age,
+          degree_weight_id:this.add.degree_weight_id,
+          specific_age:this.add.specific_age,
+          admission_id:this.add.admission_id,
+          nurse_uid:this.add.nurse_uid,
+          Indications_uid:this.add.Indications_uid,
+          stakeholder:this.add.stakeholder,
+          department_id:this.add.department_id,
+          hospitalized_time:this.add.hospitalized_time,
+          bed_number:this.add.bed_number,
+          admitting_diagnosis:this.add.admitting_diagnosis,
+          patient_situation:this.add.patient_situation,
+          diagnosis_process:this.add.diagnosis_process,
+          event_describe:this.add.event_describe,
+        }
+        console.log(params)
+        console.log(indexOf(this.add.evrnt_type))
+        service.badAdd(params).then(res=>{
+          console.log(res)
+        })
+        // this.$emit('pageAdd')
+
       },
       // 返回
       back() {
         this.$emit('pageAdd')
       },
+      // 取消关联
       // 查看
       handleClick(row) {
         console.log(row);
