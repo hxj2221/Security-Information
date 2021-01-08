@@ -257,3 +257,11 @@
     padding-top: 30px;
     padding-left: 35px;
 }
+/* 弹框按钮 */
+.dialog_button{
+ overflow: hidden;
+}
+.dialog_button>.el-button{
+    float: right;
+    margin-right: 10px;
+}

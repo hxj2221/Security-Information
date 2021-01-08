@@ -9,11 +9,12 @@
           placeholder="请选择"
           class="staffSel"
         >
+          <el-option label="请选择" value="请选择"></el-option>
           <el-option
             v-for="item in optionbeldepart"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
+            :key="item.id"
+            :label="item.title"
+            :value="item.id"
           >
           </el-option>
         </el-select>
@@ -22,7 +23,9 @@
           class="staffNameipt"
           placeholder="请输入内容"
         ></el-input>
-        <el-button class="staffNamesch" icon="el-icon-search">搜索</el-button>
+        <el-button class="staffNamesch" icon="el-icon-search" @click="seachAll"
+          >搜索</el-button
+        >
       </div>
       <el-table
         :data="tables"
@@ -41,9 +44,13 @@
         </el-table-column>
         <el-table-column prop="phone" label="手机号码" width="150">
         </el-table-column>
-        <el-table-column prop="staffKs" label="所属科室" width="120">
+        <el-table-column
+          prop="department[0].title"
+          label="所属科室"
+          width="120"
+        >
         </el-table-column>
-        <el-table-column prop="staffJs" label="角色" width="120">
+        <el-table-column prop="auth_grouap[0].title" label="角色" width="120">
         </el-table-column>
         <el-table-column
           prop="name"
@@ -95,7 +102,7 @@
     </div>
     <!--新增-->
     <Staff v-show="add"></Staff>
-    <!-- 编辑 -->
+    <!-- 编辑弹框 -->
     <el-dialog
       title="编辑"
       :visible.sync="editFormVisible"
@@ -144,6 +151,11 @@
           ></el-input>
         </el-form-item>
       </el-form>
+      <div class="dialog_button">
+          <el-button >返回</el-button>
+        <el-button type="primary" style="background:#666ee8;border-color:#666ee8" >确定</el-button>
+       
+      </div>
     </el-dialog>
   </div>
 </template>
@@ -169,32 +181,9 @@ export default {
       staffvue: true,
       currentRow: [], //选中的值
       editFormVisible: false, //设置默认弹出框  为false
-      editForm: {
-        // staffjobNum: "",
-        // staffName: "",
-        // staffGen: "",
-        // staffAge: "",
-        // staffPhone: "",
-        // staffKs: "",
-        // staffJs: "",
-        // staffCreapeo: "",
-        // staffCreat: "",
-      },
-
-      optionbeldepart: [
-        {
-          value: "选项1",
-          label: "全科",
-        },
-        {
-          value: "选项2",
-          label: "儿科",
-        },
-        {
-          value: "选项3",
-          label: "内科",
-        },
-      ],
+      editForm: {},
+      tables1: [],
+      optionbeldepart: [],
 
       tables: [],
 
@@ -203,16 +192,33 @@ export default {
     };
   },
   created() {
+    // 获取员工列表
     service.staffList().then((res) => {
-      console.log(res);
       this.tables = res.data;
+      //  this.tables.department=res.data[].department[0].title
       for (let i = 1; i < res.data.length; i++) {
         this.id = res.data[i].id;
         console.log(this.id);
       }
     });
+    // 员工搜索
+    service.staffSeah().then((res) => {
+      this.optionbeldepart = res.data;
+    });
   },
   methods: {
+    // 员工搜索
+    seachAll() {
+      let params = {
+        name: this.search,
+        department_id: this.staffbeldepart,
+      };
+      console.log(params);
+      service.staffSea(params).then((res) => {
+        // this.tables1
+        this.tables = this.tables1 = res.data;
+      });
+    },
     // 新增
     fathpowadd() {
       this.staffvue = false;
@@ -229,20 +235,30 @@ export default {
         this.staffvue = true;
       }, 3000);
     },
-    // switch开关
+    //员工状态
     changeSwitch(val, row) {
-      console.log(row.status);
-      if (row.status == 1) {
-        this.$message({
-          type: "success",
-          message: "员工启用成功",
-        });
-      } else {
-        this.$message({
-          type: "success",
-          message: "员工停用成功",
-        });
-      }
+      console.log(val, row);
+      // 员工状态
+      let params = {
+        id: row.id,
+      };
+      console.log(params);
+      service.staffState(params).then((res) => {
+        // console.log(res)
+        if (row.state == 1) {
+          this.$message({
+            type: "success",
+            message: "员工启用成功",
+          });
+        } else {
+          if (row.state == 0) {
+            this.$message({
+              type: "warning",
+              message: "员工停用",
+            });
+          }
+        }
+      });
     },
     // 编辑
     handleEdit(index, row) {
@@ -259,37 +275,37 @@ export default {
       };
       service.staffedits(params).then((res) => {
         console.log(this.id);
-        console.log(res);
       });
     },
     //删除：
     handleDelete(index, row) {
-      console.log(index, row);
+      // console.log(index, row);
       let params = {
         id: this.id,
       };
       service.staffDel(params).then((res) => {
-        console.log(res);
-        
+        console.log(res.code);
+        if (res.code == "20010") {
+          this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+            confirmButtonText: "确定",
+            cancelButtonText: "取消",
+            type: "warning",
+          })
+            .then(() => {
+              this.$message({
+                type: "success",
+                message: "删除成功!",
+                delete: row.splice(index, 1),
+              });
+            })
+            .catch(() => {
+              this.$message({
+                type: "info",
+                message: "已取消删除",
+              });
+            });
+        }
       });
-      // this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-      //   confirmButtonText: "确定",
-      //   cancelButtonText: "取消",
-      //   type: "warning",
-      // })
-      //   .then(() => {
-      //     this.$message({
-      //       type: "success",
-      //       message: "删除成功!",
-      //       delete: row.splice(index, 1),
-      //     });
-      //   })
-      //   .catch(() => {
-      //     this.$message({
-      //       type: "info",
-      //       message: "已取消删除",
-      //     });
-      //   });
     },
   },
 };

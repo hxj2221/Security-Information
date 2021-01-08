@@ -104,14 +104,17 @@
       </div>
       <!-- 分页 -->
       <div class="category_statistics_paging">
-        <div class="block">
-          <el-pagination
-            :current-page.sync="currentPage"
-            layout="total,prev, pager, next"
-            :total="tableData.length"
-          >
-          </el-pagination>
-        </div>
+       <div class="block">
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-sizes="[8, 10, 20]"
+      :page-size="8"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="tableData.length">
+    </el-pagination>
+  </div>
       </div>
     </div>
   </div>

@@ -383,9 +383,11 @@ export default {
           setTimeout(() => {
             loading.close();
           }, 2000);
-          // this.$parent.fathstaffyes();
+          this.$parent.fathstaffyes();
         }
-        //  if(res.)
+       else{
+         
+       }
       });
     },
     handleChange(cityvalue) {
