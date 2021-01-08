@@ -124,7 +124,7 @@
         <el-row :gutter="20">
           <el-col :span="8">
             <el-form-item label="地址" required>
-              <el-cascader
+              <!-- <el-cascader
                 class="dialog-input-text"
                 type="input"
                 autosize
@@ -137,7 +137,21 @@
                 v-model="addStaff.address"
                 :options="city"
                 placeholder="请选择内容"
-              ></el-cascader>
+              ></el-cascader> -->
+              <el-cascader
+                class="dialog-input-text"
+                style="
+                  display: block;
+                  position: relative;
+                  font-size: 14px;
+                  line-height: 40px;
+                "
+                size="large"
+                :options="options"
+                v-model="addStaff.address"
+                @change="handleChange"
+              >
+              </el-cascader>
             </el-form-item>
           </el-col>
           <el-col :span="16">
@@ -245,11 +259,16 @@ import { Aepyee } from "@/network/Sta.js";
 
 import qs from "qs";
 import service from "@/service/index";
+//地址级联选择器
+import {
+ provinceAndCityData, regionData, provinceAndCityDataPlus, regionDataPlus, CodeToText, TextToCode 
+} from "element-china-area-data";
 export default {
   components: {},
   props: {},
   data() {
     return {
+      options: regionData,
       addStaff: {
         staffemployee: "", // 员工编号
         // staffNumInput: "",
@@ -262,12 +281,12 @@ export default {
         cardnumber: "422723200008203820", //证件号码
         position: "12", //职位
         eraddress: "", //详细地址
-        staffdepart: "", //所属科室
-        staffrolesel: "", //角色
+        staffdepart: "1", //所属科室
+        staffrolesel: "1", //角色
         head_department: "", //科室负责人
         status: "", //员工状态
         password: "123qwe", //密码
-        address: "", //地址
+        address: [], //地址
       },
 
       //年龄循环
@@ -333,14 +352,15 @@ export default {
     // 保存
     staffaddvueyes() {
       // let params = this.addStaff
+      console.log(this.addStaff.address);
       let data = {
         name: this.addStaff.name,
         password: this.addStaff.password,
         sex: this.addStaff.sex,
         email: this.addStaff.email,
         phone: this.addStaff.phone,
-        address: "one",
-        eraddress: "oen",
+        address: this.addStaff.address,
+        eraddress: this.addStaff.eraddress,
         position: this.addStaff.position,
         age: this.addStaff.age,
         // specific_age: this.addStaff.age,
@@ -353,7 +373,7 @@ export default {
       console.log(data);
       service.staffAdd(data).then((res) => {
         console.log(res);
-        if ((res.msg = "员工信息添加成功")) {
+        if (res.msg == "员工信息添加成功") {
           const loading = this.$loading({
             lock: true,
             text: "保存中",
@@ -363,13 +383,22 @@ export default {
           setTimeout(() => {
             loading.close();
           }, 2000);
-          this.$parent.fathstaffyes();
+          // this.$parent.fathstaffyes();
         }
         //  if(res.)
       });
     },
     handleChange(cityvalue) {
-      console.log(cityvalue);
+     
+       console.log(CodeToText[cityvalue[0]], CodeToText[cityvalue[1]], CodeToText[cityvalue[2]]);
+       let a=CodeToText[cityvalue[0]]+' '+CodeToText[cityvalue[1]]+' '+CodeToText[cityvalue[2]]
+       this.addStaff.address=a
+      // for (let i=0;i<cityvalue.length;i++){
+      //  let a =CodeToText[cityvalue[i]]
+      //  this.addStaff.address=a
+      //  console.log(this.addStaffaddress)
+      // }
+     console.log(this.addStaff.address)
     },
     // 子调用父
     staffaddvueno() {
@@ -380,6 +409,7 @@ export default {
     // 获取到的科室和角色
     let self = this;
     this.bus.$on("ReceiveMessage", function (item) {
+      console.log(item);
       self.optionrole = item.auth_grouap;
       self.optiondepart = item.department;
     });

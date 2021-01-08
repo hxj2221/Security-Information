@@ -110,7 +110,7 @@ export default {
       ],
       logining: false,
       ruleForm: {
-        account: "admin2",
+        phone: "admin2",
         password: "admin2",
         captcha: "",
       },

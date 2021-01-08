@@ -69,4 +69,10 @@ export default  {
   getrole: async (params:Object) => {
     return await service.get(`${baseUrl}api/Employees/add`).then(res => res).catch(err => err)
   },
+  //
+  staffedits: async (params:any) => {
+    return await service.get(`${baseUrl}api/Employees/edit`,{params}).then(res => res).catch(err => err)
+  },
+ 
+  
 }
