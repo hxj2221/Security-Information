@@ -42,7 +42,7 @@
                 <el-option
                   v-for="item in comgenders"
                   :key="item.value"
-                  :label="item.label"
+                  :label="item.lable"
                   :value="item.value"
                 >
                 </el-option>
@@ -80,7 +80,7 @@
                   v-for="item in commodes"
                   :key="item.id"
                   :label="item.title"
-                  :value="item.title"
+                  :value="item.id"
                 >
                 </el-option>
               </el-select></div
@@ -117,7 +117,7 @@
                   v-for="item in relationlist"
                   :key="item.id"
                   :label="item.title"
-                  :value="item.title"
+                  :value="item.id"
                 >
                 </el-option>
               </el-select>
@@ -139,7 +139,7 @@
                   v-for="item in comtypelist"
                   :key="item.id"
                   :label="item.title"
-                  :value="item.title"
+                  :value="item.id"
                 >
                 </el-option>
               </el-select></div
@@ -304,12 +304,16 @@ export default {
       comgenders: [
         //性别
         {
-          value: "男",
-          lable: "1",
+          value: "0",
+          lable: "男",
         },
         {
-          value: "女",
-          lable: "2",
+          value: "1",
+          lable: "女",
+        },
+         {
+          value: "2",
+          lable: "未知",
         },
       ],
       commodes: [], // 投诉方式列表
@@ -332,13 +336,14 @@ export default {
     //保存提交事件
     keepform() {
       // this.$router.go(0);
+      let comde=this.comde.map(x => {return x[1]})
       let params={
         event_number:this.comnumber,//业务编号
         event_type:this.comtype,//投诉类型
         cause:this.reason,//投诉原因
-        occur_time:this.incidentdata,//事发时间
-        department_id:this.comde,//投诉科室
-        create_time:this.comdata, //投诉日期
+        occur_time:new Date(this.incidentdata).getTime(),//事发时间
+        department_id:comde,//投诉科室
+        create_time:new Date(this.comdata).getTime(), //投诉日期
         ComplaintType:this.commode, //投诉方式
         complaint_name:this.comname, //投诉人姓名
         complaint_phone:this.comphone, //投诉人电话
