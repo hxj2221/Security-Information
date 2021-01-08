@@ -17,7 +17,7 @@
           </el-form-item>
           <el-form-item label="发生地点">
             <el-select v-model="search.value" placeholder="请选择">
-              <el-option v-for="item in search.options" :key="item.value" :label="item.label" :value="item.value">
+              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </el-form-item>
@@ -30,11 +30,11 @@
         <div class="searchAll_search">
           <el-form-item label="轻重程度">
             <el-select style="width: 562px;" v-model="search.value1" placeholder="请选择">
-              <el-option v-for="item in search.options1" :key="item.value" :label="item.label" :value="item.value">
+              <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </el-form-item>
-          <el-button class="searchbtn" type="primary" icon="el-icon-search"></el-button>
+          <el-button class="searchbtn" type="primary" icon="el-icon-search" @click="screen()"></el-button>
         </div>
       </el-form>
     </div>
@@ -64,13 +64,13 @@
       </el-table-column>
       <el-table-column label="操作" >
         <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+          <el-button @click="handleClick(scope.$index,scope.row)" type="text" size="small">查看</el-button>
         </template>
       </el-table-column>
     </el-table>
     <!-- 分页 -->
     <div class="paging">
-      <el-pagination :page-size="10" :pager-count="11" layout="prev, pager, next" :total="500">
+      <el-pagination :page-size="10" :pager-count="11" layout="prev, pager, next" :total="tableData.length">
       </el-pagination>
     </div>
   </div>
@@ -86,10 +86,11 @@ import service from "@/service/index";
         // 检索
         search: {
           name: '',
-          way: '',
-          state: '',
           date: '',
-          options: [{
+          value: '',
+          value1: ''
+        },
+        options: [{
             value: '选项1',
             label: '急诊'
           }, {
@@ -111,8 +112,7 @@ import service from "@/service/index";
             value: '选项7',
             label: '其他'
           }],
-          value: '',
-          options1: [{
+        options1: [{
             value: '选项1',
             label: 'A级：客观环境或条件可能引发不良事件（隐患）'
           }, {
@@ -140,10 +140,10 @@ import service from "@/service/index";
             value: '选项9',
             label: 'I级：导致患者死亡'
           }, ],
-          value1: ''
-        },
         // 内容
         tableData: [],
+        details:{},//查看
+        addcon:[],//新增里面的
       };
     },
     methods: {
@@ -152,28 +152,32 @@ import service from "@/service/index";
         this.$emit('pageAdd')
       },
       // 查看
-      handleClick(row) {
-        // this.$emit('pageDetail')
-        let param={
-          id:row.id
+      handleClick(row,index) {
+        // console.log(index.id)
+        let params={
+          id:index.id
         }
-        console.log(param)
-        service.badSee(param).then(res=>{
+        service.badSee(params).then(res=>{
           console.log(res)
+          if(res.code==20010){
+            this.$emit('pageDetail')
+            this.details=res.data
+            this.bus.$emit('detail',this.details)
+          }
         })
       },
+      // 搜索事件
+      screen(){
+        console.log(this.search)
+      }
       
     },
     created(){
       // 不良列表
      service.AdeList().then(res=>{
-        // console.log(res)
         this.tableData=res.data
       })
-    //   // 不良类型
-    //   service.badType().then(res=>{
-    //     console.log(res)
-    //   })
+      
     //   // // 轻重程度
     //   service.Weight().then(res=>{
     //     console.log(res)

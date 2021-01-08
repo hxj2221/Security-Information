@@ -70,27 +70,27 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Complaints',
         component: () => import('../views/H-Complaints/index.vue'),
-        meta: {
-          roles: ['admin','admin1','admin2','admin3']
-        }
+        // meta: {
+        //   roles: ['admin','admin1','admin2','admin3']
+        // }
       },
       {
         name: '不良事件',
         iconCls: 'el-icon-bicycle',
         path: '/Ade',
         component: () => import('../views/H-Ade/index.vue'),
-        meta: {
-          roles: ['admin','admin1','admin2','admin3']
-        }
+        // meta: {
+        //   roles: ['admin','admin1','admin2','admin3']
+        // }
       },
       {
         name: '医患沟通记录',
         iconCls: 'el-icon-bicycle',
         path: '/Connect',
         component: () => import('../views/H-Connect/index.vue'),
-        meta: {
-            roles: ['admin','admin1','admin2','admin3']
-        }
+         // meta: {
+        //     roles: ['admin','admin1','admin2','admin3']
+        // }
       }
     ]
   },
@@ -106,9 +106,9 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Category',
         component: () => import('../views/H-Category/index.vue'),
-        meta: {
-            roles: ['admin','admin1','admin2','admin3']
-        }
+         // meta: {
+        //     roles: ['admin','admin1','admin2','admin3']
+        // }
       }
     ]
   },
@@ -124,27 +124,27 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Articlelist',
         component: () => import('../views/H-Articlelist/index.vue'),
-        meta: {
-            roles: ['admin','admin1','admin2','admin3']
-        }
+         // meta: {
+        //     roles: ['admin','admin1','admin2','admin3']
+        // }
       },
       {
         name: '添加文章',
         iconCls: 'el-icon-help',
         path: '/Addarticle',
         component: () => import('../views/H-Addarticle/index.vue'),
-        meta: {
-            roles: ['admin','admin1','admin2','admin3']
-        }
+         // meta: {
+        //     roles: ['admin','admin1','admin2','admin3']
+        // }
       },
       {
         name: '栏目列表',
         iconCls: 'el-icon-help',
         path: '/Columnlist',
         component: () => import('../views/H-Columnlist/index.vue'),
-        meta: {
-            roles: ['admin','admin1','admin2','admin3']
-        }
+        // meta: {
+        //     roles: ['admin','admin1','admin2','admin3']
+        // }
       }
     ]
   },
@@ -160,9 +160,9 @@ const asyncRoutes = [
         name: '文件列表',
         path: '/form',
         component: () => import('../views/H-Files/index.vue'),
-        meta: {
-            roles: ['admin','admin1','admin2','admin3']
-        }
+         // meta: {
+        //     roles: ['admin','admin1','admin2','admin3']
+        // }
       }
     ]
   },
@@ -178,36 +178,36 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Staff',
         component: () => import('../views/H-Staff/index.vue'),
-        meta: {
-            roles: ['admin','admin1','admin2','admin3']
-        }
+         // meta: {
+        //     roles: ['admin','admin1','admin2','admin3']
+        // }
       },
       {
         name: '科室管理',
         iconCls: 'el-icon-help',
         path: '/Department',
         component: () => import('../views/H-Department/index.vue'),
-        meta: {
-            roles: ['admin','admin1','admin2','admin3']
-        }
+         // meta: {
+        //     roles: ['admin','admin1','admin2','admin3']
+        // }
       },
       {
         name: '角色管理',
         iconCls: 'el-icon-help',
         path: '/Role',
         component: () => import('../views/H-Role/index.vue'),
-        meta: {
-            roles: ['admin','admin1','admin2','admin3']
-        }
+         // meta: {
+        //     roles: ['admin','admin1','admin2','admin3']
+        // }
       },
       {
-        name: '编辑权限',
+        name: '权限管理',
         iconCls: 'el-icon-help',
         path: '/Edit',
         component: () => import('../views/H-Edit/index.vue'),
-        meta: {
-            roles: ['admin','admin1','admin2','admin3']
-        }
+         // meta: {
+        //     roles: ['admin','admin1','admin2','admin3']
+        // }
       }
     ]
   },
@@ -223,27 +223,27 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Personal',
         component: () => import('../views/H-Personal/index.vue'),
-        meta: {
-            roles: ['admin','admin1','admin2','admin3']
-        }
+         // meta: {
+        //     roles: ['admin','admin1','admin2','admin3']
+        // }
       },
       {
         name: '账户管理',
         iconCls: 'el-icon-help',
         path: '/Account',
         component: () => import('../views/H-Account/index.vue'),
-        meta: {
-            roles: ['admin','admin1','admin2','admin3']
-        }
+         // meta: {
+        //     roles: ['admin','admin1','admin2','admin3']
+        // }
       },
       {
         name: '消息通知',
         iconCls: 'el-icon-help',
         path: '/Notify',
         component: () => import('../views/H-Notify/index.vue'),
-        meta: {
-            roles: ['admin','admin1','admin2','admin3']
-        }
+         // meta: {
+        //     roles: ['admin','admin1','admin2','admin3']
+        // }
       }
     ]
   },
@@ -259,18 +259,18 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Dictionaries',
         component: () => import('../views/H-Dictionaries/index.vue'),
-        meta: {
-            roles: ['admin','admin1','admin2','admin3']
-        }
+         // meta: {
+        //     roles: ['admin','admin1','admin2','admin3']
+        // }
       },
       {
         name: '基本设置',
         iconCls: 'el-icon-help',
         path: '/Technological',
         component: () => import('../views/H-Technological/index.vue'),
-        meta: {
-            roles: ['admin','admin1','admin2','admin3']
-        }
+         // meta: {
+        //     roles: ['admin','admin1','admin2','admin3']
+        // }
       }
     ]
   },
