@@ -30,9 +30,9 @@ import service from '@/service/index';
           </el-form-item>
           <el-form-item label="性别" required>
             <el-select v-model="addAde.sex" placeholder="男">
-              <el-option label="男" value="1"></el-option>
-              <el-option label="女" value="2"></el-option>
-              <el-option label="未知" value="3"></el-option>
+              <el-option label="男" value="男"></el-option>
+              <el-option label="女" value="女"></el-option>
+              <el-option label="未知" value="未知"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="年龄">
@@ -53,7 +53,13 @@ import service from '@/service/index';
             </el-date-picker>
           </el-form-item>
           <el-form-item label="科室" required>
-            <el-input v-model="addAde.department_id" autocomplete="off"></el-input>
+            <el-select v-model="addAde.department_id"  placeholder="请选择">
+              <el-option v-for="item in department"
+                :key="item.id"
+                :label="item.title"
+                :value="item.id">
+              </el-option>
+            </el-select>
           </el-form-item>
           <el-form-item label="床号" required>
             <el-input v-model="addAde.bed_number" autocomplete="off"></el-input>
@@ -198,6 +204,7 @@ import qs from 'qs'
           event_describe: '',// 不良事件描述
         },
         options: [],
+        department:[],//科室
         options1: [],
         options4: [],
         tableData: [{
@@ -214,13 +221,36 @@ import qs from 'qs'
     methods: {
       // 提交
       sure() {
+        // let params={
+        //   event_type:this.addAde.event_type,
+        //   occur_scene:this.addAde.occur_scene,
+        //   occur_time:this.addAde.occur_time,
+        //   create_uid:this.addAde.create_uid,
+        //   create_time:this.addAde.create_time,
+        //   patient_name:this.addAde.patient_name,
+        //   sex:this.addAde.sex,
+        //   age:this.addAde.age,
+        //   degree_weight_id:this.addAde.degree_weight_id,
+        //   specific_age:this.addAde.specific_age,
+        //   admission_id:this.addAde.admission_id,
+        //   nurse_uid:this.addAde.nurse_uid,
+        //   Indications_uid:this.addAde.Indications_uid,
+        //   stakeholder:this.addAde.stakeholder,
+        //   department_id:this.addAde.department_id,
+        //   hospitalized_time:this.addAde.hospitalized_time,
+        //   bed_number:this.addAde.bed_number,
+        //   admitting_diagnosis:this.addAde.admitting_diagnosis,
+        //   patient_situation:this.addAde.patient_situation,
+        //   diagnosis_process:this.addAde.diagnosis_process,
+        //   event_describe:this.addAde.event_describe
+        // }
         let params=this.addAde
-        service.badAdd(params).then(res=>{
-          console.log(res)
-          if(res.code==20010){
-            this.$emit('pageAdd')
-          }
-        });
+        // service.badAdd(params).then(res=>{
+        //   console.log(res)
+        //   if(res.code==20010){
+        //     this.$emit('pageAdd')
+        //   }
+        // });
       },
       // 返回
       back() {
@@ -234,29 +264,13 @@ import qs from 'qs'
 
     },
     created(){
-      service.badType().then(res=>{
-        console.log(res)
+      service.AdeSel().then(res=>{
         this.options=res.choice_type
         this.options1=res.address
         this.options4=res.degree_weight
+        this.department=res.department
       })
-    },
-    filters: {
-        addAde: function (value) {
-            let date = new Date(value);
-            let y = date.getFullYear();
-            let MM = date.getMonth() + 1;
-            MM = MM < 10 ? ('0' + MM) : MM;
-            let d = date.getDate();
-            d = d < 10 ? ('0' + d) : d;
-            let h = date.getHours();
-            h = h < 10 ? ('0' + h) : h;
-            let m = date.getMinutes();
-            m = m < 10 ? ('0' + m) : m;
-            let s = date.getSeconds();
-            s = s < 10 ? ('0' + s) : s;
-            return y + '-' + MM + '-' + d + ' ' + h + ':' + m + ':' + s;
-        }
+      
     },
   }
 </script>

@@ -21,7 +21,7 @@
       <div class="txt">
         <p>
           <span class="tit">事发时间：</span>
-          <span>{{occur_time}}</span>
+          <span>{{occur_time |formatDate }}</span>
         </p>
         <p>
           <span class="tit">事发地点：</span>
@@ -68,7 +68,7 @@
             <p class="tit">入院日期</p>
           </th>
           <td>
-            <p class="con">{{hospitalized_time}}</p>
+            <p class="con">{{hospitalized_time |date}}</p>
           </td>
           <th>
             <p class="tit">科室</p>
@@ -87,13 +87,13 @@
           <th>
             不良发生时间
           </th>
-          <td colspan="5">{{occur_time}}</td>
+          <td colspan="5">{{occur_time |formatDate}}</td>
         </tr>
         <tr class="leng">
           <th>
             不良报告时间
           </th>
-          <td colspan="5">{{create_time}}</td>
+          <td colspan="5">{{create_time |formatDate}}</td>
         </tr>
         <tr class="leng">
           <th>
@@ -237,7 +237,41 @@
       back() {
         this.$emit("pageDetail")
 
-      }
+      },
+      // 事件格式化
+      getdate:function(row, column) { 
+        var date = row[column.property]; 
+     if (date == undefined) { 
+       return ""; 
+     } 
+     return moment(date).format("YYYY-MM-DD HH:mm:ss"); 
+      } 
+    },
+    filters: {
+        formatDate: function (value) {
+            let date = new Date(value);
+            let y = date.getFullYear();
+            let MM = date.getMonth() + 1;
+            MM = MM < 10 ? ('0' + MM) : MM;
+            let d = date.getDate();
+            d = d < 10 ? ('0' + d) : d;
+            let h = date.getHours();
+            h = h < 10 ? ('0' + h) : h;
+            let m = date.getMinutes();
+            m = m < 10 ? ('0' + m) : m;
+            let s = date.getSeconds();
+            s = s < 10 ? ('0' + s) : s;
+            return y + '-' + MM + '-' + d + ' ' + h + ':' + m + ':' + s;
+        },
+        Date: function (value) {
+            let date = new Date(value);
+            let y = date.getFullYear();
+            let MM = date.getMonth() + 1;
+            MM = MM < 10 ? ('0' + MM) : MM;
+            let d = date.getDate();
+            d = d < 10 ? ('0' + d) : d;
+            return y + '-' + MM + '-' + d ;
+        }
     },
     created() {
       let that = this;

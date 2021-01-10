@@ -36,13 +36,9 @@ export default  {
   badAdd: async (params:any) => {
     return await service.post(`${baseUrl}api/bad/bad_add`,params).then(res => res).catch(err => err)
   },
-  // 不良事件轻重程度
-  // Weight: async () => {
-  //   return await service.get(`${baseUrl}api/bad/lists`).then(res => res).catch(err => err)
-  // },
-  // 不良类型类型
-  badType: async () => {
-    return await service.get(`${baseUrl}api/bad/choice_type`).then(res => res).catch(err => err)
+  // 不良中的下拉框
+  AdeSel : async()=>{
+    return await service.get(`${baseUrl}api/bad/choice_type`).then(res=>res).catch(err=>err)
   },
   // 不良查看
   badSee: async (params:any) => {

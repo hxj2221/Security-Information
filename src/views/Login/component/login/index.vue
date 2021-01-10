@@ -110,7 +110,15 @@ export default {
       ],
       logining: false,
       ruleForm: {
+<<<<<<< HEAD
         account: "",
+=======
+<<<<<<< HEAD
+        account: "",
+=======
+        phone: "",
+>>>>>>> d89bc2c5bd9b15d187280c747ca545d2956b8744
+>>>>>>> 637cc6440dd8f44816a67da0ea1ea68378ac15ca
         password: "",
         captcha: "",
       },
