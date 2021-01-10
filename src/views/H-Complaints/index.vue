@@ -211,11 +211,16 @@ export default {
     },
     // 查看详情
     looks(index) {
-      console.log(index);
       this.list = false;
       this.add = false;
       this.look = true;
       this.operations = false;
+       let params = {
+        event_number: index.event_number
+      };
+      service.componrdetaile(params).then((res) => {
+        console.log(res);
+      });
     },
     // 添加页面保存
     keepform() {
@@ -250,7 +255,18 @@ export default {
     },
     // 搜索事件
   },
-  created() {},
+  created() {
+    if(this.look == true){
+    if (event_number !== null && event_number !== "" && token !== null && token !== "") {
+      let params = {
+        event_number: event_number
+      };
+      service.componrdetaile(params).then((res) => {
+        console.log(res);
+      });
+    }
+    }
+  },
 };
 </script>
 

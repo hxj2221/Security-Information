@@ -19,12 +19,13 @@
                 v-model="comdata"
                 type="date"
                 placeholder="选择日期"
+                :picker-options="pickerOptions"
               ></el-date-picker></div
           ></el-col>
           <el-col :span="6"
             ><div class="grid-content bg-purple-light">
               <span> 事发日期<span>*</span> </span> <br />
-              <el-date-picker v-model="incidentdata" type="date" placeholder="选择日期">
+              <el-date-picker v-model="incidentdata" type="date" placeholder="选择日期"   :picker-options="pickerOptions">
               </el-date-picker></div
           ></el-col>
         </el-row>
@@ -55,6 +56,9 @@
                 placeholder="请输入"
                 v-model="comagenumber"
                 class="input-with-select"
+                type='number'
+               oninput="value=value.replace(/[^\d]/g,'')"
+               onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )"
               >
                 <template slot="append">
                   <el-select v-model="comage" slot="prepend" style="width: 80px">
@@ -69,7 +73,9 @@
           <el-col :span="6"
             ><div class="grid-content bg-purple">
               <span> 手机号码 </span>
-              <el-input v-model="comphone" placeholder="请输入投诉人手机号码"></el-input>
+              <el-input v-model="comphone" placeholder="请输入投诉人手机号码" type="input" maxlength="11" max="11"     
+               oninput="value=value.replace(/[^\d]/g,'')"
+               onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )"  ></el-input>
             </div>
           </el-col>
           <el-col :span="6"
@@ -98,9 +104,14 @@
                 </el-option>
               </el-select> -->
               <el-cascader
-              ref="cascader"
+                ref="cascader"
                 :options="comdes"
-                 :props="{ value: 'id',label: 'title',children: '_child',multiple:'true'}"
+                :props="{
+                  value: 'id',
+                  label: 'title',
+                  children: '_child',
+                  multiple: 'true',
+                }"
                 :show-all-levels="false"
                 v-model="comde"
                 clearable
@@ -126,7 +137,9 @@
           <el-col :span="6"
             ><div class="grid-content bg-purple-light">
               <span> 答复协商时间</span> <br />
-              <el-input placeholder="请输入" v-model="consulttime" style="width: 60%">
+              <el-input placeholder="请输入" v-model="consulttime" style="width: 60%" type="input" maxlength="3" max="3"     
+               oninput="value=value.replace(/[^\d]/g,'')"
+               onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )" >
                 <template slot="append">天</template>
               </el-input>
             </div></el-col
@@ -187,7 +200,7 @@
             <el-col :span="6" :pull="2"
               ><div class="grid-content bg-purple">
                 <span> 经办人姓名<span>*</span> </span>
-                <el-input v-model="agentname" placeholder="请输入姓名"></el-input>
+                <el-input v-model="agentname" placeholder="请输入姓名"  type="input" maxlength="8"></el-input>
               </div>
             </el-col>
             <el-col :span="6" :pull="6"
@@ -196,6 +209,9 @@
                 <el-input
                   v-model="agentphone"
                   placeholder="请输入手机号码"
+                  type="input" maxlength="11" max="11"     
+               oninput="value=value.replace(/[^\d]/g,'')"
+               onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )"
                 ></el-input></div
             ></el-col>
           </el-row>
@@ -282,7 +298,11 @@ export default {
     return {
       props: { multiple: true },
       agree: "", //同意要求
-
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now();
+        },
+      },
       data: [
         {
           name: 1,
@@ -311,7 +331,7 @@ export default {
           value: "1",
           lable: "女",
         },
-         {
+        {
           value: "2",
           lable: "未知",
         },
@@ -330,37 +350,41 @@ export default {
   },
 
   methods: {
-     getCascaderObj() {
-     console.log(this.comde)
+    getCascaderObj() {
+      console.log(this.comde);
     },
     //保存提交事件
     keepform() {
-      // this.$router.go(0);
-      let comde=this.comde.map(x => {return x[1]})
-      let params={
-        event_number:this.comnumber,//业务编号
-        event_type:this.comtype,//投诉类型
-        cause:this.reason,//投诉原因
-        occur_time:new Date(this.incidentdata).getTime(),//事发时间
-        department_id:comde,//投诉科室
-        create_time:new Date(this.comdata).getTime(), //投诉日期
-        ComplaintType:this.commode, //投诉方式
-        complaint_name:this.comname, //投诉人姓名
-        complaint_phone:this.comphone, //投诉人电话
-        sex:this.comgender, //投诉人电话
-        specific_age:this. comage, //投诉人年龄
-        age:this.comagenumber, //投诉人年龄
-        inpatient_relation:this.relation, //患者关系
-        reply_time:this.consulttime, //协商时间
-        character:1, //事件性质this.nature
-        handle_name:this. agentname, //经办人姓名
-         handle_phone:this.agentphone, //经办人手机号
+      if (this.comde !== "" || this.comde !== null) {
+        let comde = this.comde.map((x) => {
+          return x[1];
+        });
       }
-      console.log(params)
-      service.AddComponent(params).then(res=>{
-        console.log(res)
-      })
 
+      let params = {
+        event_number: this.comnumber, //业务编号
+        event_type: this.comtype, //投诉类型
+        cause: this.reason, //投诉原因
+        occur_time: new Date(this.incidentdata).getTime(), //事发时间
+        department_id: comde, //投诉科室
+        create_time: new Date(this.comdata).getTime(), //投诉日期
+        ComplaintType: this.commode, //投诉方式
+        complaint_name: this.comname, //投诉人姓名
+        complaint_phone: this.comphone, //投诉人电话
+        sex: this.comgender, //投诉人电话
+        specific_age: 1, //投诉人年龄
+        age: this.comagenumber, //投诉人年龄
+        inpatient_relation: this.relation, //患者关系
+        reply_time: this.consulttime, //协商时间
+        character: 1, //事件性质this.nature
+        handle_name: this.agentname, //经办人姓名
+        handle_phone: this.agentphone, //经办人手机号
+      };
+      console.log(params);
+      service.AddComponent(params).then((res) => {
+        console.log(res);
+        this.$router.go(0);
+      });
     },
     backss() {
       this.$router.go(0);
@@ -380,6 +404,9 @@ export default {
     },
   },
   created() {
+     let token=localStorage.getItem('token')
+     console.log(token)
+    if(token!==null&&token!==''){
     service
       .AddCom()
       .then((res) => {
@@ -390,7 +417,7 @@ export default {
           this.comtypelist = res.data.event_type; // 投诉方式
           this.natures = res.data.character; // 事件性质
           this.relationlist = res.data.inpatient_relation; // 关系
-          this.comdes = res.data.department;//投诉科室
+          this.comdes = res.data.department; //投诉科室
         } else {
           this.$message({
             message: res.msg,
@@ -400,6 +427,7 @@ export default {
         }
       })
       .catch((err) => {});
+    }
   },
 };
 </script>

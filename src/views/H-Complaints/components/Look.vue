@@ -2,7 +2,7 @@
   <div>
     <div class="look">
       <slot name="title">
-       <div class="look-top">
+        <div class="look-top">
           <span>投诉详情-调查中</span>
           <div>
             <slot name="stamp">
@@ -100,20 +100,22 @@
           </div>
           <div class="look-content-box">
             <!-- 审批节点 -->
-             <div class="box-Information">
+            <div class="box-Information">
               <div class="box-top">
                 <el-row type="flex" class="row-bg" justify="space-between">
                   <el-col :span="3" :push="2"
                     ><div class="grid-content bg-purple">
                       <span><b>科室自查</b></span>
-                    </div></el-col>
-                     <el-col :span="3"
+                    </div></el-col
+                  >
+                  <el-col :span="3"
                     ><div class="grid-content bg-purple-light"></div
                   ></el-col>
                   <el-col :span="9" :pull="1"
                     ><div class="grid-content bg-purple">
                       <span><b>操作时间：</b>2021-1-4 00:00:00</span>
-                    </div></el-col>
+                    </div></el-col
+                  >
                 </el-row>
               </div>
               <div class="box-content">
@@ -149,13 +151,11 @@
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value"
-                        >已受理→科室自查
-                        </span>
+                      <span class="value">已受理→科室自查 </span>
                     </div></el-col
                   >
                 </el-row>
-                 <el-row>
+                <el-row>
                   <el-col :span="4"
                     ><div class="grid-content bg-purple">
                       <span class="label">下发科室：</span>
@@ -163,12 +163,11 @@
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value"
-                        >血液科</span>
+                      <span class="value">血液科</span>
                     </div></el-col
                   >
                 </el-row>
-                 <el-row>
+                <el-row>
                   <el-col :span="4"
                     ><div class="grid-content bg-purple">
                       <span class="label">主要事实：</span>
@@ -176,12 +175,11 @@
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value"
-                        >无</span>
+                      <span class="value">无</span>
                     </div></el-col
                   >
                 </el-row>
-                 <el-row>
+                <el-row>
                   <el-col :span="4"
                     ><div class="grid-content bg-purple">
                       <span class="label">争议焦点：</span>
@@ -189,31 +187,25 @@
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value"
-                        >无</span>
+                      <span class="value">无</span>
                     </div></el-col
                   >
                 </el-row>
-                <div
-                  style="
-                    border-bottom: 0.5px solid #797979;
-                    width: 100%;
-                  "
-                ></div>
-                  <div class="file clearfix">
-                    <div>
-                      <span class="filename">文件名</span>
-                      <span class="filedetaile">查看</span>
-                    </div>
-                     <div>
-                      <span class="filename">文件名</span>
-                      <span class="filedetaile">查看</span>
-                    </div>
-                     <div>
-                      <span class="filename">文件名</span>
-                      <span class="filedetaile">查看</span>
-                    </div>
+                <div style="border-bottom: 0.5px solid #797979; width: 100%"></div>
+                <div class="file clearfix">
+                  <div>
+                    <span class="filename">文件名</span>
+                    <span class="filedetaile">查看</span>
                   </div>
+                  <div>
+                    <span class="filename">文件名</span>
+                    <span class="filedetaile">查看</span>
+                  </div>
+                  <div>
+                    <span class="filename">文件名</span>
+                    <span class="filedetaile">查看</span>
+                  </div>
+                </div>
               </div>
               <hr />
             </div>
@@ -582,12 +574,11 @@
   </div>
 </template>
 <script>
+import service from "@/service/index";
 export default {
-  components: {
-      },
+  components: {},
   data() {
     return {
-      
       data: [
         {
           GetLoop: [
@@ -765,7 +756,9 @@ export default {
     };
   },
   methods: {},
-  created() {},
+  created() {
+ 
+  },
 };
 </script>
 <style scoped>

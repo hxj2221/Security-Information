@@ -17,7 +17,7 @@
           <el-input
             type="text"
             class="logininput"
-            v-model="ruleForm.phone"
+            v-model="ruleForm.account"
             placeholder="请输入账号"
             autocomplete="off"
             prefix-icon="el-icon-s-custom"
@@ -110,7 +110,7 @@ export default {
       ],
       logining: false,
       ruleForm: {
-        phone: "",
+        account: "",
         password: "",
         captcha: "",
       },
@@ -129,11 +129,9 @@ export default {
           let params = this.ruleForm;
           this.logining = true;
           service.login(params).then((res) => {
-            console.log(params)
-            console.log(res)
               if (res.code === 20010) {
                  localStorage.setItem('token', res.data.token)
-                sessionStorage.setItem("phone", this.ruleForm.account);
+                sessionStorage.setItem("account", this.ruleForm.account);
                 sessionStorage.setItem("password", this.ruleForm.password);
                 this.$router.push("/dashboard");
                    
@@ -174,6 +172,7 @@ export default {
     }
   },
   created() {
+    localStorage.clear()
     // this.height=document.body.clientHeight
     // var heights=document.getElementsByClassName('login')
     //  var div_height = window.screen.availHeight;

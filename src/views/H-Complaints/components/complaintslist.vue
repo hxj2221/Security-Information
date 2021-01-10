@@ -17,10 +17,10 @@
       <div class="Complaints-screen clearfix">
         <el-form ref="form" :model="form" label-width="80px">
           <el-form-item label="投诉人">
-            <el-input v-model="complaintname" placeholder="请输入投诉人姓名"></el-input>
+            <el-input v-model="complaintname" placeholder="请输入投诉人姓名" type="input" :max="10" :maxlength="10" clearable></el-input>
           </el-form-item>
           <el-form-item label="投诉方式">
-            <el-select v-model="complainttype" placeholder="请选择">
+            <el-select v-model="complainttype" placeholder="请选择" clearable>
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -30,7 +30,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="事件状态">
-            <el-select v-model="complaintstatus" placeholder="请选择">
+            <el-select v-model="complaintstatus" placeholder="请选择" clearable>
               <el-option
                 v-for="item in option"
                 :key="item.value"
@@ -43,6 +43,7 @@
             <el-date-picker
             style="width:200%"
               v-model="complaintsate"
+              :picker-options="pickerOptions"
               type="daterange"
               range-separator="-"
               start-placeholder="开始日期"
@@ -62,15 +63,7 @@
      
       </slot>
     
-      <div class="Complaints-footer">
-        <el-pagination
-          :page-size="20"
-          :pager-count="11"
-          layout="prev, pager, next"
-          :total="1000"
-        >
-        </el-pagination>
-      </div>
+      
     </div>
   </div>
 </template>
@@ -82,6 +75,11 @@ export default {
 
   data() {
     return {
+       pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now();
+        },
+      },
       complaintname: "",
       complainttype: "",
       complaintstatus: "",
