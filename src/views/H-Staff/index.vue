@@ -206,6 +206,7 @@ export default {
         this.id = res.data[i].id;
         console.log(this.id);
       }
+       
     });
     // 员工搜索
     service.staffSeah().then((res) => {
@@ -284,8 +285,17 @@ export default {
         id: id,
       };
       service.staffedits(params).then((res) => {
-        console.log(res);
+        console.log(res.data.user.sex);
         this.childedit = res.data.user;
+        if(res.data.user.sex=='女'){
+          this.childedit.sex='0'
+        }
+        else if(res.data.user.sex=='男'){
+          this.childedit.sex='1'
+        }
+       else{
+         this.childedit.sex='2'
+       }
       });
     },
     //删除：
