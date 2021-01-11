@@ -31,15 +31,9 @@ export default {
   AddComponent: async (params: any) => {
     return await service.post(`${baseUrl}api/tsevent/add`, params).then(res => res).catch(err => err)
   },
-<<<<<<< HEAD
 // 获取详情
   componrdetaile: async (data: any) => {
     return await service.post(`${baseUrl}api/tsevent/details`, data ).then(res => res).catch(err => err)
-=======
-  // 获取详情
-  componrdetaile: async (params: any) => {
-    return await service.post(`${baseUrl}api/tsevent/details`, { data: { params } }).then(res => res).catch(err => err)
->>>>>>> 33a3c8ed5aeed0db8e8e84059e6606b9aa0b1dd9
   },
 // 待下发
 Issue: async (event_number: any) => {
