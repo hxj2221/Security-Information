@@ -31,9 +31,9 @@ export default {
   AddComponent: async (params: any) => {
     return await service.post(`${baseUrl}api/tsevent/add`, params).then(res => res).catch(err => err)
   },
-// 获取详情
+  // 获取详情
   componrdetaile: async (params: any) => {
-    return await service.post(`${baseUrl}api/tsevent/details`, {data:{params}} ).then(res => res).catch(err => err)
+    return await service.post(`${baseUrl}api/tsevent/details`, { data: { params } }).then(res => res).catch(err => err)
   },
 
   // 不良事件列表
@@ -45,8 +45,8 @@ export default {
     return await service.post(`${baseUrl}api/bad/bad_add`, params).then(res => res).catch(err => err)
   },
   // 不良中的下拉框
-  AdeSel : async()=>{
-    return await service.get(`${baseUrl}api/bad/choice_type`).then(res=>res).catch(err=>err)
+  AdeSel: async () => {
+    return await service.get(`${baseUrl}api/bad/choice_type`).then(res => res).catch(err => err)
   },
   // 不良查看
   badSee: async (params: any) => {
@@ -79,7 +79,7 @@ export default {
   },
   // 员工状态
   staffState: async (params: Object) => {
-    return await service.post(`${baseUrl}api/Employees/status`,params).then(res => res).catch(err => err)
+    return await service.post(`${baseUrl}api/Employees/status`, params).then(res => res).catch(err => err)
   },
   //
   getrole: async (params: Object) => {
@@ -89,6 +89,9 @@ export default {
   staffedits: async (params: any) => {
     return await service.get(`${baseUrl}api/Employees/edit`, { params }).then(res => res).catch(err => err)
   },
-// 科室管理
+  // 科室部门列表
+  department: async () => {
+    return await service.get(`${baseUrl}api/Department/lists`).then(res => res).catch(err => err)
+  },
 
 }
