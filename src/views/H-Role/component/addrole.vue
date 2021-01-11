@@ -144,6 +144,7 @@
 <script>
 import service from "@/service/index";
 export default {
+  inject: ["reload"],
   data() {
     return {
       radio: 3,
@@ -335,6 +336,7 @@ export default {
           });
           setTimeout(() => {
             loading.close();
+            this.reload();
           }, 2000);
           this.$parent.fathroleyes();
         }

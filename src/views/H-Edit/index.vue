@@ -4,7 +4,6 @@
       <div class="edit-top">
         <el-button type="primary" @click="add">添加权限</el-button>
       </div>
-<<<<<<< HEAD
       <el-table
         :data="tableData"
         style="width: 100%; margin-bottom: 20px"
@@ -117,49 +116,6 @@
               <el-input v-model="powaps" auto-complete="off"></el-input>
             </el-form-item>
           </el-form>
-=======
-      <!-- <el-table :data="tableData" row-key="id" border default-expand-all> -->
-      <div class="content">
-        <div class="title">
-          <el-checkbox v-model="checked" label="我的地盘"></el-checkbox>
-        </div>
-        <div class="power">
-          <el-checkbox class="tit" v-model="checked" label="首页桌面插件"></el-checkbox>
-          <el-checkbox-group v-model="checkList">
-            <el-checkbox label="首页桌面插件"></el-checkbox>
-            <el-checkbox label="复选框 B"></el-checkbox>
-            <el-checkbox label="复选框 C"></el-checkbox>
-          </el-checkbox-group>
-        </div>
-        <div class="power">
-          <el-checkbox class="tit" v-model="checked" label="首页桌面插件"></el-checkbox>
-          <el-checkbox-group v-model="checkList">
-            <el-checkbox label="首页桌面插件"></el-checkbox>
-            <el-checkbox label="复选框 B"></el-checkbox>
-            <el-checkbox label="复选框 C"></el-checkbox>
-          </el-checkbox-group>
-        </div>
-        <div class="power">
-          <el-checkbox class="tit" v-model="checked" label="首页桌面插件"></el-checkbox>
-          <el-checkbox-group v-model="checkList">
-            <el-checkbox label="首页桌面插件"></el-checkbox>
-            <el-checkbox label="复选框 B"></el-checkbox>
-            <el-checkbox label="复选框 C"></el-checkbox>
-          </el-checkbox-group>
-        </div>
-      </div>
-
-      <!-- </el-table> -->
-      <div>
-        <el-dialog title="添加权限" :visible.sync="dialogVisible" width="width" :before-close="dialogBeforeClose">
-          <div>
-            <div>
-              <span>权限名：</span>
-              <el-input v-model="name" placeholder="请输入权限名" style="width:70%"></el-input>
-            </div>
-
-          </div>
->>>>>>> 55d9b06e664c434d5424aec9c866ee1db6217b18
           <div slot="footer">
             <el-button @click="dialogVisible = false">取 消</el-button>
             <el-button type="primary" @click="dialog">确 定</el-button>
@@ -228,7 +184,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 import service from "@/service/index";
 export default {
   data() {
@@ -350,31 +305,8 @@ export default {
     },
   },
 };
-=======
-  export default {
-    data() {
-      return {
-        name: '', //权限名
-        checked: false, //标题
-        checkList: [],
-        dialogVisible: false,
-      };
-    },
-    methods: {
-      // 添加权限
-      add() {
-        this.dialogVisible = true
-      },
-      dialogBeforeClose() {
-        this.dialogVisible = false
-      },
-      handleClick() {},
-    },
-
-  };
->>>>>>> 55d9b06e664c434d5424aec9c866ee1db6217b18
 </script>
 
 <style scoped>
-  @import "edit.css";
+@import "edit.css";
 </style>

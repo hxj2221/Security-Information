@@ -79,6 +79,7 @@ import editdep from "./component/departdit";
 import service from "@/service/index";
 export default {
   components: { headpow, adddep, editdep },
+  inject: ["reload"],
   data() {
     return {
       departvue: true,
@@ -166,6 +167,7 @@ export default {
       console.log(data);
       service.departdel(data).then((res) => {
         console.log(res);
+        this.reload();
       });
       // this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
       //   confirmButtonText: "确定",

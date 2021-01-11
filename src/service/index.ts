@@ -174,4 +174,9 @@ export default {
   changeinfor: async (data: object) => {
     return await service.post(`${baseUrl}api/home/edit_personal`, data).then(res => res).catch(err => err)
   },
+
+  //个人手机号
+  phoneyz: async (data: object) => {
+    return await service.post(`${baseUrl}api/login/hssmsphone`, data).then(res => res).catch(err => err)
+  },
 }
