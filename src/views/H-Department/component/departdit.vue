@@ -94,6 +94,7 @@
 import service from "@/service/index";
 export default {
   props: ["editchild"],
+  inject: ["reload"],
   data() {
     return {
       departNameipt: "",
@@ -141,6 +142,7 @@ export default {
           });
           setTimeout(() => {
             loading.close();
+            this.reload();
           }, 2000);
         } else {
           alert("修改失败");

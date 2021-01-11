@@ -109,6 +109,7 @@
 <script>
 import service from "@/service/index";
 export default {
+  inject: ["reload"],
   data() {
     return {
       departNameipt: "",
@@ -148,6 +149,7 @@ export default {
           });
           setTimeout(() => {
             loading.close();
+            this.reload();
           }, 2000);
         } else {
           alert("添加失败");

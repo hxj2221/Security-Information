@@ -79,6 +79,7 @@ import editrole from "./component/editrole";
 import service from "@/service/index";
 export default {
   components: { headpow, addrole, editrole },
+  inject: ["reload"],
   data() {
     return {
       rolevue: true,
@@ -180,6 +181,7 @@ export default {
       console.log(param);
       service.roledel(param).then((res) => {
         console.log(res);
+        this.reload();
       });
     },
     // 序号

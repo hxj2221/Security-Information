@@ -74,8 +74,13 @@
               placeholder="请输入验证码"
               v-model="phonecode"
             />
-            <button class="account-change-phonehq" id="one" :disabled="phonedd">
-              {{ phonecodeTxt }}
+            <button
+              class="account-change-phonehq"
+              @click="phonebtncode"
+              id="regis"
+              :disabled="disablbtn"
+            >
+              {{ codeTxt }}
             </button>
           </div>
           <div>
@@ -113,7 +118,7 @@
                 v-model="changephonecode"
               />
               <button class="account-new-hqcode" id="one" :disabled="phonedd">
-                {{ phonecodeTxt }}
+                {{ codeTxt }}
               </button>
             </div>
             <div>
@@ -152,7 +157,7 @@
               v-model="emailphonecode"
             />
             <button class="account-change-phonehq" id="one" :disabled="phonedd">
-              {{ phonecodeTxt }}
+              {{ codeTxt }}
             </button>
           </div>
           <div>
@@ -191,7 +196,7 @@
                 v-model="newemailcode"
               />
               <button class="account-new-hqcode" id="one" :disabled="phonedd">
-                {{ phonecodeTxt }}
+                {{ codeTxt }}
               </button>
             </div>
             <div>
@@ -229,7 +234,7 @@
               v-model="pwdphonecode"
             />
             <button class="account-change-phonehq" id="one" :disabled="phonedd">
-              {{ phonecodeTxt }}
+              {{ codeTxt }}
             </button>
           </div>
           <div>
@@ -300,7 +305,7 @@
               v-model="wxphonecode"
             />
             <button class="account-change-phonehq" id="one" :disabled="phonedd">
-              {{ phonecodeTxt }}
+              {{ codeTxt }}
             </button>
           </div>
           <div>
@@ -319,7 +324,9 @@
 </template>
 
 <script>
+//import service from "../../util/request";
 import userthre from "../component/userthre";
+import service from "@/service/index";
 export default {
   components: { userthre },
 
@@ -349,7 +356,10 @@ export default {
       pwdnew: false,
       wxbtn: false,
       wxnewbtn: false,
-      phonecodeTxt: "获取验证码",
+      isCodeIng: false, //是否倒计时
+      codeTxt: "获取验证码",
+      codetime: 60,
+      disablbtn: false,
     };
   },
 
@@ -358,6 +368,33 @@ export default {
     phoneyes() {
       this.phonenew = true;
       this.phoneyz = false;
+    },
+    phonebtncode() {
+      let data = {
+        phone: this.phone,
+      };
+      service.phoneyz(data).then((res) => {
+        console.log(res);
+        if (res.code == 20020) {
+          alert(res.msg);
+        } else if (res.code == 20010) {
+          let timer = setInterval(() => {
+            this.isCodeIng = true;
+            this.disablbtn = true;
+            this.codetime -= 1;
+            this.codeTxt = "重新获取" + this.codetime + "s";
+            if (this.codetime < 1) {
+              clearInterval(timer);
+              if (this.codetime < 1) {
+                this.codeTxt = "获取验证码";
+                this.isCodeIng = false;
+                this.codetime = 60;
+                this.disablbtn = false;
+              }
+            }
+          }, 1000);
+        }
+      });
     },
     phoneno() {
       this.phoneyz = false;
