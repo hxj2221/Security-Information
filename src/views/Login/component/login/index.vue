@@ -51,11 +51,12 @@
 
           <img
             src="http://bt1.wlqqlp.com:8082/api/login/captcha"
-             title="看不清？点击切换"
+            title="看不清？点击切换"
             @click="reloadcode()"
-            style="height:40px"
-            class="imgcode" />
-           
+            style="height: 40px"
+            class="imgcode"
+          />
+
           <el-input
             placeholder="请输入验证码"
             v-model="ruleForm.captcha"
@@ -111,6 +112,8 @@ export default {
       logining: false,
       ruleForm: {
         account: "",
+        phone: "",
+        account: "",
         password: "",
         captcha: "",
       },
@@ -121,22 +124,26 @@ export default {
   methods: {
     reloadcode() {
       var verifyimg = $(".imgcode").attr("src");
-      $(".imgcode").attr("src", verifyimg.replace(/\?.*$/, "") + "?" + Math.random());
+      $(".imgcode").attr(
+        "src",
+        verifyimg.replace(/\?.*$/, "") + "?" + Math.random()
+      );
     },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           let params = this.ruleForm;
           this.logining = true;
-          service.login(params).then((res) => {
+          service
+            .login(params)
+            .then((res) => {
               if (res.code === 20010) {
-                 localStorage.setItem('token', res.data.token)
+                localStorage.setItem("token", res.data.token);
                 sessionStorage.setItem("account", this.ruleForm.account);
                 sessionStorage.setItem("password", this.ruleForm.password);
                 this.$router.push("/dashboard");
-                   
               } else {
-                 this.$message({
+                this.$message({
                   message: res.msg,
                   type: "error",
                   duration: 1000,
@@ -172,7 +179,7 @@ export default {
     }
   },
   created() {
-    localStorage.clear()
+    localStorage.clear();
     // this.height=document.body.clientHeight
     // var heights=document.getElementsByClassName('login')
     //  var div_height = window.screen.availHeight;
@@ -279,11 +286,11 @@ export default {
     right: 25px;
     width: 40%;
   }
-  .clickcode{
-    font-size:6px;
+  .clickcode {
+    font-size: 6px;
     position: absolute;
-     left: 155px;
-     color: #666ee8;
+    left: 155px;
+    color: #666ee8;
   }
 }
 </style>

@@ -200,17 +200,17 @@
       </div>
       <!-- 分页 -->
       <div class="addRecord_enclosure_paging">
-        <div class="block">
-          <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page.sync="currentPage"
-            :page-size="100"
-            layout="total, prev, pager, next"
-            :total="tableData.length"
-          >
-          </el-pagination>
-        </div>
+       <div class="block">
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-sizes="[8, 10, 20]"
+      :page-size="8"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="tableData.length">
+    </el-pagination>
+  </div>
       </div>
     </div>
     <!-- 表格  关联投诉信息 -->

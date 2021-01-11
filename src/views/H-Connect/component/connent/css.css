@@ -85,7 +85,7 @@
     line-height: 40px;
 }
 
-.connent_Tableall .el-input {
+.connent_Tableall .seach>.block> .el-input {
     width: 160px;
     margin-left: 10px;
     margin-right: 10px;

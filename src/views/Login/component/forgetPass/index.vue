@@ -94,7 +94,8 @@ export default {
         phone: this.ruleForm.name,
       };
       console.log(params);
-      PCode(qs.stringify(params)).then((res) => {
+     service.PCode(params).then((res) => {
+       console.log(res)
         if (/^1[34578]\d{9}$/.test(this.ruleForm.name) == "") {
           this.$message.error("手机号错误或为空，请重新输入");
         } else {
@@ -135,7 +136,7 @@ export default {
           password: this.ruleForm.newpassword,
           passwords: this.ruleForm.newpassword1,
         };
-        FPW(qs.stringify(data)).then((res) => {
+        service.Fpassword(data).then((res) => {
           if (res.data.msg == "找回成功") {
             this.$emit("forgetLogin");
             this.$message({
