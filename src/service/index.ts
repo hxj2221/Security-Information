@@ -11,6 +11,7 @@ export default {
   login: async (params: Object) => {
     return await service.post(`${baseUrl}api/login/login`, params).then(res => res).catch(err => err)
   },
+<<<<<<< HEAD
   // 找回密码
   Fpassword: async (params: Object) => {
     return await service.post(`${baseUrl}api/login/zhaopassword`, params).then(res => res).catch(err => err)
@@ -22,6 +23,11 @@ export default {
   // 投诉列表
   ComList: async () => {
     return await service.get(`${baseUrl}api/tsevent/lists`).then(res => res).catch(err => err)
+=======
+// 投诉列表
+  ComList: async (pNum:number,current:number) => {
+    return await service.get(`${baseUrl}api/tsevent/lists`,{params:{pNum,current}}).then(res => res).catch(err => err)
+>>>>>>> 8a22dd4c1375c3d030ce5c6bb9f6415c61234ea1
   },
   // 获取添加投诉列表信息
   AddCom: async () => {
@@ -31,9 +37,9 @@ export default {
   AddComponent: async (params: any) => {
     return await service.post(`${baseUrl}api/tsevent/add`, params).then(res => res).catch(err => err)
   },
-
-  deleteAdminList: async (params: any) => {
-    return await service.delete(`${baseUrl}admin`, { params }).then(res => res).catch(err => err)
+// 获取详情
+  componrdetaile: async (params: any) => {
+    return await service.post(`${baseUrl}api/tsevent/details`, {data:{params}} ).then(res => res).catch(err => err)
   },
 
   // 不良事件列表
@@ -44,13 +50,9 @@ export default {
   badAdd: async (params: any) => {
     return await service.post(`${baseUrl}api/bad/bad_add`, params).then(res => res).catch(err => err)
   },
-  // 不良事件轻重程度
-  // Weight: async () => {
-  //   return await service.get(`${baseUrl}api/bad/lists`).then(res => res).catch(err => err)
-  // },
-  // 不良类型类型
-  badType: async () => {
-    return await service.get(`${baseUrl}api/bad/choice_type`).then(res => res).catch(err => err)
+  // 不良中的下拉框
+  AdeSel : async()=>{
+    return await service.get(`${baseUrl}api/bad/choice_type`).then(res=>res).catch(err=>err)
   },
   // 不良查看
   badSee: async (params: any) => {

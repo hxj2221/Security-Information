@@ -290,12 +290,12 @@ const router = new VueRouter({
 var flag = true  // 页面刷新标志
 router.beforeEach((to, from, next) => {
   if (to.path == '/login') {
-    sessionStorage.removeItem('phone');
+    sessionStorage.removeItem('account');
     sessionStorage.removeItem('password');
     store.dispatch('app/ResetRouter');  // 全局路由tag重置
     flag = true
   }
-  let admin = <String>sessionStorage.getItem('phone');
+  let admin = <String>sessionStorage.getItem('account');
   if (!admin && to.path !== '/login') {
     next({ path: '/login' })
   } else {
@@ -303,7 +303,7 @@ router.beforeEach((to, from, next) => {
     if (flag && to.path !== '/login') {
       flag = false
       router['options'].routes = routes
-      let generateAsyncRoutes = generateRoutes(asyncRoutes, <string>sessionStorage.getItem('phone'))  // 根据登录角色生成动态路由
+      let generateAsyncRoutes = generateRoutes(asyncRoutes, <string>sessionStorage.getItem('account'))  // 根据登录角色生成动态路由
       router.addRoutes(generateAsyncRoutes)
       router['options'].routes = router['options'].routes.concat(generateAsyncRoutes)
       next({ ...to, replace: true })  // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record

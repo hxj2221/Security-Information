@@ -30,14 +30,15 @@
           </slot>
         </div>
       </div>
-      <el-drawer title="快捷查看" :visible.sync="drawer" :with-header="false" size='59%'>
-      
-          <ul class="infinite-list"  style="overflow:auto;height:870px;texr-aligin:center">
-             <Look  style="width:100%; margin:0px 0px;padding:0px 0px">
-          <div slot="title"></div>
+      <el-drawer title="快捷查看" :visible.sync="drawer" :with-header="false" size="59%">
+        <ul
+          class="infinite-list"
+          style="overflow: auto; height: 870px; texr-aligin: center"
+        >
+          <Look style="width: 100%; margin: 0px 0px; padding: 0px 0px">
+            <div slot="title"></div>
           </Look>
-          </ul>
-        
+        </ul>
       </el-drawer>
       <div class="operation-content">
         <!-- 基本信息 -->
@@ -212,11 +213,13 @@
                 ></el-col>
               </el-row>
             </div>
+            <!-- 附件 -->
             <el-row
               type="flex"
               class="row-bg"
               justify="space-between"
               style="margin: 20px 0"
+              
             >
               <el-col :span="15" :push="1"
                 ><div class="grid-content bg-purple">
@@ -289,6 +292,7 @@
           </div>
           <div class="feedback-content">
             <!-- 操作区域 -->
+            <!-- 下发科室 -->
             <div>
               <el-row type="flex" class="row-bg" justify="space-between">
                 <el-col :span="6" :push="1"
@@ -306,12 +310,27 @@
                 ></el-col>
               </el-row>
               <el-row type="flex" class="row-bg" justify="space-between">
+                <el-col :span="6" :push="1" style="margin-left: 10px"
+                  ><div class="grid-content bg-purple">
+                    <span class="label">截止日期:</span>
+                    <el-input
+                      type="input"
+                      v-model="endday"
+                      placeholder="请输入调查天数"
+                    ></el-input></div
+                ></el-col>
+              </el-row>
+           
+            </div>
+            <!-- 科室自查 -->
+            <div v-show="false">
+                 <el-row type="flex" class="row-bg" justify="space-between">
                 <el-col :span="20" :push="1"
                   ><div class="grid-content bg-purple">
                     <span class="label">主要事实:</span>
                     <el-input
                       type="textarea"
-                      v-model="reason"
+                      v-model="facts"
                       placeholder="请填写"
                       autosize
                     ></el-input></div
@@ -323,75 +342,93 @@
                     <span class="label">争议焦点:</span>
                     <el-input
                       type="textarea"
-                      v-model="reason"
+                      v-model="dispute"
                       placeholder="请填写"
                       autosize
                     ></el-input></div
                 ></el-col>
               </el-row>
             </div>
-            <el-row
-              type="flex"
-              class="row-bg"
-              justify="space-between"
-              style="margin: 20px 0"
-            >
-              <el-col :span="15" :push="1"
-                ><div class="grid-content bg-purple">
-                  <span class="label">附件信息:</span>
-                </div></el-col
+            <!-- 院内讨论 -->
+            <div>
+               <el-row type="flex" class="row-bg" justify="space-between">
+                <el-col :span="20" :push="1"
+                  ><div class="grid-content bg-purple">
+                    <span class="label">初步意见:</span>
+                    <el-input
+                      type="textarea"
+                      v-model="opinion"
+                      placeholder="请填写"
+                      autosize
+                    ></el-input></div
+                ></el-col>
+              </el-row>
+            </div>
+          
+            <div v-show="false">
+              <el-row
+                type="flex"
+                class="row-bg"
+                justify="space-between"
+                style="margin: 20px 0"
               >
-              <el-col :span="2" :pull="1"
-                ><div class="grid-content bg-purple">
-                  <el-button
-                    type="primary"
-                    icon="el-icon-circle-plus"
-                    @click="upfile()"
-                    style="background-color: #666ee8; border: none"
-                    >上传附件</el-button
-                  >
-                </div></el-col
-              >
-            </el-row>
-            <el-row type="flex" class="row-bg" justify="space-between">
-              <el-col :span="22" :push="1"
-                ><div class="grid-content bg-purple">
-                  <el-table
-                    :data="filelist"
-                    style="width: 100%"
-                    :header-cell-style="getRowClass"
-                  >
-                    <el-table-column prop="ID" label="ID" width="width">
-                    </el-table-column>
-                    <el-table-column prop="filename" label="文件名" width="width">
-                    </el-table-column>
-                    <el-table-column prop="describe" label="描述" width="width">
-                    </el-table-column>
-                    <el-table-column prop="filesize" label="文件大小" width="width">
-                    </el-table-column>
-                    <el-table-column prop="uptime" label="更新时间" width="width">
-                    </el-table-column>
-                    <el-table-column prop="filetype" label="文件类型" width="width">
-                    </el-table-column>
-                    <el-table-column prop="uploader" label="上传人员" width="width">
-                    </el-table-column>
-                    <el-table-column fixed="right" label="操作" width="100">
-                      <template slot-scope="scope">
-                        <slot name="fileoper">
-                          <el-button
-                            @click="handleClick(scope.row)"
-                            type="text"
-                            size="small"
-                            >下载</el-button
-                          >
-                          <el-button type="text" size="small">删除</el-button>
-                        </slot>
-                      </template>
-                    </el-table-column>
-                  </el-table>
-                </div></el-col
-              >
-            </el-row>
+                <el-col :span="15" :push="1"
+                  ><div class="grid-content bg-purple">
+                    <span class="label">附件信息:</span>
+                  </div></el-col
+                >
+                <el-col :span="2" :pull="1"
+                  ><div class="grid-content bg-purple">
+                    <el-button
+                      type="primary"
+                      icon="el-icon-circle-plus"
+                      @click="upfile()"
+                      style="background-color: #666ee8; border: none"
+                      >上传附件</el-button
+                    >
+                  </div></el-col
+                >
+              </el-row>
+              <el-row type="flex" class="row-bg" justify="space-between">
+                <el-col :span="22" :push="1"
+                  ><div class="grid-content bg-purple">
+                    <el-table
+                      :data="filelist"
+                      style="width: 100%"
+                      :header-cell-style="getRowClass"
+                    >
+                      <el-table-column prop="ID" label="ID" width="width">
+                      </el-table-column>
+                      <el-table-column prop="filename" label="文件名" width="width">
+                      </el-table-column>
+                      <el-table-column prop="describe" label="描述" width="width">
+                      </el-table-column>
+                      <el-table-column prop="filesize" label="文件大小" width="width">
+                      </el-table-column>
+                      <el-table-column prop="uptime" label="更新时间" width="width">
+                      </el-table-column>
+                      <el-table-column prop="filetype" label="文件类型" width="width">
+                      </el-table-column>
+                      <el-table-column prop="uploader" label="上传人员" width="width">
+                      </el-table-column>
+                      <el-table-column fixed="right" label="操作" width="100">
+                        <template slot-scope="scope">
+                          <slot name="fileoper">
+                            <el-button
+                              @click="handleClick(scope.row)"
+                              type="text"
+                              size="small"
+                              >下载</el-button
+                            >
+                            <el-button type="text" size="small">删除</el-button>
+                          </slot>
+                        </template>
+                      </el-table-column>
+                    </el-table>
+                  </div></el-col
+                >
+              </el-row>
+            </div>
           </div>
         </div>
         <!-- 提交 -->
@@ -454,6 +491,10 @@ export default {
   },
   data() {
     return {
+      opinion:'',//初步意见
+      dispute:'',//争议焦点
+      facts:'',//主要事实
+      endday:'',//截止天数
       drawer: false,
       uploadfile: "", //上传附件
       filedescribe: "", //文件描述
@@ -471,36 +512,7 @@ export default {
           value: 1,
         },
       ],
-      filelist: [
-        {
-          ID: "FJ20201229001",
-          filename: "调解书",
-          describe: "这是一个调解书",
-          filesize: "32.23kb",
-          uptime: "2020-12-02 20:56:37",
-          filetype: "jpg",
-          uploader: "王丽",
-        },
-        {
-          ID: "FJ20201229001",
-          filename: "调解书",
-          describe: "这是一个调解书",
-          filesize: "32.23kb",
-          uptime: "2020-12-02 20:56:37",
-          filetype: "jpg",
-          uploader: "王丽",
-        },
-
-        {
-          ID: "FJ20201229001",
-          filename: "调解书",
-          describe: "这是一个调解书",
-          filesize: "32.23kb",
-          uptime: "2020-12-02 20:56:37",
-          filetype: "jpg",
-          uploader: "王丽",
-        },
-      ],
+      filelist: [],
     };
   },
   methods: {
@@ -519,7 +531,6 @@ export default {
       }
     },
     //   上传文件弹窗
-
     upfile() {
       this.upfiles = true;
     },

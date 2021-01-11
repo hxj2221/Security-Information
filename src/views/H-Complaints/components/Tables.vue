@@ -28,6 +28,18 @@
         </slot>
       </el-table>
     </div>
+    <div class="Complaints-footer">
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="Pagess"
+        :page-sizes="numberlist"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      >
+      </el-pagination>
+    </div>
   </div>
 </template>
 <script>
@@ -38,52 +50,50 @@ export default {
 
   data() {
     return {
-      tableData: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "1",
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "1 1517 弄",
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "1 1519 弄",
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "1 1516 弄",
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "1 1516 弄",
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "1 1516 弄",
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "1 1516 弄",
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "1 1516 弄",
-        },
-      ],
+      tableData: [],
+      numberlist: [8, 10, 20],
+      Pagess: 1,
+      total: 100,
+      number: 8,
     };
   },
 
   methods: {
+    handleSizeChange(val) {
+      this.number = val;
+      service.ComList(this.number, this.Pagess).then((res) => {
+        if (res.code === 20010) {
+          this.tableData = res.data[0];
+          this.total = res.data[1].count;
+          this.Pagess = res.data[1].current;
+        } else {
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          // this.$router.push("/login");
+        }
+      });
+    },
+    handleCurrentChange(val) {
+      this.Pagess = val;
+      service.ComList(this.number, this.Pagess).then((res) => {
+        console.log(res);
+        if (res.code === 20010) {
+          this.tableData = res.data[0];
+          this.total = res.data[1].count;
+          this.Pagess = res.data[1].current;
+        } else {
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          // this.$router.push("/login");
+        }
+      });
+    },
     handle(row) {
       console.log(row);
     },
@@ -97,18 +107,19 @@ export default {
     },
   },
   created() {
-    service.ComList().then((res) => {
+    service.ComList(this.number, this.Pagess).then((res) => {
       console.log(res);
       if (res.code === 20010) {
-        this.tableData = res.data;
+        this.tableData = res.data[0];
+        this.total = res.data[1].count;
+        this.Pagess = res.data[1].current;
       } else {
         this.$message({
           message: res.msg,
           type: "error",
           duration: 1000,
         });
-        this.$router.push("/login");
-        localStorage.clear();
+        // this.$router.push("/login");
       }
     });
   },

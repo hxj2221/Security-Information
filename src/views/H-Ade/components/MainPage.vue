@@ -17,20 +17,20 @@
           </el-form-item>
           <el-form-item label="发生地点">
             <el-select v-model="search.value" placeholder="请选择">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+              <el-option v-for="item in options" :key="item.id" :label="item.title" :value="item.title">
               </el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="事发日期">
-            <el-date-picker v-model="search.date" type="daterange" align="right" unlink-panels range-separator="至"
-              start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="search">
+            <el-date-picker v-model="search.date" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="daterange" align="right" unlink-panels range-separator="至"
+              start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions">
             </el-date-picker>
           </el-form-item>
         </div>
         <div class="searchAll_search">
           <el-form-item label="轻重程度">
             <el-select style="width: 562px;" v-model="search.value1" placeholder="请选择">
-              <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value">
+              <el-option v-for="item in options1" :key="item.id" :label="item.title" :value="item.title">
               </el-option>
             </el-select>
           </el-form-item>
@@ -50,19 +50,19 @@
       </el-table-column>
       <el-table-column prop="age" label="年龄">
       </el-table-column>
-      <el-table-column prop="occur_time" label="事发日期" width="150" >
+      <el-table-column prop="occur_time" :formatter="getdate" label="事发日期" width="150">
       </el-table-column>
-      <el-table-column prop="occur_scene" label="发生场所" >
+      <el-table-column prop="occur_scene" label="发生场所">
       </el-table-column>
-      <el-table-column prop="degree_weight_id" label="轻重程度" >
+      <el-table-column prop="degree_weight_id" label="轻重程度">
       </el-table-column>
       <el-table-column prop="create_time" label="上报时间" width="150">
       </el-table-column>
-      <el-table-column prop="department_id"  label="患者科室" >
+      <el-table-column prop="department_id" label="患者科室">
       </el-table-column>
-      <el-table-column prop="create_uid" label="上报人" >
+      <el-table-column prop="create_uid" label="上报人">
       </el-table-column>
-      <el-table-column label="操作" >
+      <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button @click="handleClick(scope.$index,scope.row)" type="text" size="small">查看</el-button>
         </template>
@@ -70,14 +70,24 @@
     </el-table>
     <!-- 分页 -->
     <div class="paging">
-      <el-pagination :page-size="10" :pager-count="11" layout="prev, pager, next" :total="tableData.length">
-      </el-pagination>
+      <div class="block">
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage4"
+      :page-sizes="[8, 10, 20]"
+      :page-size="8"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="tableData.length">
+    </el-pagination>
+  </div>
     </div>
   </div>
 </template>
 
 <script>
-import service from "@/service/index";
+  import service from "@/service/index";
+  import moment from 'moment'
   export default {
     components: {},
     props: {},
@@ -90,60 +100,41 @@ import service from "@/service/index";
           value: '',
           value1: ''
         },
-        options: [{
-            value: '选项1',
-            label: '急诊'
+        pickerOptions: {
+          shortcuts: [{
+            text: '最近一周',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+              picker.$emit('pick', [start, end]);
+            }
           }, {
-            value: '选项2',
-            label: '门诊'
+            text: '最近一个月',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+              picker.$emit('pick', [start, end]);
+            }
           }, {
-            value: '选项3',
-            label: '病房部'
-          }, {
-            value: '选项4',
-            label: '手术室'
-          }, {
-            value: '选项5',
-            label: '医技检查室'
-          }, {
-            value: '选项6',
-            label: '后勤区域'
-          }, {
-            value: '选项7',
-            label: '其他'
-          }],
-        options1: [{
-            value: '选项1',
-            label: 'A级：客观环境或条件可能引发不良事件（隐患）'
-          }, {
-            value: '选项2',
-            label: 'B级：发生但未累及患者'
-          }, {
-            value: '选项3',
-            label: 'C级：累及到患者，但没有造成伤害'
-          }, {
-            value: '选项4',
-            label: 'D级：累及到患者，需要进行监测以确保患者不被伤害，或需通过干预阻止伤害发生'
-          }, {
-            value: '选项5',
-            label: 'E级：造成患者暂时性伤害，并需要进行治疗或干预'
-          }, {
-            value: '选项6',
-            label: 'F级：造成患者暂时性伤害，并需要住院或延长住院时间'
-          }, {
-            value: '选项7',
-            label: 'G级：造成患者永久性伤害'
-          }, {
-            value: '选项8',
-            label: 'H级：导致患者需要治疗挽救生命'
-          }, {
-            value: '选项9',
-            label: 'I级：导致患者死亡'
-          }, ],
+            text: '最近三个月',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+              picker.$emit('pick', [start, end]);
+            }
+          }]
+        },
+        options: [],//发生地点
+        options1: [],//轻重程度
         // 内容
-        tableData: [],
-        details:{},//查看
-        addcon:[],//新增里面的
+        tableData: [],//表格内容
+        details: {}, //查看
+        addcon: [], //新增里面的
+        resultData:[],//搜索后放置新的值
+        currentPage4: 1
       };
     },
     methods: {
@@ -152,38 +143,53 @@ import service from "@/service/index";
         this.$emit('pageAdd')
       },
       // 查看
-      handleClick(row,index) {
+      handleClick(row, index) {
         // console.log(index.id)
-        let params={
-          id:index.id
+        let params = {
+          id: index.id
         }
-        service.badSee(params).then(res=>{
+        service.badSee(params).then(res => {
           console.log(res)
-          if(res.code==20010){
+          if (res.code == 20010) {
             this.$emit('pageDetail')
-            this.details=res.data
-            this.bus.$emit('detail',this.details)
+            this.details = res.data
+            this.bus.$emit('detail', this.details)
           }
         })
       },
       // 搜索事件
-      screen(){
+      screen() {
         console.log(this.search)
+        
+      },
+       //时间格式化 
+      getdate:function(row, column) { 
+        var date = row[column.property]; 
+     if (date == undefined) { 
+       return ""; 
+     } 
+     return moment(date).format("YYYY-MM-DD HH:mm:ss"); 
+      } ,
+      // 分页
+      handleSizeChange(val) {
+        console.log(`每页 ${val} 条`);
+      },
+      handleCurrentChange(val) {
+        console.log(`当前页: ${val}`);
       }
-      
     },
-    created(){
+    created() {
       // 不良列表
-     service.AdeList().then(res=>{
-        this.tableData=res.data
+      service.AdeList().then(res => {
+        this.tableData = res.data 
       })
-      
-    //   // // 轻重程度
-    //   service.Weight().then(res=>{
-    //     console.log(res)
-    //   })
-      
-    }
+      // 下拉框内容
+      service.AdeSel().then(res=>{
+        // console.log(res)
+        this.options=res.address
+        this.options1=res.degree_weight
+      })
+    },
   }
 </script>
 <style>
