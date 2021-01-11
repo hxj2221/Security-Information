@@ -11,7 +11,6 @@ export default {
   login: async (params: Object) => {
     return await service.post(`${baseUrl}api/login/login`, params).then(res => res).catch(err => err)
   },
-<<<<<<< HEAD
   // 找回密码
   Fpassword: async (params: Object) => {
     return await service.post(`${baseUrl}api/login/zhaopassword`, params).then(res => res).catch(err => err)
@@ -23,11 +22,6 @@ export default {
   // 投诉列表
   ComList: async () => {
     return await service.get(`${baseUrl}api/tsevent/lists`).then(res => res).catch(err => err)
-=======
-// 投诉列表
-  ComList: async (pNum:number,current:number) => {
-    return await service.get(`${baseUrl}api/tsevent/lists`,{params:{pNum,current}}).then(res => res).catch(err => err)
->>>>>>> 8a22dd4c1375c3d030ce5c6bb9f6415c61234ea1
   },
   // 获取添加投诉列表信息
   AddCom: async () => {
