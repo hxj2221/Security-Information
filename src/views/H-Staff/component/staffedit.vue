@@ -2,14 +2,14 @@
   <div class="addstaffall">
     <!-- top -->
     <div class="staffThre">
-      <span class="staffSpan">新增员工信息</span>
+      <span class="staffSpan">编辑员工信息</span>
       <div style="padding-right: 30px">
         <el-button class="staffgr" @click="staffaddvueyes">保存</el-button>
         <el-button class="staffb" @click="staffaddvueno">返回</el-button>
       </div>
     </div>
     <hr class="staffWidhr" />
-    <!-- add -->
+    <!-- edit -->
     <div class="addmain">
       <el-form ref="form" :model="addStaff">
         <el-row :gutter="20">
@@ -37,25 +37,6 @@
           <el-col :span="8">
             <el-form-item label="年龄" required>
               <el-input type="number" v-model="addStaff.age"></el-input>
-              <!-- <el-input placeholder="请输入内容" v-model="staffAgeipt" class="">
-                <template slot="append">
-                  <el-select
-                    type="input"
-                    style="width: 90px"
-                    autosize
-                    v-model="staffAgesel"
-                    placeholder="请选择"
-                  >
-                    <el-option
-                      v-for="item in optionages"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value"
-                    >
-                    </el-option>
-                  </el-select>
-                </template>
-              </el-input> -->
             </el-form-item>
           </el-col>
           <el-col :span="8">
@@ -124,20 +105,6 @@
         <el-row :gutter="20">
           <el-col :span="8">
             <el-form-item label="地址" required>
-              <!-- <el-cascader
-                class="dialog-input-text"
-                type="input"
-                autosize
-                style="
-                  display: block;
-                  position: relative;
-                  font-size: 14px;
-                  line-height: 40px;
-                "
-                v-model="addStaff.address"
-                :options="city"
-                placeholder="请选择内容"
-              ></el-cascader> -->
               <el-cascader
                 class="dialog-input-text"
                 style="
@@ -255,8 +222,7 @@
 
 <script>
 // 添加员工，调后台
-import { Aepyee } from "@/network/Sta.js";
-
+//  import { Aepyee } from "@/network/Sta.js";
 import qs from "qs";
 import service from "@/service/index";
 //地址级联选择器
@@ -269,8 +235,8 @@ import {
   TextToCode,
 } from "element-china-area-data";
 export default {
+  props: ["childed"],
   components: {},
-  props: {},
   data() {
     return {
       options: regionData,
@@ -324,74 +290,70 @@ export default {
           label: "未知",
         },
       ],
-      // // 地址循环
-      // city: [
-      //   {
-      //     value: "浙江",
-      //     label: "浙江",
-      //     children: [
-      //       {
-      //         value: "绍兴",
-      //         label: "绍兴",
-      //       },
-      //     ],
-      //   },
-      //   {
-      //     value: "河南",
-      //     label: "河南",
-      //     children: [
-      //       {
-      //         value: "郑州",
-      //         label: "郑州",
-      //       },
-      //     ],
-      //   },
-      // ],
+
       // 科室
       optiondepart: [],
       // 角色
       optionrole: [],
     };
   },
+  watch: {
+    childed(res) {
+      console.log(res); //数据已经拿到
+      this.addStaff.name = res.name;
+      this.addStaff.password = res.password;
+      this.addStaff.sex = res.sex;
+      this.addStaff.email = res.email;
+      this.addStaff.phone = res.phone;
+      this.addStaff.address = res.address;
+      this.addStaff.eraddress = res.eraddress;
+      this.addStaff.position = res.position;
+      this.addStaff.age = res.age;
+      this.addStaff.cardnumber = res.cardnumber;
+      this.addStaff.head_department = res.head_department;
+      this.addStaff.status = res.status;
+      this.addStaff.head_department = res.head_department;
+    },
+  },
   methods: {
     // 保存
     staffaddvueyes() {
-      // let params = this.addStaff
-      console.log(this.addStaff.address);
-      let data = {
-        name: this.addStaff.name,
-        password: this.addStaff.password,
-        sex: this.addStaff.sex,
-        email: this.addStaff.email,
-        phone: this.addStaff.phone,
-        address: this.addStaff.address,
-        eraddress: this.addStaff.eraddress,
-        position: this.addStaff.position,
-        age: this.addStaff.age,
-        // specific_age: this.addStaff.age,
-        cardnumber: this.addStaff.cardnumber,
-        head_department: this.addStaff.head_department,
-        status: this.addStaff.status,
-        department_id: this.addStaff.head_department,
-        role_id: "1",
-      };
-      console.log(data);
-      service.staffAdd(data).then((res) => {
-        console.log(res);
-        if (res.msg == "员工信息添加成功") {
-          const loading = this.$loading({
-            lock: true,
-            text: "保存中",
-            spinner: "el-icon-loading",
-            background: "rgba(0, 0, 0, 0.7)",
-          });
-          setTimeout(() => {
-            loading.close();
-          }, 2000);
-          this.$parent.fathstaffyes();
-        } else {
-        }
-      });
+      // // let params = this.addStaff
+      // console.log(this.addStaff.address);
+      // let data = {
+      //   name: this.addStaff.name,
+      //   password: this.addStaff.password,
+      //   sex: this.addStaff.sex,
+      //   email: this.addStaff.email,
+      //   phone: this.addStaff.phone,
+      //   address: this.addStaff.address,
+      //   eraddress: this.addStaff.eraddress,
+      //   position: this.addStaff.position,
+      //   age: this.addStaff.age,
+      //   // specific_age: this.addStaff.age,
+      //   cardnumber: this.addStaff.cardnumber,
+      //   head_department: this.addStaff.head_department,
+      //   status: this.addStaff.status,
+      //   department_id: this.addStaff.head_department,
+      //   role_id: "1",
+      // };
+      // console.log(data);
+      // service.staffAdd(data).then((res) => {
+      //   console.log(res);
+      //   if (res.msg == "员工信息添加成功") {
+      //     const loading = this.$loading({
+      //       lock: true,
+      //       text: "保存中",
+      //       spinner: "el-icon-loading",
+      //       background: "rgba(0, 0, 0, 0.7)",
+      //     });
+      //     setTimeout(() => {
+      //       loading.close();
+      //     }, 2000);
+      //     this.$parent.fathstaffyes();
+      //   } else {
+      //   }
+      // });
     },
     handleChange(cityvalue) {
       console.log(
@@ -406,11 +368,6 @@ export default {
         " " +
         CodeToText[cityvalue[2]];
       this.addStaff.address = a;
-      // for (let i=0;i<cityvalue.length;i++){
-      //  let a =CodeToText[cityvalue[i]]
-      //  this.addStaff.address=a
-      //  console.log(this.addStaffaddress)
-      // }
       console.log(this.addStaff.address);
     },
     // 子调用父

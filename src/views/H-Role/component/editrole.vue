@@ -1,7 +1,7 @@
 <template>
   <div class="addstaffall">
     <div class="roleaddThre">
-      <span class="roleaddSpan">新增角色信息</span>
+      <span class="roleaddSpan">编辑角色信息</span>
       <div>
         <el-button class="roleaddgr" @click="roleaddvueyes">保存</el-button>
         <el-button class="roleaddb" @click="roleaddvueno">返回</el-button>
@@ -52,7 +52,7 @@
                 class="dialog-input-text"
                 type="input"
                 autosize
-                v-model="rolecreate"
+                v-model="rolems"
                 placeholder="请输入内容"
               ></el-input>
             </el-form-item>
@@ -144,13 +144,16 @@
 <script>
 import service from "@/service/index";
 export default {
+  props: ["editchid"],
   inject: ["reload"],
   data() {
     return {
       radio: 3,
+      rolems: "",
       rolecreate: "",
       roleNameipt: "",
-      valuestatus: 1,
+      valuestatus: 0,
+      jkid: "",
       datas: [
         {
           listTitle: "模块1",
@@ -315,6 +318,16 @@ export default {
       ],
     };
   },
+  created() {},
+  watch: {
+    editchid(newValue) {
+      console.log(newValue); //数据已经拿到
+      this.roleNameipt = newValue.title;
+      this.rolems = newValue.describe;
+      this.valuestatus = newValue.status;
+      this.jkid = newValue.id;
+    },
+  },
   methods: {
     //   保存
     roleaddvueyes() {
@@ -322,10 +335,11 @@ export default {
         title: this.roleNameipt,
         status: this.valuestatus,
         describe: this.rolecreate,
+        id: this.jkid,
         rules: 1,
         data_rule: 1,
       };
-      service.roleadd(data).then((res) => {
+      service.roleeditsqve(data).then((res) => {
         console.log(res);
         if (res.code == "20010") {
           const loading = this.$loading({
@@ -390,9 +404,6 @@ export default {
     },
     changesonc(e) {
       console.log(e);
-    },
-    jsmc() {
-      console.log(this.roleNameipt);
     },
   },
 };

@@ -48,7 +48,7 @@
       <div class="connent_myTable">
         <!--  -->
         <el-table :data="tableData" style="width: 100%">
-          <el-table-column label="序号" >
+          <el-table-column label="序号">
             <template slot-scope="scope">
               <span>{{ scope.row.num }}</span>
             </template>
@@ -60,7 +60,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="患者姓名" >
+          <el-table-column label="患者姓名">
             <template slot-scope="scope">
               <span>{{ scope.row.name }}</span>
             </template>
@@ -72,7 +72,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="记录人" >
+          <el-table-column label="记录人">
             <template slot-scope="scope">
               <span>{{ scope.row.jlr }}</span>
             </template>
@@ -90,7 +90,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="主要沟通事项" >
+          <el-table-column label="主要沟通事项">
             <template slot-scope="scope">
               <el-popover trigger="hover" placement="top">
                 <p>{{ scope.row.zygtsx }}</p>
@@ -116,12 +116,13 @@
       <!-- 分页 -->
       <div class="connent_paging">
         <div class="block">
-         <el-pagination
+          <el-pagination
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
-            :current-page.sync="currentPage"
-            :page-size="100"
-            layout="total, prev, pager, next"
+            :current-page="currentPage"
+            :page-sizes="[8, 10, 20]"
+            :page-size="8"
+            layout="total, sizes, prev, pager, next, jumper"
             :total="tableData.length"
           >
           </el-pagination>

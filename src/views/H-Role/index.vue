@@ -13,28 +13,28 @@
       <el-table
         :data="tables"
         tooltip-effect="dark"
-        height="61.7%"
+        height="600px"
         style="width: 90%; margin-left: 5%"
         :header-cell-style="{ background: '#C2C5F6' }"
         :cell-style="{ background: '#fff' }"
       >
         <el-table-column label="序号" type="index" :index="indexMethod">
         </el-table-column>
-        <el-table-column prop="rolejobNum" label="角色编号"> </el-table-column>
-        <el-table-column prop="roleName" label="角色名称"> </el-table-column>
-        <el-table-column prop="rolenumber" label="员工数量"> </el-table-column>
-        <el-table-column prop="roleCreapeo" label="创建人员"></el-table-column>
+        <el-table-column prop="number" label="角色编号"> </el-table-column>
+        <el-table-column prop="title" label="角色名称"> </el-table-column>
+        <el-table-column prop="number" label="员工数量"> </el-table-column>
+        <el-table-column prop="user.name" label="创建人员"></el-table-column>
 
-        <el-table-column prop="roleCreat" label="创建时间"></el-table-column>
+        <el-table-column prop="create_time" label="创建时间"></el-table-column>
         <el-table-column label="角色状态">
           <template slot-scope="scope">
             <el-switch
               v-model="scope.row.status"
               :active-value="1"
-              :inactive-value="2"
+              :inactive-value="0"
               active-color="#02538C"
               inactive-color="#B9B9B9"
-              @change="changeSwitch($event, scope.row)"
+              @change="changeSwitch($event, scope.row, scope.row.id)"
             />
           </template>
           ></el-table-column
@@ -45,14 +45,14 @@
             <el-button
               class="roleEdit"
               size="mini"
-              @click="handleEdit(scope.$index, scope.row)"
+              @click="handleEdit(scope.row.id)"
               >编辑</el-button
             >
             <el-button
               class="roleDel"
               size="mini"
               type="danger"
-              @click="handleDelete(scope.$index, tables)"
+              @click="delrole(scope.row.id)"
               >删除</el-button
             >
           </template>
@@ -68,94 +68,49 @@
     <!-- 新增-->
     <addrole v-show="addrole"></addrole>
     <!-- 编辑 -->
-    <el-dialog
-      title="编辑"
-      :visible.sync="editFormVisible"
-      :close-on-click-modal="true"
-      :append-to-body="true"
-    >
-      <!--editForm表单提交的数据-->
-      <el-form :model="editForm" label-width="80px" ref="editForm">
-        <el-form-item prop="rolejobNum" label="角色编号" width="100">
-          <el-input
-            v-model="editForm.rolejobNum"
-            auto-complete="off"
-          ></el-input>
-        </el-form-item>
-        <el-form-item prop="roleName" label="角色名称" width="120">
-          <el-input v-model="editForm.roleName" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item prop="roleName" label="员工数量" width="120">
-          <el-input
-            v-model="editForm.rolenumber"
-            auto-complete="off"
-          ></el-input>
-        </el-form-item>
-        <el-form-item prop="roleCreapeo" label="创建人员" width="120">
-          <el-input
-            v-model="editForm.roleCreapeo"
-            auto-complete="off"
-          ></el-input>
-        </el-form-item>
-      </el-form>
-    </el-dialog>
+    <editrole v-show="editshow" :editchid="childedit"></editrole>
   </div>
 </template>
 
 <script>
 import headpow from "../component/power";
 import addrole from "./component/addrole";
-import { getrole } from "../../network/H-role";
+import editrole from "./component/editrole";
+import service from "@/service/index";
 export default {
-  components: { headpow, addrole },
+  components: { headpow, addrole, editrole },
+  inject: ["reload"],
   data() {
     return {
       rolevue: true,
       addrole: false,
+      editshow: false,
+      tables: [],
       currentRow: [], //选中的值
-      editFormVisible: false, //设置默认弹出框  为false
-      editForm: {
-        rolejobNum: "",
-        rolenumber: "",
-        roleName: "",
-        roleCreapeo: "",
-      },
       dormitory: [],
       search: "",
+      childedit: [],
     };
   },
   created() {
-    $.ajax({
-      url: "http://bt1.wlqqlp.com:8082/api/part/authgroup",
-      type: "get",
-      dataType: "json",
-      headers: {
-        token:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjE1LCJpYXQiOjE2MDk5MTUwNDYsImp0aSI6ImE1Y2M1MTJjZTJhYmJkMjFiN2RmNzMxNzkyZGIyZTc5In0.gHTJUmJk0G0iaOKcQCJwDCk7nonBZ7QsDXKV6vIYYwU",
-      },
-      success(e) {
-        console.log(e);
-        this.dormitory = e.data.data;
-        console.log(dormitory);
-      },
+    service.rolelist().then((res) => {
+      console.log(res.data);
+      this.tables = res.data;
     });
-    // getrole().then((res) => {
-    //   console.log(res);
-    // });
   },
   computed: {
     // 搜索
-    tables() {
-      const search = this.search;
-      if (search) {
-        return this.dormitory.filter((data) => {
-          return Object.keys(data).some((key) => {
-            return String(data[key]).toLowerCase().indexOf(search) > -1;
-          });
-        });
-      }
-      return this.dormitory;
-    },
+    // tables() {
+    //   const search = this.search;
+    //   if (search) {
+    //     return this.dormitory.filter((data) => {
+    //       return Object.keys(data).some((key) => {
+    //         return String(data[key]).toLowerCase().indexOf(search) > -1;
+    //       });
+    //     });
+    //   }
+    //   return this.dormitory;
+    // },
   },
   methods: {
     // 新增
@@ -167,16 +122,26 @@ export default {
     fathroleyes() {
       setTimeout(() => {
         this.addrole = false;
+        this.editshow = false;
         this.rolevue = true;
       }, 3000);
     },
     // 子取消
     fathroleno() {
       this.addrole = false;
+      this.editshow = false;
       this.rolevue = true;
     },
     // switch开关
-    changeSwitch(val, row) {
+    changeSwitch(val, row, id) {
+      let data = {
+        id: id,
+        status: row.status,
+      };
+      console.log(data);
+      service.rolestatus(data).then((res) => {
+        console.log(res);
+      });
       console.log(row.status);
       if (row.status == 1) {
         this.$message({
@@ -191,10 +156,33 @@ export default {
       }
     },
     // 编辑
-    handleEdit(index, row) {
-      this.editFormVisible = true;
-      this.editForm = Object.assign({}, row); //重点
-      console.log(this.editForm);
+    handleEdit(id) {
+      // this.editFormVisible = true;
+      // this.editForm = Object.assign({}, row); //重点
+      this.rolevue = false;
+      this.editshow = true;
+      console.log(id);
+      let param = {
+        id: id,
+      };
+      console.log(param);
+      service.roleedit(param).then((res) => {
+        console.log(res.info);
+        this.childedit = res.info;
+        console.log(this.childedit);
+      });
+    },
+    // 删除角色
+    delrole(id) {
+      console.log(id);
+      let param = {
+        id: id,
+      };
+      console.log(param);
+      service.roledel(param).then((res) => {
+        console.log(res);
+        this.reload();
+      });
     },
     // 序号
     indexMethod(index) {
