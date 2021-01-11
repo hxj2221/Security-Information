@@ -24,10 +24,13 @@ export default  {
     return await service.post(`${baseUrl}api/tsevent/add`, params ).then(res => res).catch(err => err)
   },
 // 获取详情
-  componrdetaile: async (params: any) => {
-    return await service.post(`${baseUrl}api/tsevent/details`, {data:{params}} ).then(res => res).catch(err => err)
+  componrdetaile: async (data: any) => {
+    return await service.post(`${baseUrl}api/tsevent/details`, data ).then(res => res).catch(err => err)
   },
-
+// 待下发
+Issue: async (event_number: any) => {
+  return await service.get(`${baseUrl}api/tsevent/issue`,{params:{event_number:event_number}} ).then(res => res).catch(err => err)
+},
   // 不良事件列表
   AdeList: async () => {
     return await service.get(`${baseUrl}api/bad/lists`).then(res => res).catch(err => err)

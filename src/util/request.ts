@@ -40,7 +40,7 @@ service.interceptors.request.use((config: AxiosRequestConfig) => {
 });
 
 service.interceptors.response.use((response: AxiosResponse) => {
-  // console.log(response)
+  console.log(response)
   if (response.status !== 200) {
     Message({
       message: `请求错误，${String(response.status)}`,

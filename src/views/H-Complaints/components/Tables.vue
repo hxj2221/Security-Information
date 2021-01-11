@@ -16,7 +16,7 @@
         <el-table-column prop="complaint_type.title" label="投诉方式"> </el-table-column>
         <el-table-column prop="create_time" label="投诉时间"> </el-table-column>
         <el-table-column prop="pass_department" label="流转部门"> </el-table-column>
-        <el-table-column prop="state" label="事件状态"> </el-table-column>
+        <el-table-column prop="state.title" label="事件状态"> </el-table-column>
         <slot name="column">
           <el-table-column fixed="right" label="操作" width="150%">
             <template slot-scope="scope">

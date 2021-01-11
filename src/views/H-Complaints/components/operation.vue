@@ -120,7 +120,7 @@
           </div>
         </div>
         <!-- 经办人信息 -->
-        <div class="box-feedback" v-show="false">
+        <div class="box-feedback" v-show="true">
           <div class="box-top">
             <el-row type="flex" class="row-bg" justify="space-between">
               <el-col :span="7" :push="1"
@@ -160,7 +160,7 @@
           </div>
         </div>
         <!-- 科室反馈 -->
-        <div class="box-feedback" v-show="false">
+        <div class="box-feedback" v-show="true">
           <div class="box-top">
             <el-row type="flex" class="row-bg" justify="space-between">
               <el-col :span="7" :push="1"
@@ -213,70 +213,62 @@
                 ></el-col>
               </el-row>
             </div>
-            <!-- 附件 -->
-            <el-row
-              type="flex"
-              class="row-bg"
-              justify="space-between"
-              style="margin: 20px 0"
-              
-            >
-              <el-col :span="15" :push="1"
-                ><div class="grid-content bg-purple">
-                  <span class="label">附件信息:</span>
-                </div></el-col
-              >
-              <el-col :span="2" :pull="1"
-                ><div class="grid-content bg-purple">
-                  <el-button
-                    type="primary"
-                    icon="el-icon-circle-plus"
-                    @click="upfile()"
-                    style="background-color: #666ee8; border: none"
-                    >上传附件</el-button
-                  >
-                </div></el-col
-              >
-            </el-row>
+          
+          </div>
+        </div>
+        <!-- 科室改进 -->
+         <div class="box-feedback" v-show="true">
+          <div class="box-top">
             <el-row type="flex" class="row-bg" justify="space-between">
-              <el-col :span="22" :push="1"
+              <el-col :span="7" :push="1"
                 ><div class="grid-content bg-purple">
-                  <el-table
-                    :data="filelist"
-                    style="width: 100%"
-                    :header-cell-style="getRowClass"
-                  >
-                    <el-table-column prop="ID" label="ID" width="width">
-                    </el-table-column>
-                    <el-table-column prop="filename" label="文件名" width="width">
-                    </el-table-column>
-                    <el-table-column prop="describe" label="描述" width="width">
-                    </el-table-column>
-                    <el-table-column prop="filesize" label="文件大小" width="width">
-                    </el-table-column>
-                    <el-table-column prop="uptime" label="更新时间" width="width">
-                    </el-table-column>
-                    <el-table-column prop="filetype" label="文件类型" width="width">
-                    </el-table-column>
-                    <el-table-column prop="uploader" label="上传人员" width="width">
-                    </el-table-column>
-                    <el-table-column fixed="right" label="操作" width="100">
-                      <template slot-scope="scope">
-                        <slot name="fileoper">
-                          <el-button
-                            @click="handleClick(scope.row)"
-                            type="text"
-                            size="small"
-                            >下载</el-button
-                          >
-                          <el-button type="text" size="small">删除</el-button>
-                        </slot>
-                      </template>
-                    </el-table-column>
-                  </el-table>
+                  <span class="feedback-title"><b>科室改进</b></span>
                 </div></el-col
               >
             </el-row>
+          </div>
+          <div class="feedback-content">
+            <!-- 操作区域 -->
+            <div>
+             
+              <el-row type="flex" class="row-bg" justify="space-between">
+                <el-col :span="20" :push="1"
+                  ><div class="grid-content bg-purple">
+                    <span class="label">根因分析:</span>
+                    <el-input
+                      type="textarea"
+                      v-model="reason"
+                      placeholder="请填写"
+                      autosize
+                    ></el-input></div
+                ></el-col>
+              </el-row>
+              <el-row type="flex" class="row-bg" justify="space-between">
+                <el-col :span="20" :push="1"
+                  ><div class="grid-content bg-purple">
+                    <span class="label">责任意见:</span>
+                    <el-input
+                      type="textarea"
+                      v-model="reason"
+                      placeholder="请填写"
+                      autosize
+                    ></el-input></div
+                ></el-col>
+              </el-row>
+               <el-row type="flex" class="row-bg" justify="space-between">
+                <el-col :span="20" :push="1"
+                  ><div class="grid-content bg-purple">
+                    <span class="label">整改措施:</span>
+                    <el-input
+                      type="textarea"
+                      v-model="reason"
+                      placeholder="请填写"
+                      autosize
+                    ></el-input></div
+                ></el-col>
+              </el-row>
+            </div>
+          
           </div>
         </div>
         <!-- 审批操作 -->
@@ -323,7 +315,7 @@
            
             </div>
             <!-- 科室自查 -->
-            <div v-show="false">
+            <div v-show="true">
                  <el-row type="flex" class="row-bg" justify="space-between">
                 <el-col :span="20" :push="1"
                   ><div class="grid-content bg-purple">
@@ -364,8 +356,58 @@
                 ></el-col>
               </el-row>
             </div>
-          
-            <div v-show="false">
+          <div>
+            <!-- 结束 -->
+            <div>
+               <el-row type="flex" class="row-bg" justify="space-between">
+                <el-col :span="6" :push="1"
+                  ><div class="grid-content bg-purple">
+                    <span class="label">责任科室:</span>
+                    <el-select v-model="peopel" multiple placeholder="请选择">
+                      <el-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      >
+                      </el-option>
+                    </el-select></div
+                ></el-col>
+              </el-row>
+              <el-row type="flex" class="row-bg" justify="space-between">
+                <el-col :span="6" :push="1"
+                  ><div class="grid-content bg-purple">
+                    <span class="label">投诉类别:</span>
+                    <el-select v-model="peopel" multiple placeholder="请选择">
+                      <el-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      >
+                      </el-option>
+                    </el-select></div
+                ></el-col>
+              </el-row>
+               <el-row type="flex" class="row-bg" justify="space-between">
+                <el-col :span="6" :push="1"
+                  ><div class="grid-content bg-purple">
+                    <span class="label">责任度:</span>
+                    <el-select v-model="peopel" multiple placeholder="请选择">
+                      <el-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      >
+                      </el-option>
+                    </el-select></div
+                ></el-col>
+              </el-row>
+            </div>
+           
+          </div>
+            <div v-show="true">
               <el-row
                 type="flex"
                 class="row-bg"
