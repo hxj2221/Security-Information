@@ -31,9 +31,9 @@ export default {
   AddComponent: async (params: any) => {
     return await service.post(`${baseUrl}api/tsevent/add`, params).then(res => res).catch(err => err)
   },
-// 获取详情
+  // 获取详情
   componrdetaile: async (params: any) => {
-    return await service.post(`${baseUrl}api/tsevent/details`, {data:{params}} ).then(res => res).catch(err => err)
+    return await service.post(`${baseUrl}api/tsevent/details`, { data: { params } }).then(res => res).catch(err => err)
   },
 
   // 不良事件列表
@@ -45,8 +45,8 @@ export default {
     return await service.post(`${baseUrl}api/bad/bad_add`, params).then(res => res).catch(err => err)
   },
   // 不良中的下拉框
-  AdeSel : async()=>{
-    return await service.get(`${baseUrl}api/bad/choice_type`).then(res=>res).catch(err=>err)
+  AdeSel: async () => {
+    return await service.get(`${baseUrl}api/bad/choice_type`).then(res => res).catch(err => err)
   },
   // 不良查看
   badSee: async (params: any) => {
@@ -79,7 +79,7 @@ export default {
   },
   // 员工状态
   staffState: async (params: Object) => {
-    return await service.post(`${baseUrl}api/Employees/status`,params).then(res => res).catch(err => err)
+    return await service.post(`${baseUrl}api/Employees/status`, params).then(res => res).catch(err => err)
   },
   //
   getrole: async (params: Object) => {
@@ -89,6 +89,89 @@ export default {
   staffedits: async (params: any) => {
     return await service.get(`${baseUrl}api/Employees/edit`, { params }).then(res => res).catch(err => err)
   },
-// 科室管理
+  // 角色列表
+  rolelist: async () => {
+    return await service.get(`${baseUrl}api/part/authgroup`).then(res => res).catch(err => err)
+  },
+  // 角色编辑
+  roleedit: async (params: any) => {
+    return await service.get(`${baseUrl}api/part/editauthgroup`, { params }).then(res => res).catch(err => err)
+  },
+  // 角色编辑save
+  roleeditsqve: async (data: object) => {
+    return await service.post(`${baseUrl}api/part/editauthgroup`, data).then(res => res).catch(err => err)
+  },
+  // 角色添加
+  roleadd: async (data: object) => {
+    return await service.post(`${baseUrl}api/part/addauthgroup`, data).then(res => res).catch(err => err)
+  },
 
+  // 角色添加
+  roledel: async (data: object) => {
+    return await service.post(`${baseUrl}api/part/delauthgroup`, data).then(res => res).catch(err => err)
+  },
+  // 角色状态
+  rolestatus: async (data: object) => {
+    return await service.post(`${baseUrl}api/part/editstatus`, data).then(res => res).catch(err => err)
+  },
+  // 科室列表
+  departlist: async () => {
+    return await service.get(`${baseUrl}api/Department/lists`).then(res => res).catch(err => err)
+  },
+  // 新增
+  departadd: async () => {
+    return await service.get(`${baseUrl}api/Department/add`).then(res => res).catch(err => err)
+  },
+  // 新增保存
+  departsave: async (data: object) => {
+    return await service.post(`${baseUrl}api/Department/add`, data).then(res => res).catch(err => err)
+  },
+  // 编辑传id
+  departedit: async (params: any) => {
+    return await service.get(`${baseUrl}api/Department/edit`, { params }).then(res => res).catch(err => err)
+  },
+  // 编辑save
+  departeditsave: async (data: object) => {
+    return await service.post(`${baseUrl}api/Department/edit`, data).then(res => res).catch(err => err)
+  },
+  // 删除
+  departdel: async (params: any) => {
+    return await service.get(`${baseUrl}api/Department/del`, { params }).then(res => res).catch(err => err)
+  },
+  // 更改状态
+  departstatus: async (data: object) => {
+    return await service.post(`${baseUrl}api/Department/status`, data).then(res => res).catch(err => err)
+  },
+  //权限列表
+  rulelist: async () => {
+    return await service.get(`${baseUrl}api/auths/get_rules`).then(res => res).catch(err => err)
+  },
+  //上级权限
+  addpower: async () => {
+    return await service.get(`${baseUrl}api/auths/get_rules`).then(res => res).catch(err => err)
+  },
+  //添加权限
+  savepower: async (data: Object) => {
+    return await service.post(`${baseUrl}api/auths/rule_add`, data).then(res => res).catch(err => err)
+  },
+  //编辑权限传id
+  getpowid: async (params: any) => {
+    return await service.get(`${baseUrl}api/auths/rule_eit`, { params }).then(res => res).catch(err => err)
+  },
+  //编辑权限save
+  editsavepower: async (data: Object) => {
+    return await service.post(`${baseUrl}api/auths/rule_eit`, data).then(res => res).catch(err => err)
+  },
+  //删除权限
+  delpow: async (data: Object) => {
+    return await service.post(`${baseUrl}api/auths/del`, data).then(res => res).catch(err => err)
+  },
+  //个人信息
+  personxq: async () => {
+    return await service.get(`${baseUrl}api/home/personal`).then(res => res).catch(err => err)
+  },
+  //个人信息编辑保存
+  changeinfor: async (data: object) => {
+    return await service.post(`${baseUrl}api/home/edit_personal`, data).then(res => res).catch(err => err)
+  },
 }

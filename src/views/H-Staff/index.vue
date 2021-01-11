@@ -81,7 +81,7 @@
             <el-button
               class="staffFotedit"
               size="mini"
-              @click="handleEdit(scope.$index, scope.row)"
+              @click="handleEdit(scope.$index, scope.row, scope.row.id)"
               >编辑</el-button
             >
             <el-button
@@ -102,15 +102,17 @@
     </div>
     <!--新增-->
     <Staff v-show="add"></Staff>
+    <!-- edit -->
+    <Edit v-show="edit" :childed="childedit"></Edit>
     <!-- 编辑弹框 -->
-    <el-dialog
+    <!-- <el-dialog
       title="编辑"
       :visible.sync="editFormVisible"
       :close-on-click-modal="true"
       :append-to-body="true"
-    >
-      <!--editForm表单提交的数据-->
-      <el-form :model="editForm" label-width="80px" ref="editForm">
+    > -->
+    <!--editForm表单提交的数据-->
+    <!-- <el-form :model="editForm" label-width="80px" ref="editForm">
         <el-form-item prop="job_number" label="工号" width="100">
           <el-input
             v-model="editForm.job_number"
@@ -152,26 +154,31 @@
         </el-form-item>
       </el-form>
       <div class="dialog_button">
-          <el-button >返回</el-button>
-        <el-button type="primary" style="background:#666ee8;border-color:#666ee8" >确定</el-button>
-       
+        <el-button>返回</el-button>
+        <el-button
+          type="primary"
+          style="background: #666ee8; border-color: #666ee8"
+          >确定</el-button
+        >
       </div>
-    </el-dialog>
+    </el-dialog> -->
   </div>
 </template>
 
 <script>
 import Staff from "./component/add";
+import Edit from "./component/staffedit";
 import headpow from "../component/power";
 
 //接口
 // import { stList } from "@/network/Sta.js";
 import service from "@/service/index";
 export default {
-  components: { Staff, headpow },
+  components: { Staff, headpow, Edit },
   data() {
     return {
       add: false,
+      edit: false,
       currentPage: 0,
       total: 0, //总条数
       page: 1, //初始显示第几页
@@ -184,11 +191,10 @@ export default {
       editForm: {},
       tables1: [],
       optionbeldepart: [],
-
       tables: [],
-
       search: "",
       id: "",
+      childedit: [],
     };
   },
   created() {
@@ -223,10 +229,12 @@ export default {
     fathpowadd() {
       this.staffvue = false;
       this.add = true;
+      this.edit = false;
     },
     // 子的
     fathstaffno() {
       this.add = false;
+      this.edit = false;
       this.staffvue = true;
     },
     fathstaffyes() {
@@ -261,20 +269,23 @@ export default {
       });
     },
     // 编辑
-    handleEdit(index, row) {
-      console.log(index);
-      this.editFormVisible = true;
-      // this.editForm=this.tables
-      this.editForm = Object.assign({}, row); //重点
-      this.editForm.department = this.editForm.department[0].title;
-      this.editForm.auth_grouap = this.editForm.auth_grouap[0].title;
-      console.log(Object.assign({}, row));
-
+    handleEdit(index, row, id) {
+      this.edit = true;
+      this.staffvue = false;
+      // console.log(index);
+      // this.editFormVisible = true;
+      // // this.editForm=this.tables
+      // this.editForm = Object.assign({}, row); //重点
+      // this.editForm.department = this.editForm.department[0].title;
+      // this.editForm.auth_grouap = this.editForm.auth_grouap[0].title;
+      // console.log(Object.assign({}, row));
+      console.log(id);
       let params = {
-        id: this.id,
+        id: id,
       };
       service.staffedits(params).then((res) => {
-        console.log(this.id);
+        console.log(res);
+        this.childedit = res.data.user;
       });
     },
     //删除：
