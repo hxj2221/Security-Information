@@ -2,14 +2,16 @@
   <div class="addstaffall">
     <!-- top -->
     <div class="departaddThre">
-      <span class="departaddSpan">新增科室信息</span>
+      <span class="departaddSpan">编辑科室信息</span>
       <div style="padding-right: 30px">
-        <el-button class="departaddgr" @click="departaddvueyes">保存</el-button>
-        <el-button class="departaddb" @click="departaddvueno">返回</el-button>
+        <el-button class="departaddgr" @click="departeditvueyes"
+          >保存</el-button
+        >
+        <el-button class="departaddb" @click="departeditvueno">返回</el-button>
       </div>
     </div>
     <hr class="departaddWidhr" />
-    <!-- add -->
+    <!--  -->
     <div class="addmain">
       <el-form ref="form">
         <el-row :gutter="20">
@@ -27,6 +29,8 @@
             <el-form-item label="科室名称" required>
               <el-input
                 class="dialog-input-text"
+                type="input"
+                autosize
                 v-model="departNameipt"
               ></el-input>
             </el-form-item>
@@ -58,7 +62,7 @@
             <el-form-item class="ssks" label="上级科室" required>
               <el-select
                 class="dialog-input-text"
-                v-model="adddepartsel"
+                v-model="editdepartsel"
                 style="margin-top: 6px"
                 placeholder="请选择"
                 @change="departsel"
@@ -77,30 +81,10 @@
           <el-col :span="8"> </el-col>
           <el-col :span="8"> </el-col>
         </el-row>
-        <!-- <el-row :gutter="20">
-          <el-col :span="8">
-            <el-form-item label="创建人" disabled>
-              <el-input
-                class="dialog-input-text"
-                type="input"
-                autosize
-                placeholder="10001"
-              ></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="创建时间" disabled>
-              <el-input
-                class="dialog-input-text"
-                type="input"
-                autosize
-                placeholder="2020-12-29 12:43:56"
-              ></el-input>
-            </el-form-item>
-          </el-col>
+        <el-row :gutter="20">
           <el-col :span="8"> </el-col>
           <el-col :span="8"> </el-col>
-        </el-row> -->
+        </el-row>
       </el-form>
     </div>
   </div>
@@ -109,35 +93,44 @@
 <script>
 import service from "@/service/index";
 export default {
+  props: ["editchild"],
   data() {
     return {
       departNameipt: "",
-      departpxipt: "",
-      valuestatus: 1,
-      adddepartsel: "",
+      valuestatus: 0,
+      editdepartsel: "",
       options: [],
+      departpxipt: "",
+      id: "",
+      pid: "",
     };
   },
-  created() {
-    service.departadd().then((res) => {
-      console.log(res.data);
-      this.options = res.data;
-    });
+
+  watch: {
+    editchild(newValue) {
+      console.log(newValue);
+      this.options = newValue.data.list;
+      this.departNameipt = newValue.data.info.title;
+      this.valuestatus = newValue.data.info.status;
+      this.departpxipt = newValue.data.info.sort;
+      this.id = newValue.data.info.id;
+      this.pid = newValue.data.info.pid;
+    },
   },
   methods: {
-    // sel
     departsel() {
-      console.log(this.adddepartsel);
+      console.log(this.editdepartsel);
     },
-    //
-    departaddvueyes() {
+    departeditvueyes() {
       let data = {
-        title: this.departNameipt,
+        titles: this.departNameipt,
         status: this.valuestatus,
-        pid: this.adddepartsel,
+        id: this.id,
         sort: this.departpxipt,
+        pid: this.pid,
       };
-      service.departsave(data).then((res) => {
+      console.log(data);
+      service.departeditsave(data).then((res) => {
         console.log(res);
         if (res.code == 20010) {
           const loading = this.$loading({
@@ -150,12 +143,12 @@ export default {
             loading.close();
           }, 2000);
         } else {
-          alert("添加失败");
+          alert("修改失败");
         }
+        this.$parent.fathdepartyes();
       });
-      this.$parent.fathdepartyes();
     },
-    departaddvueno() {
+    departeditvueno() {
       this.$parent.fathdepartno();
     },
   },

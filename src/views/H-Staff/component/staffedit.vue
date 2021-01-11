@@ -2,14 +2,14 @@
   <div class="addstaffall">
     <!-- top -->
     <div class="staffThre">
-      <span class="staffSpan">新增员工信息</span>
+      <span class="staffSpan">编辑员工信息</span>
       <div style="padding-right: 30px">
         <el-button class="staffgr" @click="staffaddvueyes">保存</el-button>
         <el-button class="staffb" @click="staffaddvueno">返回</el-button>
       </div>
     </div>
     <hr class="staffWidhr" />
-    <!-- add -->
+    <!-- edit -->
     <div class="addmain">
       <el-form ref="form" :model="addStaff">
         <el-row :gutter="20">
@@ -37,25 +37,6 @@
           <el-col :span="8">
             <el-form-item label="年龄" required>
               <el-input type="number" v-model="addStaff.age"></el-input>
-              <!-- <el-input placeholder="请输入内容" v-model="staffAgeipt" class="">
-                <template slot="append">
-                  <el-select
-                    type="input"
-                    style="width: 90px"
-                    autosize
-                    v-model="staffAgesel"
-                    placeholder="请选择"
-                  >
-                    <el-option
-                      v-for="item in optionages"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value"
-                    >
-                    </el-option>
-                  </el-select>
-                </template>
-              </el-input> -->
             </el-form-item>
           </el-col>
           <el-col :span="8">
@@ -124,20 +105,6 @@
         <el-row :gutter="20">
           <el-col :span="8">
             <el-form-item label="地址" required>
-              <!-- <el-cascader
-                class="dialog-input-text"
-                type="input"
-                autosize
-                style="
-                  display: block;
-                  position: relative;
-                  font-size: 14px;
-                  line-height: 40px;
-                "
-                v-model="addStaff.address"
-                :options="city"
-                placeholder="请选择内容"
-              ></el-cascader> -->
               <el-cascader
                 class="dialog-input-text"
                 style="
@@ -173,7 +140,7 @@
                 class="dialog-input-text"
                 type="input"
                 autosize
-                v-model="addStaff.staffdepart"
+                v-model="department"
                 style="margin-top: 40px"
                 placeholder="请选择"
               >
@@ -194,8 +161,7 @@
                 type="input"
                 autosize
                 style="margin-top: 40px"
-                v-model="addStaff.staffrolesel"
-                multiple
+                v-model="auth_grouap"
                 placeholder="请选择"
               >
                 <el-option
@@ -228,7 +194,6 @@
               <el-input
                 class="dialog-input-text"
                 type="input"
-                autosize
                 v-model="addStaff.password"
               ></el-input>
             </el-form-item>
@@ -255,8 +220,7 @@
 
 <script>
 // 添加员工，调后台
-import { Aepyee } from "@/network/Sta.js";
-
+//  import { Aepyee } from "@/network/Sta.js";
 import qs from "qs";
 import service from "@/service/index";
 //地址级联选择器
@@ -269,13 +233,13 @@ import {
   TextToCode,
 } from "element-china-area-data";
 export default {
+  props: ["childed"],
   components: {},
-  props: {},
   data() {
     return {
       options: regionData,
       addStaff: {
-        staffemployee: "", // 员工编号
+        job_number: "", // 员工编号
         // staffNumInput: "",
         name: "", // 姓名
         age: "", //年龄
@@ -286,14 +250,16 @@ export default {
         cardnumber: "", //证件号码
         position: "", //职位
         eraddress: "", //详细地址
-        staffdepart: "", //所属科室
-        staffrolesel: "", //角色
+
         head_department: "", //科室负责人
         status: "", //员工状态
         password: "", //密码
         address: [], //地址
       },
-
+      department: "", //所属科室
+      auth_grouap: "", //角色
+      role_id:'',
+      department_id:'',
       //年龄循环
       optionages: [
         {
@@ -324,22 +290,45 @@ export default {
           label: "未知",
         },
       ],
-    
+
       // 科室
       optiondepart: [],
       // 角色
       optionrole: [],
+      id: "",
     };
+  },
+  watch: {
+    childed(res) {
+      console.log(res); //数据已经拿到
+      this.id = res.id;
+      this.addStaff.job_number = res.job_number;
+      this.addStaff.name = res.name;
+      // this.addStaff.password = res.password;
+      this.addStaff.sex = res.sex;
+      this.addStaff.email = res.email;
+      this.addStaff.phone = res.phone;
+      this.addStaff.address = res.address;
+      this.addStaff.eraddress = res.eraddress;
+      this.addStaff.position = res.position;
+      this.addStaff.age = res.age;
+      this.addStaff.cardnumber = res.cardnumber;
+      this.department = res.department[0].title;
+      this.department_id=res.department_id;
+      this.addStaff.status = res.status;
+      this.addStaff.head_department = res.head_department;
+      this.addStaff.position = res.position;
+      this.auth_grouap = res.auth_grouap[0].title;
+      this.role_id=res.role_id;
+      this.addStaff.status = res.status;
+    },
   },
   methods: {
     // 保存
     staffaddvueyes() {
-      // let params = this.addStaff
-      console.log(this.addStaff.address);
-      let data = {
-        job_number:this.addStaff.job_number,
+      let params = {
+        id: this.id,
         name: this.addStaff.name,
-        password: this.addStaff.password,
         sex: this.addStaff.sex,
         email: this.addStaff.email,
         phone: this.addStaff.phone,
@@ -347,28 +336,23 @@ export default {
         eraddress: this.addStaff.eraddress,
         position: this.addStaff.position,
         age: this.addStaff.age,
-        // specific_age: this.addStaff.age,
         cardnumber: this.addStaff.cardnumber,
-        head_department: this.addStaff.head_department,
+        department_id: this.department_id,
+        role_id: this.role_id,
         status: this.addStaff.status,
-        department_id: this.addStaff.staffdepart,
-        role_id: "",
+        head_department: this.addStaff.head_department,
       };
-      console.log(data);
-      service.staffAdd(data).then((res) => {
+      service.staffEdit(params).then((res) => {
         console.log(res);
-        if (res.msg == "员工信息添加成功") {
-          const loading = this.$loading({
-            lock: true,
-            text: "保存中",
-            spinner: "el-icon-loading",
-            background: "rgba(0, 0, 0, 0.7)",
-          });
-          setTimeout(() => {
-            loading.close();
-          }, 2000);
-          this.$parent.fathstaffyes();
-        } else {
+        
+        if(res.code='20010'){
+           this.$message({
+          message: '员工信息更新成功',
+          type: 'success'
+        });
+        }
+        else{
+           this.$message.error('名字已存在');
         }
       });
     },
@@ -384,12 +368,7 @@ export default {
         CodeToText[cityvalue[1]] +
         " " +
         CodeToText[cityvalue[2]];
-      this.addStaff.address = a;
-      // for (let i=0;i<cityvalue.length;i++){
-      //  let a =CodeToText[cityvalue[i]]
-      //  this.addStaff.address=a
-      //  console.log(this.addStaffaddress)
-      // }
+      // this.addStaff.address = a;
       console.log(this.addStaff.address);
     },
     // 子调用父
@@ -404,7 +383,6 @@ export default {
       console.log(item);
       self.optionrole = item.auth_grouap;
       self.optiondepart = item.department;
-      self.addStaff.job_number=item.job_number
     });
   },
 };

@@ -153,16 +153,25 @@
       <el-button class="persongr" @click="personsave"
         ><i class="iconfont el-icon-icon-fanhui"></i> 保存</el-button
       >
-      <el-button class="personb">返回</el-button>
+      <el-button class="personb" @click="personback">返回</el-button>
     </div>
   </div>
 </template>
 
 <script>
 import userthre from "../component/userthre";
-import { changeinfor } from "../../network/H-person";
-import { personxq } from "../../network/H-person";
-import options from "./coun.js";
+// import { changeinfor } from "../../network/H-person";
+// import { personxq } from "../../network/H-person";
+import service from "@/service/index";
+// import options from "./coun.js";
+import {
+  provinceAndCityData,
+  regionData,
+  provinceAndCityDataPlus,
+  regionDataPlus,
+  CodeToText,
+  TextToCode,
+} from "element-china-area-data";
 import qs from "qs";
 export default {
   components: { userthre },
@@ -178,21 +187,21 @@ export default {
       personEmailipt: "",
       personCardipt: "",
       personPositioniPt: "",
-      selectedOptions: [],
-      options: options,
+      selectedOptions: "",
+      options: regionData,
       personaddreiPt: "",
       optiongen: [
         {
-          value: "选项1",
+          value: "1",
           label: "男",
         },
         {
-          value: "选项2",
+          value: "0",
           label: "女",
         },
         {
-          value: "选项3",
-          label: "未知",
+          value: "2",
+          label: "保密",
         },
       ],
       optionages: [
@@ -213,49 +222,53 @@ export default {
   },
   // 个人信息数据
   created() {
-    let data = {};
-    personxq().then((res) => {
+    service.personxq().then((res) => {
       console.log(res);
-      this.personNameipt = res.data.data.name;
-      this.personAgeipt = res.data.data.age;
-      this.personPhoneipt = res.data.data.phone;
-      this.personEmailipt = res.data.data.email;
-      this.personCardipt = res.data.data.cardnumber;
-      this.personPositioniPt = res.data.data.position;
-      this.personaddreiPt = res.data.data.eraddress;
-      this.persongensel = res.data.data.sex;
+      this.personNameipt = res.data.name;
+      this.personAgeipt = res.data.age;
+      this.personPhoneipt = res.data.phone;
+      this.personEmailipt = res.data.email;
+      this.personCardipt = res.data.cardnumber;
+      this.personPositioniPt = res.data.position;
+      this.personaddreiPt = res.data.eraddress;
+      this.persongensel = res.data.sex;
+      this.selectedOptions = res.data.address;
     });
   },
   methods: {
     personsave() {
-      console.log(
-        this.personNameipt +
-          this.personAgeipt +
-          this.personagesel +
-          this.persongensel +
-          this.personPhoneipt +
-          this.personEmailipt +
-          this.personCardipt +
-          this.personPositioniPt +
-          this.selectedOptions +
-          this.personaddreiPt
-      );
       let data = {
         name: this.personNameipt,
-        age: this.personAgeipt + this.personAgeel,
+        age: this.personAgeipt,
         sex: this.persongensel,
         phone: this.personPhoneipt,
         email: this.personEmailipt,
         cardnumber: this.personCardipt,
         position: this.personPositioniPt,
-        address: this.personaddreiPt,
+        eraddress: this.personaddreiPt,
+        address: this.address,
       };
-      changeinfor(qs.stringify(data)).then((result) => {
-        console.log(data);
+      service.changeinfor(data).then((res) => {
+        console.log(res);
       });
     },
-    handleChange(value) {
-      console.log(value);
+    handleChange(cityvalue) {
+      console.log(
+        CodeToText[cityvalue[0]],
+        CodeToText[cityvalue[1]],
+        CodeToText[cityvalue[2]]
+      );
+      let a =
+        CodeToText[cityvalue[0]] +
+        " " +
+        CodeToText[cityvalue[1]] +
+        " " +
+        CodeToText[cityvalue[2]];
+      this.address = a;
+      console.log(this.address);
+    },
+    personback() {
+      this.$router.push("/dashboard");
     },
   },
 };
