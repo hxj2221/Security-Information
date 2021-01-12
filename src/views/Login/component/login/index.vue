@@ -112,8 +112,6 @@ export default {
       logining: false,
       ruleForm: {
         account: "",
-        phone: "",
-        account: "",
         password: "",
         captcha: "",
       },

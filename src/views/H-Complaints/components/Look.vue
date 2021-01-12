@@ -576,6 +576,9 @@
 <script>
 import service from "@/service/index";
 export default {
+  props:{
+    lookdata: Array
+  },
   components: {},
   data() {
     return {

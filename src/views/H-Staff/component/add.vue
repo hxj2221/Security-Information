@@ -20,7 +20,7 @@
                 type="input"
                 autosize
                 disabled="disabled"
-                v-model="addStaff.staffemployee"
+                v-model="addStaff.job_number"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -324,29 +324,7 @@ export default {
           label: "未知",
         },
       ],
-      // // 地址循环
-      // city: [
-      //   {
-      //     value: "浙江",
-      //     label: "浙江",
-      //     children: [
-      //       {
-      //         value: "绍兴",
-      //         label: "绍兴",
-      //       },
-      //     ],
-      //   },
-      //   {
-      //     value: "河南",
-      //     label: "河南",
-      //     children: [
-      //       {
-      //         value: "郑州",
-      //         label: "郑州",
-      //       },
-      //     ],
-      //   },
-      // ],
+    
       // 科室
       optiondepart: [],
       // 角色
@@ -359,6 +337,7 @@ export default {
       // let params = this.addStaff
       console.log(this.addStaff.address);
       let data = {
+        job_number:this.addStaff.job_number,
         name: this.addStaff.name,
         password: this.addStaff.password,
         sex: this.addStaff.sex,
@@ -372,8 +351,8 @@ export default {
         cardnumber: this.addStaff.cardnumber,
         head_department: this.addStaff.head_department,
         status: this.addStaff.status,
-        department_id: this.addStaff.head_department,
-        role_id: "1",
+        department_id: this.addStaff.staffdepart,
+        role_id: "",
       };
       console.log(data);
       service.staffAdd(data).then((res) => {
@@ -425,6 +404,7 @@ export default {
       console.log(item);
       self.optionrole = item.auth_grouap;
       self.optiondepart = item.department;
+      self.addStaff.job_number=item.job_number
     });
   },
 };

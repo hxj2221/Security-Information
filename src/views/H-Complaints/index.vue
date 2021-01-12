@@ -118,7 +118,7 @@
         </div>
       </Addcom>
       <!-- 查看 -->
-      <Look v-show="look">
+      <Look v-show="look" :look='lookdata'>
         <el-button
           type="primary"
           icon="el-icon-printer"
@@ -168,12 +168,14 @@ import Table from "../H-Complaints/components/Tables";
 import Operation from "../H-Complaints/components/operation";
 // 添加投诉
 import service from "@/service/index";
-
+import qs from 'qs'
 export default {
   components: { Complaintslist, Addcom, Look, Read, Conserve, Table, Operation },
 
   data() {
     return {
+      operations:'',
+      lookdata:'',
       list: true,
       add: false,
       look: false,
@@ -191,6 +193,14 @@ export default {
       this.add = false;
       this.look = false;
       this.operations = true;
+       let params = {
+        event_number: index.event_number
+      };
+      service.Issue(index.event_number).then(res=>{
+        console.log(res)
+        this.operations=res
+
+      })
     },
     records(index) {
       console.log(index);
@@ -218,8 +228,10 @@ export default {
        let params = {
         event_number: index.event_number
       };
-      service.componrdetaile(params).then((res) => {
+    console.log(qs.stringify(params))
+      service.componrdetaile(qs.stringify(params)).then((res) => {
         console.log(res);
+        this.lookdata=res
       });
     },
     // 添加页面保存

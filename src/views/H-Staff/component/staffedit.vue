@@ -20,7 +20,7 @@
                 type="input"
                 autosize
                 disabled="disabled"
-                v-model="addStaff.staffemployee"
+                v-model="addStaff.job_number"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -140,7 +140,7 @@
                 class="dialog-input-text"
                 type="input"
                 autosize
-                v-model="addStaff.staffdepart"
+                v-model="department"
                 style="margin-top: 40px"
                 placeholder="请选择"
               >
@@ -161,8 +161,7 @@
                 type="input"
                 autosize
                 style="margin-top: 40px"
-                v-model="addStaff.staffrolesel"
-                multiple
+                v-model="auth_grouap"
                 placeholder="请选择"
               >
                 <el-option
@@ -195,7 +194,6 @@
               <el-input
                 class="dialog-input-text"
                 type="input"
-                autosize
                 v-model="addStaff.password"
               ></el-input>
             </el-form-item>
@@ -241,7 +239,7 @@ export default {
     return {
       options: regionData,
       addStaff: {
-        staffemployee: "", // 员工编号
+        job_number: "", // 员工编号
         // staffNumInput: "",
         name: "", // 姓名
         age: "", //年龄
@@ -252,14 +250,16 @@ export default {
         cardnumber: "", //证件号码
         position: "", //职位
         eraddress: "", //详细地址
-        staffdepart: "", //所属科室
-        staffrolesel: "", //角色
+
         head_department: "", //科室负责人
         status: "", //员工状态
         password: "", //密码
         address: [], //地址
       },
-
+      department: "", //所属科室
+      auth_grouap: "", //角色
+      role_id:'',
+      department_id:'',
       //年龄循环
       optionages: [
         {
@@ -295,13 +295,16 @@ export default {
       optiondepart: [],
       // 角色
       optionrole: [],
+      id: "",
     };
   },
   watch: {
     childed(res) {
       console.log(res); //数据已经拿到
+      this.id = res.id;
+      this.addStaff.job_number = res.job_number;
       this.addStaff.name = res.name;
-      this.addStaff.password = res.password;
+      // this.addStaff.password = res.password;
       this.addStaff.sex = res.sex;
       this.addStaff.email = res.email;
       this.addStaff.phone = res.phone;
@@ -310,50 +313,48 @@ export default {
       this.addStaff.position = res.position;
       this.addStaff.age = res.age;
       this.addStaff.cardnumber = res.cardnumber;
-      this.addStaff.head_department = res.head_department;
+      this.department = res.department[0].title;
+      this.department_id=res.department_id;
       this.addStaff.status = res.status;
       this.addStaff.head_department = res.head_department;
+      this.addStaff.position = res.position;
+      this.auth_grouap = res.auth_grouap[0].title;
+      this.role_id=res.role_id;
+      this.addStaff.status = res.status;
     },
   },
   methods: {
     // 保存
     staffaddvueyes() {
-      // // let params = this.addStaff
-      // console.log(this.addStaff.address);
-      // let data = {
-      //   name: this.addStaff.name,
-      //   password: this.addStaff.password,
-      //   sex: this.addStaff.sex,
-      //   email: this.addStaff.email,
-      //   phone: this.addStaff.phone,
-      //   address: this.addStaff.address,
-      //   eraddress: this.addStaff.eraddress,
-      //   position: this.addStaff.position,
-      //   age: this.addStaff.age,
-      //   // specific_age: this.addStaff.age,
-      //   cardnumber: this.addStaff.cardnumber,
-      //   head_department: this.addStaff.head_department,
-      //   status: this.addStaff.status,
-      //   department_id: this.addStaff.head_department,
-      //   role_id: "1",
-      // };
-      // console.log(data);
-      // service.staffAdd(data).then((res) => {
-      //   console.log(res);
-      //   if (res.msg == "员工信息添加成功") {
-      //     const loading = this.$loading({
-      //       lock: true,
-      //       text: "保存中",
-      //       spinner: "el-icon-loading",
-      //       background: "rgba(0, 0, 0, 0.7)",
-      //     });
-      //     setTimeout(() => {
-      //       loading.close();
-      //     }, 2000);
-      //     this.$parent.fathstaffyes();
-      //   } else {
-      //   }
-      // });
+      let params = {
+        id: this.id,
+        name: this.addStaff.name,
+        sex: this.addStaff.sex,
+        email: this.addStaff.email,
+        phone: this.addStaff.phone,
+        address: this.addStaff.address,
+        eraddress: this.addStaff.eraddress,
+        position: this.addStaff.position,
+        age: this.addStaff.age,
+        cardnumber: this.addStaff.cardnumber,
+        department_id: this.department_id,
+        role_id: this.role_id,
+        status: this.addStaff.status,
+        head_department: this.addStaff.head_department,
+      };
+      service.staffEdit(params).then((res) => {
+        console.log(res);
+        
+        if(res.code='20010'){
+           this.$message({
+          message: '员工信息更新成功',
+          type: 'success'
+        });
+        }
+        else{
+           this.$message.error('名字已存在');
+        }
+      });
     },
     handleChange(cityvalue) {
       console.log(
@@ -367,7 +368,7 @@ export default {
         CodeToText[cityvalue[1]] +
         " " +
         CodeToText[cityvalue[2]];
-      this.addStaff.address = a;
+      // this.addStaff.address = a;
       console.log(this.addStaff.address);
     },
     // 子调用父
