@@ -1,14 +1,13 @@
 <template>
   <div>
     <div class="userthreThre">
-      <span class="userthreSpan">{{ headTitle }}</span>
+      <h2 class="userthreSpan">{{ headTitle }}</h2>
       <div class="userthrehead">
         <el-button
           style="margin-left: -5px"
           class="userthregr"
           @click="information"
-          >个人信息</el-button
-        >
+          >个人信息</el-button >
         <el-button
           style="margin-left: -5px"
           class="userthreb"

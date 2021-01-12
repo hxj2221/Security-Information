@@ -33,8 +33,13 @@ export default {
   },
   // 获取详情
   componrdetaile: async (data: any) => {
-    return await service.post(`${baseUrl}api/tsevent/details`, data ).then(res => res).catch(err => err)
+    return await service.post(`${baseUrl}api/tsevent/details`, data).then(res => res).catch(err => err)
   },
+  // 待下发
+  Issue: async (event_number: any) => {
+    return await service.get(`${baseUrl}api/tsevent/issue`, { params: { event_number: event_number } }).then(res => res).catch(err => err)
+  },
+<<<<<<< HEAD
   // 待下发
   Issue: async (event_number: any) => {
   return await service.get(`${baseUrl}api/tsevent/issue`,{params:{event_number:event_number}} ).then(res => res).catch(err => err)
@@ -103,6 +108,8 @@ export default {
     uploadfiles: async (data: any) => {
         return await service.post(`${baseUrl}api/Complaintprocess/event_uploadfiles`, data ).then(res => res).catch(err => err)
       }, 
+=======
+>>>>>>> edc98b68cdae386be56bf57482389408da018fac
   // 不良事件列表
   AdeList: async () => {
     return await service.get(`${baseUrl}api/bad/lists`).then(res => res).catch(err => err)
@@ -245,5 +252,13 @@ export default {
   //个人手机号
   phoneyz: async (data: object) => {
     return await service.post(`${baseUrl}api/login/hssmsphone`, data).then(res => res).catch(err => err)
+  },
+  //手机号验证
+  phonechange: async (data: object) => {
+    return await service.post(`${baseUrl}api/home/authentication`, data).then(res => res).catch(err => err)
+  },
+  //账户管理
+  accountman: async () => {
+    return await service.get(`${baseUrl}api/home/user_home`).then(res => res).catch(err => err)
   },
 }

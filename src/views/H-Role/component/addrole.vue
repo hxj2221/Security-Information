@@ -1,5 +1,5 @@
 <template>
-  <div class="addstaffall">
+  <div class="addrole">
     <div class="roleaddThre">
       <span class="roleaddSpan">新增角色信息</span>
       <div>
@@ -18,6 +18,7 @@
                 type="input"
                 autosize
                 placeholder="10001"
+                disabled
               ></el-input>
             </el-form-item>
           </el-col>
@@ -31,6 +32,7 @@
               ></el-input>
             </el-form-item>
           </el-col>
+
           <el-col :span="8">
             <el-form-item style="margin-top: 40px" label="角色状态">
               <el-switch
@@ -74,10 +76,10 @@
       >
         权限分配
       </p>
-      <div class="roleF">
+      <div class="roleFs">
         <table class="roleTab">
           <tr style="background-color: #c2c5f6">
-            <td style="margin-left: 83px">
+            <td >
               <input
                 type="checkbox"
                 id="all-checked"
@@ -103,7 +105,7 @@
               <span
                 v-for="item in data.name"
                 :key="item.id"
-                style="font-size: 14px; margin-left: 30px"
+                style="font-size: 14px;"
               >
                 <input
                   type="checkbox"
@@ -131,7 +133,7 @@
       >
         查看权限
       </p>
-      <div style="margin-left: 160px; margin-top: 40px; display: flex">
+      <div class="role_div" style="width:50%;text-align:left; margin:20px 40px;">
         <el-radio-group v-model="radio" @change="radiochange">
           <el-radio :label="3">本科室</el-radio>
           <el-radio :label="6">全部</el-radio>

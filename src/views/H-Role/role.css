@@ -4,8 +4,11 @@
 }
 
 .rolealBg {
+    width: 100%;
+    min-height: 100%;
     background-color: #fff;
-    margin-left: -20px;
+    /* margin-left: -20px; */
+    padding-bottom: 200px;
 }
 
 .roleheadThre {
@@ -59,17 +62,18 @@
     color: none;
 }
 
-.roleWidhr {
+/* .roleWidhr {
     width: 92%;
     margin: auto;
     margin-top: 15px;
     margin-bottom: 12px;
-}
+} */
 
 .roleIptsech {
+    width: 50%;
     display: flex;
     /* justify-content: center; */
-    margin-left: 45px;
+    /* margin-left: 45px; */
     margin-bottom: 20px;
 }
 
@@ -85,6 +89,15 @@
     color: #fff;
     background-color: #666ee8;
     border-radius: 5px;
+}
+
+.roleTable {
+    margin: 0 30px;
+}
+
+.roleTable .el-table td,
+.el-table th {
+    text-align: center !important;
 }
 
 .roleEdit {
@@ -253,3 +266,12 @@
     text-decoration: none;
     cursor: pointer;
 }
+    /* 分页 */
+
+.rolepag {
+     overflow: hidden;
+     margin: 20px 25px;
+ }
+ .rolepag>.block {
+     float: right;
+ }

@@ -1,5 +1,5 @@
 <template>
-  <div class="addstaffall">
+  <div class="departAll">
     <!-- top -->
     <div class="departaddThre">
       <span class="departaddSpan">编辑科室信息</span>
@@ -10,8 +10,7 @@
         <el-button class="departaddb" @click="departeditvueno">返回</el-button>
       </div>
     </div>
-    <hr class="departaddWidhr" />
-    <!--  -->
+    <hr class="staffWidhr" />
     <div class="addmain">
       <el-form ref="form">
         <el-row :gutter="20">
@@ -128,7 +127,7 @@ export default {
         status: this.valuestatus,
         id: this.id,
         sort: this.departpxipt,
-        pid: this.pid,
+        pid: this.editdepartsel,
       };
       console.log(data);
       service.departeditsave(data).then((res) => {

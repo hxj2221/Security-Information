@@ -3,9 +3,9 @@
     padding: 0;
 }
 
-.addstaffall {
+.addrole {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     background: #fff;
     border-radius: 5px;
     box-shadow: 0 0 2px rgb(184, 183, 183);
@@ -20,7 +20,9 @@
     padding-top: 30px;
     padding-left: 60px;
 }
-
+.roleaddThre>div{
+    margin-right: 25px;
+}
 .roleaddSpan {
     padding-left: 5px;
     color: #000;
@@ -35,6 +37,8 @@
 }
 
 .roleaddgr {
+    background-color: #666ee8;
+    color: #fff;
     border-left: 2px solid #ccc;
     border-top: 2px solid #ccc;
     border-bottom: 2px solid #ccc;
@@ -50,12 +54,13 @@
     border-radius: 5px;
 }
 
-.roleaddWidhr {
-    margin-top: 15px;
-    margin-bottom: 12px;
-    background-color: #ccc;
-    height: 1px;
+.addrole .roleaddWidhr {
+    width: 97%;
+    height: 2px;
+    border: 2px solid #ebe9e9;
+    background-color: #ebe9e9;
     border: none;
+    margin: 20px auto;
 }
 
 .addmain {
@@ -94,22 +99,18 @@
 
 /*  */
 
-.roleF {
-    display: flex;
-    margin-left: 9%;
+.roleFs {
+    /* display: flex; */
+    /* margin-left: 9%; */
     /* height: 80%; */
-    margin-top: 2%;
-    width: 75%;
+    /* margin-top: 2%; */
+    width: 65%;
+    margin-left: 20px;
+    margin-top: 40px;
 }
-
-.roleTab {
-    width: 75%;
-    height: 60%;
-    font-size: 20px;
-    font-weight: bold;
-    border-collapse: collapse;
+.roleFs> .roleTab tr{
+    height: 50px;
 }
-
 .roleTd {
     border-bottom: #ccc 2px solid;
 }

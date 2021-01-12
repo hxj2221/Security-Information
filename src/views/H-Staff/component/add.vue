@@ -3,10 +3,11 @@
     <!-- top -->
     <div class="staffThre">
       <span class="staffSpan">新增员工信息</span>
-      <div style="padding-right: 30px">
+      <div class="staffThre_div">
         <el-button class="staffgr" @click="staffaddvueyes">保存</el-button>
         <el-button class="staffb" @click="staffaddvueno">返回</el-button>
       </div>
+      
     </div>
     <hr class="staffWidhr" />
     <!-- add -->
@@ -324,7 +325,7 @@ export default {
           label: "未知",
         },
       ],
-    
+
       // 科室
       optiondepart: [],
       // 角色
@@ -337,7 +338,7 @@ export default {
       // let params = this.addStaff
       console.log(this.addStaff.address);
       let data = {
-        job_number:this.addStaff.job_number,
+        job_number: this.addStaff.job_number,
         name: this.addStaff.name,
         password: this.addStaff.password,
         sex: this.addStaff.sex,
@@ -380,16 +381,12 @@ export default {
       );
       let a =
         CodeToText[cityvalue[0]] +
-        " " +
+        "/" +
         CodeToText[cityvalue[1]] +
-        " " +
+        "/" +
         CodeToText[cityvalue[2]];
       this.addStaff.address = a;
-      // for (let i=0;i<cityvalue.length;i++){
-      //  let a =CodeToText[cityvalue[i]]
-      //  this.addStaff.address=a
-      //  console.log(this.addStaffaddress)
-      // }
+
       console.log(this.addStaff.address);
     },
     // 子调用父
@@ -404,7 +401,7 @@ export default {
       console.log(item);
       self.optionrole = item.auth_grouap;
       self.optiondepart = item.department;
-      self.addStaff.job_number=item.job_number
+      self.addStaff.job_number = item.job_number;
     });
   },
 };

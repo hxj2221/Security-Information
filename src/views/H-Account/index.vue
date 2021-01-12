@@ -9,7 +9,7 @@
               <p class="accountHead">手机号</p>
             </div>
             <div style="display: flex; justify-content: space-between">
-              <p class="accountMain">177****1234</p>
+              <p class="accountMain">{{ phone }}</p>
               <p class="accountClick" @click="phoneyz = true">更改</p>
             </div>
           </td>
@@ -20,7 +20,7 @@
               <p class="accountHead">邮箱</p>
             </div>
             <div style="display: flex; justify-content: space-between">
-              <p class="accountMain">123456789@gmail.com</p>
+              <p class="accountMain">{{ email }}</p>
               <p class="accountClick" @click="emailyz = true">绑定</p>
             </div>
           </td>
@@ -117,7 +117,12 @@
                 placeholder="请输入验证码"
                 v-model="changephonecode"
               />
-              <button class="account-new-hqcode" id="one" :disabled="phonedd">
+              <button
+                class="account-new-hqcode"
+                @click="changephonebtncode"
+                id="regis"
+                :disabled="disablbtn"
+              >
                 {{ codeTxt }}
               </button>
             </div>
@@ -334,6 +339,7 @@ export default {
     return {
       pageTitle: "账户管理",
       phone: "",
+      email: "",
       phonecode: "",
       changephone: "",
       changephonecode: "",
@@ -362,12 +368,25 @@ export default {
       disablbtn: false,
     };
   },
-
+  created() {
+    service.accountman().then((res) => {
+      console.log(res);
+      this.phone = res.data.phone;
+      this.email = res.data.email;
+    });
+  },
   methods: {
     // 手机
     phoneyes() {
-      this.phonenew = true;
-      this.phoneyz = false;
+      let data = {
+        phone: this.phone,
+        pcaptcha: this.phonecode,
+      };
+      service.phonechange(data).then((res) => {
+        console.log(res);
+      });
+      // this.phonenew = true;
+      // this.phoneyz = false;
     },
     phonebtncode() {
       let data = {
@@ -389,6 +408,33 @@ export default {
                 this.codeTxt = "获取验证码";
                 this.isCodeIng = false;
                 this.codetime = 60;
+                this.disablbtn = false;
+              }
+            }
+          }, 1000);
+        }
+      });
+    },
+    changephonebtncode() {
+      let data = {
+        phone: this.changephone,
+      };
+      service.phoneyz(data).then((res) => {
+        console.log(res);
+        if (res.code == 20020) {
+          alert(res.msg);
+        } else if (res.code == 20010) {
+          let timer = setInterval(() => {
+            this.isCodeIng = true;
+            this.disablbtn = true;
+            this.codetime -= 1;
+            this.codeTxt = "重新获取" + this.codetime + "s";
+            if (this.codetime < 1) {
+              clearInterval(timer);
+              if (this.codetime < 1) {
+                this.codeTxt = "获取验证码";
+                this.isCodeIng = false;
+                this.codetime = 120;
                 this.disablbtn = false;
               }
             }

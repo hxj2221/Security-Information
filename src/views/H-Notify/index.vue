@@ -6,15 +6,7 @@
         <tr>
           <td class="notifyTd">
             <div class="notifyTddiv">
-              <i
-                class="iconfont icon-zu"
-                style="
-                  font-size: 56px;
-                  color: rgb(102, 110, 232);
-                  display: flex;
-                  flex-direction: column;
-                "
-              ></i>
+              <i class="iconfont icon-zu"></i>
               <p class="notifyHead">投诉推送</p>
               <span
                 style="

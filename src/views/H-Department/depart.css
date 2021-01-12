@@ -4,10 +4,14 @@
 }
 
 .departalBg {
-    background-color: #fff;
-    height: 80%;
-    margin-left: -20px;
-    width: 96%;
+
+    width: 100%;
+    min-height: 100%;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgb(184, 183, 183);
+    /* margin-bottom: 50px; */
+    padding-bottom: 150px;
 }
 
 .departheadThre {
@@ -62,19 +66,32 @@
 }
 
 .departWidhr {
-    width: 92%;
-    margin: auto;
-    margin-top: 15px;
-    margin-bottom: 12px;
-}
-
-.departIptsech {
-    display: flex;
-    /* justify-content: center; */
-    margin-left: 45px;
+    width: 97%;
+    height: 2px;
+    background-color: #ebe9e9;
+    border: none;
     margin-bottom: 20px;
 }
 
+.departIptsech {
+
+    /* float: left; */
+    /* display: flex; */
+    /* justify-content: center; */
+    /* margin-left: 45px; */
+    margin-bottom: 20px;
+
+}
+.departIptsech_div{
+    width: 50%;
+    text-align: left;
+}
+.departIptsech_div>.el-input{
+    margin-right: 10px;
+}
+.departTable .el-table td,.el-table th {
+    text-align: center !important;
+}
 .departtable {
     table-layout: fixed;
     /* margin: auto; */
@@ -198,4 +215,12 @@
     flex-wrap: wrap;
     width: 270px;
     margin-top: 50px;
+}
+/* 分页 */
+.departpag{
+overflow: hidden;
+margin: 20px 25px;
+}
+.departpag>.block{
+    float: right;
 }

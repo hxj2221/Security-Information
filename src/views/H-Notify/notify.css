@@ -5,9 +5,10 @@
 
 .notifyalBg {
     background-color: #fff;
-    height: 65%;
+    min-height: 100%;
     margin-left: -20px;
-    width: 81%;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .notifyThre {
@@ -68,17 +69,20 @@
     display: flex;
     margin-left: 2%;
     height: 80%;
-    margin-top: 7%;
+    /* margin-top: 7%; */
 }
 
 .notifyTab {
     width: 90%;
     height: 60%;
+    margin: 0 auto;
     border-collapse: collapse;
+    margin-top: 60px;
 }
 
 .notifyTd {
     border-bottom: #ccc 2px solid;
+    height: 70px;
 }
 
 .notifyTddiv {
@@ -86,6 +90,16 @@
     justify-content: flex-start;
     height: 30px;
     margin-left: 10px;
+}
+
+.notifyTddiv>i {
+    width: 50px;
+    background-color: #666ee8;
+    margin-right: 10px;
+    font-size: 56px;
+    color: rgb(102, 110, 232);
+    display: flex;
+    flex-direction: column;
 }
 
 .notifyHead {
@@ -106,4 +120,10 @@
     margin-right: 12px;
     text-decoration: none;
     cursor: pointer;
+}
+.notifyClick>i{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #666ee8;
 }

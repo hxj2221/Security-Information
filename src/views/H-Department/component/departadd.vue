@@ -1,5 +1,5 @@
 <template>
-  <div class="addstaffall">
+  <div class="departAll">
     <!-- top -->
     <div class="departaddThre">
       <span class="departaddSpan">新增科室信息</span>
@@ -8,7 +8,8 @@
         <el-button class="departaddb" @click="departaddvueno">返回</el-button>
       </div>
     </div>
-    <hr class="departaddWidhr" />
+    <hr class="staffWidhr" />
+
     <!-- add -->
     <div class="addmain">
       <el-form ref="form">
@@ -126,6 +127,7 @@ export default {
     });
   },
   methods: {
+    
     // sel
     departsel() {
       console.log(this.adddepartsel);
