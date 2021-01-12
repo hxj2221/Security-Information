@@ -3,17 +3,15 @@
     justify-content: space-between;
     font-size: 14px;
     color: #cccccc;
-    padding-top: 30px;
-    padding-left: 60px;
+    /* padding-top: 30px;
+    padding-left: 60px; */
+    /* padding: 25px; */
+    padding: 30px 25px 30px 25px;
 }
 
 .userthreSpan {
     padding-left: 5px;
     color: #000;
-    border-left: 5px solid #666ee8;
-    font-size: 1em;
-    font-weight: 700;
-    height: 28px;
 }
 
 .userthrehead {
@@ -61,8 +59,10 @@
 }
 
 .userthreWidhr {
-    width: 92%;
-    margin: auto;
-    margin-top: 15px;
-    margin-bottom: 12px;
+    width: 96%;
+    height: 2px;
+    margin: 0 auto;
+    background-color: #ebe9e9;
+    border: none;
+    margin-bottom: 20px;
 }

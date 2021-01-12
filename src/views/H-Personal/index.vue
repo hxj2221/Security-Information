@@ -11,8 +11,7 @@
                 class="dialog-input-text"
                 type="input"
                 autosize
-                placeholder="10001"
-              ></el-input>
+                placeholder="10001"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
@@ -150,11 +149,11 @@
         </el-row>
       </el-form>
     </div>
-    <div style="display: flex; margin-top: 50px; margin-left: 35px">
-      <el-button class="persongr" @click="personsave"
-        ><i class="iconfont el-icon-icon-fanhui"></i> 保存</el-button
+    <div class="person_button">
+      <el-button class="persongr" icon="el-icon-s-claim" @click="personsave"
+      >保存</el-button
       >
-      <el-button class="personb" @click="personback">返回</el-button>
+      <el-button class="personb" @click="personback" icon="el-icon-back">返回</el-button>
     </div>
   </div>
 </template>

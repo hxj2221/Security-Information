@@ -5,16 +5,17 @@
 
 .accountalBg {
     background-color: #fff;
-    height: 65%;
+    width: 100%;
+    min-height: 100%;
     margin-left: -20px;
-    width: 81%;
+ margin:  0 auto;
 }
 
 .accountF {
     display: flex;
-    margin-left: 2%;
+    /* margin-left: 2%; */
     height: 80%;
-    margin-top: 7%;
+    margin-top: 4%;
     justify-content: space-around;
     flex-wrap: wrap;
     width: 100%;
@@ -27,6 +28,7 @@
 }
 
 .accountTd {
+    height: 70px;
     border-bottom: #ccc 2px solid;
 }
 
@@ -35,24 +37,26 @@
     justify-content: flex-start;
     height: 30px;
     margin-left: 10px;
+    margin-bottom: 5px;
 }
 
 .accountHead {
-    color: #ccc;
-    font-size: 14px;
+    color: rgb(114, 112, 112);
+    font-size: 17px;
     height: 30px;
+    margin-bottom: 5px;
 }
 
 .accountMain {
     margin-left: 10px;
     color: #000;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .accountClick {
     color: #409eff;
     font-size: 14px;
-    margin-right: 12px;
+    margin-right: 14px;
     text-decoration: none;
     cursor: pointer;
 }

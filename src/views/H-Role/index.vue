@@ -2,6 +2,7 @@
   <div>
     <div class="rolealBg" v-if="rolevue">
       <headpow></headpow>
+      <!-- 搜索 -->
       <div class="roleIptsech">
         <el-input
           v-model="search"
@@ -10,60 +11,72 @@
         ></el-input>
         <el-button class="staffNamesch" icon="el-icon-search">搜索</el-button>
       </div>
-      <el-table
-        :data="tables"
-        tooltip-effect="dark"
-        height="600px"
-        style="width: 90%; margin-left: 5%"
-        :header-cell-style="{ background: '#C2C5F6' }"
-        :cell-style="{ background: '#fff' }"
-      >
-        <el-table-column label="序号" type="index" :index="indexMethod">
-        </el-table-column>
-        <el-table-column prop="number" label="角色编号"> </el-table-column>
-        <el-table-column prop="title" label="角色名称"> </el-table-column>
-        <el-table-column prop="number" label="员工数量"> </el-table-column>
-        <el-table-column prop="user.name" label="创建人员"></el-table-column>
-
-        <el-table-column prop="create_time" label="创建时间"></el-table-column>
-        <el-table-column label="角色状态">
-          <template slot-scope="scope">
-            <el-switch
-              v-model="scope.row.status"
-              :active-value="1"
-              :inactive-value="0"
-              active-color="#02538C"
-              inactive-color="#B9B9B9"
-              @change="changeSwitch($event, scope.row, scope.row.id)"
-            />
-          </template>
-          ></el-table-column
+      <!-- 表格 -->
+      <div class="roleTable">
+        <el-table
+          :data="tables"
+          tooltip-effect="dark"
+          :header-cell-style="{ background: '#C2C5F6' }"
+          :cell-style="{ background: '#fff' }"
         >
+          <el-table-column label="序号" type="index" :index="indexMethod">
+          </el-table-column>
+          <el-table-column prop="number" label="角色编号"> </el-table-column>
+          <el-table-column prop="title" label="角色名称"> </el-table-column>
+          <el-table-column prop="number" label="员工数量"> </el-table-column>
+          <el-table-column prop="user.name" label="创建人员"></el-table-column>
 
-        <el-table-column label="操作">
-          <template slot-scope="scope">
-            <el-button
-              class="roleEdit"
-              size="mini"
-              @click="handleEdit(scope.row.id)"
-              >编辑</el-button
-            >
-            <el-button
-              class="roleDel"
-              size="mini"
-              type="danger"
-              @click="delrole(scope.row.id)"
-              >删除</el-button
-            >
-          </template>
-        </el-table-column>
-      </el-table>
-      <el-pagination
-        class="rolePag"
-        layout="total, prev, pager, next, jumper"
-        :total="dormitory.length"
-      >
-      </el-pagination>
+          <el-table-column
+            prop="create_time"
+            label="创建时间"
+          ></el-table-column>
+          <el-table-column label="角色状态">
+            <template slot-scope="scope">
+              <el-switch
+                v-model="scope.row.status"
+                :active-value="1"
+                :inactive-value="0"
+                active-color="#02538C"
+                inactive-color="#B9B9B9"
+                @change="changeSwitch($event, scope.row, scope.row.id)"
+              />
+            </template>
+            ></el-table-column
+          >
+
+          <el-table-column label="操作">
+            <template slot-scope="scope">
+              <el-button
+                class="roleEdit"
+                size="mini"
+                @click="handleEdit(scope.row.id)"
+                >编辑</el-button
+              >
+              <el-button
+                class="roleDel"
+                size="mini"
+                type="danger"
+                @click="delrole(scope.row.id)"
+                >删除</el-button
+              >
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+
+   <!-- 分页 -->
+      <div class="rolepag">
+        <div class="block">
+          <el-pagination
+            :current-page="currentPage"
+            :page-sizes="[8, 10, 20]"
+            :page-size="8"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="tables.length"
+          >
+          </el-pagination>
+        </div>
+      </div>
     </div>
     <!-- 新增-->
     <addrole v-show="addrole"></addrole>
@@ -90,6 +103,7 @@ export default {
       dormitory: [],
       search: "",
       childedit: [],
+      currentPage:1
     };
   },
   created() {

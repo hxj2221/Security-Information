@@ -1,5 +1,5 @@
 <template>
-  <div class="addstaffall">
+  <div class="addrole">
     <div class="roleaddThre">
       <span class="roleaddSpan">编辑角色信息</span>
       <div>

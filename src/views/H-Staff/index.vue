@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="staffalBg" v-if="staffvue">
+      <!-- 头部（公共） -->
       <headpow></headpow>
+      <!-- 搜索部分 -->
       <div class="staffIptsech">
         <span class="staffBelong">所属科室</span>
         <el-select
@@ -27,141 +29,87 @@
           >搜索</el-button
         >
       </div>
-      <el-table
-        :data="tables"
-        style="width: 99%; margin-left: 1%"
-        :header-cell-style="{ background: '#C2C5F6' }"
-        :cell-style="{ background: '#fff' }"
-      >
-        <el-table-column label="序号" width="50" prop="id"> </el-table-column>
-        <el-table-column prop="job_number" label="工号" width="100">
-        </el-table-column>
-        <el-table-column prop="name" label="员工姓名" width="120">
-        </el-table-column>
-        <el-table-column prop="sex" label="员工性别" width="100">
-        </el-table-column>
-        <el-table-column prop="age" label="员工年龄" width="100">
-        </el-table-column>
-        <el-table-column prop="phone" label="手机号码" width="150">
-        </el-table-column>
-        <el-table-column
-          prop="department[0].title"
-          label="所属科室"
-          width="120"
+      <!-- 表格部分 -->
+      <div class="staffTable">
+        <el-table
+          :data="tables"
+          :header-cell-style="{ background: '#C2C5F6' }"
+          :cell-style="{ background: '#fff' }"
         >
-        </el-table-column>
-        <el-table-column prop="auth_grouap[0].title" label="角色" width="120">
-        </el-table-column>
-        <el-table-column
-          prop="name"
-          label="创建人员"
-          width="120"
-        ></el-table-column>
+          <el-table-column label="序号" prop="id"> </el-table-column>
+          <el-table-column prop="job_number" label="工号"> </el-table-column>
+          <el-table-column prop="name" label="员工姓名"> </el-table-column>
+          <el-table-column prop="sex" label="员工性别"> </el-table-column>
+          <el-table-column prop="age" label="员工年龄"> </el-table-column>
+          <el-table-column prop="phone" label="手机号码"> </el-table-column>
+          <el-table-column prop="department[0].title" label="所属科室">
+          </el-table-column>
+          <el-table-column prop="auth_grouap[0].title" label="角色">
+          </el-table-column>
+          <el-table-column prop="name" label="创建人员"></el-table-column>
 
-        <el-table-column
-          prop="create_time"
-          label="创建时间"
-          width="150"
-        ></el-table-column>
-        <el-table-column label="员工状态" width="100">
-          <template slot-scope="scope">
-            <el-switch
-              v-model="scope.row.status"
-              :active-value="1"
-              :inactive-value="2"
-              active-color="#02538C"
-              inactive-color="#B9B9B9"
-              @change="changeSwitch($event, scope.row)"
-            ></el-switch>
-          </template>
-        </el-table-column>
+          <el-table-column
+            prop="create_time"
+            label="创建时间"
+          ></el-table-column>
+          <el-table-column label="员工状态">
+            <template slot-scope="scope">
+              <el-switch
+                v-model="scope.row.status"
+                :active-value="1"
+                :inactive-value="2"
+                active-color="#02538C"
+                inactive-color="#B9B9B9"
+                @change="changeSwitch($event, scope.row)"
+              ></el-switch>
+            </template>
+          </el-table-column>
 
-        <el-table-column label="操作" width="120">
-          <template slot-scope="scope">
-            <el-button
-              class="staffFotedit"
-              size="mini"
-              @click="handleEdit(scope.$index, scope.row, scope.row.id)"
-              >编辑</el-button
-            >
-            <el-button
-              class="staffFotdel"
-              size="mini"
-              type="danger"
-              @click="handleDelete(scope.$index, tables)"
-              >删除</el-button
-            >
-          </template>
-        </el-table-column>
-      </el-table>
-      <el-pagination
+          <el-table-column label="操作">
+            <template slot-scope="scope">
+              <el-button
+                class="staffFotedit"
+                size="mini"
+                @click="handleEdit(scope.$index, scope.row, scope.row.id)"
+                >编辑</el-button
+              >
+              <el-button
+                class="staffFotdel"
+                size="mini"
+                type="danger"
+                @click="handleDelete(scope.$index, tables)"
+                >删除</el-button
+              >
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <!-- 分页 -->
+      <div class="staffpag">
+        <div class="block">
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="[8, 10, 20]"
+            :page-size="8"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="tables.length"
+          >
+          </el-pagination>
+        </div>
+      </div>
+      <!-- <el-pagination
         layout="total, prev, pager, next, jumper"
         :total="tables.length"
       >
-      </el-pagination>
+      </el-pagination> -->
     </div>
     <!--新增-->
     <Staff v-show="add"></Staff>
-    <!-- edit -->
+    <!-- edit（编辑） -->
     <Edit v-show="edit" :childed="childedit"></Edit>
-    <!-- 编辑弹框 -->
-    <!-- <el-dialog
-      title="编辑"
-      :visible.sync="editFormVisible"
-      :close-on-click-modal="true"
-      :append-to-body="true"
-    > -->
-    <!--editForm表单提交的数据-->
-    <!-- <el-form :model="editForm" label-width="80px" ref="editForm">
-        <el-form-item prop="job_number" label="工号" width="100">
-          <el-input
-            v-model="editForm.job_number"
-            auto-complete="off"
-          ></el-input>
-        </el-form-item>
-        <el-form-item prop="name" label="员工姓名" width="120">
-          <el-input v-model="editForm.name" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item prop="sex" label="员工性别" width="100">
-          <el-input v-model="editForm.sex" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item prop="age" label="员工年龄" width="100">
-          <el-input v-model="editForm.age" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item prop="phone" label="手机号码" width="150">
-          <el-input v-model="editForm.phone" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item prop="staffKs" label="所属科室" width="120">
-          <el-input
-            v-model="editForm.department"
-            auto-complete="off"
-          ></el-input>
-        </el-form-item>
-        <el-form-item prop="staffJs" label="角色" width="120">
-          <el-input
-            v-model="editForm.auth_grouap"
-            auto-complete="off"
-          ></el-input>
-        </el-form-item>
-        <el-form-item prop="name" label="创建人员" width="120">
-          <el-input v-model="editForm.name" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item prop="create_time" label="创建时间" width="150">
-          <el-input
-            v-model="editForm.create_time"
-            auto-complete="off"
-          ></el-input>
-        </el-form-item>
-      </el-form>
-      <div class="dialog_button">
-        <el-button>返回</el-button>
-        <el-button
-          type="primary"
-          style="background: #666ee8; border-color: #666ee8"
-          >确定</el-button
-        >
-      </div>
-    </el-dialog> -->
+  
   </div>
 </template>
 
@@ -179,7 +127,7 @@ export default {
     return {
       add: false,
       edit: false,
-      currentPage: 0,
+      currentPage: 1,
       total: 0, //总条数
       page: 1, //初始显示第几页
       pageSize: 5, //每页显示多少数据
@@ -206,7 +154,6 @@ export default {
         this.id = res.data[i].id;
         console.log(this.id);
       }
-       
     });
     // 员工搜索
     service.staffSeah().then((res) => {
@@ -287,15 +234,13 @@ export default {
       service.staffedits(params).then((res) => {
         console.log(res.data.user.sex);
         this.childedit = res.data.user;
-        if(res.data.user.sex=='女'){
-          this.childedit.sex='0'
+        if (res.data.user.sex == "女") {
+          this.childedit.sex = "0";
+        } else if (res.data.user.sex == "男") {
+          this.childedit.sex = "1";
+        } else {
+          this.childedit.sex = "2";
         }
-        else if(res.data.user.sex=='男'){
-          this.childedit.sex='1'
-        }
-       else{
-         this.childedit.sex='2'
-       }
       });
     },
     //删除：
@@ -327,6 +272,12 @@ export default {
             });
         }
       });
+    },
+      handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
     },
   },
 };
