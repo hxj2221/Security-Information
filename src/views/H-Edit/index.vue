@@ -4,6 +4,71 @@
       <div class="edit-top">
         <el-button type="primary" @click="add">添加权限</el-button>
       </div>
+<<<<<<< HEAD
+      <el-table
+        :data="tableData"
+        style="width: 100%; margin-bottom: 20px"
+        :header-cell-style="getRowClass"
+        row-key="id"
+        border
+        default-expand-all
+        :tree-props="{
+          children: '_child',
+          hasChildren: 'hasChildren',
+          id: 'id',
+          title: 'title',
+          sort: 'sort',
+          icon: 'icon',
+          name: 'name',
+          url: 'url',
+        }"
+      >
+        <el-table-column type="selection" width="55"></el-table-column>
+        <el-table-column
+          type=""
+          width="55"
+          prop="sort"
+          label="排序"
+        ></el-table-column>
+        <el-table-column prop="title" label="名称" width="180">
+        </el-table-column>
+        <el-table-column prop="icon" label="左侧图标">
+          <!-- <template slot-scope="scope"> -->
+          <!-- <i class="el-icon-s-help"></i> -->
+          <!-- </template> -->
+        </el-table-column>
+        <el-table-column prop="name" label="接口地址"></el-table-column>
+        <el-table-column prop="url" label="前端路由"> </el-table-column>
+        <el-table-column label="角色状态">
+          <template slot-scope="scope">
+            <el-switch
+              v-model="scope.row.status"
+              :active-value="1"
+              :inactive-value="0"
+              active-color="#02538C"
+              inactive-color="#B9B9B9"
+            />
+          </template>
+          ></el-table-column
+        >
+        <el-table-column fixed="right" label="操作" width="400">
+          <template slot-scope="scope">
+            <!-- <el-button @click="handleClick(scope.row)" type="text" size="small"
+              >添加子级</el-button
+            > -->
+            <el-button
+              type="text"
+              size="small"
+              @click="handleEdit(scope.row.id)"
+              >编辑</el-button
+            >
+            <el-button type="text" size="small" @click="delpow(scope.row.id)"
+              >删除</el-button
+            >
+          </template>
+        </el-table-column>
+      </el-table>
+=======
       <!-- <el-table :data="tableData" row-key="id" border default-expand-all> -->
       <div class="content">
         <div class="title">
@@ -36,6 +101,7 @@
       </div>
 
       <!-- </el-table> -->
+>>>>>>> 6c1f2375fb4e5d48eefb7fb5ac2590c95e21ff92
       <div>
         <el-dialog title="添加权限" :visible.sync="dialogVisible" width="width" :before-close="dialogBeforeClose">
           <div>

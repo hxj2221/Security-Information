@@ -127,7 +127,7 @@ export default {
         status: this.valuestatus,
         id: this.id,
         sort: this.departpxipt,
-        pid: this.pid,
+        pid: this.editdepartsel,
       };
       console.log(data);
       service.departeditsave(data).then((res) => {
