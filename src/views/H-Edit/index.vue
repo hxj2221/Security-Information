@@ -52,9 +52,9 @@
         >
         <el-table-column fixed="right" label="操作" width="400">
           <template slot-scope="scope">
-            <el-button @click="handleClick(scope.row)" type="text" size="small"
+            <!-- <el-button @click="handleClick(scope.row)" type="text" size="small"
               >添加子级</el-button
-            >
+            > -->
             <el-button
               type="text"
               size="small"

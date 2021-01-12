@@ -15,13 +15,19 @@
         class="departtable"
         :header-cell-style="{ background: '#C2C5F6' }"
         :cell-style="{ background: '#fff' }"
+        row-key="id"
+        default-expand-all
+        :tree-props="{
+          children: '_child',
+          hasChildren: 'hasChildren',
+        }"
       >
         <el-table-column label="序号" type="index" :index="indexMethod">
         </el-table-column>
         <el-table-column prop="id" label="科室编号"> </el-table-column>
         <el-table-column prop="title" label="科室名称"> </el-table-column>
         <el-table-column prop="usernumber" label="员工数量"> </el-table-column>
-        <el-table-column prop="title" label="上级科室"> </el-table-column>
+        <!-- <el-table-column prop="title" label="上级科室"> </el-table-column> -->
         <el-table-column
           prop="createname.name"
           label="创建人员"
