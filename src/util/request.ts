@@ -22,9 +22,9 @@ const service = axios.default.create({
 
 service.interceptors.request.use((config: AxiosRequestConfig) => {
   
-  if (localStorage.getItem('token')) {
+  if (sessionStorage.getItem('token')) {
   
-    config.headers.token = localStorage.getItem('token');  //让请求头携带验证token
+    config.headers.token = sessionStorage.getItem('token');  //让请求头携带验证token
     // config.headers.admin = localStorage.getItem('user'); // 让每个请求携带自定义token 请根据实际情况自行修改
   
 
@@ -40,7 +40,7 @@ service.interceptors.request.use((config: AxiosRequestConfig) => {
 });
 
 service.interceptors.response.use((response: AxiosResponse) => {
-  console.log(response)
+  // console.log(response)
   if (response.status !== 200) {
     Message({
       message: `请求错误，${String(response.status)}`,
@@ -52,15 +52,15 @@ service.interceptors.response.use((response: AxiosResponse) => {
     let res = response.data;
     if (response.data.token) {
       
-      // localStorage.setItem('token', response.data.token)
+      // sessionStorage.setItem('token', response.data.token)
     }
     // if (code === -1) {
     //   MessageBox.alert(msg, {
     //     confirmButtonText: '重新登录',
     //     type: 'warning'
     //   }).then(() => {
-    //       localStorage.removeItem('token');
-    //       localStorage.removeItem('user');
+    //       sessionStorage.removeItem('token');
+    //       sessionStorage.removeItem('user');
     //       location.reload() // 为了重新实例化vue-router对象 避免bug
     //   })
     //   return Promise.reject('error')

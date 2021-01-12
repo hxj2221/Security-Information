@@ -118,7 +118,7 @@
         </div>
       </Addcom>
       <!-- 查看 -->
-      <Look v-show="look" :look='lookdata'>
+      <Look v-show="look" :lookdata='lookdata'>
         <el-button
           type="primary"
           icon="el-icon-printer"
@@ -137,7 +137,7 @@
           >返回</el-button
         >
       </Look>
-      <Operation v-show="operations">
+      <Operation v-show="operations" :operationdata='operationdata'>
         <div slot="records">
           <el-button type="primary" icon="el-icon-edit" class="records" @click="records()"
             >医患记录</el-button
@@ -174,8 +174,8 @@ export default {
 
   data() {
     return {
-      operations:'',
-      lookdata:'',
+      operationdata:'',
+      lookdata:'',//详情数据
       list: true,
       add: false,
       look: false,
@@ -198,7 +198,7 @@ export default {
       };
       service.Issue(index.event_number).then(res=>{
         console.log(res)
-        this.operations=res
+        this.operationdata=res.data
 
       })
     },
@@ -228,7 +228,6 @@ export default {
        let params = {
         event_number: index.event_number
       };
-    console.log(qs.stringify(params))
       service.componrdetaile(qs.stringify(params)).then((res) => {
         console.log(res);
         this.lookdata=res

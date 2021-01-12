@@ -136,7 +136,7 @@ export default {
             .login(params)
             .then((res) => {
               if (res.code === 20010) {
-                localStorage.setItem("token", res.data.token);
+                sessionStorage.setItem("token", res.data.token);
                 sessionStorage.setItem("account", this.ruleForm.account);
                 sessionStorage.setItem("password", this.ruleForm.password);
                 this.$router.push("/dashboard");
@@ -178,6 +178,7 @@ export default {
   },
   created() {
     localStorage.clear();
+    sessionStorage.clear()
     // this.height=document.body.clientHeight
     // var heights=document.getElementsByClassName('login')
     //  var div_height = window.screen.availHeight;

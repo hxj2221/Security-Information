@@ -32,8 +32,6 @@
       <slot name="content">
         <div
           class="look-content"
-          v-for="item in data"
-          :key="item.BasicInformation[0].D_I_Number"
         >
           <div class="look-content-title">
             <span>投诉事件调查表</span>
@@ -44,7 +42,7 @@
               <el-col :span="6"
                 ><div class="grid-content bg-purple">
                   <span
-                    ><span>医院名称：</span>{{ item.BasicInformation[0].H_Name }}</span
+                    ><span>医院名称：</span>兰州大学第二医院</span
                   >
                 </div></el-col
               >
@@ -53,7 +51,7 @@
                 ><div class="grid-content bg-purple">
                   <span
                     ><span>事件编号：</span
-                    >{{ item.BasicInformation[0].D_I_Number }}</span
+                    >{{ }}</span
                   >
                 </div></el-col
               >
@@ -63,7 +61,7 @@
                 ><div class="grid-content bg-purple">
                   <span
                     ><span>投诉日期：</span
-                    >{{ item.BasicInformation[0].Complaint_Time }}</span
+                    >{{  }}</span
                   >
                 </div></el-col
               >
@@ -72,7 +70,7 @@
                 ><div class="grid-content bg-purple">
                   <span
                     ><span>事发日期：</span
-                    >{{ item.BasicInformation[0].Incident_Time }}</span
+                    >{{  }}</span
                   >
                 </div></el-col
               >
@@ -82,7 +80,7 @@
                 ><div class="grid-content bg-purple">
                   <span
                     ><span>事件性质：</span
-                    >{{ item.BasicInformation[0].Dispute_State }}</span
+                    >{{  }}</span
                   >
                 </div></el-col
               >
@@ -91,7 +89,7 @@
                 ><div class="grid-content bg-purple">
                   <span
                     ><span>事件状态：</span
-                    >{{ item.BasicInformation[0].Event_State }}</span
+                    >{{  }}</span
                   >
                 </div></el-col
               >
@@ -212,15 +210,13 @@
             <!-- 科室调查 -->
             <div
               class="box-contents"
-              v-for="item in data[0].GetLoop"
-              :key="item.Participating[0].Num"
             >
               <div class="box-top">
                 <el-row type="flex" class="row-bg" justify="space-between">
                   <el-col :span="3" :push="2">
                     <div class="grid-content bg-purple">
                       <span
-                        ><b>{{ item.Participating[0].Num }}</b></span
+                        ><b>{{}}</b></span
                       >
                     </div></el-col
                   >
@@ -229,7 +225,7 @@
                   ></el-col>
                   <el-col :span="9" :pull="1"
                     ><div class="grid-content bg-purple">
-                      <span><b>下发时间：</b>{{ item.Participating[0].Time }}</span>
+                      <span><b>下发时间：</b>{{}}</span>
                     </div></el-col
                   >
                 </el-row>
@@ -243,19 +239,15 @@
                   >
                   <el-col :span="20">
                     <div class="grid-content bg-purple-light">
-                      <span>{{ item.Participating[0].D_Names }}</span>
+                      <span>{{ }}</span>
                     </div></el-col
                   >
                 </el-row>
               </div>
               <div
-                v-for="items in item.Participating"
-                :key="items.SurveyProgress[0].D_Name"
               >
                 <div
                   class="box-content-child clearfix"
-                  v-for="itemss in items.SurveyProgress"
-                  :key="itemss[0].D_Name"
                 >
                   <el-row>
                     <el-col :span="4"
@@ -265,7 +257,7 @@
                     >
                     <el-col :span="20">
                       <div class="grid-content bg-purple-light">
-                        <span class="value">{{ itemss[0].D_Name }}</span>
+                        <span class="value">{{  }}</span>
                       </div></el-col
                     >
                   </el-row>
@@ -277,7 +269,7 @@
                     >
                     <el-col :span="20">
                       <div class="grid-content bg-purple-light">
-                        <span class="value">{{ itemss[0].Department_Head }}</span>
+                        <span class="value">{{ }}</span>
                       </div></el-col
                     >
                   </el-row>
@@ -289,7 +281,7 @@
                     >
                     <el-col :span="20">
                       <div class="grid-content bg-purple-light">
-                        <span class="value">{{ itemss[0].StaffInvolved }}</span>
+                        <span class="value">{{ }}</span>
                       </div></el-col
                     >
                   </el-row>
@@ -301,7 +293,7 @@
                     >
                     <el-col :span="20">
                       <div class="grid-content bg-purple-light">
-                        <span class="value">{{ itemss[0].EndTime }}</span>
+                        <span class="value">{{  }}</span>
                       </div></el-col
                     >
                   </el-row>
@@ -313,14 +305,14 @@
                     >
                     <el-col :span="20">
                       <div class="grid-content bg-purple-light">
-                        <span class="value">{{ itemss[0].I_Reply }}</span>
+                        <span class="value">{{ }}</span>
                       </div></el-col
                     >
                   </el-row>
                   <div style="border-bottom: 0.5px solid #797979; width: 100%"></div>
                   <div class="file clearfix">
-                    <div v-for="itemsss in itemss[0].E_Name" :key="itemsss._Name">
-                      <span class="filename">{{ itemsss.E_Name }}</span>
+                    <div >
+                      <span class="filename"></span>
                       <span class="filedetaile">查看</span>
                     </div>
                   </div>
@@ -577,7 +569,7 @@
 import service from "@/service/index";
 export default {
   props:{
-    lookdata: Array
+    lookdata: {}
   },
   components: {},
   data() {
