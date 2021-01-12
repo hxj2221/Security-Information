@@ -1,5 +1,5 @@
 <template>
-  <div class="addstaffall">
+  <div class="departAll">
     <!-- top -->
     <div class="departaddThre">
       <span class="departaddSpan">编辑科室信息</span>
@@ -10,8 +10,7 @@
         <el-button class="departaddb" @click="departeditvueno">返回</el-button>
       </div>
     </div>
-    <hr class="departaddWidhr" />
-    <!--  -->
+    <hr class="staffWidhr" />
     <div class="addmain">
       <el-form ref="form">
         <el-row :gutter="20">

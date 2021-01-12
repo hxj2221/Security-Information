@@ -8,11 +8,13 @@
     font-size: 14px;
     color: #cccccc;
     padding-top: 30px;
-    padding-left: 60px;
-    justify-content: flex-start;
+    padding-left: 30px;
+    /* padding-left: 25px; */
+    /* justify-content: flex-start; */
+    margin-bottom: 20px;
 }
 
-.powerheadThre>>>.el-button+.el-button {
+.powerheadThre>.el-button+.el-button {
     margin: 0;
 }
 
@@ -53,7 +55,8 @@
     background: #666ee8;
     border-radius: 5px;
     position: absolute;
-    left: 86%;
+    /* left: 86%; */
+    right: 4%;
 }
 
 .powerAdd :hover {
@@ -61,8 +64,10 @@
 }
 
 .powerWidhr {
-    width: 92%;
-    margin: auto;
-    margin-top: 15px;
-    margin-bottom: 12px;
+    margin: 0 auto;
+    width: 96%;
+    height: 2px;
+    background-color: #ebe9e9;
+    border: none;
+    margin-bottom: 20px;
 }

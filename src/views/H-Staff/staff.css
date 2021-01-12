@@ -5,8 +5,9 @@
 
 .staffalBg {
     background-color: #fff;
-    height: 85%;
+    min-height: 100%;
     margin-left: -20px;
+    padding-bottom: 100px;
 }
 
 .staffheadThre {
@@ -73,7 +74,7 @@
 
 .staffIptsech {
     display: flex;
-    margin-left: 45px;
+    margin-left: 25px;
     margin-bottom: 20px;
 }
 
@@ -81,19 +82,22 @@
     font-size: 14px;
     color: #000;
     margin-top: 10px;
+    margin: 10px 10px;
 }
 
 .staffSel {
-    width: 10vw;
+    /* width: 10vw; */
     border: 2px solid #ccc;
     border-radius: 5px;
+    margin-right: 20px;
 }
 
 .staffNameipt {
     width: 18vw;
     border: 2px solid #ccc;
     border-radius: 5px;
-    margin-left: 4%;
+    margin-right: 20px;
+    /* margin-left: 4%; */
 }
 
 .staffNamesch {
@@ -103,6 +107,18 @@
     border-radius: 5px;
 }
 
+.staffTable {
+    margin: 0 15px;
+}
+
+.staffTable .el-table td,
+.el-table th {
+    text-align: center !important;
+}
+.staffTable .el-table th{
+    background-color: #666EE866;
+    color: #515A6E;
+}
 .staffFotedit {
     width: 45px;
 }
@@ -137,12 +153,12 @@
 }
 
 .staffThre {
-    display: flex;
+    /* display: flex;
     justify-content: space-between;
     font-size: 14px;
     color: #cccccc;
     padding-top: 30px;
-    padding-left: 60px;
+    padding-left: 60px; */
 }
 
 .staffSpan {
@@ -257,11 +273,21 @@
     padding-top: 30px;
     padding-left: 35px;
 }
+
 /* 弹框按钮 */
-.dialog_button{
- overflow: hidden;
+.dialog_button {
+    overflow: hidden;
 }
-.dialog_button>.el-button{
+
+.dialog_button>.el-button {
     float: right;
     margin-right: 10px;
+}
+/* 分页 */
+.staffpag{
+    overflow: hidden;
+    margin: 20px 25px;
+}
+.staffpag>.block{
+    float: right;
 }
