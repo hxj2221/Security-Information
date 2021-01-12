@@ -28,13 +28,16 @@
         <el-table-column prop="title" label="科室名称"> </el-table-column>
         <el-table-column prop="usernumber" label="员工数量"> </el-table-column>
         <!-- <el-table-column prop="title" label="上级科室"> </el-table-column> -->
-        <el-table-column prop="createname" label="创建人员"></el-table-column>
+        <el-table-column
+          prop="createname.name"
+          label="创建人员"
+        ></el-table-column>
 
         <el-table-column prop="create_time" label="创建时间"></el-table-column>
         <el-table-column label="科室状态">
           <template slot-scope="scope">
             <el-switch
-              v-model="status"
+              v-model="scope.row.status"
               :active-value="1"
               :inactive-value="0"
               active-color="#02538C"

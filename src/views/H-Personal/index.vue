@@ -58,9 +58,10 @@
                 class="dialog-input-text"
                 type="input"
                 autosize
-                v-model="persongensel"
+                v-model="persongense"
                 style="margin-top: 40px"
                 placeholder="请选择"
+                @change="changesex"
               >
                 <el-option
                   v-for="item in optiongen"
@@ -175,7 +176,7 @@ import {
 import qs from "qs";
 export default {
   components: { userthre },
-
+  inject: ["reload"],
   data() {
     return {
       pageTitle: "个人信息",
@@ -183,6 +184,7 @@ export default {
       personAgeipt: "",
       personagesel: "",
       persongensel: "",
+      persongense: "",
       personPhoneipt: "",
       personEmailipt: "",
       personCardipt: "",
@@ -231,11 +233,17 @@ export default {
       this.personCardipt = res.data.cardnumber;
       this.personPositioniPt = res.data.position;
       this.personaddreiPt = res.data.eraddress;
-      this.persongensel = res.data.sex;
+      this.persongense = res.data.sex.name;
+      this.persongensel = res.data.sex.number;
       this.selectedOptions = res.data.address;
+      console.log(this.persongensel);
     });
   },
   methods: {
+    changesex() {
+      console.log(this.persongense);
+      this.persongensel = this.persongense;
+    },
     personsave() {
       let data = {
         name: this.personNameipt,
@@ -248,7 +256,13 @@ export default {
         eraddress: this.personaddreiPt,
         address: this.address,
       };
+      console.log(data);
       service.changeinfor(data).then((res) => {
+        if (res.code == 20010) {
+          this.reload();
+        } else {
+          alert("修改失败，请刷新后重试！！！");
+        }
         console.log(res);
       });
     },

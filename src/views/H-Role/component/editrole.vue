@@ -133,8 +133,8 @@
       </p>
       <div style="margin-left: 160px; margin-top: 40px; display: flex">
         <el-radio-group v-model="radio" @change="radiochange">
-          <el-radio :label="3">本科室</el-radio>
-          <el-radio :label="6">全部</el-radio>
+          <el-radio :label="1">本科室</el-radio>
+          <el-radio :label="0">全部</el-radio>
         </el-radio-group>
       </div>
     </div>
@@ -148,7 +148,7 @@ export default {
   inject: ["reload"],
   data() {
     return {
-      radio: 3,
+      radio: 0,
       rolems: "",
       rolecreate: "",
       roleNameipt: "",

@@ -31,14 +31,14 @@ export default {
   AddComponent: async (params: any) => {
     return await service.post(`${baseUrl}api/tsevent/add`, params).then(res => res).catch(err => err)
   },
-// 获取详情
+  // 获取详情
   componrdetaile: async (data: any) => {
-    return await service.post(`${baseUrl}api/tsevent/details`, data ).then(res => res).catch(err => err)
+    return await service.post(`${baseUrl}api/tsevent/details`, data).then(res => res).catch(err => err)
   },
-// 待下发
-Issue: async (event_number: any) => {
-  return await service.get(`${baseUrl}api/tsevent/issue`,{params:{event_number:event_number}} ).then(res => res).catch(err => err)
-},
+  // 待下发
+  Issue: async (event_number: any) => {
+    return await service.get(`${baseUrl}api/tsevent/issue`, { params: { event_number: event_number } }).then(res => res).catch(err => err)
+  },
   // 不良事件列表
   AdeList: async () => {
     return await service.get(`${baseUrl}api/bad/lists`).then(res => res).catch(err => err)
@@ -181,5 +181,13 @@ Issue: async (event_number: any) => {
   //个人手机号
   phoneyz: async (data: object) => {
     return await service.post(`${baseUrl}api/login/hssmsphone`, data).then(res => res).catch(err => err)
+  },
+  //手机号验证
+  phonechange: async (data: object) => {
+    return await service.post(`${baseUrl}api/home/authentication`, data).then(res => res).catch(err => err)
+  },
+  //账户管理
+  accountman: async () => {
+    return await service.get(`${baseUrl}api/home/user_home`).then(res => res).catch(err => err)
   },
 }
