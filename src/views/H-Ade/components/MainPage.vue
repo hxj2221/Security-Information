@@ -122,14 +122,14 @@
     methods: {
       // 新增
       Add() {
-        service.badNum().then(res=>{
-          // console.log(res)
-          if(res.code==20010){
+        // service.badNum().then(res=>{
+        //   console.log(res)
+        //   if(res.code==20010){
             this.$emit('pageAdd')
-            this.eventNum=res.event_num
-            this.bus.$emit('eventNum', this.eventNum)
-          }
-        })
+        //     this.eventNum=res.event_num
+        //     this.bus.$emit('eventNum', this.eventNum)
+        //   }
+        // })
         
       },
       // 查看
