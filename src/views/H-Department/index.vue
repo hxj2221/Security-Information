@@ -28,13 +28,13 @@
           hasChildren: 'hasChildren',
         }"
       >
-        <el-table-column label="序号" type="index" :index="indexMethod">
+        <el-table-column label="序号" type="index" >
         </el-table-column>
         <el-table-column prop="number" label="科室编号"> </el-table-column>
         <el-table-column prop="title" label="科室名称"> </el-table-column>
         <el-table-column prop="usernumber" label="员工数量"> </el-table-column>
         <!-- <el-table-column prop="title" label="上级科室"> </el-table-column> -->
-        <el-table-column prop="createname" label="创建人员"></el-table-column>
+        <el-table-column prop="create_uid" label="创建人员"></el-table-column>
 
           <el-table-column
             prop="create_time"
@@ -170,9 +170,9 @@ export default {
       }
     },
     // 序号
-    indexMethod(index) {
-      return index * 1;
-    },
+    // indexMethod(index) {
+    //   return index * 1;
+    // },
     // 编辑
     handleEdit(id) {
       this.editdep = true;
@@ -184,7 +184,7 @@ export default {
       service.departedit(param).then((res) => {
         console.log(res);
         this.departchildedit = res;
-        // console.log(this.departchildedit);
+       this.departchildedit=res.user.sex
       });
     },
     //删除：

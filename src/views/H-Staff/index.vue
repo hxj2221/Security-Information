@@ -36,7 +36,7 @@
           :header-cell-style="{ background: '#C2C5F6' }"
           :cell-style="{ background: '#fff' }"
         >
-          <el-table-column label="序号" prop="id"> </el-table-column>
+          <el-table-column label="序号" type="index" > </el-table-column>
           <el-table-column prop="job_number" label="工号"> </el-table-column>
           <el-table-column prop="name" label="员工姓名"> </el-table-column>
           <el-table-column prop="sex.name" label="员工性别"> </el-table-column>
@@ -123,6 +123,7 @@ import headpow from "../component/power";
 import service from "@/service/index";
 export default {
   components: { Staff, headpow, Edit },
+    inject: ["reload"],
   data() {
     return {
       add: false,
@@ -148,7 +149,9 @@ export default {
   created() {
     // 获取员工列表
     service.staffList().then((res) => {
+      console.log(res)
       this.tables = res.data;
+      
       //  this.tables.department=res.data[].department[0].title
       for (let i = 1; i < res.data.length; i++) {
         this.id = res.data[i].id;
@@ -215,35 +218,32 @@ export default {
     handleEdit(index, row, id) {
       this.edit = true;
       this.staffvue = false;
-      // console.log(index);
-      // this.editFormVisible = true;
-      // // this.editForm=this.tables
-      // this.editForm = Object.assign({}, row); //重点
-      // this.editForm.department = this.editForm.department[0].title;
-      // this.editForm.auth_grouap = this.editForm.auth_grouap[0].title;
-      // console.log(Object.assign({}, row));
       let params = {
         id: id,
       };
       service.staffedits(params).then((res) => {
-        console.log(res);
+        console.log(res)
         this.childedit = res.data.user;
-        //  if (res.data.user.sex == "女") {
-        //   this.childedit.sex = "0";
-        // } else if (res.data.user.sex == "男") {
-        //   this.childedit.sex = "1";
-        // } else {
-        //   this.childedit.sex = "2";
-        // }
+         if (res.data.user.sex.name == "女") {
+          this.childedit.sex = "0";
+        } else if (res.data.user.sex.name == "男") {
+          this.childedit.sex = "1";
+        } else {
+          this.childedit.sex = "2";
+        }
       });
     },
     //删除：
-    handleDelete(index, row) {
+    handleDelete(val, row) {
       let params = {
-        id: this.id,
+        id: row[val].id,
       };
+      console.log(params)
       service.staffDel(params).then((res) => {
-        if (res.code == "20010") {
+        // this.reload();
+        
+        console.log(res)
+        if (res.code ==20010) {
           this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
             confirmButtonText: "确定",
             cancelButtonText: "取消",
@@ -253,9 +253,11 @@ export default {
               this.$message({
                 type: "success",
                 message: "删除成功!",
-                delete: row.splice(index, 1),
+                delete: row.splice(val, 1),
+                
               });
-            })
+            }
+            )
             .catch(() => {
               this.$message({
                 type: "info",
@@ -263,6 +265,7 @@ export default {
               });
             });
         }
+       
       });
     },
     // 分页

@@ -228,7 +228,7 @@
             <el-form-item label="密码" required>
               <el-input
                 class="dialog-input-text"
-                type="input"
+                type="password"
                 autosize
                 v-model="addStaff.password"
               ></el-input>
@@ -271,12 +271,13 @@ import {
 } from "element-china-area-data";
 export default {
   components: {},
+    inject: ["reload"],
   props: {},
   data() {
     return {
       options: regionData,
       addStaff: {
-        staffemployee: "", // 员工编号
+        job_number: "", // 员工编号
         // staffNumInput: "",
         name: "天河", // 姓名
         age: "12", //年龄
@@ -295,7 +296,7 @@ export default {
         address: [], //地址
       },
       addressC: [],
-staffroleselC:[],
+      staffroleselC: [],
       // 性别循环
       optiongen: [
         {
@@ -319,17 +320,11 @@ staffroleselC:[],
   },
   methods: {
     one(val) {
-      for (let i = 0; i <=val.length-1; i++) {
+      for (let i = 0; i <= val.length - 1; i++) {
         // console.log(val[i])
-        let a=val[i]
-        this.staffroleselC=a
-        console.log(this.staffroleselC)
-      //   this.optionrole.find((item) => {
-      //     if (item.id == val[i]) {
-      //       this.addStaff.staffrolesel = item.id;
-      //       console.log(this.addStaff.staffrolesel)
-      //     }
-      //   });
+        let a = val[i];
+        this.staffroleselC = a;
+        console.log(this.staffroleselC);
       }
     },
     // 保存
@@ -337,7 +332,7 @@ staffroleselC:[],
       // let params = this.addStaff
       console.log(this.addStaff.address);
       let data = {
-        job_number: this.addStaff.job_number,
+        // job_number: this.addStaff.job_number,
         name: this.addStaff.name,
         password: this.addStaff.password,
         sex: this.addStaff.sex,
@@ -357,19 +352,21 @@ staffroleselC:[],
       console.log(data);
       service.staffAdd(data).then((res) => {
         console.log(res);
-        // if (res.msg == "员工信息添加成功") {
-        //   const loading = this.$loading({
-        //     lock: true,
-        //     text: "保存中",
-        //     spinner: "el-icon-loading",
-        //     background: "rgba(0, 0, 0, 0.7)",
-        //   });
-        //   setTimeout(() => {
-        //     loading.close();
-        //   }, 2000);
-        //   this.$parent.fathstaffyes();
-        // } else {
-        // }
+        if (res.msg == "员工信息添加成功") {
+          const loading = this.$loading({
+            lock: true,
+            text: "保存中",
+            spinner: "el-icon-loading",
+            background: "rgba(0, 0, 0, 0.7)",
+          });
+          setTimeout(() => {
+            loading.close();
+            this.reload();
+          }, 2000);
+          this.$parent.fathstaffyes();
+        } else {
+             this.$message.error(res.msg);
+        }
       });
     },
     handleChange(cityvalue) {
@@ -399,7 +396,7 @@ staffroleselC:[],
       console.log(item);
       self.optiondepart = item.department;
       self.optionrole = item.auth_grouap;
-      self.addStaff.job_number = item.job_number;
+      self.addStaff.job_number=item.job_number
     });
   },
 };
