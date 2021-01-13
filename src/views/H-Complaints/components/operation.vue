@@ -695,7 +695,7 @@ import service from "@/service";
 import Look from "../components/Look";
 
 export default {
-  props: { operationdata: "" },
+  props: { operationdata: "" ,opdata:''},
   components: {
     Look,
   },

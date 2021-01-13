@@ -137,7 +137,7 @@
           >返回</el-button
         >
       </Look>
-      <Operation v-show="operations" :operationdata='operationdata'>
+      <Operation v-show="operations" :operationdata='operationdata' :opdata='opdata'>
         <div slot="records">
           <el-button type="primary" icon="el-icon-edit" class="records" @click="records()"
             >医患记录</el-button
@@ -175,6 +175,7 @@ export default {
   data() {
     return {
       operationdata:'',
+      opdata:'',//操作详情
       lookdata:'',//详情数据
       list: true,
       add: false,
@@ -198,7 +199,8 @@ export default {
       };
       service.Issue(index.event_number).then(res=>{
         console.log(res)
-        this.operationdata=res.data
+        this.operationdata=index
+        this.opdata=res.data
 
       })
     },
