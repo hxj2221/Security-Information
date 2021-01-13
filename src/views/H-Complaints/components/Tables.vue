@@ -12,7 +12,7 @@
         <el-table-column prop="sex" label="性别"> </el-table-column>
         <el-table-column prop="age" label="年龄"> </el-table-column>
         <el-table-column prop="complaint_phone" label="手机号码"> </el-table-column>
-        <el-table-column prop="department.title" label="投诉科室"> </el-table-column>
+        <el-table-column prop="department[0].title" label="投诉科室"> </el-table-column>
         <el-table-column prop="complaint_type.title" label="投诉方式"> </el-table-column>
         <el-table-column prop="create_time" label="投诉时间"> </el-table-column>
         <el-table-column prop="pass_department" label="流转部门"> </el-table-column>

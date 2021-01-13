@@ -232,7 +232,7 @@ export default {
       };
       service.componrdetaile(qs.stringify(params)).then((res) => {
         console.log(res);
-        this.lookdata=res
+        this.lookdata=res.data
       });
     },
     // 添加页面保存
