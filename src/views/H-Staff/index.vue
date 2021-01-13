@@ -36,10 +36,10 @@
           :header-cell-style="{ background: '#C2C5F6' }"
           :cell-style="{ background: '#fff' }"
         >
-          <el-table-column label="序号" prop="id"> </el-table-column>
+          <el-table-column label="序号" type="index" > </el-table-column>
           <el-table-column prop="job_number" label="工号"> </el-table-column>
           <el-table-column prop="name" label="员工姓名"> </el-table-column>
-          <el-table-column prop="sex" label="员工性别"> </el-table-column>
+          <el-table-column prop="sex.name" label="员工性别"> </el-table-column>
           <el-table-column prop="age" label="员工年龄"> </el-table-column>
           <el-table-column prop="phone" label="手机号码"> </el-table-column>
           <el-table-column prop="department[0].title" label="所属科室">
@@ -123,6 +123,7 @@ import headpow from "../component/power";
 import service from "@/service/index";
 export default {
   components: { Staff, headpow, Edit },
+    inject: ["reload"],
   data() {
     return {
       add: false,
@@ -148,11 +149,12 @@ export default {
   created() {
     // 获取员工列表
     service.staffList().then((res) => {
+      console.log(res)
       this.tables = res.data;
+      
       //  this.tables.department=res.data[].department[0].title
       for (let i = 1; i < res.data.length; i++) {
         this.id = res.data[i].id;
-        console.log(this.id);
       }
     });
     // 员工搜索
@@ -167,7 +169,6 @@ export default {
         name: this.search,
         department_id: this.staffbeldepart,
       };
-      console.log(params);
       service.staffSea(params).then((res) => {
         // this.tables1
         this.tables = this.tables1 = res.data;
@@ -193,26 +194,23 @@ export default {
     },
     //员工状态
     changeSwitch(val, row) {
-      console.log(val, row);
       // 员工状态
       let params = {
         id: row.id,
       };
-      console.log(params);
       service.staffState(params).then((res) => {
-        // console.log(res)
-        if (row.state == 1) {
+        if (row.status == 1) {
           this.$message({
             type: "success",
             message: "员工启用成功",
           });
         } else {
-          if (row.state == 0) {
+         
             this.$message({
-              type: "warning",
+               type: 'error',
               message: "员工停用",
             });
-          }
+        
         }
       });
     },
@@ -220,23 +218,15 @@ export default {
     handleEdit(index, row, id) {
       this.edit = true;
       this.staffvue = false;
-      // console.log(index);
-      // this.editFormVisible = true;
-      // // this.editForm=this.tables
-      // this.editForm = Object.assign({}, row); //重点
-      // this.editForm.department = this.editForm.department[0].title;
-      // this.editForm.auth_grouap = this.editForm.auth_grouap[0].title;
-      // console.log(Object.assign({}, row));
-      console.log(id);
       let params = {
         id: id,
       };
       service.staffedits(params).then((res) => {
-        console.log(res.data.user.sex);
+        console.log(res)
         this.childedit = res.data.user;
-        if (res.data.user.sex == "女") {
+         if (res.data.user.sex.name == "女") {
           this.childedit.sex = "0";
-        } else if (res.data.user.sex == "男") {
+        } else if (res.data.user.sex.name == "男") {
           this.childedit.sex = "1";
         } else {
           this.childedit.sex = "2";
@@ -244,14 +234,16 @@ export default {
       });
     },
     //删除：
-    handleDelete(index, row) {
-      // console.log(index, row);
+    handleDelete(val, row) {
       let params = {
-        id: this.id,
+        id: row[val].id,
       };
+      console.log(params)
       service.staffDel(params).then((res) => {
-        console.log(res.code);
-        if (res.code == "20010") {
+        // this.reload();
+        
+        console.log(res)
+        if (res.code ==20010) {
           this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
             confirmButtonText: "确定",
             cancelButtonText: "取消",
@@ -261,9 +253,11 @@ export default {
               this.$message({
                 type: "success",
                 message: "删除成功!",
-                delete: row.splice(index, 1),
+                delete: row.splice(val, 1),
+                
               });
-            })
+            }
+            )
             .catch(() => {
               this.$message({
                 type: "info",
@@ -271,8 +265,10 @@ export default {
               });
             });
         }
+       
       });
     },
+    // 分页
       handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
     },

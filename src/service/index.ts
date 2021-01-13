@@ -107,7 +107,15 @@ export default {
   AdeList: async () => {
     return await service.get(`${baseUrl}api/bad/lists`).then(res => res).catch(err => err)
   },
-  // 不良新增
+  // 不良检索
+  AdeSearch: async (params:any) => {
+    return await service.get(`${baseUrl}api/bad/lists`,{params}).then(res => res).catch(err => err)
+  },
+  // 事件编号
+  badNum: async () => {
+    return await service.get(`${baseUrl}api/bad/bad_add`).then(res => res).catch(err => err)
+  },
+  // 确认不良新增
   badAdd: async (params: any) => {
     return await service.post(`${baseUrl}api/bad/bad_add`, params).then(res => res).catch(err => err)
   },
@@ -249,6 +257,10 @@ export default {
   //手机号验证
   phonechange: async (data: object) => {
     return await service.post(`${baseUrl}api/home/authentication`, data).then(res => res).catch(err => err)
+  },
+  //手机号换绑
+  phonehb: async (data: object) => {
+    return await service.post(`${baseUrl}api/home/hs_bind_phone`, data).then(res => res).catch(err => err)
   },
   //账户管理
   accountman: async () => {

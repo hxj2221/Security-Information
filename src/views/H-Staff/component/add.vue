@@ -7,7 +7,6 @@
         <el-button class="staffgr" @click="staffaddvueyes">保存</el-button>
         <el-button class="staffb" @click="staffaddvueno">返回</el-button>
       </div>
-      
     </div>
     <hr class="staffWidhr" />
     <!-- add -->
@@ -195,6 +194,7 @@
                 type="input"
                 autosize
                 style="margin-top: 40px"
+                @change="one"
                 v-model="addStaff.staffrolesel"
                 multiple
                 placeholder="请选择"
@@ -228,7 +228,7 @@
             <el-form-item label="密码" required>
               <el-input
                 class="dialog-input-text"
-                type="input"
+                type="password"
                 autosize
                 v-model="addStaff.password"
               ></el-input>
@@ -271,45 +271,32 @@ import {
 } from "element-china-area-data";
 export default {
   components: {},
+    inject: ["reload"],
   props: {},
   data() {
     return {
       options: regionData,
       addStaff: {
-        staffemployee: "", // 员工编号
+        job_number: "", // 员工编号
         // staffNumInput: "",
-        name: "", // 姓名
-        age: "", //年龄
+        name: "天河", // 姓名
+        age: "12", //年龄
         // staffAgesel: "", //年龄岁月天
         sex: "", //性别
-        phone: "", //手机号
-        email: "", //电子邮箱
-        cardnumber: "", //证件号码
-        position: "", //职位
-        eraddress: "", //详细地址
+        phone: "13139435905", //手机号
+        email: "1237@qq.com", //电子邮箱
+        cardnumber: "412723200001013920", //证件号码
+        position: "哈哈哈", //职位
+        eraddress: "哈哈哈", //详细地址
         staffdepart: "", //所属科室
-        staffrolesel: "", //角色
+        staffrolesel: [], //角色
         head_department: "", //科室负责人
         status: "", //员工状态
-        password: "", //密码
+        password: "123qwe", //密码
         address: [], //地址
       },
-
-      //年龄循环
-      optionages: [
-        {
-          value: "选项1",
-          label: "岁",
-        },
-        {
-          value: "选项2",
-          label: "月",
-        },
-        {
-          value: "选项3",
-          label: "天",
-        },
-      ],
+      addressC: [],
+      staffroleselC: [],
       // 性别循环
       optiongen: [
         {
@@ -325,7 +312,6 @@ export default {
           label: "未知",
         },
       ],
-
       // 科室
       optiondepart: [],
       // 角色
@@ -333,18 +319,26 @@ export default {
     };
   },
   methods: {
+    one(val) {
+      for (let i = 0; i <= val.length - 1; i++) {
+        // console.log(val[i])
+        let a = val[i];
+        this.staffroleselC = a;
+        console.log(this.staffroleselC);
+      }
+    },
     // 保存
     staffaddvueyes() {
       // let params = this.addStaff
       console.log(this.addStaff.address);
       let data = {
-        job_number: this.addStaff.job_number,
+        // job_number: this.addStaff.job_number,
         name: this.addStaff.name,
         password: this.addStaff.password,
         sex: this.addStaff.sex,
         email: this.addStaff.email,
         phone: this.addStaff.phone,
-        address: this.addStaff.address,
+        address: this.addressC,
         eraddress: this.addStaff.eraddress,
         position: this.addStaff.position,
         age: this.addStaff.age,
@@ -352,8 +346,8 @@ export default {
         cardnumber: this.addStaff.cardnumber,
         head_department: this.addStaff.head_department,
         status: this.addStaff.status,
+        role_id: this.staffroleselC,
         department_id: this.addStaff.staffdepart,
-        role_id: "",
       };
       console.log(data);
       service.staffAdd(data).then((res) => {
@@ -367,9 +361,11 @@ export default {
           });
           setTimeout(() => {
             loading.close();
+            this.reload();
           }, 2000);
           this.$parent.fathstaffyes();
         } else {
+             this.$message.error(res.msg);
         }
       });
     },
@@ -379,13 +375,12 @@ export default {
         CodeToText[cityvalue[1]],
         CodeToText[cityvalue[2]]
       );
-      let a =
+      this.addressC =
         CodeToText[cityvalue[0]] +
         "/" +
         CodeToText[cityvalue[1]] +
         "/" +
         CodeToText[cityvalue[2]];
-      this.addStaff.address = a;
 
       console.log(this.addStaff.address);
     },
@@ -399,9 +394,9 @@ export default {
     let self = this;
     this.bus.$on("ReceiveMessage", function (item) {
       console.log(item);
-      self.optionrole = item.auth_grouap;
       self.optiondepart = item.department;
-      self.addStaff.job_number = item.job_number;
+      self.optionrole = item.auth_grouap;
+      self.addStaff.job_number=item.job_number
     });
   },
 };

@@ -89,7 +89,7 @@
 .departIptsech_div>.el-input{
     margin-right: 10px;
 }
-.departTable .el-table td,.el-table th {
+.departTable .el-table tr, .el-table th , .el-table td  {
     text-align: center !important;
 }
 .departtable {
@@ -218,8 +218,9 @@
 }
 /* 分页 */
 .departpag{
-overflow: hidden;
+
 margin: 20px 25px;
+overflow: hidden;
 }
 .departpag>.block{
     float: right;

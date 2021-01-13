@@ -193,8 +193,9 @@
             <el-form-item label="密码" required>
               <el-input
                 class="dialog-input-text"
-                type="input"
+                type="password"
                 v-model="addStaff.password"
+              placeholder="******"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -234,6 +235,7 @@ import {
 } from "element-china-area-data";
 export default {
   props: ["childed"],
+  inject: ["reload"],
   components: {},
   data() {
     return {
@@ -300,11 +302,11 @@ export default {
   },
   watch: {
     childed(res) {
-      console.log(res); //数据已经拿到
+      // console.log(res); //数据已经拿到
       this.id = res.id;
       this.addStaff.job_number = res.job_number;
       this.addStaff.name = res.name;
-      // this.addStaff.password = res.password;
+      this.addStaff.password = res.password;
       this.addStaff.sex = res.sex;
       this.addStaff.email = res.email;
       this.addStaff.phone = res.phone;
@@ -327,6 +329,8 @@ export default {
     // 保存
     staffaddvueyes() {
       let params = {
+        password:this.addStaff.password,
+        job_number:this.addStaff.job_number,
         id: this.id,
         name: this.addStaff.name,
         sex: this.addStaff.sex,
@@ -346,10 +350,18 @@ export default {
         console.log(res);
         
         if(res.code='20010'){
-           this.$message({
-          message: '员工信息更新成功',
-          type: 'success'
-        });
+          const loading = this.$loading({
+            lock: true,
+            text: "保存中",
+            spinner: "el-icon-loading",
+            background: "rgba(0, 0, 0, 0.7)",
+          });
+          setTimeout(() => {
+            loading.close();
+            this.reload();
+             this.$parent.fathstaffno();
+            
+          }, 1500);
         }
         else{
            this.$message.error('名字已存在');
@@ -385,6 +397,7 @@ export default {
       self.optiondepart = item.department;
     });
   },
+ 
 };
 </script>
 <style scoped>
