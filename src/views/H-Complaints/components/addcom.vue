@@ -359,7 +359,7 @@ export default {
         let comde = this.comde.map((x) => {
           return x[1];
         });
-      }
+     
 
       let params = {
         event_number: this.comnumber, //业务编号
@@ -383,8 +383,9 @@ export default {
       console.log(params);
       service.AddComponent(params).then((res) => {
         console.log(res);
-        this.$router.go(0);
+        // this.$router.go(0);
       });
+       }
     },
     backss() {
       this.$router.go(0);
@@ -404,7 +405,7 @@ export default {
     },
   },
   created() {
-     let token=localStorage.getItem('token')
+     let token=sessionStorage.getItem('token')
      console.log(token)
     if(token!==null&&token!==''){
     service

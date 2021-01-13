@@ -4,7 +4,6 @@
       <div class="edit-top">
         <el-button type="primary" @click="add">添加权限</el-button>
       </div>
-<<<<<<< HEAD
       <el-table
         :data="tableData"
         style="width: 100%; margin-bottom: 20px"
@@ -49,8 +48,7 @@
               inactive-color="#B9B9B9"
             />
           </template>
-          ></el-table-column
-        >
+        </el-table-column>
         <el-table-column fixed="right" label="操作" width="400">
           <template slot-scope="scope">
             <!-- <el-button @click="handleClick(scope.row)" type="text" size="small"
@@ -68,49 +66,55 @@
           </template>
         </el-table-column>
       </el-table>
-=======
-      <!-- <el-table :data="tableData" row-key="id" border default-expand-all> -->
-      <div class="content">
-        <div class="title">
-          <el-checkbox v-model="checked" label="我的地盘"></el-checkbox>
-        </div>
-        <div class="power">
-          <el-checkbox class="tit" v-model="checked" label="首页桌面插件"></el-checkbox>
-          <el-checkbox-group v-model="checkList">
-            <el-checkbox label="首页桌面插件"></el-checkbox>
-            <el-checkbox label="复选框 B"></el-checkbox>
-            <el-checkbox label="复选框 C"></el-checkbox>
-          </el-checkbox-group>
-        </div>
-        <div class="power">
-          <el-checkbox class="tit" v-model="checked" label="首页桌面插件"></el-checkbox>
-          <el-checkbox-group v-model="checkList">
-            <el-checkbox label="首页桌面插件"></el-checkbox>
-            <el-checkbox label="复选框 B"></el-checkbox>
-            <el-checkbox label="复选框 C"></el-checkbox>
-          </el-checkbox-group>
-        </div>
-        <div class="power">
-          <el-checkbox class="tit" v-model="checked" label="首页桌面插件"></el-checkbox>
-          <el-checkbox-group v-model="checkList">
-            <el-checkbox label="首页桌面插件"></el-checkbox>
-            <el-checkbox label="复选框 B"></el-checkbox>
-            <el-checkbox label="复选框 C"></el-checkbox>
-          </el-checkbox-group>
-        </div>
-      </div>
-
-      <!-- </el-table> -->
->>>>>>> 6c1f2375fb4e5d48eefb7fb5ac2590c95e21ff92
       <div>
-        <el-dialog title="添加权限" :visible.sync="dialogVisible" width="width" :before-close="dialogBeforeClose">
-          <div>
-            <div>
-              <span>权限名：</span>
-              <el-input v-model="name" placeholder="请输入权限名" style="width:70%"></el-input>
-            </div>
-
-          </div>
+        <el-dialog
+          title="添加权限"
+          :visible.sync="dialogVisible"
+          width="width"
+          :before-close="dialogeditright"
+        >
+          <el-form label-width="80px" ref="editForm">
+            <el-form-item prop="staffName" label="上级" width="120">
+              <el-select
+                v-model="selvalue"
+                @change="selchang"
+                placeholder="请选择"
+              >
+                <el-option value="0">作为顶级 </el-option>
+                <template v-for="v in seldata">
+                  <el-option
+                    :key="v.id"
+                    :label="v.title"
+                    :value="v.id"
+                  ></el-option>
+                  <template v-if="v._child">
+                    <el-option
+                      v-for="vv in v._child"
+                      :key="vv.id"
+                      :label="'|——' + vv.title"
+                      :value="vv.id"
+                    >
+                    </el-option>
+                  </template>
+                </template>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="排序" width="100">
+              <el-input v-model="powpx" auto-complete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="状态" width="100">
+              <el-input v-model="powstatu" auto-complete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="标题" width="150">
+              <el-input v-model="powlab" auto-complete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="图标" width="120">
+              <el-input v-model="powicon" auto-complete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="后端接口" width="120">
+              <el-input v-model="powaps" auto-complete="off"></el-input>
+            </el-form-item>
+          </el-form>
           <div slot="footer">
             <el-button @click="dialogVisible = false">取 消</el-button>
             <el-button type="primary" @click="dialog">确 定</el-button>
@@ -179,27 +183,127 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        name: '', //权限名
-        checked: false, //标题
-        checkList: [],
-        dialogVisible: false,
+import service from "@/service/index";
+export default {
+  data() {
+    return {
+      name: "", //权限名
+      dialogVisible: false,
+      dialogedit: false,
+      tableData: [],
+      seldata: [], //权限下拉框
+      selvalue: "",
+      powpx: "",
+      powstatu: "",
+      powlab: "",
+      powicon: "",
+      powaps: "",
+      editseldata: [],
+      editselvalue: 2,
+      editpowpx: "",
+      editpowstatu: "",
+      editpowlab: "",
+      editpowicon: "",
+      editpowaps: "",
+      editid: "",
+    };
+  },
+  created() {
+    service.rulelist().then((res) => {
+      console.log(res);
+      this.tableData = res.data;
+    });
+  },
+  methods: {
+    selchang() {
+      console.log(this.editselvalue);
+    },
+    // 权限确认
+    dialog() {
+      let data = {
+        sort: this.powpx,
+        status: this.powstatu,
+        title: this.powlab,
+        icon: this.powicon,
+        pid: this.selvalue,
+        name: this.powaps,
       };
+      service.savepower(data).then((res) => {
+        //alert(res);
+        console.log(res);
+      });
+      this.dialogVisible = false;
     },
-    methods: {
-      // 添加权限
-      add() {
-        this.dialogVisible = true
-      },
-      dialogBeforeClose() {
-        this.dialogVisible = false
-      },
-      handleClick() {},
+    // 添加权限
+    add() {
+      this.dialogVisible = true;
+      service.addpower().then((res) => {
+        console.log(res);
+        this.seldata = res.data;
+      });
     },
-
-  };
+    // 权限编辑
+    // 编辑
+    handleEdit(id) {
+      this.dialogedit = true;
+      console.log(id);
+      let param = {
+        id: id,
+      };
+      service.getpowid(param).then((res) => {
+        console.log(res.data);
+        this.editseldata = res.data.lists;
+        this.editselvalue = res.data.info.pid;
+        this.editpowpx = res.data.info.sort;
+        this.editpowstatu = res.data.info.status;
+        this.editpowlab = res.data.info.title;
+        this.editpowicon = res.data.info.icon;
+        this.editpowaps = res.data.info.name;
+        this.editid = res.data.info.id;
+      });
+    },
+    // 编辑权限确认
+    editdialog() {
+      let data = {
+        sort: this.editpowpx,
+        status: this.editpowstatu,
+        name: this.editpowaps,
+        icon: this.editpowicon,
+        title: this.editpowlab,
+        pid: this.editselvalue,
+        id: this.editid,
+      };
+      console.log(data);
+      service.editsavepower(data).then((res) => {
+        console.log(res);
+      });
+      this.dialogedit = false;
+    },
+    delpow(id) {
+      console.log(id);
+      let param = {
+        id: id,
+      };
+      service.delpow(param).then((res) => {
+        console.log(res);
+      });
+    },
+    dialogeditright() {
+      this.dialogVisible = false;
+    },
+    dialogBeforeCl() {
+      this.dialogedit = false;
+    },
+    handleClick() {},
+    getRowClass({ rowIndex }) {
+      if (rowIndex == 0) {
+        return "background:#c2c5f6;color:#000";
+      } else {
+        return "";
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>
