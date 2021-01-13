@@ -305,7 +305,7 @@ export default {
       this.addStaff.job_number = res.job_number;
       this.addStaff.name = res.name;
       // this.addStaff.password = res.password;
-      this.addStaff.sex = res.sex;
+      this.addStaff.sex = res.sex.number;
       this.addStaff.email = res.email;
       this.addStaff.phone = res.phone;
       this.addStaff.address = res.address;
