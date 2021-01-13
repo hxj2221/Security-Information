@@ -324,6 +324,8 @@
         </div>
         <!-- 解绑微信 -->
       </el-dialog>
+      <el-button @click="dialogVisible">点击打开</el-button>
+      <change v-show="chan"></change>
     </div>
   </div>
 </template>
@@ -332,11 +334,13 @@
 //import service from "../../util/request";
 import userthre from "../component/userthre";
 import service from "@/service/index";
+import change from "./component/phonechange";
 export default {
-  components: { userthre },
-
+  components: { userthre, change },
+  inject: ["reload"],
   data() {
     return {
+      chan: false,
       pageTitle: "账户管理",
       phone: "",
       email: "",
@@ -384,9 +388,11 @@ export default {
       };
       service.phonechange(data).then((res) => {
         console.log(res);
+        if (res.msg == "身份验证通过!") {
+          this.phonenew = true;
+          this.phoneyz = false;
+        }
       });
-      // this.phonenew = true;
-      // this.phoneyz = false;
     },
     phonebtncode() {
       let data = {
@@ -448,7 +454,17 @@ export default {
 
     //新手机
     phonenewyes() {
-      this.phonenew = false;
+      let data = {
+        phone: this.changephone,
+        pcaptcha: this.changephonecode,
+      };
+      service.phonehb(data).then((res) => {
+        console.log(res);
+        if (res.code == "20010") {
+          this.phonenew = false;
+        }
+        this.reload();
+      });
     },
     phonenewno() {
       this.phonenew = false;

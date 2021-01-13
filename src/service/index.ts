@@ -186,6 +186,10 @@ export default {
   phonechange: async (data: object) => {
     return await service.post(`${baseUrl}api/home/authentication`, data).then(res => res).catch(err => err)
   },
+  //手机号换绑
+  phonehb: async (data: object) => {
+    return await service.post(`${baseUrl}api/home/hs_bind_phone`, data).then(res => res).catch(err => err)
+  },
   //账户管理
   accountman: async () => {
     return await service.get(`${baseUrl}api/home/user_home`).then(res => res).catch(err => err)
