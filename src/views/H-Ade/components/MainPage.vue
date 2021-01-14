@@ -46,7 +46,7 @@
     <el-table class="elTable" :data="tableData">
       <el-table-column prop="id" label="序号">
       </el-table-column>
-      <el-table-column prop="serialNum" label="事件编码">
+      <el-table-column prop="event_num" label="事件编码">
       </el-table-column>
       <el-table-column prop="patient_name" label="患者姓名">
       </el-table-column>
@@ -75,9 +75,9 @@
     <!-- 分页 -->
     <div class="paging">
       <div class="block">
-        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
-          :current-page="currentPage4" :page-sizes="[8, 10, 20]" :page-size="8"
-          layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
+        <el-pagination @size-change="handleSizeChange" @current-change="currentChage"
+          :current-page="currentPage4" :page-sizes="[8, 10,  20]" :page-size="8"
+          layout="total, sizes, prev, pager, next, jumper" :total="pageCount">
         </el-pagination>
       </div>
     </div>
@@ -116,6 +116,7 @@
         details: {}, //查看
         addcon: [], //新增里面的
         currentPage4: 1,//分页
+        pageCount:0,
         eventNum:'',// 事件编码
       };
     },
@@ -165,18 +166,35 @@
         return moment(date).format("YYYY-MM-DD HH:mm:ss");
       },
       // 分页
+      currentChage(current){
+        console.log(current)
+        let params={
+          pageNum:current,
+          pageSize:8
+        }
+        service.AdeList(params).then(res=>{
+          console.log(res)
+          this.tableData=res.data
+        })
+      },
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
       },
-      handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
-      }
+   
     },
     created() {
       // 不良列表
-      service.AdeList().then(res => {
+      let params={
+        pageNum:1,
+        pageSize:8
+      }
+      service.AdeList(params).then(res => {
         // console.log(res)
         this.tableData = res.data 
+      })
+      service.AdeList(8,'').then(res => {
+        // console.log(res)
+        this.pageCount = res.data.length 
       })
       // 下拉框内容
       service.AdeSel().then(res => {
