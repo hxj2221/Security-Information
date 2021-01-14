@@ -194,4 +194,11 @@ export default {
   accountman: async () => {
     return await service.get(`${baseUrl}api/home/user_home`).then(res => res).catch(err => err)
   },
+
+
+
+  // 角色权限
+  rolepowlist: async () => {
+    return await service.get(`${baseUrl}api/part/displayauthgroup`).then(res => res).catch(err => err)
+  },
 }
