@@ -28,17 +28,17 @@
         <el-table :data="tableData">
           <el-table-column prop="id" label="ID" width="180">
           </el-table-column>
-          <el-table-column prop="filename" label="文件名" width="180">
+          <el-table-column prop="file_name" label="文件名" width="180">
           </el-table-column>
-          <el-table-column prop="describe" label="文件描述" width="260">
+          <el-table-column prop="file_describe" label="文件描述" width="260">
           </el-table-column>
-          <el-table-column prop="sizes" label="文件大小" width="180">
+          <el-table-column prop="file_size" label="文件大小" width="180">
           </el-table-column>
-          <el-table-column prop="newdate" label="更新时间" width="180">
+          <el-table-column prop="create_time" label="更新时间" width="180">
           </el-table-column>
-          <el-table-column prop="classify" label="文件分类" width="180">
+          <el-table-column prop="class_id" label="文件分类" width="180">
           </el-table-column>
-          <el-table-column prop="name" label="上传人员" width="180">
+          <el-table-column prop="uid" label="上传人员" width="180">
           </el-table-column>
           <el-table-column label="操作" width="180">
             <template slot-scope="scope">
@@ -65,6 +65,7 @@
 <script>
   import './css/Files.css'
   import AddFiles from './components/AddFiles'
+import service from '@/service/index'
   export default {
     components: {
       AddFiles
@@ -89,89 +90,9 @@
             label: '分类4'
           }, ]
         },
-        tableData: [{
-          id: 'AT20201203001',
-          filename: '调解书模板',
-          describe: '这里是描述...最多300字',
-          sizes: '96.32KB',
-          newdate: '2020-12-02 20:56:37',
-          classify: '分类1',
-          name: '王小虎',
-        }, {
-          id: 'AT20201203001',
-          filename: '第三方调查模板',
-          describe: '这里是描述...最多300字',
-          sizes: '96.32KB',
-          newdate: '2020-12-02 20:56:37',
-          classify: '分类1',
-          name: '王小虎',
-        }, {
-          id: 'AT20201203001',
-          filename: '内部调查模板',
-          describe: '这里是描述...最多300字',
-          sizes: '96.32KB',
-          newdate: '2020-12-02 20:56:37',
-          classify: '分类1',
-          name: '王小虎',
-        }, {
-          id: 'AT20201203001',
-          filename: '上报公安模板',
-          describe: '这里是描述...最多300字',
-          sizes: '96.32KB',
-          newdate: '2020-12-02 20:56:37',
-          classify: '分类1',
-          name: '王小虎',
-        }, {
-          id: 'AT20201203001',
-          filename: '会议记录模板',
-          describe: '这里是描述...最多300字',
-          sizes: '96.32KB',
-          newdate: '2020-12-02 20:56:37',
-          classify: '分类1',
-          name: '王小虎',
-        },{
-          id: 'AT20201203001',
-          filename: '调解书模板',
-          describe: '这里是描述...最多300字',
-          sizes: '96.32KB',
-          newdate: '2020-12-02 20:56:37',
-          classify: '分类1',
-          name: '王小虎',
-        }, {
-          id: 'AT20201203001',
-          filename: '第三方调查模板',
-          describe: '这里是描述...最多300字',
-          sizes: '96.32KB',
-          newdate: '2020-12-02 20:56:37',
-          classify: '分类1',
-          name: '王小虎',
-        }, {
-          id: 'AT20201203001',
-          filename: '内部调查模板',
-          describe: '这里是描述...最多300字',
-          sizes: '96.32KB',
-          newdate: '2020-12-02 20:56:37',
-          classify: '分类1',
-          name: '王小虎',
-        }, {
-          id: 'AT20201203001',
-          filename: '上报公安模板',
-          describe: '这里是描述...最多300字',
-          sizes: '96.32KB',
-          newdate: '2020-12-02 20:56:37',
-          classify: '分类1',
-          name: '王小虎',
-        }, {
-          id: 'AT20201203001',
-          filename: '会议记录模板',
-          describe: '这里是描述...最多300字',
-          sizes: '96.32KB',
-          newdate: '2020-12-02 20:56:37',
-          classify: '分类1',
-          name: '王小虎',
-        }],
-        filesIsShow:true,
-        addIsShow:false
+        tableData: [],
+        filesIsShow:false,
+        addIsShow:true
       };
     },
     methods: {
@@ -192,6 +113,12 @@
         this.filesIsShow=!this.filesIsShow
         this.addIsShow=!this.addIsShow
       },
+    },
+    created(){
+      service.FileList().then(res=>{
+        // console.log(res)
+        this.tableData=res.data
+      })
     },
   }
 </script>

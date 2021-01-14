@@ -1,3 +1,4 @@
+import service from '@/service/index';
 <template>
   <div class="newlyFiles">
     <!-- 头部 -->
@@ -12,19 +13,21 @@
     <div class="newlyContent">
       <div class="TableContent">
         <el-table :data="tableData">
-          <el-table-column prop="id" label="权重">
+          <el-table-column prop="weight" label="权重">
           </el-table-column>
-          <el-table-column prop="filename" label="分类名称" width="190">
+          <el-table-column prop="class_name" label="分类名称" width="190">
           </el-table-column>
-          <el-table-column prop="num" label="文件数量" width="190">
+          <el-table-column prop="file_num" label="文件数量" width="190">
           </el-table-column>
-          <el-table-column prop="newdate" label="更新时间" width="190">
+          <el-table-column prop="update_time" label="更新时间" width="190">
           </el-table-column>
-          <el-table-column prop="state" label="状态" width="190">
-            <el-switch v-model="tableData.value" active-color="#cccccc" inactive-color="#13ce66">
-            </el-switch>
+          <el-table-column prop="status" label="状态" width="190">
+            <template slot-scope="scope">
+              <el-switch v-model="scope.row.status" :active-value="1" :inactive-value="2" active-color="#02538C"
+                inactive-color="#B9B9B9" @change="changeSwitch($event, scope.row)"></el-switch>
+            </template>
           </el-table-column>
-          <el-table-column prop="name" label="修改人员" width="190">
+          <el-table-column prop="uid" label="修改人员" width="190">
           </el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
@@ -56,7 +59,7 @@
           <span class="one_level">一级分类选择“无”</span>
         </el-form-item>
         <el-form-item label="分类标题" required :label-width="formLabelWidth">
-          <el-input style="width:360px" v-model="form.title" placeholder="请输入分类标题" ></el-input>
+          <el-input style="width:360px" v-model="form.title" placeholder="请输入分类标题"></el-input>
         </el-form-item>
         <el-form-item label="分类权重" required :label-width="formLabelWidth">
           <el-input style="width:360px" v-model="form.weight" placeholder="默认0，越大越靠前"></el-input>
@@ -98,9 +101,10 @@
 </template>
 
 <script>
+  import service from '@/service/index'
   export default {
     components: {
-     
+
     },
     props: {},
     data() {
@@ -114,48 +118,8 @@
         },
         formLabelWidth: '120px',
         // 编辑弹框
-        dialogVisible:false,
-        tableData: [{
-          id: ' 5',
-          filename: '调解书模板',
-          num: '96.32KB',
-          newdate: '2020-12-02 20:56:37',
-          classify: '分类1',
-          name: '王小虎',
-          value: true
-        }, {
-          id: ' 0',
-          filename: '第三方调查模板',
-          num: '96.32KB',
-          newdate: '2020-12-02 20:56:37',
-          classify: '分类1',
-          name: '王小虎',
-          value: true
-        }, {
-          id: ' 5',
-          filename: '内部调查模板',
-          num: '96.32KB',
-          newdate: '2020-12-02 20:56:37',
-          classify: '分类1',
-          name: '王小虎',
-          value: true
-        }, {
-          id: ' 0',
-          filename: '上报公安模板',
-          num: '96.32KB',
-          newdate: '2020-12-02 20:56:37',
-          classify: '分类1',
-          name: '王小虎',
-          value: true
-        }, {
-          id: ' 5',
-          filename: '会议记录模板',
-          num: '96.32KB',
-          newdate: '2020-12-02 20:56:37',
-          classify: '分类1',
-          name: '王小虎',
-          value: true
-        }],
+        dialogVisible: false,
+        tableData: [],
       };
     },
     methods: {
@@ -170,9 +134,20 @@
       // 编辑
       handleClick(row) {
         console.log(row);
-        this.dialogVisible=!this.dialogVisible
+        this.dialogVisible = !this.dialogVisible
       },
+      // 状态
+      changeSwitch(val, row) {
+        
+      }
     },
+    created() {
+      // 分类列表
+      service.FileAddList().then(res => {
+        // console.log(res)
+        this.tableData = res.data
+      })
+    }
   }
 </script>
 <style>
