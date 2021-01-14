@@ -238,7 +238,7 @@
         this.$emit("pageDetail")
 
       },
-      // 事件格式化
+      // 时间格式化
       getdate:function(row, column) { 
         var date = row[column.property]; 
      if (date == undefined) { 
