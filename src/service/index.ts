@@ -20,8 +20,12 @@ export default {
     return await service.post(`${baseUrl}api/login/hssmsphone`, params).then(res => res).catch(err => err)
   },
   // 投诉列表
-  ComList: async () => {
-    return await service.get(`${baseUrl}api/tsevent/lists`).then(res => res).catch(err => err)
+  ComList: async (pNum:number,current:number) => {
+    return await service.get(`${baseUrl}api/tsevent/lists`,{params:{pNum,current}}).then(res => res).catch(err => err)
+  },
+  //搜索
+  search: async (pNum:number,current:number,complaint_name:any,ComplaintType:any,state:any,start_time:any,end_time:any) => {
+    return await service.get(`${baseUrl}api/tsevent/lists`,{params:{pNum,current,complaint_name,ComplaintType,state,start_time,end_time}}).then(res => res).catch(err => err)
   },
   // 获取添加投诉列表信息
   AddCom: async () => {
@@ -41,6 +45,10 @@ export default {
   },
   // 投诉退回
   send: async (event_number: any,examine_textone:any) => {
+    return await service.get(`${baseUrl}api/complaintprocess/complaintReturn`,{params:{event_number:event_number,examine_textone:examine_textone}} ).then(res => res).catch(err => err)
+    },
+     // 投诉驳回
+     reject: async (event_number: any,examine_textone:any) => {
     return await service.get(`${baseUrl}api/complaintprocess/complaintReturn`,{params:{event_number:event_number,examine_textone:examine_textone}} ).then(res => res).catch(err => err)
     },
     // 下发科室调查
@@ -95,6 +103,10 @@ export default {
     Hospitalimprovement: async (data: any) => {
         return await service.post(`${baseUrl}api/Complaintprocess/hospitalImprovement`, data ).then(res => res).catch(err => err)
       },  
+       //   医院改进完成
+       ImprovementEnd: async (data: any) => {
+      return await service.post(`${baseUrl}api/Complaintprocess/hospitalImprovementEnd`, data ).then(res => res).catch(err => err)
+    }, 
     //   结束
     end: async (data: any) => {
         return await service.post(`${baseUrl}api/Complaintprocess/eventEnd`, data ).then(res => res).catch(err => err)

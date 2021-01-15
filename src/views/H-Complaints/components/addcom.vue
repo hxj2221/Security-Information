@@ -32,7 +32,7 @@
         <el-row type="flex" class="row-bg" justify="space-around">
           <el-col :span="6"
             ><div class="grid-content bg-purple">
-              <span> 投诉人姓名 </span>
+              <span> 投诉人姓名 <span>*</span></span>
               <el-input v-model="comname" placeholder="请输入投诉人姓名"></el-input>
             </div>
           </el-col>
@@ -51,7 +51,7 @@
           ></el-col>
           <el-col :span="6"
             ><div class="grid-content bg-purple-light">
-              <span> 年龄</span> <br />
+              <span> 年龄<span>*</span></span> <br />
               <el-input
                 placeholder="请输入"
                 v-model="comagenumber"
@@ -72,7 +72,7 @@
         <el-row type="flex" class="row-bg" justify="space-around">
           <el-col :span="6"
             ><div class="grid-content bg-purple">
-              <span> 手机号码 </span>
+              <span> 手机号码 <span>*</span></span>
               <el-input v-model="comphone" placeholder="请输入投诉人手机号码" type="input" maxlength="11" max="11"     
                oninput="value=value.replace(/[^\d]/g,'')"
                onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )"  ></el-input>
@@ -94,15 +94,6 @@
           <el-col :span="6"
             ><div class="grid-content bg-purple-light">
               <span> 投诉科室<span>*</span> </span> <br />
-              <!-- <el-select v-model="comde" placeholder="请选择">
-                <el-option
-                  v-for="item in comdes"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                >
-                </el-option>
-              </el-select> -->
               <el-cascader
                 ref="cascader"
                 :options="comdes"
@@ -122,7 +113,7 @@
         <el-row type="flex" class="row-bg" justify="space-around">
           <el-col :span="6"
             ><div class="grid-content bg-purple">
-              <span> 投诉人与患者关系 </span><br />
+              <span> 投诉人与患者关系 <span>*</span></span><br />
               <el-select v-model="relation" placeholder="请选择">
                 <el-option
                   v-for="item in relationlist"
@@ -357,10 +348,8 @@ export default {
     keepform() {
       if (this.comde !== "" || this.comde !== null) {
         let comde = this.comde.map((x) => {
-          return x[1];
+          return x[0];
         });
-     
-
       let params = {
         event_number: this.comnumber, //业务编号
         event_type: this.comtype, //投诉类型
@@ -383,7 +372,21 @@ export default {
       console.log(params);
       service.AddComponent(params).then((res) => {
         console.log(res);
-        // this.$router.go(0);
+        if(res.code==20010){
+           this.$message({
+            message: res.msg,
+            type: "success",
+            duration: 1000,
+          });
+        }
+        else{
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+        }
+        this.$router.go(0);
       });
        }
     },

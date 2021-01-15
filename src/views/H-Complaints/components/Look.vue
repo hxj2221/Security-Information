@@ -106,6 +106,7 @@
             <!-- 审批节点 -->
            
             <!-- 科室调查 -->
+            <div v-if="lookdata.investigate">
             <div
               class="box-contents"
               v-for="item in lookdata.investigate" :key="item.investigate_number"
@@ -148,11 +149,12 @@
                   >
                   <el-col :span="20">
                     <div class="grid-content bg-purple-light">
-                      <span>{{item.department}}</span>
+                      <span><a v-for="items in item.department" :key="items" style="margin-right:5px;margin-left:10px">{{items}}</a></span>
                     </div></el-col
                   >
                 </el-row>
               </div>
+              <div v-if="item.investigate">
               <div
               v-for="items in item.investigate" :key="items.department.title"
               >
@@ -191,7 +193,8 @@
                     >
                     <el-col :span="20">
                       <div class="grid-content bg-purple-light">
-                        <span class="value">{{items.investigator_ids}}</span>
+                        <span class="value" v-if="items.investigator_ids">{{items.investigator_ids}}</span>
+                        <span class="value" v-else>无</span>
                       </div></el-col
                     >
                   </el-row>
@@ -203,7 +206,8 @@
                     >
                     <el-col :span="20">
                       <div class="grid-content bg-purple-light">
-                        <span class="value">{{items.feedback_time}}</span>
+                        <span class="value" v-if="items.feedback_time">{{items.feedback_time}}</span>
+                        <span class="value" v-else style="color:red">未反馈</span>
                       </div></el-col
                     >
                   </el-row>
@@ -215,7 +219,8 @@
                     >
                     <el-col :span="20">
                       <div class="grid-content bg-purple-light">
-                        <span class="value">{{items.diagnose_feedback}}</span>
+                        <span class="value" v-if="items.diagnose_feedback">{{items.diagnose_feedback}}</span>
+                        <span class="value" v-else>无</span>
                       </div></el-col
                     >
                   </el-row>
@@ -227,12 +232,12 @@
                     >
                     <el-col :span="20">
                       <div class="grid-content bg-purple-light">
-                        <span class="value">{{items.event_reply}}</span>
-                      </div></el-col
-                    >
+                        <span class="value" v-if="items.event_reply">{{items.event_reply}}</span>
+                        <span class="value" v-else>无</span>
+                      </div></el-col>
                   </el-row>
                   <div style="border-bottom: 0.5px solid #797979; width: 100%"></div>
-                  <div class="file clearfix" v-show="items.enclosure.lenght!==0" >
+                  <div class="file clearfix" v-if="items.enclosure" >
                     <div v-for="itemsss in items.enclosure" :key="itemsss.file_name">
                       <span class="filename">{{itemsss.file_name}}</span>
                       <span class="filedetaile">查看</span>
@@ -240,12 +245,14 @@
                   </div>
                 </div>
               </div>
+                </div>
+                <div v-if="item.examine.length!==0&&item.examine!==''&&item.examine!==null">
                <div class="box-Information" v-for="itemssss in item.examine" :key="itemssss.department.title">
               <div class="box-top">
                 <el-row type="flex" class="row-bg" justify="space-between">
                   <el-col :span="3" :push="2"
                     ><div class="grid-content bg-purple">
-                      <span><b>科室自查</b></span>
+                      <span><b>{{itemssss.event_state.title}}</b></span>
                     </div></el-col
                   >
                   <el-col :span="3"
@@ -332,11 +339,19 @@
                   >
                 </el-row>
                 <div style="border-bottom: 0.5px solid #797979; width: 100%"></div>
+                  <div class="file clearfix" v-if="itemssss.enclosure" >
+                    <div v-for="itemsssss in itemssss.enclosure" :key="itemsssss.file_name">
+                      <span class="filename">{{itemsssss.file_name}}</span>
+                      <span class="filedetaile">查看</span>
+                    </div>
+                  </div>
                
               </div>
             </div>
+            </div>
               <hr />
             </div>
+             </div>
             <!-- 投诉人信息 -->
             <div class="box-Information">
               <div class="box-top">
@@ -396,7 +411,8 @@
                   >
                   <el-col :span="4"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">{{lookdata.inpatientrelation.title}}</span>
+                      <span class="value" v-if="lookdata.inpatientrelation!==null&&lookdata.inpatientrelation!==''">{{lookdata.inpatientrelation.title}}</span>
+                      <span  class="value" v-else>无</span>
                     </div></el-col
                   >
                   <el-col :span="4"
@@ -405,7 +421,21 @@
                   >
                   <el-col :span="4"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">{{lookdata.reply_time}}日</span>
+                      <span class="value" v-if="lookdata.reply_time!==null&&lookdata.reply_time!==''">{{lookdata.reply_time}}日</span>
+                       <span class="value" v-else-if="lookdata.reply_time==null||lookdata.reply_time==''">{{lookdata.reply_time}}日</span>
+                    </div></el-col
+                  >
+                </el-row>
+                 <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">经办人信息：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value" v-if="lookdata.handle_name">{{lookdata.handle_name}}/{{lookdata.handle_phone}}</span>
+                        <span class="value" v-else>无</span>
                     </div></el-col
                   >
                 </el-row>
@@ -429,7 +459,8 @@
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">{{lookdata.event_type}}</span>
+                      <span class="value" v-if="lookdata.event_type">{{lookdata.event_type}}</span>
+                        <span class="value" v-else>无</span>
                     </div></el-col
                   >
                 </el-row>
@@ -441,11 +472,9 @@
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value"
-                        >{{lookdata.cause}}</span
-                      >
-                    </div></el-col
-                  >
+                      <span class="value" v-if="lookdata.cause">{{lookdata.cause}}</span>
+                      <span class="value" v-else>无</span>
+                    </div></el-col>
                 </el-row>
                 <div
                   style="
@@ -458,7 +487,8 @@
               <hr />
             </div> 
             <!-- 患者信息 -->
-            <div class="box-Information" v-for="item in lookdata.patient" :key="item.name"> 
+            <div v-if="lookdata.patient!==''&&lookdata.patient!==null&&lookdata.patient.length!==0" >
+            <div class="box-Information" v-for="item in lookdata.patient" :key="item.age"> 
               <div class="box-top">
                 <el-row type="flex" class="row-bg" justify="space-between">
                   <el-col :span="3" :push="2"
@@ -576,6 +606,7 @@
                 ></div>
               </div>
             </div>
+            </div>
           </div>
         </div>
       </slot>
@@ -586,185 +617,12 @@
 import service from "@/service/index";
 export default {
   props:{
-    lookdata: {}
+    lookdata:''
   },
   components: {},
   data() {
     return {
-      data: [
-        {
-          GetLoop: [
-            {
-              Participating: [
-                {
-                  D_Names: "科室一、科室四",
-                  Num: "第1次科室调查",
-                  Time: "2020-12-29 00:00:00",
-                  SurveyProgress: [
-                    [
-                      {
-                        D_Name: "科室一",
-                        Department_Head: "李四/12345678921",
-                        StaffInvolved: "无",
-                        EndTime: "2020-01-01 00:00:00",
-                        I_After: "无",
-                        I_Reply: "无",
-                        E_Name: [
-                          {
-                            E_Number: "55555",
-                            E_Name: "附件五",
-                          },
-                          {
-                            E_Number: "666666",
-                            E_Name: "附件六",
-                          },
-                          {
-                            E_Number: "55555",
-                            E_Name: "附件五",
-                          },
-                          {
-                            E_Number: "55555",
-                            E_Name: "附件五",
-                          },
-                          {
-                            E_Number: "55555",
-                            E_Name: "附件五",
-                          },
-                        ],
-                      },
-                    ],
-                    [
-                      {
-                        D_Name: "科室四",
-                        Department_Head: "李四/1248787821",
-                        StaffInvolved: "无",
-                        EndTime: "2020-01-01 00:00:00",
-                        I_After: "1111",
-                        I_Reply: "1111",
-                        E_Name: [
-                          {
-                            E_Number: "55555",
-                            E_Name: "附件五",
-                          },
-                          {
-                            E_Number: "666666",
-                            E_Name: "附件六",
-                          },
-                          {
-                            E_Number: "55555",
-                            E_Name: "附件五",
-                          },
-                        ],
-                      },
-                    ],
-                  ],
-                },
-              ],
-              ApprovalDepartment: [
-                {
-                  Time: "2020-12-31 00:00:00",
-                  Department: "医务处",
-                  Department_Head: "王五/12345678921",
-                  UpdateState: "无→345",
-                  D_Name: "科室一、科室四",
-                  Complaint_Type: "456",
-                  Duty: "无",
-                  PersonLiable: "张三/科室一",
-                  CCDepartment: "无",
-                  A_Opinion: "审批意见意见意见意见",
-                  E_Name: [
-                    {
-                      E_Number: "55555",
-                      E_Name: "附件五",
-                    },
-                    {
-                      E_Number: "666666",
-                      E_Name: "附件六",
-                    },
-                    {
-                      E_Number: "55555",
-                      E_Name: "附件五",
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              Participating: [
-                {
-                  D_Names: "科室五",
-                  Num: "第2次科室调查",
-                  Time: "2020-12-29 00:00:00",
-                  SurveyProgress: [
-                    [
-                      {
-                        D_Name: "科室五",
-                        Department_Head: "张三/12345678921",
-                        StaffInvolved: "无",
-                        EndTime: "2020-01-01 00:00:00",
-                        I_After: "4444",
-                        I_Reply: "4444",
-                        E_Name: [
-                          {
-                            E_Number: "55555",
-                            E_Name: "附件五",
-                          },
-                          {
-                            E_Number: "666666",
-                            E_Name: "附件六",
-                          },
-                          {
-                            E_Number: "55555",
-                            E_Name: "附件五",
-                          },
-                        ],
-                      },
-                    ],
-                  ],
-                },
-              ],
-              ApprovalDepartment: [],
-            },
-          ],
-          BasicInformation: [
-            {
-              H_Name: "兰州大学第二医院",
-              D_I_Number: "YY12143254376587",
-              Complaint_Time: "2020-12-31",
-              Incident_Time: "2020-12-31",
-              Dispute_State: "纠纷",
-              Event_State: "科室自查",
-            },
-          ],
-          ComplaintsInformation: [
-            {
-              C_I_Name: "投诉人一号",
-              C_I_Gender: 0,
-              C_I_Age: 18,
-              Complaint_Mode: "345",
-              D_M_Name: "345",
-              Reply_Time: 3,
-              D_Name: "科室二、科室三",
-              Complaint_Type: "456",
-              Complain_Reason: "原因",
-            },
-          ],
-          PatientInformation: [
-            {
-              P_I_Name: "患者一号",
-              P_I_Gender: 0,
-              P_I_Age: 18,
-              Insurance_Type: 0,
-              P_I_Phone: 13445678945,
-              Hz_Diagnosis_Time: "2020-01-01 00:00:00",
-              Inpatient_Area: "病区",
-              Ward_Number: "病房",
-              Hz_Outpatient_Diagnosis: "诊断",
-              P_I_Medical_Card: "123465",
-            },
-          ],
-        },
-      ],
+     
     };
   },
   methods: {},
