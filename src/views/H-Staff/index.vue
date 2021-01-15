@@ -46,7 +46,7 @@
           </el-table-column>
           <el-table-column prop="auth_grouap[0].title" label="角色">
           </el-table-column>
-          <el-table-column prop="name" label="创建人员"></el-table-column>
+          <el-table-column prop="user[0].name" label="创建人员"></el-table-column>
 
           <el-table-column
             prop="create_time"
@@ -126,6 +126,7 @@ export default {
     inject: ["reload"],
   data() {
     return {
+      all:{},
       add: false,
       edit: false,
       currentPage: 1,
@@ -231,6 +232,14 @@ export default {
         } else {
           this.childedit.sex = "2";
         }
+      });
+       service.getrole().then((res) => {
+        console.log(res)
+      this.all=res.data
+         this.bus.$emit("ReceiveMessage", this.all)
+        // this.$parent.fathpowadd();
+         
+
       });
     },
     //删除：

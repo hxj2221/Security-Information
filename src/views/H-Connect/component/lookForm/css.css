@@ -31,22 +31,18 @@
 }
 
 .lookForm_top_content {
-    padding: 10px 20px
+    padding: 10px 20px;
 }
-
-.lookForm_top_content>.el-row>.el-col>p {
-    font-size: 14px;
-    display: inline-block;
-    margin: 10px 0;
+.lookForm_top_content>.el-form .el-input>.el-input__inner{
+    border: none;
 }
-
-.lookForm_top_content>.el-row>.el-col {
-    text-align: left;
+.lookForm_top_content>.el-form>.el-row{
+    overflow: hidden;
 }
-.lookForm_top_content>.el-row>.el-col:last-child{
-    text-align: right;
+.lookForm_top_content>.el-form>.el-row>.el-col:last-child{
+    /* background-color: skyblue; */
+    float: right;
 }
-
 
 .lookForm_all hr {
     border: none;

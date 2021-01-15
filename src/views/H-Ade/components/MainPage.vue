@@ -129,15 +129,14 @@
       },
       // 查看
       handleClick(row, index) {
-        // console.log(index.id)
         let params = {
           id: index.id
         }
         service.badSee(params).then(res => {
-          // console.log(res)
+          console.log(res)
           if (res.code == 20010) {
             this.$emit('pageDetail')
-            this.details = res.data
+            this.details = res
             this.bus.$emit('detail', this.details)
           }
         })
@@ -171,7 +170,7 @@
           degree_weight_id:this.search.degree_weight_id
         }
         service.AdeList(params).then(res=>{
-          console.log(res)
+          // console.log(res)
           this.tableData=res.data
         })
       },
@@ -181,9 +180,9 @@
           pageSize:this.pages,
           pageNum:this.pageNum
         }
-        console.log(params)
+        // console.log(params)
         service.AdeList(params).then(res=>{
-          console.log(res)
+          // console.log(res)
           this.tableData=res.data
         })
         // console.log(`每页 ${val} 条`);
@@ -196,14 +195,15 @@
         pageNum:1,
         pageSize:this.pageSize
       }
-      console.log(params)
+      // console.log(params)
       service.AdeList(params).then(res => {
         // console.log(res)
         this.tableData = res.data 
       })
       // 总数
+     
       service.AdeList(this.pageSize,'').then(res => {
-        console.log(res)
+        // console.log(res)
         this.pageCount = res.data.length 
       })
       // 下拉框内容

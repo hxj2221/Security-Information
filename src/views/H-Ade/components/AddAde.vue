@@ -30,9 +30,9 @@ import service from '@/service/index';
           </el-form-item>
           <el-form-item label="性别" required>
             <el-select v-model="addAde.sex" placeholder="请选择">
-              <el-option label="男" value="1"></el-option>
-              <el-option label="女" value="2"></el-option>
-              <el-option label="未知" value="3"></el-option>
+              <el-option label="男" value="0"></el-option>
+              <el-option label="女" value="1"></el-option>
+              <el-option label="未知" value="2"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="年龄">
@@ -224,7 +224,7 @@ import qs from 'qs'
         let params=this.addAde
         console.log(params)
         service.badAdd(params).then(res=>{
-          // console.log(res)
+          console.log(res)
           if(res.code==20010){
             this.$emit('pageAdd')
           }
@@ -242,12 +242,6 @@ import qs from 'qs'
 
     },
     created(){
-      // 事件编号
-      let that = this;
-      this.bus.$on('eventNum', function (item){
-        // console.log(item)
-        that.addAde.event_num=item
-      })
       // 下拉框
       service.AdeSel().then(res=>{
         // console.log(res)
