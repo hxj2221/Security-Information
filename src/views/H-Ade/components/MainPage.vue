@@ -76,7 +76,7 @@
     <div class="paging">
       <div class="block">
         <el-pagination @size-change="handleSizeChange" @current-change="currentChage"
-          :current-page="currentPage4" :page-sizes="[8, 10,  20]" :page-size="8"
+          :current-page="currentPage4" :page-sizes="[8,10,20]" :page-size="100"
           layout="total, sizes, prev, pager, next, jumper" :total="pageCount">
         </el-pagination>
       </div>
@@ -116,6 +116,8 @@
         details: {}, //查看
         addcon: [], //新增里面的
         currentPage4: 1,//分页
+        pages:'',
+        pageSize:8,
         pageCount:0,
         eventNum:'',// 事件编码
       };
@@ -123,15 +125,7 @@
     methods: {
       // 新增
       Add() {
-        // service.badNum().then(res=>{
-        //   console.log(res)
-        //   if(res.code==20010){
-            this.$emit('pageAdd')
-        //     this.eventNum=res.event_num
-        //     this.bus.$emit('eventNum', this.eventNum)
-        //   }
-        // })
-        
+        this.$emit('pageAdd')
       },
       // 查看
       handleClick(row, index) {
@@ -167,10 +161,14 @@
       },
       // 分页
       currentChage(current){
-        console.log(current)
         let params={
           pageNum:current,
-          pageSize:8
+          pageSize:this.pageSize,
+          patient_name: this.search.patient_name,
+          starttime: this.search.starttime,
+          endtime: this.search.endtime,
+          occur_scene: this.search.occur_scene,
+          degree_weight_id:this.search.degree_weight_id
         }
         service.AdeList(params).then(res=>{
           console.log(res)
@@ -178,7 +176,17 @@
         })
       },
       handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
+        this.pages=val
+        let params={
+          pageSize:this.pages,
+          pageNum:this.pageNum
+        }
+        console.log(params)
+        service.AdeList(params).then(res=>{
+          console.log(res)
+          this.tableData=res.data
+        })
+        // console.log(`每页 ${val} 条`);
       },
    
     },
@@ -186,14 +194,16 @@
       // 不良列表
       let params={
         pageNum:1,
-        pageSize:8
+        pageSize:this.pageSize
       }
+      console.log(params)
       service.AdeList(params).then(res => {
         // console.log(res)
         this.tableData = res.data 
       })
-      service.AdeList(8,'').then(res => {
-        // console.log(res)
+      // 总数
+      service.AdeList(this.pageSize,'').then(res => {
+        console.log(res)
         this.pageCount = res.data.length 
       })
       // 下拉框内容

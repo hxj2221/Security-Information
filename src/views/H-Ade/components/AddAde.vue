@@ -7,7 +7,7 @@ import service from '@/service/index';
       <el-form class="form_con" ref="addAde" :model="addAde">
         <div class="info">
           <el-form-item label="业务编号">
-            <el-input v-model="addAde.event_num" :disabled="true" autocomplete="off"></el-input>
+            <el-input v-model="addAde.event_num" placeholder="保存后自动生成" :disabled="true" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="不良类型" required>
               <el-select v-model="addAde.event_type" >   
@@ -247,15 +247,16 @@ import qs from 'qs'
       this.bus.$on('eventNum', function (item){
         // console.log(item)
         that.addAde.event_num=item
-      }),
+      })
       // 下拉框
       service.AdeSel().then(res=>{
+        // console.log(res)
         this.options=res.choice_type
         this.options1=res.address
         this.options4=res.degree_weight
         this.department=res.department
       })
-    },
+    }
   }
 </script>
 <style>
