@@ -40,76 +40,76 @@ export default {
     return await service.get(`${baseUrl}api/tsevent/issue`, { params: { event_number: event_number } }).then(res => res).catch(err => err)
   },
   // 投诉退回
-  send: async (event_number: any,examine_textone:any) => {
-    return await service.get(`${baseUrl}api/complaintprocess/complaintReturn`,{params:{event_number:event_number,examine_textone:examine_textone}} ).then(res => res).catch(err => err)
-    },
-    // 下发科室调查
-    Issuedepartment:  async (data: any) => {
-        return await service.post(`${baseUrl}api/Complaintprocess/distributionDepartment`, data ).then(res => res).catch(err => err)
-      },
-    //   科室提交
-    departmentsubmit:  async (data: any) => {
-        return await service.post(`${baseUrl}api/Complaintprocess/departmentSurveySubmission`, data ).then(res => res).catch(err => err)
-      },
-    //   院内讨论
-    discussion: async (data: any) => {
-        return await service.post(`${baseUrl}api/Complaintprocess/hospitalDiscussion`, data ).then(res => res).catch(err => err)
-      },
-    //   医患沟通
-    communicate:async (data: any) => {
-        return await service.post(`${baseUrl}api/Complaintprocess/doctorPatientCommunication`, data ).then(res => res).catch(err => err)
-      },
-    //人民调解
-    mediate:async (data: any) => {
-        return await service.post(`${baseUrl}api/Complaintprocess/peoplesMediation`, data ).then(res => res).catch(err => err)
-      },  
-    // 责任鉴定
-    appraisal:async (data: any) => {
-        return await service.post(`${baseUrl}api/Complaintprocess/responsibilityAppraisal`, data ).then(res => res).catch(err => err)
-      },  
-    //患方推迟
-    delay: async (data: any) => {
-        return await service.post(`${baseUrl}api/Complaintprocess/PatientsDelay`, data ).then(res => res).catch(err => err)
-      },  
-    //   中止调解 
-    suspension: async (data: any) => {
-        return await service.post(`${baseUrl}api/Complaintprocess/suspensionOfRegulation`, data ).then(res => res).catch(err => err)
-      },  
-    //   终止调解
-    termination: async (data: any) => {
-        return await service.post(`${baseUrl}api/Complaintprocess/terminationOfRegulation`, data ).then(res => res).catch(err => err)
-      },  
-    // 司法诉讼  
-    litigation: async (data: any) => {
-        return await service.post(`${baseUrl}api/Complaintprocess/judicialLitigation`, data ).then(res => res).catch(err => err)
-      },  
-    //   下发改进科室
-    ImproveDepartment: async (data: any) => {
-        return await service.post(`${baseUrl}api/Complaintprocess/departmentImprovement`, data ).then(res => res).catch(err => err)
-      },  
-    //   科室改进完成
-    ImproveDepartmentsubmission: async (data: any) => {
-        return await service.post(`${baseUrl}api/Complaintprocess/departmentImprovementSubmission`, data ).then(res => res).catch(err => err)
-      },  
-    //   医院改进
-    Hospitalimprovement: async (data: any) => {
-        return await service.post(`${baseUrl}api/Complaintprocess/hospitalImprovement`, data ).then(res => res).catch(err => err)
-      },  
-    //   结束
-    end: async (data: any) => {
-        return await service.post(`${baseUrl}api/Complaintprocess/eventEnd`, data ).then(res => res).catch(err => err)
-      },  
-    //   上传附件
-    uploadfiles: async (data: any) => {
-        return await service.post(`${baseUrl}api/Complaintprocess/event_uploadfiles`, data ).then(res => res).catch(err => err)
-      }, 
+  send: async (event_number: any, examine_textone: any) => {
+    return await service.get(`${baseUrl}api/complaintprocess/complaintReturn`, { params: { event_number: event_number, examine_textone: examine_textone } }).then(res => res).catch(err => err)
+  },
+  // 下发科室调查
+  Issuedepartment: async (data: any) => {
+    return await service.post(`${baseUrl}api/Complaintprocess/distributionDepartment`, data).then(res => res).catch(err => err)
+  },
+  //   科室提交
+  departmentsubmit: async (data: any) => {
+    return await service.post(`${baseUrl}api/Complaintprocess/departmentSurveySubmission`, data).then(res => res).catch(err => err)
+  },
+  //   院内讨论
+  discussion: async (data: any) => {
+    return await service.post(`${baseUrl}api/Complaintprocess/hospitalDiscussion`, data).then(res => res).catch(err => err)
+  },
+  //   医患沟通
+  communicate: async (data: any) => {
+    return await service.post(`${baseUrl}api/Complaintprocess/doctorPatientCommunication`, data).then(res => res).catch(err => err)
+  },
+  //人民调解
+  mediate: async (data: any) => {
+    return await service.post(`${baseUrl}api/Complaintprocess/peoplesMediation`, data).then(res => res).catch(err => err)
+  },
+  // 责任鉴定
+  appraisal: async (data: any) => {
+    return await service.post(`${baseUrl}api/Complaintprocess/responsibilityAppraisal`, data).then(res => res).catch(err => err)
+  },
+  //患方推迟
+  delay: async (data: any) => {
+    return await service.post(`${baseUrl}api/Complaintprocess/PatientsDelay`, data).then(res => res).catch(err => err)
+  },
+  //   中止调解 
+  suspension: async (data: any) => {
+    return await service.post(`${baseUrl}api/Complaintprocess/suspensionOfRegulation`, data).then(res => res).catch(err => err)
+  },
+  //   终止调解
+  termination: async (data: any) => {
+    return await service.post(`${baseUrl}api/Complaintprocess/terminationOfRegulation`, data).then(res => res).catch(err => err)
+  },
+  // 司法诉讼  
+  litigation: async (data: any) => {
+    return await service.post(`${baseUrl}api/Complaintprocess/judicialLitigation`, data).then(res => res).catch(err => err)
+  },
+  //   下发改进科室
+  ImproveDepartment: async (data: any) => {
+    return await service.post(`${baseUrl}api/Complaintprocess/departmentImprovement`, data).then(res => res).catch(err => err)
+  },
+  //   科室改进完成
+  ImproveDepartmentsubmission: async (data: any) => {
+    return await service.post(`${baseUrl}api/Complaintprocess/departmentImprovementSubmission`, data).then(res => res).catch(err => err)
+  },
+  //   医院改进
+  Hospitalimprovement: async (data: any) => {
+    return await service.post(`${baseUrl}api/Complaintprocess/hospitalImprovement`, data).then(res => res).catch(err => err)
+  },
+  //   结束
+  end: async (data: any) => {
+    return await service.post(`${baseUrl}api/Complaintprocess/eventEnd`, data).then(res => res).catch(err => err)
+  },
+  //   上传附件
+  uploadfiles: async (data: any) => {
+    return await service.post(`${baseUrl}api/Complaintprocess/event_uploadfiles`, data).then(res => res).catch(err => err)
+  },
   // 不良事件列表
   AdeList: async (params:any) => {
     return await service.get(`${baseUrl}api/bad/lists`,{params}).then(res => res).catch(err => err)
   },
   // 不良检索
-  AdeSearch: async (params:any) => {
-    return await service.get(`${baseUrl}api/bad/lists`,{params}).then(res => res).catch(err => err)
+  AdeSearch: async (params: any) => {
+    return await service.get(`${baseUrl}api/bad/lists`, { params }).then(res => res).catch(err => err)
   },
   // 事件编号
   badNum: async () => {
@@ -270,6 +270,48 @@ export default {
   rolepowlist: async () => {
     return await service.get(`${baseUrl}api/part/displayauthgroup`).then(res => res).catch(err => err)
   },
+<<<<<<< HEAD
+
+  // 文件库新增分类list
+  doclist: async () => {
+    return await service.get(`${baseUrl}api/fileclass/lists`).then(res => res).catch(err => err)
+  },
+  // 文件库新增分类treelist
+  docaddtree: async () => {
+    return await service.get(`${baseUrl}user/Fileclass/classtree`).then(res => res).catch(err => err)
+  },
+  // 文件库新增分类tree
+  docadd: async (data: object) => {
+    return await service.post(`${baseUrl}api/fileclass/addclass`, data).then(res => res).catch(err => err)
+  },
+  // 文件库更改状态
+  docstatu: async (data: object) => {
+    return await service.post(`${baseUrl}api/fileclass/editstatus`, data).then(res => res).catch(err => err)
+  },
+  // 文件库del
+  docdel: async (data: object) => {
+    return await service.post(`${baseUrl}api/fileclass/del`, data).then(res => res).catch(err => err)
+  },
+  // 文件库edit
+  docedit: async (params: any) => {
+    return await service.get(`${baseUrl}api/fileclass/editclass`, { params }).then(res => res).catch(err => err)
+  },
+  // 文件库editsave
+  doceditsave: async (data: object) => {
+    return await service.post(`${baseUrl}api/fileclass/editclass`, data).then(res => res).catch(err => err)
+  },
+  // 文件库文件list
+  filelist: async () => {
+    return await service.get(`${baseUrl}api/file/lists`).then(res => res).catch(err => err)
+  },
+  // 文件库文件分类
+  filetree: async () => {
+    return await service.get(`${baseUrl}api/file/classtree`).then(res => res).catch(err => err)
+  },
+  // 文件库文件上传
+  fileupload: async (data: object) => {
+    return await service.post(`${baseUrl}api/file/addfile`, data).then(res => res).catch(err => err)
+=======
   // 文件库
   // 文件列表
   FileList: async () => {
@@ -282,5 +324,6 @@ export default {
   // 工作台
   dashboard: async () => {
     return await service.get(`${baseUrl}api/home/Lz_workbench`).then(res => res).catch(err => err)
+>>>>>>> 8aa1a27aaa5d9e934f8676fcd3b129cca062cd23
   },
 }
