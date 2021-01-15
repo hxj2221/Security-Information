@@ -44,7 +44,7 @@
     </div>
     <!-- 内容 -->
     <el-table class="elTable" :data="tableData">
-      <el-table-column prop="id" label="序号">
+      <el-table-column type="index" label="序号">
       </el-table-column>
       <el-table-column prop="event_num" label="事件编码">
       </el-table-column>
@@ -56,13 +56,13 @@
       </el-table-column>
       <el-table-column prop="occur_time" :formatter="getdate" label="事发日期" width="150">
       </el-table-column>
-      <el-table-column prop="occur_scene" label="发生场所">
+      <el-table-column prop="department.title" label="发生场所">
       </el-table-column>
-      <el-table-column prop="degree_weight_id" label="轻重程度" :show-overflow-tooltip='true'>
+      <el-table-column prop="degreeweight.title" label="轻重程度" :show-overflow-tooltip='true'>
       </el-table-column>
       <el-table-column prop="create_time" label="上报时间" width="150">
       </el-table-column>
-      <el-table-column prop="department_id" label="患者科室">
+      <el-table-column prop="department.title" label="患者科室">
       </el-table-column>
       <el-table-column prop="create_uid" label="上报人">
       </el-table-column>
@@ -136,17 +136,26 @@
           console.log(res)
           if (res.code == 20010) {
             this.$emit('pageDetail')
-            this.details = res
+            this.details = res.data
             this.bus.$emit('detail', this.details)
           }
         })
       },
       // 搜索事件
       screen() {
-        let params=this.search
+        let params={
+          pageNum:8,
+          pageSize:this.pageSize,
+          patient_name: this.search.patient_name,
+          starttime: this.search.starttime,
+          endtime: this.search.endtime,
+          occur_scene: this.search.occur_scene,
+          degree_weight_id:this.search.degree_weight_id
+        }
         service.AdeSearch(params).then(res=>{
           // console.log(res)
           this.tableData=res.data
+          this.pageCount=res.data.length
         })
 
       },
@@ -197,14 +206,13 @@
       }
       // console.log(params)
       service.AdeList(params).then(res => {
-        // console.log(res)
+        console.log(res)
         this.tableData = res.data 
+        this.pageCount=res.data.length//总数量
       })
-      // 总数
-     
-      service.AdeList(this.pageSize,'').then(res => {
-        // console.log(res)
-        this.pageCount = res.data.length 
+      service.AdeList(8,'').then(res => {
+        console.log(res)
+        this.pageCount=res.data.length//总数量
       })
       // 下拉框内容
       service.AdeSel().then(res => {
@@ -212,7 +220,7 @@
         this.options = res.address
         this.options1 = res.degree_weight
       })
-    },
+    }
   }
 </script>
 <style>

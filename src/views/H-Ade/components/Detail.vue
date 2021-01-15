@@ -54,7 +54,7 @@
             <p class="tit">性别/年龄</p>
           </th>
           <td>
-            <p class="con">{{sex}}/{{age}}</p>
+            <p class="con">{{sex}}/{{age}}{{specific_age}}</p>
           </td>
           <th>
             <p class="tit">住院号</p>
@@ -216,6 +216,7 @@
         patient_name: '',
         sex: '',
         age: '',
+        specific_age:'',
         event_describe: '',
         diagnosis_process: '',
         patient_situation: '',
@@ -281,6 +282,7 @@
         that.patient_name = item.patient_name;
         that.sex = item.sex;
         that.age = item.age;
+        that.specific_age=item.specific_age
         that.event_describe = item.event_describe;
         that.diagnosis_process = item.diagnosis_process;
         that.patient_situation = item.patient_situation;
@@ -294,8 +296,8 @@
         that.admission_id = item.admission_id;
         that.create_time = item.create_time;
         that.occur_time = item.occur_time;
-        that.occur_scene=item.occur_scene;
-        that.event_type=item.event_type;
+        that.occur_scene=item.department.title;
+        that.event_type=item.eventtype.title;
         that.create_uid=item.create_uid
       })
     }
