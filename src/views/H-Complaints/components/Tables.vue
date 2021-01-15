@@ -1,5 +1,50 @@
 <template>
   <div>
+      <div class="Complaints-screen clearfix">
+        <el-form ref="form" label-width="80px">
+          <el-form-item label="投诉人">
+            <el-input v-model="complaintname" placeholder="请输入投诉人姓名" type="input" :max="10" :maxlength="10" clearable></el-input>
+          </el-form-item>
+          <el-form-item label="投诉方式">
+            <el-select v-model="complainttype" placeholder="请选择" clearable>
+              <el-option
+                v-for="item in options"
+                :key="item.id"
+                :label="item.title"
+                :value="item.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="事件状态">
+            <el-select v-model="complaintstatus" placeholder="请选择" clearable>
+              <el-option
+                v-for="item in option"
+                :key="item.state_val"
+                :label="item.title"
+                :value="item.state_val"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="投诉日期">
+            <el-date-picker
+            style="width:200%"
+              v-model="complaintsate"
+              :picker-options="pickerOptions"
+              type="daterange"
+              range-separator="-"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
+            >
+            </el-date-picker>
+          </el-form-item>
+        </el-form>
+        <el-button
+          type="primary"
+          icon="el-icon-search"
+          class="search"
+          @click="search"
+        ></el-button>
+      </div>
     <div class="Complaints-content">
       <el-table
         :data="tableData"
@@ -15,7 +60,7 @@
         <el-table-column prop="department[0].title" label="投诉科室"> </el-table-column>
         <el-table-column prop="complaint_type.title" label="投诉方式"> </el-table-column>
         <el-table-column prop="create_time" label="投诉时间"> </el-table-column>
-        <el-table-column prop="pass_department" label="流转部门"> </el-table-column>
+        <el-table-column prop="pass_names" label="流转部门"> </el-table-column>
         <el-table-column prop="state.title" label="事件状态"> </el-table-column>
         <slot name="column">
           <el-table-column fixed="right" label="操作" width="150%">
@@ -32,7 +77,7 @@
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page="Pagess"
+        :current-page="currentPage4"
         :page-sizes="numberlist"
         :page-size="100"
         layout="total, sizes, prev, pager, next, jumper"
@@ -50,49 +95,219 @@ export default {
 
   data() {
     return {
+      options:[
+        {
+          value:"1",
+          label:"2"
+        }
+      ],
+       option:[
+        {
+          value:"1",
+          label:"2"
+        }
+      ],
+        pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now();
+        },
+      },
+       complaintname: "",
+      complainttype: "",
+      complaintstatus: "",
+      complaintsate: "",
       tableData: [],
       numberlist: [8, 10, 20],
-      Pagess: 1,
+      currentPage4: 1,
       total: 100,
       number: 8,
     };
   },
 
   methods: {
-    handleSizeChange(val) {
-      this.number = val;
-      service.ComList(this.number, this.Pagess).then((res) => {
+    // 查询
+    search(){
+      console.log(this.number, this.currentPage4,this.complaintname,this.complainttype,this.complaintstatus,this.complaintsate)
+      if((this.complaintsate!==''&&this.complaintsate!==null)||this.complaintname!==''||this.complainttype!==''||this.complaintstatus!==''){
+      // 将标准时间转为时间戳
+      if(this.complaintsate!==''&&this.complaintsate!==null){
+      let starttime= new Date(this.complaintsate[0]).getTime()
+      let endtiem= new Date(this.complaintsate[1]).getTime()
+      service.search(this.number, this.currentPage4,this.complaintname,this.complainttype,this.complaintstatus,starttime,endtiem).then(res=>{
+        console.log(res)
+        if(res.code=20010){
+          this.tableData = res.data[0];
+          this.total = res.data[1].count;
+          this.currentPage4 = res.data[1].current;
+        }
+        else{
+           this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+      // this.$router.push("/login")
+        }
+      })
+       }
+      else{
+      service.search(this.number, this.currentPage4,this.complaintname,this.complainttype,this.complaintstatus,'','').then(res=>{
+        console.log(res)
+        if(res.code=20010){
+          this.tableData = res.data[0];
+          this.total = res.data[1].count;
+          this.currentPage4 = res.data[1].current;
+        }
+        else{
+           this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+        // this.$router.push("/login")
+        }
+      })
+     }
+    }
+    else{
+       service.ComList(this.number, this.currentPage4).then((res) => {
         if (res.code === 20010) {
           this.tableData = res.data[0];
           this.total = res.data[1].count;
-          this.Pagess = res.data[1].current;
+          this.currentPage4 = res.data[1].current;
         } else {
           this.$message({
             message: res.msg,
             type: "error",
             duration: 1000,
           });
-          // this.$router.push("/login");
+             // this.$router.push("/login")
         }
       });
+    }
+    
+    },
+    handleSizeChange(val) {
+      this.number = val;
+    if((this.complaintsate!==''&&this.complaintsate!==null)||this.complaintname!==''||this.complainttype!==''||this.complaintstatus!==''){
+      // 将标准时间转为时间戳
+      if(this.complaintsate!==''&&this.complaintsate!==null){
+      let starttime= new Date(this.complaintsate[0]).getTime()
+      let endtiem= new Date(this.complaintsate[1]).getTime()
+      service.search(this.number, this.currentPage4,this.complaintname,this.complainttype,this.complaintstatus,starttime,endtiem).then(res=>{
+        console.log(res)
+        if(res.code=20010){
+          this.tableData = res.data[0];
+          this.total = res.data[1].count;
+          this.currentPage4 = res.data[1].current;
+        }
+        else{
+           this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+      // this.$router.push("/login")
+        }
+      })
+       }
+      else{
+      service.search(this.number, this.currentPage4,this.complaintname,this.complainttype,this.complaintstatus,'','').then(res=>{
+        console.log(res)
+        if(res.code=20010){
+          this.tableData = res.data[0];
+          this.total = res.data[1].count;
+          this.currentPage4 = res.data[1].current;
+        }
+        else{
+           this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+        // this.$router.push("/login")
+        }
+      })
+     }
+    }
+    else{
+        service.ComList(this.number, this.currentPage4).then((res) => {
+        if (res.code === 20010) {
+          this.tableData = res.data[0];
+          this.total = res.data[1].count;
+          this.currentPage4 = res.data[1].current;
+        } else {
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+             // this.$router.push("/login")
+        }
+      });
+    }
+    
     },
     handleCurrentChange(val) {
-      this.Pagess = val;
-      service.ComList(this.number, this.Pagess).then((res) => {
+      this.currentPage4 = val;
+        if((this.complaintsate!==''&&this.complaintsate!==null)||this.complaintname!==''||this.complainttype!==''||this.complaintstatus!==''){
+      // 将标准时间转为时间戳
+      if(this.complaintsate!==''&&this.complaintsate!==null){
+      let starttime= new Date(this.complaintsate[0]).getTime()
+      let endtiem= new Date(this.complaintsate[1]).getTime()
+      service.search(this.number, this.currentPage4,this.complaintname,this.complainttype,this.complaintstatus,starttime,endtiem).then(res=>{
+        console.log(res)
+        if(res.code=20010){
+          this.tableData = res.data[0];
+          this.total = res.data[1].count;
+          this.currentPage4 = res.data[1].current;
+        }
+        else{
+           this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+      // this.$router.push("/login")
+        }
+      })
+       }
+      else{
+      service.search(this.number, this.currentPage4,this.complaintname,this.complainttype,this.complaintstatus,'','').then(res=>{
+        console.log(res)
+        if(res.code=20010){
+          this.tableData = res.data[0];
+          this.total = res.data[1].count;
+          this.currentPage4 = res.data[1].current;
+        }
+        else{
+           this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+        // this.$router.push("/login")
+        }
+      })
+     }
+    }
+      else{
+      service.ComList(this.number, this.currentPage4).then((res) => {
         console.log(res);
         if (res.code === 20010) {
           this.tableData = res.data[0];
           this.total = res.data[1].count;
-          this.Pagess = res.data[1].current;
+          this.currentPage4 = res.data[1].current;
         } else {
           this.$message({
             message: res.msg,
             type: "error",
             duration: 1000,
           });
-          // this.$router.push("/login");
+             // this.$router.push("/login")
         }
       });
+      }
     },
     handle(row) {
       console.log(row);
@@ -107,19 +322,21 @@ export default {
     },
   },
   created() {
-    service.ComList(this.number, this.Pagess).then((res) => {
+    service.ComList(this.number, this.currentPage4).then((res) => {
       console.log(res);
       if (res.code === 20010) {
         this.tableData = res.data[0];
         this.total = res.data[1].count;
-        this.Pagess = res.data[1].current;
+        this.currentPage4 = res.data[1].current;
+        this.options=res.data[2].ComplaintType
+        this.option=res.data[2].state
       } else {
         this.$message({
           message: res.msg,
           type: "error",
           duration: 1000,
         });
-        // this.$router.push("/login");
+           // this.$router.push("/login")
       }
     });
   },
