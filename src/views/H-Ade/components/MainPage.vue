@@ -46,7 +46,7 @@
     <el-table class="elTable" :data="tableData">
       <el-table-column prop="id" label="序号">
       </el-table-column>
-      <el-table-column prop="serialNum" label="事件编码">
+      <el-table-column prop="event_num" label="事件编码">
       </el-table-column>
       <el-table-column prop="patient_name" label="患者姓名">
       </el-table-column>
@@ -75,9 +75,9 @@
     <!-- 分页 -->
     <div class="paging">
       <div class="block">
-        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
-          :current-page="currentPage4" :page-sizes="[8, 10, 20]" :page-size="8"
-          layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
+        <el-pagination @size-change="handleSizeChange" @current-change="currentChage"
+          :current-page="currentPage4" :page-sizes="[8,10,20]" :page-size="100"
+          layout="total, sizes, prev, pager, next, jumper" :total="pageCount">
         </el-pagination>
       </div>
     </div>
@@ -116,21 +116,16 @@
         details: {}, //查看
         addcon: [], //新增里面的
         currentPage4: 1,//分页
+        pages:'',
+        pageSize:8,
+        pageCount:0,
         eventNum:'',// 事件编码
       };
     },
     methods: {
       // 新增
       Add() {
-        // service.badNum().then(res=>{
-        //   console.log(res)
-        //   if(res.code==20010){
-            this.$emit('pageAdd')
-        //     this.eventNum=res.event_num
-        //     this.bus.$emit('eventNum', this.eventNum)
-        //   }
-        // })
-        
+        this.$emit('pageAdd')
       },
       // 查看
       handleClick(row, index) {
@@ -165,18 +160,51 @@
         return moment(date).format("YYYY-MM-DD HH:mm:ss");
       },
       // 分页
-      handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
+      currentChage(current){
+        let params={
+          pageNum:current,
+          pageSize:this.pageSize,
+          patient_name: this.search.patient_name,
+          starttime: this.search.starttime,
+          endtime: this.search.endtime,
+          occur_scene: this.search.occur_scene,
+          degree_weight_id:this.search.degree_weight_id
+        }
+        service.AdeList(params).then(res=>{
+          console.log(res)
+          this.tableData=res.data
+        })
       },
-      handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
-      }
+      handleSizeChange(val) {
+        this.pages=val
+        let params={
+          pageSize:this.pages,
+          pageNum:this.pageNum
+        }
+        console.log(params)
+        service.AdeList(params).then(res=>{
+          console.log(res)
+          this.tableData=res.data
+        })
+        // console.log(`每页 ${val} 条`);
+      },
+   
     },
     created() {
       // 不良列表
-      service.AdeList().then(res => {
+      let params={
+        pageNum:1,
+        pageSize:this.pageSize
+      }
+      console.log(params)
+      service.AdeList(params).then(res => {
         // console.log(res)
         this.tableData = res.data 
+      })
+      // 总数
+      service.AdeList(this.pageSize,'').then(res => {
+        console.log(res)
+        this.pageCount = res.data.length 
       })
       // 下拉框内容
       service.AdeSel().then(res => {

@@ -324,8 +324,6 @@
         </div>
         <!-- 解绑微信 -->
       </el-dialog>
-      <el-button @click="dialogVisible">点击打开</el-button>
-      <change v-show="chan"></change>
     </div>
   </div>
 </template>
@@ -334,13 +332,11 @@
 //import service from "../../util/request";
 import userthre from "../component/userthre";
 import service from "@/service/index";
-import change from "./component/phonechange";
 export default {
-  components: { userthre, change },
+  components: { userthre },
   inject: ["reload"],
   data() {
     return {
-      chan: false,
       pageTitle: "账户管理",
       phone: "",
       email: "",

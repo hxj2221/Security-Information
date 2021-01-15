@@ -99,6 +99,9 @@
           <el-form-item label="后端接口" width="120">
             <el-input v-model="powaps" auto-complete="off"></el-input>
           </el-form-item>
+          <el-form-item label="前端路由" width="120">
+            <el-input v-model="powweb" auto-complete="off"></el-input>
+          </el-form-item>
         </el-form>
       </div>
     </div>
@@ -122,7 +125,7 @@ export default {
       powlab: "",
       powicon: "",
       powaps: "",
-
+      powweb: "",
       seldata: [],
 
       datas: [
@@ -179,7 +182,8 @@ export default {
         this.powstatu,
         this.powlab,
         this.powicon,
-        this.powaps
+        this.powaps,
+        this.powweb
       );
       let data = {
         sort: this.powpx,
@@ -188,6 +192,7 @@ export default {
         icon: this.powicon,
         pid: this.selvalue,
         name: this.powaps,
+        url: this.powweb,
       };
       savepower(data).then((res) => {
         alert(res.data.msg);
@@ -209,44 +214,6 @@ export default {
     // 取消
     addpowno() {
       this.$parent.fathroleno();
-    },
-    //   模块功能
-    isTitleChecked(data) {
-      var _selected = data.selected;
-      var _name = data.name;
-      // 验证selected中是否含有全部的item的id 如果是 证明title要选中
-      return _name.every(function (item) {
-        return _selected.indexOf(item) != -1;
-      });
-    },
-    changeTitleChecked(data, event) {
-      if (event.target.checked === true) {
-        data.name.forEach(function (item) {
-          data.selected.indexOf(item) === -1 && data.selected.push(item);
-        });
-        console.log(data.name);
-      } else {
-        data.selected = [];
-      }
-    },
-    changeAllChecked(event) {
-      if (event.target.checked === true) {
-        this.datas.forEach(function (data) {
-          data.name.forEach(function (item) {
-            data.selected.indexOf(item) === -1 && data.selected.push(item);
-          });
-          console.log(data.id);
-        });
-      } else {
-        this.datas.forEach(function (data) {
-          data.selected = [];
-        });
-      }
-    },
-    isAllChecked() {
-      return this.datas.every(function (data) {
-        return data.selected.length === data.name.length;
-      });
     },
     changesonc(e) {
       console.log(e);

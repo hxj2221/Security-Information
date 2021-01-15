@@ -2,7 +2,9 @@
   <el-dialog
     title="身份验证"
     :close-on-click-modal="false"
-    :visible.sync="phoneyz"
+    :visible.sync="visible"
+    :show="show"
+    v-if="visible"
   >
     <div>
       <p class="account-change-bindphone2">
@@ -86,19 +88,114 @@
 export default {
   data() {
     return {
-      dialogVisible: false,
+      visible: this.show,
+      phone: "",
+      phonecode: "",
+      changephone: "",
+      changephonecode: "",
+      phonenew: false,
+      isCodeIng: false, //是否倒计时
+      codeTxt: "获取验证码",
+      codetime: 60,
+      disablbtn: false,
     };
   },
-  methods: {
-    dialog() {
-      this.$parent.fatherclose();
+  props: {
+    show: {
+      type: Boolean,
+      default: false,
     },
-    handleClose(done) {
-      this.$confirm("确认关闭？")
-        .then((_) => {
-          done();
-        })
-        .catch((_) => {});
+  },
+  watch: {
+    show() {
+      this.visible = this.show;
+    },
+  },
+  methods: {
+    // 手机
+    phoneyes() {
+      let data = {
+        phone: this.phone,
+        pcaptcha: this.phonecode,
+      };
+      service.phonechange(data).then((res) => {
+        console.log(res);
+        if (res.msg == "身份验证通过!") {
+          this.phonenew = true;
+          this.phoneyz = false;
+        }
+      });
+    },
+    phonebtncode() {
+      let data = {
+        phone: this.phone,
+      };
+      service.phoneyz(data).then((res) => {
+        console.log(res);
+        if (res.code == 20020) {
+          alert(res.msg);
+        } else if (res.code == 20010) {
+          let timer = setInterval(() => {
+            this.isCodeIng = true;
+            this.disablbtn = true;
+            this.codetime -= 1;
+            this.codeTxt = "重新获取" + this.codetime + "s";
+            if (this.codetime < 1) {
+              clearInterval(timer);
+              if (this.codetime < 1) {
+                this.codeTxt = "获取验证码";
+                this.isCodeIng = false;
+                this.codetime = 60;
+                this.disablbtn = false;
+              }
+            }
+          }, 1000);
+        }
+      });
+    },
+    changephonebtncode() {
+      let data = {
+        phone: this.changephone,
+      };
+      service.phoneyz(data).then((res) => {
+        console.log(res);
+        if (res.code == 20020) {
+          alert(res.msg);
+        } else if (res.code == 20010) {
+          let timer = setInterval(() => {
+            this.isCodeIng = true;
+            this.disablbtn = true;
+            this.codetime -= 1;
+            this.codeTxt = "重新获取" + this.codetime + "s";
+            if (this.codetime < 1) {
+              clearInterval(timer);
+              if (this.codetime < 1) {
+                this.codeTxt = "获取验证码";
+                this.isCodeIng = false;
+                this.codetime = 120;
+                this.disablbtn = false;
+              }
+            }
+          }, 1000);
+        }
+      });
+    },
+    phoneno() {
+      this.phoneyz = false;
+    },
+    //新手机
+    phonenewyes() {
+      let data = {
+        phone: this.changephone,
+        pcaptcha: this.changephonecode,
+      };
+      service.phonehb(data).then((res) => {
+        console.log(res);
+        if (res.code == "20010") {
+          this.phonenew = false;
+        }
+        this.reload();
+      });
     },
   },
 };

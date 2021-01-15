@@ -195,7 +195,7 @@
                 class="dialog-input-text"
                 type="password"
                 v-model="addStaff.password"
-              placeholder="******"
+                placeholder="******"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -260,8 +260,8 @@ export default {
       },
       department: "", //所属科室
       auth_grouap: "", //角色
-      role_id:'',
-      department_id:'',
+      role_id: "",
+      department_id: "",
       //年龄循环
       optionages: [
         {
@@ -302,7 +302,7 @@ export default {
   },
   watch: {
     childed(res) {
-      // console.log(res); //数据已经拿到
+      console.log(res); //数据已经拿到
       this.id = res.id;
       this.addStaff.job_number = res.job_number;
       this.addStaff.name = res.name;
@@ -316,12 +316,12 @@ export default {
       this.addStaff.age = res.age;
       this.addStaff.cardnumber = res.cardnumber;
       this.department = res.department[0].title;
-      this.department_id=res.department_id;
+      this.department_id = res.department_id;
       this.addStaff.status = res.status;
       this.addStaff.head_department = res.head_department;
       this.addStaff.position = res.position;
       this.auth_grouap = res.auth_grouap[0].title;
-      this.role_id=res.role_id;
+      this.role_id = res.role_id;
       this.addStaff.status = res.status;
     },
   },
@@ -329,8 +329,8 @@ export default {
     // 保存
     staffaddvueyes() {
       let params = {
-        password:this.addStaff.password,
-        job_number:this.addStaff.job_number,
+        password: this.addStaff.password,
+        job_number: this.addStaff.job_number,
         id: this.id,
         name: this.addStaff.name,
         sex: this.addStaff.sex,
@@ -348,8 +348,7 @@ export default {
       };
       service.staffEdit(params).then((res) => {
         console.log(res);
-        
-        if(res.code='20010'){
+        if ((res.code = "20010")) {
           const loading = this.$loading({
             lock: true,
             text: "保存中",
@@ -359,12 +358,10 @@ export default {
           setTimeout(() => {
             loading.close();
             this.reload();
-             this.$parent.fathstaffno();
-            
+            this.$parent.fathstaffno();
           }, 1500);
-        }
-        else{
-           this.$message.error('名字已存在');
+        } else {
+          this.$message.error("名字已存在");
         }
       });
     },
@@ -397,7 +394,6 @@ export default {
       self.optiondepart = item.department;
     });
   },
- 
 };
 </script>
 <style scoped>

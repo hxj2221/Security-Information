@@ -127,7 +127,6 @@ export default {
     });
   },
   methods: {
-    
     // sel
     departsel() {
       console.log(this.adddepartsel);

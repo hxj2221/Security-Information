@@ -19,6 +19,10 @@ export default {
   PCode: async (params: Object) => {
     return await service.post(`${baseUrl}api/login/hssmsphone`, params).then(res => res).catch(err => err)
   },
+  // 工作台
+  dashboard: async () => {
+    return await service.get(`${baseUrl}api/home/Lz_workbench`).then(res => res).catch(err => err)
+  },
   // 投诉列表
   ComList: async (pNum:number,current:number) => {
     return await service.get(`${baseUrl}api/tsevent/lists`,{params:{pNum,current}}).then(res => res).catch(err => err)
@@ -116,12 +120,12 @@ export default {
         return await service.post(`${baseUrl}api/Complaintprocess/event_uploadfiles`, data ).then(res => res).catch(err => err)
       }, 
   // 不良事件列表
-  AdeList: async () => {
-    return await service.get(`${baseUrl}api/bad/lists`).then(res => res).catch(err => err)
+  AdeList: async (params:any) => {
+    return await service.get(`${baseUrl}api/bad/lists`,{params}).then(res => res).catch(err => err)
   },
   // 不良检索
-  AdeSearch: async (params:any) => {
-    return await service.get(`${baseUrl}api/bad/lists`,{params}).then(res => res).catch(err => err)
+  AdeSearch: async (params: any) => {
+    return await service.get(`${baseUrl}api/bad/lists`, { params }).then(res => res).catch(err => err)
   },
   // 事件编号
   badNum: async () => {
@@ -129,11 +133,11 @@ export default {
   },
   // 确认不良新增
   badAdd: async (params: any) => {
-    return await service.post(`${baseUrl}api/bad/bad_add`, params).then(res => res).catch(err => err)
+    return await service.post(`${baseUrl}/api/bad/bad_add`, params).then(res => res).catch(err => err)
   },
   // 不良中的下拉框
   AdeSel: async () => {
-    return await service.get(`${baseUrl}api/bad/choice_type`).then(res => res).catch(err => err)
+    return await service.get(`${baseUrl}api/bad/bad_add`).then(res => res).catch(err => err)
   },
   // 不良查看
   badSee: async (params: any) => {
@@ -277,5 +281,50 @@ export default {
   //账户管理
   accountman: async () => {
     return await service.get(`${baseUrl}api/home/user_home`).then(res => res).catch(err => err)
+  },
+  // 角色权限
+  rolepowlist: async () => {
+    return await service.get(`${baseUrl}api/part/displayauthgroup`).then(res => res).catch(err => err)
+  },
+
+  // 文件库新增分类list
+  doclist: async () => {
+    return await service.get(`${baseUrl}api/fileclass/lists`).then(res => res).catch(err => err)
+  },
+  // 文件库新增分类treelist
+  docaddtree: async () => {
+    return await service.get(`${baseUrl}user/Fileclass/classtree`).then(res => res).catch(err => err)
+  },
+  // 文件库新增分类tree
+  docadd: async (data: object) => {
+    return await service.post(`${baseUrl}api/fileclass/addclass`, data).then(res => res).catch(err => err)
+  },
+  // 文件库更改状态
+  docstatu: async (data: object) => {
+    return await service.post(`${baseUrl}api/fileclass/editstatus`, data).then(res => res).catch(err => err)
+  },
+  // 文件库del
+  docdel: async (data: object) => {
+    return await service.post(`${baseUrl}api/fileclass/del`, data).then(res => res).catch(err => err)
+  },
+  // 文件库edit
+  docedit: async (params: any) => {
+    return await service.get(`${baseUrl}api/fileclass/editclass`, { params }).then(res => res).catch(err => err)
+  },
+  // 文件库editsave
+  doceditsave: async (data: object) => {
+    return await service.post(`${baseUrl}api/fileclass/editclass`, data).then(res => res).catch(err => err)
+  },
+  // 文件库文件list
+  filelist: async () => {
+    return await service.get(`${baseUrl}api/file/lists`).then(res => res).catch(err => err)
+  },
+  // 文件库文件分类
+  filetree: async () => {
+    return await service.get(`${baseUrl}api/file/classtree`).then(res => res).catch(err => err)
+  },
+  // 文件库文件上传
+  fileupload: async (data: object) => {
+    return await service.post(`${baseUrl}api/file/addfile`, data).then(res => res).catch(err => err)
   },
 }
