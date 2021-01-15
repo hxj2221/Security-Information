@@ -48,6 +48,7 @@
           <el-table-column prop="id" label="ID" width="180"> </el-table-column>
           <el-table-column prop="file_name" label="文件名" width="180">
           </el-table-column>
+<<<<<<< HEAD
           <el-table-column prop="file_describe" label="文件描述" width="260">
           </el-table-column>
           <el-table-column prop="file_size" label="文件大小" width="180">
@@ -56,6 +57,18 @@
           </el-table-column>
           <el-table-column prop="class_id" label="文件分类" width="180">
           </el-table-column>
+=======
+          <el-table-column prop="file_name" label="文件名" width="180">
+          </el-table-column>
+          <el-table-column prop="file_describe" label="文件描述" width="260">
+          </el-table-column>
+          <el-table-column prop="file_size" label="文件大小" width="180">
+          </el-table-column>
+          <el-table-column prop="create_time" label="更新时间" width="180">
+          </el-table-column>
+          <el-table-column prop="class_id" label="文件分类" width="180">
+          </el-table-column>
+>>>>>>> 8aa1a27aaa5d9e934f8676fcd3b129cca062cd23
           <el-table-column prop="uid" label="上传人员" width="180">
           </el-table-column>
           <el-table-column label="操作" width="180">
@@ -152,6 +165,7 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import "./css/Files.css";
 import AddFiles from "./components/AddFiles";
 import service from "@/service/index";
@@ -167,6 +181,44 @@ export default {
         name: "",
         region: "",
         desc: "",
+=======
+  import './css/Files.css'
+  import AddFiles from './components/AddFiles'
+import service from '@/service/index'
+  export default {
+    components: {
+      AddFiles
+    },
+    props: {},
+    data() {
+      return {
+        form: {
+          input: '',
+          region: '',
+          options: [{
+            value: '选项1',
+            label: '分类1'
+          }, {
+            value: '选项2',
+            label: '分类2'
+          }, {
+            value: '选项3',
+            label: '分类3'
+          }, {
+            value: '选项4',
+            label: '分类4'
+          }, ]
+        },
+        tableData: [],
+        filesIsShow:false,
+        addIsShow:true
+      };
+    },
+    methods: {
+      // 删除
+      deleteRow(index, rows) {
+        rows.splice(index, 1);
+>>>>>>> 8aa1a27aaa5d9e934f8676fcd3b129cca062cd23
       },
       editseldata: [],
       editselvalue: 0,
@@ -268,8 +320,18 @@ export default {
       this.filesIsShow = !this.filesIsShow;
       this.addIsShow = !this.addIsShow;
     },
+<<<<<<< HEAD
   },
 };
+=======
+    created(){
+      service.FileList().then(res=>{
+        // console.log(res)
+        this.tableData=res.data
+      })
+    },
+  }
+>>>>>>> 8aa1a27aaa5d9e934f8676fcd3b129cca062cd23
 </script>
 <style>
 </style>
