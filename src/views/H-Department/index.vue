@@ -34,7 +34,10 @@
         <el-table-column prop="usernumber" label="员工数量"> </el-table-column>
         <el-table-column prop="head_department.name" label="负责人">
         </el-table-column>
-        <el-table-column prop="create_uid" label="创建人员"></el-table-column>
+        <el-table-column
+          prop="createname.name"
+          label="创建人员"
+        ></el-table-column>
 
         <el-table-column prop="create_time" label="创建时间"></el-table-column>
         <el-table-column label="科室状态">
