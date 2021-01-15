@@ -185,13 +185,13 @@ export default {
           this.operations = true;
           this.operationdata = index;
           this.opdata = res.data;
-          let params = {
-           event_number: index.event_number,
-          };
-          service.componrdetaile(qs.stringify(params)).then((res) => {
-          console.log(res);
-          this.lookdata = res.data;
-        });
+        //   let params = {
+        //    event_number: index.event_number,
+        //   };
+        //   service.componrdetaile(qs.stringify(params)).then((res) => {
+        //   console.log(res);
+        //   this.lookdata = res.data;
+        // });
         }
       
       });

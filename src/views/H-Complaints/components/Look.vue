@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="look">
+    <div class="look" v-if="lookdata!=''">
       <slot name="title">
         <div class="look-top">
           <span>投诉详情-调查中</span>
@@ -118,15 +118,9 @@
                       <span v-if="item.investigate_number==1"
                         ><b>第一次调查</b></span
                       >
-                       <span v-else-if="item.investigate_number==2"
-                        ><b>第二次调查</b></span
-                      >
-                      <span  v-else-if="item.investigate_number==3"
-                        ><b>第三次调查</b></span
-                      >
-                       <span v-else-if="item.investigate_number==4"
-                        ><b>第四次调查</b></span
-                      >
+                       <span v-else-if="item.investigate_number==2"><b>第二次调查</b></span >
+                      <span  v-else-if="item.investigate_number==3" ><b>第三次调查</b></span>
+                       <span v-else-if="item.investigate_number==4"><b>第四次调查</b></span>
 
                     </div></el-col
                   >
@@ -181,7 +175,8 @@
                     >
                     <el-col :span="20">
                       <div class="grid-content bg-purple-light">
-                        <span class="value">{{items.dutyuser.name}}/{{items.dutyuser.phone}}</span>
+                        <span class="value" v-if="item.dutyuser">{{items.dutyuser.name}}/{{items.dutyuser.phone}}</span>
+                         <span class="value" v-else>无</span>
                       </div></el-col
                     >
                   </el-row>
@@ -246,7 +241,7 @@
                 </div>
               </div>
                 </div>
-                <div v-if="item.examine.length!==0&&item.examine!==''&&item.examine!==null">
+                <div v-if="item.examine!==''&&item.examine!==null">
                <div class="box-Information" v-for="itemssss in item.examine" :key="itemssss.department.title">
               <div class="box-top">
                 <el-row type="flex" class="row-bg" justify="space-between">
@@ -487,7 +482,7 @@
               <hr />
             </div> 
             <!-- 患者信息 -->
-            <div v-if="lookdata.patient!==''&&lookdata.patient!==null&&lookdata.patient.length!==0" >
+            <div v-if="lookdata.patient!==''&&lookdata.patient!==null" >
             <div class="box-Information" v-for="item in lookdata.patient" :key="item.age"> 
               <div class="box-top">
                 <el-row type="flex" class="row-bg" justify="space-between">
