@@ -8,7 +8,7 @@
           <i
             class="fa fa-plus-circle fa-2"
             aria-hidden="true"
-            @click="uploadclassify()"
+            @click="dialogVisible = true"
             ><span>上传文件</span></i
           >
           <i
@@ -99,33 +99,14 @@
           <el-input v-model="ruleForm.name"></el-input>
         </el-form-item>
         <el-form-item label="文件分类" prop="region">
-          <el-select
-            @change="selchang"
-            v-model="editselvalue"
-            placeholder="请选择"
-          >
-            <el-option label="作为顶级" :value="0"></el-option>
-            <template v-for="v in editseldata">
-              <el-option
-                :key="v.id"
-                :label="v.class_name"
-                :value="v.id"
-              ></el-option>
-              <template v-if="v._child">
-                <el-option
-                  v-for="vv in v._child"
-                  :key="vv.id"
-                  :label="'|——' + vv.class_name"
-                  :value="vv.id"
-                >
-                </el-option>
-              </template>
-            </template>
+          <el-select v-model="ruleForm.region" placeholder="请选择活动区域">
+            <el-option label="区域一" value="shanghai"></el-option>
+            <el-option label="区域二" value="beijing"></el-option>
           </el-select>
         </el-form-item>
         <el-upload
           class="upload-demo"
-          action="http://bt1.wlqqlp.com:8082/api/file/addfile"
+          action="https://jsonplaceholder.typicode.com/posts/"
           :on-preview="handlePreview"
           :on-remove="handleRemove"
           :before-remove="beforeRemove"
@@ -162,15 +143,14 @@ export default {
   props: {},
   data() {
     return {
+      fileList: [],
+      newclassify: false,
       dialogVisible: false,
       ruleForm: {
         name: "",
         region: "",
         desc: "",
       },
-      editseldata: [],
-      editselvalue: 0,
-      fileList: [],
       rules: {
         name: [
           { required: true, message: "请输入文件标题", trigger: "blur" },
@@ -217,29 +197,16 @@ export default {
     });
     service.filetree().then((res) => {
       console.log(res);
-      this.editseldata = res.data;
     });
   },
   methods: {
-    submitForm() {
-      let data = {
-        file_name: this.ruleForm.name,
-        file_describe: this.ruleForm.desc,
-        class_id: this.editselvalue,
-      };
-      service.fileupload(data).then((res) => {
-        console.log(res);
-      });
-    },
+    submitForm() {},
     resetForm() {},
     handleRemove(file, fileList) {
       console.log(file, fileList);
     },
     handlePreview(file) {
       console.log(file);
-    },
-    beforeRemove(file, fileList) {
-      return this.$confirm(`确定移除 ${file.name}？`);
     },
     handleExceed(files, fileList) {
       this.$message.warning(
@@ -248,26 +215,24 @@ export default {
         } 个文件`
       );
     },
-    selchang() {
-      console.log(this.editselvalue);
+    beforeRemove(file, fileList) {
+      return this.$confirm(`确定移除 ${file.name}？`);
     },
-    // 删除
-    deleteRow(index, rows) {
-      rows.splice(index, 1);
-    },
-    // 下载
-    handleClick(row) {
-      console.log(row);
-    },
-    // 上传文件
-    uploadclassify() {
-      this.dialogVisible = true;
-    },
-    // 新增分类
-    newclassify() {
-      this.filesIsShow = !this.filesIsShow;
-      this.addIsShow = !this.addIsShow;
-    },
+  },
+  // 删除
+  deleteRow(index, rows) {
+    rows.splice(index, 1);
+  },
+  // 下载
+  handleClick(row) {
+    console.log(row);
+  },
+  // 上传文件
+  uploadclassify() {},
+  // 新增分类
+  newclassify() {
+    this.filesIsShow = !this.filesIsShow;
+    this.addIsShow = !this.addIsShow;
   },
 };
 </script>

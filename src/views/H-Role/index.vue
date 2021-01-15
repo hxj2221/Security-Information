@@ -64,7 +64,7 @@
         </el-table>
       </div>
 
-   <!-- 分页 -->
+      <!-- 分页 -->
       <div class="rolepag">
         <div class="block">
           <el-pagination
@@ -103,7 +103,7 @@ export default {
       dormitory: [],
       search: "",
       childedit: [],
-      currentPage:1
+      currentPage: 1,
     };
   },
   created() {
@@ -181,8 +181,8 @@ export default {
       };
       console.log(param);
       service.roleedit(param).then((res) => {
-        console.log(res.info);
-        this.childedit = res.info;
+        console.log(res);
+        this.childedit = res;
         console.log(this.childedit);
       });
     },

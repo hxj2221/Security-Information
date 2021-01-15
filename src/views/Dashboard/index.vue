@@ -12,19 +12,19 @@
         <div class="dashRow">
           <el-card class="dashRowItem" shadow="always">
             <p class="dashRowItemTitle">部门员工</p>
-            {{personnel}}
+            {{staff}}
           </el-card>
           <el-card class="dashRowItem" shadow="always">
             <p class="dashRowItemTitle">需审批的事件</p>
-            {{ApprovalRequired}}
+            {{examine}}
           </el-card>
           <el-card class="dashRowItem" shadow="always">
             <p class="dashRowItemTitle">需调查的事件</p>
-            {{NeedInvestigation}}
+            {{survey}}
           </el-card>
           <el-card class="dashRowItem last " shadow="always">
             <p class="dashRowItemTitle">进程中事件</p>
-            {{InProgress}}
+            {{infor}}
           </el-card>
         </div>
 
@@ -33,28 +33,28 @@
     <div class="box1">
       <div class="dashRow">
         <el-card class="dashRowItem" shadow="always">
-          {{createData}}
+          {{todaynew}}
           <p class="dashRowItemKey">
             <img src="../../assets/image/u267.png" alt="">
           </p>
           <p class="dashRowItemTitle">今日新增投诉</p>
         </el-card>
         <el-card class="dashRowItem" shadow="always">
-          {{retreiveData}}
+          {{isputes}}
           <p class="dashRowItemKey">
             <img src="../../assets/image/u274.png" alt="">
           </p>
           <p class="dashRowItemTitle">今日新增纠纷</p>
         </el-card>
         <el-card class="dashRowItem" shadow="always">
-          {{updateData}}
+          {{bad}}
           <p class="dashRowItemKey">
             <img src="../../assets/image/u281.png" alt="">
           </p>
           <p class="dashRowItemTitle">今日新增不良</p>
         </el-card>
         <el-card class="dashRowItem" shadow="always">
-          {{deleteData}}
+          {{all_infor}}
           <p class="dashRowItemKey">
             <img src="../../assets/image/u285.png" alt="">
           </p>
@@ -66,129 +66,25 @@
       <el-row :gutter="20">
         <el-col :span="16">
           <div class="bg">
-            <div class="left">
               <div class="tit">
                 <span>进行中的事件</span>
                 <span>全部事件</span>
               </div>
-              <div class="cent">
-                <div class="con">
-                  <div class="con_info">
-                    <div class="info">
-                      <div class="info_detail">
-                        <p>投诉人：薛大刚</p>
-                        <p><span>●</span>调查中</p>
-                      </div>
-                      <div class="info_detail">
-                        <p>截止日期：2020-11-22 00:00 </p>
-                        <p><i class="fa fa-user-circle" aria-hidden="true"></i></p>
-                      </div>
-                      <div class="info_detail">
-                        <p>事件性质：投诉</p>
-                        <p>患者：薛小刚</p>
-                      </div>
-                    </div>
-                  </div>
+              <div class="con_info" v-for="item in Info" :key="item.id">
+                <div class="info">
+                  <p style="font-size:13px;color:#999">投诉人：{{item.complaint_name}}</p>
+                  <p><span style="color:#52C1F5">●</span>{{item.son}}</p>
                 </div>
-                <div class="con">
-                  <div class="con_info">
-                    <div class="info">
-                      <div class="info_detail">
-                        <p>投诉人：薛大刚</p>
-                        <p><span>●</span>调查中</p>
-                      </div>
-                      <div class="info_detail">
-                        <p>截止日期：2020-11-22 00:00 </p>
-                        <p><i class="fa fa-user-circle" aria-hidden="true"></i></p>
-                      </div>
-                      <div class="info_detail">
-                        <p>事件性质：投诉</p>
-                        <p>患者：薛小刚</p>
-                      </div>
-                    </div>
-                  </div>
+                <div class="info">
+                  <p>截止日期：{{item.reply_time}}</p>
+                  <p style="font-size:28px;color:#ccc"><i class="fa fa-user-circle" aria-hidden="true"></i></p>
                 </div>
-              </div>
-              <div class="cent">
-                <div class="con">
-                  <div class="con_info">
-                    <div class="info">
-                      <div class="info_detail">
-                        <p>投诉人：薛大刚</p>
-                        <p><span>●</span>调查中</p>
-                      </div>
-                      <div class="info_detail">
-                        <p>截止日期：2020-11-22 00:00 </p>
-                        <p><i class="fa fa-user-circle" aria-hidden="true"></i></p>
-                      </div>
-                      <div class="info_detail">
-                        <p>事件性质：投诉</p>
-                        <p>患者：薛小刚</p>
-                      </div>
-                    </div>
-                  </div>
+                <div class="info">
+                  <p>事件性质：{{item.character}}</p>
+                  <p>患者：{{item.patients}}</p>
                 </div>
-                <div class="con">
-                  <div class="con_info">
-                    <div class="info">
-                      <div class="info_detail">
-                        <p>投诉人：薛大刚</p>
-                        <p><span>●</span>调查中</p>
-                      </div>
-                      <div class="info_detail">
-                        <p>截止日期：2020-11-22 00:00 </p>
-                        <p><i class="fa fa-user-circle" aria-hidden="true"></i></p>
-                      </div>
-                      <div class="info_detail">
-                        <p>事件性质：投诉</p>
-                        <p>患者：薛小刚</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-              <div class="cent">
-                <div class="con">
-                  <div class="con_info">
-                    <div class="info">
-                      <div class="info_detail">
-                        <p>投诉人：薛大刚</p>
-                        <p><span>●</span>调查中</p>
-                      </div>
-                      <div class="info_detail">
-                        <p>截止日期：2020-11-22 00:00 </p>
-                        <p><i class="fa fa-user-circle" aria-hidden="true"></i></p>
-                      </div>
-                      <div class="info_detail">
-                        <p>事件性质：投诉</p>
-                        <p>患者：薛小刚</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="con">
-                  <div class="con_info">
-                    <div class="info">
-                      <div class="info_detail">
-                        <p>投诉人：薛大刚</p>
-                        <p><span>●</span>调查中</p>
-                      </div>
-                      <div class="info_detail">
-                        <p>截止日期：2020-11-22 00:00 </p>
-                        <p><i class="fa fa-user-circle" aria-hidden="true"></i></p>
-                      </div>
-                      <div class="info_detail">
-                        <p>事件性质：投诉</p>
-                        <p>患者：薛小刚</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
               </div>
             </div>
-          </div>
         </el-col>
         <el-col :span="8">
           <div class="bg">
@@ -199,55 +95,32 @@
               </div>
               <div class="last dashRow">
                 <el-card class="dashRowItem" shadow="always">
-                <p class="dashRowItemTitle"><span class="person">●</span>个人</p>
-                {{person}}
-              </el-card>
-              <el-card class="dashRowItem" shadow="always">
-                <p class="dashRowItemTitle"><span class="depart">●</span>部门</p>
-                {{depart}}
-              </el-card>
-              <el-card class="dashRowItem" shadow="always">
-                <p class="dashRowItemTitle"><span class="system">●</span>系统</p>
-                {{system}}
-              </el-card>
+                  <p class="dashRowItemTitle"><span class="person">●</span>个人</p>
+                  {{person}}
+                </el-card>
+                <el-card class="dashRowItem" shadow="always">
+                  <p class="dashRowItemTitle"><span class="depart">●</span>部门</p>
+                  {{depart}}
+                </el-card>
+                <el-card class="dashRowItem" shadow="always">
+                  <p class="dashRowItemTitle"><span class="system">●</span>系统</p>
+                  {{system}}
+                </el-card>
               </div>
-              
+
             </div>
           </div>
         </el-col>
       </el-row>
     </div>
-
-
-    <!-- <div class="dashRow">
-      <div class="dashRowMiddle">
-        <line-chart></line-chart>
-      </div>
-    </div> -->
-    <!-- <div class="dashRow">
-      <div class="dashRowGraph">
-        <radar-chart></radar-chart>
-      </div>
-      <div class="dashRowGraph">
-        <pie-chart></pie-chart>
-      </div>
-      <div class="dashRowGraph">
-        <bar-chart></bar-chart>
-      </div>
-    </div> -->
-
-    <!-- <div class="dashRow">
-      <swiper-img class="dashRowSwiper"></swiper-img>
-      <todo-list class="dashRowTodo"></todo-list>
-      <cool-clock class="dashRowClock"></cool-clock>
-    </div> -->
-
     <!-- 空白占位，方便后续内容拓展，同时防止页面下方被hidden -->
     <div class="dashBlock"></div>
   </div>
 </template>
 
-<script lang="ts">
+
+
+<script>
   // 引入css
   import './css/index.css'
   import {
@@ -262,8 +135,8 @@
   import SwiperImg from './components/SwiperImg.vue'
   import TodoList from './components/TodoList.vue'
   import CoolClock from './components/CoolClock.vue'
-
-  @Component({
+  import service from '@/service/index';
+  export default {
     components: {
       LineChart,
       RadarChart,
@@ -272,26 +145,41 @@
       SwiperImg,
       TodoList,
       CoolClock
-    }
-  })
-  export default class DashBoard extends Vue {
-    // box1里面的值
-    createData: string = "26"
-    retreiveData: string = "15"
-    updateData: string = "32"
-    deleteData: string = "50"
-    chartLine: any
-    // box里面的值
-    personnel: string = "56"
-    ApprovalRequired: string = "0"
-    NeedInvestigation: string = "8"
-    InProgress: string = "23"
-    // box2里面的内容
-    person:string='0'
-    depart:string='3'
-    system:string='26'
+    },
+    props: {},
+    data() {
+      return {
+        staff: '',//部门员工
+        examine: '',//审批事件
+        survey: '',//调查事件
+        infor: '',//进行中
+
+        todaynew: 26,//
+        isputes: 15,//
+        bad: 32,//
+        all_infor: 50,//
+
+        person: 0,//
+        depart: 3,//
+        system: 26,//
+        Info:[],
+      };
+    },
+    methods: {},
+    created() {
+      service.dashboard().then(res => {
+        console.log(res)
+        this.Info=res.data.data
+        this.staff=res.data.staff
+        this.examine=res.data.examine
+        this.survey=res.data.survey
+        this.infor=res.data.infor
+      })
+    },
   }
 </script>
+
+
 
 <style lang="less" scoped>
   .dash {

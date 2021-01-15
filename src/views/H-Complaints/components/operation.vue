@@ -30,7 +30,8 @@
           </slot>
         </div>
       </div>
-      <el-drawer title="快捷查看" :visible.sync="drawer" :with-header="false" size="59%">
+      <slot name='drawerss'>
+            <el-drawer title="快捷查看" :visible.sync="drawer" :with-header="false" size="59%">
         <ul
           class="infinite-list"
           style="overflow: auto; height: 870px; texr-aligin: center"
@@ -40,6 +41,8 @@
           </Look>
         </ul>
       </el-drawer>
+      </slot>
+   
       <div class="operation-content">
         <!-- 基本信息 -->
         <div class="box-Information">
@@ -61,7 +64,7 @@
               >
               <el-col :span="4"
                 ><div class="grid-content bg-purple-light">
-                  <span class="value">{{ operationdata.event_number }}</span>
+                  <span class="value">{{ opdata[0].event_number }}</span>
                 </div></el-col
               >
               <el-col :span="4"
@@ -70,7 +73,7 @@
               >
               <el-col :span="4"
                 ><div class="grid-content bg-purple-light">
-                  <!-- <span class="value">{{ operationdata.state.title }}</span> -->
+                  <span class="value">{{ opdata[0].state.title }}</span>
                 </div></el-col
               >
               <el-col :span="4"
@@ -79,7 +82,7 @@
               >
               <el-col :span="4"
                 ><div class="grid-content bg-purple-light">
-                  <span class="value">{{ operationdata.department_id }}</span>
+                  <span class="value">{{ opdata[0].department_id}}</span>
                 </div></el-col
               >
             </el-row>
@@ -91,7 +94,7 @@
               >
               <el-col :span="4"
                 ><div class="grid-content bg-purple-light">
-                  <span class="value">{{ operationdata.handle_name }}</span>
+                  <span class="value">{{ opdata[0].handle_name }}</span>
                 </div></el-col
               >
               <el-col :span="4"
@@ -100,7 +103,7 @@
               >
               <el-col :span="4"
                 ><div class="grid-content bg-purple-light">
-                  <span class="value">{{ operationdata.sex }}</span>
+                  <span class="value">{{ opdata[0].sex }}</span>
                 </div></el-col
               >
               <el-col :span="4"
@@ -109,7 +112,7 @@
               >
               <el-col :span="4"
                 ><div class="grid-content bg-purple-light">
-                  <span class="value">{{ operationdata.age }}{{operationdata.specific_age}}</span>
+                  <span class="value">{{ opdata[0].age }}{{opdata[0].specific_age}}</span>
                 </div></el-col
               >
             </el-row>
@@ -121,8 +124,8 @@
         </div>
 
         <!-- 科室反馈 -->
-        <div class="box-feedback"  >
-          <!-- v-show="operationdata.state.state_val == 10"-->
+        <div class="box-feedback" v-show="operationdata.state.state_val == 1||operationdata.state.state_val == 11" >
+          <!-- -->
           <div class="box-top">
             <el-row type="flex" class="row-bg" justify="space-between">
               <el-col :span="7" :push="1"
@@ -134,17 +137,17 @@
           </div>
           <div class="feedback-content">
             <!-- 操作区域 -->
-            <div>
+            <div v-show="operationdata.state.state_val == 1">
               <el-row type="flex" class="row-bg" justify="space-between">
                 <el-col :span="6" :push="1"
                   ><div class="grid-content bg-purple">
                     <span class="label">当事员工:</span>
                     <el-select v-model="peopel" multiple placeholder="请选择">
                       <el-option
-                        v-for="item in options"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value"
+                        v-for="item in opdata[1].user"
+                        :key="item.id"
+                        :label="item.name"
+                        :value="item.id"
                       >
                       </el-option>
                     </el-select></div
@@ -175,215 +178,21 @@
                 ></el-col>
               </el-row>
             </div>
-          </div>
-        </div>
-        <!-- 审批操作 -->
-        <div class="box-feedback" >
-          <!-- v-show="operationdata.state.state_val !== 10" -->
-          <div class="box-top">
-            <el-row type="flex" class="row-bg" justify="space-between">
-              <el-col :span="7" :push="1"
-                ><div class="grid-content bg-purple">
-                  <span class="feedback-title"><b>审批操作</b></span>
-                </div></el-col
-              >
-            </el-row>
-          </div>
-          <div class="feedback-content">
-            <!-- 操作区域 -->
-            <div>
-              <el-row type="flex" class="row-bg" justify="space-between">
-                <el-col :span="6" :push="1"
-                  ><div class="grid-content bg-purple">
-                    <span class="label">审批操作:</span>
-                    <el-select v-model="checkstate" placeholder="请选择事件状态">
-                      <el-option
-                       
-                      >
-                      <!--  v-for="item in statelist"
-                        :key="item.D_M_ID"
-                        :label="item.D_M_Name"
-                        :value="item.D_M_ID" -->
-                      </el-option>
-                    </el-select></div
-                ></el-col>
-              </el-row>
-              <!-- 经办人信息 -->
-
-              <!-- 退回 -->
-              <div v-show="checkstate == 9">
-                <el-row type="flex" class="row-bg" justify="space-between">
-                  <el-col :span="20" :push="1"
-                    ><div class="grid-content bg-purple">
-                      <span class="label">退回原因:</span>
-                      <el-input
-                        type="textarea"
-                        v-model="preliminary"
-                        placeholder="请填写"
-                        autosize
-                      ></el-input></div
-                  ></el-col>
-                </el-row>
-              </div>
-              <!-- 驳回 -->
-              <div v-show="checkstate == 8">
-                <el-row type="flex" class="row-bg" justify="space-between">
-                  <el-col :span="20" :push="1"
-                    ><div class="grid-content bg-purple">
-                      <span class="label">驳回原因:</span>
-                      <el-input
-                        type="textarea"
-                        v-model="preliminary"
-                        placeholder="请填写"
-                        autosize
-                      ></el-input></div
-                  ></el-col>
-                </el-row>
-              </div>
-              <!-- 科室自查 -->
-              <div v-show="checkstate == 10">
-                <el-row type="flex" class="row-bg" justify="space-between">
-                  <el-col :span="6" :push="1"
-                    ><div class="grid-content bg-purple">
-                      <span class="label">选择下发科室:</span>
-                      <el-select v-model="issue" placeholder="请选择下发科室">
-                        <el-option
-                         
-                        >
-                        <!--  v-for="item in issuelist"
-                          :key="item.D_M_ID"
-                          :label="item.D_M_Name"
-                          :value="item.D_M_ID" -->
-                        </el-option>
-                      </el-select></div
-                  ></el-col>
-                </el-row>
-                <el-row type="flex" class="row-bg" justify="space-between">
-                  <el-col :span="6" :push="1"
-                    ><div class="grid-content bg-purple" style="margin-left: 10px">
-                      <span class="label">输入天数:</span>
-                      <el-input
-                        type="input"
-                        v-model="needtime"
-                        placeholder="请填写"
-                        autosize
-                      ></el-input></div
-                  ></el-col>
-                </el-row>
-              </div>
-              <!-- 院内讨论 -->
-              <div v-show="checkstate == 12">
-                <el-row type="flex" class="row-bg" justify="space-between">
-                  <el-col :span="20" :push="1"
-                    ><div class="grid-content bg-purple">
-                      <span class="label">主要事实:</span>
-                      <el-input
-                        type="textarea"
-                        v-model="facts"
-                        placeholder="请填写"
-                        autosize
-                      ></el-input></div
-                  ></el-col>
-                </el-row>
-                <el-row type="flex" class="row-bg" justify="space-between">
-                  <el-col :span="20" :push="1"
-                    ><div class="grid-content bg-purple">
-                      <span class="label">争议焦点:</span>
-                      <el-input
-                        type="textarea"
-                        v-model="focus"
-                        placeholder="请填写"
-                        autosize
-                      ></el-input></div
-                  ></el-col>
-                </el-row>
-              </div>
-              <!-- 医患沟通 -->
-              <div
-                v-show="
-                  checkstate == 42 ||
-                  checkstate == 14 ||
-                  checkstate == 15 ||
-                  checkstate == 16 ||
-                  checkstate == 17 ||
-                  checkstate == 18||
-                  checkstate==13
-                "
-              >
-                <el-row type="flex" class="row-bg" justify="space-between" >
-                  <el-col :span="6" :push="1"
-                    ><div class="grid-content bg-purple" style="margin-left: 10px">
-                      <span class="label">约定日期:</span>
-                      <el-input
-                        type="input"
-                        v-model="date"
-                        placeholder="请填写"
-                        autosize
-                      ></el-input></div
-                  ></el-col>
-                </el-row>
-                <el-row type="flex" class="row-bg" justify="space-between"  v-show="
-                  checkstate == 42 ||
-                  checkstate == 14 ||
-                  checkstate == 15 ||
-                  checkstate == 16 ||
-                  checkstate == 17 ||
-                  checkstate == 18
-                ">
-                  <el-col :span="20" :push="1"
-                    ><div class="grid-content bg-purple">
-                      <span class="label" v-show="checkstate == 42">初步意见:</span>
-                      <span class="label" v-show="checkstate == 14 || checkstate == 18"
-                        >情况说明:</span
-                      >
-                      <span class="label" v-show="checkstate == 15">处理意见:</span>
-                      <span class="label" v-show="checkstate == 16 || checkstate == 17"
-                        >事实及理由:</span
-                      >
-                      <el-input
-                        type="textarea"
-                        v-model="preliminary"
-                        placeholder="请填写"
-                        autosize
-                      ></el-input></div
-                  ></el-col>
-                </el-row>
-              </div>
-              <!-- 持续改进【科室】 -->
-              <div v-show="checkstate == 19">
-                <el-row type="flex" class="row-bg" justify="space-between">
-                  <el-col :span="6" :push="1"
-                    ><div class="grid-content bg-purple">
-                      <span class="label">选择下发科室:</span>
-                      <el-select v-model="issue" placeholder="请选择下发科室">
-                        <el-option
-                         
-                        >
-                        <!--  v-for="item in issuelist"
-                          :key="item.D_M_ID"
-                          :label="item.D_M_Name"
-                          :value="item.D_M_ID" -->
-                        </el-option>
-                      </el-select></div
-                  ></el-col>
-                </el-row>
-              </div>
-              <!-- 改进完成 -->
-              <div v-show="checkstate == 21">
+              <!-- 科室改进完成 -->
+              <div v-show="operationdata.state.state_val == 11">
                 <el-row type="flex" class="row-bg" justify="space-between">
                   <el-col :span="6" :push="1"
                     ><div class="grid-content bg-purple">
                       <span class="label">选择责任人:</span>
-                      <el-select v-model="liable" placeholder="请选择责任人">
-                        <el-option
-                        
-                        >
-                        <!--   v-for="item in liablelist"
-                          :key="item.D_M_ID"
-                          :label="item.D_M_Name"
-                          :value="item.D_M_ID" -->
-                        </el-option>
-                      </el-select></div
+                       <el-select v-model="peopel" multiple placeholder="请选择">
+                      <el-option
+                        v-for="item in opdata[1].user"
+                        :key="item.id"
+                        :label="item.name"
+                        :value="item.id"
+                      >
+                      </el-option>
+                    </el-select></div
                   ></el-col>
                 </el-row>
                 <el-row type="flex" class="row-bg" justify="space-between">
@@ -423,55 +232,328 @@
                   ></el-col>
                 </el-row>
               </div>
+          </div>
+        </div>
+        <!-- 审批操作 -->
+        <div class="box-feedback" v-show="operationdata.state.state_val !== 1&&operationdata.state.state_val !== 11">
+          <div class="box-top">
+            <el-row type="flex" class="row-bg" justify="space-between">
+              <el-col :span="7" :push="1"
+                ><div class="grid-content bg-purple">
+                  <span class="feedback-title"><b>审批操作</b></span>
+                </div></el-col
+              >
+            </el-row>
+          </div>
+          <div class="feedback-content">
+            <!-- 操作区域 -->
+            <div>
+              <el-row type="flex" class="row-bg" justify="space-between">
+                <el-col :span="6" :push="1"
+                  ><div class="grid-content bg-purple">
+                    <span class="label">审批操作:</span>
+                    <el-select v-model="checkstate" placeholder="请选择事件状态">
+                      <el-option
+                       v-for="item in opdata[1].examine"
+                        :key="item.state_val"
+                        :label="item.title"
+                        :value="item.state_val"
+                      >
+                      </el-option>
+                    </el-select></div
+                ></el-col>
+              </el-row>
+              <!-- 经办人信息 -->
+
+              <!-- 退回 -->
+              <div v-show="checkstate == -2">
+                <el-row type="flex" class="row-bg" justify="space-between">
+                  <el-col :span="20" :push="1"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">退回原因:</span>
+                      <el-input
+                        type="textarea"
+                        v-model="preliminary"
+                        placeholder="请填写"
+                        autosize
+                      ></el-input></div
+                  ></el-col>
+                </el-row>
+              </div>
+              <!-- 驳回 -->
+              <div v-show="checkstate == -1">
+                <el-row type="flex" class="row-bg" justify="space-between">
+                  <el-col :span="20" :push="1"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">驳回原因:</span>
+                      <el-input
+                        type="textarea"
+                        v-model="preliminary"
+                        placeholder="请填写"
+                        autosize
+                      ></el-input></div
+                  ></el-col>
+                </el-row>
+              </div>
+              <!-- 科室自查 -->
+              <div v-show="checkstate == 1">
+                <el-row type="flex" class="row-bg" justify="space-between" style="margin-top:10px">
+                  <el-col :span="6" :push="1"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">选择下发科室:</span>
+                      <br/>
+                       <el-cascader
+                ref="cascader"
+                :options="opdata[1].department"
+                :props="{
+                  value: 'id',
+                  label: 'title',
+                  children: '_child',
+                  multiple: 'true',
+                }"
+                :show-all-levels="false"
+                v-model="comde"
+                clearable
+                @change="getCascaderObj"
+                style="margin-left:10px"
+              ></el-cascader>
+                      </div
+                  ></el-col>
+                </el-row>
+                <el-row type="flex" class="row-bg" justify="space-between">
+                  <el-col :span="6" :push="1"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">输入天数:</span>
+                      <el-input
+                        type="input"
+                         style="margin-left: 10px"
+                        v-model="needtime"
+                        placeholder="请填写"
+                        autosize
+                      ></el-input></div
+                  ></el-col>
+                </el-row>
+              </div>
+              <!-- 院内讨论 -->
+              <div v-show="checkstate == 3">
+                 <el-row type="flex" class="row-bg" justify="space-between" style="margin-top:20px">
+                  <el-col :span="6" :push="1"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">选择抄送部门:</span>
+                      <br/>
+                      <el-cascader
+                        ref="cascader"
+                        :options="opdata[1].department"
+                        :props="{
+                          value: 'id',
+                          label: 'title',
+                          children: '_child',
+                          multiple: 'true'}"
+                          :show-all-levels="false"
+                          v-model="comde"
+                          clearable
+                          @change="getCascaderObj"
+                          style="margin-left:10px"
+                        ></el-cascader></div
+                  ></el-col>
+                </el-row>
+                <el-row type="flex" class="row-bg" justify="space-between">
+                  <el-col :span="20" :push="1"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">主要事实:</span>
+                      <el-input
+                        type="textarea"
+                        v-model="facts"
+                        placeholder="请填写"
+                        autosize
+                      ></el-input></div
+                  ></el-col>
+                </el-row>
+                <el-row type="flex" class="row-bg" justify="space-between">
+                  <el-col :span="20" :push="1"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">争议焦点:</span>
+                      <el-input
+                        type="textarea"
+                        v-model="focus"
+                        placeholder="请填写"
+                        autosize
+                      ></el-input></div
+                  ></el-col>
+                </el-row>
+              </div>
+              <!-- 医患沟通 -->
+              <div
+                v-show="
+                  checkstate == 4 ||
+                  checkstate == 5 ||
+                  checkstate == 6 ||
+                  checkstate == 7 ||
+                  checkstate == 8 ||
+                  checkstate == 9||
+                  checkstate==10
+                "
+              >
+                <el-row type="flex" class="row-bg" justify="space-between" >
+                  <el-col :span="6" :push="1"
+                    ><div class="grid-content bg-purple" >
+                      <span class="label">约定日期:</span>
+                      <el-input
+                      style="margin-left: 10px"
+                        type="input"
+                        v-model="date"
+                        placeholder="请填写"
+                        autosize
+                      ></el-input></div
+                  ></el-col>
+                </el-row>
+                <el-row type="flex" class="row-bg" justify="space-between"  v-show="
+                  checkstate == 4||
+                  checkstate == 6 ||
+                  checkstate == 7 ||
+                  checkstate == 8 ||
+                  checkstate == 9 ||
+                  checkstate == 10
+                ">
+                  <el-col :span="20" :push="1"
+                    ><div class="grid-content bg-purple">
+                      <span class="label" v-show="checkstate == 4">初步意见:</span>
+                      <span class="label" v-show="checkstate == 6 || checkstate == 10"
+                        >情况说明:</span
+                      >
+                      <span class="label" v-show="checkstate == 7">处理意见:</span>
+                      <span class="label" v-show="checkstate == 8 || checkstate == 9"
+                        >事实及理由:</span
+                      >
+                      <el-input
+                        type="textarea"
+                        v-model="preliminary"
+                        placeholder="请填写"
+                        autosize
+                      ></el-input></div
+                  ></el-col>
+                </el-row>
+              </div>
+              <!-- 持续改进【科室】 -->
+              <div v-show="checkstate == 11">
+                <el-row type="flex" class="row-bg" justify="space-between">
+                  <el-col :span="6" :push="1"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">选择下发科室:</span>
+                          <el-cascader
+                ref="cascader"
+                :options="opdata[1].department"
+                :props="{
+                  value: 'id',
+                  label: 'title',
+                  children: '_child',
+                  multiple: 'true',
+                }"
+                :show-all-levels="false"
+                v-model="comde"
+                style="margin-left:10px"
+                clearable
+                @change="getCascaderObj"
+              ></el-cascader>
+                      </div></el-col>
+                </el-row>
+              </div>
+            
+              <!-- 医院改进完成 -->
+              <div v-show="checkstate == 14">
+               
+              
+                <el-row type="flex" class="row-bg" justify="space-between">
+                  <el-col :span="20" :push="1"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">处理意见:</span>
+                      <el-input
+                        type="textarea"
+                        v-model="preliminary"
+                        placeholder="请填写"
+                        autosize
+                      ></el-input></div
+                  ></el-col>
+                </el-row>
+                <el-row type="flex" class="row-bg" justify="space-between">
+                  <el-col :span="20" :push="1"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">管理措施:</span>
+                      <el-input
+                        type="textarea"
+                        v-model="management"
+                        placeholder="请填写"
+                        autosize
+                      ></el-input></div
+                  ></el-col>
+                </el-row>
+              </div>
                 <!-- 结束 -->
-              <div v-show="checkstate == 23">
+              <div v-show="checkstate == 20">
                 <el-row type="flex" class="row-bg" justify="space-between">
                   <el-col :span="6" :push="1"
                     ><div class="grid-content bg-purple">
                       <span class="label">选择责任科室:</span>
-                      <el-select v-model="liable"  placeholder="请选择责任科室">
-                        <el-option
-                        
-                        >
-                        <!--   v-for="item in liablelist"
-                          :key="item.D_M_ID"
-                          :label="item.D_M_Name"
-                          :value="item.D_M_ID" -->
-                        </el-option>
-                      </el-select></div
+                      <br/>
+                      <el-cascader
+                        ref="cascader"
+                        :options="opdata[1].department"
+                        :props="{
+                          value: 'id',
+                          label: 'title',
+                          children: '_child',
+                          multiple: 'true'}"
+                          :show-all-levels="false"
+                          v-model="comde"
+                          clearable
+                          @change="getCascaderObj"
+                           style="margin-left:10px"
+                        ></el-cascader></div
                   ></el-col>
                 </el-row>
                   <el-row type="flex" class="row-bg" justify="space-between">
                   <el-col :span="6" :push="1"
                     ><div class="grid-content bg-purple">
                       <span class="label">投诉类别:</span>
-                      <el-select v-model="liable"  placeholder="请选择投诉类别">
-                        <el-option
-                         
-                        >
-                        <!--  v-for="item in liablelist"
-                          :key="item.D_M_ID"
-                          :label="item.D_M_Name"
-                          :value="item.D_M_ID" -->
-                        </el-option>
-                      </el-select></div
+                      <br/>
+                       <el-cascader
+                        ref="cascader"
+                         placeholder="请选择投诉类别"
+                        :options="opdata[1].event_type"
+                        :props="{
+                          value: 'id',
+                          label: 'title',
+                          multiple: 'true'}"
+                          :show-all-levels="false"
+                          v-model="eventtype"
+                          clearable
+                          @change="getCascaderObj"
+                           style="margin-left:10px"
+                        ></el-cascader>
+                      </div
                   ></el-col>
                 </el-row>
                   <el-row type="flex" class="row-bg" justify="space-between">
                   <el-col :span="6" :push="1"
                     ><div class="grid-content bg-purple">
                       <span class="label">选择责任度:</span>
-                      <el-select v-model="liable"  placeholder="请选择责任度">
-                        <el-option
-                         
-                        >
-                        <!--  v-for="item in liablelist"
-                          :key="item.D_M_ID"
-                          :label="item.D_M_Name"
-                          :value="item.D_M_ID" -->
-                        </el-option>
-                      </el-select></div
-                  ></el-col>
+                      
+                      <br/>
+                       <el-cascader
+                        ref="cascader"
+                         placeholder="请选择责任度"
+                        :options="accountabilitylist"
+                        :props="{
+                          value: 'id',
+                          label: 'title',
+                          multiple: 'true'}"
+                          :show-all-levels="false"
+                          v-model="accountability"
+                          clearable
+                          @change="getCascaderObj"
+                           style="margin-left:10px"
+                        ></el-cascader>
+                      </div></el-col>
                 </el-row>
                 <el-row type="flex" class="row-bg" justify="space-between">
                   <el-col :span="20" :push="1"
@@ -479,7 +561,7 @@
                       <span class="label">直接经济损失:</span>
                       <el-input
                         type="textarea"
-                        v-model="analysis"
+                        v-model="economic"
                         placeholder="请填写"
                         autosize
                       ></el-input></div
@@ -491,7 +573,7 @@
                       <span class="label">处理意见:</span>
                       <el-input
                         type="textarea"
-                        v-model="responsibility"
+                        v-model="preliminary"
                         placeholder="请填写"
                         autosize
                       ></el-input></div
@@ -501,7 +583,7 @@
             </div>
             <div
               class="box-feedback"
-              v-show="checkstate == 8 || checkstate == 9 || checkstate == 7"
+              v-show="checkstate == 0 || checkstate == -1 || checkstate == -2"
             >
               <div class="box-top">
                 <el-row type="flex" class="row-bg" justify="space-between">
@@ -554,15 +636,14 @@
             <!-- 附件 -->
             <div
               v-show="
+                checkstate ==3 ||
+                checkstate == 5 ||
+                checkstate == 6 ||
+                checkstate == 8 ||
+                checkstate == 9||
                 checkstate == 10 ||
-                checkstate == 11 ||
-                checkstate == 13 ||
-                checkstate == 14 ||
-                checkstate == 16 ||
-                checkstate == 17 ||
-                checkstate == 18 ||
-                checkstate == 21 ||
-                checkstate == 22
+                checkstate == 12 ||
+                checkstate == 14
               "
             >
               <el-row
@@ -592,20 +673,20 @@
                 type="flex"
                 class="row-bg"
                 justify="space-between"
-                v-show="filelist.length !== 0"
+                v-show="fileList.length !== 0"
               >
                 <el-col :span="22" :push="1"
                   ><div class="grid-content bg-purple">
                     <el-table
-                      :data="filelist"
+                      :data="fileList"
                       style="width: 100%"
                       :header-cell-style="getRowClass"
                     >
-                      <el-table-column prop="ID" label="ID" width="width">
+                      <el-table-column prop="name" label="ID" width="width">
                       </el-table-column>
                       <el-table-column prop="filename" label="文件名" width="width">
                       </el-table-column>
-                      <el-table-column prop="describe" label="描述" width="width">
+                      <!-- <el-table-column prop="describe" label="描述" width="width">
                       </el-table-column>
                       <el-table-column prop="filesize" label="文件大小" width="width">
                       </el-table-column>
@@ -614,7 +695,7 @@
                       <el-table-column prop="filetype" label="文件类型" width="width">
                       </el-table-column>
                       <el-table-column prop="uploader" label="上传人员" width="width">
-                      </el-table-column>
+                      </el-table-column> -->
                       <el-table-column fixed="right" label="操作" width="100">
                         <template slot-scope="scope">
                           <slot name="fileoper">
@@ -638,12 +719,11 @@
         <!-- 提交 -->
         <div class="box-button">
           <slot name="submit">
-            <el-button type="primary" @click="submit()" icon="el-icon-finished" v-show="checkstate !== 10 && checkstate !== 19&&checkstate !== 9&&checkstate !== 8">确认提交</el-button>
-            <el-button type="primary" v-show="checkstate == 10 || checkstate == 19"
-              >下发</el-button
+            <el-button type="primary" @click="submit()" icon="el-icon-finished" v-show="checkstate !== -2 && checkstate !== -1&&checkstate !== 11&&checkstate !== 1||operationdata.state.state_val==11">确认提交</el-button>
+            <el-button type="primary" v-show="checkstate == 11 || checkstate == 1" @click="issuesss()">下发</el-button
             >
-            <el-button type="primary" @click="send()" v-show="checkstate == 9">退回</el-button>
-            <el-button type="primary" @click="reject()" v-show="checkstate == 8">驳回</el-button>
+            <el-button type="primary" @click="send()" v-show="checkstate == -2">退回</el-button>
+            <el-button type="primary" @click="reject()" v-show="checkstate == -1">驳回</el-button>
           </slot>
         </div>
       </div>
@@ -669,18 +749,31 @@
                 placeholder="请输入文件描述"
               ></el-input>
             </el-form-item>
+            
             <el-form-item label="上传附件：" class="uploadfile">
-              <el-input
+              <!-- <el-input
                 v-model="uploadfile"
                 type="file"
                 style="border: none"
                 class="uploadfile"
-              ></el-input>
+              ></el-input> -->
+              <!--  -->
+            <el-upload
+                 class="upload-demo"
+                 style="margin-left:-30px"
+                 ref="upload"
+                 action="https://jsonplaceholder.typicode.com/posts/"
+                 :on-preview="handlePreview"
+                 :on-remove="handleRemove"
+                 :on-progress='aa'
+                 :auto-upload="false">
+  <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+</el-upload>
             </el-form-item>
           </el-form>
-          <el-button type="primary" icon="el-icon-upload" class="uploadfiles"
+          <!-- <el-button type="primary" icon="el-icon-upload" class="uploadfiles"
             >上传文件</el-button
-          >
+          > -->
           <span slot="footer" class="dialog-footer">
             <el-button @click="upfiles = false">取 消</el-button>
             <el-button type="primary" @click="upfiles = false">确 定</el-button>
@@ -693,14 +786,25 @@
 <script>
 import service from "@/service";
 import Look from "../components/Look";
-
+import qs from 'qs'
 export default {
-  props: { operationdata: "" ,opdata:''},
+  props: { operationdata:{} ,opdata:{}},
   components: {
     Look,
   },
   data() {
     return {
+      token:'',
+      economic:'',//直接经济损失
+      management:'',//管理措施
+      eventtype:'',//投诉类别
+      accountability:'',//责任度
+      accountabilitylist:[
+        {id:1,title:"一级"},
+         {id:2,title:"二级"},
+          {id:3,title:"三级"}
+      ],
+      comde:'',//
       date: "", //约定日期
       liable: "", //责任人
       liablelist: [], //责任人列表
@@ -717,7 +821,7 @@ export default {
       responsibility: "", //责任意见
       measures: "", //整改措施
       preliminary: "", //初步意见
-      checkstate: 0, //选中状态
+      checkstate: "请选择", //选中状态
       statelist: [], //状态列表
       drawer: false,
       uploadfile: "", //上传附件
@@ -736,31 +840,510 @@ export default {
           lable: "终止",
         },
       ],
-      filelist: [
-        // {
-        //   ID: "FJ20201229001",
-        //   filename: "调解书",
-        //   describe: "这是一个调解书",
-        //   filesize: "32.23kb",
-        //   uptime: "2020-12-02 20:56:37",
-        //   filetype: "jpg",
-        //   uploader: "王丽",
-        // }
+      fileList: [
       ],
     };
   },
   methods: {
+    aa(event, file, fileList){
+      console.log(event, file, fileList)
+    },
+     handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePreview(file) {
+        console.log(file);
+      },
+      handleExceed(files, fileList) {
+        this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+      },
+      beforeRemove(file, fileList) {
+        return this.$confirm(`确定移除 ${ file.name }？`);
+      },
+    getCascaderObj() {
+      console.log(this.comde);
+    },
+    //下发
+    issuesss(){
+       if(this.checkstate==1){//下发科室调查
+       if(this.comde!==''&&this.comde!==null&&this.needtime!==''){
+        let comde = this.comde.map((x) => {
+          return x[0];
+        });
+          console.log(comde)
+        let data={
+        event_number:this.$parent.opdata[0].event_number,//编号
+        department_ids:comde,//下发科室
+        reply_time:this.needtime// 输入天数
+      }
+      console.log(qs.stringify(data))
+      service.Issuedepartment(data).then(res=>{
+        console.log(res)
+         if(res.code==20010){
+          this.$message({
+                  message: res.msg,
+                  type: "success",
+                  duration: 1000,
+                });
+        }
+        else{
+          this.$message({
+                  message: res.msg,
+                  type: "error",
+                  duration: 1000,
+                });
+        }
+      })
+       }
+       else if(this.comde==''||this.comde==null){
+          this.$message({
+                  message: '请选择下发科室',
+                  type: "error",
+                  duration: 1000,
+                });
+       }
+        else if(this.needtime==''||this.needtime==null){
+          this.$message({
+                  message: '请选择输入科室调查天数',
+                  type: "error",
+                  duration: 1000,
+                });
+       }
+       }
+       else if(this.checkstate==11){
+          if(this.comde!==''&&this.comde!==null){
+        let comde = this.comde.map((x) => {
+          return x[0];
+        });
+          console.log(comde)
+        let data={
+        event_number:this.$parent.opdata[0].event_number,//编号
+        department_ids:comde//下发科室
+      }
+      console.log(qs.stringify(data))
+      service.ImproveDepartment(data).then(res=>{
+        console.log(res)
+         if(res.code==20010){
+          this.$message({
+                  message: res.msg,
+                  type: "success",
+                  duration: 1000,
+                });
+        }
+        else{
+          this.$message({
+                  message: res.msg,
+                  type: "error",
+                  duration: 1000,
+                });
+        }
+      })
+       }
+       }
+    },
     //提交
     submit(){
-
+     if(this.$parent.opdata[0].state.state_val==1){//科室提交
+     let params={
+        event_number:this.$parent.opdata[0].event_number,//编号
+        investigator_ids:this.peopel,//当事员工
+        diagnose_feedback:this.treatment,//诊疗经过
+        event_reply:this.response//针对答复
+      }
+       service.departmentsubmit(params).then(res=>{
+        console.log(res)
+         if(res.code==20010){
+          this.$message({
+                  message: res.msg,
+                  type: "success",
+                  duration: 1000,
+                });
+        }
+        else{
+          this.$message({
+                  message: res.msg,
+                  type: "error",
+                  duration: 1000,
+                });
+        }
+      })
+      }
+      else if(this.checkstate==3){//院内讨论
+         if(this.comde!==''&&this.comde!==null&&this.facts!==''&&this.focus!==''){
+        let comde = this.comde.map((x) => {
+          return x[0];
+        });
+       let params={
+        event_number:this.$parent.opdata[0].event_number,//编号
+        copy_department:comde,//抄送部门
+        examine_textone:this.facts,//主要事实
+        examine_texttwo:this.focus//争议焦点
+      }
+       service.discussion(params).then(res=>{
+        console.log(res)
+        if(res.code==20010){
+          this.$message({
+                  message: res.msg,
+                  type: "success",
+                  duration: 1000,
+                });
+        }
+        else{
+          this.$message({
+                  message: res.msg,
+                  type: "error",
+                  duration: 1000,
+                });
+        }
+      })
+      }
+     else if(this.comde!==''||this.comde!==null){
+       this.$message({
+                  message: '请选择抄送部门',
+                  type: "error",
+                  duration: 1000,
+                });
+     }
+      else if(this.facts==''){
+       this.$message({
+                  message: '主要事实不能为空',
+                  type: "error",
+                  duration: 1000,
+                });
+     }
+     else if(this.focus==''){
+       this.$message({
+                  message: '争议焦点不能为空',
+                  type: "error",
+                  duration: 1000,
+                });
+     }
+      }
+      else if(this.checkstate==4){//医患沟通中
+      let params={
+        event_number:this.$parent.opdata[0].event_number,//编号
+        examine_textone:this.preliminary,//初步意见
+        appointment_time:this.date//约定时间
+      }
+       service.communicate(params).then(res=>{
+        console.log(res)
+         if(res.code==20010){
+          this.$message({
+                  message: res.msg,
+                  type: "success",
+                  duration: 1000,
+                });
+        }
+        else{
+          this.$message({
+                  message: res.msg,
+                  type: "error",
+                  duration: 1000,
+                });
+        }
+      })
+      }
+      else if(this.checkstate==5){//人民调解
+      let params={
+        event_number:this.$parent.opdata[0].event_number,//编号
+        appointment_time:this.date//约定时间
+      }
+      service.mediate(params).then(res=>{
+        console.log(res)
+           if(res.code==20010){
+          this.$message({
+                  message: res.msg,
+                  type: "success",
+                  duration: 1000,
+                });
+        }
+        else{
+          this.$message({
+                  message: res.msg,
+                  type: "error",
+                  duration: 1000,
+                });
+        }
+      })
+      }
+      else if(this.checkstate==6){//责任鉴定中
+       let params={
+        event_number:this.$parent.opdata[0].event_number,//编号
+        examine_textone:this.preliminary,//情况说明
+        appointment_time:this.date//约定时间
+      }
+       service.appraisal(params).then(res=>{
+        console.log(res)
+           if(res.code==20010){
+          this.$message({
+                  message: res.msg,
+                  type: "success",
+                  duration: 1000,
+                });
+        }
+        else{
+          this.$message({
+                  message: res.msg,
+                  type: "error",
+                  duration: 1000,
+                });
+        }
+      })
+      }
+      else if(this.checkstate==7){//患方推迟
+       let params={
+        event_number:this.$parent.opdata[0].event_number,//编号
+        examine_textone:this.preliminary,//处理意见
+        appointment_time:this.date//约定时间
+      }
+       service.delay(params).then(res=>{
+        console.log(res)
+           if(res.code==20010){
+          this.$message({
+                  message: res.msg,
+                  type: "success",
+                  duration: 1000,
+                });
+        }
+        else{
+          this.$message({
+                  message: res.msg,
+                  type: "error",
+                  duration: 1000,
+                });
+        }
+      })
+      }
+      else if(this.checkstate==8){//中止调节
+      let params={
+        event_number:this.$parent.opdata[0].event_number,//编号
+        examine_textone:this.preliminary,//事实及理由
+        appointment_time:this.date//约定时间
+      }
+       service.suspension(params).then(res=>{
+        console.log(res)
+           if(res.code==20010){
+          this.$message({
+                  message: res.msg,
+                  type: "success",
+                  duration: 1000,
+                });
+        }
+        else{
+          this.$message({
+                  message: res.msg,
+                  type: "error",
+                  duration: 1000,
+                });
+        }
+      })
+      }
+      else if(this.checkstate==9){//终止调节
+      let params={
+        event_number:this.$parent.opdata[0].event_number,//编号
+        examine_textone:this.preliminary,//事实及理由
+        appointment_time:this.date//约定时间
+      }
+      service.termination(params).then(res=>{
+        console.log(res)
+           if(res.code==20010){
+          this.$message({
+                  message: res.msg,
+                  type: "success",
+                  duration: 1000,
+                });
+        }
+        else{
+          this.$message({
+                  message: res.msg,
+                  type: "error",
+                  duration: 1000,
+                });
+        }
+      })
+      }
+      else if(this.checkstate==10){//司法诉讼
+       let params={
+        event_number:this.$parent.opdata[0].event_number,//编号
+        examine_textone:this.preliminary,//情况说明
+        appointment_time:this.date//约定时间
+      }
+       service.litigation(params).then(res=>{
+        console.log(res)
+           if(res.code==20010){
+          this.$message({
+                  message: res.msg,
+                  type: "success",
+                  duration: 1000,
+                });
+        }
+        else{
+          this.$message({
+                  message: res.msg,
+                  type: "error",
+                  duration: 1000,
+                });
+        }
+      })
+      }
+      else if(this.$parent.opdata[0].state.state_val==11){//改进完成（科室）
+       let params={
+        event_number:this.$parent.opdata[0].event_number,//编号
+        investigator_ids:this.peopel,//当事员工
+        examine_textone:this.analysis,//根因分析
+        examine_texttwo:this.responsibility,//责任意见
+        examine_textthree:this.measures//整改措施
+      }
+      console.log(params)
+        service.ImproveDepartmentsubmission(params).then(res=>{
+        console.log(res)
+           if(res.code==20010){
+          this.$message({
+                  message: res.msg,
+                  type: "success",
+                  duration: 1000,
+                });
+        }
+        else{
+          this.$message({
+                  message: res.msg,
+                  type: "error",
+                  duration: 1000,
+                });
+        }
+      })
+      }
+       else if(this.checkstate==13){//持续改进（医院）
+         let params={
+        event_number:this.$parent.opdata[0].event_number//编号
+      }
+         service.Hospitalimprovement(params).then(res=>{
+        console.log(res)
+           if(res.code==20010){
+          this.$message({
+                  message: res.msg,
+                  type: "success",
+                  duration: 1000,
+                });
+        }
+        else{
+          this.$message({
+                  message: res.msg,
+                  type: "error",
+                  duration: 1000,
+                });
+        }
+      })
+      }
+       else if(this.checkstate==14){//改进完成（医院）
+        let params={
+        event_number:this.$parent.opdata[0].event_number,//编号
+        examine_textone:this.preliminary,//处理意见
+        examine_texttwo:this.management//管理措施
+      }
+         service.ImprovementEnd(params).then(res=>{
+        console.log(res)
+           if(res.code==20010){
+          this.$message({
+                  message: res.msg,
+                  type: "success",
+                  duration: 1000,
+                });
+        }
+        else{
+          this.$message({
+                  message: res.msg,
+                  type: "error",
+                  duration: 1000,
+                });
+        }
+      })
+      }
+       else if(this.checkstate==20){//已结束
+        if(this.comde!==''&&this.comde!==null&&this.accountability!==''&&this.accountability!==null&&this.eventtype!==''&&this.eventtype!==null){
+        let comde = this.comde.map((x) => {
+          return x[0];
+        });
+        let accountability = this.accountability.map((x) => {
+          return x[0];
+        });
+        let eventtype = this.eventtype.map((x) => {
+          return x[0];
+        });
+       let params={
+        event_number:this.$parent.opdata[0].event_number,//编号
+        responsibility_did:comde,//责任科室
+        event_type:eventtype,//投诉类型
+         responsibility_how:accountability,//责任度
+          examine_textone:this.economic,//直接经济损失
+           examine_texttwo:this.preliminary,//处理意见
+      }
+      console.log(params)
+        service.end(params).then(res=>{
+        console.log(res)
+           if(res.code==20010){
+          this.$message({
+                  message: res.msg,
+                  type: "success",
+                  duration: 1000,
+                });
+        }
+        else{
+          this.$message({
+                  message: res.msg,
+                  type: "error",
+                  duration: 1000,
+                });
+        }
+      })
+        }
+      }
     },
     // 退回
     send(){
-      
+      if(this.checkstate==-2){
+        service.send(this.$parent.opdata[0].event_number,this.preliminary).then(res=>{
+            console.log(res)
+            if(res.code === 20010){
+               this.$message({
+                  message: res.msg,
+                  type: "success",
+                  duration: 1000,
+                });
+            }
+            else {
+                 this.$message({
+                  message: res.msg,
+                  type: "error",
+                  duration: 1000,
+                });
+            }
+        })
+      }
     },
     // 驳回
     reject(){
-
+       if(this.checkstate==-1){
+        console.log(this.$parent.opdata[0].event_number)
+        console.log(this.preliminary)
+        service.reject(this.$parent.opdata[0].event_number,this.preliminary).then(res=>{
+            console.log(res)
+               if(res.code==20010){
+          this.$message({
+                  message: res.msg,
+                  type: "success",
+                  duration: 1000,
+                });
+        }
+        else{
+          this.$message({
+                  message: res.msg,
+                  type: "error",
+                  duration: 1000,
+                });
+        }
+        })
+      }
     },
     handleClose() {
       this.dialogVisibless = false;
@@ -791,6 +1374,7 @@ export default {
     },
   },
   created() {
+   this.token=sessionStorage.getItem('token')
     // service.AddManaged(4).then((res) => {
     //   this.statelist = res.data;
     // });

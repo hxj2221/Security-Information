@@ -15,7 +15,7 @@
         </p>
         <p>
           <span class="tit">事件编号：</span>
-          <span>TS202011150001</span>
+          <span>{{event_num}}</span>
         </p>
       </div>
       <div class="txt">
@@ -212,6 +212,7 @@
     props: {},
     data() {
       return {
+        event_num:'',
         patient_name: '',
         sex: '',
         age: '',
@@ -238,7 +239,7 @@
         this.$emit("pageDetail")
 
       },
-      // 事件格式化
+      // 时间格式化
       getdate:function(row, column) { 
         var date = row[column.property]; 
      if (date == undefined) { 
@@ -276,6 +277,7 @@
     created() {
       let that = this;
       this.bus.$on('detail', function (item) {
+        that.event_num=item.event_num
         that.patient_name = item.patient_name;
         that.sex = item.sex;
         that.age = item.age;

@@ -50,8 +50,9 @@
               <el-col :span="6"
                 ><div class="grid-content bg-purple">
                   <span
-                    ><span>事件编号：</span
-                    >{{ }}</span
+                    ><span>事件编号：</span >
+                    {{lookdata.event_number }}
+                    </span
                   >
                 </div></el-col
               >
@@ -61,7 +62,9 @@
                 ><div class="grid-content bg-purple">
                   <span
                     ><span>投诉日期：</span
-                    >{{  }}</span
+                    >
+                    {{ lookdata.create_time}}
+                    </span
                   >
                 </div></el-col
               >
@@ -69,8 +72,9 @@
               <el-col :span="6"
                 ><div class="grid-content bg-purple">
                   <span
-                    ><span>事发日期：</span
-                    >{{  }}</span
+                    ><span>事发日期：</span>
+                    {{ lookdata.occur_time }}
+                    </span
                   >
                 </div></el-col
               >
@@ -79,8 +83,9 @@
               <el-col :span="6"
                 ><div class="grid-content bg-purple">
                   <span
-                    ><span>事件性质：</span
-                    >{{  }}</span
+                    ><span>事件性质：</span>
+                    {{lookdata.character }}
+                    </span
                   >
                 </div></el-col
               >
@@ -88,8 +93,9 @@
               <el-col :span="6"
                 ><div class="grid-content bg-purple">
                   <span
-                    ><span>事件状态：</span
-                    >{{  }}</span
+                    ><span>事件状态：</span >
+                    {{ lookdata.state.title}}
+                    </span
                   >
                 </div></el-col
               >
@@ -98,12 +104,155 @@
           </div>
           <div class="look-content-box">
             <!-- 审批节点 -->
-            <div class="box-Information">
+           
+            <!-- 科室调查 -->
+            <div v-if="lookdata.investigate">
+            <div
+              class="box-contents"
+              v-for="item in lookdata.investigate" :key="item.investigate_number"
+            >
+              <div class="box-top">
+                <el-row type="flex" class="row-bg" justify="space-between">
+                  <el-col :span="3" :push="2">
+                    <div class="grid-content bg-purple">
+                      <span v-if="item.investigate_number==1"
+                        ><b>第一次调查</b></span
+                      >
+                       <span v-else-if="item.investigate_number==2"
+                        ><b>第二次调查</b></span
+                      >
+                      <span  v-else-if="item.investigate_number==3"
+                        ><b>第三次调查</b></span
+                      >
+                       <span v-else-if="item.investigate_number==4"
+                        ><b>第四次调查</b></span
+                      >
+
+                    </div></el-col
+                  >
+                  <el-col :span="3"
+                    ><div class="grid-content bg-purple-light"></div
+                  ></el-col>
+                  <el-col :span="9" :pull="1"
+                    ><div class="grid-content bg-purple">
+                      <span><b>下发时间：</b>{{item.Issue_time}}</span>
+                    </div></el-col
+                  >
+                </el-row>
+              </div>
+              <div class="box-content clearfix">
+                <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">参与调查科室：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20">
+                    <div class="grid-content bg-purple-light">
+                      <span><a v-for="items in item.department" :key="items" style="margin-right:5px;margin-left:10px">{{items}}</a></span>
+                    </div></el-col
+                  >
+                </el-row>
+              </div>
+              <div v-if="item.investigate">
+              <div
+              v-for="items in item.investigate" :key="items.department.title"
+              >
+                <div
+                  class="box-content-child clearfix"
+                >
+                  <el-row>
+                    <el-col :span="4"
+                      ><div class="grid-content bg-purple">
+                        <span class="label">调查科室：</span>
+                      </div></el-col
+                    >
+                    <el-col :span="20">
+                      <div class="grid-content bg-purple-light">
+                        <span class="value">{{items.department.title}}</span>
+                      </div></el-col
+                    >
+                  </el-row>
+                  <el-row>
+                    <el-col :span="4"
+                      ><div class="grid-content bg-purple">
+                        <span class="label">负责人：</span>
+                      </div></el-col
+                    >
+                    <el-col :span="20">
+                      <div class="grid-content bg-purple-light">
+                        <span class="value">{{items.dutyuser.name}}/{{items.dutyuser.phone}}</span>
+                      </div></el-col
+                    >
+                  </el-row>
+                  <el-row>
+                    <el-col :span="4"
+                      ><div class="grid-content bg-purple">
+                        <span class="label">当事员工：</span>
+                      </div></el-col
+                    >
+                    <el-col :span="20">
+                      <div class="grid-content bg-purple-light">
+                        <span class="value" v-if="items.investigator_ids">{{items.investigator_ids}}</span>
+                        <span class="value" v-else>无</span>
+                      </div></el-col
+                    >
+                  </el-row>
+                  <el-row>
+                    <el-col :span="4"
+                      ><div class="grid-content bg-purple">
+                        <span class="label">反馈时间：</span>
+                      </div></el-col
+                    >
+                    <el-col :span="20">
+                      <div class="grid-content bg-purple-light">
+                        <span class="value" v-if="items.feedback_time">{{items.feedback_time}}</span>
+                        <span class="value" v-else style="color:red">未反馈</span>
+                      </div></el-col
+                    >
+                  </el-row>
+                  <el-row>
+                    <el-col :span="4"
+                      ><div class="grid-content bg-purple">
+                        <span class="label">诊疗经过：</span>
+                      </div></el-col
+                    >
+                    <el-col :span="20">
+                      <div class="grid-content bg-purple-light">
+                        <span class="value" v-if="items.diagnose_feedback">{{items.diagnose_feedback}}</span>
+                        <span class="value" v-else>无</span>
+                      </div></el-col
+                    >
+                  </el-row>
+                  <el-row>
+                    <el-col :span="4"
+                      ><div class="grid-content bg-purple">
+                        <span class="label">针对性答复：</span>
+                      </div></el-col
+                    >
+                    <el-col :span="20">
+                      <div class="grid-content bg-purple-light">
+                        <span class="value" v-if="items.event_reply">{{items.event_reply}}</span>
+                        <span class="value" v-else>无</span>
+                      </div></el-col>
+                  </el-row>
+                  <div style="border-bottom: 0.5px solid #797979; width: 100%"></div>
+                  <div class="file clearfix" v-if="items.enclosure" >
+                    <div v-for="itemsss in items.enclosure" :key="itemsss.file_name">
+                      <span class="filename">{{itemsss.file_name}}</span>
+                      <span class="filedetaile">查看</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                </div>
+                <div v-if="item.examine.length!==0&&item.examine!==''&&item.examine!==null">
+               <div class="box-Information" v-for="itemssss in item.examine" :key="itemssss.department.title">
               <div class="box-top">
                 <el-row type="flex" class="row-bg" justify="space-between">
                   <el-col :span="3" :push="2"
                     ><div class="grid-content bg-purple">
-                      <span><b>科室自查</b></span>
+                      <span><b>{{itemssss.event_state.title}}</b></span>
                     </div></el-col
                   >
                   <el-col :span="3"
@@ -125,7 +274,7 @@
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">医务处</span>
+                      <span class="value">{{itemssss.department.title}}</span>
                     </div></el-col
                   >
                 </el-row>
@@ -137,7 +286,7 @@
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">魏忠文/13955551234</span>
+                      <span class="value">{{itemssss.user.name}}/{{itemssss.user.phone}}</span>
                     </div></el-col
                   >
                 </el-row>
@@ -149,7 +298,7 @@
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">已受理→科室自查 </span>
+                      <span class="value">{{itemssss.event_state_before.title}}→{{itemssss.event_state.title}} </span>
                     </div></el-col
                   >
                 </el-row>
@@ -161,7 +310,7 @@
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">血液科</span>
+                      <span class="value">{{itemssss.Issue}}</span>
                     </div></el-col
                   >
                 </el-row>
@@ -190,136 +339,19 @@
                   >
                 </el-row>
                 <div style="border-bottom: 0.5px solid #797979; width: 100%"></div>
-                <div class="file clearfix">
-                  <div>
-                    <span class="filename">文件名</span>
-                    <span class="filedetaile">查看</span>
-                  </div>
-                  <div>
-                    <span class="filename">文件名</span>
-                    <span class="filedetaile">查看</span>
-                  </div>
-                  <div>
-                    <span class="filename">文件名</span>
-                    <span class="filedetaile">查看</span>
-                  </div>
-                </div>
-              </div>
-              <hr />
-            </div>
-            <!-- 科室调查 -->
-            <div
-              class="box-contents"
-            >
-              <div class="box-top">
-                <el-row type="flex" class="row-bg" justify="space-between">
-                  <el-col :span="3" :push="2">
-                    <div class="grid-content bg-purple">
-                      <span
-                        ><b>{{}}</b></span
-                      >
-                    </div></el-col
-                  >
-                  <el-col :span="3"
-                    ><div class="grid-content bg-purple-light"></div
-                  ></el-col>
-                  <el-col :span="9" :pull="1"
-                    ><div class="grid-content bg-purple">
-                      <span><b>下发时间：</b>{{}}</span>
-                    </div></el-col
-                  >
-                </el-row>
-              </div>
-              <div class="box-content clearfix">
-                <el-row>
-                  <el-col :span="4"
-                    ><div class="grid-content bg-purple">
-                      <span class="label">参与调查科室：</span>
-                    </div></el-col
-                  >
-                  <el-col :span="20">
-                    <div class="grid-content bg-purple-light">
-                      <span>{{ }}</span>
-                    </div></el-col
-                  >
-                </el-row>
-              </div>
-              <div
-              >
-                <div
-                  class="box-content-child clearfix"
-                >
-                  <el-row>
-                    <el-col :span="4"
-                      ><div class="grid-content bg-purple">
-                        <span class="label">调查科室：</span>
-                      </div></el-col
-                    >
-                    <el-col :span="20">
-                      <div class="grid-content bg-purple-light">
-                        <span class="value">{{  }}</span>
-                      </div></el-col
-                    >
-                  </el-row>
-                  <el-row>
-                    <el-col :span="4"
-                      ><div class="grid-content bg-purple">
-                        <span class="label">负责人：</span>
-                      </div></el-col
-                    >
-                    <el-col :span="20">
-                      <div class="grid-content bg-purple-light">
-                        <span class="value">{{ }}</span>
-                      </div></el-col
-                    >
-                  </el-row>
-                  <el-row>
-                    <el-col :span="4"
-                      ><div class="grid-content bg-purple">
-                        <span class="label">当事员工：</span>
-                      </div></el-col
-                    >
-                    <el-col :span="20">
-                      <div class="grid-content bg-purple-light">
-                        <span class="value">{{ }}</span>
-                      </div></el-col
-                    >
-                  </el-row>
-                  <el-row>
-                    <el-col :span="4"
-                      ><div class="grid-content bg-purple">
-                        <span class="label">反馈时间：</span>
-                      </div></el-col
-                    >
-                    <el-col :span="20">
-                      <div class="grid-content bg-purple-light">
-                        <span class="value">{{  }}</span>
-                      </div></el-col
-                    >
-                  </el-row>
-                  <el-row>
-                    <el-col :span="4"
-                      ><div class="grid-content bg-purple">
-                        <span class="label">诊疗经过：</span>
-                      </div></el-col
-                    >
-                    <el-col :span="20">
-                      <div class="grid-content bg-purple-light">
-                        <span class="value">{{ }}</span>
-                      </div></el-col
-                    >
-                  </el-row>
-                  <div style="border-bottom: 0.5px solid #797979; width: 100%"></div>
-                  <div class="file clearfix">
-                    <div >
-                      <span class="filename"></span>
+                  <div class="file clearfix" v-if="itemssss.enclosure" >
+                    <div v-for="itemsssss in itemssss.enclosure" :key="itemsssss.file_name">
+                      <span class="filename">{{itemsssss.file_name}}</span>
                       <span class="filedetaile">查看</span>
                     </div>
                   </div>
-                </div>
+               
               </div>
+            </div>
+            </div>
               <hr />
             </div>
+             </div>
             <!-- 投诉人信息 -->
             <div class="box-Information">
               <div class="box-top">
@@ -340,7 +372,7 @@
                   >
                   <el-col :span="4"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">张大牛</span>
+                      <span class="value">{{lookdata.complaint_name}}</span>
                     </div></el-col
                   >
                   <el-col :span="4"
@@ -349,7 +381,7 @@
                   >
                   <el-col :span="4"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">男</span>
+                      <span class="value">{{lookdata.sex}}</span>
                     </div></el-col
                   >
                   <el-col :span="4"
@@ -358,7 +390,7 @@
                   >
                   <el-col :span="4"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">65</span>
+                      <span class="value">{{lookdata.age}}{{lookdata.specific_age}}</span>
                     </div></el-col
                   >
                 </el-row>
@@ -369,7 +401,7 @@
                   >
                   <el-col :span="4"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">上级转办</span>
+                      <span class="value">{{lookdata.complaint_type.title}}</span>
                     </div></el-col
                   >
                   <el-col :span="4"
@@ -379,7 +411,8 @@
                   >
                   <el-col :span="4"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">本人</span>
+                      <span class="value" v-if="lookdata.inpatientrelation!==null&&lookdata.inpatientrelation!==''">{{lookdata.inpatientrelation.title}}</span>
+                      <span  class="value" v-else>无</span>
                     </div></el-col
                   >
                   <el-col :span="4"
@@ -388,7 +421,21 @@
                   >
                   <el-col :span="4"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">3日</span>
+                      <span class="value" v-if="lookdata.reply_time!==null&&lookdata.reply_time!==''">{{lookdata.reply_time}}日</span>
+                       <span class="value" v-else-if="lookdata.reply_time==null||lookdata.reply_time==''">{{lookdata.reply_time}}日</span>
+                    </div></el-col
+                  >
+                </el-row>
+                 <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">经办人信息：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value" v-if="lookdata.handle_name">{{lookdata.handle_name}}/{{lookdata.handle_phone}}</span>
+                        <span class="value" v-else>无</span>
                     </div></el-col
                   >
                 </el-row>
@@ -400,7 +447,7 @@
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">心血管内科、血液科</span>
+                      <span class="value">{{lookdata.department_id}}</span>
                     </div></el-col
                   >
                 </el-row>
@@ -412,7 +459,8 @@
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">费用、医院制度、服务态度</span>
+                      <span class="value" v-if="lookdata.event_type">{{lookdata.event_type}}</span>
+                        <span class="value" v-else>无</span>
                     </div></el-col
                   >
                 </el-row>
@@ -424,11 +472,9 @@
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value"
-                        >患者后颈部疼痛伴四肢无力8小时急诊入院，5小时后接入手术室行手术治疗，现患者截瘫，家属认为要求办理转院手续</span
-                      >
-                    </div></el-col
-                  >
+                      <span class="value" v-if="lookdata.cause">{{lookdata.cause}}</span>
+                      <span class="value" v-else>无</span>
+                    </div></el-col>
                 </el-row>
                 <div
                   style="
@@ -439,9 +485,10 @@
                 ></div>
               </div>
               <hr />
-            </div>
+            </div> 
             <!-- 患者信息 -->
-            <div class="box-Information">
+            <div v-if="lookdata.patient!==''&&lookdata.patient!==null&&lookdata.patient.length!==0" >
+            <div class="box-Information" v-for="item in lookdata.patient" :key="item.age"> 
               <div class="box-top">
                 <el-row type="flex" class="row-bg" justify="space-between">
                   <el-col :span="3" :push="2"
@@ -460,7 +507,7 @@
                   >
                   <el-col :span="4"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">张大牛</span>
+                      <span class="value">{{item.name}}</span>
                     </div></el-col
                   >
                   <el-col :span="4"
@@ -469,7 +516,7 @@
                   >
                   <el-col :span="4"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">男</span>
+                      <span class="value">{{item.sex}}</span>
                     </div></el-col
                   >
                   <el-col :span="4"
@@ -478,7 +525,7 @@
                   >
                   <el-col :span="4"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">65</span>
+                      <span class="value">{{item.age}}</span>
                     </div></el-col
                   >
                 </el-row>
@@ -490,7 +537,7 @@
                   >
                   <el-col :span="4"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">社保</span>
+                      <span class="value">{{item.医保}}</span>
                     </div></el-col
                   >
                   <el-col :span="4"
@@ -499,7 +546,7 @@
                   >
                   <el-col :span="4"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">13898761234</span>
+                      <span class="value">{{item.手机号}}</span>
                     </div></el-col
                   >
                   <el-col :span="4"
@@ -508,7 +555,7 @@
                   >
                   <el-col :span="4"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">2020-11-15</span>
+                      <span class="value">{{item.就诊日期}}</span>
                     </div></el-col
                   >
                 </el-row>
@@ -520,7 +567,7 @@
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">普通外科一病区</span>
+                      <span class="value">{{item.病房}}</span>
                     </div></el-col
                   >
                 </el-row>
@@ -532,7 +579,7 @@
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">306</span>
+                      <span class="value">{{item.病房}}</span>
                     </div></el-col
                   >
                 </el-row>
@@ -545,7 +592,7 @@
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
                       <span class="value"
-                        >患者后颈部疼痛伴四肢无力8小时急诊入院，5小时后接入手术室行手术治疗，现患者截瘫，家属认为要求办理转院手续</span
+                        >{{item.诊断信息}}</span
                       >
                     </div></el-col
                   >
@@ -559,6 +606,7 @@
                 ></div>
               </div>
             </div>
+            </div>
           </div>
         </div>
       </slot>
@@ -569,185 +617,12 @@
 import service from "@/service/index";
 export default {
   props:{
-    lookdata: {}
+    lookdata:''
   },
   components: {},
   data() {
     return {
-      data: [
-        {
-          GetLoop: [
-            {
-              Participating: [
-                {
-                  D_Names: "科室一、科室四",
-                  Num: "第1次科室调查",
-                  Time: "2020-12-29 00:00:00",
-                  SurveyProgress: [
-                    [
-                      {
-                        D_Name: "科室一",
-                        Department_Head: "李四/12345678921",
-                        StaffInvolved: "无",
-                        EndTime: "2020-01-01 00:00:00",
-                        I_After: "无",
-                        I_Reply: "无",
-                        E_Name: [
-                          {
-                            E_Number: "55555",
-                            E_Name: "附件五",
-                          },
-                          {
-                            E_Number: "666666",
-                            E_Name: "附件六",
-                          },
-                          {
-                            E_Number: "55555",
-                            E_Name: "附件五",
-                          },
-                          {
-                            E_Number: "55555",
-                            E_Name: "附件五",
-                          },
-                          {
-                            E_Number: "55555",
-                            E_Name: "附件五",
-                          },
-                        ],
-                      },
-                    ],
-                    [
-                      {
-                        D_Name: "科室四",
-                        Department_Head: "李四/1248787821",
-                        StaffInvolved: "无",
-                        EndTime: "2020-01-01 00:00:00",
-                        I_After: "1111",
-                        I_Reply: "1111",
-                        E_Name: [
-                          {
-                            E_Number: "55555",
-                            E_Name: "附件五",
-                          },
-                          {
-                            E_Number: "666666",
-                            E_Name: "附件六",
-                          },
-                          {
-                            E_Number: "55555",
-                            E_Name: "附件五",
-                          },
-                        ],
-                      },
-                    ],
-                  ],
-                },
-              ],
-              ApprovalDepartment: [
-                {
-                  Time: "2020-12-31 00:00:00",
-                  Department: "医务处",
-                  Department_Head: "王五/12345678921",
-                  UpdateState: "无→345",
-                  D_Name: "科室一、科室四",
-                  Complaint_Type: "456",
-                  Duty: "无",
-                  PersonLiable: "张三/科室一",
-                  CCDepartment: "无",
-                  A_Opinion: "审批意见意见意见意见",
-                  E_Name: [
-                    {
-                      E_Number: "55555",
-                      E_Name: "附件五",
-                    },
-                    {
-                      E_Number: "666666",
-                      E_Name: "附件六",
-                    },
-                    {
-                      E_Number: "55555",
-                      E_Name: "附件五",
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              Participating: [
-                {
-                  D_Names: "科室五",
-                  Num: "第2次科室调查",
-                  Time: "2020-12-29 00:00:00",
-                  SurveyProgress: [
-                    [
-                      {
-                        D_Name: "科室五",
-                        Department_Head: "张三/12345678921",
-                        StaffInvolved: "无",
-                        EndTime: "2020-01-01 00:00:00",
-                        I_After: "4444",
-                        I_Reply: "4444",
-                        E_Name: [
-                          {
-                            E_Number: "55555",
-                            E_Name: "附件五",
-                          },
-                          {
-                            E_Number: "666666",
-                            E_Name: "附件六",
-                          },
-                          {
-                            E_Number: "55555",
-                            E_Name: "附件五",
-                          },
-                        ],
-                      },
-                    ],
-                  ],
-                },
-              ],
-              ApprovalDepartment: [],
-            },
-          ],
-          BasicInformation: [
-            {
-              H_Name: "兰州大学第二医院",
-              D_I_Number: "YY12143254376587",
-              Complaint_Time: "2020-12-31",
-              Incident_Time: "2020-12-31",
-              Dispute_State: "纠纷",
-              Event_State: "科室自查",
-            },
-          ],
-          ComplaintsInformation: [
-            {
-              C_I_Name: "投诉人一号",
-              C_I_Gender: 0,
-              C_I_Age: 18,
-              Complaint_Mode: "345",
-              D_M_Name: "345",
-              Reply_Time: 3,
-              D_Name: "科室二、科室三",
-              Complaint_Type: "456",
-              Complain_Reason: "原因",
-            },
-          ],
-          PatientInformation: [
-            {
-              P_I_Name: "患者一号",
-              P_I_Gender: 0,
-              P_I_Age: 18,
-              Insurance_Type: 0,
-              P_I_Phone: 13445678945,
-              Hz_Diagnosis_Time: "2020-01-01 00:00:00",
-              Inpatient_Area: "病区",
-              Ward_Number: "病房",
-              Hz_Outpatient_Diagnosis: "诊断",
-              P_I_Medical_Card: "123465",
-            },
-          ],
-        },
-      ],
+     
     };
   },
   methods: {},

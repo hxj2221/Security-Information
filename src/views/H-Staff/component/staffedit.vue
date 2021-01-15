@@ -195,7 +195,7 @@
                 class="dialog-input-text"
                 type="password"
                 v-model="addStaff.password"
-              placeholder="******"
+                placeholder="******"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -259,9 +259,15 @@ export default {
         address:[], //地址
       },
       department: "", //所属科室
+<<<<<<< HEAD
      
       role_id:'',
       department_id:'',
+=======
+      auth_grouap: "", //角色
+      role_id: "",
+      department_id: "",
+>>>>>>> bfdcad8f8689f9775516ad3d70d41f71e243222e
       //年龄循环
       optionages: [
         {
@@ -302,9 +308,13 @@ export default {
   },
   watch: {
     childed(res) {
+<<<<<<< HEAD
       console.log(res.auth_grouap[0].id)
       console.log(res)
       // console.log(res.address); //数据已经拿到
+=======
+      console.log(res); //数据已经拿到
+>>>>>>> bfdcad8f8689f9775516ad3d70d41f71e243222e
       this.id = res.id;
       this.addStaff.job_number = res.job_number;
       this.addStaff.name = res.name;
@@ -317,13 +327,23 @@ export default {
       this.addStaff.position = res.position;
       this.addStaff.age = res.age;
       this.addStaff.cardnumber = res.cardnumber;
+<<<<<<< HEAD
       // this.department = res.department[0].id;
       this.department_id=res.department_id;
+=======
+      this.department = res.department[0].title;
+      this.department_id = res.department_id;
+>>>>>>> bfdcad8f8689f9775516ad3d70d41f71e243222e
       this.addStaff.status = res.status;
       // this.addStaff.head_department = res.head_department;
       this.addStaff.position = res.position;
+<<<<<<< HEAD
       // this.addStaff.auth_grouap = res.auth_grouap;
       this.role_id=res.role_id;
+=======
+      this.auth_grouap = res.auth_grouap[0].title;
+      this.role_id = res.role_id;
+>>>>>>> bfdcad8f8689f9775516ad3d70d41f71e243222e
       this.addStaff.status = res.status;
     },
   },
@@ -331,8 +351,8 @@ export default {
     // 保存
     staffaddvueyes() {
       let params = {
-        password:this.addStaff.password,
-        job_number:this.addStaff.job_number,
+        password: this.addStaff.password,
+        job_number: this.addStaff.job_number,
         id: this.id,
         name: this.addStaff.name,
         sex: this.addStaff.sex,
@@ -350,8 +370,12 @@ export default {
       };
       service.staffEdit(params).then((res) => {
         console.log(res);
+<<<<<<< HEAD
         
         if(res.code==20010){
+=======
+        if ((res.code = "20010")) {
+>>>>>>> bfdcad8f8689f9775516ad3d70d41f71e243222e
           const loading = this.$loading({
             lock: true,
             text: "保存中",
@@ -361,12 +385,16 @@ export default {
           setTimeout(() => {
             loading.close();
             this.reload();
-             this.$parent.fathstaffno();
-            
+            this.$parent.fathstaffno();
           }, 1500);
+<<<<<<< HEAD
         }
         else{
            this.$message.error(res.msg);
+=======
+        } else {
+          this.$message.error("名字已存在");
+>>>>>>> bfdcad8f8689f9775516ad3d70d41f71e243222e
         }
       });
     },
@@ -399,7 +427,6 @@ export default {
       self.optiondepart = item.department;
     });
   },
- 
 };
 </script>
 <style scoped>

@@ -114,6 +114,9 @@
             <el-form-item label="后端接口" width="120">
               <el-input v-model="powaps" auto-complete="off"></el-input>
             </el-form-item>
+            <el-form-item label="前端路由" width="120">
+              <el-input v-model="powweb" auto-complete="off"></el-input>
+            </el-form-item>
           </el-form>
           <div slot="footer">
             <el-button @click="dialogVisible = false">取 消</el-button>
@@ -171,6 +174,9 @@
             <el-form-item label="后端接口" width="120">
               <el-input v-model="editpowaps" auto-complete="off"></el-input>
             </el-form-item>
+            <el-form-item label="前端路由" width="120">
+              <el-input v-model="editpowweb" auto-complete="off"></el-input>
+            </el-form-item>
           </el-form>
           <div slot="footer">
             <el-button @click="dialogedit = false">取 消</el-button>
@@ -185,6 +191,7 @@
 <script>
 import service from "@/service/index";
 export default {
+  inject: ["reload"],
   data() {
     return {
       name: "", //权限名
@@ -198,6 +205,7 @@ export default {
       powlab: "",
       powicon: "",
       powaps: "",
+      powweb: "",
       editseldata: [],
       editselvalue: 2,
       editpowpx: "",
@@ -205,6 +213,7 @@ export default {
       editpowlab: "",
       editpowicon: "",
       editpowaps: "",
+      editpowweb: "",
       editid: "",
     };
   },
@@ -227,10 +236,12 @@ export default {
         icon: this.powicon,
         pid: this.selvalue,
         name: this.powaps,
+        url: this.powweb,
       };
       service.savepower(data).then((res) => {
         //alert(res);
         console.log(res);
+        this.reload();
       });
       this.dialogVisible = false;
     },
@@ -260,6 +271,7 @@ export default {
         this.editpowicon = res.data.info.icon;
         this.editpowaps = res.data.info.name;
         this.editid = res.data.info.id;
+        this.editpowweb = res.data.info.url;
       });
     },
     // 编辑权限确认
@@ -272,6 +284,7 @@ export default {
         title: this.editpowlab,
         pid: this.editselvalue,
         id: this.editid,
+        url: this.editpowweb,
       };
       console.log(data);
       service.editsavepower(data).then((res) => {

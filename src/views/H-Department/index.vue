@@ -28,51 +28,48 @@
           hasChildren: 'hasChildren',
         }"
       >
-        <el-table-column label="序号" type="index" >
-        </el-table-column>
+        <el-table-column label="序号" type="index"> </el-table-column>
         <el-table-column prop="number" label="科室编号"> </el-table-column>
         <el-table-column prop="title" label="科室名称"> </el-table-column>
         <el-table-column prop="usernumber" label="员工数量"> </el-table-column>
-        <!-- <el-table-column prop="title" label="上级科室"> </el-table-column> -->
+        <el-table-column prop="head_department.name" label="负责人">
+        </el-table-column>
         <el-table-column prop="create_uid" label="创建人员"></el-table-column>
 
-          <el-table-column
-            prop="create_time"
-            label="创建时间"
-          ></el-table-column>
-          <el-table-column label="科室状态">
-            <template slot-scope="scope">
-              <el-switch
-                v-model="scope.row.status"
-                :active-value="1"
-                :inactive-value="0"
-                active-color="#02538C"
-                inactive-color="#B9B9B9"
-                @change="changeSwitch($event, scope.row, scope.row.id)"
-              />
-            </template>
-          </el-table-column>
+        <el-table-column prop="create_time" label="创建时间"></el-table-column>
+        <el-table-column label="科室状态">
+          <template slot-scope="scope">
+            <el-switch
+              v-model="scope.row.status"
+              :active-value="1"
+              :inactive-value="0"
+              active-color="#02538C"
+              inactive-color="#B9B9B9"
+              @change="changeSwitch($event, scope.row, scope.row.id)"
+            />
+          </template>
+        </el-table-column>
 
-          <el-table-column label="操作">
-            <template slot-scope="scope">
-              <el-button
-                class="departEdit"
-                size="mini"
-                @click="handleEdit(scope.row.id)"
-                >编辑</el-button
-              >
-              <el-button
-                class="departDel"
-                size="mini"
-                type="danger"
-                @click="handleDelete(scope.row.id)"
-                >删除</el-button
-              >
-            </template>
-          </el-table-column>
-        </el-table>
-        
- <!-- 分页 -->
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-button
+              class="departEdit"
+              size="mini"
+              @click="handleEdit(scope.row.id)"
+              >编辑</el-button
+            >
+            <el-button
+              class="departDel"
+              size="mini"
+              type="danger"
+              @click="handleDelete(scope.row.id)"
+              >删除</el-button
+            >
+          </template>
+        </el-table-column>
+      </el-table>
+
+      <!-- 分页 -->
       <div class="departpag">
         <div class="block">
           <el-pagination
@@ -87,9 +84,8 @@
           </el-pagination>
         </div>
       </div>
-      </div>
+    </div>
 
-  
     <!-- 新增 -->
     <adddep v-show="adddep"></adddep>
     <!-- 编辑 -->
@@ -108,7 +104,7 @@ export default {
   data() {
     return {
       departvue: true,
-      currentPage:1,
+      currentPage: 1,
       adddep: false,
       editdep: false,
       currentRow: [], //选中的值
@@ -125,7 +121,7 @@ export default {
   },
   computed: {},
   methods: {
-       handleSizeChange(val) {
+    handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
     },
     handleCurrentChange(val) {
@@ -166,7 +162,7 @@ export default {
           message: "科室启用成功",
         });
       } else {
-         this.$message.error('科室停用成功');
+        this.$message.error("科室停用成功");
       }
     },
     // 序号
@@ -184,7 +180,7 @@ export default {
       service.departedit(param).then((res) => {
         console.log(res);
         this.departchildedit = res;
-       this.departchildedit=res.user.sex
+        //this.departchildedit = res.user.sex;
       });
     },
     //删除：
