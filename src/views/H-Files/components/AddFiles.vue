@@ -17,7 +17,6 @@ import service from '@/service/index';
     <!-- 内容 -->
     <div class="newlyContent">
       <div class="TableContent">
-<<<<<<< HEAD
         <el-table
           :data="tableData"
           row-key="id"
@@ -47,23 +46,6 @@ import service from '@/service/index';
             </template>
           </el-table-column>
 
-=======
-        <el-table :data="tableData">
-          <el-table-column prop="weight" label="权重">
-          </el-table-column>
-          <el-table-column prop="class_name" label="分类名称" width="190">
-          </el-table-column>
-          <el-table-column prop="file_num" label="文件数量" width="190">
-          </el-table-column>
-          <el-table-column prop="update_time" label="更新时间" width="190">
-          </el-table-column>
-          <el-table-column prop="status" label="状态" width="190">
-            <template slot-scope="scope">
-              <el-switch v-model="scope.row.status" :active-value="1" :inactive-value="2" active-color="#02538C"
-                inactive-color="#B9B9B9" @change="changeSwitch($event, scope.row)"></el-switch>
-            </template>
-          </el-table-column>
->>>>>>> 8aa1a27aaa5d9e934f8676fcd3b129cca062cd23
           <el-table-column prop="uid" label="修改人员" width="190">
           </el-table-column>
           <el-table-column label="操作">
@@ -132,15 +114,11 @@ import service from '@/service/index';
           <span class="one_level">一级分类选择“无”</span>
         </el-form-item>
         <el-form-item label="分类标题" required :label-width="formLabelWidth">
-<<<<<<< HEAD
           <el-input
             style="width: 360px"
             v-model="form.title"
             placeholder="请输入分类标题"
           ></el-input>
-=======
-          <el-input style="width:360px" v-model="form.title" placeholder="请输入分类标题"></el-input>
->>>>>>> 8aa1a27aaa5d9e934f8676fcd3b129cca062cd23
         </el-form-item>
         <el-form-item label="分类权重" required :label-width="formLabelWidth">
           <el-input
@@ -230,7 +208,6 @@ import service from '@/service/index';
 </template>
 
 <script>
-<<<<<<< HEAD
 import service from "@/service/index";
 export default {
   inject: ["reload"],
@@ -274,27 +251,6 @@ export default {
         class_name: this.form.title,
         weight: this.form.weight,
         pid: this.editselvalue,
-=======
-  import service from '@/service/index'
-  export default {
-    components: {
-
-    },
-    props: {},
-    data() {
-      return {
-        // 新增弹框
-        dialogFormVisible: false,
-        form: {
-          region: '',
-          title: '',
-          weight: '',
-        },
-        formLabelWidth: '120px',
-        // 编辑弹框
-        dialogVisible: false,
-        tableData: [],
->>>>>>> 8aa1a27aaa5d9e934f8676fcd3b129cca062cd23
       };
       service.docadd(data).then((res) => {
         console.log(res);
@@ -305,7 +261,6 @@ export default {
         }
       });
     },
-<<<<<<< HEAD
     changeSwitch(val, row, id) {
       let data = {
         id: id,
@@ -372,35 +327,6 @@ export default {
     },
   },
 };
-=======
-    methods: {
-      // 返回
-      back() {
-        this.$emit('newly')
-      },
-      // 删除
-      deleteRow(index, rows) {
-        rows.splice(index, 1);
-      },
-      // 编辑
-      handleClick(row) {
-        console.log(row);
-        this.dialogVisible = !this.dialogVisible
-      },
-      // 状态
-      changeSwitch(val, row) {
-        
-      }
-    },
-    created() {
-      // 分类列表
-      service.FileAddList().then(res => {
-        // console.log(res)
-        this.tableData = res.data
-      })
-    }
-  }
->>>>>>> 8aa1a27aaa5d9e934f8676fcd3b129cca062cd23
 </script>
 <style>
 </style>

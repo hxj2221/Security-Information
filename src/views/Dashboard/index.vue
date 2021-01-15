@@ -33,28 +33,28 @@
     <div class="box1">
       <div class="dashRow">
         <el-card class="dashRowItem" shadow="always">
-          {{createData}}
+          {{todaynew}}
           <p class="dashRowItemKey">
             <img src="../../assets/image/u267.png" alt="">
           </p>
           <p class="dashRowItemTitle">今日新增投诉</p>
         </el-card>
         <el-card class="dashRowItem" shadow="always">
-          {{retreiveData}}
+          {{isputes}}
           <p class="dashRowItemKey">
             <img src="../../assets/image/u274.png" alt="">
           </p>
           <p class="dashRowItemTitle">今日新增纠纷</p>
         </el-card>
         <el-card class="dashRowItem" shadow="always">
-          {{updateData}}
+          {{bad}}
           <p class="dashRowItemKey">
             <img src="../../assets/image/u281.png" alt="">
           </p>
           <p class="dashRowItemTitle">今日新增不良</p>
         </el-card>
         <el-card class="dashRowItem" shadow="always">
-          {{deleteData}}
+          {{all_infor}}
           <p class="dashRowItemKey">
             <img src="../../assets/image/u285.png" alt="">
           </p>
@@ -72,7 +72,7 @@
               </div>
               <div class="con_info" v-for="item in Info" :key="item.id">
                 <div class="info">
-                  <p style="font-size:13px;color:#999">投诉人：{{item.patients}}</p>
+                  <p style="font-size:13px;color:#999">投诉人：{{item.complaint_name}}</p>
                   <p><span style="color:#52C1F5">●</span>{{item.son}}</p>
                 </div>
                 <div class="info">
@@ -81,7 +81,7 @@
                 </div>
                 <div class="info">
                   <p>事件性质：{{item.character}}</p>
-                  <p>患者：{{item.complaint_name}}</p>
+                  <p>患者：{{item.patients}}</p>
                 </div>
               </div>
             </div>
@@ -153,6 +153,7 @@
         examine: '',//审批事件
         survey: '',//调查事件
         infor: '',//进行中
+
         todaynew: 26,//
         isputes: 15,//
         bad: 32,//

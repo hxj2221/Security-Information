@@ -19,6 +19,10 @@ export default {
   PCode: async (params: Object) => {
     return await service.post(`${baseUrl}api/login/hssmsphone`, params).then(res => res).catch(err => err)
   },
+  // 工作台
+  dashboard: async () => {
+    return await service.get(`${baseUrl}api/home/Lz_workbench`).then(res => res).catch(err => err)
+  },
   // 投诉列表
   ComList: async () => {
     return await service.get(`${baseUrl}api/tsevent/lists`).then(res => res).catch(err => err)
