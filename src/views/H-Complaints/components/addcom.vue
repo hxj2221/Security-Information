@@ -342,7 +342,6 @@ export default {
 
   methods: {
     getCascaderObj() {
-      console.log(this.comde);
     },
     //保存提交事件
     keepform() {
@@ -369,7 +368,6 @@ export default {
         handle_name: this.agentname, //经办人姓名
         handle_phone: this.agentphone, //经办人手机号
       };
-      console.log(params);
       service.AddComponent(params).then((res) => {
         console.log(res);
         if(res.code==20010){
