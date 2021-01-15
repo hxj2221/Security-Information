@@ -281,7 +281,6 @@ export default {
   accountman: async () => {
     return await service.get(`${baseUrl}api/home/user_home`).then(res => res).catch(err => err)
   },
-<<<<<<< HEAD
   // 文章列表 (post)
   detailList: async () => {
     return await service.post(`${baseUrl}api/article/article_cate`).then(res => res).catch(err => err)
@@ -321,7 +320,7 @@ export default {
   // 医患详情
   details: async (data: any) => {
     return await service.post(`${baseUrl}api/record/record_details`, data).then(res => res).catch(err => err)
-=======
+  },
   // 角色权限
   rolepowlist: async () => {
     return await service.get(`${baseUrl}api/part/displayauthgroup`).then(res => res).catch(err => err)
@@ -366,6 +365,5 @@ export default {
   // 文件库文件上传
   fileupload: async (data: object) => {
     return await service.post(`${baseUrl}api/file/addfile`, data).then(res => res).catch(err => err)
->>>>>>> bfdcad8f8689f9775516ad3d70d41f71e243222e
   },
 }
