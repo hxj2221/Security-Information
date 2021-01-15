@@ -121,7 +121,7 @@ export default {
   },
   // 确认不良新增
   badAdd: async (params: any) => {
-    return await service.post(`${baseUrl}/api/bad/bad_add`, params).then(res => res).catch(err => err)
+    return await service.post(`${baseUrl}api/bad/bad_add`, params).then(res => res).catch(err => err)
   },
   // 不良中的下拉框
   AdeSel: async () => {
