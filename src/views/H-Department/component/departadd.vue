@@ -17,9 +17,11 @@
           <el-col :span="8">
             <el-form-item label="科室编号" disabled>
               <el-input
+                disabled
                 class="dialog-input-text"
                 type="input"
                 autosize
+                v-model="numb"
                 placeholder="10001"
               ></el-input>
             </el-form-item>
@@ -118,12 +120,14 @@ export default {
       valuestatus: 1,
       adddepartsel: "",
       options: [],
+      numb: "",
     };
   },
   created() {
     service.departadd().then((res) => {
       console.log(res.data);
-      this.options = res.data;
+      this.options = res.data.lists;
+      this.numb = res.data.number;
     });
   },
   methods: {

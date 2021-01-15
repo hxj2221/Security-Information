@@ -104,8 +104,8 @@ export default {
     return await service.post(`${baseUrl}api/Complaintprocess/event_uploadfiles`, data).then(res => res).catch(err => err)
   },
   // 不良事件列表
-  AdeList: async (params:any) => {
-    return await service.get(`${baseUrl}api/bad/lists`,{params}).then(res => res).catch(err => err)
+  AdeList: async (params: any) => {
+    return await service.get(`${baseUrl}api/bad/lists`, { params }).then(res => res).catch(err => err)
   },
   // 不良检索
   AdeSearch: async (params: any) => {
@@ -270,7 +270,6 @@ export default {
   rolepowlist: async () => {
     return await service.get(`${baseUrl}api/part/displayauthgroup`).then(res => res).catch(err => err)
   },
-<<<<<<< HEAD
 
   // 文件库新增分类list
   doclist: async () => {
@@ -306,12 +305,13 @@ export default {
   },
   // 文件库文件分类
   filetree: async () => {
-    return await service.get(`${baseUrl}api/file/classtree`).then(res => res).catch(err => err)
+    return await service.get(`${baseUrl}api/file/addfile`).then(res => res).catch(err => err)
   },
   // 文件库文件上传
   fileupload: async (data: object) => {
     return await service.post(`${baseUrl}api/file/addfile`, data).then(res => res).catch(err => err)
-=======
+  },
+
   // 文件库
   // 文件列表
   FileList: async () => {
@@ -324,6 +324,6 @@ export default {
   // 工作台
   dashboard: async () => {
     return await service.get(`${baseUrl}api/home/Lz_workbench`).then(res => res).catch(err => err)
->>>>>>> 8aa1a27aaa5d9e934f8676fcd3b129cca062cd23
+
   },
 }

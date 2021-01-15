@@ -10,7 +10,6 @@
         :header-cell-style="getRowClass"
         row-key="id"
         border
-        default-expand-all
         :tree-props="{
           children: '_child',
           hasChildren: 'hasChildren',
@@ -51,9 +50,12 @@
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="400">
           <template slot-scope="scope">
-            <!-- <el-button @click="handleClick(scope.row)" type="text" size="small"
+            <el-button
+              @click="handleClick(scope.row.id)"
+              type="text"
+              size="small"
               >添加子级</el-button
-            > -->
+            >
             <el-button
               type="text"
               size="small"
@@ -66,6 +68,7 @@
           </template>
         </el-table-column>
       </el-table>
+      <!-- 添加权限 -->
       <div>
         <el-dialog
           title="添加权限"
@@ -80,7 +83,7 @@
                 @change="selchang"
                 placeholder="请选择"
               >
-                <el-option value="0">作为顶级 </el-option>
+                <el-option label="作为顶级" value="0"> </el-option>
                 <template v-for="v in seldata">
                   <el-option
                     :key="v.id"
@@ -124,6 +127,7 @@
           </div>
         </el-dialog>
       </div>
+      <!-- 添加子级 -->
 
       <!-- 编辑权限 -->
       <div>
@@ -197,9 +201,10 @@ export default {
       name: "", //权限名
       dialogVisible: false,
       dialogedit: false,
+      dialogaddson: false,
       tableData: [],
       seldata: [], //权限下拉框
-      selvalue: "",
+      selvalue: "0",
       powpx: "",
       powstatu: "",
       powlab: "",
@@ -215,6 +220,15 @@ export default {
       editpowaps: "",
       editpowweb: "",
       editid: "",
+      addsonseldata: [],
+      addsonselvalue: 2,
+      addsonpowpx: "",
+      addsonpowstatu: "",
+      addsonpowlab: "",
+      addsonpowicon: "",
+      addsonpowaps: "",
+      addsonpowweb: "",
+      addsonid: "",
     };
   },
   created() {
@@ -248,6 +262,7 @@ export default {
     // 添加权限
     add() {
       this.dialogVisible = true;
+      this.selvalue = "0";
       service.addpower().then((res) => {
         console.log(res);
         this.seldata = res.data;
@@ -274,6 +289,40 @@ export default {
         this.editpowweb = res.data.info.url;
       });
     },
+    // 添加下级
+    handleClick(id) {
+      this.dialogVisible = true;
+      console.log(id);
+      let param = {
+        id: id,
+      };
+      service.addpower().then((res) => {
+        console.log(res);
+        this.seldata = res.data;
+      });
+      service.getpowid(param).then((res) => {
+        console.log(res.data);
+        this.addsonseldata = res.data.lists;
+        this.addsonselvalue = res.data.info.pid;
+        this.selvalue = res.data.info.id;
+      });
+    },
+    // 添加下级确认
+    addsondialog() {
+      let data = {
+        sort: this.addsonpowpx,
+        status: this.addsonpowstatu,
+        name: this.addsonpowaps,
+        icon: this.addsonpowicon,
+        title: this.addsonpowlab,
+        pid: this.addsonselvalue,
+        id: this.addsonid,
+        url: this.addsonpowweb,
+      };
+      service.savepower(data).then((res) => {
+        console.log(res);
+      });
+    },
     // 编辑权限确认
     editdialog() {
       let data = {
@@ -289,6 +338,9 @@ export default {
       console.log(data);
       service.editsavepower(data).then((res) => {
         console.log(res);
+        if ((res.code = "20010")) {
+          this.reload();
+        }
       });
       this.dialogedit = false;
     },
@@ -299,6 +351,9 @@ export default {
       };
       service.delpow(param).then((res) => {
         console.log(res);
+        if (res.code == "20010") {
+          this.reload();
+        }
       });
     },
     dialogeditright() {
@@ -307,7 +362,7 @@ export default {
     dialogBeforeCl() {
       this.dialogedit = false;
     },
-    handleClick() {},
+
     getRowClass({ rowIndex }) {
       if (rowIndex == 0) {
         return "background:#c2c5f6;color:#000";
