@@ -32,7 +32,8 @@
         <el-table-column prop="number" label="科室编号"> </el-table-column>
         <el-table-column prop="title" label="科室名称"> </el-table-column>
         <el-table-column prop="usernumber" label="员工数量"> </el-table-column>
-        <!-- <el-table-column prop="title" label="上级科室"> </el-table-column> -->
+        <el-table-column prop="head_department.name" label="负责人">
+        </el-table-column>
         <el-table-column prop="create_uid" label="创建人员"></el-table-column>
 
         <el-table-column prop="create_time" label="创建时间"></el-table-column>
@@ -179,7 +180,7 @@ export default {
       service.departedit(param).then((res) => {
         console.log(res);
         this.departchildedit = res;
-        this.departchildedit = res.user.sex;
+        //this.departchildedit = res.user.sex;
       });
     },
     //删除：

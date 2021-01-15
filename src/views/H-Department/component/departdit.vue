@@ -76,7 +76,25 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="8"> </el-col>
+          <el-col :span="8">
+            <el-form-item class="ssks" label="选择负责人" required>
+              <el-select
+                class="dialog-input-text"
+                v-model="editchargetsel"
+                style="margin-top: 6px"
+                placeholder="请选择"
+                @change="chargesel"
+              >
+                <el-option
+                  v-for="item in charge"
+                  :key="item.id"
+                  :label="item.name"
+                  :value="item.id"
+                >
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
           <el-col :span="8"> </el-col>
           <el-col :span="8"> </el-col>
         </el-row>
@@ -99,10 +117,12 @@ export default {
       departNameipt: "",
       valuestatus: 0,
       editdepartsel: "",
+      editchargetsel: "",
       options: [],
       departpxipt: "",
       id: "",
       pid: "",
+      charge: [],
     };
   },
 
@@ -115,11 +135,15 @@ export default {
       this.departpxipt = newValue.data.info.sort;
       this.id = newValue.data.info.id;
       this.pid = newValue.data.info.pid;
+      this.charge = newValue.data.userlist;
     },
   },
   methods: {
     departsel() {
       console.log(this.editdepartsel);
+    },
+    chargesel() {
+      console.log(this.editchargetsel);
     },
     departeditvueyes() {
       let data = {
@@ -128,6 +152,7 @@ export default {
         id: this.id,
         sort: this.departpxipt,
         pid: this.editdepartsel,
+        head_department: this.editchargetsel,
       };
       console.log(data);
       service.departeditsave(data).then((res) => {

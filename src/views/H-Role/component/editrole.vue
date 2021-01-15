@@ -221,44 +221,6 @@ export default {
     roleaddvueno() {
       this.$parent.fathroleno();
     },
-    //   模块功能
-    isTitleChecked(data) {
-      var _selected = data.selected;
-      var _name = data.name;
-      // 验证selected中是否含有全部的item的id 如果是 证明title要选中
-      return _name.every(function (item) {
-        return _selected.indexOf(item) != -1;
-      });
-    },
-    changeTitleChecked(data, event) {
-      if (event.target.checked === true) {
-        data.name.forEach(function (item) {
-          data.selected.indexOf(item) === -1 && data.selected.push(item);
-        });
-        console.log(data.name);
-      } else {
-        data.selected = [];
-      }
-    },
-    changeAllChecked(event) {
-      if (event.target.checked === true) {
-        this.datas.forEach(function (data) {
-          data.name.forEach(function (item) {
-            data.selected.indexOf(item) === -1 && data.selected.push(item);
-          });
-          console.log(data.id);
-        });
-      } else {
-        this.datas.forEach(function (data) {
-          data.selected = [];
-        });
-      }
-    },
-    isAllChecked() {
-      return this.datas.every(function (data) {
-        return data.selected.length === data.name.length;
-      });
-    },
     changesonc(e) {
       console.log(e);
     },
