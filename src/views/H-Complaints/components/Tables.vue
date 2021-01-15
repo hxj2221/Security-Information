@@ -127,7 +127,7 @@ export default {
   methods: {
     // 查询
     search(){
-      // console.log(this.number, this.currentPage4,this.complaintname,this.complainttype,this.complaintstatus,this.complaintsate)
+      console.log(this.number, this.currentPage4,this.complaintname,this.complainttype,this.complaintstatus,this.complaintsate)
       if((this.complaintsate!==''&&this.complaintsate!==null)||this.complaintname!==''||this.complainttype!==''||this.complaintstatus!==''){
       // 将标准时间转为时间戳
       if(this.complaintsate!==''&&this.complaintsate!==null){
