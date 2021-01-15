@@ -106,8 +106,6 @@
       <div class="category_statistics_paging">
        <div class="block">
     <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
       :current-page="currentPage"
       :page-sizes="[8, 10, 20]"
       :page-size="8"

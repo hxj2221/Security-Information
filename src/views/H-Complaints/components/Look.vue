@@ -104,7 +104,107 @@
           </div>
           <div class="look-content-box">
             <!-- 审批节点 -->
-           
+             <!-- 科室改进 -->
+            <div >
+            <div class="box-Information" v-for="item in lookdata.patient" :key="item.age"> 
+              <div class="box-top">
+                  <el-row type="flex" class="row-bg" justify="space-between">
+                  <el-col :span="3" :push="2">
+                    <div class="grid-content bg-purple">
+                      <span ><b>科室改进</b></span>
+                    </div></el-col>
+                  <el-col :span="3"
+                    ><div class="grid-content bg-purple-light"></div
+                  ></el-col>
+                  <el-col :span="9" :pull="1"
+                    ><div class="grid-content bg-purple">
+                      <span><b>完成时间：</b>2021-5-17</span>
+                    </div></el-col>
+                </el-row>
+              </div>
+              <div class="box-content">
+                <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">改进科室：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">儿科</span>
+                    </div></el-col
+                  >
+                </el-row>
+                <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">负责人：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">小黄</span>
+                    </div></el-col
+                  >
+                </el-row>
+                <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">责任人：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">小黄/小黑</span>
+                    </div></el-col
+                  >
+                </el-row>
+                 <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">根因分析：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">小黄/小黑</span>
+                    </div></el-col
+                  >
+                </el-row>
+                  <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">责任意见：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">小黄/小黑</span>
+                    </div></el-col
+                  >
+                </el-row>
+                  <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">整改措施：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">小黄/小黑</span>
+                    </div></el-col
+                  >
+                </el-row>
+                <div
+                  style="
+                    border-bottom: 0.5px solid #797979;
+                    width: 100%;
+                    margin-bottom: 20px;
+                  "
+                ></div>
+              </div>
+            </div>
+            </div>
             <!-- 科室调查 -->
             <div v-if="lookdata.investigate">
             <div
@@ -241,6 +341,7 @@
                 </div>
               </div>
                 </div>
+                <!-- 审批操作 -->
                 <div v-if="item.examine!==''&&item.examine!==null">
                <div class="box-Information" v-for="itemssss in item.examine" :key="itemssss.department.title">
               <div class="box-top">
@@ -321,6 +422,79 @@
                     </div></el-col
                   >
                 </el-row>
+                <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">主要事实：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">无</span>
+                    </div></el-col
+                  >
+                </el-row>
+                <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">主要事实：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">无</span>
+                    </div></el-col
+                  >
+                </el-row>
+                <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">主要事实：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">无</span>
+                    </div></el-col
+                  >
+                </el-row>
+                <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">主要事实：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">无</span>
+                    </div></el-col
+                  >
+                </el-row>
+                <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">主要事实：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">无</span>
+                    </div></el-col
+                  >
+                </el-row>
+                <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">主要事实：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">无</span>
+                    </div></el-col
+                  >
+                </el-row>
+
                 <el-row>
                   <el-col :span="4"
                     ><div class="grid-content bg-purple">
@@ -482,7 +656,7 @@
               <hr />
             </div> 
             <!-- 患者信息 -->
-            <div v-if="lookdata.patient!==''&&lookdata.patient!==null" >
+            <div v-if="lookdata.patient!==''&&lookdata.patient!==null">
             <div class="box-Information" v-for="item in lookdata.patient" :key="item.age"> 
               <div class="box-top">
                 <el-row type="flex" class="row-bg" justify="space-between">
