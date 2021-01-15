@@ -209,9 +209,8 @@
             <div v-if="lookdata.investigate">
             <div
               class="box-contents"
-              v-for="item in lookdata.investigate" :key="item.investigate_number"
-            >
-              <div class="box-top">
+              v-for="item in lookdata.investigate" :key="item">
+             <div class="box-top" v-if="item.investigate_number"> 
                 <el-row type="flex" class="row-bg" justify="space-between">
                   <el-col :span="3" :push="2">
                     <div class="grid-content bg-purple">
@@ -234,7 +233,7 @@
                   >
                 </el-row>
               </div>
-              <div class="box-content clearfix">
+              <div class="box-content clearfix" v-if="item.investigate_number==true">
                 <el-row>
                   <el-col :span="4"
                     ><div class="grid-content bg-purple">
@@ -248,7 +247,7 @@
                   >
                 </el-row>
               </div>
-              <div v-if="item.investigate">
+              <div v-if="item.investigate_number==true">
               <div
               v-for="items in item.investigate" :key="items.department.title"
               >
@@ -342,7 +341,7 @@
               </div>
                 </div>
                 <!-- 审批操作 -->
-                <div v-if="item.examine!==''&&item.examine!==null">
+                <div v-if="item.examine">
                <div class="box-Information" v-for="itemssss in item.examine" :key="itemssss.department.title">
               <div class="box-top">
                 <el-row type="flex" class="row-bg" justify="space-between">
@@ -356,7 +355,7 @@
                   ></el-col>
                   <el-col :span="9" :pull="1"
                     ><div class="grid-content bg-purple">
-                      <span><b>操作时间：</b>2021-1-4 00:00:00</span>
+                      <span><b>操作时间：</b>{{itemssss.examine_time}}</span>
                     </div></el-col
                   >
                 </el-row>
@@ -382,7 +381,8 @@
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">{{itemssss.user.name}}/{{itemssss.user.phone}}</span>
+                      <span class="value"  v-if="itemssss.user">{{itemssss.user.name}}/{{itemssss.user.phone}}</span>
+                       <span class="value" v-else>无</span>
                     </div></el-col
                   >
                 </el-row>
@@ -398,7 +398,7 @@
                     </div></el-col
                   >
                 </el-row>
-                <el-row>
+                <el-row v-if="itemssss.Issue">
                   <el-col :span="4"
                     ><div class="grid-content bg-purple">
                       <span class="label">下发科室：</span>
