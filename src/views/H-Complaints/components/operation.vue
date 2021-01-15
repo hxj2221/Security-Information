@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="operation" style="min-height: 800px">
+    <div class="operation" style="min-height: 800px" v-if="operationdata!=''&&opdata!=''">
       <div class="operation-top">
         <span>投诉详情-调查中</span>
         <div>

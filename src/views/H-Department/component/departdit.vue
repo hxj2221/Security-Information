@@ -20,6 +20,8 @@
                 class="dialog-input-text"
                 type="input"
                 autosize
+                v-model="ksnum"
+                disabled
                 placeholder="10001"
               ></el-input>
             </el-form-item>
@@ -123,6 +125,7 @@ export default {
       id: "",
       pid: "",
       charge: [],
+      ksnum: "",
     };
   },
 
@@ -136,6 +139,8 @@ export default {
       this.id = newValue.data.info.id;
       this.pid = newValue.data.info.pid;
       this.charge = newValue.data.userlist;
+      this.ksnum = newValue.data.info.number;
+      //console.log(this.charge);
     },
   },
   methods: {

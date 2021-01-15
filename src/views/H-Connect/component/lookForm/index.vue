@@ -13,20 +13,75 @@
             >
           </div>
         </div>
-        <div class="lookForm_top_content">
-          <el-row :gutter="20" v-for="(item, index) in content" :key="index">
+        <!-- top -->
+        <!-- <div class="lookForm_top_content" :model='connent'>
+          <el-row :gutter="20">
             <el-col :span="8">
-              <p>{{ item.name }}</p>
-              <p>{{ item.names }}</p>
+              <p>医院名称：</p>
+              <p :model="connent.communicate_time"></p>
             </el-col>
             <el-col :span="8" :offset="8">
-              <p>{{ item.bh }}</p>
-              <p>{{ item.bhs }}</p>
+              <p>记录编号：</p>
+              <p :model='connent.number'></p>
             </el-col>
           </el-row>
+           <el-row :gutter="20">
+            <el-col :span="8">
+              <p>沟通日期：</p>
+              <p :model="connent.communicate_time"></p>
+            </el-col>
+            <el-col :span="8" :offset="8">
+              <p>沟通地点：</p>
+              <p :model='connent.note_taker'></p>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20">
+            <el-col :span="8">
+              <p>患者姓名：</p>
+              <p :model="connent.note_taker"></p>
+            </el-col>
+           
+          </el-row>
+        </div> -->
+        <div class="lookForm_top_content">
+          <el-form ref="form" :model="connent" label-width="86px">
+            <el-row :gutter="20">
+              <el-col :span="8">
+                <el-form-item label="医院名称：">
+                  <el-input v-model="connent.communication"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="记录编号：">
+                  <el-input v-model="connent.number"></el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row :gutter="20">
+              <el-col :span="8">
+                <el-form-item label="沟通日期：">
+                  <el-input v-model="connent.communicate_time"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="沟通地点：">
+                  <el-input v-model="connent.communication"></el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row :gutter="20">
+              <el-col :span="8">
+                <el-form-item label="患者姓名：">
+                  <el-input v-model="connent.note_taker"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8"> </el-col>
+            </el-row>
+          </el-form>
         </div>
       </div>
       <hr />
+      <!-- center -->
       <div class="lookForm_center">
         <div class="lookForm_center_top">
           <div class="lookForm_center_top_left">
@@ -38,29 +93,46 @@
         </div>
         <div class="lookForm_center_form">
           <table border="1" cellspacing="0">
-            <tr v-for="(item, index) in table" :key="index">
-              <th>{{ item.top }}</th>
-              <td>{{ item.content }}</td>
+            <tr>
+              <th>主持人</th>
+              <td>{{ hosp_name }}</td>
+            </tr>
+            <tr>
+              <th>记录人</th>
+              <td>{{ patient_name }}</td>
+            </tr>
+            <tr>
+              <th>沟通日期</th>
+              <td>{{ communicate_time }}</td>
+            </tr>
+            <tr>
+              <th>沟通地点</th>
+              <td>{{ communication }}</td>
             </tr>
             <tr>
               <th>沟通记录</th>
               <td>
-                <li>这是一个记录XXXXXX</li>
-                <li>这是一个记录XXXXXX</li>
-                <li>这是一个记录XXXXXX</li>
+                <li>{{ record_of_communication }}</li>
+                <!-- <li>这是一个记录XXXXXX</li>
+                <li>这是一个记录XXXXXX</li> -->
               </td>
             </tr>
           </table>
         </div>
       </div>
       <hr />
+      <!-- bottom -->
       <div class="lookForm_bottom">
         <div class="lookForm_bottom_top">
           <h6>附件信息</h6>
         </div>
         <div class="lookForm_bottom_form">
           <table border="1" cellspacing="0">
-            <tr>
+            <tr v-for="(item,i) in con" :key="i">
+              <th>{{item.file_name}}</th>
+              <td>查看</td>
+            </tr>
+            <!-- <tr>
               <th>文件1</th>
               <td>查看</td>
               <th>文件2</th>
@@ -71,14 +143,13 @@
             <tr>
               <th>文件4</th>
               <td>查看</td>
-            </tr>
+            </tr> -->
           </table>
         </div>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import "@/views/H-Connect/component/lookForm/css.css";
 export default {
@@ -86,38 +157,35 @@ export default {
   props: {},
   data() {
     return {
-      content: [
-        {
-          name: "医院名称：",
-          names: "第二人民医院",
-          bh: "记录编号：",
-          bhs: "Ushiagwehk",
-        },
-        {
-          name: "沟通日期：",
-          names: "2020-12-26",
-          bh: "沟通地点：",
-          bhs: "会议室",
-        },
-        {
-          name: "患者姓名：",
-          names: "李小虎",
-          bh: "",
-          bhs: "",
-        },
-      ],
-      table: [
-        { top: "主持人", content: "王丽" },
-        { top: "记录人", content: "王丽" },
-        { top: "沟通日期", content: "2020-12-25" },
-        { top: "沟通地点", content: "医院门诊室" },
-      ],
+      connent: {},
+      // 沟通记录
+      communication: "",
+      hosp_name: "",
+      record_of_communication: "",
+      patient_name: "",
+      communicate_time: "",
+      //
+      con: [],
     };
   },
   methods: {
     upper() {
       this.$emit("upper");
     },
+  },
+  created() {
+    this.bus.$on("details", (item) => {
+      console.log(item.info);
+      this.connent = item.data;
+      // 沟通记录
+      this.hosp_name = item.data.hosp_name;
+      this.patient_name = item.data.hosp_name;
+      this.communicate_time = item.data.communicate_time;
+      this.communication = item.data.communication;
+      this.record_of_communication = item.data.record_of_communication;
+      //
+      this.con = item.info;
+    });
   },
 };
 </script>

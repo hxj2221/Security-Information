@@ -39,7 +39,11 @@
             maxlength="10"
             placeholder="输入患者姓名"
           ></el-input>
-          <el-button type="primary" icon="el-icon-search" size="small"
+          <el-button
+            type="primary"
+            icon="el-icon-search"
+            size="small"
+            @click="searchBtn"
             >搜索</el-button
           >
         </div>
@@ -48,65 +52,42 @@
       <div class="connent_myTable">
         <!--  -->
         <el-table :data="tableData" style="width: 100%">
-          <el-table-column label="序号">
-            <template slot-scope="scope">
-              <span>{{ scope.row.num }}</span>
-            </template>
+          <el-table-column label="序号" type="index"> </el-table-column>
+
+          <el-table-column label="记录编号" prop="number"> </el-table-column>
+
+          <el-table-column label="患者姓名" prop="patient_name">
           </el-table-column>
 
-          <el-table-column label="记录编号">
-            <template slot-scope="scope">
-              <span>{{ scope.row.jlbh }}</span>
-            </template>
+          <el-table-column label="主持人" prop="hosp_name"> </el-table-column>
+
+          <el-table-column label="记录人" prop="note_taker"> </el-table-column>
+
+          <el-table-column label="沟通日期" prop="communicate_time">
           </el-table-column>
 
-          <el-table-column label="患者姓名">
-            <template slot-scope="scope">
-              <span>{{ scope.row.name }}</span>
-            </template>
+          <el-table-column label="关联投诉编号" prop="event_number">
           </el-table-column>
 
-          <el-table-column label="主持人">
-            <template slot-scope="scope">
-              <span>{{ scope.row.zcr }}</span>
-            </template>
-          </el-table-column>
-
-          <el-table-column label="记录人">
-            <template slot-scope="scope">
-              <span>{{ scope.row.jlr }}</span>
-            </template>
-          </el-table-column>
-
-          <el-table-column label="沟通日期">
-            <template slot-scope="scope">
-              <span>{{ scope.row.data }}</span>
-            </template>
-          </el-table-column>
-
-          <el-table-column label="关联投诉编号">
-            <template slot-scope="scope">
-              <span>{{ scope.row.gltsbh }}</span>
-            </template>
-          </el-table-column>
-
-          <el-table-column label="主要沟通事项">
-            <template slot-scope="scope">
-              <el-popover trigger="hover" placement="top">
-                <p>{{ scope.row.zygtsx }}</p>
-                <div slot="reference" class="name-wrapper">
-                  <el-tag size="medium">轻触查看</el-tag>
-                </div>
-              </el-popover>
-            </template>
+          <el-table-column
+            label="主要沟通事项"
+            prop="record_of_communication"
+            :show-overflow-tooltip="true"
+          >
           </el-table-column>
 
           <el-table-column label="操作">
-            <template>
-              <el-link type="primary" :underline="false" @click="details"
+            <template slot-scope="scope">
+              <el-link
+                type="primary"
+                :underline="false"
+                @click="details(scope.$index, scope.row)"
                 >记录详情</el-link
               >
-              <el-link type="primary" :underline="false" @click="complaint"
+              <el-link
+                type="primary"
+                :underline="false"
+                @click="complaint(scope.$index, scope.row)"
                 >投诉详情</el-link
               >
             </template>
@@ -121,9 +102,9 @@
             @current-change="handleCurrentChange"
             :current-page="currentPage"
             :page-sizes="[8, 10, 20]"
-            :page-size="8"
+            :page-size="100"
             layout="total, sizes, prev, pager, next, jumper"
-            :total="tableData.length"
+            :total="total"
           >
           </el-pagination>
         </div>
@@ -133,53 +114,14 @@
 </template>
 
 <script>
-// import AdminHead from './components/AdminHead'
+// 引用css
 import "@/views/H-Connect/component/connent/css.css";
+// 引用service
+import service from "@/service/index";
 export default {
   data() {
     return {
-      tableData: [
-        {
-          num: "1",
-          jlbh: "202011151036",
-          name: "成武机型如",
-          zcr: "hhh",
-          jlr: "hhh",
-          data: "2020-12-18",
-          gltsbh: " TS20201115001",
-          zygtsx: 200333,
-        },
-        {
-          num: "2",
-          jlbh: "202011151036",
-          name: "王小虎",
-          zcr: "hhh",
-          jlr: "hhh",
-          data: "2020-12-18",
-          gltsbh: " TS20201115001",
-          zygtsx: 200333,
-        },
-        {
-          num: "3",
-          jlbh: "202011151036",
-          name: "王小虎",
-          zcr: "hhh",
-          jlr: "hhh",
-          data: "2020-12-18",
-          gltsbh: " TS20201115001",
-          zygtsx: 200333,
-        },
-        {
-          num: "4",
-          jlbh: "202011151036",
-          name: "王小虎",
-          zcr: "hhh",
-          jlr: "hhh",
-          data: "2020-12-18",
-          gltsbh: " TS20201115001",
-          zygtsx: 200333,
-        },
-      ],
+      tableData: [],
       pickerOptions: {
         shortcuts: [
           {
@@ -211,42 +153,101 @@ export default {
           },
         ],
       },
-      seachTime: "", //选择时间
+      seachTime: [], //选择时间
       input: "", //input内容
       // 分页
       currentPage: 1,
+      total: 0,
+      tableDatas: [],
     };
   },
+  watch: {
+    seachTime: function (val, oldVal) {
+      console.log(val, oldVal);
+      if (val !== null) {
+        this.beginDate = val[0];
+        this.endDate = val[1];
+      } else {
+        this.beginDate = null;
+        this.endDate = null;
+      }
+    },
+  },
   methods: {
+    // 搜索
+    searchBtn() {
+      let data = {
+        starttime: this.seachTime.beginDate,
+        endtime: this.seachTime.endDate,
+        patient_name: this.input,
+      };
+      console.log(data);
+      service.seachpag(data).then((res) => {
+        console.log(res);
+        this.tableData = this.tableDatas = res.data;
+      });
+    },
+    // 分页
+    handleCurrentChange(current) {
+      console.log(current);
+      let data = {
+        pageNum: current,
+        pageSize: 8,
+      };
+      service.seachpag(data).then((res) => {
+        console.log(res);
+        this.tableDatas = res.data;
+      });
+    },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
     },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
-    },
+
     // 新增记录
     addRecord() {
-      this.$emit("abcClick");
+      service.selDep().then((res) => {
+        console.log(res);
+        this.bus.$emit("selDep", res);
+        this.$emit("abcClick");
+      });
+      // this.$emit("abcClick");
     },
     // 记录详情
-    details() {
-      console.log(12);
-      this.$emit("abClick");
+    details(val, row) {
+      console.log(val, row.id);
+      let data = {
+        id: row.id,
+      };
+      service.details(data).then((res) => {
+        console.log(res.data);
+        this.bus.$emit("details", res);
+        this.$emit("abClick");
+      });
+      // this.$emit("abClick");
     },
     //投诉详情
     complaint() {
       this.$router.push("/Complaints");
     },
-    // 分页
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
-    },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
-    },
+
     handleSee(index, row) {
       console.log(index, row);
     },
+  },
+  created() {
+    let params = {
+      pageNum: 1,
+      pageSize: 8,
+    };
+    service.patientList(params).then((res) => {
+      console.log(res);
+      this.tableData = res.data;
+    });
+
+    service.patientList(8, "").then((res) => {
+      // console.log(res);
+      this.total = res.data.length;
+    });
   },
 };
 </script>

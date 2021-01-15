@@ -80,14 +80,19 @@
         </el-table>
       </div>
       <!-- 分页 -->
-      <div class="pagenum">
-        <el-pagination
-          :page-size="20"
-          :pager-count="11"
-          layout="prev, pager, next"
-          :total="1000"
-        >
-        </el-pagination>
+      <div class="staffpag">
+        <div class="block">
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="[8, 10, 20]"
+            :page-size="8"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="tableData.length"
+          >
+          </el-pagination>
+        </div>
       </div>
     </div>
     <!-- 新增分类 -->
@@ -150,7 +155,6 @@
     </el-dialog>
   </div>
 </template>
-
 <script>
 import "./css/Files.css";
 import AddFiles from "./components/AddFiles";
@@ -162,6 +166,7 @@ export default {
   props: {},
   data() {
     return {
+      currentPage: 1,
       dialogVisible: false,
       ruleForm: {
         name: "",
@@ -186,24 +191,24 @@ export default {
       form: {
         input: "",
         region: "",
-        options: [
-          {
-            value: "选项1",
-            label: "分类1",
-          },
-          {
-            value: "选项2",
-            label: "分类2",
-          },
-          {
-            value: "选项3",
-            label: "分类3",
-          },
-          {
-            value: "选项4",
-            label: "分类4",
-          },
-        ],
+        // options: [
+        //   {
+        //     value: "选项1",
+        //     label: "分类1",
+        //   },
+        //   {
+        //     value: "选项2",
+        //     label: "分类2",
+        //   },
+        //   {
+        //     value: "选项3",
+        //     label: "分类3",
+        //   },
+        //   {
+        //     value: "选项4",
+        //     label: "分类4",
+        //   },
+        // ],
       },
       tableData: [],
       filesIsShow: true,
@@ -268,6 +273,16 @@ export default {
       this.filesIsShow = !this.filesIsShow;
       this.addIsShow = !this.addIsShow;
     },
+<<<<<<< HEAD
+    // 分页
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+    },
+=======
+>>>>>>> bfdcad8f8689f9775516ad3d70d41f71e243222e
   },
 };
 </script>
