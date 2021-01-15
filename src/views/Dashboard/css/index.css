@@ -117,44 +117,31 @@
   display: flex;
   justify-content: space-between;
   padding: 0 10px;
+  text-align: left;
 }
-.box2 .bg .con{
-  width: 45%;
+.box2 .bg .con_info{
   padding: 15px 15px;
   margin-top: 25px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.0470588235294118);
   border-left: 4px solid rgba(82, 193, 245, 1);
+  width: 45%;
+  display: inline-block;
 }
-.box2 .bg .con .con_info .info .info_detail{
+.box2 .bg .con_info .info{
   display: flex;
   justify-content: space-between;
   font-size: 12px;
-  color: #999999;
-  align-items: center;
+  color: #333;
+  line-height: 20px;
 }
-.box2 .bg .con .con_info .info .info_detail p i{
-  font-size: 28px;
-  color: #cccccc;
+.box2 .bg .con_info:last-child{
+  margin-bottom: 40px;
 }
-.box2 .bg .con .con_info .info .info_detail:first-child{
-  padding-bottom: 10px;
-}
-.box2 .bg .con .con_info .info .info_detail:first-child p:first-child{
+.box2 .bg .dashRow .last .dashRowItem .dashRowItemTitle{
+  color: 0000006d;
   font-size: 13px;
-  color: #999999;
-}
-.box2 .bg .con .con_info .info .info_detail:first-child p:last-child{
-  font-size: 12px;
-  color: #999999;
-}
-.box2 .bg .con .con_info .info .info_detail:first-child p:last-child span{
-  color: #52C1F5;
-}
-.box2 .bg .con .con_info .info .info_detail:last-child{
-  line-height: 30px;
 }
 /* 右边 */
-
 .box2 .bg .tit{
   text-align: left;
   font-size: 16px;

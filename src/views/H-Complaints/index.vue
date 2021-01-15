@@ -95,30 +95,10 @@
             </span>
           </el-dialog>
         </div>
-        <div slot="conserve">
-          <!-- <Conserve>
-            <el-button
-              type="primary"
-              icon="iconfont el-icon-hospital-passwordbaocun"
-              class="keep"
-              slot="keep"
-              @click="keepform()"
-              >提交</el-button
-            >
-            <el-button
-              type="primary"
-              icon="iconfont el-icon-hospital-passwordai207"
-              class="return"
-              style="border: 1px solid #949aef"
-              slot="back"
-              @click="backss()"
-              >返回</el-button
-            >
-          </Conserve> -->
-        </div>
+        <div slot="conserve"></div>
       </Addcom>
       <!-- 查看 -->
-      <Look v-show="look" :lookdata='lookdata'>
+      <Look v-show="look" :lookdata="lookdata">
         <el-button
           type="primary"
           icon="el-icon-printer"
@@ -137,7 +117,7 @@
           >返回</el-button
         >
       </Look>
-      <Operation v-show="operations" :operationdata='operationdata' :opdata='opdata'>
+      <Operation v-show="operations" :operationdata="operationdata" :opdata="opdata">
         <div slot="records">
           <el-button type="primary" icon="el-icon-edit" class="records" @click="records()"
             >医患记录</el-button
@@ -168,21 +148,23 @@ import Table from "../H-Complaints/components/Tables";
 import Operation from "../H-Complaints/components/operation";
 // 添加投诉
 import service from "@/service/index";
-import qs from 'qs'
+import qs from "qs";
 export default {
+  inject: ["reload"],
   components: { Complaintslist, Addcom, Look, Read, Conserve, Table, Operation },
 
   data() {
     return {
-      operationdata:'',
-      opdata:'',//操作详情
-      lookdata:'',//详情数据
+      operationdata: "",
+      opdata: "", //操作详情
+      lookdata: "", //详情数据
       list: true,
       add: false,
       look: false,
       dialogVisible: false, //弹窗显示
       agree: "",
       operations: false,
+      drawer: false,
     };
   },
 
@@ -190,19 +172,29 @@ export default {
     // 操作页面
     handle(index) {
       console.log(index);
-      this.list = false;
-      this.add = false;
-      this.look = false;
-      this.operations = true;
-       let params = {
-        event_number: index.event_number
-      };
-      service.Issue(index.event_number).then(res=>{
-        console.log(res)
-        this.operationdata=index
-        this.opdata=res.data
 
-      })
+      let params = {
+        event_number: index.event_number,
+      };
+      service.Issue(index.event_number).then((res) => {
+        console.log(res);
+        if (res.code == 20010) {
+          this.list = false;
+          this.add = false;
+          this.look = false;
+          this.operations = true;
+          this.operationdata = index;
+          this.opdata = res.data;
+          let params = {
+           event_number: index.event_number,
+          };
+          service.componrdetaile(qs.stringify(params)).then((res) => {
+          console.log(res);
+          this.lookdata = res.data;
+        });
+        }
+      
+      });
     },
     records(index) {
       console.log(index);
@@ -213,7 +205,8 @@ export default {
     handleClose(done) {
       this.$confirm("确认关闭？")
         .then((_) => {
-          done();
+          // done();
+          this.dialogVisible = false;
         })
         .catch((_) => {});
     },
@@ -227,12 +220,12 @@ export default {
       this.add = false;
       this.look = true;
       this.operations = false;
-       let params = {
-        event_number: index.event_number
+      let params = {
+        event_number: index.event_number,
       };
       service.componrdetaile(qs.stringify(params)).then((res) => {
         console.log(res);
-        this.lookdata=res.data
+        this.lookdata = res.data;
       });
     },
     // 添加页面保存
@@ -252,6 +245,7 @@ export default {
       this.add = false;
       this.look = false;
       this.operations = false;
+      this.reload();
     },
     // 添加投诉
     addcomsss() {
@@ -260,7 +254,6 @@ export default {
       this.look = false;
       this.dialogVisible = true;
       this.operations = false;
-     
     },
     // 导出事件
     exportcom() {
@@ -269,15 +262,20 @@ export default {
     // 搜索事件
   },
   created() {
-    if(this.look == true){
-    if (event_number !== null && event_number !== "" && token !== null && token !== "") {
-      let params = {
-        event_number: event_number
-      };
-      service.componrdetaile(params).then((res) => {
-        console.log(res);
-      });
-    }
+    if (this.look == true) {
+      if (
+        event_number !== null &&
+        event_number !== "" &&
+        token !== null &&
+        token !== ""
+      ) {
+        let params = {
+          event_number: event_number,
+        };
+        service.componrdetaile(params).then((res) => {
+          console.log(res);
+        });
+      }
     }
   },
 };
