@@ -146,7 +146,7 @@ export default {
             type: "error",
             duration: 1000,
           });
-      // this.$router.push("/login")
+      this.$router.push("/login")
         }
       })
        }
@@ -164,7 +164,7 @@ export default {
             type: "error",
             duration: 1000,
           });
-        // this.$router.push("/login")
+        this.$router.push("/login")
         }
       })
      }
@@ -181,7 +181,7 @@ export default {
             type: "error",
             duration: 1000,
           });
-             // this.$router.push("/login")
+             this.$router.push("/login")
         }
       });
     }
@@ -207,7 +207,7 @@ export default {
             type: "error",
             duration: 1000,
           });
-      // this.$router.push("/login")
+           this.$router.push("/login")
         }
       })
        }
@@ -225,7 +225,7 @@ export default {
             type: "error",
             duration: 1000,
           });
-        // this.$router.push("/login")
+        this.$router.push("/login")
         }
       })
      }
@@ -242,7 +242,7 @@ export default {
             type: "error",
             duration: 1000,
           });
-             // this.$router.push("/login")
+             this.$router.push("/login")
         }
       });
     }
@@ -268,7 +268,7 @@ export default {
             type: "error",
             duration: 1000,
           });
-      // this.$router.push("/login")
+      this.$router.push("/login")
         }
       })
        }
@@ -286,7 +286,7 @@ export default {
             type: "error",
             duration: 1000,
           });
-        // this.$router.push("/login")
+        this.$router.push("/login")
         }
       })
      }
@@ -304,7 +304,7 @@ export default {
             type: "error",
             duration: 1000,
           });
-             // this.$router.push("/login")
+             this.$router.push("/login")
         }
       });
       }
@@ -336,7 +336,7 @@ export default {
           type: "error",
           duration: 1000,
         });
-           // this.$router.push("/login")
+           this.$router.push("/login")
       }
     });
   },

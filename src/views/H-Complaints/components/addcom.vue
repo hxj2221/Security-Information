@@ -25,7 +25,7 @@
           <el-col :span="6"
             ><div class="grid-content bg-purple-light">
               <span> 事发日期<span>*</span> </span> <br />
-              <el-date-picker v-model="incidentdata" type="date" placeholder="选择日期"   :picker-options="pickerOptions">
+              <el-date-picker v-model="incidentdata" type="date" placeholder="选择日期"   :picker-options="pickerOption">
               </el-date-picker></div
           ></el-col>
         </el-row>
@@ -294,6 +294,11 @@ export default {
           return time.getTime() > Date.now();
         },
       },
+        pickerOption: {
+        disabledDate(time) {
+          return time.getTime() >  Date.now();
+        },
+      },
       data: [
         {
           name: 1,
@@ -376,6 +381,7 @@ export default {
             type: "success",
             duration: 1000,
           });
+          this.$router.go(0);
         }
         else{
           this.$message({
@@ -384,7 +390,7 @@ export default {
             duration: 1000,
           });
         }
-        this.$router.go(0);
+        
       });
        }
     },
