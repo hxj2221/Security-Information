@@ -88,7 +88,7 @@ const asyncRoutes = [
         iconCls: 'el-icon-bicycle',
         path: '/Connect',
         component: () => import('../views/H-Connect/index.vue'),
-         // meta: {
+        // meta: {
         //     roles: ['admin','admin1','admin2','admin3']
         // }
       }
@@ -106,7 +106,7 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Category',
         component: () => import('../views/H-Category/index.vue'),
-         // meta: {
+        // meta: {
         //     roles: ['admin','admin1','admin2','admin3']
         // }
       }
@@ -124,7 +124,7 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Articlelist',
         component: () => import('../views/H-Articlelist/index.vue'),
-         // meta: {
+        // meta: {
         //     roles: ['admin','admin1','admin2','admin3']
         // }
       },
@@ -133,7 +133,7 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Addarticle',
         component: () => import('../views/H-Addarticle/index.vue'),
-         // meta: {
+        // meta: {
         //     roles: ['admin','admin1','admin2','admin3']
         // }
       },
@@ -160,7 +160,7 @@ const asyncRoutes = [
         name: '文件列表',
         path: '/form',
         component: () => import('../views/H-Files/index.vue'),
-         // meta: {
+        // meta: {
         //     roles: ['admin','admin1','admin2','admin3']
         // }
       }
@@ -178,7 +178,7 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Staff',
         component: () => import('../views/H-Staff/index.vue'),
-         // meta: {
+        // meta: {
         //     roles: ['admin','admin1','admin2','admin3']
         // }
       },
@@ -187,7 +187,7 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Department',
         component: () => import('../views/H-Department/index.vue'),
-         // meta: {
+        // meta: {
         //     roles: ['admin','admin1','admin2','admin3']
         // }
       },
@@ -196,7 +196,7 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Role',
         component: () => import('../views/H-Role/index.vue'),
-         // meta: {
+        // meta: {
         //     roles: ['admin','admin1','admin2','admin3']
         // }
       },
@@ -205,7 +205,7 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Edit',
         component: () => import('../views/H-Edit/index.vue'),
-         // meta: {
+        // meta: {
         //     roles: ['admin','admin1','admin2','admin3']
         // }
       }
@@ -223,7 +223,7 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Personal',
         component: () => import('../views/H-Personal/index.vue'),
-         // meta: {
+        // meta: {
         //     roles: ['admin','admin1','admin2','admin3']
         // }
       },
@@ -232,7 +232,7 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Account',
         component: () => import('../views/H-Account/index.vue'),
-         // meta: {
+        // meta: {
         //     roles: ['admin','admin1','admin2','admin3']
         // }
       },
@@ -241,7 +241,7 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Notify',
         component: () => import('../views/H-Notify/index.vue'),
-         // meta: {
+        // meta: {
         //     roles: ['admin','admin1','admin2','admin3']
         // }
       }
@@ -259,7 +259,7 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Dictionaries',
         component: () => import('../views/H-Dictionaries/index.vue'),
-         // meta: {
+        // meta: {
         //     roles: ['admin','admin1','admin2','admin3']
         // }
       },
@@ -268,7 +268,7 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Technological',
         component: () => import('../views/H-Technological/index.vue'),
-         // meta: {
+        // meta: {
         //     roles: ['admin','admin1','admin2','admin3']
         // }
       }

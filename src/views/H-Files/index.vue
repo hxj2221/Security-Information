@@ -134,10 +134,12 @@
           :on-preview="handlePreview"
           :on-remove="handleRemove"
           :before-remove="beforeRemove"
+          :auto-upload="false"
           multiple
           :limit="3"
           :on-exceed="handleExceed"
           :file-list="fileList"
+          :data="persondata"
         >
           <el-button size="small" type="primary">点击上传</el-button>
           <div slot="tip" class="el-upload__tip">
@@ -188,27 +190,10 @@ export default {
         ],
         region: [{ required: true, message: "请选择分类", trigger: "change" }],
       },
+      persondata: [],
       form: {
         input: "",
         region: "",
-        // options: [
-        //   {
-        //     value: "选项1",
-        //     label: "分类1",
-        //   },
-        //   {
-        //     value: "选项2",
-        //     label: "分类2",
-        //   },
-        //   {
-        //     value: "选项3",
-        //     label: "分类3",
-        //   },
-        //   {
-        //     value: "选项4",
-        //     label: "分类4",
-        //   },
-        // ],
       },
       tableData: [],
       filesIsShow: true,
