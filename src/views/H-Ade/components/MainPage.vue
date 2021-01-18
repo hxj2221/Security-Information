@@ -145,7 +145,7 @@
       screen() {
         let params=this.search
         service.AdeSearch(params).then(res=>{
-          // console.log(res)
+          console.log(res)
           this.tableData=res.data
         })
 

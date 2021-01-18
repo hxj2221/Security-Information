@@ -101,8 +101,8 @@
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
             :current-page="currentPage"
-            :page-sizes="[8, 10, 20]"
-            :page-size="100"
+            :page-sizes="numberlist"
+            :page-size="num"
             layout="total, sizes, prev, pager, next, jumper"
             :total="total"
           >
@@ -155,10 +155,13 @@ export default {
       },
       seachTime: [], //选择时间
       input: "", //input内容
+      beginDate: "",
+      endDate: "",
       // 分页
+      numberlist: [8, 10, 20],
       currentPage: 1,
       total: 0,
-      tableDatas: [],
+      num: 8,
     };
   },
   watch: {
@@ -177,30 +180,48 @@ export default {
     // 搜索
     searchBtn() {
       let data = {
-        starttime: this.seachTime.beginDate,
-        endtime: this.seachTime.endDate,
+        starttime: this.beginDate,
+        endtime: this.endDate,
         patient_name: this.input,
+        pageNum: this.currentPage,
+        pageSize: this.number,
       };
       console.log(data);
       service.seachpag(data).then((res) => {
         console.log(res);
         this.tableData = this.tableDatas = res.data;
+        this.total = res.allNews;
       });
     },
-    // 分页
-    handleCurrentChange(current) {
-      console.log(current);
-      let data = {
-        pageNum: current,
-        pageSize: 8,
-      };
-      service.seachpag(data).then((res) => {
-        console.log(res);
-        this.tableDatas = res.data;
-      });
-    },
+    //  分页
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
+      console.log(val)
+      this.num = val;
+      let data = {
+        pageSize: val,//每页几条
+        pageNum: this.currentPage,//第几页
+      };
+      console.log(data)
+      service.patientList(data).then((res) => {
+        console.log(res);
+        this.tableData = res.data;
+        this.total = res.allNews;
+      });
+    },
+    //
+    handleCurrentChange(val) {
+      this.currentPage = val;
+      console.log(val)
+      let data = {
+        pageSize: this.num,
+        pageNum: this.currentPage,
+      };
+      console.log(data)
+      service.patientList(data).then((res) => {
+        console.log(res);
+        this.tableData = res.data;
+        this.total = res.allNews;
+      });
     },
 
     // 新增记录
@@ -235,18 +256,15 @@ export default {
     },
   },
   created() {
-    let params = {
-      pageNum: 1,
-      pageSize: 8,
-    };
+   let params={
+       pageSize:this.num,
+        pageNum:this.currentPage,
+   }
+   console.log(params)
     service.patientList(params).then((res) => {
       console.log(res);
       this.tableData = res.data;
-    });
-
-    service.patientList(8, "").then((res) => {
-      // console.log(res);
-      this.total = res.data.length;
+      this.total = res.allNews;
     });
   },
 };

@@ -49,8 +49,6 @@
                   :value="item.id"
                 >
                 </el-option>
-                <!-- <el-option label="区域一" value="one"></el-option>
-                <el-option label="区域二" value="two"></el-option> -->
               </el-select>
             </el-form-item>
           </el-col>
@@ -129,6 +127,7 @@
                   :on-success="UploadSuccess"
                   multiple
                   :limit="3"
+                  
                   :on-exceed="handleExceed"
                   :file-list="fileList"
                 >
