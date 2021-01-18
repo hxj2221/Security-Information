@@ -123,6 +123,16 @@
             >医患记录</el-button
           >
         </div>
+        <div slot="detail">
+            <el-button
+              type="primary"
+              icon="el-icon-s-order"
+              class="detail"
+              slot="reference"
+              @click="drawer = true"
+              >投诉详情</el-button
+            >
+          </div>
         <div slot="back">
           <el-button
             type="primary"
@@ -133,6 +143,18 @@
             >返回</el-button
           >
         </div>
+         <div slot='drawerss'>
+            <el-drawer title="快捷查看" :visible.sync="drawer" :with-header="false" size="59%">
+        <ul
+          class="infinite-list"
+          style="overflow: auto; height: 870px; texr-aligin: center"
+        >
+          <Look style="width: 100%; margin: 0px 0px; padding: 0px 0px" :lookdata='lookdata'>
+            <div slot="title"></div>
+          </Look>
+        </ul>
+      </el-drawer>
+      </div>
       </Operation>
     </div>
   </div>
@@ -185,13 +207,21 @@ export default {
           this.operations = true;
           this.operationdata = index;
           this.opdata = res.data;
-        //   let params = {
-        //    event_number: index.event_number,
-        //   };
-        //   service.componrdetaile(qs.stringify(params)).then((res) => {
-        //   console.log(res);
-        //   this.lookdata = res.data;
-        // });
+          let params = {
+           event_number: index.event_number,
+          };
+          service.componrdetaile(qs.stringify(params)).then((res) => {
+          console.log(res);
+          this.lookdata = res.data;
+        });
+        }
+       else{
+           this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+           this.$router.push("/login")
         }
       
       });

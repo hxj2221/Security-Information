@@ -205,13 +205,11 @@
               </div>
             </div>
             </div>
-            <!-- 科室调查 -->
             <div v-if="lookdata.investigate">
             <div
               class="box-contents"
-              v-for="item in lookdata.investigate" :key="item.investigate_number"
-            >
-              <div class="box-top">
+              v-for="item in lookdata.investigate" :key="item">
+             <div class="box-top" v-if="item.investigate_number"> 
                 <el-row type="flex" class="row-bg" justify="space-between">
                   <el-col :span="3" :push="2">
                     <div class="grid-content bg-purple">
@@ -234,7 +232,7 @@
                   >
                 </el-row>
               </div>
-              <div class="box-content clearfix">
+              <div class="box-content clearfix" v-if="item.investigate_number==true">
                 <el-row>
                   <el-col :span="4"
                     ><div class="grid-content bg-purple">
@@ -248,7 +246,8 @@
                   >
                 </el-row>
               </div>
-              <div v-if="item.investigate">
+              <!-- 科室调查 -->
+              <div v-if="item.investigate_number==true">
               <div
               v-for="items in item.investigate" :key="items.department.title"
               >
@@ -342,7 +341,7 @@
               </div>
                 </div>
                 <!-- 审批操作 -->
-                <div v-if="item.examine!==''&&item.examine!==null">
+                <div v-if="item.examine">
                <div class="box-Information" v-for="itemssss in item.examine" :key="itemssss.department.title">
               <div class="box-top">
                 <el-row type="flex" class="row-bg" justify="space-between">
@@ -356,7 +355,7 @@
                   ></el-col>
                   <el-col :span="9" :pull="1"
                     ><div class="grid-content bg-purple">
-                      <span><b>操作时间：</b>2021-1-4 00:00:00</span>
+                      <span><b>操作时间：</b>{{itemssss.examine_time}}</span>
                     </div></el-col
                   >
                 </el-row>
@@ -382,7 +381,8 @@
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">{{itemssss.user.name}}/{{itemssss.user.phone}}</span>
+                      <span class="value"  v-if="itemssss.user">{{itemssss.user.name}}/{{itemssss.user.phone}}</span>
+                       <span class="value" v-else>无</span>
                     </div></el-col
                   >
                 </el-row>
@@ -398,7 +398,8 @@
                     </div></el-col
                   >
                 </el-row>
-                <el-row>
+                <div v-if="itemssss.Issue">
+                   <el-row >
                   <el-col :span="4"
                     ><div class="grid-content bg-purple">
                       <span class="label">下发科室：</span>
@@ -410,10 +411,13 @@
                     </div></el-col
                   >
                 </el-row>
-                <el-row>
+                </div>
+                <!-- 院内讨论显示内容 -->
+                <div v-if="itemssss.event_state==3">
+                  <el-row>
                   <el-col :span="4"
                     ><div class="grid-content bg-purple">
-                      <span class="label">主要事实：</span>
+                      <span class="label">抄送部门：</span>
                     </div></el-col
                   >
                   <el-col :span="20"
@@ -434,67 +438,6 @@
                     </div></el-col
                   >
                 </el-row>
-                <el-row>
-                  <el-col :span="4"
-                    ><div class="grid-content bg-purple">
-                      <span class="label">主要事实：</span>
-                    </div></el-col
-                  >
-                  <el-col :span="20"
-                    ><div class="grid-content bg-purple-light">
-                      <span class="value">无</span>
-                    </div></el-col
-                  >
-                </el-row>
-                <el-row>
-                  <el-col :span="4"
-                    ><div class="grid-content bg-purple">
-                      <span class="label">主要事实：</span>
-                    </div></el-col
-                  >
-                  <el-col :span="20"
-                    ><div class="grid-content bg-purple-light">
-                      <span class="value">无</span>
-                    </div></el-col
-                  >
-                </el-row>
-                <el-row>
-                  <el-col :span="4"
-                    ><div class="grid-content bg-purple">
-                      <span class="label">主要事实：</span>
-                    </div></el-col
-                  >
-                  <el-col :span="20"
-                    ><div class="grid-content bg-purple-light">
-                      <span class="value">无</span>
-                    </div></el-col
-                  >
-                </el-row>
-                <el-row>
-                  <el-col :span="4"
-                    ><div class="grid-content bg-purple">
-                      <span class="label">主要事实：</span>
-                    </div></el-col
-                  >
-                  <el-col :span="20"
-                    ><div class="grid-content bg-purple-light">
-                      <span class="value">无</span>
-                    </div></el-col
-                  >
-                </el-row>
-                <el-row>
-                  <el-col :span="4"
-                    ><div class="grid-content bg-purple">
-                      <span class="label">主要事实：</span>
-                    </div></el-col
-                  >
-                  <el-col :span="20"
-                    ><div class="grid-content bg-purple-light">
-                      <span class="value">无</span>
-                    </div></el-col
-                  >
-                </el-row>
-
                 <el-row>
                   <el-col :span="4"
                     ><div class="grid-content bg-purple">
@@ -507,6 +450,188 @@
                     </div></el-col
                   >
                 </el-row>
+                 </div>
+                 <!-- 医患沟通中 -->
+                 <div v-if="itemssss.event_state==4">
+                   <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">初步意见：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">无</span>
+                    </div></el-col
+                  >
+                </el-row>
+                 </div>
+                 <!--人民调解 责任鉴定 司法诉讼 患方推迟  中止调解  终止调解  科室改进-->
+                <div v-if="itemssss.event_state==5||itemssss.event_state==6||itemssss.event_state==7||itemssss.event_state==8||itemssss.event_state==9||itemssss.event_state==10">
+                     <!-- 人民调解 -->
+                    <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">约定日期：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">无</span>
+                    </div></el-col
+                  >
+                </el-row>
+                <!-- 责任鉴定    司法诉讼 -->
+                <div  v-if="itemssss.event_state==6||itemssss.event_state==10">
+                  <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">情况说明：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">无</span>
+                    </div></el-col
+                  >
+                </el-row>
+                </div>
+                 <!-- 患方推迟 -->
+                <div v-if="itemssss.event_state==7">
+                    <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">处理意见：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">无</span>
+                    </div></el-col
+                  >
+                </el-row>
+                </div>
+                 <!-- 中止调解   终止调解 -->
+                <div v-if="itemssss.event_state==8||itemssss.event_state==9">
+                    <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">事实及理由：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">无</span>
+                    </div></el-col
+                  >
+                </el-row>
+                </div>
+                 <!-- 持续改进科室 -->
+                <div v-if="itemssss.event_state==11">
+                    <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">下发调查科室：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">无</span>
+                    </div></el-col
+                  >
+                </el-row>
+                </div>
+                </div>
+              <!-- 改进完成医院 -->
+              <div v-if="itemssss.event_state==14">
+                 <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">处理意见：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">无</span>
+                    </div></el-col
+                  >
+                </el-row>
+                <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">管理措施：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">无</span>
+                    </div></el-col
+                  >
+                </el-row>
+              </div>
+               <!-- 已结束 -->
+                <div  v-if="itemssss.event_state==20">
+                 <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">责任科室：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">无</span>
+                    </div></el-col
+                  >
+                </el-row>
+                <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">投诉类别：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">无</span>
+                    </div></el-col
+                  >
+                </el-row>
+                <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">责任度：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">无</span>
+                    </div></el-col
+                  >
+                </el-row>
+                <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">直接经济损失：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">无</span>
+                    </div></el-col
+                  >
+                </el-row>
+                <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">处理意见：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value">无</span>
+                    </div></el-col
+                  >
+                </el-row>
+              </div>
                 <div style="border-bottom: 0.5px solid #797979; width: 100%"></div>
                   <div class="file clearfix" v-if="itemssss.enclosure" >
                     <div v-for="itemsssss in itemssss.enclosure" :key="itemsssss.file_name">
