@@ -76,7 +76,7 @@
             :page-sizes="nums"
             :page-size="num"
             layout="total, sizes, prev, pager, next, jumper"
-            :total="tables.length"
+            :total="total"
           >
           </el-pagination>
         </div>
@@ -107,10 +107,10 @@ export default {
       dormitory: [],
       search: "",
       childedit: [],
-      currentPage: 20,
-      total: 0,
-      page: 1,
-      pageSize: 5,
+      currentPage: 1,
+      total: 0, //总条数
+      page: 1, //初始显示第几页
+      pageSize: 5, //每页显示几条数据
       nums: [8, 10, 20],
       num: 8,
       tables1: [],
@@ -119,8 +119,9 @@ export default {
   },
   created() {
     service.rolelist().then((res) => {
-      console.log(res.data);
+      console.log(res);
       this.tables = res.data;
+      this.total = res.allNews;
     });
   },
 
@@ -152,6 +153,8 @@ export default {
     roleserch() {
       let data = {
         title: this.search,
+        pageSize: this.num,
+        pageNum: this.currentPage,
       };
       service.roleserch(data).then((res) => {
         this.tables = this.tables1 = res.data;
@@ -210,7 +213,7 @@ export default {
     },
     // 序号
     indexMethod(index) {
-      return index * 1;
+      return index * 1 + 1;
     },
 
     // 删除
@@ -252,9 +255,10 @@ export default {
       this.currentPage = val;
       console.log(`当前页:${val}`);
       let data = {
-        pageNum: this.num,
-        pageSize: this.currentPage,
+        pageSize: this.num,
+        pageNum: this.currentPage,
       };
+      console.log(data);
       service.rolelist(data).then((res) => {
         console.log(res);
         this.tables = res.data;

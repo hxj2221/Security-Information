@@ -181,8 +181,8 @@ export default {
     return await service.get(`${baseUrl}api/Employees/edit`, { params }).then(res => res).catch(err => err)
   },
   // 角色列表
-  rolelist: async () => {
-    return await service.get(`${baseUrl}api/part/authgroup`).then(res => res).catch(err => err)
+  rolelist: async (params: object) => {
+    return await service.get(`${baseUrl}api/part/authgroup`, { params }).then(res => res).catch(err => err)
   },
   //角色搜索
   roleserch: async (data: object) => {
