@@ -310,15 +310,6 @@ export default {
     return await service.get(`${baseUrl}api/article/article_cate_add`, { params }).then(res => res).catch(err => err)
   },
   // 医患列表
-<<<<<<< HEAD
-  patientList: async (params:any) => {
-    return await service.get(`${baseUrl}api/record/records`,{params}).then(res => res).catch(err => err)
-  },
-    // 搜索+分页
-    seachpag: async (data:any) => {
-      return await service.post(`${baseUrl}api/record/record`,{data}).then(res => res).catch(err => err)
-    },
-=======
   patientList: async (params: any) => {
     return await service.get(`${baseUrl}api/record/record`, { params }).then(res => res).catch(err => err)
   },
@@ -326,7 +317,6 @@ export default {
   seachpag: async (data: any) => {
     return await service.post(`${baseUrl}api/record/record`, data).then(res => res).catch(err => err)
   },
->>>>>>> e582aa97f0dd186ce6eb67aa0b832bbee3fbe9d3
   // 医患添加
   patientAdd: async (data: any) => {
     return await service.post(`${baseUrl}api/record/addrecord`, data).then(res => res).catch(err => err)
