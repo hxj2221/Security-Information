@@ -30,8 +30,8 @@ import service from '@/service/index';
           </el-form-item>
           <el-form-item label="性别" required>
             <el-select v-model="addAde.sex" placeholder="请选择">
-              <el-option label="男" value="1"></el-option>
-              <el-option label="女" value="2"></el-option>
+              <el-option label="男" value="2"></el-option>
+              <el-option label="女" value="1"></el-option>
               <el-option label="未知" value="3"></el-option>
             </el-select>
           </el-form-item>

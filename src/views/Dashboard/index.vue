@@ -4,7 +4,7 @@
       <div class="left">
         <img class="img" src="../../assets/image/u388.png" alt="">
         <div class="title">
-          <p>您好，张令清<span>医务处&nbsp; |&nbsp; 安全科科长</span></p>
+          <p>您好，{{name}}<span>{{department}}&nbsp; |&nbsp; {{authgrouap}}</span></p>
           <p>以我们的热心、关心、耐心，让病人舒心、放心、安心</p>
         </div>
       </div>
@@ -149,6 +149,10 @@
     props: {},
     data() {
       return {
+        name:'',//登录人姓名
+        department:'',//科室
+        authgrouap:'',//角色
+
         staff: '',//部门员工
         examine: '',//审批事件
         survey: '',//调查事件
@@ -174,6 +178,9 @@
         this.examine=res.data.examine
         this.survey=res.data.survey
         this.infor=res.data.infor
+        this.name=res.data.user[0].name
+        this.department=res.data.user[0].department[0].title
+        this.authgrouap=res.data.user[0].authgrouap[0].title
       })
     },
   }

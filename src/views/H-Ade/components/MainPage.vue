@@ -141,7 +141,8 @@
       },
       // 搜索事件
       screen() {
-        let params={
+        if((this.starttime!==''&&this.starttime!==null)||(this.endtime!==''&&this.endtime!==null)||this.patient_name!==''||this.occur_scene!==''||this.degree_weight_id!==''){
+          let params={
           patient_name:this.patient_name,
           starttime:this.starttime,
           endtime:this.endtime,
@@ -155,7 +156,17 @@
           this.tableData=res.data
           this.pageCount=res.data.length
         })
-
+        }else{
+          let params={
+          pageNum:this.currentPage4,
+          pageSize:this.pageSize
+        }
+        service.AdeList(params).then(res=>{
+          console.log(res)
+          this.tableData=res.data
+          this.pageCount=res.data.length
+        })
+        }
       },
       //时间格式化 
       getdate: function (row, column) {
@@ -169,7 +180,8 @@
       currentChage(val){
         console.log(val)
         this.currentPage4=val
-        let params={
+        if((this.starttime!==''&&this.starttime!==null)||(this.endtime!==''&&this.endtime!==null)||this.patient_name!==''||this.occur_scene!==''||this.degree_weight_id!==''){
+          let params={
           patient_name:this.patient_name,
           starttime:this.starttime,
           endtime:this.endtime,
@@ -178,17 +190,28 @@
           pageNum:this.currentPage4,
           pageSize:this.pageSize
         }
-        service.AdeList(params).then(res => {
+        service.AdeSearch(params).then(res=>{
           console.log(res)
           this.tableData=res.data
           this.pageCount=res.allnews
-          // this.currentPage4=res.endpage
         })
+        }else{
+          let params={
+          pageNum:this.currentPage4,
+          pageSize:this.pageSize
+        }
+        service.AdeList(params).then(res=>{
+          console.log(res)
+          this.tableData=res.data
+          this.pageCount=res.allnews
+        })
+        }
       },
       handleSizeChange(val) {
         console.log(val)
         this.pageSize=val
-        let params={
+        if((this.starttime!==''&&this.starttime!==null)||(this.endtime!==''&&this.endtime!==null)||this.patient_name!==''||this.occur_scene!==''||this.degree_weight_id!==''){
+          let params={
           patient_name:this.patient_name,
           starttime:this.starttime,
           endtime:this.endtime,
@@ -197,12 +220,22 @@
           pageNum:this.currentPage4,
           pageSize:this.pageSize
         }
-        service.AdeList(params).then(res => {
+        service.AdeSearch(params).then(res=>{
+          console.log(res)
+          this.tableData=res.data
+          this.pageCount=resallnews
+        })
+        }else{
+          let params={
+          pageNum:this.currentPage4,
+          pageSize:this.pageSize
+        }
+        service.AdeList(params).then(res=>{
           console.log(res)
           this.tableData=res.data
           this.pageCount=res.allnews
-          // this.currentPage4=res.endpage
         })
+        }
       },
    
     },
@@ -213,7 +246,7 @@
         pageSize:this.pageSize
       }
       service.AdeList(params).then(res => {
-        console.log(res)
+        // console.log(res)
         this.tableData = res.data 
         this.pageCount=res.allnews
       })
