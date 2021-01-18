@@ -158,14 +158,14 @@
         survey: '',//调查事件
         infor: '',//进行中
 
-        todaynew: 26,//
-        isputes: 15,//
-        bad: 32,//
-        all_infor: 50,//
+        todaynew: '',//今日新增投诉
+        isputes: '',//今日新增纠纷
+        bad: '',//今日新增不良
+        all_infor: '',//进程中的事件
 
-        person: 0,//
-        depart: 3,//
-        system: 26,//
+        person: '',//
+        depart: '',//
+        system: '',//
         Info:[],
       };
     },
@@ -178,6 +178,10 @@
         this.examine=res.data.examine
         this.survey=res.data.survey
         this.infor=res.data.infor
+        this.todaynew=res.data.todaynew
+        this.isputes=res.data.isputes
+        this.bad=res.data.bad
+        this.all_infor=res.data.all_infor
         this.name=res.data.user[0].name
         this.department=res.data.user[0].department[0].title
         this.authgrouap=res.data.user[0].authgrouap[0].title
