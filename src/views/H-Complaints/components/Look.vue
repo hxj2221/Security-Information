@@ -105,8 +105,9 @@
           <div class="look-content-box">
             <!-- 审批节点 -->
              <!-- 科室改进 -->
-            <div >
-            <div class="box-Information" v-for="item in lookdata.patient" :key="item.age"> 
+             <div  v-if="lookdata.improves">
+            <div v-for="i in lookdata.improves" :key="i">
+            <div class="box-Information" > 
               <div class="box-top">
                   <el-row type="flex" class="row-bg" justify="space-between">
                   <el-col :span="3" :push="2">
@@ -118,11 +119,24 @@
                   ></el-col>
                   <el-col :span="9" :pull="1"
                     ><div class="grid-content bg-purple">
-                      <span><b>完成时间：</b>2021-5-17</span>
+                      <span><b>下发时间：</b>{{i.feedback_time}}</span>
                     </div></el-col>
                 </el-row>
               </div>
-              <div class="box-content">
+                <div class="box-content clearfix" >
+                <el-row>
+                  <el-col :span="4" style="border-bottom:1px solid #797979"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">参与调查科室：</span>
+                    </div></el-col>
+                  <el-col :span="20">
+                    <div class="grid-content bg-purple-light">
+                      <span><a v-for="items in i.department" :key="items" style="margin-right:5px;margin-left:10px">{{items}}</a></span>
+                    </div></el-col
+                  >
+                </el-row>
+              </div>
+              <div class="box-content" v-for="item in i.improves" :key="item">
                 <el-row>
                   <el-col :span="4"
                     ><div class="grid-content bg-purple">
@@ -131,7 +145,7 @@
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">儿科</span>
+                      <span class="value">{{item.department.title}}</span>
                     </div></el-col
                   >
                 </el-row>
@@ -143,7 +157,8 @@
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">小黄</span>
+                      <span class="value" v-if="item.dutyuser">{{item.dutyuser.name}}/{{item.dutyuser.phone}}</span>
+                       <span class="value" v-else>无</span>
                     </div></el-col
                   >
                 </el-row>
@@ -155,7 +170,8 @@
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">小黄/小黑</span>
+                      <span class="value" v-if="item.investigator_ids">{{item.investigator_ids}}</span>
+                        <span class="value" v-else>无</span>
                     </div></el-col
                   >
                 </el-row>
@@ -163,11 +179,13 @@
                   <el-col :span="4"
                     ><div class="grid-content bg-purple">
                       <span class="label">根因分析：</span>
+                      
                     </div></el-col
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">小黄/小黑</span>
+                      <span class="value"  v-if="item.examine_textone">{{item.examine_textone}}</span>
+                       <span class="value" v-else>无</span>
                     </div></el-col
                   >
                 </el-row>
@@ -179,7 +197,8 @@
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">小黄/小黑</span>
+                      <span class="value"  v-if="item.examine_texttwo">{{item.examine_texttwo}}</span>
+                       <span class="value" v-else>无</span>
                     </div></el-col
                   >
                 </el-row>
@@ -191,7 +210,8 @@
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">小黄/小黑</span>
+                      <span class="value" v-if="item.examine_textthree">{{item.examine_textthree}}</span>
+                       <span class="value" v-else>无</span>
                     </div></el-col
                   >
                 </el-row>
@@ -205,6 +225,7 @@
               </div>
             </div>
             </div>
+             </div>
             <div v-if="lookdata.investigate">
             <div
               class="box-contents"
@@ -213,9 +234,7 @@
                 <el-row type="flex" class="row-bg" justify="space-between">
                   <el-col :span="3" :push="2">
                     <div class="grid-content bg-purple">
-                      <span v-if="item.investigate_number==1"
-                        ><b>第一次调查</b></span
-                      >
+                      <span v-if="item.investigate_number==1"><b>第一次调查</b></span>
                        <span v-else-if="item.investigate_number==2"><b>第二次调查</b></span >
                       <span  v-else-if="item.investigate_number==3" ><b>第三次调查</b></span>
                        <span v-else-if="item.investigate_number==4"><b>第四次调查</b></span>

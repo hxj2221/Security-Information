@@ -686,18 +686,10 @@
                       <el-table-column type="index" width="50" label="序号"></el-table-column>
                       <el-table-column prop="name" label="文件名" width="width">
                       </el-table-column>
-                      <el-table-column prop="describe" label="描述" width="width">
+                      <el-table-column prop="filedescribe" label="描述" width="width">
                       </el-table-column>
                       <el-table-column prop="size" label="文件大小" width="width">
                       </el-table-column>
-                      <!-- 
-                      
-                      <el-table-column prop="uptime" label="更新时间" width="width">
-                      </el-table-column>
-                      <el-table-column prop="filetype" label="文件类型" width="width">
-                      </el-table-column>
-                      <el-table-column prop="uploader" label="上传人员" width="width">
-                      </el-table-column> -->
                       <el-table-column fixed="right" label="操作" width="100">
                         <template slot-scope="scope">
                           <slot name="fileoper">
@@ -754,13 +746,14 @@
             
             <el-form-item label="上传附件：" class="uploadfile">
             <el-upload
+                 :http-request='upfilesubmit'
                  class="upload-demo"
-                 limit='1'
-                 style="margin-left:-30px"
-                 ref="upload"
+                 :limit='1'
+                :disabled='(filetitle==""||filedescribe=="")?true:false'
+                 :multiple='false'
                  :on-change="handleChange"
                  :auto-upload="false">
-            <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+            <el-button slot="trigger" size="small" type="primary"   :disabled='(filetitle==""||filedescribe=="")?true:false' v-show="fileList.length==0">选取文件</el-button>
             </el-upload>
             </el-form-item>
           </el-form>
@@ -784,6 +777,8 @@ export default {
   },
   data() {
     return {
+      dis:false,
+      upfiledatas:{},
       upfilesss:false,
       token:'',
       economic:'',//直接经济损失
@@ -833,20 +828,57 @@ export default {
       ],
       fileList: [
       ],
+      base64file:'',
     };
   },
   methods: {
+    //这个file参数 也就是文件信息，你使用 插件 时 你就可以打印出文件信息 看看嘛
+    getBase64() {
+      return new Promise((resolve, reject) => {
+        let reader = new FileReader();
+        let fileResult = "";
+        reader.readAsDataURL(this.fileList[0].raw);　　　　　//开始转
+        reader.onload = function() {
+          fileResult = reader.result;
+        };　　　　　//转 失败
+        reader.onerror = function(error) {
+          reject(error);
+        };　　　　　//转 结束  咱就 resolve 出去
+        reader.onloadend = function() {
+          resolve(fileResult);
+        };
+      });
+    },
     upfilesubmit(){
+      let file=this.fileList[0]
+      console.log(file.raw)
+      this.getBase64(file.raw).then(resBase64 => {
+        this.base64file = resBase64.split(',')[1]　　//直接拿到base64信息
+        console.log(this.base64file)
+          let params={
+        // event_number:this.$parent.opdata[0].event_number,//编号
+        file:this.base64file,
+        //  file_name:this.filetitle,
+        // represent:this.filedescribe
+      }
+      console.log(params)
+      service.uploadfiles(params).then(res=>{
+        console.log(res)
+      })
+        })
+    
       this.upfilesss=true
       this.upfiles = false
+
     },
      handleChange(file, fileList) {
-       console.log(file, fileList)
-       this.filetitle=file.name
-       for(let i=0;i<this.fileList.length;i++){
-    this.fileList.push({describe:this.filedescribe})
+      
+     if(this.filedescribe!==''&&this.filetitle!==''){
+          file.name=this.filetitle
+      file.filedescribe=this.filedescribe
+       this.fileList.push(file)
        }
-       this.fileList=fileList
+     
       },
     getCascaderObj() {
       console.log(this.comde);
@@ -864,7 +896,6 @@ export default {
         department_ids:comde,//下发科室
         reply_time:this.needtime// 输入天数
       }
-      console.log(qs.stringify(data))
       service.Issuedepartment(data).then(res=>{
         console.log(res)
          if(res.code==20010){
