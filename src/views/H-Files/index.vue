@@ -130,7 +130,7 @@
         </el-form-item>
         <el-upload
           class="upload-demo"
-          action="http://bt1.wlqqlp.com:8082/api/file/addfile"
+          action="http://bt1.wlqqlp.com:8082/api/srk/event_uploadfiles"
           :on-preview="handlePreview"
           :on-remove="handleRemove"
           :before-remove="beforeRemove"
@@ -273,7 +273,6 @@ export default {
       this.filesIsShow = !this.filesIsShow;
       this.addIsShow = !this.addIsShow;
     },
-<<<<<<< HEAD
     // 分页
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
@@ -281,8 +280,6 @@ export default {
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
     },
-=======
->>>>>>> bfdcad8f8689f9775516ad3d70d41f71e243222e
   },
 };
 </script>

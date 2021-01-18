@@ -9,7 +9,9 @@
           class="roleNameIpt"
           placeholder="请输入内容"
         ></el-input>
-        <el-button class="staffNamesch" icon="el-icon-search">搜索</el-button>
+        <el-button class="staffNamesch" icon="el-icon-search" @click="roleserch"
+          >搜索</el-button
+        >
       </div>
       <!-- 表格 -->
       <div class="roleTable">
@@ -104,6 +106,7 @@ export default {
       search: "",
       childedit: [],
       currentPage: 1,
+      tables1: [],
     };
   },
   created() {
@@ -145,6 +148,16 @@ export default {
       this.addrole = false;
       this.editshow = false;
       this.rolevue = true;
+    },
+    // 角色搜索
+    roleserch() {
+      let data = {
+        title: this.search,
+      };
+      service.roleserch(data).then((res) => {
+        this.tables = this.tables1 = res.data;
+        console.log(res);
+      });
     },
     // switch开关
     changeSwitch(val, row, id) {

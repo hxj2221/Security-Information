@@ -60,6 +60,7 @@
           </p>
           <div>
             <input
+              disabled
               class="account-change-phoneaccount"
               type="text"
               placeholder="请输入手机号"
@@ -77,7 +78,6 @@
             <button
               class="account-change-phonehq"
               @click="phonebtncode"
-              id="regis"
               :disabled="disablbtn"
             >
               {{ codeTxt }}
@@ -120,10 +120,9 @@
               <button
                 class="account-new-hqcode"
                 @click="changephonebtncode"
-                id="regis"
-                :disabled="disablbtn"
+                :disabled="changedisablbtn"
               >
-                {{ codeTxt }}
+                {{ changecodeTxt }}
               </button>
             </div>
             <div>
@@ -151,7 +150,8 @@
               type="text"
               placeholder="请输入手机号"
               maxlength="11"
-              v-model="emailphone"
+              disabled
+              v-model="phone"
             />
           </div>
           <div>
@@ -161,8 +161,12 @@
               placeholder="请输入验证码"
               v-model="emailphonecode"
             />
-            <button class="account-change-phonehq" id="one" :disabled="phonedd">
-              {{ codeTxt }}
+            <button
+              class="account-change-phonehq"
+              @click="emailcode"
+              :disabled="emaildisabl"
+            >
+              {{ emailcodeTxt }}
             </button>
           </div>
           <div>
@@ -189,7 +193,6 @@
                 class="account-new-changeimp"
                 type="text"
                 placeholder="请输入邮箱"
-                maxlength="11"
                 v-model="newemail"
               />
             </div>
@@ -200,8 +203,12 @@
                 placeholder="请输入验证码"
                 v-model="newemailcode"
               />
-              <button class="account-new-hqcode" id="one" :disabled="phonedd">
-                {{ codeTxt }}
+              <button
+                class="account-new-hqcode"
+                @click="changeemail"
+                :disabled="changeemaildisabl"
+              >
+                {{ changeemailcodeTxt }}
               </button>
             </div>
             <div>
@@ -364,7 +371,16 @@ export default {
       wxnewbtn: false,
       isCodeIng: false, //是否倒计时
       codeTxt: "获取验证码",
+      changecodeTxt: "获取验证码",
+      changedisablbtn: false,
+      changecodetime: 60,
       codetime: 60,
+      emailcodeTxt: "获取验证码",
+      emailtime: 60,
+      emaildisabl: false,
+      changeemailcodeTxt: "获取验证码",
+      changeemailtime: 60,
+      changeemaildisabl: false,
       disablbtn: false,
     };
   },
@@ -428,16 +444,16 @@ export default {
         } else if (res.code == 20010) {
           let timer = setInterval(() => {
             this.isCodeIng = true;
-            this.disablbtn = true;
-            this.codetime -= 1;
-            this.codeTxt = "重新获取" + this.codetime + "s";
-            if (this.codetime < 1) {
+            this.changedisablbtn = true;
+            this.changecodetime -= 1;
+            this.changecodeTxt = "重新获取" + this.changecodetime + "s";
+            if (this.changecodetime < 1) {
               clearInterval(timer);
-              if (this.codetime < 1) {
-                this.codeTxt = "获取验证码";
+              if (this.changecodetime < 1) {
+                this.changecodeTxt = "获取验证码";
                 this.isCodeIng = false;
-                this.codetime = 120;
-                this.disablbtn = false;
+                this.changecodetime = 120;
+                this.changedisablbtn = false;
               }
             }
           }, 1000);
@@ -466,16 +482,93 @@ export default {
       this.phonenew = false;
     },
     // 邮箱
+    emailcode() {
+      let data = {
+        phone: this.phone,
+      };
+      service.phoneyz(data).then((res) => {
+        console.log(res);
+        if (res.code == 20020) {
+          alert(res.msg);
+        } else if (res.code == 20010) {
+          let timer = setInterval(() => {
+            this.isCodeIng = true;
+            this.emaildisabl = true;
+            this.emailtime -= 1;
+            this.emailcodeTxt = "重新获取" + this.emailtime + "s";
+            if (this.emailtime < 1) {
+              clearInterval(timer);
+              if (this.emailtime < 1) {
+                this.emailcodeTxt = "获取验证码";
+                this.isCodeIng = false;
+                this.emailtime = 60;
+                this.emaildisabl = false;
+              }
+            }
+          }, 1000);
+        }
+      });
+    },
+    emailyes() {
+      let data = {
+        phone: this.phone,
+        pcaptcha: this.emailphonecode,
+      };
+      service.phonechange(data).then((res) => {
+        console.log(res);
+        if (res.msg == "身份验证通过!") {
+          this.emailyz = false;
+          this.emailnew = true;
+        }
+      });
+    },
     emailno() {
       this.emailyz = false;
     },
-    emailyes() {
-      this.emailyz = false;
-      this.emailnew = true;
-    },
     // 新邮箱
+    changeemail() {
+      let data = {
+        email: this.newemail,
+      };
+      service.emailcode(data).then((res) => {
+        console.log(res);
+        if (res.code == 20020) {
+          alert(res.msg);
+        } else if (res.info.code == 20010) {
+          let timer = setInterval(() => {
+            this.isCodeIng = true;
+            this.changeemaildisabl = true;
+            this.changeemailtime -= 1;
+            this.changeemailcodeTxt = "重新获取" + this.changeemailtime + "s";
+            if (this.changeemailtime < 1) {
+              clearInterval(timer);
+              if (this.changeemailtime < 1) {
+                this.changeemailcodeTxt = "获取验证码";
+                this.isCodeIng = false;
+                this.changeemailtime = 60;
+                this.changeemaildisabl = false;
+              }
+            }
+          }, 1000);
+        }
+      });
+    },
     emailnewyes() {
-      this.emailnew = false;
+      let data = {
+        email: this.newemail,
+        Ecaptcha: this.newemailcode,
+      };
+      service.emailhb(data).then((res) => {
+        console.log(res);
+        if (res.msg == "20010") {
+          this.emailnew = false;
+          this.reload();
+        } else if (res.msg == "此邮箱已被绑定!") {
+          alert(res.msg);
+        } else {
+          alert(res.msg);
+        }
+      });
     },
 
     // 密码

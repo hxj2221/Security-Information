@@ -64,6 +64,25 @@
         </el-row>
       </el-form>
     </div>
+    <div style="margin-top: 10px">
+      <p
+        style="
+          display: flex;
+          margin-left: 15px;
+          font-size: 20px;
+          color: #858bed;
+          font-weight: bold;
+        "
+      >
+        查看权限
+      </p>
+      <div class="role_div" style="width: 50%; text-align: left">
+        <el-radio-group v-model="radio" @change="radiochange">
+          <el-radio :label="2">本科室</el-radio>
+          <el-radio :label="1">全部</el-radio>
+        </el-radio-group>
+      </div>
+    </div>
     <div>
       <p
         style="
@@ -111,28 +130,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div style="margin-top: 100px">
-      <p
-        style="
-          display: flex;
-          margin-left: 15px;
-          font-size: 20px;
-          color: #858bed;
-          font-weight: bold;
-        "
-      >
-        查看权限
-      </p>
-      <div
-        class="role_div"
-        style="width: 50%; text-align: left; margin: 20px 40px"
-      >
-        <el-radio-group v-model="radio" @change="radiochange">
-          <el-radio :label="2">本科室</el-radio>
-          <el-radio :label="1">全部</el-radio>
-        </el-radio-group>
       </div>
     </div>
   </div>

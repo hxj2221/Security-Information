@@ -30,6 +30,8 @@
         ></el-table-column>
         <el-table-column prop="title" label="名称" width="180">
         </el-table-column>
+        <el-table-column prop="level" label="等级" width="180">
+        </el-table-column>
         <el-table-column prop="icon" label="左侧图标">
           <!-- <template slot-scope="scope"> -->
           <!-- <i class="el-icon-s-help"></i> -->
