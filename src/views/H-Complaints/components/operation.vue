@@ -753,7 +753,7 @@
                  :multiple='false'
                  :on-change="handleChange"
                  :auto-upload="false">
-            <el-button slot="trigger" size="small" type="primary"   :disabled='(filetitle==""||filedescribe=="")?true:false' v-show="fileList.length==0">选取文件</el-button>
+            <el-button slot="trigger" size="small" type="primary"   :disabled='(filetitle==""||filedescribe=="")?true:false' >选取文件</el-button>
             </el-upload>
             </el-form-item>
           </el-form>
