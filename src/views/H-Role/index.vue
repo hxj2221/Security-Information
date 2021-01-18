@@ -70,9 +70,11 @@
       <div class="rolepag">
         <div class="block">
           <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
             :current-page="currentPage"
-            :page-sizes="[8, 10, 20]"
-            :page-size="8"
+            :page-sizes="nums"
+            :page-size="num"
             layout="total, sizes, prev, pager, next, jumper"
             :total="tables.length"
           >
@@ -81,7 +83,7 @@
       </div>
     </div>
     <!-- 新增-->
-    <addrole v-show="addrole"></addrole>
+    <addrole v-show="addrole" :listaddchild="addchild"></addrole>
     <!-- 编辑 -->
     <editrole v-show="editshow" :editchid="childedit"></editrole>
   </div>
@@ -105,8 +107,14 @@ export default {
       dormitory: [],
       search: "",
       childedit: [],
-      currentPage: 1,
+      currentPage: 20,
+      total: 0,
+      page: 1,
+      pageSize: 5,
+      nums: [8, 10, 20],
+      num: 8,
       tables1: [],
+      addchild: [],
     };
   },
   created() {
@@ -115,25 +123,16 @@ export default {
       this.tables = res.data;
     });
   },
-  computed: {
-    // 搜索
-    // tables() {
-    //   const search = this.search;
-    //   if (search) {
-    //     return this.dormitory.filter((data) => {
-    //       return Object.keys(data).some((key) => {
-    //         return String(data[key]).toLowerCase().indexOf(search) > -1;
-    //       });
-    //     });
-    //   }
-    //   return this.dormitory;
-    // },
-  },
+
   methods: {
     // 新增
     fathpowadd() {
       this.rolevue = false;
       this.addrole = true;
+      service.rolepowlist().then((res) => {
+        console.log(res);
+        this.addchild = res;
+      });
     },
     // 子保存
     fathroleyes() {
@@ -184,8 +183,6 @@ export default {
     },
     // 编辑
     handleEdit(id) {
-      // this.editFormVisible = true;
-      // this.editForm = Object.assign({}, row); //重点
       this.rolevue = false;
       this.editshow = true;
       console.log(id);
@@ -215,6 +212,7 @@ export default {
     indexMethod(index) {
       return index * 1;
     },
+
     // 删除
     handleDelete(index, row) {
       console.log(index, row);
@@ -236,6 +234,31 @@ export default {
             message: "已取消删除",
           });
         });
+    },
+    // 分页
+    handleSizeChange(val) {
+      console.log(`每页 ${val}条`);
+      this.num = val;
+      let data = {
+        pageSize: this.num,
+        pageNum: this.currentPage,
+      };
+      service.rolelist(data).then((res) => {
+        console.log(res);
+        this.tables = res.data;
+      });
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val;
+      console.log(`当前页:${val}`);
+      let data = {
+        pageNum: this.num,
+        pageSize: this.currentPage,
+      };
+      service.rolelist(data).then((res) => {
+        console.log(res);
+        this.tables = res.data;
+      });
     },
   },
 };

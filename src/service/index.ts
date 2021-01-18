@@ -306,17 +306,17 @@ export default {
     return await service.get(`${baseUrl}api/article/article_cate`).then(res => res).catch(err => err)
   },
   // 添加文章
-  AriList: async (params:any) => {
-    return await service.get(`${baseUrl}api/article/article_cate_add`,{params}).then(res => res).catch(err => err)
+  AriList: async (params: any) => {
+    return await service.get(`${baseUrl}api/article/article_cate_add`, { params }).then(res => res).catch(err => err)
   },
   // 医患列表
-  patientList: async (params:any) => {
-    return await service.get(`${baseUrl}api/record/record`,{params}).then(res => res).catch(err => err)
+  patientList: async (params: any) => {
+    return await service.get(`${baseUrl}api/record/record`, { params }).then(res => res).catch(err => err)
   },
-    // 搜索+分页
-    seachpag: async (data:any) => {
-      return await service.post(`${baseUrl}api/record/record`,data).then(res => res).catch(err => err)
-    },
+  // 搜索+分页
+  seachpag: async (data: any) => {
+    return await service.post(`${baseUrl}api/record/record`, data).then(res => res).catch(err => err)
+  },
   // 医患添加
   patientAdd: async (data: any) => {
     return await service.post(`${baseUrl}api/record/addrecord`, data).then(res => res).catch(err => err)
@@ -339,7 +339,7 @@ export default {
   },
   // 角色权限
   rolepowlist: async () => {
-    return await service.get(`${baseUrl}api/part/displayauthgroup`).then(res => res).catch(err => err)
+    return await service.get(`${baseUrl}api/part/addauthgroup`).then(res => res).catch(err => err)
   },
 
   // 文件库新增分类list
@@ -392,13 +392,9 @@ export default {
   FileAddList: async () => {
     return await service.get(`${baseUrl}api/fileclass/lists`).then(res => res).catch(err => err)
   },
-<<<<<<< HEAD
   // 工作台
   // dashboard: async () => {
   //   return await service.get(`${baseUrl}api/home/Lz_workbench`).then(res => res).catch(err => err)
 
   // },
-=======
- 
->>>>>>> 702a15621bb3b903eeaa3bfa1ae7eb647abd5ad2
 }

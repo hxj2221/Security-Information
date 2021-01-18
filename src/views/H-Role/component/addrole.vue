@@ -111,7 +111,12 @@
                 >{{ item.title }}</el-checkbox
               >
             </div>
-            <div class="power" v-for="v in item.son" :key="v.id" :label="v.id">
+            <div
+              class="power"
+              v-for="v in item._child"
+              :key="v.id"
+              :label="v.id"
+            >
               <el-checkbox
                 v-model="vcheck"
                 @change="vcheckchange"
@@ -121,7 +126,7 @@
               >
               <el-checkbox-group v-model="checkList" @change="checkchange">
                 <el-checkbox
-                  v-for="(vv, index) in v.son"
+                  v-for="(vv, index) in v._child"
                   :key="index"
                   :label="vv.id"
                   >{{ vv.title }}</el-checkbox
@@ -138,6 +143,7 @@
 <script>
 import service from "@/service/index";
 export default {
+  props: ["listaddchild"],
   inject: ["reload"],
   data() {
     return {
@@ -154,12 +160,18 @@ export default {
       powlist: [],
     };
   },
-  created() {
-    service.rolepowlist().then((res) => {
+  // created() {
+  //   service.rolepowlist().then((res) => {
+  //     console.log(res);
+  //     this.powlist = res.data;
+  //     console.log(this.powlist);
+  //   });
+  // },
+  watch: {
+    listaddchild(res) {
       console.log(res);
       this.powlist = res.data;
-      console.log(this.powlist);
-    });
+    },
   },
   methods: {
     checkchange() {

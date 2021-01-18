@@ -75,7 +75,8 @@
       </el-table>
 
       <!-- 分页 -->
-      <div class="departpag">
+      <!-- 咱不需要 -->
+      <!-- <div class="departpag">
         <div class="block">
           <el-pagination
             @size-change="handleSizeChange"
@@ -88,7 +89,7 @@
           >
           </el-pagination>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <!-- 新增 -->

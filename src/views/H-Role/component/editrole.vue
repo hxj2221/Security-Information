@@ -113,7 +113,12 @@
                 >{{ item.title }}
               </el-checkbox>
             </div>
-            <div class="power" v-for="v in item.son" :key="v.id" :label="v.id">
+            <div
+              class="power"
+              v-for="v in item._child"
+              :key="v.id"
+              :label="v.id"
+            >
               <el-checkbox
                 v-model="vcheck"
                 @change="vcheckchange"
@@ -124,7 +129,7 @@
               >
               <el-checkbox-group v-model="checkList" @change="checkchange">
                 <el-checkbox
-                  v-for="(vv, index) in v.son"
+                  v-for="(vv, index) in v._child"
                   :key="index"
                   :label="vv.id"
                   :checked="vv.checked"
@@ -146,7 +151,7 @@ export default {
   inject: ["reload"],
   data() {
     return {
-      radio: 1,
+      radio: "",
       cc: 0,
       rolems: "",
       rolecreate: "",
@@ -160,9 +165,6 @@ export default {
       vcheck: [],
       dialogVisible: false,
       powlist: [],
-      // check1: true,
-      // check2: true,
-      // check3: false,
     };
   },
   watch: {
@@ -173,6 +175,7 @@ export default {
       this.valuestatus = newValue.info.status;
       this.jkid = newValue.info.id;
       this.powlist = newValue.rule;
+      this.radio = newValue.info.data_rule;
       console.log(this.powlist);
     },
   },
@@ -196,6 +199,7 @@ export default {
         rules: this.checkList + "," + this.vcheck + "," + this.fcheck,
         data_rule: this.radio,
       };
+      console.log(data);
       service.roleeditsqve(data).then((res) => {
         console.log(res);
         if (res.code == "20010") {
