@@ -64,6 +64,25 @@
         </el-row>
       </el-form>
     </div>
+    <div style="margin-top: 10px">
+      <p
+        style="
+          display: flex;
+          margin-left: 15px;
+          font-size: 20px;
+          color: #858bed;
+          font-weight: bold;
+        "
+      >
+        查看权限
+      </p>
+      <div class="role_div" style="width: 50%; text-align: left">
+        <el-radio-group v-model="radio" @change="radiochange">
+          <el-radio :label="2">本科室</el-radio>
+          <el-radio :label="1">全部</el-radio>
+        </el-radio-group>
+      </div>
+    </div>
     <div>
       <p
         style="
@@ -92,7 +111,12 @@
                 >{{ item.title }}</el-checkbox
               >
             </div>
-            <div class="power" v-for="v in item.son" :key="v.id" :label="v.id">
+            <div
+              class="power"
+              v-for="v in item._child"
+              :key="v.id"
+              :label="v.id"
+            >
               <el-checkbox
                 v-model="vcheck"
                 @change="vcheckchange"
@@ -102,7 +126,7 @@
               >
               <el-checkbox-group v-model="checkList" @change="checkchange">
                 <el-checkbox
-                  v-for="(vv, index) in v.son"
+                  v-for="(vv, index) in v._child"
                   :key="index"
                   :label="vv.id"
                   >{{ vv.title }}</el-checkbox
@@ -113,34 +137,13 @@
         </div>
       </div>
     </div>
-    <div style="margin-top: 100px">
-      <p
-        style="
-          display: flex;
-          margin-left: 15px;
-          font-size: 20px;
-          color: #858bed;
-          font-weight: bold;
-        "
-      >
-        查看权限
-      </p>
-      <div
-        class="role_div"
-        style="width: 50%; text-align: left; margin: 20px 40px"
-      >
-        <el-radio-group v-model="radio" @change="radiochange">
-          <el-radio :label="2">本科室</el-radio>
-          <el-radio :label="1">全部</el-radio>
-        </el-radio-group>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
 import service from "@/service/index";
 export default {
+  props: ["listaddchild"],
   inject: ["reload"],
   data() {
     return {
@@ -157,12 +160,18 @@ export default {
       powlist: [],
     };
   },
-  created() {
-    service.rolepowlist().then((res) => {
+  // created() {
+  //   service.rolepowlist().then((res) => {
+  //     console.log(res);
+  //     this.powlist = res.data;
+  //     console.log(this.powlist);
+  //   });
+  // },
+  watch: {
+    listaddchild(res) {
       console.log(res);
       this.powlist = res.data;
-      console.log(this.powlist);
-    });
+    },
   },
   methods: {
     checkchange() {

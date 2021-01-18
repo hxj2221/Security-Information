@@ -20,9 +20,11 @@
     padding-top: 30px;
     padding-left: 60px;
 }
-.roleaddThre>div{
+
+.roleaddThre>div {
     margin-right: 25px;
 }
+
 .roleaddSpan {
     padding-left: 5px;
     color: #000;
@@ -43,6 +45,8 @@
     border-top: 2px solid #ccc;
     border-bottom: 2px solid #ccc;
     border-radius: 5px;
+    width: 70px;
+    height: 40px;
 }
 
 .roleaddb:hover {
@@ -52,6 +56,8 @@
 .roleaddb {
     border: 2px solid #ccc;
     border-radius: 5px;
+    width: 70px;
+    height: 40px;
 }
 
 .addrole .roleaddWidhr {
@@ -108,9 +114,11 @@
     margin-left: 20px;
     margin-top: 40px;
 }
-.roleFs> .roleTab tr{
+
+.roleFs>.roleTab tr {
     height: 50px;
 }
+
 .roleTd {
     border-bottom: #ccc 2px solid;
 }

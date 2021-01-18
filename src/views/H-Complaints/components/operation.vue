@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="operation" style="min-height: 800px">
+    <div class="operation" style="min-height: 800px" v-if="operationdata!=''&&opdata!=''">
       <div class="operation-top">
         <span>投诉详情-调查中</span>
         <div>
@@ -635,7 +635,7 @@
             </div>
             <!-- 附件 -->
             <div
-              v-show="
+              v-if="
                 checkstate ==3 ||
                 checkstate == 5 ||
                 checkstate == 6 ||
@@ -678,24 +678,18 @@
                 <el-col :span="22" :push="1"
                   ><div class="grid-content bg-purple">
                     <el-table
+                     v-show="upfilesss"
                       :data="fileList"
                       style="width: 100%"
                       :header-cell-style="getRowClass"
                     >
-                      <el-table-column prop="name" label="ID" width="width">
+                      <el-table-column type="index" width="50" label="序号"></el-table-column>
+                      <el-table-column prop="name" label="文件名" width="width">
                       </el-table-column>
-                      <el-table-column prop="filename" label="文件名" width="width">
+                      <el-table-column prop="filedescribe" label="描述" width="width">
                       </el-table-column>
-                      <!-- <el-table-column prop="describe" label="描述" width="width">
+                      <el-table-column prop="size" label="文件大小" width="width">
                       </el-table-column>
-                      <el-table-column prop="filesize" label="文件大小" width="width">
-                      </el-table-column>
-                      <el-table-column prop="uptime" label="更新时间" width="width">
-                      </el-table-column>
-                      <el-table-column prop="filetype" label="文件类型" width="width">
-                      </el-table-column>
-                      <el-table-column prop="uploader" label="上传人员" width="width">
-                      </el-table-column> -->
                       <el-table-column fixed="right" label="操作" width="100">
                         <template slot-scope="scope">
                           <slot name="fileoper">
@@ -751,32 +745,21 @@
             </el-form-item>
             
             <el-form-item label="上传附件：" class="uploadfile">
-              <!-- <el-input
-                v-model="uploadfile"
-                type="file"
-                style="border: none"
-                class="uploadfile"
-              ></el-input> -->
-              <!--  -->
             <el-upload
+                 :http-request='upfilesubmit'
                  class="upload-demo"
-                 style="margin-left:-30px"
-                 ref="upload"
-                 action="https://jsonplaceholder.typicode.com/posts/"
-                 :on-preview="handlePreview"
-                 :on-remove="handleRemove"
-                 :on-progress='aa'
+                 :limit='1'
+                :disabled='(filetitle==""||filedescribe=="")?true:false'
+                 :multiple='false'
+                 :on-change="handleChange"
                  :auto-upload="false">
-  <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-</el-upload>
+            <el-button slot="trigger" size="small" type="primary"   :disabled='(filetitle==""||filedescribe=="")?true:false' v-show="fileList.length==0">选取文件</el-button>
+            </el-upload>
             </el-form-item>
           </el-form>
-          <!-- <el-button type="primary" icon="el-icon-upload" class="uploadfiles"
-            >上传文件</el-button
-          > -->
           <span slot="footer" class="dialog-footer">
             <el-button @click="upfiles = false">取 消</el-button>
-            <el-button type="primary" @click="upfiles = false">确 定</el-button>
+            <el-button type="primary" @click="upfilesubmit">确 定</el-button>
           </span>
         </el-dialog>
       </div>
@@ -794,6 +777,9 @@ export default {
   },
   data() {
     return {
+      dis:false,
+      upfiledatas:{},
+      upfilesss:false,
       token:'',
       economic:'',//直接经济损失
       management:'',//管理措施
@@ -842,23 +828,57 @@ export default {
       ],
       fileList: [
       ],
+      base64file:'',
     };
   },
   methods: {
-    aa(event, file, fileList){
-      console.log(event, file, fileList)
+    //这个file参数 也就是文件信息，你使用 插件 时 你就可以打印出文件信息 看看嘛
+    getBase64() {
+      return new Promise((resolve, reject) => {
+        let reader = new FileReader();
+        let fileResult = "";
+        reader.readAsDataURL(this.fileList[0].raw);　　　　　//开始转
+        reader.onload = function() {
+          fileResult = reader.result;
+        };　　　　　//转 失败
+        reader.onerror = function(error) {
+          reject(error);
+        };　　　　　//转 结束  咱就 resolve 出去
+        reader.onloadend = function() {
+          resolve(fileResult);
+        };
+      });
     },
-     handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePreview(file) {
-        console.log(file);
-      },
-      handleExceed(files, fileList) {
-        this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
-      },
-      beforeRemove(file, fileList) {
-        return this.$confirm(`确定移除 ${ file.name }？`);
+    upfilesubmit(){
+      let file=this.fileList[0]
+      console.log(file.raw)
+      this.getBase64(file.raw).then(resBase64 => {
+        this.base64file = resBase64.split(',')[1]　　//直接拿到base64信息
+        console.log(this.base64file)
+          let params={
+        // event_number:this.$parent.opdata[0].event_number,//编号
+        file:this.base64file,
+        //  file_name:this.filetitle,
+        // represent:this.filedescribe
+      }
+      console.log(params)
+      service.uploadfiles(params).then(res=>{
+        console.log(res)
+      })
+        })
+    
+      this.upfilesss=true
+      this.upfiles = false
+
+    },
+     handleChange(file, fileList) {
+      
+     if(this.filedescribe!==''&&this.filetitle!==''){
+          file.name=this.filetitle
+      file.filedescribe=this.filedescribe
+       this.fileList.push(file)
+       }
+     
       },
     getCascaderObj() {
       console.log(this.comde);
@@ -876,7 +896,6 @@ export default {
         department_ids:comde,//下发科室
         reply_time:this.needtime// 输入天数
       }
-      console.log(qs.stringify(data))
       service.Issuedepartment(data).then(res=>{
         console.log(res)
          if(res.code==20010){

@@ -11,7 +11,10 @@
             class="departNameipt"
             placeholder="请输入内容"
           ></el-input>
-          <el-button class="departNamesch" icon="el-icon-search"
+          <el-button
+            class="departNamesch"
+            icon="el-icon-search"
+            @click="departsearch"
             >搜索</el-button
           >
         </div>
@@ -22,15 +25,14 @@
         :header-cell-style="{ background: '#C2C5F6' }"
         :cell-style="{ background: '#fff' }"
         row-key="id"
-        default-expand-all
         :tree-props="{
           children: '_child',
           hasChildren: 'hasChildren',
         }"
       >
         <el-table-column label="序号" type="index"> </el-table-column>
-        <el-table-column prop="number" label="科室编号"> </el-table-column>
         <el-table-column prop="title" label="科室名称"> </el-table-column>
+        <el-table-column prop="number" label="科室编号"> </el-table-column>
         <el-table-column prop="usernumber" label="员工数量"> </el-table-column>
         <el-table-column prop="head_department.name" label="负责人">
         </el-table-column>
@@ -73,7 +75,8 @@
       </el-table>
 
       <!-- 分页 -->
-      <div class="departpag">
+      <!-- 咱不需要 -->
+      <!-- <div class="departpag">
         <div class="block">
           <el-pagination
             @size-change="handleSizeChange"
@@ -86,7 +89,7 @@
           >
           </el-pagination>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <!-- 新增 -->
@@ -101,6 +104,7 @@ import headpow from "../component/power";
 import adddep from "./component/departadd";
 import editdep from "./component/departdit";
 import service from "@/service/index";
+import qs from "qs";
 export default {
   components: { headpow, adddep, editdep },
   inject: ["reload"],
@@ -114,6 +118,7 @@ export default {
       dormitory: [],
       search: "",
       departchildedit: [],
+      tables1: [],
     };
   },
   created() {
@@ -134,6 +139,16 @@ export default {
     fathpowadd() {
       this.departvue = !this.departvue;
       this.adddep = !this.adddep;
+    },
+    // 搜索
+    departsearch() {
+      let param = {
+        name: this.search,
+      };
+      service.departserc(param).then((res) => {
+        this.dormitory = this.tables1 = res.data;
+        console.log(res);
+      });
     },
     // 子
     fathdepartyes() {

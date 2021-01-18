@@ -11,7 +11,10 @@
                 class="dialog-input-text"
                 type="input"
                 autosize
-                placeholder="10001"></el-input>
+                v-model="jobnum"
+                placeholder="10001"
+                disabled
+              ></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
@@ -151,9 +154,11 @@
     </div>
     <div class="person_button">
       <el-button class="persongr" icon="el-icon-s-claim" @click="personsave"
-      >保存</el-button
+        >保存</el-button
       >
-      <el-button class="personb" @click="personback" icon="el-icon-back">返回</el-button>
+      <el-button class="personb" @click="personback" icon="el-icon-back"
+        >返回</el-button
+      >
     </div>
   </div>
 </template>
@@ -191,6 +196,7 @@ export default {
       selectedOptions: "",
       options: regionData,
       personaddreiPt: "",
+      jobnum: "",
       optiongen: [
         {
           value: "1",
@@ -235,6 +241,7 @@ export default {
       this.persongense = res.data.sex.name;
       this.persongensel = res.data.sex.number;
       this.selectedOptions = res.data.address;
+      this.jobnum = res.data.job_number;
       console.log(this.persongensel);
     });
   },

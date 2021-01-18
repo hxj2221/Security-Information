@@ -130,7 +130,7 @@
         </el-form-item>
         <el-upload
           class="upload-demo"
-          action="http://bt1.wlqqlp.com:8082/api/file/addfile"
+          action="http://bt1.wlqqlp.com:8082/api/srk/event_uploadfiles"
           :on-preview="handlePreview"
           :on-remove="handleRemove"
           :before-remove="beforeRemove"
