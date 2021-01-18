@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="operation" style="min-height: 800px">
+    <div class="operation" style="min-height: 800px" v-if="operationdata!=''&&opdata!=''">
       <div class="operation-top">
         <span>投诉详情-调查中</span>
         <div>
@@ -635,7 +635,7 @@
             </div>
             <!-- 附件 -->
             <div
-              v-show="
+              v-if="
                 checkstate ==3 ||
                 checkstate == 5 ||
                 checkstate == 6 ||
@@ -678,18 +678,20 @@
                 <el-col :span="22" :push="1"
                   ><div class="grid-content bg-purple">
                     <el-table
+                     v-show="upfilesss"
                       :data="fileList"
                       style="width: 100%"
                       :header-cell-style="getRowClass"
                     >
-                      <el-table-column prop="name" label="ID" width="width">
+                      <el-table-column type="index" width="50" label="序号"></el-table-column>
+                      <el-table-column prop="name" label="文件名" width="width">
                       </el-table-column>
-                      <el-table-column prop="filename" label="文件名" width="width">
+                      <el-table-column prop="describe" label="描述" width="width">
                       </el-table-column>
-                      <!-- <el-table-column prop="describe" label="描述" width="width">
+                      <el-table-column prop="size" label="文件大小" width="width">
                       </el-table-column>
-                      <el-table-column prop="filesize" label="文件大小" width="width">
-                      </el-table-column>
+                      <!-- 
+                      
                       <el-table-column prop="uptime" label="更新时间" width="width">
                       </el-table-column>
                       <el-table-column prop="filetype" label="文件类型" width="width">
@@ -751,32 +753,20 @@
             </el-form-item>
             
             <el-form-item label="上传附件：" class="uploadfile">
-              <!-- <el-input
-                v-model="uploadfile"
-                type="file"
-                style="border: none"
-                class="uploadfile"
-              ></el-input> -->
-              <!--  -->
             <el-upload
                  class="upload-demo"
+                 limit='1'
                  style="margin-left:-30px"
                  ref="upload"
-                 action="https://jsonplaceholder.typicode.com/posts/"
-                 :on-preview="handlePreview"
-                 :on-remove="handleRemove"
-                 :on-progress='aa'
+                 :on-change="handleChange"
                  :auto-upload="false">
-  <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-</el-upload>
+            <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+            </el-upload>
             </el-form-item>
           </el-form>
-          <!-- <el-button type="primary" icon="el-icon-upload" class="uploadfiles"
-            >上传文件</el-button
-          > -->
           <span slot="footer" class="dialog-footer">
             <el-button @click="upfiles = false">取 消</el-button>
-            <el-button type="primary" @click="upfiles = false">确 定</el-button>
+            <el-button type="primary" @click="upfilesubmit">确 定</el-button>
           </span>
         </el-dialog>
       </div>
@@ -794,6 +784,7 @@ export default {
   },
   data() {
     return {
+      upfilesss:false,
       token:'',
       economic:'',//直接经济损失
       management:'',//管理措施
@@ -845,20 +836,17 @@ export default {
     };
   },
   methods: {
-    aa(event, file, fileList){
-      console.log(event, file, fileList)
+    upfilesubmit(){
+      this.upfilesss=true
+      this.upfiles = false
     },
-     handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePreview(file) {
-        console.log(file);
-      },
-      handleExceed(files, fileList) {
-        this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
-      },
-      beforeRemove(file, fileList) {
-        return this.$confirm(`确定移除 ${ file.name }？`);
+     handleChange(file, fileList) {
+       console.log(file, fileList)
+       this.filetitle=file.name
+       for(let i=0;i<this.fileList.length;i++){
+    this.fileList.push({describe:this.filedescribe})
+       }
+       this.fileList=fileList
       },
     getCascaderObj() {
       console.log(this.comde);

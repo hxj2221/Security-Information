@@ -153,7 +153,7 @@ export default {
     return await service.post(`${baseUrl}api/Employees/add`, data).then(res => res).catch(err => err)
   },
   // 员工编辑
-  staffEdit: async (params: Object) => {
+  staffEdit: async (params: any) => {
     return await service.post(`${baseUrl}api/Employees/edit`, params).then(res => res).catch(err => err)
   },
   // 员工删除
@@ -200,7 +200,6 @@ export default {
   roleadd: async (data: object) => {
     return await service.post(`${baseUrl}api/part/addauthgroup`, data).then(res => res).catch(err => err)
   },
-
   // 角色添加
   roledel: async (data: object) => {
     return await service.post(`${baseUrl}api/part/delauthgroup`, data).then(res => res).catch(err => err)
@@ -298,6 +297,46 @@ export default {
   accountman: async () => {
     return await service.get(`${baseUrl}api/home/user_home`).then(res => res).catch(err => err)
   },
+  // 文章列表 (post)
+  detailList: async () => {
+    return await service.post(`${baseUrl}api/article/article_cate`).then(res => res).catch(err => err)
+  },
+  // 文章列表（get）
+  detaillist: async () => {
+    return await service.get(`${baseUrl}api/article/article_cate`).then(res => res).catch(err => err)
+  },
+  // 添加文章
+  AriList: async (params:any) => {
+    return await service.get(`${baseUrl}api/article/article_cate_add`,{params}).then(res => res).catch(err => err)
+  },
+  // 医患列表
+  patientList: async (params:any) => {
+    return await service.get(`${baseUrl}api/record/record`,{params}).then(res => res).catch(err => err)
+  },
+    // 搜索+分页
+    seachpag: async (data:any) => {
+      return await service.post(`${baseUrl}api/record/record`,data).then(res => res).catch(err => err)
+    },
+  // 医患添加
+  patientAdd: async (data: any) => {
+    return await service.post(`${baseUrl}api/record/addrecord`, data).then(res => res).catch(err => err)
+  },
+  // 选择科室,投诉事件
+  selDep: async () => {
+    return await service.get(`${baseUrl}api/record/addrecord`).then(res => res).catch(err => err)
+  },
+  // 点击上传附件按钮
+  upLode: async (params: any) => {
+    return await service.get(`${baseUrl}api/record/upload_attachment`, { params }).then(res => res).catch(err => err)
+  },
+  // 上传附件 确定
+  uplode: async (data: any) => {
+    return await service.post(`${baseUrl}api/record/upload_attachment`, data).then(res => res).catch(err => err)
+  },
+  // 医患详情
+  details: async (data: any) => {
+    return await service.post(`${baseUrl}api/record/record_details`, data).then(res => res).catch(err => err)
+  },
   // 角色权限
   rolepowlist: async () => {
     return await service.get(`${baseUrl}api/part/displayauthgroup`).then(res => res).catch(err => err)
@@ -353,9 +392,13 @@ export default {
   FileAddList: async () => {
     return await service.get(`${baseUrl}api/fileclass/lists`).then(res => res).catch(err => err)
   },
+<<<<<<< HEAD
   // 工作台
   // dashboard: async () => {
   //   return await service.get(`${baseUrl}api/home/Lz_workbench`).then(res => res).catch(err => err)
 
   // },
+=======
+ 
+>>>>>>> 702a15621bb3b903eeaa3bfa1ae7eb647abd5ad2
 }

@@ -110,17 +110,15 @@
 
         <!-- 分页 -->
         <div class="articleList_table_table_paging">
-        
-    <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page="currentPage"
-      :page-sizes="[8, 10, 20]"
-      :page-size="8"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="tableData.length">
-    </el-pagination>
-  
+          <el-pagination
+           
+            :current-page="currentPage"
+            :page-sizes="[8, 10, 20]"
+            :page-size="8"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="tableData.length"
+          >
+          </el-pagination>
         </div>
       </div>
     </div>
@@ -128,8 +126,10 @@
 </template>
 
 <script>
+// 引入css
 import "@/views/H-Articlelist/component/articleList/css.css";
-
+// 引入service
+import service from "@/service/index";
 export default {
   components: {},
   props: {},
@@ -449,7 +449,7 @@ export default {
           label: "删除",
         },
       ],
-      currentPage1: 5,
+      currentPage: 1,
       // 弹框
       dlog: "",
       valueHover: [],
@@ -574,12 +574,12 @@ export default {
   },
   methods: {
     handleDelete(index, item) {
-      item.splice(index,1)
-       this.$message({
-          showClose: true,
-          message: '删除成功',
-          type: 'success'
-        });
+      item.splice(index, 1);
+      this.$message({
+        showClose: true,
+        message: "删除成功",
+        type: "success",
+      });
     },
     //级选择器
     handleChange() {},
@@ -615,6 +615,15 @@ export default {
       }
     },
   },
+  created(){
+    service.detailList().then(res=>{
+      console.log(res)
+    })
+    service.detaillist().then(res=>{
+      console.log(res)
+    })
+   
+  }
 };
 </script>
 <style scoped>

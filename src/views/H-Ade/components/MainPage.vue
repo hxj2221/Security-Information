@@ -10,30 +10,30 @@
     </div>
     <!-- 检索 -->
     <div class="searchAll">
-      <el-form ref="form" :model="search">
+      <el-form ref="form">
         <div class="searchAll_search">
           <el-form-item label="患者姓名">
-            <el-input v-model="search.patient_name" placeholder="请输入内容"></el-input>
+            <el-input v-model="patient_name" placeholder="请输入内容"></el-input>
           </el-form-item>
           <el-form-item label="发生地点">
-            <el-select v-model="search.occur_scene" placeholder="请选择">
+            <el-select v-model="occur_scene" placeholder="请选择">
               <el-option v-for="item in options" :key="item.id" :label="item.title" :value="item.id">
               </el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="事发日期">
-            <el-date-picker format="yyyy-MM-dd" value-format="yyyy-MM-dd" v-model="search.starttime" type="date"
+            <el-date-picker format="yyyy-MM-dd" value-format="yyyy-MM-dd" v-model="starttime" type="date"
               placeholder="开始日期时间" :picker-options="start_Date" style="width:162px">
             </el-date-picker>
             --
-            <el-date-picker format="yyyy-MM-dd" value-format="yyyy-MM-dd" v-model="search.endtime" type="date"
+            <el-date-picker format="yyyy-MM-dd" value-format="yyyy-MM-dd" v-model="endtime" type="date"
               placeholder="结束日期时间" :picker-options="end_Date" style="width:162px">
             </el-date-picker>
           </el-form-item>
         </div>
         <div class="searchAll_search">
           <el-form-item label="轻重程度">
-            <el-select style="width: 562px;" v-model="search.degree_weight_id" placeholder="请选择">
+            <el-select style="width: 562px;" v-model="degree_weight_id" placeholder="请选择">
               <el-option v-for="item in options1" :key="item.id" :label="item.title" :value="item.id">
               </el-option>
             </el-select>
@@ -44,7 +44,7 @@
     </div>
     <!-- 内容 -->
     <el-table class="elTable" :data="tableData">
-      <el-table-column prop="id" label="序号">
+      <el-table-column type="index" label="序号">
       </el-table-column>
       <el-table-column prop="event_num" label="事件编码">
       </el-table-column>
@@ -56,13 +56,13 @@
       </el-table-column>
       <el-table-column prop="occur_time" :formatter="getdate" label="事发日期" width="150">
       </el-table-column>
-      <el-table-column prop="occur_scene" label="发生场所">
+      <el-table-column prop="occurscene.title" label="发生场所">
       </el-table-column>
-      <el-table-column prop="degree_weight_id" label="轻重程度" :show-overflow-tooltip='true'>
+      <el-table-column prop="degreeweight.title" label="轻重程度" :show-overflow-tooltip='true'>
       </el-table-column>
       <el-table-column prop="create_time" label="上报时间" width="150">
       </el-table-column>
-      <el-table-column prop="department_id" label="患者科室">
+      <el-table-column prop="department.title" label="患者科室">
       </el-table-column>
       <el-table-column prop="create_uid" label="上报人">
       </el-table-column>
@@ -76,7 +76,7 @@
     <div class="paging">
       <div class="block">
         <el-pagination @size-change="handleSizeChange" @current-change="currentChage"
-          :current-page="currentPage4" :page-sizes="[8,10,20]" :page-size="100"
+          :current-page="currentPage4" :page-sizes="pageNumList" :page-size="100"
           layout="total, sizes, prev, pager, next, jumper" :total="pageCount">
         </el-pagination>
       </div>
@@ -93,13 +93,11 @@
     data() {
       return {
         // 检索
-        search: {
-          patient_name: '',//患者姓名
-          starttime: '',//开始日期
-          endtime: '',//结束日期
-          occur_scene: '',//发生地点
-          degree_weight_id: ''//轻重程度
-        },
+        patient_name: '',//患者姓名
+        starttime: '',//开始日期
+        endtime: '',//结束日期
+        occur_scene: '',//发生地点
+        degree_weight_id: '',//轻重程度      
         start_Date: { //时间限制
           disabledDate: time => {
             return time.getTime() > Date.now();
@@ -116,9 +114,9 @@
         details: {}, //查看
         addcon: [], //新增里面的
         currentPage4: 1,//分页
-        pages:'',
+        pageCount:0,//总数量
+        pageNumList:[8,10,20],//显示个数选择器
         pageSize:8,
-        pageCount:0,
         eventNum:'',// 事件编码
       };
     },
@@ -136,19 +134,39 @@
           console.log(res)
           if (res.code == 20010) {
             this.$emit('pageDetail')
-            this.details = res
+            this.details = res.data
             this.bus.$emit('detail', this.details)
           }
         })
       },
       // 搜索事件
       screen() {
-        let params=this.search
+        if((this.starttime!==''&&this.starttime!==null)||(this.endtime!==''&&this.endtime!==null)||this.patient_name!==''||this.occur_scene!==''||this.degree_weight_id!==''){
+          let params={
+          patient_name:this.patient_name,
+          starttime:this.starttime,
+          endtime:this.endtime,
+          occur_scene:this.occur_scene,
+          degree_weight_id:this.degree_weight_id,
+          pageNum:this.currentPage4,
+          pageSize:this.pageSize
+        }
         service.AdeSearch(params).then(res=>{
-          // console.log(res)
+          console.log(res)
           this.tableData=res.data
+          this.pageCount=res.data.length
         })
-
+        }else{
+          let params={
+          pageNum:this.currentPage4,
+          pageSize:this.pageSize
+        }
+        service.AdeList(params).then(res=>{
+          console.log(res)
+          this.tableData=res.data
+          this.pageCount=res.data.length
+        })
+        }
       },
       //时间格式化 
       getdate: function (row, column) {
@@ -159,52 +177,78 @@
         return moment(date).format("YYYY-MM-DD HH:mm:ss");
       },
       // 分页
-      currentChage(current){
-        let params={
-          pageNum:current,
-          pageSize:this.pageSize,
-          patient_name: this.search.patient_name,
-          starttime: this.search.starttime,
-          endtime: this.search.endtime,
-          occur_scene: this.search.occur_scene,
-          degree_weight_id:this.search.degree_weight_id
+      currentChage(val){
+        console.log(val)
+        this.currentPage4=val
+        if((this.starttime!==''&&this.starttime!==null)||(this.endtime!==''&&this.endtime!==null)||this.patient_name!==''||this.occur_scene!==''||this.degree_weight_id!==''){
+          let params={
+          patient_name:this.patient_name,
+          starttime:this.starttime,
+          endtime:this.endtime,
+          occur_scene:this.occur_scene,
+          degree_weight_id:this.degree_weight_id,
+          pageNum:this.currentPage4,
+          pageSize:this.pageSize
+        }
+        service.AdeSearch(params).then(res=>{
+          console.log(res)
+          this.tableData=res.data
+          this.pageCount=res.allnews
+        })
+        }else{
+          let params={
+          pageNum:this.currentPage4,
+          pageSize:this.pageSize
         }
         service.AdeList(params).then(res=>{
-          // console.log(res)
+          console.log(res)
           this.tableData=res.data
+          this.pageCount=res.allnews
         })
+        }
       },
       handleSizeChange(val) {
-        this.pages=val
-        let params={
-          pageSize:this.pages,
-          pageNum:this.pageNum
+        console.log(val)
+        this.pageSize=val
+        if((this.starttime!==''&&this.starttime!==null)||(this.endtime!==''&&this.endtime!==null)||this.patient_name!==''||this.occur_scene!==''||this.degree_weight_id!==''){
+          let params={
+          patient_name:this.patient_name,
+          starttime:this.starttime,
+          endtime:this.endtime,
+          occur_scene:this.occur_scene,
+          degree_weight_id:this.degree_weight_id,
+          pageNum:this.currentPage4,
+          pageSize:this.pageSize
         }
-        // console.log(params)
-        service.AdeList(params).then(res=>{
-          // console.log(res)
+        service.AdeSearch(params).then(res=>{
+          console.log(res)
           this.tableData=res.data
+          this.pageCount=resallnews
         })
-        // console.log(`每页 ${val} 条`);
+        }else{
+          let params={
+          pageNum:this.currentPage4,
+          pageSize:this.pageSize
+        }
+        service.AdeList(params).then(res=>{
+          console.log(res)
+          this.tableData=res.data
+          this.pageCount=res.allnews
+        })
+        }
       },
    
     },
     created() {
       // 不良列表
       let params={
-        pageNum:1,
+        pageNum:this.currentPage4,
         pageSize:this.pageSize
       }
-      // console.log(params)
       service.AdeList(params).then(res => {
         // console.log(res)
         this.tableData = res.data 
-      })
-      // 总数
-     
-      service.AdeList(this.pageSize,'').then(res => {
-        // console.log(res)
-        this.pageCount = res.data.length 
+        this.pageCount=res.allnews
       })
       // 下拉框内容
       service.AdeSel().then(res => {
@@ -212,7 +256,7 @@
         this.options = res.address
         this.options1 = res.degree_weight
       })
-    },
+    }
   }
 </script>
 <style>

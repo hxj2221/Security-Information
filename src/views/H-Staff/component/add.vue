@@ -279,20 +279,20 @@ export default {
       addStaff: {
         job_number: "", // 员工编号
         // staffNumInput: "",
-        name: "天河", // 姓名
-        age: "12", //年龄
+        name: "", // 姓名
+        age: "", //年龄
         // staffAgesel: "", //年龄岁月天
         sex: "", //性别
-        phone: "13139435905", //手机号
-        email: "1237@qq.com", //电子邮箱
-        cardnumber: "412723200001013920", //证件号码
-        position: "哈哈哈", //职位
-        eraddress: "哈哈哈", //详细地址
+        phone: "", //手机号
+        email: "", //电子邮箱
+        cardnumber: "", //证件号码
+        position: "", //职位
+        eraddress: "", //详细地址
         staffdepart: "", //所属科室
         staffrolesel: [], //角色
         head_department: "", //科室负责人
         status: "", //员工状态
-        password: "123qwe", //密码
+        password: "", //密码
         address: [], //地址
       },
       addressC: [],
@@ -321,9 +321,8 @@ export default {
   methods: {
     one(val) {
       for (let i = 0; i <= val.length - 1; i++) {
-        // console.log(val[i])
         let a = val[i];
-        this.staffroleselC = a;
+        this.staffroleselC= a;
         console.log(this.staffroleselC);
       }
     },
@@ -338,7 +337,7 @@ export default {
         sex: this.addStaff.sex,
         email: this.addStaff.email,
         phone: this.addStaff.phone,
-        address: this.addressC,
+        address: this.addStaff.address,
         eraddress: this.addStaff.eraddress,
         position: this.addStaff.position,
         age: this.addStaff.age,
@@ -352,7 +351,7 @@ export default {
       console.log(data);
       service.staffAdd(data).then((res) => {
         console.log(res);
-        if (res.msg == "员工信息添加成功") {
+        if (res.code == "20010") {
           const loading = this.$loading({
             lock: true,
             text: "保存中",
@@ -365,24 +364,24 @@ export default {
           }, 2000);
           this.$parent.fathstaffyes();
         } else {
-             this.$message.error(res.msg);
+             this.$message.error(res.code);
         }
       });
     },
     handleChange(cityvalue) {
-      console.log(
-        CodeToText[cityvalue[0]],
-        CodeToText[cityvalue[1]],
-        CodeToText[cityvalue[2]]
-      );
-      this.addressC =
-        CodeToText[cityvalue[0]] +
-        "/" +
-        CodeToText[cityvalue[1]] +
-        "/" +
-        CodeToText[cityvalue[2]];
-
-      console.log(this.addStaff.address);
+//       console.log(
+//         CodeToText[cityvalue[0]],
+//         CodeToText[cityvalue[1]],
+//         CodeToText[cityvalue[2]]
+//       );
+//       this.addressC =
+//         CodeToText[cityvalue[0]] +
+//         "/" +
+//         CodeToText[cityvalue[1]] +
+//         "/" +
+//         CodeToText[cityvalue[2]];
+// console.log(this.addressC)
+//       console.log(this.addStaff.address);
     },
     // 子调用父
     staffaddvueno() {
