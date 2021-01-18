@@ -36,7 +36,7 @@
           :header-cell-style="{ background: '#C2C5F6' }"
           :cell-style="{ background: '#fff' }"
         >
-          <el-table-column label="序号" type="index" > </el-table-column>
+          <el-table-column label="序号" type="index"> </el-table-column>
           <el-table-column prop="job_number" label="工号"> </el-table-column>
           <el-table-column prop="name" label="员工姓名"> </el-table-column>
           <el-table-column prop="sex.name" label="员工性别"> </el-table-column>
@@ -46,7 +46,10 @@
           </el-table-column>
           <el-table-column prop="auth_grouap[0].title" label="角色">
           </el-table-column>
-          <el-table-column prop="user[0].name" label="创建人员"></el-table-column>
+          <el-table-column
+            prop="user[0].name"
+            label="创建人员"
+          ></el-table-column>
 
           <el-table-column
             prop="create_time"
@@ -91,25 +94,19 @@
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
             :current-page="currentPage"
-            :page-sizes="[8, 10, 20]"
-            :page-size="8"
+            :page-sizes="nums"
+            :page-size="num"
             layout="total, sizes, prev, pager, next, jumper"
-            :total="tables.length"
+            :total="total"
           >
           </el-pagination>
         </div>
       </div>
-      <!-- <el-pagination
-        layout="total, prev, pager, next, jumper"
-        :total="tables.length"
-      >
-      </el-pagination> -->
     </div>
     <!--新增-->
     <Staff v-show="add"></Staff>
     <!-- edit（编辑） -->
     <Edit v-show="edit" :childed="childedit"></Edit>
-  
   </div>
 </template>
 
@@ -123,16 +120,18 @@ import headpow from "../component/power";
 import service from "@/service/index";
 export default {
   components: { Staff, headpow, Edit },
-    inject: ["reload"],
+  inject: ["reload"],
   data() {
     return {
-      all:{},
+      all: {},
       add: false,
       edit: false,
       currentPage: 1,
       total: 0, //总条数
       page: 1, //初始显示第几页
-      pageSize: 5, //每页显示多少数据
+      pageSize: 1, //每页显示多少数据
+      nums: [8, 10, 20],
+      num: 8,
       staffbeldepart: "",
       dialogVisible: false,
       staffvue: true,
@@ -150,29 +149,32 @@ export default {
   created() {
     // 获取员工列表
     service.staffList().then((res) => {
-      console.log(res)
-      this.tables = res.data;
-      
-      //  this.tables.department=res.data[].department[0].title
+      this.optionbeldepart = res.data;
+    });
+
+    service.stafflist().then((res) => {
+      console.log(res);
+      this.tables = res.data[0];
+      this.total = res.data[1].count;
       for (let i = 1; i < res.data.length; i++) {
         this.id = res.data[i].id;
       }
-    });
-    // 员工搜索
-    service.staffSeah().then((res) => {
-      this.optionbeldepart = res.data;
     });
   },
   methods: {
     // 员工搜索
     seachAll() {
-      let params = {
+      let data = {
         name: this.search,
         department_id: this.staffbeldepart,
+        pNum: this.num, //每页显示数量
+        count: this.pageSize, //每页显示的数量
       };
-      service.staffSea(params).then((res) => {
-        // this.tables1
-        this.tables = this.tables1 = res.data;
+      console.log(data);
+      service.stafflist(data).then((res) => {
+        console.log(res.data);
+        this.tables1 = this.tables = res.data[0];
+        this.total = res.data[1].count;
       });
     },
     // 新增
@@ -206,12 +208,10 @@ export default {
             message: "员工启用成功",
           });
         } else {
-         
-            this.$message({
-               type: 'error',
-              message: "员工停用",
-            });
-        
+          this.$message({
+            type: "error",
+            message: "员工停用",
+          });
         }
       });
     },
@@ -223,9 +223,9 @@ export default {
         id: id,
       };
       service.staffedits(params).then((res) => {
-        console.log(res)
+        console.log(res);
         this.childedit = res.data.user;
-         if (res.data.user.sex.name == "女") {
+        if (res.data.user.sex.name == "女") {
           this.childedit.sex = "0";
         } else if (res.data.user.sex.name == "男") {
           this.childedit.sex = "1";
@@ -233,13 +233,11 @@ export default {
           this.childedit.sex = "2";
         }
       });
-       service.getrole().then((res) => {
-        console.log(res)
-      this.all=res.data
-         this.bus.$emit("ReceiveMessage", this.all)
+      service.getrole().then((res) => {
+        console.log(res);
+        this.all = res.data;
+        this.bus.$emit("ReceiveMessage", this.all);
         // this.$parent.fathpowadd();
-         
-
       });
     },
     //删除：
@@ -247,12 +245,12 @@ export default {
       let params = {
         id: row[val].id,
       };
-      console.log(params)
+      console.log(params);
       service.staffDel(params).then((res) => {
         // this.reload();
-        
-        console.log(res)
-        if (res.code ==20010) {
+
+        console.log(res);
+        if (res.code == 20010) {
           this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
             confirmButtonText: "确定",
             cancelButtonText: "取消",
@@ -263,10 +261,8 @@ export default {
                 type: "success",
                 message: "删除成功!",
                 delete: row.splice(val, 1),
-                
               });
-            }
-            )
+            })
             .catch(() => {
               this.$message({
                 type: "info",
@@ -274,15 +270,33 @@ export default {
               });
             });
         }
-       
       });
     },
     // 分页
-      handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
+    handleSizeChange(val) {
+      this.num = val;
+      let data = {
+        pNum: this.num,
+        current: this.currentPage,
+      };
+      service.stafflist(data).then((res) => {
+        console.log(res);
+        this.tables = res.data[0];
+      });
     },
     handleCurrentChange(val) {
+      this.currentPage = val;
       console.log(`当前页: ${val}`);
+      let data = {
+        //  name: this.search,
+        // department_id: this.staffbeldepart,
+        pNum: this.num,
+        current: this.currentPage,
+      };
+      service.stafflist(data).then((res) => {
+        console.log(res);
+        this.tables = res.data[0];
+      });
     },
   },
 };
