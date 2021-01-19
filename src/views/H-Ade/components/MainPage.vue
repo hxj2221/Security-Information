@@ -23,7 +23,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="事发日期" label-width="80px">
-            <el-date-picker v-model="occur_time" type="daterange" range-separator="至" start-placeholder="开始日期"
+            <el-date-picker style="width:240px" v-model="occur_time" type="daterange" range-separator="至" start-placeholder="开始日期"
               end-placeholder="结束日期" format="yyyy-MM-dd" value-format="yyyy-MM-dd">
             </el-date-picker>
           </el-form-item>
@@ -194,6 +194,7 @@
       },
       
       // 分页
+      // 当前页
       currentChage(val) {
         console.log(val)
         this.currentPage4 = val
@@ -225,6 +226,7 @@
           })
         }
       },
+      // 每页条数
       handleSizeChange(val) {
         console.log(val)
         this.pageSize = val

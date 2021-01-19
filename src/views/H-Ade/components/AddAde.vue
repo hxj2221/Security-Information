@@ -237,7 +237,7 @@ import qs from 'qs'
           }
         });
       },
-      // 返回
+      // 返回列表页
       back() {
         this.$emit('pageAdd')
       },

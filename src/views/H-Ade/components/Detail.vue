@@ -354,35 +354,36 @@
     props: {},
     data() {
       return {
-        event_num: '',
-        patient_name: '',
-        sex: '',
-        age: '',
-        specific_age: '',
-        event_describe: '',
-        diagnosis_process: '',
-        patient_situation: '',
-        admitting_diagnosis: '',
-        bed_number: "",
-        hospitalized_time: "",
-        department_id: "",
-        stakeholder: '',
-        Indications_uid: "",
-        nurse_uid: "",
-        admission_id: '',
-        create_time: '',
-        occur_time: '',
-        occur_scene: '',
-        event_type: "",
-        create_uid: "",
+        event_num: '',//事件编号
+        patient_name: '',//患者姓名
+        sex: '',//性别
+        age: '',//年龄
+        specific_age: '',//年龄类型
+        event_describe: '',//不良事件描述
+        diagnosis_process: '',//诊疗经过
+        patient_situation: '',//患者目前状况
+        admitting_diagnosis: '',//入院诊断
+        bed_number: "",//床号
+        hospitalized_time: "",//入院日期
+        department_id: "",//科室
+        stakeholder: '',//在场相关人员
+        Indications_uid: "",//主管医师
+        nurse_uid: "",//主管护士
+        admission_id: '',//住院号
+        create_time: '',//不良报告时间
+        occur_time: '',//不良发生时间
+        occur_scene: '',//事发地点
+        event_type: "",//不良类型
+        create_uid: "",//上报人
       };
     },
     methods: {
+      // 返回列表页
       back() {
         this.$emit("pageDetail")
-
       },
     },
+    // 时间过滤器
     filters: {
       formatDate: function (value) {
         let date = new Date(value);
@@ -406,27 +407,27 @@
     created() {
       let that = this;
       this.bus.$on('detail', function (item) {
-        that.event_num = item.event_num
-        that.patient_name = item.patient_name;
-        that.sex = item.sex;
-        that.age = item.age;
-        that.specific_age = item.specific_age
-        that.event_describe = item.event_describe;
-        that.diagnosis_process = item.diagnosis_process;
-        that.patient_situation = item.patient_situation;
-        that.admitting_diagnosis = item.admitting_diagnosis;
-        that.bed_number = item.bed_number;
-        that.hospitalized_time = item.hospitalized_time;
-        that.department_id = item.department_id;
-        that.stakeholder = item.stakeholder;
-        that.Indications_uid = item.Indications_uid;
-        that.nurse_uid = item.nurse_uid;
-        that.admission_id = item.admission_id;
-        that.create_time = item.create_time;
-        that.occur_time = item.occur_time;
-        that.occur_scene = item.department.title;
-        that.event_type = item.eventtype.title;
-        that.create_uid = item.create_uid
+        that.event_num = item.event_num//事件编号
+        that.patient_name = item.patient_name;//患者姓名
+        that.sex = item.sex;//性别
+        that.age = item.age;//年龄
+        that.specific_age = item.specific_age//年龄类别
+        that.event_describe = item.event_describe;//不良事件描述
+        that.diagnosis_process = item.diagnosis_process;//诊疗经过
+        that.patient_situation = item.patient_situation;//患者目前状况
+        that.admitting_diagnosis = item.admitting_diagnosis;//入院诊断
+        that.bed_number = item.bed_number;//床号
+        that.hospitalized_time = item.hospitalized_time;//入院日期
+        that.department_id = item.department_id;//科室
+        that.stakeholder = item.stakeholder;//在场相关人员
+        that.Indications_uid = item.Indications_uid;//主管医师
+        that.nurse_uid = item.nurse_uid;//主管护士
+        that.admission_id = item.admission_id;//住院号
+        that.create_time = item.create_time;//不良报告时间
+        that.occur_time = item.occur_time;//不良发生时间
+        that.occur_scene = item.department.title;//事发地点
+        that.event_type = item.eventtype.title;//不良类型
+        that.create_uid = item.create_uid//上报人
       })
     }
   }
