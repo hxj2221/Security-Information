@@ -7,6 +7,7 @@
   height: 152px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .box .left{
   display: flex;
@@ -14,16 +15,15 @@
 .box .left .img{
   width: 56px;
   height: 56px;
-  margin: 20px 20px 0 ;
+  margin: 0 20px;
 }
 .box .left .title{
   font-size: 20px;
   color: #333333;
   text-align: left;
+  line-height: 33px;
 }
-.box .left .title p{
-  margin-top: 30px;
-}
+
 .box .left .title p:first-child span{
   color: #0000006D;
   font-size: 14px;
@@ -32,31 +32,23 @@
 }
 .box .left .title p:last-child{
   color: #FB528B;
-  /* line-height: 60px; */
 }
 /* 右边 */
-.box .right .dashRow[data-v-5b204ecd]{
-  margin-bottom: 0;
+.box .right {
+  display: flex;
+  padding-right: 27px;
 }
-.box .right .dashRow .dashRowItem[data-v-5b204ecd]{
-  width: auto;
-  text-align: none;
-  border-radius: 0;
-  box-shadow: none;
-  border-color:#fff;
-}
-.box .right .dashRow .dashRowItem .el-card__body{
-  border-right: 1px solid #f2f2f2;
-  padding-right: 20px;
-  margin-top: 20px;
-}
-.box .right .dashRow .last .el-card__body{
-  border-right: none;
-}
-.box .right .dashRow .dashRowItemTitle{
+.box .right .right_con{
   font-size: 14px;
+  border-right: 1px solid #f0f0f0;
+  padding: 0 18px;
   color: #0000006D;
 }
+.box .right .right_con p:last-child{
+  font-size: 30px;
+  color: #000000d8;
+}
+
 /* box1 */
 .box1{
   width: 97%;
@@ -98,6 +90,7 @@
   padding: 0 20px;
   border-radius: 10px;
   box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+  min-height: 500px;
 }
 .box2 .bg .tit{
   display: flex;
@@ -156,7 +149,6 @@
   font-weight: 650;
 }
 .box2 .bg {
-  padding: 20px 0 0;
   position: relative;
   text-align: left;
 }

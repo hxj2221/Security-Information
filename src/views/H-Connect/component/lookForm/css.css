@@ -3,6 +3,7 @@
 }
 .lookForm_all_in{
     width: 60%;
+    min-height:680px;
     background: #fff;
     margin: 0 auto;
     box-shadow: 0 0 2px rgb(184, 183, 183);
@@ -19,8 +20,9 @@
     overflow: hidden;
 }
 .lookForm_top_button .el-button{
-    border:1px solid #666EE8;
-    color: #666EE8;
+    border: 1px solid #666ee8;   
+    color: #666ee8;
+    background:none;
 }
 .lookForm_top_button_left {
     float: left;

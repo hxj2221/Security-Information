@@ -12,24 +12,26 @@
     <div class="searchAll">
       <el-form ref="form">
         <div class="searchAll_search">
-          <el-form-item label="患者姓名">
-            <el-input v-model="patient_name" placeholder="请输入内容"></el-input>
+          <el-form-item label="患者姓名" label-width="80px">
+            <el-input clearable v-model="patient_name" placeholder="请输入内容"></el-input>
           </el-form-item>
-          <el-form-item label="发生地点">
-            <el-select v-model="occur_scene" placeholder="请选择">
-              <el-option v-for="item in options" :key="item.id" :label="item.title" :value="item.id">
+          <el-form-item label="发生地点" label-width="80px">
+            <el-select clearable   v-model="occur_scene" placeholder="请选择">
+              <el-option label="请选择" value=""></el-option>
+              <el-option  v-for="item in options" :key="item.id" :label="item.title" :value="item.id">
               </el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="事发日期">
-            <el-date-picker v-model="occur_time" type="daterange" range-separator="至" start-placeholder="开始日期"
+          <el-form-item label="事发日期" label-width="80px">
+            <el-date-picker style="width:240px" v-model="occur_time" type="daterange" range-separator="至" start-placeholder="开始日期"
               end-placeholder="结束日期" format="yyyy-MM-dd" value-format="yyyy-MM-dd">
             </el-date-picker>
           </el-form-item>
         </div>
         <div class="searchAll_search">
-          <el-form-item label="轻重程度">
-            <el-select style="width: 562px;" v-model="degree_weight_id" placeholder="请选择">
+          <el-form-item label="轻重程度" label-width="80px">
+            <el-select clearable  style="width: 562px;" v-model="degree_weight_id" placeholder="请选择">
+              <el-option label="请选择" value=""></el-option>
               <el-option v-for="item in options1" :key="item.id" :label="item.title" :value="item.id">
               </el-option>
             </el-select>
@@ -39,7 +41,7 @@
       </el-form>
     </div>
     <!-- 内容 -->
-    <el-table class="elTable" :data="tableData">
+    <el-table class="elTable" :data="tableData" :header-cell-style="getRowClass">
       <el-table-column type="index" label="序号">
       </el-table-column>
       <el-table-column prop="event_num" label="事件编码">
@@ -62,7 +64,7 @@
       </el-table-column>
       <el-table-column prop="create_uid" label="上报人">
       </el-table-column>
-      <el-table-column label="操作">
+      <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
           <el-button @click="handleClick(scope.$index,scope.row)" type="text" size="small">查看</el-button>
         </template>
@@ -116,6 +118,14 @@
       };
     },
     methods: {
+      // 设置表头颜色
+    getRowClass({ rowIndex }) {
+      if (rowIndex == 0) {
+        return "background:#c2c5f6;color:#000";
+      } else {
+        return "";
+      }
+    },
       // 时间戳转为日期格式
       getDate:function(row, column, cellValue, index){
         // console.log(new Date(cellValue * 1000))
@@ -184,6 +194,7 @@
       },
       
       // 分页
+      // 当前页
       currentChage(val) {
         console.log(val)
         this.currentPage4 = val
@@ -215,6 +226,7 @@
           })
         }
       },
+      // 每页条数
       handleSizeChange(val) {
         console.log(val)
         this.pageSize = val

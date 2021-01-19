@@ -11,7 +11,7 @@
           placeholder="请选择"
           class="staffSel"
         >
-          <el-option label="请选择" value="请选择"></el-option>
+          <el-option label="请选择" value=""></el-option>
           <el-option
             v-for="item in optionbeldepart"
             :key="item.id"
@@ -202,15 +202,18 @@ export default {
         id: row.id,
       };
       service.staffState(params).then((res) => {
+        console.log(res)
         if (row.status == 1) {
           this.$message({
             type: "success",
             message: "员工启用成功",
+            duration:1000
           });
         } else {
           this.$message({
             type: "error",
             message: "员工停用",
+            duration:1000
           });
         }
       });
@@ -260,12 +263,14 @@ export default {
                 type: "success",
                 message: "删除成功!",
                 delete: row.splice(val, 1),
+                duration:1000
               });
             })
             .catch(() => {
               this.$message({
                 type: "info",
                 message: "已取消删除",
+                duration:1000
               });
             });
         }

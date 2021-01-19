@@ -121,7 +121,6 @@
                 size="large"
                 :options="options"
                 v-model="addStaff.address"
-                @change="handleChange"
               >
               </el-cascader>
             </el-form-item>
@@ -166,7 +165,7 @@
                 type="input"
                 autosize
                 style="margin-top: 40px"
-                v-model="role_id"
+                v-model="addStaff.auth_grouap"
                 placeholder="请选择"
               >
                 <el-option
@@ -264,6 +263,7 @@ export default {
         address: [], //地址
       },
       department: "", //所属科室
+<<<<<<< HEAD
 
       role_id: "",
       department_id: "",
@@ -282,6 +282,12 @@ export default {
           label: "天",
         },
       ],
+=======
+     
+      role_id:'',
+      department_id:'',
+      
+>>>>>>> 00a9151db0e258800f12b7f388799ad41a02e9a1
       // 性别循环
       optiongen: [
         {
@@ -307,8 +313,13 @@ export default {
   },
   watch: {
     childed(res) {
+<<<<<<< HEAD
       console.log(res.auth_grouap[0].id);
       console.log(res);
+=======
+      console.log(res.role_id)
+      console.log(res)
+>>>>>>> 00a9151db0e258800f12b7f388799ad41a02e9a1
       // console.log(res.address); //数据已经拿到
       this.id = res.id;
       this.addStaff.job_number = res.job_number;
@@ -327,8 +338,13 @@ export default {
       this.addStaff.status = res.status;
       // this.addStaff.head_department = res.head_department;
       this.addStaff.position = res.position;
+<<<<<<< HEAD
       // this.addStaff.auth_grouap = res.auth_grouap;
       this.role_id = res.role_id;
+=======
+      this.addStaff.auth_grouap = res.auth_grouap[0].title;
+      this.role_id=res.role_id;
+>>>>>>> 00a9151db0e258800f12b7f388799ad41a02e9a1
       this.addStaff.status = res.status;
     },
   },
@@ -368,25 +384,20 @@ export default {
             this.reload();
             this.$parent.fathstaffno();
           }, 1500);
+<<<<<<< HEAD
         } else {
           this.$message.error(res.msg);
+=======
+        }
+        else{
+           this.$message({
+               message:res.msg,
+               type:'error',
+               duration:1000
+             })
+>>>>>>> 00a9151db0e258800f12b7f388799ad41a02e9a1
         }
       });
-    },
-    handleChange(cityvalue) {
-      console.log(
-        CodeToText[cityvalue[0]],
-        CodeToText[cityvalue[1]],
-        CodeToText[cityvalue[2]]
-      );
-      let a =
-        CodeToText[cityvalue[0]] +
-        " " +
-        CodeToText[cityvalue[1]] +
-        " " +
-        CodeToText[cityvalue[2]];
-      // this.addStaff.address = a;
-      console.log(this.addStaff.address);
     },
     // 子调用父
     staffaddvueno() {
