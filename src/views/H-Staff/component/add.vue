@@ -354,7 +354,11 @@ export default {
           }, 2000);
           this.$parent.fathstaffyes();
         } else {
-             this.$message.error(res.code);
+             this.$message({
+               message:res.msg,
+               type:'error',
+               duration:1000
+             })
         }
       });
     },

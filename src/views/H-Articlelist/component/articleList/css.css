@@ -1,6 +1,6 @@
 .articleList_all {
     width: 100%;
-    min-height: 750px;
+    min-height:680px;
     /* height: 750px; */
     background: #fff;
     border-radius: 5px;
@@ -28,8 +28,8 @@
 }
 
 .articleList_top_right>.el-button {
+    border: 3px solid #666ee8;
     background: #666ee8;
-    border-color: #666ee8;
 }
 
 
@@ -62,8 +62,8 @@
 /* table  表格部分 */
 
 .articleList_table_table .el-table th {
-    background-color: #666EE866;
-    color: #515A6E;
+    background-color: #c2c5f6;
+    color: #000;
 }
 
 .articleList_table_table .el-table td,
