@@ -9,25 +9,22 @@
         </div>
       </div>
       <div class="right">
-        <div class="dashRow">
-          <el-card class="dashRowItem" shadow="always">
-            <p class="dashRowItemTitle">部门员工</p>
-            {{staff}}
-          </el-card>
-          <el-card class="dashRowItem" shadow="always">
-            <p class="dashRowItemTitle">需审批的事件</p>
-            {{examine}}
-          </el-card>
-          <el-card class="dashRowItem" shadow="always">
-            <p class="dashRowItemTitle">需调查的事件</p>
-            {{survey}}
-          </el-card>
-          <el-card class="dashRowItem last " shadow="always">
-            <p class="dashRowItemTitle">进程中事件</p>
-            {{infor}}
-          </el-card>
+        <div class="right_con">
+          <p>部门员工</p>
+          <p>{{staff}}</p>
         </div>
-
+        <div class="right_con">
+          <p>需审批的事件</p>
+          <p>{{examine}}</p>
+        </div>
+        <div class="right_con">
+            <p>需调查的事件</p>
+            <p>{{survey}}</p>
+        </div>
+        <div class="right_con">
+            <p>进程中事件</p>
+            <p>{{infor}}</p>
+        </div>
       </div>
     </div>
     <div class="box1">
@@ -172,7 +169,7 @@
     methods: {},
     created() {
       service.dashboard().then(res => {
-        console.log(res)
+        // console.log(res)
         this.Info=res.data.data
         this.staff=res.data.staff
         this.examine=res.data.examine

@@ -145,11 +145,11 @@ export default {
   },
   // 员工管理
   // 员工列表显示
-  staffList: async (params:any) => {
-    return await service.get(`${baseUrl}api/Employees/index`,{params}).then(res => res).catch(err => err)
+  staffList: async (params: any) => {
+    return await service.get(`${baseUrl}api/Employees/index`, { params }).then(res => res).catch(err => err)
   },
-  stafflist: async (data:any) => {
-    return await service.post(`${baseUrl}api/Employees/index`,data).then(res => res).catch(err => err)
+  stafflist: async (data: any) => {
+    return await service.post(`${baseUrl}api/Employees/index`, data).then(res => res).catch(err => err)
   },
   // // 员工搜索
   // staffSea: async (params: Object) => {
@@ -167,7 +167,7 @@ export default {
   staffDel: async (params: Object) => {
     return await service.post(`${baseUrl}api/Employees/del`, params).then(res => res).catch(err => err)
   },
-  
+
   // 员工状态
   staffState: async (params: Object) => {
     return await service.post(`${baseUrl}api/Employees/status`, params).then(res => res).catch(err => err)
@@ -214,7 +214,7 @@ export default {
   },
   // 科室搜索
   departserc: async (params: object) => {
-    return await service.get(`${baseUrl}api/Department/lists`, { params }).then(res => res).catch(err => err)
+    return await service.post(`${baseUrl}api/Department/lists`, params).then(res => res).catch(err => err)
   },
   // 新增
   departadd: async () => {

@@ -57,7 +57,17 @@
               ></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="8"> </el-col>
+          <el-col :span="8">
+            <el-form-item label="角色排序" required>
+              <el-input
+                class="dialog-input-text"
+                type="input"
+                autosize
+                v-model="px"
+                placeholder="请输入内容"
+              ></el-input>
+            </el-form-item>
+          </el-col>
           <el-col :span="8"> </el-col>
         </el-row>
       </el-form>
@@ -154,7 +164,7 @@ export default {
       radio: "",
       cc: 0,
       rolems: "",
-      rolecreate: "",
+      px: "",
       roleNameipt: "",
       valuestatus: 0,
       jkid: "",
@@ -172,6 +182,7 @@ export default {
       console.log(newValue.info); //数据已经拿到
       this.roleNameipt = newValue.info.title;
       this.rolems = newValue.info.describe;
+      this.px = newValue.info.sort;
       this.valuestatus = newValue.info.status;
       this.jkid = newValue.info.id;
       this.powlist = newValue.rule;
@@ -194,10 +205,11 @@ export default {
       let data = {
         title: this.roleNameipt,
         status: this.valuestatus,
-        describe: this.rolecreate,
+        describe: this.rolems,
         id: this.jkid,
         rules: this.checkList + "," + this.vcheck + "," + this.fcheck,
         data_rule: this.radio,
+        sort: this.px,
       };
       console.log(data);
       service.roleeditsqve(data).then((res) => {

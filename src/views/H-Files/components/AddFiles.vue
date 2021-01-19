@@ -72,13 +72,10 @@ import service from '@/service/index';
     </div>
     <!-- 分页 -->
     <div class="pagenum">
-      <el-pagination
-        :page-size="20"
-        :pager-count="11"
-        layout="prev, pager, next"
-        :total="1000"
-      >
-      </el-pagination>
+     <el-pagination @size-change="handleSizeChange" @current-change="currentChage"
+          :current-page="currentPage4" :page-sizes="pageNumList" :page-size="100"
+          layout="total, sizes, prev, pager, next, jumper" :total="pageCount">
+        </el-pagination>
     </div>
     <!-- 新增分类 -->
     <el-dialog
@@ -230,7 +227,12 @@ export default {
       edittitle: "",
       editweight: "",
       editid: "",
+      currentPage4:1,//分页
+      pageNumList:[8,10,20],//页数
+      pageCount:0,//总数量
+      pageSize:8,//默认条数
     };
+    
   },
   created() {
     service.doclist().then((res) => {
@@ -243,6 +245,15 @@ export default {
     });
   },
   methods: {
+    // 分页
+      // 每页显示条数
+      handleSizeChange(val){
+        console.log(val)
+      },
+      // 页面跳转
+      currentChage(val){
+        console.log(val)
+      },
     selchang() {
       console.log(this.editselvalue);
     },
