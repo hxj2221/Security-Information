@@ -23,7 +23,7 @@
         >
           <el-table-column label="序号" type="index" :index="indexMethod">
           </el-table-column>
-          <el-table-column prop="number" label="角色编号"> </el-table-column>
+          <el-table-column prop="sort" label="角色排序"> </el-table-column>
           <el-table-column prop="title" label="角色名称"> </el-table-column>
           <el-table-column prop="number" label="员工数量"> </el-table-column>
           <el-table-column prop="user.name" label="创建人员"></el-table-column>
@@ -158,7 +158,9 @@ export default {
       };
       service.roleserch(data).then((res) => {
         this.tables = this.tables1 = res.data;
+        //this.tables = this.tables1 = res.datas;
         console.log(res);
+        this.total = res.allNews;
       });
     },
     // switch开关

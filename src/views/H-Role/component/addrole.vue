@@ -59,7 +59,17 @@
               ></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="8"> </el-col>
+          <el-col :span="8">
+            <el-form-item label="排序" required>
+              <el-input
+                class="dialog-input-text"
+                type="input"
+                autosize
+                v-model="px"
+                placeholder="请输入内容"
+              ></el-input>
+            </el-form-item>
+          </el-col>
           <el-col :span="8"> </el-col>
         </el-row>
       </el-form>
@@ -158,15 +168,9 @@ export default {
       vcheck: [],
       dialogVisible: false,
       powlist: [],
+      px: "",
     };
   },
-  // created() {
-  //   service.rolepowlist().then((res) => {
-  //     console.log(res);
-  //     this.powlist = res.data;
-  //     console.log(this.powlist);
-  //   });
-  // },
   watch: {
     listaddchild(res) {
       console.log(res);
@@ -189,6 +193,7 @@ export default {
         title: this.roleNameipt,
         status: this.valuestatus,
         describe: this.rolecreate,
+        sort: this.px,
         rules: this.checkList + "," + this.vcheck + "," + this.fcheck,
         data_rule: this.radio,
       };
