@@ -3,7 +3,7 @@
     text-align: left;
     padding-bottom: 1px;
     padding: 0 20px 50px;
-    width: 96%;
+    width: 95%;
     min-height: 750px;
     margin: 0 auto;
     border-radius: 5px;
@@ -63,19 +63,22 @@
 /* 检索 */
 
 .mainBl .searchAll {
-    padding-top: 20px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+.mainBl .searchAll .searchAll_search:last-child{
+    display: flex;
 }
 
 .mainBl .searchAll .searchAll_search {
     display: flex;
+    margin: 23px 0;
 }
-
-.mainBl .searchAll .searchAll_search .el-form-item {
-    display: flex;
+.mainBl .searchAll .searchAll_search .el-form-item{
+    margin-bottom: 0;
 }
-
 .mainBl .searchAll .searchAll_search .el-form-item:nth-child(2) {
-    margin: 0 80px;
+    margin: 0 20px;
 }
 
 .mainBl .searchAll .searchAll_search .searchbtn {
@@ -86,8 +89,6 @@
 }
 
 .mainBl .elTable .el-table__header-wrapper .el-table__header .has-gutter tr th {
-    background-color: #666EE866;
-    color: #333333;
     text-align: center;
 }
 

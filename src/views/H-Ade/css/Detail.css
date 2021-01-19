@@ -3,7 +3,7 @@
 .AdeDetail {
     padding: 20px;
     background-color: #fff;
-    width: 756px;
+    width: 95%;
     font-size: 14px;
     margin: 0 auto 100px;
 }
@@ -62,53 +62,54 @@
 .AdeDetail .head-txt {
     padding: 20px 10px;
     border-bottom: 2px solid #f2f2f2;
+    margin: 0 14%;
+    font-size: 16px;
 }
 
 .AdeDetail .head-txt .txt {
     padding: 10px 0;
-    display: flex;
-    justify-content: space-between;
+    text-align: left;
+    line-height: 40px;
 }
+
 
 
 /* 基本信息 */
 
 .AdeDetail .cent_info {
     text-align: left;
+    margin: 0 14%;
 }
 
 .AdeDetail .cent_info>p {
     margin: 10px 0;
+    font-size: 16px;
 }
 
 .AdeDetail .cent_info .tab {
     width: 100%;
-    border: 1px solid #797979;
+    border-left: 0.5px solid #797979;
+    border-top: 0.5px solid #797979;
+    
     border-spacing: 0;
 }
-
-.AdeDetail .cent_info .tab tr th {
-    border: 1px solid #797979;
-    background-color: #f2f2f2;
-    padding-left: 5px;
+.AdeDetail .cent_info .tab:last-child{
+    border-bottom: 0.5px solid #797979;
 }
-
-.AdeDetail .cent_info .tab tr td {
-    border: 1px solid #797979;
-    padding-left: 5px;
-}
-
 .AdeDetail .cent_info .tab .tit {
-    width: 120px;
     height: 30px;
     line-height: 30px;
+    background: #f2f2f2;
+    padding-left: 10px;
 }
 
 .AdeDetail .cent_info .tab .con {
-    width: 119px;
     height: 30px;
     line-height: 30px;
-}
+    border-left: 0.5px solid #797979;
+    border-right:0.5px solid #797979 ;
+    padding-left: 10px;
+} 
 
 .AdeDetail .cent_info .tab .leng {
     height: 30px;

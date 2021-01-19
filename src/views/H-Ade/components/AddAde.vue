@@ -204,10 +204,10 @@ import qs from 'qs'
           patient_situation: '',// 患者目前情况
           event_describe: '',// 不良事件描述
         },
-        options: [],
+        options: [],//不良类型
         department:[],//科室
-        options1: [],
-        options4: [],
+        options1: [],//发生场所
+        options4: [],//轻重程度
         tableData: [{
           name: '王小虎',
           sex: '男',
@@ -216,7 +216,7 @@ import qs from 'qs'
           address: '城中区人民大道188号9栋302',
           depart: '门诊/急诊',
           diagnosis: '高血压',
-        }, ],
+        }, ],//关联患者信息
       };
     },
     methods: {
@@ -229,6 +229,11 @@ import qs from 'qs'
           if(res.code==20010){
             this.$emit('pageAdd')
             this.reload();
+            this.$message({
+              message: '添加成功',
+              type: 'success',
+              duration: 1000,
+            });
           }
         });
       },
@@ -247,10 +252,10 @@ import qs from 'qs'
       // 下拉框
       service.AdeSel().then(res=>{
         // console.log(res)
-        this.options=res.choice_type
-        this.options1=res.address
-        this.options4=res.degree_weight
-        this.department=res.department
+        this.options=res.choice_type//不良类型
+        this.options1=res.address//发生场所
+        this.options4=res.degree_weight//轻重程度
+        this.department=res.department//科室
       })
     }
   }
