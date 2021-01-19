@@ -326,15 +326,11 @@ export default {
           }, 2000);
           this.$parent.fathstaffyes();
         } else {
-<<<<<<< HEAD
-          this.$message.error(res.code);
-=======
-             this.$message({
-               message:res.msg,
-               type:'error',
-               duration:1000
-             })
->>>>>>> 00a9151db0e258800f12b7f388799ad41a02e9a1
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
         }
       });
     },
