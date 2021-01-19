@@ -120,31 +120,26 @@
             </template>
           </el-select>
         </el-form-item>
-        <el-upload
-          class="upload-demo"
-          action="http://bt1.wlqqlp.com:8082/api/srk/event_uploadfiles"
-          :on-preview="handlePreview"
-          :on-remove="handleRemove"
-          :before-remove="beforeRemove"
-          :auto-upload="false"
-          multiple
-          :limit="3"
-          :on-exceed="handleExceed"
-          :file-list="fileList"
-          :data="persondata"
+        <form
+          action="http://bt1.wlqqlp.com:8082/api/file/addfile"
+          enctype="multipart/form-data"
+          method="post"
         >
-          <el-button size="small" type="primary">点击上传</el-button>
-          <div slot="tip" class="el-upload__tip">
-            只能上传jpg/png文件，且不超过500kb
-          </div>
-        </el-upload>
-        <el-form-item label="文件描述" prop="desc">
-          <el-input type="textarea" v-model="ruleForm.desc"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm">上传</el-button>
-          <el-button @click="resetForm">取消</el-button>
-        </el-form-item>
+          <!-- 文件名称: <input type="text" name="file_name" /><br />
+          文件描述:<input type="text" name="file_describe" /><br />
+          文件分类:<input type="text" name="class_id" /><br /> -->
+          <input type="file" name="file" />
+          <!-- <input type="submit" value="上传" /> -->
+
+          <el-form-item label="文件描述" prop="desc">
+            <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <input type="submit" value="上传" @click="submitForm" />
+            <!-- <el-button type="primary" @click="submitForm">上传</el-button> -->
+            <el-button @click="resetForm">取消</el-button>
+          </el-form-item>
+        </form>
       </el-form>
     </el-dialog>
   </div>
@@ -162,26 +157,13 @@ export default {
     return {
       currentPage: 1,
       dialogVisible: false,
-      ruleForm: {
-        name: "",
-        region: "",
-        desc: "",
-      },
+      ruleForm: {},
+      name: "",
+      region: "",
+      desc: "",
       editseldata: [],
       editselvalue: 0,
       fileList: [],
-      rules: {
-        name: [
-          { required: true, message: "请输入文件标题", trigger: "blur" },
-          {
-            min: 2,
-            max: 20,
-            message: "长度在 2 到 20 个字符",
-            trigger: "blur",
-          },
-        ],
-        region: [{ required: true, message: "请选择分类", trigger: "change" }],
-      },
       persondata: [],
       form: {
         input: "",
@@ -205,8 +187,8 @@ export default {
   methods: {
     submitForm() {
       let data = {
-        file_name: this.ruleForm.name,
-        file_describe: this.ruleForm.desc,
+        file_name: this.name,
+        file_describe: this.desc,
         class_id: this.editselvalue,
       };
       service.fileupload(data).then((res) => {

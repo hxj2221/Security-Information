@@ -19,10 +19,19 @@
           >
         </div>
       </div>
+      <div>
+        <input
+          type="file"
+          name="image"
+          accept="image/*"
+          @change="onchangeImgFun"
+        />
+        <!-- <img :src="portrait" alt="" class="my-avatar" /> -->
+      </div>
       <el-table
         :data="dormitory"
         class="departtable"
-        :header-cell-style="{ background: '#C2C5F6' }"
+        :header-cell-style="{ background: '#c2c5f6' }"
         :cell-style="{ background: '#fff' }"
         row-key="id"
         :tree-props="{
@@ -48,8 +57,8 @@
               v-model="scope.row.status"
               :active-value="1"
               :inactive-value="0"
-              active-color="#02538C"
-              inactive-color="#B9B9B9"
+              active-color="#13ce66"
+              inactive-color="#ff4949"
               @change="changeSwitch($event, scope.row, scope.row.id)"
             />
           </template>
@@ -129,6 +138,41 @@ export default {
   },
   computed: {},
   methods: {
+    onchangeImgFun(e) {
+      var file = e.target.files[0];
+      // 获取图片的大小，做大小限制有用
+      let imgSize = file.size;
+      var _this = this; // this指向问题，所以在外面先定义
+      // 比如上传头像限制5M大小，这里获取的大小单位是b
+      if (imgSize <= 50 * 1024 * 1024) {
+        // 合格
+        _this.errorStr = "";
+        // base64方法
+        var reader = new FileReader();
+        reader.readAsDataURL(file); // 读出 base64
+        reader.onloadend = function () {
+          // 图片的 base64 格式, 可以直接当成 img 的 src 属性值
+          var dataURL = reader.result;
+          console.log(dataURL);
+          _this.imgStr = dataURL;
+          // 下面逻辑处理
+          let data = {
+            base64_file: _this.imgStr,
+          };
+          console.log(data);
+          // 上传图片
+          service.getupimg(data).then((res) => {
+            console.log(res);
+            // if (res.data.code == 1) {
+            //   _this.reload();
+            // }
+          });
+        };
+      } else {
+        console.log("大小不合适");
+        _this.errorStr = "图片大小超出范围";
+      }
+    },
     // 新增
     fathpowadd() {
       this.departvue = !this.departvue;

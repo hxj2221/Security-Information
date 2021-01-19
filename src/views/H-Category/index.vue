@@ -104,15 +104,16 @@
       </div>
       <!-- 分页 -->
       <div class="category_statistics_paging">
-       <div class="block">
-    <el-pagination
-      :current-page="currentPage"
-      :page-sizes="[8, 10, 20]"
-      :page-size="8"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="tableData.length">
-    </el-pagination>
-  </div>
+        <div class="block">
+          <el-pagination
+            :current-page="currentPage"
+            :page-sizes="[8, 10, 20]"
+            :page-size="8"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="tableData.length"
+          >
+          </el-pagination>
+        </div>
       </div>
     </div>
   </div>
@@ -283,9 +284,12 @@ export default {
         },
       ],
       currentPage: 1,
+      
     };
   },
-
+  watch(){
+ console.log(body.clientWidth)
+  },
   methods: {
     // 柱状图
     drawChart() {

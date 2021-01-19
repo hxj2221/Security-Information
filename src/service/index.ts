@@ -119,6 +119,10 @@ export default {
   uploadfiles: async (data: any) => {
     return await service.post(`${baseUrl}api/Complaintprocess/event_uploadfiles`, data).then(res => res).catch(err => err)
   },
+  //   上传附件index.php/api/srk/create_base64_file
+  uploadfilebase: async (data: any) => {
+    return await service.post(`${baseUrl}index.php/api/srk/create_base64_file`, data).then(res => res).catch(err => err)
+  },
   // 不良事件列表
   AdeList: async (params: any) => {
     return await service.get(`${baseUrl}api/bad/lists`, { params }).then(res => res).catch(err => err)
@@ -330,8 +334,8 @@ export default {
     return await service.get(`${baseUrl}api/record/upload_attachment`, { params }).then(res => res).catch(err => err)
   },
   // 上传附件 确定
-  uplode: async (data: any) => {
-    return await service.post(`${baseUrl}api/record/upload_attachment`, data).then(res => res).catch(err => err)
+  uplode: async (params: any) => {
+    return await service.post(`${baseUrl}api/record/upload_attachment`, params).then(res => res).catch(err => err)
   },
   // 医患详情
   details: async (data: any) => {
@@ -382,4 +386,26 @@ export default {
   fileupload: async (data: object) => {
     return await service.post(`${baseUrl}api/file/addfile`, data).then(res => res).catch(err => err)
   },
+<<<<<<< HEAD
+=======
+
+  // 文件库
+  // 文件列表
+  FileList: async () => {
+    return await service.get(`${baseUrl}api/file/listS`).then(res => res).catch(err => err)
+  },
+  // 新建分类列表
+  FileAddList: async () => {
+    return await service.get(`${baseUrl}api/fileclass/lists`).then(res => res).catch(err => err)
+  },
+  // 工作台
+  // dashboard: async () => {
+  //   return await service.get(`${baseUrl}api/home/Lz_workbench`).then(res => res).catch(err => err)
+
+  // },
+  // img
+  getupimg: async (data: object) => {
+    return await service.post(`${baseUrl}api/srk/create_base64_file`, data).then(res => res).catch(err => err)
+  },
+>>>>>>> ed7730812a1e5891c4376a513e8559e896ffe7d2
 }

@@ -4,11 +4,13 @@
 }
 
 .accountalBg {
-    background-color: #fff;
     width: 100%;
     min-height: 100%;
-    margin-left: -20px;
- margin:  0 auto;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgb(184, 183, 183);
+    padding-bottom: 150px;
 }
 
 .accountF {

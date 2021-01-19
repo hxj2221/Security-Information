@@ -4,10 +4,19 @@
 }
 
 .staffalBg {
+<<<<<<< HEAD
+    width: 100%;
+    min-height: 680px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgb(184, 183, 183);
+    padding-bottom: 150px;
+=======
     background-color: #fff;
-    min-height: 100%;
+    min-height:680px;
     margin-left: -20px;
     padding-bottom: 100px;
+>>>>>>> 00a9151db0e258800f12b7f388799ad41a02e9a1
 }
 
 .staffheadThre {
@@ -54,9 +63,8 @@
 }
 
 .staffAdd {
-    color: #fff;
+    border: 3px solid #666ee8;
     background: #666ee8;
-    border-radius: 5px;
     position: absolute;
     left: 85%;
 }
@@ -87,24 +95,23 @@
 
 .staffSel {
     /* width: 10vw; */
-    border: 2px solid #ccc;
+    /* border: 2px solid #ccc; */
     border-radius: 5px;
     margin-right: 20px;
 }
 
 .staffNameipt {
     width: 18vw;
-    border: 2px solid #ccc;
+    /* border: 2px solid #ccc; */
     border-radius: 5px;
     margin-right: 20px;
     /* margin-left: 4%; */
 }
 
 .staffNamesch {
-    font-size: 14px;
     color: #fff;
-    background-color: #666ee8;
-    border-radius: 5px;
+    border: 3px solid #666ee8;
+    background: #666ee8;
 }
 
 .staffTable {
@@ -115,10 +122,18 @@
 .el-table th {
     text-align: center !important;
 }
-.staffTable .el-table th{
+<<<<<<< HEAD
+
+.staffTable .el-table th {
     background-color: #666EE866;
     color: #515A6E;
+=======
+.staffTable .el-table th{
+    background-color: #c2c5f6;
+    color: #000;
+>>>>>>> 00a9151db0e258800f12b7f388799ad41a02e9a1
 }
+
 .staffFotedit {
     width: 45px;
 }
@@ -151,16 +166,6 @@
     margin-left: -20px;
     width: 81%;
 }
-
-.staffThre {
-    /* display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    color: #cccccc;
-    padding-top: 30px;
-    padding-left: 60px; */
-}
-
 .staffSpan {
     color: #000;
     font-size: 20px;
@@ -274,7 +279,9 @@
     padding-left: 35px;
 }
 
+
 /* 弹框按钮 */
+
 .dialog_button {
     overflow: hidden;
 }
@@ -283,11 +290,34 @@
     float: right;
     margin-right: 10px;
 }
+
+
 /* 分页 */
-.staffpag{
+
+.staffpag {
     overflow: hidden;
     margin: 20px 25px;
 }
-.staffpag>.block{
+
+.staffpag>.block {
     float: right;
+}
+
+.el-input__inner {
+    -webkit-appearance: none;
+    background-color: #FFF;
+    background-image: none;
+    border-radius: 4px;
+    border: 2px solid #DCDFE6;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 40px;
+    line-height: 40px;
+    outline: 0;
+    padding: 0 15px;
+    -webkit-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+    width: 100%;
 }

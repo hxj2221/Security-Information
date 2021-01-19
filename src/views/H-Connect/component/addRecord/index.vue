@@ -124,25 +124,18 @@
                   :headers="myHeaders"
                   class="upload-demo"
                   :action="imgUrl"
-                  :on-success="UploadSuccess"
                   multiple
                   :limit="3"
-                  
                   :on-exceed="handleExceed"
                   :file-list="fileList"
+                  @on-change="handleChange"
+                  :http-request="getFile"
                 >
                   <el-button size="small" type="primary">点击上传</el-button>
                   <div slot="tip" class="el-upload__tip">
                     只能上传jpg/png文件，且不超过500kb
                   </div>
                 </el-upload>
-                <!-- <el-upload
-                  :action="UploadUrl()"
-                  :on-success="UploadSuccess"
-                  :file-list="fileList"
-                >
-                  <el-button size="small" type="primary">点击上传</el-button>
-                </el-upload> -->
               </el-form-item>
             </el-form>
           </div>
@@ -325,36 +318,6 @@ export default {
           filetype: "jpg",
           name: "王小虎",
         },
-        {
-          id: "2",
-          file: "hhh",
-          filecontent: "hauhuhhajkfd",
-          files: "123",
-          filesize: "120kb",
-          date: "2016-05-02",
-          filetype: "jpg",
-          name: "王小虎",
-        },
-        {
-          id: "3",
-          file: "hhh",
-          filecontent: "hauhuhhajkfd",
-          files: "123",
-          filesize: "120kb",
-          date: "2016-05-02",
-          filetype: "jpg",
-          name: "王小虎",
-        },
-        {
-          id: "4",
-          file: "hhh",
-          filecontent: "hauhuhhajkfd",
-          files: "123",
-          filesize: "120kb",
-          date: "2016-05-02",
-          filetype: "jpg",
-          name: "王小虎",
-        },
       ],
       currentPage: 4,
       // 表格2  关联信息
@@ -363,10 +326,15 @@ export default {
       dialogVisible: false,
       dialogForm: {},
       fileList: [],
-      file: [],
+      file: {},
     };
   },
   methods: {
+    handleChange(val) {},
+    getFile(item) {
+      console.log(item.file);
+      this.file = item.file;
+    },
     // 编辑
     handleEdit(index, row) {},
     handleDelete(index, row) {
@@ -375,6 +343,7 @@ export default {
         showClose: true,
         message: "删除成功",
         type: "success",
+        duration: 1000,
       });
     },
     // 分页
@@ -393,7 +362,8 @@ export default {
     },
     mysubmit() {
       let data = {
-        event_number: this.tableData1[0].event_number,
+        // event_number: this.tableData1[0].event_number,
+        event_number: 12,
         communicate_time: this.form.communicate_time,
         communication: this.form.communication,
         department_id: this.form.department_id,
@@ -417,7 +387,11 @@ export default {
             this.reload();
           }, 2000);
         } else {
-          this.$message.error(res.msg);
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
         }
       });
       // this.$emit("abcClick");
@@ -425,37 +399,41 @@ export default {
     // 点击上传附件按钮
     upLode_define() {
       let params = {
-        event_number: this.tableData1[0].event_number,
+        // event_number: this.tableData1[0].event_number,
+        event_number: 12,
       };
       console.log(params);
       service.upLode(params).then((res) => {
         console.log(res);
         this.dialogVisible = true;
       });
-      console.log(token);
     },
-    UploadSuccess(response, file, index) {
-      this.file = file;
-      console.log(this.file);
-    },
+
     //上传附件 确定
     define() {
-      let data = {
+      let params = {
         file_name: this.dialogForm.file_name,
-        event_number: this.tableData1[0].event_number,
+        event_number: 12,
+        // event_number: this.tableData1[0].event_number,
         file_describe: this.dialogForm.file_describe,
         file: this.file,
       };
-      console.log(data);
-      service.uplode(data).then((res) => {
+      service.uplode(params).then((res) => {
+        console.log(params);
         console.log(res);
         if (res.code == 20010) {
           this.$message({
             message: res.msg,
             type: "success",
+            duration: 1000,
           });
         } else {
-          this.$message.error(res.msg);
+          this.$message({
+            showClose: true,
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
         }
       });
     },

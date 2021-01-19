@@ -1,9 +1,8 @@
 <template>
   <div>
     <div class="H-edit">
-      <div class="edit-top">
-        <el-button type="primary" @click="add">添加权限</el-button>
-      </div>
+      <!-- 头部 -->
+      <headpow></headpow>
       <el-table
         :data="tableData"
         style="width: 100%; margin-bottom: 20px"
@@ -45,8 +44,8 @@
               v-model="scope.row.status"
               :active-value="1"
               :inactive-value="0"
-              active-color="#02538C"
-              inactive-color="#B9B9B9"
+              active-color="#13ce66"
+              inactive-color="#ff4949"
             />
           </template>
         </el-table-column>
@@ -195,8 +194,10 @@
 </template>
 
 <script>
+import headpow from "../component/power";
 import service from "@/service/index";
 export default {
+  components: { headpow },
   inject: ["reload"],
   data() {
     return {
@@ -262,7 +263,7 @@ export default {
       this.dialogVisible = false;
     },
     // 添加权限
-    add() {
+    fathpowadd() {
       this.dialogVisible = true;
       this.selvalue = "0";
       service.addpower().then((res) => {

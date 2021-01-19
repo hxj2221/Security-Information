@@ -79,8 +79,6 @@
     border-radius: 5px;
     background-color: #666ee8;
     color: #fff;
-    /* width: 80px;
-    height: 40px; */
 }
 
 .persongr:hover {
@@ -90,19 +88,19 @@
 .personb {
     border: 2px solid #ccc;
     border-radius: 5px;
-    /* width: 80px;
-    height: 40px; */
 }
 
 .personb:hover {
     background-color: #666ee8;
     color: #fff;
 }
-.person_button{
-overflow: hidden;
-margin-left: 40px;
+
+.person_button {
+    overflow: hidden;
+    margin-left: 40px;
 }
-.person_button>.el-button{
+
+.person_button>.el-button {
     float: left;
     margin-left: 40px;
 }

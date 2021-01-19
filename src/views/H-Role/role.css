@@ -4,11 +4,13 @@
 }
 
 .rolealBg {
+    margin-top: -12px;
     width: 100%;
     min-height: 100%;
-    background-color: #fff;
-    /* margin-left: -20px; */
-    padding-bottom: 200px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgb(184, 183, 183);
+    padding-bottom: 150px;
 }
 
 .roleheadThre {
@@ -62,6 +64,7 @@
     color: none;
 }
 
+
 /* .roleWidhr {
     width: 92%;
     margin: auto;
@@ -79,7 +82,7 @@
 
 .roleNameIpt {
     width: 18vw;
-    border: 2px solid #ccc;
+    /* border: 2px solid #ccc; */
     border-radius: 5px;
     margin-left: 4%;
 }
@@ -266,12 +269,34 @@
     text-decoration: none;
     cursor: pointer;
 }
-    /* 分页 */
+
+
+/* 分页 */
 
 .rolepag {
-     overflow: hidden;
-     margin: 20px 25px;
- }
- .rolepag>.block {
-     float: right;
- }
+    overflow: hidden;
+    margin: 20px 25px;
+}
+
+.rolepag>.block {
+    float: right;
+}
+
+.el-input__inner {
+    -webkit-appearance: none;
+    background-color: #FFF;
+    background-image: none;
+    border-radius: 4px;
+    border: 2px solid #DCDFE6;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 40px;
+    line-height: 40px;
+    outline: 0;
+    padding: 0 15px;
+    -webkit-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+    width: 100%;
+}

@@ -106,6 +106,7 @@
 <script>
 // import AdminHead from './components/AdminHead'
 import "@/views/H-Columnlist/css.css";
+import { duration } from 'moment';
 export default {
   components: {},
 
@@ -184,7 +185,8 @@ export default {
        this.$message({
           showClose: true,
           message: '删除成功',
-          type: 'success'
+          type: 'success',
+          duration:1000
         });
     },
   },

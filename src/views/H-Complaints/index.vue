@@ -164,7 +164,6 @@
 import Complaintslist from "../H-Complaints/components/complaintslist";
 import Addcom from "../H-Complaints/components/addcom";
 import Look from "../H-Complaints/components/Look";
-import Read from "../H-Complaints/components/read";
 import Conserve from "../H-Complaints/components/conserve";
 import Table from "../H-Complaints/components/Tables";
 import Operation from "../H-Complaints/components/operation";
@@ -173,7 +172,7 @@ import service from "@/service/index";
 import qs from "qs";
 export default {
   inject: ["reload"],
-  components: { Complaintslist, Addcom, Look, Read, Conserve, Table, Operation },
+  components: { Complaintslist, Addcom, Look, Conserve, Table, Operation },
 
   data() {
     return {
@@ -193,13 +192,11 @@ export default {
   methods: {
     // 操作页面
     handle(index) {
-      console.log(index);
-
       let params = {
         event_number: index.event_number,
-      };
+        };
+        //操作页面数据接口
       service.Issue(index.event_number).then((res) => {
-        console.log(res);
         if (res.code == 20010) {
           this.list = false;
           this.add = false;
@@ -210,24 +207,63 @@ export default {
           let params = {
            event_number: index.event_number,
           };
+          //详情数据接口
           service.componrdetaile(qs.stringify(params)).then((res) => {
-          console.log(res);
-          this.lookdata = res.data;
-        });
+          if(res.code==20010){
+              this.lookdata = res.data;
+          }
+           else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
         }
-       else{
-           this.$message({
+        else if(res.code==20403){
+          this.$message({
             message: res.msg,
             type: "error",
             duration: 1000,
           });
-           this.$router.push("/login")
+          this.$router.push('/dashboard')
+        }
+         else{
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+        }
+        });
+        }
+       else if(res.code=20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code=20403){
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
+        }
+         else{
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
         }
       
       });
     },
     records(index) {
-      console.log(index);
       //跳转到医患记录
       this.$router.push("/Connect");
     },
@@ -235,7 +271,6 @@ export default {
     handleClose(done) {
       this.$confirm("确认关闭？")
         .then((_) => {
-          // done();
           this.dialogVisible = false;
         })
         .catch((_) => {});
@@ -254,8 +289,32 @@ export default {
         event_number: index.event_number,
       };
       service.componrdetaile(qs.stringify(params)).then((res) => {
-        console.log(res);
-        this.lookdata = res.data;
+         if(res.code==20010){
+              this.lookdata = res.data;
+          }
+           else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
+        }
+         else{
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+        }
       });
     },
     // 添加页面保存
@@ -264,6 +323,7 @@ export default {
       this.add = false;
       this.look = false;
       this.operations = false;
+      this.reload()
     },
     // 打印
     stamp() {
@@ -275,7 +335,7 @@ export default {
       this.add = false;
       this.look = false;
       this.operations = false;
-      this.reload();
+      this.reload()
     },
     // 添加投诉
     addcomsss() {
@@ -287,26 +347,10 @@ export default {
     },
     // 导出事件
     exportcom() {
-      console.log(1);
-    },
-    // 搜索事件
+      console.log(2);
+    }
   },
   created() {
-    if (this.look == true) {
-      if (
-        event_number !== null &&
-        event_number !== "" &&
-        token !== null &&
-        token !== ""
-      ) {
-        let params = {
-          event_number: event_number,
-        };
-        service.componrdetaile(params).then((res) => {
-          console.log(res);
-        });
-      }
-    }
   },
 };
 </script>

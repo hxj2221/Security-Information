@@ -14,41 +14,19 @@
         >
         </slot>
       </div>
-    
-      <slot name="table">
-     
-      </slot>
-    
-      
+      <slot name="table"></slot>
     </div>
   </div>
 </template>
 <script>
-import Tables from '../components/Tables'
-
 export default {
-  components: {Tables},
-
+  components: {},
   data() {
     return {
-     
-     
-      form: {},
-      
     };
   },
 
   methods: {
-    // 搜索事件
-    clicks() {
-      // 将标准时间转为年月日
-      var stime = new Date(this.complaintsate[0]);
-      var StartTime =
-        stime.getFullYear() + "-" + (stime.getMonth() + 1) + "-" + stime.getDate();
-      var etime = new Date(this.complaintsate[1]);
-      var EndTime =
-        etime.getFullYear() + "-" + (etime.getMonth() + 1) + "-" + etime.getDate();
-    },
   },
 };
 </script>

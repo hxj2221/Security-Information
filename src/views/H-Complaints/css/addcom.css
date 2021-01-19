@@ -13,11 +13,11 @@
 .addcom input[type=number] {  
         -moz-appearance:textfield;  
     }  
-    .addcom input[type=number]::-webkit-inner-spin-button,  
-    .addcom input[type=number]::-webkit-outer-spin-button {  
-        -webkit-appearance: none;  
-        margin: 0;  
-    }
+.addcom input[type=number]::-webkit-inner-spin-button,  
+.addcom input[type=number]::-webkit-outer-spin-button {  
+    -webkit-appearance: none;  
+    margin: 0;  
+}
 
 .addcom .el-button{
     border: none;

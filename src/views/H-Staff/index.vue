@@ -11,7 +11,7 @@
           placeholder="请选择"
           class="staffSel"
         >
-          <el-option label="请选择" value="请选择"></el-option>
+          <el-option label="请选择" value=""></el-option>
           <el-option
             v-for="item in optionbeldepart"
             :key="item.id"
@@ -61,8 +61,8 @@
                 v-model="scope.row.status"
                 :active-value="1"
                 :inactive-value="2"
-                active-color="#02538C"
-                inactive-color="#B9B9B9"
+                active-color="#13ce66"
+                inactive-color="#ff4949"
                 @change="changeSwitch($event, scope.row)"
               ></el-switch>
             </template>
@@ -202,15 +202,18 @@ export default {
         id: row.id,
       };
       service.staffState(params).then((res) => {
+        console.log(res)
         if (row.status == 1) {
           this.$message({
             type: "success",
             message: "员工启用成功",
+            duration:1000
           });
         } else {
           this.$message({
             type: "error",
             message: "员工停用",
+            duration:1000
           });
         }
       });
@@ -248,7 +251,6 @@ export default {
       console.log(params);
       service.staffDel(params).then((res) => {
         // this.reload();
-
         console.log(res);
         if (res.code == 20010) {
           this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
@@ -261,12 +263,14 @@ export default {
                 type: "success",
                 message: "删除成功!",
                 delete: row.splice(val, 1),
+                duration:1000
               });
             })
             .catch(() => {
               this.$message({
                 type: "info",
                 message: "已取消删除",
+                duration:1000
               });
             });
         }
