@@ -116,7 +116,6 @@
                 size="large"
                 :options="options"
                 v-model="addStaff.address"
-                @change="handleChange"
               >
               </el-cascader>
             </el-form-item>
@@ -161,7 +160,7 @@
                 type="input"
                 autosize
                 style="margin-top: 40px"
-                v-model="role_id"
+                v-model="addStaff.auth_grouap"
                 placeholder="请选择"
               >
                 <el-option
@@ -262,21 +261,7 @@ export default {
      
       role_id:'',
       department_id:'',
-      //年龄循环
-      optionages: [
-        {
-          value: "选项1",
-          label: "岁",
-        },
-        {
-          value: "选项2",
-          label: "月",
-        },
-        {
-          value: "选项3",
-          label: "天",
-        },
-      ],
+      
       // 性别循环
       optiongen: [
         {
@@ -302,7 +287,7 @@ export default {
   },
   watch: {
     childed(res) {
-      console.log(res.auth_grouap[0].id)
+      console.log(res.role_id)
       console.log(res)
       // console.log(res.address); //数据已经拿到
       this.id = res.id;
@@ -322,7 +307,7 @@ export default {
       this.addStaff.status = res.status;
       // this.addStaff.head_department = res.head_department;
       this.addStaff.position = res.position;
-      // this.addStaff.auth_grouap = res.auth_grouap;
+      this.addStaff.auth_grouap = res.auth_grouap[0].title;
       this.role_id=res.role_id;
       this.addStaff.status = res.status;
     },
@@ -365,24 +350,13 @@ export default {
           }, 1500);
         }
         else{
-           this.$message.error(res.msg);
+           this.$message({
+               message:res.msg,
+               type:'error',
+               duration:1000
+             })
         }
       });
-    },
-    handleChange(cityvalue) {
-      console.log(
-        CodeToText[cityvalue[0]],
-        CodeToText[cityvalue[1]],
-        CodeToText[cityvalue[2]]
-      );
-      let a =
-        CodeToText[cityvalue[0]] +
-        " " +
-        CodeToText[cityvalue[1]] +
-        " " +
-        CodeToText[cityvalue[2]];
-      // this.addStaff.address = a;
-      console.log(this.addStaff.address);
     },
     // 子调用父
     staffaddvueno() {

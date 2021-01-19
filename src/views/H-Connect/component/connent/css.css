@@ -1,6 +1,7 @@
 .connent_all {
     width: 100%;
-    min-height: 750px;
+    /* min-height: 750px; */
+    min-height:680px;
     background: #fff;
     border-radius: 5px;
     box-shadow: 0 0 2px rgb(184, 183, 183);
@@ -29,15 +30,18 @@
 }
 
 .connent_top_right>.el-button:first-child {
-    color: #fff;
-    border-color: #666EE8;
-    background-color: #666EE8;
+    border: 3px solid #666ee8;
+     background: #666ee8;
 }
+.connent_top_right>.el-button:last-child{
+    border: 1px solid #666ee8;   
+     color: #666ee8;
+     background:none;
 
+} 
 .connent_Tableall>.seach>.block>.el-button {
-    color: #fff;
-    border-color: #666EE8;
-    background-color: #666EE8;
+    border: 3px solid #666ee8;
+    background: #666ee8;
 }
 
 .connent_hr {
@@ -101,7 +105,7 @@
 
 .connent_myTable .el-table th {
     color: #000;
-    background-color: #666EE866
+    background-color: #c2c5f6;   
 }
 
 .connent_myTable .el-table td,

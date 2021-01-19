@@ -33,7 +33,7 @@ export default {
       service.getrole().then((res) => {
         console.log(res);
         this.all = res.data;
-        this.job_number = res.data.job_number;
+        // this.job_number = res.data.job_number;
         this.bus.$emit("ReceiveMessage", this.all);
         this.$parent.fathpowadd();
       });

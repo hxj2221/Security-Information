@@ -579,6 +579,7 @@ export default {
         showClose: true,
         message: "删除成功",
         type: "success",
+        duration:1000
       });
     },
     //级选择器

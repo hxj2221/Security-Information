@@ -95,7 +95,8 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="是否可见" prop="delivery">
-          <el-switch v-model="ruleForm.delivery"></el-switch>
+          <el-switch v-model="ruleForm.delivery" active-color="#13ce66"
+  inactive-color="#ff4949"></el-switch>
         </el-form-item>
       </el-form>
     </div>
