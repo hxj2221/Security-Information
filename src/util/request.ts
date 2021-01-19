@@ -32,7 +32,7 @@ service.interceptors.request.use((config: AxiosRequestConfig) => {
   return config
 }, (err: any) => {
   Message({
-    message: err.message,
+    message: "请求错误",
     type: 'error',
     duration: 3 * 1000
   });
@@ -40,10 +40,9 @@ service.interceptors.request.use((config: AxiosRequestConfig) => {
 });
 
 service.interceptors.response.use((response: AxiosResponse) => {
-  // console.log(response)
   if (response.status !== 200) {
     Message({
-      message: `请求错误，${String(response.status)}`,
+      message: `请求错误`,
       type: 'error',
       duration: 3 * 1000
     });

@@ -122,9 +122,7 @@ export default {
   methods: {
     reloadcode() {
       var verifyimg = $(".imgcode").attr("src");
-      $(".imgcode").attr(
-        "src",
-        verifyimg.replace(/\?.*$/, "") + "?" + Math.random()
+      $(".imgcode").attr( "src",verifyimg.replace(/\?.*$/, "") + "?" + Math.random()
       );
     },
     submitForm(formName) {
@@ -140,7 +138,8 @@ export default {
                 sessionStorage.setItem("account", this.ruleForm.account);
                 sessionStorage.setItem("password", this.ruleForm.password);
                 this.$router.push("/dashboard");
-              } else {
+              } 
+              else {
                 this.$message({
                   message: res.msg,
                   type: "error",
@@ -177,6 +176,7 @@ export default {
     }
   },
   created() {
+    this.reloadcode()
     localStorage.clear();
     sessionStorage.clear()
     // this.height=document.body.clientHeight

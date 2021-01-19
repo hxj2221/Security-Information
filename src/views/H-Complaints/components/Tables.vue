@@ -1,7 +1,7 @@
 <template>
   <div>
       <div class="Complaints-screen clearfix">
-        <el-form ref="form" label-width="80px">
+        <el-form  label-width="80px">
           <el-form-item label="投诉人">
             <el-input v-model="complaintname" placeholder="请输入投诉人姓名" type="input" :max="10" :maxlength="10" clearable></el-input>
           </el-form-item>
@@ -47,21 +47,22 @@
       </div>
     <div class="Complaints-content">
       <el-table
+        max-height='550px'
         :data="tableData"
         style="width: 94%; margin-left: 3%; text-align: center"
         :header-cell-style="getRowClass"
       >
         <el-table-column type="index" width="50" label="序号"> </el-table-column>
-        <el-table-column prop="event_number" label="事件编码"></el-table-column>
-        <el-table-column prop="complaint_name" label="投诉人姓名"> </el-table-column>
-        <el-table-column prop="sex" label="性别"> </el-table-column>
-        <el-table-column prop="age" label="年龄"> </el-table-column>
-        <el-table-column prop="complaint_phone" label="手机号码"> </el-table-column>
-        <el-table-column prop="department[0].title" label="投诉科室"> </el-table-column>
-        <el-table-column prop="complaint_type.title" label="投诉方式"> </el-table-column>
-        <el-table-column prop="create_time" label="投诉时间"> </el-table-column>
-        <el-table-column prop="pass_names" label="流转部门"> </el-table-column>
-        <el-table-column prop="state.title" label="事件状态"> </el-table-column>
+        <el-table-column prop="event_number" width="160" label="事件编码"></el-table-column>
+        <el-table-column prop="complaint_name" width="120" label="投诉人姓名"> </el-table-column>
+        <el-table-column prop="sex" label="性别" width="100"> </el-table-column>
+        <el-table-column prop="age" width="80" label="年龄/岁"> </el-table-column>
+        <el-table-column prop="complaint_phone" width="110" label="手机号码"> </el-table-column>
+        <el-table-column prop="department[0].title" label="投诉科室" width="110" :show-overflow-tooltip='true'></el-table-column>
+        <el-table-column prop="complaint_type.title" width="140" label="投诉方式"> </el-table-column>
+        <el-table-column prop="create_time" width="100" label="投诉时间"> </el-table-column>
+        <el-table-column prop="pass_names" width="150" label="流转部门"> </el-table-column>
+        <el-table-column prop="state.title" width="150" label="事件状态"> </el-table-column>
         <slot name="column">
           <el-table-column fixed="right" label="操作" width="150%">
             <template slot-scope="scope">
@@ -110,7 +111,7 @@ export default {
         pickerOptions: {
         disabledDate(time) {
           return time.getTime() > Date.now();
-        },
+        }
       },
        complaintname: "",
       complainttype: "",
@@ -118,7 +119,7 @@ export default {
       complaintsate: "",
       tableData: [],
       numberlist: [8, 10, 20],
-      currentPage4: 1,
+      currentPage4:1,
       total: 100,
       number: 8,
     };
@@ -135,53 +136,98 @@ export default {
       let endtiem= new Date(this.complaintsate[1]).getTime()
       service.search(this.number, this.currentPage4,this.complaintname,this.complainttype,this.complaintstatus,starttime,endtiem).then(res=>{
         console.log(res)
-        if(res.code=20010){
+        if(res.code==20010){
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
         }
-        else{
-           this.$message({
+        else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
             message: res.msg,
             type: "error",
             duration: 1000,
           });
-      this.$router.push("/login")
+          this.$router.push('/dashboard')
+        }
+         else{
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
         }
       })
        }
       else{
       service.search(this.number, this.currentPage4,this.complaintname,this.complainttype,this.complaintstatus,'','').then(res=>{
         console.log(res)
-        if(res.code=20010){
+        if(res.code==20010){
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
         }
-        else{
-           this.$message({
+         else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
             message: res.msg,
             type: "error",
             duration: 1000,
           });
-        this.$router.push("/login")
+          this.$router.push('/dashboard')
+        }
+         else{
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
         }
       })
      }
     }
     else{
        service.ComList(this.number, this.currentPage4).then((res) => {
-        if (res.code === 20010) {
+        if (res.code == 20010) {
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
-        } else {
+        }  else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
           this.$message({
             message: res.msg,
             type: "error",
             duration: 1000,
           });
-             this.$router.push("/login")
+          this.$router.push('/dashboard')
+        }
+         else{
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
         }
       });
     }
@@ -196,53 +242,98 @@ export default {
       let endtiem= new Date(this.complaintsate[1]).getTime()
       service.search(this.number, this.currentPage4,this.complaintname,this.complainttype,this.complaintstatus,starttime,endtiem).then(res=>{
         console.log(res)
-        if(res.code=20010){
+        if(res.code==20010){
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
         }
-        else{
-           this.$message({
+         else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
             message: res.msg,
             type: "error",
             duration: 1000,
           });
-           this.$router.push("/login")
+          this.$router.push('/dashboard')
+        }
+         else{
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
         }
       })
        }
       else{
       service.search(this.number, this.currentPage4,this.complaintname,this.complainttype,this.complaintstatus,'','').then(res=>{
         console.log(res)
-        if(res.code=20010){
+        if(res.code==20010){
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
         }
-        else{
-           this.$message({
+        else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
             message: res.msg,
             type: "error",
             duration: 1000,
           });
-        this.$router.push("/login")
+          this.$router.push('/dashboard')
+        }
+         else{
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
         }
       })
      }
     }
     else{
         service.ComList(this.number, this.currentPage4).then((res) => {
-        if (res.code === 20010) {
+        if (res.code == 20010) {
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
-        } else {
+        } else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
           this.$message({
             message: res.msg,
             type: "error",
             duration: 1000,
           });
-             this.$router.push("/login")
+          this.$router.push('/dashboard')
+        }
+         else{
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
         }
       });
     }
@@ -257,18 +348,33 @@ export default {
       let endtiem= new Date(this.complaintsate[1]).getTime()
       service.search(this.number, this.currentPage4,this.complaintname,this.complainttype,this.complaintstatus,starttime,endtiem).then(res=>{
         console.log(res)
-        if(res.code=20010){
+        if(res.code==20010){
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
         }
-        else{
-           this.$message({
+         else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
             message: res.msg,
             type: "error",
             duration: 1000,
           });
-      this.$router.push("/login")
+          this.$router.push('/dashboard')
+        }
+         else{
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
         }
       })
        }
@@ -280,13 +386,28 @@ export default {
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
         }
-        else{
-           this.$message({
+         else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
             message: res.msg,
             type: "error",
             duration: 1000,
           });
-        this.$router.push("/login")
+          this.$router.push('/dashboard')
+        }
+         else{
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
         }
       })
      }
@@ -294,17 +415,32 @@ export default {
       else{
       service.ComList(this.number, this.currentPage4).then((res) => {
         console.log(res);
-        if (res.code === 20010) {
+        if (res.code == 20010) {
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
-        } else {
+        }  else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
           this.$message({
             message: res.msg,
             type: "error",
             duration: 1000,
           });
-             this.$router.push("/login")
+          this.$router.push('/dashboard')
+        }
+         else{
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
         }
       });
       }
@@ -323,22 +459,38 @@ export default {
   },
   created() {
     service.ComList(this.number, this.currentPage4).then((res) => {
-      console.log(res);
-      if (res.code === 20010) {
+      if (res.code == 20010) {
         this.tableData = res.data[0];
         this.total = res.data[1].count;
         this.currentPage4 = res.data[1].current;
         this.options=res.data[2].ComplaintType
         this.option=res.data[2].state
-      } else {
-        this.$message({
-          message: res.msg,
-          type: "error",
-          duration: 1000,
-        });
-           this.$router.push("/login")
       }
-    });
+        else if(res.code==20403){
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
+        }
+        else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+      
+         else{
+          this.$message({
+            message: "请求错误",
+            type: "error",
+            duration: 1000,
+          });
+        }
+    })
   },
 };
 </script>
