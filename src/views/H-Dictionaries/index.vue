@@ -7,7 +7,8 @@
           <li class="list" v-for="(item,index) in Nav" :key="item.index" v-bind:class="{bgColor:index==nowIndex}"
             @click="change(index)">{{item.name}}</li>
         </ul>
-        <i class="el-icon-circle-plus-outline" @click="increase()"><span>新增</span></i>
+        <el-button type="primary" icon="el-icon-circle-plus" @click="increase()" >新增
+        </el-button>
       </div>
       <div class="allManage_cont">
         <!-- 侧边导航 -->
@@ -21,7 +22,7 @@
           <el-input placeholder="请输入内容" v-model="search" class="input-with-select search">
             <el-button slot="append" icon="el-icon-search"></el-button>
           </el-input>
-          <el-table class="right_con" ref="singleTable" :data="tableData" style="width:100%">
+          <el-table class="right_con" ref="singleTable" :header-cell-style="getRowClass" :data="tableData" style="width:100%">
             <el-table-column type="index" label="序号" width="90">
             </el-table-column>
             <el-table-column property="field" label="字段" width="350">
@@ -189,6 +190,14 @@
         this.nowIndex = index;
       },
       // 表格操作
+       // 设置表头颜色
+    getRowClass({ rowIndex }) {
+      if (rowIndex == 0) {
+        return "background:#c2c5f6;color:#000";
+      } else {
+        return "";
+      }
+    },
       // 编辑
       edit() {
         this.dialogVisible = !this.dialogVisible

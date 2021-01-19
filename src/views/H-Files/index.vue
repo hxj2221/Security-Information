@@ -5,18 +5,10 @@
       <div class="head">
         <h4 class="title">文件列表</h4>
         <div class="push_btn">
-          <i
-            class="fa fa-plus-circle fa-2"
-            aria-hidden="true"
-            @click="uploadclassify()"
-            ><span>上传文件</span></i
-          >
-          <i
-            class="fa fa-plus-circle fa-2"
-            aria-hidden="true"
-            @click="newclassify()"
-            ><span>新建分类</span></i
-          >
+          <el-button type="primary" icon="el-icon-circle-plus" @click="uploadclassify()" >上传文件
+        </el-button>
+        <el-button type="primary" icon="el-icon-circle-plus" @click="newclassify()" >新建分类
+        </el-button>
         </div>
       </div>
       <!-- 搜索 -->

@@ -4,7 +4,7 @@
     padding-bottom: 1px;
     padding: 0 20px 50px;
     width: 95%;
-    min-height: 750px;
+    min-height: 680px;
     margin: 0 auto;
     border-radius: 5px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
@@ -14,48 +14,43 @@
 /* 头部 */
 
 .mainBl>.header {
-    height: 60px;
+    height: 91px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid #f2f2f2;
+    padding: 0 26px;
 }
 
 .mainBl>.header>h4 {
     color: #666EE8;
 }
 
-.mainBl>.header>.btn>i {
-    width: 110px;
-    height: 36px;
+.mainBl>.header>.btn>.el-button {
+    /* width: 110px; */
     background-color: #666EE8;
     border-radius: 5px;
     color: #fff;
-    line-height: 36px;
     text-align: center;
-    font-size: 17px;
     font-weight: 900;
     margin: 0 10px;
     cursor: pointer;
+    border:3px solid #666EE8;
 }
 
-.mainBl>.header>.btn>i:first-child:hover {
-    background-color: #666EE866;
-}
-
-.mainBl>.header>.btn>i:last-child {
+.mainBl>.header>.btn>.exportAde {
     background-color: #fff;
     border: 1px solid #666EE8;
     color: #666EE8;
     margin: 0;
 }
 
-.mainBl>.header>.btn>i:last-child:hover {
+.mainBl>.header>.btn>.exportAde:hover {
     background-color: #666EE8;
     color: #fff;
 }
 
-.mainBl>.header>.btn>i>span {
+.mainBl>.header>.btn>.el-button>span {
     font-size: 14px;
 }
 
@@ -65,6 +60,7 @@
 .mainBl .searchAll {
     padding-top: 10px;
     margin-bottom: 10px;
+    padding: 0 20px;
 }
 .mainBl .searchAll .searchAll_search:last-child{
     display: flex;
@@ -88,6 +84,10 @@
     border-color: #666ee8;
 }
 
+.mainBl .elTable{
+    width: 95%;
+    margin: 0 auto;
+}
 .mainBl .elTable .el-table__header-wrapper .el-table__header .has-gutter tr th {
     text-align: center;
 }

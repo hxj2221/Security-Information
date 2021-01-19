@@ -234,7 +234,13 @@ import qs from 'qs'
               type: 'success',
               duration: 1000,
             });
-          }
+          }else{
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+        }
         });
       },
       // 返回列表页

@@ -4,8 +4,9 @@
     <div class="header">
       <h4>不良事件</h4>
       <div class="btn">
-        <i class="el-icon-circle-plus-outline" @click="Add()">&nbsp;<span>新增不良</span></i>
-        <i class="fa fa-sign-in" aria-hidden="true">&nbsp;&nbsp;&nbsp;&nbsp;<span>导出</span></i>
+        <el-button type="primary" icon="el-icon-circle-plus" class="addAde" @click="Add()" >新增
+        </el-button>
+        <el-button icon="iconfont el-icon-hospital-passwordexport" class="exportAde">导出</el-button>
       </div>
     </div>
     <!-- 检索 -->
@@ -16,21 +17,22 @@
             <el-input clearable v-model="patient_name" placeholder="请输入内容"></el-input>
           </el-form-item>
           <el-form-item label="发生地点" label-width="80px">
-            <el-select clearable   v-model="occur_scene" placeholder="请选择">
+            <el-select clearable v-model="occur_scene" placeholder="请选择">
               <el-option label="请选择" value=""></el-option>
-              <el-option  v-for="item in options" :key="item.id" :label="item.title" :value="item.id">
+              <el-option v-for="item in options" :key="item.id" :label="item.title" :value="item.id">
               </el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="事发日期" label-width="80px">
-            <el-date-picker style="width:240px" v-model="occur_time" type="daterange" range-separator="至" start-placeholder="开始日期"
-              end-placeholder="结束日期" format="yyyy-MM-dd" value-format="yyyy-MM-dd">
+            <el-date-picker style="width:240px" v-model="occur_time" type="daterange" range-separator="至"
+              start-placeholder="开始日期" end-placeholder="结束日期" format="yyyy-MM-dd" value-format="yyyy-MM-dd"
+              :picker-options="pickerOptions">
             </el-date-picker>
           </el-form-item>
         </div>
         <div class="searchAll_search">
           <el-form-item label="轻重程度" label-width="80px">
-            <el-select clearable  style="width: 562px;" v-model="degree_weight_id" placeholder="请选择">
+            <el-select clearable style="width: 562px;" v-model="degree_weight_id" placeholder="请选择">
               <el-option label="请选择" value=""></el-option>
               <el-option v-for="item in options1" :key="item.id" :label="item.title" :value="item.id">
               </el-option>
@@ -44,7 +46,7 @@
     <el-table class="elTable" :data="tableData" :header-cell-style="getRowClass">
       <el-table-column type="index" label="序号">
       </el-table-column>
-      <el-table-column prop="event_num" label="事件编码">
+      <el-table-column prop="event_num" label="事件编码" width="180">
       </el-table-column>
       <el-table-column prop="patient_name" label="患者姓名">
       </el-table-column>
@@ -58,7 +60,7 @@
       </el-table-column>
       <el-table-column prop="degreeweight.title" label="轻重程度" :show-overflow-tooltip='true'>
       </el-table-column>
-      <el-table-column prop="create_time"  label="上报时间" width="150">
+      <el-table-column prop="create_time" label="上报时间" width="150">
       </el-table-column>
       <el-table-column prop="department.title" label="患者科室">
       </el-table-column>
@@ -92,19 +94,39 @@
       return {
         // 检索
         patient_name: '', //患者姓名
-        occur_time:'',// 事发日期
+        occur_time: '', // 事发日期
         occur_scene: '', //发生地点
         degree_weight_id: '', //轻重程度      
-        start_Date: { //时间限制
-          disabledDate: time => {
+        pickerOptions: {
+          disabledDate(time) {
             return time.getTime() > Date.now();
-          }
-        },
-        end_Date: {
-          disabledDate: time => {
-            return time.getTime() > Date.now();
-          }
-        },
+          },
+          shortcuts: [{
+            text: '最近一周',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+              picker.$emit('pick', [start, end]);
+            }
+          }, {
+            text: '最近一个月',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+              picker.$emit('pick', [start, end]);
+            }
+          }, {
+            text: '最近三个月',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+              picker.$emit('pick', [start, end]);
+            }
+          }]
+        }, //时间限制
         options: [], //发生地点
         options1: [], //轻重程度
         tableData: [], //表格内容
@@ -119,28 +141,30 @@
     },
     methods: {
       // 设置表头颜色
-    getRowClass({ rowIndex }) {
-      if (rowIndex == 0) {
-        return "background:#c2c5f6;color:#000";
-      } else {
-        return "";
-      }
-    },
+      getRowClass({
+        rowIndex
+      }) {
+        if (rowIndex == 0) {
+          return "background:#c2c5f6;color:#000";
+        } else {
+          return "";
+        }
+      },
       // 时间戳转为日期格式
-      getDate:function(row, column, cellValue, index){
+      getDate: function (row, column, cellValue, index) {
         // console.log(new Date(cellValue * 1000))
         var date = new Date(cellValue * 1000);
-        var y = date.getFullYear();  
-        var m = date.getMonth() + 1;  
-        m = m < 10 ? ('0' + m) : m;  
-        var d = date.getDate();  
-        d = d < 10 ? ('0' + d) : d;  
-        var h = date.getHours();  
-        var minute = date.getMinutes();  
-        minute = minute < 10 ? ('0' + minute) : minute; 
-        var second= date.getSeconds();  
-        second = minute < 10 ? ('0' + second) : second;  
-        return y + '-' + m + '-' + d+' '+h+':'+minute+':'+ second;    
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        m = m < 10 ? ('0' + m) : m;
+        var d = date.getDate();
+        d = d < 10 ? ('0' + d) : d;
+        var h = date.getHours();
+        var minute = date.getMinutes();
+        minute = minute < 10 ? ('0' + minute) : minute;
+        var second = date.getSeconds();
+        second = minute < 10 ? ('0' + second) : second;
+        return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
       },
       // 新增
       Add() {
@@ -164,7 +188,7 @@
       screen() {
         if ((this.occur_time !== '' && this.occur_time !== null) || this
           .patient_name !== '' || this.occur_scene !== '' || this.degree_weight_id !== '') {
-            // console.log(this.occur_time)
+          // console.log(this.occur_time)
           let params = {
             patient_name: this.patient_name,
             starttime: this.occur_time[0],
@@ -192,11 +216,11 @@
           })
         }
       },
-      
+
       // 分页
       // 当前页
       currentChage(val) {
-        console.log(val)
+        // console.log(val)
         this.currentPage4 = val
         if ((this.occur_time !== '' && this.occur_time !== null) || this
           .patient_name !== '' || this.occur_scene !== '' || this.degree_weight_id !== '') {
@@ -228,7 +252,7 @@
       },
       // 每页条数
       handleSizeChange(val) {
-        console.log(val)
+        // console.log(val)
         this.pageSize = val
         if ((this.occur_time !== '' && this.occur_time !== null) || this
           .patient_name !== '' || this.occur_scene !== '' || this.degree_weight_id !== '') {
