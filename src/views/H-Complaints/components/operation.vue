@@ -314,7 +314,6 @@
                 :show-all-levels="false"
                 v-model="comde"
                 clearable
-                @change="getCascaderObj"
                 style="margin-left:10px"
               ></el-cascader>
                       </div
@@ -352,7 +351,6 @@
                           :show-all-levels="false"
                           v-model="comde"
                           clearable
-                          @change="getCascaderObj"
                           style="margin-left:10px"
                         ></el-cascader></div
                   ></el-col>
@@ -452,8 +450,7 @@
                 :show-all-levels="false"
                 v-model="comde"
                 style="margin-left:10px"
-                clearable
-                @change="getCascaderObj"
+                clearabl
               ></el-cascader>
                       </div></el-col>
                 </el-row>
@@ -506,7 +503,6 @@
                           :show-all-levels="false"
                           v-model="comde"
                           clearable
-                          @change="getCascaderObj"
                            style="margin-left:10px"
                         ></el-cascader></div
                   ></el-col>
@@ -526,8 +522,7 @@
                           multiple: 'true'}"
                           :show-all-levels="false"
                           v-model="eventtype"
-                          clearable
-                          @change="getCascaderObj"
+                          clearabl
                            style="margin-left:10px"
                         ></el-cascader>
                       </div
@@ -550,7 +545,6 @@
                           :show-all-levels="false"
                           v-model="accountability"
                           clearable
-                          @change="getCascaderObj"
                            style="margin-left:10px"
                         ></el-cascader>
                       </div></el-col>
@@ -699,7 +693,7 @@
                               size="small"
                               >下载</el-button
                             >
-                            <el-button type="text" size="small">删除</el-button>
+                            <el-button type="text" size="small" @click="handleRemove">删除</el-button>
                           </slot>
                         </template>
                       </el-table-column>
@@ -745,8 +739,26 @@
             </el-form-item>
             
             <el-form-item label="上传附件：" class="uploadfile">
-            <el-upload
-                 :http-request='upfilesubmit'
+              <!-- 
+                 :http-request='upfilesubmit' -->
+            <!-- <el-upload
+                  action="http://bt1.wlqqlp.com:8082/api/Complaintprocess/event_uploadfiles"
+                  class="upload-demo"
+                  ref="upload"
+                 :disabled='(filetitle==""||filedescribe=="")?true:false'
+                 :multiple='false'
+                 data='datalist'
+                 :headers="importHeaders"
+                 :on-preview="handlePreview"
+                 :on-remove="handleRemove"
+                 :on-change="handleChange"
+                 :on-success="onSuccess"
+                 :on-error="onError"
+                 :auto-upload="false">
+            <el-button slot="trigger" size="small" type="primary"   :disabled='(filetitle==""||filedescribe=="")?true:false' >选取文件</el-button>
+            </el-upload> -->
+             <el-upload
+             action='http://bt1.wlqqlp.com:8082/index.php/api/srk/create_base64_file'
                  class="upload-demo"
                  :limit='1'
                 :disabled='(filetitle==""||filedescribe=="")?true:false'
@@ -776,11 +788,13 @@ export default {
     Look,
   },
   data() {
+     const tokens=sessionStorage.getItem('token')
     return {
+        importHeaders:{ token: tokens},
       dis:false,
       upfiledatas:{},
       upfilesss:false,
-      token:'',
+      token:tokens,
       economic:'',//直接经济损失
       management:'',//管理措施
       eventtype:'',//投诉类别
@@ -790,6 +804,12 @@ export default {
          {id:2,title:"二级"},
           {id:3,title:"三级"}
       ],
+      datalist:{
+         event_number:'',//编号
+         file:'',
+         file_name:'',
+         represent:''
+      },
       comde:'',//
       date: "", //约定日期
       liable: "", //责任人
@@ -832,8 +852,8 @@ export default {
     };
   },
   methods: {
-    //这个file参数 也就是文件信息，你使用 插件 时 你就可以打印出文件信息 看看嘛
-    getBase64() {
+    // //这个file参数 也就是文件信息，你使用 插件 时 你就可以打印出文件信息 看看嘛
+   getBase64() {
       return new Promise((resolve, reject) => {
         let reader = new FileReader();
         let fileResult = "";
@@ -849,29 +869,28 @@ export default {
         };
       });
     },
-    upfilesubmit(){
+  upfilesubmit(){
       let file=this.fileList[0]
       console.log(file.raw)
-      this.getBase64(file.raw).then(resBase64 => {
+      this.getBase64(file).then(resBase64 => {
         this.base64file = resBase64.split(',')[1]　　//直接拿到base64信息
         console.log(this.base64file)
           let params={
         // event_number:this.$parent.opdata[0].event_number,//编号
-        file:this.base64file,
+        base64_file:this.base64file,
         //  file_name:this.filetitle,
         // represent:this.filedescribe
       }
       console.log(params)
-      service.uploadfiles(params).then(res=>{
+      service.uploadfilebase(params).then(res=>{
         console.log(res)
       })
         })
     
       this.upfilesss=true
       this.upfiles = false
-
     },
-     handleChange(file, fileList) {
+      handleChange(file, fileList) {
       
      if(this.filedescribe!==''&&this.filetitle!==''){
           file.name=this.filetitle
@@ -904,8 +923,25 @@ export default {
                   type: "success",
                   duration: 1000,
                 });
+                this.$router.go(0)
         }
-        else{
+         else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
+        }
+         else{
           this.$message({
                   message: res.msg,
                   type: "error",
@@ -948,8 +984,25 @@ export default {
                   type: "success",
                   duration: 1000,
                 });
+                this.$router.go(0)
         }
-        else{
+          else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
+        }
+         else{
           this.$message({
                   message: res.msg,
                   type: "error",
@@ -977,8 +1030,25 @@ export default {
                   type: "success",
                   duration: 1000,
                 });
+                   this.$router.go(0)
         }
-        else{
+          else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
+        }
+         else{
           this.$message({
                   message: res.msg,
                   type: "error",
@@ -1006,8 +1076,25 @@ export default {
                   type: "success",
                   duration: 1000,
                 });
+                   this.$router.go(0)
         }
-        else{
+          else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
+        }
+         else{
           this.$message({
                   message: res.msg,
                   type: "error",
@@ -1052,8 +1139,25 @@ export default {
                   type: "success",
                   duration: 1000,
                 });
+                   this.$router.go(0)
         }
-        else{
+          else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
+        }
+         else{
           this.$message({
                   message: res.msg,
                   type: "error",
@@ -1075,8 +1179,25 @@ export default {
                   type: "success",
                   duration: 1000,
                 });
+                   this.$router.go(0)
         }
-        else{
+          else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
+        }
+         else{
           this.$message({
                   message: res.msg,
                   type: "error",
@@ -1099,8 +1220,25 @@ export default {
                   type: "success",
                   duration: 1000,
                 });
+                    this.$router.go(0)
         }
-        else{
+          else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
+        }
+         else{
           this.$message({
                   message: res.msg,
                   type: "error",
@@ -1123,8 +1261,25 @@ export default {
                   type: "success",
                   duration: 1000,
                 });
+                    this.$router.go(0)
         }
-        else{
+          else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
+        }
+         else{
           this.$message({
                   message: res.msg,
                   type: "error",
@@ -1140,15 +1295,31 @@ export default {
         appointment_time:this.date//约定时间
       }
        service.suspension(params).then(res=>{
-        console.log(res)
            if(res.code==20010){
           this.$message({
                   message: res.msg,
                   type: "success",
                   duration: 1000,
                 });
+                   this.$router.go(0)
         }
-        else{
+          else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
+        }
+         else{
           this.$message({
                   message: res.msg,
                   type: "error",
@@ -1171,8 +1342,25 @@ export default {
                   type: "success",
                   duration: 1000,
                 });
+                     this.$router.go(0)
         }
-        else{
+          else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
+        }
+         else{
           this.$message({
                   message: res.msg,
                   type: "error",
@@ -1195,8 +1383,25 @@ export default {
                   type: "success",
                   duration: 1000,
                 });
+                     this.$router.go(0)
         }
-        else{
+          else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
+        }
+         else{
           this.$message({
                   message: res.msg,
                   type: "error",
@@ -1222,8 +1427,25 @@ export default {
                   type: "success",
                   duration: 1000,
                 });
+                    this.$router.go(0)
         }
-        else{
+          else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
+        }
+         else{
           this.$message({
                   message: res.msg,
                   type: "error",
@@ -1244,14 +1466,37 @@ export default {
                   type: "success",
                   duration: 1000,
                 });
+                     this.$router.go(0)
         }
-        else{
+          else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
+        }
+         else{
           this.$message({
                   message: res.msg,
                   type: "error",
                   duration: 1000,
                 });
         }
+      }).catch(err=>{
+          this.$message({
+                  message:'000000',
+                  type: "error",
+                  duration: 1000,
+                });
       })
       }
        else if(this.checkstate==14){//改进完成（医院）
@@ -1268,8 +1513,25 @@ export default {
                   type: "success",
                   duration: 1000,
                 });
+                     this.$router.go(0)
         }
-        else{
+          else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
+        }
+         else{
           this.$message({
                   message: res.msg,
                   type: "error",
@@ -1297,17 +1559,32 @@ export default {
           examine_textone:this.economic,//直接经济损失
            examine_texttwo:this.preliminary,//处理意见
       }
-      console.log(params)
         service.end(params).then(res=>{
-        console.log(res)
            if(res.code==20010){
           this.$message({
                   message: res.msg,
                   type: "success",
                   duration: 1000,
                 });
+                     this.$router.go(0)
         }
-        else{
+          else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
+        }
+         else{
           this.$message({
                   message: res.msg,
                   type: "error",
@@ -1329,14 +1606,31 @@ export default {
                   type: "success",
                   duration: 1000,
                 });
-            }
-            else {
-                 this.$message({
+                         this.$router.go(0)
+        }
+          else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
+        }
+         else{
+          this.$message({
                   message: res.msg,
                   type: "error",
                   duration: 1000,
                 });
-            }
+        }
         })
       }
     },
@@ -1346,15 +1640,31 @@ export default {
         console.log(this.$parent.opdata[0].event_number)
         console.log(this.preliminary)
         service.reject(this.$parent.opdata[0].event_number,this.preliminary).then(res=>{
-            console.log(res)
                if(res.code==20010){
           this.$message({
                   message: res.msg,
                   type: "success",
                   duration: 1000,
                 });
+                   this.$router.go(0)
         }
-        else{
+          else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
+        }
+         else{
           this.$message({
                   message: res.msg,
                   type: "error",
@@ -1394,9 +1704,6 @@ export default {
   },
   created() {
    this.token=sessionStorage.getItem('token')
-    // service.AddManaged(4).then((res) => {
-    //   this.statelist = res.data;
-    // });
   },
 };
 </script>

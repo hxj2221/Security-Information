@@ -119,6 +119,10 @@ export default {
   uploadfiles: async (data: any) => {
     return await service.post(`${baseUrl}api/Complaintprocess/event_uploadfiles`, data).then(res => res).catch(err => err)
   },
+  //   上传附件index.php/api/srk/create_base64_file
+  uploadfilebase: async (data: any) => {
+    return await service.post(`${baseUrl}index.php/api/srk/create_base64_file`, data).then(res => res).catch(err => err)
+  },
   // 不良事件列表
   AdeList: async (params: any) => {
     return await service.get(`${baseUrl}api/bad/lists`, { params }).then(res => res).catch(err => err)

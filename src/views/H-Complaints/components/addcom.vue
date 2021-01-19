@@ -18,6 +18,8 @@
               <el-date-picker
                 v-model="comdata"
                 type="date"
+                format="yyyy 年 MM 月 dd 日"
+                value-format="timestamp"
                 placeholder="选择日期"
                 :picker-options="pickerOptions"
               ></el-date-picker></div
@@ -25,7 +27,8 @@
           <el-col :span="6"
             ><div class="grid-content bg-purple-light">
               <span> 事发日期<span>*</span> </span> <br />
-              <el-date-picker v-model="incidentdata" type="date" placeholder="选择日期"   :picker-options="pickerOption">
+              <el-date-picker v-model="incidentdata" type="date" placeholder="选择日期" format="yyyy 年 MM 月 dd 日"
+      value-format="timestamp"  :picker-options="pickerOption">
               </el-date-picker></div
           ></el-col>
         </el-row>
@@ -45,6 +48,7 @@
                   :key="item.value"
                   :label="item.lable"
                   :value="item.value"
+                  clearable
                 >
                 </el-option>
               </el-select></div
@@ -56,15 +60,14 @@
                 placeholder="请输入"
                 v-model="comagenumber"
                 class="input-with-select"
+                clearable
                 type='number'
                oninput="value=value.replace(/[^\d]/g,'')"
                onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )"
               >
                 <template slot="append">
                   <el-select v-model="comage" slot="prepend" style="width: 80px">
-                    <el-option label="岁" value="1"></el-option>
-                    <el-option label="月" value="2"></el-option>
-                    <el-option label="日" value="3"></el-option> </el-select
+                    <el-option label="岁" value="1"></el-option> </el-select
                 ></template>
               </el-input></div
           ></el-col>
@@ -75,13 +78,14 @@
               <span> 手机号码 <span>*</span></span>
               <el-input v-model="comphone" placeholder="请输入投诉人手机号码" type="input" maxlength="11" max="11"     
                oninput="value=value.replace(/[^\d]/g,'')"
+               clearable
                onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )"  ></el-input>
             </div>
           </el-col>
           <el-col :span="6"
             ><div class="grid-content bg-purple-light">
               <span> 投诉方式<span>*</span> </span> <br />
-              <el-select v-model="commode" placeholder="请选择">
+              <el-select v-model="commode" placeholder="请选择" clearable>
                 <el-option
                   v-for="item in commodes"
                   :key="item.id"
@@ -102,6 +106,7 @@
                   label: 'title',
                   children: '_child',
                   multiple: 'true',
+                  checkStrictly:'true'
                 }"
                 :show-all-levels="false"
                 v-model="comde"
@@ -114,7 +119,7 @@
           <el-col :span="6"
             ><div class="grid-content bg-purple">
               <span> 投诉人与患者关系 <span>*</span></span><br />
-              <el-select v-model="relation" placeholder="请选择">
+              <el-select v-model="relation" placeholder="请选择" clearable>
                 <el-option
                   v-for="item in relationlist"
                   :key="item.id"
@@ -129,7 +134,7 @@
             ><div class="grid-content bg-purple-light">
               <span> 答复协商时间</span> <br />
               <el-input placeholder="请输入" v-model="consulttime" style="width: 60%" type="input" maxlength="3" max="3"     
-               oninput="value=value.replace(/[^\d]/g,'')"
+               oninput="value=value.replace(/[^\d]/g,'')" clearable
                onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )" >
                 <template slot="append">天</template>
               </el-input>
@@ -138,7 +143,7 @@
           <el-col :span="6"
             ><div class="grid-content bg-purple-light">
               <span> 投诉类别(多选)</span> <br />
-              <el-select v-model="comtype" multiple placeholder="请选择">
+              <el-select v-model="comtype" multiple placeholder="请选择" clearable>
                 <el-option
                   v-for="item in comtypelist"
                   :key="item.id"
@@ -153,7 +158,7 @@
           <el-col :span="6" :push="1"
             ><div class="grid-content bg-purple">
               <span> 事件性质 </span><br />
-              <el-select v-model="nature" placeholder="请选择">
+              <el-select v-model="nature" placeholder="请选择" clearable>
                 <el-option
                   v-for="item in natures"
                   :key="item.id"
@@ -167,7 +172,7 @@
           <el-col :span="12" :push="3"
             ><div class="grid-content bg-purple-light">
               <span> 联系地址<span>*</span> </span> <br />
-              <el-input v-model="address" placeholder="联系地址"></el-input></div
+              <el-input v-model="address" placeholder="联系地址" clearable></el-input></div
           ></el-col>
         </el-row>
         <el-row type="flex" class="row-bg">
@@ -178,6 +183,7 @@
                 type="textarea"
                 v-model="reason"
                 placeholder="请输入投诉原因"
+                clearable
               ></el-input>
             </div>
           </el-col>
@@ -191,7 +197,7 @@
             <el-col :span="6" :pull="2"
               ><div class="grid-content bg-purple">
                 <span> 经办人姓名<span>*</span> </span>
-                <el-input v-model="agentname" placeholder="请输入姓名"  type="input" maxlength="8"></el-input>
+                <el-input v-model="agentname" placeholder="请输入姓名" clearable type="input" maxlength="8"></el-input>
               </div>
             </el-col>
             <el-col :span="6" :pull="6"
@@ -200,6 +206,7 @@
                 <el-input
                   v-model="agentphone"
                   placeholder="请输入手机号码"
+                  clearable
                   type="input" maxlength="11" max="11"     
                oninput="value=value.replace(/[^\d]/g,'')"
                onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )"
@@ -284,7 +291,7 @@ export default {
   components: {
     Conserve,
   },
-
+inject: ["reload"],
   data() {
     return {
       props: { multiple: true },
@@ -293,11 +300,51 @@ export default {
         disabledDate(time) {
           return time.getTime() > Date.now();
         },
+        // shortcuts: [{
+        //     text: '今天',
+        //     onClick(picker) {
+        //       picker.$emit('pick', new Date());
+        //     }
+        //   }, {
+        //     text: '昨天',
+        //     onClick(picker) {
+        //       const date = new Date();
+        //       date.setTime(date.getTime() - 3600 * 1000 * 24);
+        //       picker.$emit('pick', date);
+        //     }
+        //   }, {
+        //     text: '一周前',
+        //     onClick(picker) {
+        //       const date = new Date();
+        //       date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+        //       picker.$emit('pick', date);
+        //     }
+        //   }]
       },
         pickerOption: {
         disabledDate(time) {
           return time.getTime() >  Date.now();
         },
+        // shortcuts: [{
+        //     text: '今天',
+        //     onClick(picker) {
+        //       picker.$emit('pick', new Date());
+        //     }
+        //   }, {
+        //     text: '昨天',
+        //     onClick(picker) {
+        //       const date = new Date();
+        //       date.setTime(date.getTime() - 3600 * 1000 * 24);
+        //       picker.$emit('pick', date);
+        //     }
+        //   }, {
+        //     text: '一周前',
+        //     onClick(picker) {
+        //       const date = new Date();
+        //       date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+        //       picker.$emit('pick', date);
+        //     }
+        //   }]
       },
       data: [
         {
@@ -350,7 +397,9 @@ export default {
     },
     //保存提交事件
     keepform() {
-      if (this.comde !== "" || this.comde !== null) {
+      console.log(this.incidentdata )
+       console.log(this.comdata )
+      if (this.comde !== "" && this.comde !== null&&this.incidentdata !== ""&&this.comdata !== ""&&this.comname !== ""&&this.comgender!=='') {
         let comde = this.comde.map((x) => {
           return x[0];
         });
@@ -358,13 +407,13 @@ export default {
         event_number: this.comnumber, //业务编号
         event_type: this.comtype, //投诉类型
         cause: this.reason, //投诉原因
-        occur_time: new Date(this.incidentdata).getTime(), //事发时间
+        occur_time:this.incidentdata, //事发时间
         department_id: comde, //投诉科室
-        create_time: new Date(this.comdata).getTime(), //投诉日期
+        create_time:this.comdata, //投诉日期
         ComplaintType: this.commode, //投诉方式
         complaint_name: this.comname, //投诉人姓名
         complaint_phone: this.comphone, //投诉人电话
-        sex: this.comgender, //投诉人电话
+        sex: this.comgender, //投诉人性别
         specific_age: 1, //投诉人年龄
         age: this.comagenumber, //投诉人年龄
         inpatient_relation: this.relation, //患者关系
@@ -373,15 +422,31 @@ export default {
         handle_name: this.agentname, //经办人姓名
         handle_phone: this.agentphone, //经办人手机号
       };
+      console.log(params)
       service.AddComponent(params).then((res) => {
-        console.log(res);
         if(res.code==20010){
            this.$message({
             message: res.msg,
             type: "success",
             duration: 1000,
           });
-          this.$router.go(0);
+          this.reload()
+        }
+         else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
         }
         else{
           this.$message({
@@ -393,14 +458,44 @@ export default {
         
       });
        }
+       else if(this.comde == ""|| this.comde == null){
+          this.$message({
+            message:'请选择投诉科室',
+            type: "error",
+            duration: 1000,
+          });
+       }
+    else if(this.comdata == ""){
+          this.$message({
+            message:'请选择投诉日期',
+            type: "error",
+            duration: 1000,
+          });
+       }
+        else if(this.incidentdata == ""){
+          this.$message({
+            message:'请选择事发日期',
+            type: "error",
+            duration: 1000,
+          });
+       }
+        else if(this.comname == ""){
+          this.$message({
+            message:'请输入投诉人姓名',
+            type: "error",
+            duration: 1000,
+          });
+       }
+          else if(this.comgender == ""){
+          this.$message({
+            message:'请输入投诉人性别',
+            type: "error",
+            duration: 1000,
+          });
+       }
     },
     backss() {
-      this.$router.go(0);
-    },
-
-    //表格点击事件
-    handleClick(index, rows) {
-      console.log(index, rows);
+      this.reload()
     },
     // 设置表头颜色
     getRowClass({ rowIndex }) {
@@ -412,13 +507,7 @@ export default {
     },
   },
   created() {
-     let token=sessionStorage.getItem('token')
-     console.log(token)
-    if(token!==null&&token!==''){
-    service
-      .AddCom()
-      .then((res) => {
-        console.log(res);
+    service.AddCom().then((res) => {
         if (res.code == 20010) {
           this.comnumber = res.data.event_number; // 事件编号
           this.commodes = res.data.ComplaintType; // 事件编号
@@ -426,17 +515,32 @@ export default {
           this.natures = res.data.character; // 事件性质
           this.relationlist = res.data.inpatient_relation; // 关系
           this.comdes = res.data.department; //投诉科室
-        } else {
+        } 
+        else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
           this.$message({
             message: res.msg,
             type: "error",
             duration: 1000,
           });
+          this.$router.push('/dashboard')
         }
+        //    else{
+        //   this.$message({
+        //     message: res.msg,
+        //     type: "error",
+        //     duration: 1000,
+        //   });
+        // }
       })
-      .catch((err) => {});
     }
-  },
 };
 </script>
 
