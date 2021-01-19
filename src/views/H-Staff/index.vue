@@ -61,8 +61,8 @@
                 v-model="scope.row.status"
                 :active-value="1"
                 :inactive-value="2"
-                active-color="#02538C"
-                inactive-color="#B9B9B9"
+                active-color="#13ce66"
+                inactive-color="#ff4949"
                 @change="changeSwitch($event, scope.row)"
               ></el-switch>
             </template>
@@ -248,7 +248,6 @@ export default {
       console.log(params);
       service.staffDel(params).then((res) => {
         // this.reload();
-
         console.log(res);
         if (res.code == 20010) {
           this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {

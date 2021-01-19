@@ -5,7 +5,12 @@
       <span class="departaddSpan">新增科室信息</span>
       <div style="padding-right: 30px">
         <el-button class="departaddgr" @click="departaddvueyes">保存</el-button>
-        <el-button class="departaddb" @click="departaddvueno">返回</el-button>
+        <el-button
+          class="departaddb"
+          icon="iconfont el-icon-hospital-passwordai207"
+          @click="departaddvueno"
+          >返回</el-button
+        >
       </div>
     </div>
     <hr class="staffWidhr" />

@@ -156,7 +156,10 @@
       <el-button class="persongr" icon="el-icon-s-claim" @click="personsave"
         >保存</el-button
       >
-      <el-button class="personb" @click="personback" icon="el-icon-back"
+      <el-button
+        class="personb"
+        @click="personback"
+        icon="iconfont el-icon-hospital-passwordai207"
         >返回</el-button
       >
     </div>

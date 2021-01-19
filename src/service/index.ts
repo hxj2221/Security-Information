@@ -397,4 +397,8 @@ export default {
   //   return await service.get(`${baseUrl}api/home/Lz_workbench`).then(res => res).catch(err => err)
 
   // },
+  // img
+  getupimg: async (data: object) => {
+    return await service.post(`${baseUrl}api/srk/create_base64_file`, data).then(res => res).catch(err => err)
+  },
 }

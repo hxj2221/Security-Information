@@ -38,8 +38,8 @@
                 v-model="scope.row.status"
                 :active-value="1"
                 :inactive-value="0"
-                active-color="#02538C"
-                inactive-color="#B9B9B9"
+                active-color="#13ce66"
+                inactive-color="#ff4949"
                 @change="changeSwitch($event, scope.row, scope.row.id)"
               />
             </template>
@@ -210,6 +210,25 @@ export default {
       console.log(param);
       service.roledel(param).then((res) => {
         console.log(res);
+        console.log(index, row);
+        this.$confirm("此操作将永久删除该角色, 是否继续?", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
+        })
+          .then(() => {
+            this.$message({
+              type: "success",
+              message: "删除成功!",
+              delete: row.splice(index, 1),
+            });
+          })
+          .catch(() => {
+            this.$message({
+              type: "info",
+              message: "已取消删除",
+            });
+          });
         this.reload();
       });
     },
@@ -221,7 +240,7 @@ export default {
     // 删除
     handleDelete(index, row) {
       console.log(index, row);
-      this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+      this.$confirm("此操作将永久删除该角色, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",

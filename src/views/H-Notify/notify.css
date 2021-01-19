@@ -4,11 +4,13 @@
 }
 
 .notifyalBg {
-    background-color: #fff;
-    min-height: 100%;
-    margin-left: -20px;
     width: 100%;
+    min-height: 100%;
     margin: 0 auto;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgb(184, 183, 183);
+    padding-bottom: 150px;
 }
 
 .notifyThre {
@@ -121,7 +123,8 @@
     text-decoration: none;
     cursor: pointer;
 }
-.notifyClick>i{
+
+.notifyClick>i {
     display: inline-block;
     width: 20px;
     height: 20px;

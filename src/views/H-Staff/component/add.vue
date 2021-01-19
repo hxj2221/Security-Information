@@ -5,7 +5,12 @@
       <span class="staffSpan">新增员工信息</span>
       <div class="staffThre_div">
         <el-button class="staffgr" @click="staffaddvueyes">保存</el-button>
-        <el-button class="staffb" @click="staffaddvueno">返回</el-button>
+        <el-button
+          class="staffb"
+          icon="iconfont el-icon-hospital-passwordai207"
+          @click="staffaddvueno"
+          >返回</el-button
+        >
       </div>
     </div>
     <hr class="staffWidhr" />
@@ -37,25 +42,6 @@
           <el-col :span="8">
             <el-form-item label="年龄" required>
               <el-input type="number" v-model="addStaff.age"></el-input>
-              <!-- <el-input placeholder="请输入内容" v-model="staffAgeipt" class="">
-                <template slot="append">
-                  <el-select
-                    type="input"
-                    style="width: 90px"
-                    autosize
-                    v-model="staffAgesel"
-                    placeholder="请选择"
-                  >
-                    <el-option
-                      v-for="item in optionages"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value"
-                    >
-                    </el-option>
-                  </el-select>
-                </template>
-              </el-input> -->
             </el-form-item>
           </el-col>
           <el-col :span="8">
@@ -124,20 +110,6 @@
         <el-row :gutter="20">
           <el-col :span="8">
             <el-form-item label="地址" required>
-              <!-- <el-cascader
-                class="dialog-input-text"
-                type="input"
-                autosize
-                style="
-                  display: block;
-                  position: relative;
-                  font-size: 14px;
-                  line-height: 40px;
-                "
-                v-model="addStaff.address"
-                :options="city"
-                placeholder="请选择内容"
-              ></el-cascader> -->
               <el-cascader
                 class="dialog-input-text"
                 style="
@@ -209,7 +181,7 @@
               </el-select>
             </el-form-item>
           </el-col>
-        
+
           <el-col :span="8"> </el-col>
         </el-row>
         <el-row :gutter="20">
@@ -260,7 +232,7 @@ import {
 } from "element-china-area-data";
 export default {
   components: {},
-    inject: ["reload"],
+  inject: ["reload"],
   props: {},
   data() {
     return {
@@ -280,7 +252,7 @@ export default {
         staffdepart: "", //所属科室
         staffrolesel: [], //角色
         head_department: "", //科室负责人
-        status:1, //员工状态
+        status: 1, //员工状态
         password: "", //密码
         address: [], //地址
       },
@@ -311,7 +283,7 @@ export default {
     one(val) {
       for (let i = 0; i <= val.length - 1; i++) {
         let a = val[i];
-        this.staffroleselC= a;
+        this.staffroleselC = a;
         console.log(this.staffroleselC);
       }
     },
@@ -354,24 +326,24 @@ export default {
           }, 2000);
           this.$parent.fathstaffyes();
         } else {
-             this.$message.error(res.code);
+          this.$message.error(res.code);
         }
       });
     },
     handleChange(cityvalue) {
-//       console.log(
-//         CodeToText[cityvalue[0]],
-//         CodeToText[cityvalue[1]],
-//         CodeToText[cityvalue[2]]
-//       );
-//       this.addressC =
-//         CodeToText[cityvalue[0]] +
-//         "/" +
-//         CodeToText[cityvalue[1]] +
-//         "/" +
-//         CodeToText[cityvalue[2]];
-// console.log(this.addressC)
-//       console.log(this.addStaff.address);
+      //       console.log(
+      //         CodeToText[cityvalue[0]],
+      //         CodeToText[cityvalue[1]],
+      //         CodeToText[cityvalue[2]]
+      //       );
+      //       this.addressC =
+      //         CodeToText[cityvalue[0]] +
+      //         "/" +
+      //         CodeToText[cityvalue[1]] +
+      //         "/" +
+      //         CodeToText[cityvalue[2]];
+      // console.log(this.addressC)
+      //       console.log(this.addStaff.address);
     },
     // 子调用父
     staffaddvueno() {
@@ -385,7 +357,7 @@ export default {
       console.log(item);
       self.optiondepart = item.department;
       self.optionrole = item.auth_grouap;
-      self.addStaff.job_number=item.job_number
+      self.addStaff.job_number = item.job_number;
     });
   },
 };

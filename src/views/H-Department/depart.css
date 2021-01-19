@@ -4,7 +4,6 @@
 }
 
 .departalBg {
-
     width: 100%;
     min-height: 100%;
     background: #fff;
@@ -74,24 +73,28 @@
 }
 
 .departIptsech {
-
     /* float: left; */
     /* display: flex; */
     /* justify-content: center; */
     /* margin-left: 45px; */
     margin-bottom: 20px;
-
 }
-.departIptsech_div{
+
+.departIptsech_div {
     width: 50%;
     text-align: left;
 }
-.departIptsech_div>.el-input{
+
+.departIptsech_div>.el-input {
     margin-right: 10px;
 }
-.departTable .el-table tr, .el-table th , .el-table td  {
+
+.departTable .el-table tr,
+.el-table th,
+.el-table td {
     text-align: center !important;
 }
+
 .departtable {
     table-layout: fixed;
     /* margin: auto; */
@@ -103,7 +106,6 @@
 
 .departNameipt {
     width: 18vw;
-    border: 2px solid #ccc;
     border-radius: 5px;
     margin-left: 4%;
 }
@@ -216,12 +218,34 @@
     width: 270px;
     margin-top: 50px;
 }
-/* 分页 */
-.departpag{
 
-margin: 20px 25px;
-overflow: hidden;
+
+/* 分页 */
+
+.departpag {
+    margin: 20px 25px;
+    overflow: hidden;
 }
-.departpag>.block{
+
+.departpag>.block {
     float: right;
+}
+
+.el-input__inner {
+    -webkit-appearance: none;
+    background-color: #FFF;
+    background-image: none;
+    border-radius: 4px;
+    border: 2px solid #DCDFE6;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 40px;
+    line-height: 40px;
+    outline: 0;
+    padding: 0 15px;
+    -webkit-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+    width: 100%;
 }

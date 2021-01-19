@@ -7,7 +7,12 @@
         <el-button class="departaddgr" @click="departeditvueyes"
           >保存</el-button
         >
-        <el-button class="departaddb" @click="departeditvueno">返回</el-button>
+        <el-button
+          class="departaddb"
+          icon="iconfont el-icon-hospital-passwordai207"
+          @click="departeditvueno"
+          >返回</el-button
+        >
       </div>
     </div>
     <hr class="staffWidhr" />

@@ -5,7 +5,12 @@
       <span class="staffSpan">编辑员工信息</span>
       <div style="padding-right: 30px">
         <el-button class="staffgr" @click="staffaddvueyes">保存</el-button>
-        <el-button class="staffb" @click="staffaddvueno">返回</el-button>
+        <el-button
+          class="staffb"
+          icon="iconfont el-icon-hospital-passwordai207"
+          @click="staffaddvueno"
+          >返回</el-button
+        >
       </div>
     </div>
     <hr class="staffWidhr" />
@@ -256,12 +261,12 @@ export default {
         // head_department: "", //科室负责人
         status: "", //员工状态
         password: "", //密码
-        address:[], //地址
+        address: [], //地址
       },
       department: "", //所属科室
-     
-      role_id:'',
-      department_id:'',
+
+      role_id: "",
+      department_id: "",
       //年龄循环
       optionages: [
         {
@@ -302,8 +307,8 @@ export default {
   },
   watch: {
     childed(res) {
-      console.log(res.auth_grouap[0].id)
-      console.log(res)
+      console.log(res.auth_grouap[0].id);
+      console.log(res);
       // console.log(res.address); //数据已经拿到
       this.id = res.id;
       this.addStaff.job_number = res.job_number;
@@ -318,12 +323,12 @@ export default {
       this.addStaff.age = res.age;
       this.addStaff.cardnumber = res.cardnumber;
       // this.department = res.department[0].id;
-      this.department_id=res.department_id;
+      this.department_id = res.department_id;
       this.addStaff.status = res.status;
       // this.addStaff.head_department = res.head_department;
       this.addStaff.position = res.position;
       // this.addStaff.auth_grouap = res.auth_grouap;
-      this.role_id=res.role_id;
+      this.role_id = res.role_id;
       this.addStaff.status = res.status;
     },
   },
@@ -350,8 +355,8 @@ export default {
       };
       service.staffEdit(params).then((res) => {
         console.log(res);
-        
-        if(res.code==20010){
+
+        if (res.code == 20010) {
           const loading = this.$loading({
             lock: true,
             text: "保存中",
@@ -363,9 +368,8 @@ export default {
             this.reload();
             this.$parent.fathstaffno();
           }, 1500);
-        }
-        else{
-           this.$message.error(res.msg);
+        } else {
+          this.$message.error(res.msg);
         }
       });
     },
