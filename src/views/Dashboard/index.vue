@@ -172,7 +172,7 @@
     methods: {},
     created() {
       service.dashboard().then(res => {
-        console.log(res)
+        // console.log(res)
         this.Info=res.data.data
         this.staff=res.data.staff
         this.examine=res.data.examine
@@ -267,8 +267,8 @@
         width: 100%;
         background-color: white;
         padding: 15px;
-        box-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
-        border-color: rgba(0, 0, 0, .05);
+        // box-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
+        // border-color: rgba(0, 0, 0, .05);
       }
 
       &Graph {

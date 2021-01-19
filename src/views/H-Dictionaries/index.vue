@@ -42,7 +42,9 @@
       </div>
       <!-- 分页 -->
       <div class="block">
-        <el-pagination :page-size="20" :pager-count="11" layout="prev, pager, next" :total="1000">
+        <el-pagination @size-change="handleSizeChange" @current-change="currentChage"
+          :current-page="currentPage4" :page-sizes="pageNumList" :page-size="100"
+          layout="total, sizes, prev, pager, next, jumper" :total="pageCount">
         </el-pagination>
       </div>
       <!-- 新增 -->
@@ -168,6 +170,10 @@
           date: '2019-11-12 12:08:12',
           name: '王小虎',
         }],
+        currentPage4:1,//分页
+        pageNumList:[8,10,20],//页数
+        pageCount:0,//总数量
+        pageSize:8,//默认条数
         // 编辑
         form: {
           name: '',
@@ -190,6 +196,15 @@
       // 删除
       deleteRow(index, rows) {
         rows.splice(index, 1);
+      },
+      // 分页
+      // 每页显示条数
+      handleSizeChange(val){
+        console.log(val)
+      },
+      // 页面跳转
+      currentChage(val){
+        console.log(val)
       },
       // 新增
       increase() {

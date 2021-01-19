@@ -1,0 +1,199 @@
+<!DOCTYPE html><html lang=en><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><script src=https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.4.1.min.js></script><meta name=viewport content="width=device-width,initial-scale=0.5"><link rel="shortcut icon" href=./favicon.ico type=image/x-icon><script src=https://cdn.bootcss.com/jquery/1.8.3/jquery.min.js></script><title>兰州大学第二医院</title><style>* {
+            margin: 0;
+            padding: 0;
+        }
+        
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+        
+        html {
+            overflow: hidden;
+        }
+        
+        body {
+            overflow: auto;
+        }
+        
+        #app {
+            height: 100%;
+            width: 100%;
+            background-color: rgba(0, 191, 255, 0.2);
+        }
+        
+        .sk-fading-circle {
+            /*background-color: #1abc9c;*/
+            margin: auto;
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        
+        .sk-fading-circle .sk-circle {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .sk-fading-circle .sk-circle:before {
+            content: '';
+            display: block;
+            margin: 0 auto;
+            width: 15%;
+            height: 15%;
+            background-color: #333;
+            border-radius: 100%;
+            -webkit-animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;
+            animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;
+        }
+        
+        .sk-fading-circle .sk-circle2 {
+            -webkit-transform: rotate(30deg);
+            -ms-transform: rotate(30deg);
+            transform: rotate(30deg);
+        }
+        
+        .sk-fading-circle .sk-circle3 {
+            -webkit-transform: rotate(60deg);
+            -ms-transform: rotate(60deg);
+            transform: rotate(60deg);
+        }
+        
+        .sk-fading-circle .sk-circle4 {
+            -webkit-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
+        
+        .sk-fading-circle .sk-circle5 {
+            -webkit-transform: rotate(120deg);
+            -ms-transform: rotate(120deg);
+            transform: rotate(120deg);
+        }
+        
+        .sk-fading-circle .sk-circle6 {
+            -webkit-transform: rotate(150deg);
+            -ms-transform: rotate(150deg);
+            transform: rotate(150deg);
+        }
+        
+        .sk-fading-circle .sk-circle7 {
+            -webkit-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+        
+        .sk-fading-circle .sk-circle8 {
+            -webkit-transform: rotate(210deg);
+            -ms-transform: rotate(210deg);
+            transform: rotate(210deg);
+        }
+        
+        .sk-fading-circle .sk-circle9 {
+            -webkit-transform: rotate(240deg);
+            -ms-transform: rotate(240deg);
+            transform: rotate(240deg);
+        }
+        
+        .sk-fading-circle .sk-circle10 {
+            -webkit-transform: rotate(270deg);
+            -ms-transform: rotate(270deg);
+            transform: rotate(270deg);
+        }
+        
+        .sk-fading-circle .sk-circle11 {
+            -webkit-transform: rotate(300deg);
+            -ms-transform: rotate(300deg);
+            transform: rotate(300deg);
+        }
+        
+        .sk-fading-circle .sk-circle12 {
+            -webkit-transform: rotate(330deg);
+            -ms-transform: rotate(330deg);
+            transform: rotate(330deg);
+        }
+        
+        .sk-fading-circle .sk-circle2:before {
+            -webkit-animation-delay: -1.1s;
+            animation-delay: -1.1s;
+        }
+        
+        .sk-fading-circle .sk-circle3:before {
+            -webkit-animation-delay: -1s;
+            animation-delay: -1s;
+        }
+        
+        .sk-fading-circle .sk-circle4:before {
+            -webkit-animation-delay: -0.9s;
+            animation-delay: -0.9s;
+        }
+        
+        .sk-fading-circle .sk-circle5:before {
+            -webkit-animation-delay: -0.8s;
+            animation-delay: -0.8s;
+        }
+        
+        .sk-fading-circle .sk-circle6:before {
+            -webkit-animation-delay: -0.7s;
+            animation-delay: -0.7s;
+        }
+        
+        .sk-fading-circle .sk-circle7:before {
+            -webkit-animation-delay: -0.6s;
+            animation-delay: -0.6s;
+        }
+        
+        .sk-fading-circle .sk-circle8:before {
+            -webkit-animation-delay: -0.5s;
+            animation-delay: -0.5s;
+        }
+        
+        .sk-fading-circle .sk-circle9:before {
+            -webkit-animation-delay: -0.4s;
+            animation-delay: -0.4s;
+        }
+        
+        .sk-fading-circle .sk-circle10:before {
+            -webkit-animation-delay: -0.3s;
+            animation-delay: -0.3s;
+        }
+        
+        .sk-fading-circle .sk-circle11:before {
+            -webkit-animation-delay: -0.2s;
+            animation-delay: -0.2s;
+        }
+        
+        .sk-fading-circle .sk-circle12:before {
+            -webkit-animation-delay: -0.1s;
+            animation-delay: -0.1s;
+        }
+        
+        @-webkit-keyframes sk-circleFadeDelay {
+            0%,
+            39%,
+            100% {
+                opacity: 0;
+            }
+            40% {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes sk-circleFadeDelay {
+            0%,
+            39%,
+            100% {
+                opacity: 0;
+            }
+            40% {
+                opacity: 1;
+            }
+        }</style><link href=css/chunk-045b6c52.47d3c3d1.css rel=prefetch><link href=css/chunk-0ad6dd6e.c01a897a.css rel=prefetch><link href=css/chunk-17d1861e.4455d19d.css rel=prefetch><link href=css/chunk-1c99a159.ad5bcd06.css rel=prefetch><link href=css/chunk-22853fda.386c0d9f.css rel=prefetch><link href=css/chunk-23828b14.b588eb3c.css rel=prefetch><link href=css/chunk-32534f07.13b0d3df.css rel=prefetch><link href=css/chunk-411abd9b.bf18179c.css rel=prefetch><link href=css/chunk-41ed9b11.fa1e68b9.css rel=prefetch><link href=css/chunk-45eaf7e5.88e357e2.css rel=prefetch><link href=css/chunk-4f0e4b80.b4a9af59.css rel=prefetch><link href=css/chunk-4ff4df1d.5ddd9168.css rel=prefetch><link href=css/chunk-56415eba.73105018.css rel=prefetch><link href=css/chunk-60acbf3f.89e79396.css rel=prefetch><link href=css/chunk-74c0a994.8cafbce1.css rel=prefetch><link href=css/chunk-79bbae43.dfcf0c11.css rel=prefetch><link href=css/chunk-80bb7f90.46fa8c9f.css rel=prefetch><link href=css/chunk-94886ac0.ee3862bd.css rel=prefetch><link href=css/chunk-cc9c13a8.bb09b2d0.css rel=prefetch><link href=js/chunk-045b6c52.a5e6c71e.js rel=prefetch><link href=js/chunk-0ad6dd6e.12466e37.js rel=prefetch><link href=js/chunk-17d1861e.9969f7cc.js rel=prefetch><link href=js/chunk-1c99a159.0044d906.js rel=prefetch><link href=js/chunk-22853fda.d4d5461e.js rel=prefetch><link href=js/chunk-23828b14.e2f0b71d.js rel=prefetch><link href=js/chunk-2d231044.18373428.js rel=prefetch><link href=js/chunk-32534f07.85b7cc8b.js rel=prefetch><link href=js/chunk-411abd9b.b82c7534.js rel=prefetch><link href=js/chunk-41ed9b11.e455bf65.js rel=prefetch><link href=js/chunk-45eaf7e5.f58ae1a6.js rel=prefetch><link href=js/chunk-4f0e4b80.58f4dce7.js rel=prefetch><link href=js/chunk-4ff4df1d.6a590c1b.js rel=prefetch><link href=js/chunk-56415eba.bfdfacbd.js rel=prefetch><link href=js/chunk-60acbf3f.308e195b.js rel=prefetch><link href=js/chunk-74c0a994.b7467932.js rel=prefetch><link href=js/chunk-79bbae43.cef520da.js rel=prefetch><link href=js/chunk-80bb7f90.9d2e2b71.js rel=prefetch><link href=js/chunk-94886ac0.13cfb261.js rel=prefetch><link href=js/chunk-cc9c13a8.5135a6b1.js rel=prefetch><link href=css/app.aa492c4a.css rel=preload as=style><link href=css/chunk-vendors.f487423e.css rel=preload as=style><link href=js/app.23bc8d0b.js rel=preload as=script><link href=js/chunk-vendors.6e01ebc1.js rel=preload as=script><link href=css/chunk-vendors.f487423e.css rel=stylesheet><link href=css/app.aa492c4a.css rel=stylesheet><link rel=icon type=image/png sizes=32x32 href=img/icons/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=img/icons/favicon-16x16.png><link rel=manifest href=manifest.json><meta name=theme-color content=#4DBA87><meta name=apple-mobile-web-app-capable content=no><meta name=apple-mobile-web-app-status-bar-style content=default><meta name=apple-mobile-web-app-title content=vue3-admin><link rel=apple-touch-icon href=img/icons/apple-touch-icon-152x152.png><link rel=mask-icon href=img/icons/safari-pinned-tab.svg color=#4DBA87><meta name=msapplication-TileImage content=img/icons/msapplication-icon-144x144.png><meta name=msapplication-TileColor content=#000000></head><body><noscript><strong>We're sorry but vue3-admin doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id=app><div class=sk-fading-circle><div class="sk-circle1 sk-circle"></div><div class="sk-circle2 sk-circle"></div><div class="sk-circle3 sk-circle"></div><div class="sk-circle4 sk-circle"></div><div class="sk-circle5 sk-circle"></div><div class="sk-circle6 sk-circle"></div><div class="sk-circle7 sk-circle"></div><div class="sk-circle8 sk-circle"></div><div class="sk-circle9 sk-circle"></div><div class="sk-circle10 sk-circle"></div><div class="sk-circle11 sk-circle"></div><div class="sk-circle12 sk-circle"></div></div></div><script src=js/chunk-vendors.6e01ebc1.js></script><script src=js/app.23bc8d0b.js></script></body><script src=https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts-en.common.min.js></script></html>

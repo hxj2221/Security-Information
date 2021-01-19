@@ -209,18 +209,7 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
-            <el-form-item style="margin-top: 40px" label="科室负责人">
-              <el-switch
-                v-model="addStaff.head_department"
-                :active-value="0"
-                :inactive-value="1"
-                active-color="#13ce66"
-                inactive-color="#ff4949"
-              >
-              </el-switch>
-            </el-form-item>
-          </el-col>
+        
           <el-col :span="8"> </el-col>
         </el-row>
         <el-row :gutter="20">
@@ -239,7 +228,7 @@
               <el-switch
                 v-model="addStaff.status"
                 :active-value="1"
-                :inactive-value="2"
+                :inactive-value="0"
                 active-color="#13ce66"
                 inactive-color="#ff4949"
               >
@@ -291,7 +280,7 @@ export default {
         staffdepart: "", //所属科室
         staffrolesel: [], //角色
         head_department: "", //科室负责人
-        status: "", //员工状态
+        status:1, //员工状态
         password: "", //密码
         address: [], //地址
       },
@@ -330,6 +319,7 @@ export default {
     staffaddvueyes() {
       // let params = this.addStaff
       console.log(this.addStaff.address);
+      //1  正常   0 禁用
       let data = {
         // job_number: this.addStaff.job_number,
         name: this.addStaff.name,
