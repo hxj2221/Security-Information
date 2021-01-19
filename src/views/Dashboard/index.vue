@@ -172,7 +172,7 @@
     methods: {},
     created() {
       service.dashboard().then(res => {
-        console.log(res)
+        // console.log(res)
         this.Info=res.data.data
         this.staff=res.data.staff
         this.examine=res.data.examine
