@@ -56,6 +56,7 @@
     height: 40px;
     border-radius: 5px;
     cursor: pointer;
+    margin-right: 10px;
 }
 
 
@@ -98,7 +99,7 @@
 .allManage .allManage_cont .right .search {
     width: 367px;
     height: 36px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     margin-left: 0;
 }
 
