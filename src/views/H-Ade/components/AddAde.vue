@@ -5,7 +5,7 @@ import service from '@/service/index';
     <div class="formBasics">
       <h2>基本信息</h2>
       <el-form class="form_con" ref="addAde" :model="addAde">
-        <el-row  type="flex" class="row-bg info" justify="space-between">
+        <el-row  type="flex" class="row-bg info" justify="space-around">
           <el-col :span="6">
             <div class="grid-content bg-purple">
               <el-form-item label="业务编号">
@@ -35,7 +35,7 @@ import service from '@/service/index';
             </div>
           </el-col>
         </el-row>
-        <el-row type="flex" class="row-bg info" justify="space-between">
+        <el-row type="flex" class="row-bg info" justify="space-around">
           <el-col :span="6">
             <div class="grid-content bg-purple">
               <el-form-item label="患者姓名" required>
@@ -70,7 +70,7 @@ import service from '@/service/index';
             </div>
           </el-col>
         </el-row>
-        <el-row type="flex" class="row-bg info" justify="space-between">
+        <el-row type="flex" class="row-bg info" justify="space-around">
           <el-col :span="6">
             <div class="grid-content bg-purple">
               <el-form-item label="入院日期" required>
@@ -97,7 +97,7 @@ import service from '@/service/index';
             </div>
           </el-col>
         </el-row>
-        <el-row type="flex" class="row-bg info" justify="space-between">
+        <el-row type="flex" class="row-bg info" justify="space-around">
           <el-col :span="6">
             <div class="grid-content bg-purple">
               <el-form-item label="住院号" required>
@@ -122,7 +122,7 @@ import service from '@/service/index';
             </div>
           </el-col>
         </el-row>
-        <el-row type="flex" class="row-bg info" justify="space-between">
+        <el-row type="flex" class="row-bg info" justify="space-around">
           <el-col :span="6">
             <div class="grid-content bg-purple">
               <el-form-item label="主管医师" required>
@@ -145,7 +145,7 @@ import service from '@/service/index';
             </div>
           </el-col>
         </el-row>
-        <el-row type="flex" class="row-bg info info_last" justify="space-between">
+        <el-row type="flex" class="row-bg info info_last" justify="space-around">
           <el-col :span="6">
             <div class="grid-content bg-purple">
               <el-form-item label="上报人" required>

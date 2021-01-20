@@ -35,8 +35,8 @@ import service from '@/service/index';
                 v-model="scope.row.status"
                 :active-value="1"
                 :inactive-value="0"
-                active-color="#02538C"
-                inactive-color="#B9B9B9"
+                active-color="#13ce66"
+                inactive-color="#ff4949"
                 @change="changeSwitch($event, scope.row, scope.row.id)"
               />
             </template>
