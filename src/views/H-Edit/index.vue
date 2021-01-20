@@ -376,6 +376,11 @@ export default {
           });
         })
         .catch(() => {
+          if (row.status == 1) {
+            row.status = 0;
+          } else {
+            row.status = 1;
+          }
           this.$message({
             type: "success",
             message: "已取消操作",

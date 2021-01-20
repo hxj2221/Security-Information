@@ -49,19 +49,19 @@
             ></el-option>
           </el-select> -->
 
-          <img
-            src="http://bt1.wlqqlp.com:8082/api/login/captcha"
-            title="看不清？点击切换"
-            @click="reloadcode()"
-            style="height: 40px"
-            class="imgcode"
-          />
+         
 
           <el-input
             placeholder="请输入验证码"
             v-model="ruleForm.captcha"
             class="codeinput"
           ></el-input>
+           <img
+            src="http://bt1.wlqqlp.com:8082/api/login/captcha"
+            title="看不清？点击切换"
+            @click="reloadcode()"
+            class="imgcode"
+          />
         </el-form-item>
         <div class="loginRem">
           <el-checkbox
@@ -128,32 +128,50 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          console.log(1)
           let params = this.ruleForm;
           this.logining = true;
           service
             .login(params)
             .then((res) => {
-              if (res.code === 20010) {
+              console.log(res)
+              if (res.code == 20010) {
+                   this.reloadcode()
                 sessionStorage.setItem("token", res.data.token);
                 sessionStorage.setItem("account", this.ruleForm.account);
                 sessionStorage.setItem("password", this.ruleForm.password);
                 this.$router.push("/dashboard");
+             
               } 
               else {
-                this.$message({
+                if(res.msg=='验证码不正确'){
+                   this.$message({
                   message: res.msg,
                   type: "error",
                   duration: 1000,
                 });
                 this.logining = false;
+                }
+                else{
+                     this.$message({
+                  message: res.msg,
+                  type: "error",
+                  duration: 1000,
+                });
+                  this.logining = false;
+                  this.reloadcode()
+                  this.ruleForm.captcha=''
+                }
+               
+                
               }
             })
             .catch((err) => {
               this.logining = false;
+              this.reloadcode()
+               this.ruleForm.captcha=''
             });
-        } else {
-          return false;
-        }
+        } 
       });
     },
 
@@ -176,7 +194,6 @@ export default {
     }
   },
   created() {
-    this.reloadcode()
     localStorage.clear();
     sessionStorage.clear()
     // this.height=document.body.clientHeight
@@ -208,7 +225,7 @@ export default {
     -moz-border-radius: 20px;
     background-clip: padding-box;
     margin: 180px auto;
-    width: 50%;
+    width: 40%;
     height: 70%;
     padding: 35px 50px 20px 50px;
     background-image: linear-gradient(to right, #ffffff, #ffffff);
@@ -277,12 +294,14 @@ export default {
   }
   .imgcode {
     position: absolute;
-    left: 25px;
-    // width: 120px;
+    right: 25px;
+    width: 40%;
+   height: 40px
+
   }
   .codeinput {
     position: absolute;
-    right: 25px;
+    left: 20px;
     width: 40%;
   }
   .clickcode {

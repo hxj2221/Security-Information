@@ -36,7 +36,7 @@
           <el-col :span="6"
             ><div class="grid-content bg-purple">
               <span> 投诉人姓名 <span>*</span></span>
-              <el-input v-model="comname" placeholder="请输入投诉人姓名"></el-input>
+              <el-input v-model="comname" placeholder="请输入投诉人姓名" maxlength="10"  onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )" clearable></el-input>
             </div>
           </el-col>
           <el-col :span="6"
@@ -61,6 +61,8 @@
                 v-model="comagenumber"
                 class="input-with-select"
                 clearable
+                maxlength="3"
+                max='3'
                 type='number'
                oninput="value=value.replace(/[^\d]/g,'')"
                onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )"
@@ -79,6 +81,7 @@
               <el-input v-model="comphone" placeholder="请输入投诉人手机号码" type="input" maxlength="11" max="11"     
                oninput="value=value.replace(/[^\d]/g,'')"
                clearable
+               @onkeyup='formatPhoneOnkeyUp'
                onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )"  ></el-input>
             </div>
           </el-col>
@@ -133,7 +136,7 @@
           <el-col :span="6"
             ><div class="grid-content bg-purple-light">
               <span> 答复协商时间</span> <br />
-              <el-input placeholder="请输入" v-model="consulttime" style="width: 60%" type="input" maxlength="3" max="3"     
+              <el-input placeholder="请输入" v-model="consulttime"  type="input" maxlength="3" max="3"     
                oninput="value=value.replace(/[^\d]/g,'')" clearable
                onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )" >
                 <template slot="append">天</template>
@@ -161,29 +164,31 @@
               <el-select v-model="nature" placeholder="请选择" clearable>
                 <el-option
                   v-for="item in natures"
-                  :key="item.id"
+                  :key="item.state_val"
                   :label="item.title"
-                  :value="item.title"
+                  :value="item.state_val"
                 >
                 </el-option>
               </el-select>
             </div>
           </el-col>
-          <el-col :span="12" :push="3"
+          <el-col :span="14" :push="3"
             ><div class="grid-content bg-purple-light">
               <span> 联系地址<span>*</span> </span> <br />
-              <el-input v-model="address" placeholder="联系地址" clearable></el-input></div
+              <el-input v-model="address" placeholder="联系地址" maxlength="50" onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )" clearable></el-input></div
           ></el-col>
         </el-row>
         <el-row type="flex" class="row-bg">
-          <el-col :span="20" :push="1"
+          <el-col :span="22" :push="1"
             ><div class="grid-content bg-purple">
               <span> 投诉原因</span
               ><el-input
                 type="textarea"
                 v-model="reason"
+                onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )"
                 placeholder="请输入投诉原因"
                 clearable
+                maxlength="100"
               ></el-input>
             </div>
           </el-col>
@@ -197,7 +202,7 @@
             <el-col :span="6" :pull="2"
               ><div class="grid-content bg-purple">
                 <span> 经办人姓名<span>*</span> </span>
-                <el-input v-model="agentname" placeholder="请输入姓名" clearable type="input" maxlength="8"></el-input>
+                <el-input v-model="agentname" onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )" placeholder="请输入姓名" clearable type="input" maxlength="20"></el-input>
               </div>
             </el-col>
             <el-col :span="6" :pull="6"
@@ -300,51 +305,51 @@ inject: ["reload"],
         disabledDate(time) {
           return time.getTime() > Date.now();
         },
-        // shortcuts: [{
-        //     text: '今天',
-        //     onClick(picker) {
-        //       picker.$emit('pick', new Date());
-        //     }
-        //   }, {
-        //     text: '昨天',
-        //     onClick(picker) {
-        //       const date = new Date();
-        //       date.setTime(date.getTime() - 3600 * 1000 * 24);
-        //       picker.$emit('pick', date);
-        //     }
-        //   }, {
-        //     text: '一周前',
-        //     onClick(picker) {
-        //       const date = new Date();
-        //       date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-        //       picker.$emit('pick', date);
-        //     }
-        //   }]
+        shortcuts: [{
+            text: '今天',
+            onClick(picker) {
+              picker.$emit('pick', new Date());
+            }
+          }, {
+            text: '昨天',
+            onClick(picker) {
+              const date = new Date();
+              date.setTime(date.getTime() - 3600 * 1000 * 24);
+              picker.$emit('pick', date);
+            }
+          }, {
+            text: '一周前',
+            onClick(picker) {
+              const date = new Date();
+              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+              picker.$emit('pick', date);
+            }
+          }]
       },
         pickerOption: {
         disabledDate(time) {
           return time.getTime() >  Date.now();
         },
-        // shortcuts: [{
-        //     text: '今天',
-        //     onClick(picker) {
-        //       picker.$emit('pick', new Date());
-        //     }
-        //   }, {
-        //     text: '昨天',
-        //     onClick(picker) {
-        //       const date = new Date();
-        //       date.setTime(date.getTime() - 3600 * 1000 * 24);
-        //       picker.$emit('pick', date);
-        //     }
-        //   }, {
-        //     text: '一周前',
-        //     onClick(picker) {
-        //       const date = new Date();
-        //       date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-        //       picker.$emit('pick', date);
-        //     }
-        //   }]
+        shortcuts: [{
+            text: '今天',
+            onClick(picker) {
+              picker.$emit('pick', new Date());
+            }
+          }, {
+            text: '昨天',
+            onClick(picker) {
+              const date = new Date();
+              date.setTime(date.getTime() - 3600 * 1000 * 24);
+              picker.$emit('pick', date);
+            }
+          }, {
+            text: '一周前',
+            onClick(picker) {
+              const date = new Date();
+              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+              picker.$emit('pick', date);
+            }
+          }]
       },
       data: [
         {
@@ -393,16 +398,36 @@ inject: ["reload"],
   },
 
   methods: {
+    formatPhoneOnkeyUp(mobile){
+    var value = mobile.replace(/\D/g, '').substring(0, 11);
+    var valueLen = value.length;
+    if (valueLen > 3 && valueLen < 8) {
+          value = `${value.substr(0, 3)} ${value.substr(3)}`;
+    } else if (valueLen >= 8) {
+          value = `${value.substr(0, 3)} ${value.substr(3, 4)} ${value.substr(7)}`;
+    }
+    return value;
+},
+    changeInput() {
+      var pattern = /^[1-9][0-9]*$/ // 正整数的正则表达式
+      // 不符合正整数时
+      if (!pattern.test(this.num)) {
+        // input 框绑定的内容为空
+        this.num = ''
+      }
+    },
     getCascaderObj() {
     },
     //保存提交事件
     keepform() {
-      console.log(this.incidentdata )
-       console.log(this.comdata )
-      if (this.comde !== "" && this.comde !== null&&this.incidentdata !== ""&&this.comdata !== ""&&this.comname !== ""&&this.comgender!=='') {
+      console.log(this.nature)
+      if (this.comde !== "" && this.comde !== null&&this.comde.length!==0&&this.incidentdata !== ""&&this.comdata !== ""&&this.comname !== ""&&
+      this.comgender!==''&&this.comagenumber !== ""&&this.comphone!== ""&&this.commode!== ""&&this.relation!==''&&this.consulttime!==''
+      &&this.nature!==''&&this.comtype!==''&&this.agentname!==''&&this. agentphone!=='') {
         let comde = this.comde.map((x) => {
           return x[0];
         });
+        console.log(comde)
       let params = {
         event_number: this.comnumber, //业务编号
         event_type: this.comtype, //投诉类型
@@ -418,7 +443,7 @@ inject: ["reload"],
         age: this.comagenumber, //投诉人年龄
         inpatient_relation: this.relation, //患者关系
         reply_time: this.consulttime, //协商时间
-        character: 1, //事件性质this.nature
+        character: this.nature, //事件性质
         handle_name: this.agentname, //经办人姓名
         handle_phone: this.agentphone, //经办人手机号
       };
@@ -493,6 +518,69 @@ inject: ["reload"],
             duration: 1000,
           });
        }
+        else if(this.comagenumber == ""){
+          this.$message({
+            message:'请输入投诉人年龄',
+            type: "error",
+            duration: 1000,
+          });
+       }
+        else if(this.comphone== ""){
+          this.$message({
+            message:'请输入投诉人手机号码',
+            type: "error",
+            duration: 1000,
+          });
+       }
+         else if(this.commode== ""){
+          this.$message({
+            message:'请选择投诉方式',
+            type: "error",
+            duration: 1000,
+          });
+       }
+         else if(this.relation== ""){
+          this.$message({
+            message:'请选择与患者的关系',
+            type: "error",
+            duration: 1000,
+          });
+       }
+         else if(this.consulttime== ""){
+          this.$message({
+            message:'请输入答复时间',
+            type: "error",
+            duration: 1000,
+          });
+       }
+          else if(this.nature== ""){
+          this.$message({
+            message:'请选择事件性质',
+            type: "error",
+            duration: 1000,
+          });
+       }
+        else if(this.comtype== ""){
+          this.$message({
+            message:'请选择投诉类别',
+            type: "error",
+            duration: 1000,
+          });
+       }
+         else if(this.agentname== ""){
+          this.$message({
+            message:'请输入经办人姓名',
+            type: "error",
+            duration: 1000,
+          });
+       }
+       else if(this.agentphone== ""){
+          this.$message({
+            message:'请输入经办人手机号',
+            type: "error",
+            duration: 1000,
+          });
+       }
     },
     backss() {
       this.reload()
@@ -516,22 +604,22 @@ inject: ["reload"],
           this.relationlist = res.data.inpatient_relation; // 关系
           this.comdes = res.data.department; //投诉科室
         } 
-        else if(res.code==20401){
-          this.$message({
-            message: "请重新登陆",
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/login')
-        }
-        else if(res.code==20403){
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        }
+        // else if(res.code==20401){
+        //   this.$message({
+        //     message: "请重新登陆",
+        //     type: "error",
+        //     duration: 1000,
+        //   });
+        //   this.$router.push('/login')
+        // }
+        // else if(res.code==20403){
+        //   this.$message({
+        //     message: res.msg,
+        //     type: "error",
+        //     duration: 1000,
+        //   });
+        //   this.$router.push('/dashboard')
+        // }
         //    else{
         //   this.$message({
         //     message: res.msg,

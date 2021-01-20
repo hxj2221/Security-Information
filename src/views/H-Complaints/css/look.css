@@ -1,6 +1,7 @@
-.look {
+
+.look{
+    margin: 0px auto; 
     position: relative;
-    margin: 0px auto;
 }
 .clearfix:after{
     content: "020"; 
@@ -14,20 +15,25 @@
     /* 触发 hasLayout */ 
     zoom: 1; 
     }
+    .look .look-content{
+        padding-bottom: 100px;
+    }
 /* 置顶标题 */
-.look .look-top {
-  position: fixed;
+.look .look-content .look-top {
+    margin-top: 30px;
+   position: absolute;
     color: #333333;
     padding: 30px 20px;
+    /* max-width:78.6%; */
     text-align: left;
-    width: 78.6%;
+    width: 96%;
     background-color: #ffffff;
     height: 50px;
     z-index: 9;
 
 }
 
-.look .look-top > span {
+.look .look-content .look-top > span {
     border-left: 6px solid #666ee8;
     text-align: left;
     font-size: 18px;
@@ -36,11 +42,11 @@
     padding-left: 10px;
 }
 
-.look .look-top div {
+.look .look-content .look-top div {
     position: relative;
 }
 
-.look .look-top div .printing {
+.look .look-content .look-top div .printing {
     right: 120px;
     top: -45px;
     position: absolute;
@@ -50,14 +56,14 @@
     font-weight: 900;
 }
 
-.look .look-top div .printing span {
+.look .look-content .look-top div .printing span {
     font-size: 14px;
     background-color: none;
     color: #6f77e9;
     font-weight: 900;
 }
 
-.look .look-top div .return {
+.look .look-content .look-top div .return {
     top: 0;
     right: 10px;
     top: -45px;
@@ -69,7 +75,7 @@
     background: none;
 }
 
-.look .look-top div .return span {
+.look .look-content .look-top div .return span {
     font-size: 14px;
     background-color: none;
     color: #6f77e9;
@@ -77,8 +83,8 @@
 
 /* 打印内容 */
 .look .look-content {
-text-align: center;
-    padding-top: 6%;
+    max-height: 1000px;
+    text-align: center;
     margin-bottom: 80px;
 }
 
@@ -306,6 +312,16 @@ text-align: center;
     line-height: 30px;
     border-bottom: none;
     padding-left: 10px;
+
+}
+ .look-texaeras{
+ 
+    height: 100px;
+
+}
+.look-texaerasss{
+ 
+    height: 150px;
 
 }
 .look .look-content .look-content-box .box-Information > .box-content .value{

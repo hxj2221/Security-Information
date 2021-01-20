@@ -179,27 +179,62 @@ export default {
     },
     // switch开关
     changeSwitch(val, row, id) {
-      let data = {
-        id: id,
-        status: row.status,
-      };
-      console.log(data);
-      service.rolestatus(data).then((res) => {
-        console.log(res);
-      });
       console.log(row.status);
-      if (row.status == 1) {
-        this.$message({
-          type: "success",
-          message: "员工启用成功",
+      this.$confirm("此操作将修改状态, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          let data = {
+            id: id,
+            status: row.status,
+          };
+          console.log(data);
+          service.rolestatus(data).then((res) => {
+            console.log(res);
+            this.$message({
+              type: "success",
+              message: res.msg,
+              duration: 1000,
+            });
+          });
+        })
+        .catch(() => {
+          if (row.status == 1) {
+            row.status = 0;
+          } else {
+            row.status = 1;
+          }
+          this.$message({
+            type: "success",
+            message: "已取消操作",
+            duration: 1000,
+          });
         });
-      } else {
-        this.$message({
-          type: "success",
-          message: "员工停用成功",
-        });
-      }
     },
+    // changeSwitch(val, row, id) {
+    //   let data = {
+    //     id: id,
+    //     status: row.status,
+    //   };
+    //   console.log(data);
+    //   service.rolestatus(data).then((res) => {
+    //     console.log(res);
+    //   });
+    //   console.log(row.status);
+    //   if (row.status == 1) {
+    //     this.$message({
+    //       type: "success",
+    //       message: "员工启用成功",
+    //     });
+    //   } else {
+    //     this.$message({
+    //       type: "success",
+    //       message: "员工停用成功",
+    //     });
+    //   }
+    // },
     // 编辑
     handleEdit(id) {
       this.rolevue = false;
