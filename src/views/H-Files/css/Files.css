@@ -6,6 +6,8 @@
     text-align: left;
     margin: 0 auto;
     min-height: 810px;
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+    border-radius: 5px;
 }
 
 
@@ -21,47 +23,44 @@
 }
 
 .filelist .head .title {
-    font-size: 18px;
+    font-size: 24px;
     color: #333333;
+    padding-left: 5px;
+    border-left: 5px solid #666ee8;
 }
 
 .filelist .head .push_btn {
     font-size: 14px;
     color: #ffffff;
-}
-
-.filelist .head .push_btn i {
-    width: 110px;
-    height: 36px;
-    background-color: #666ee8;
-    border-radius: 5px;
-    text-align: center;
-    line-height: 36px;
-    cursor: pointer;
-}
-
-.filelist .head .push_btn i:first-child {
     margin-right: 10px;
 }
 
-.filelist .head .push_btn i span {
-    padding-left: 10px;
+.filelist .head .push_btn .el-button {
+    background-color: #666ee8;
+    border-radius: 5px;
+    cursor: pointer;
+    border-color: #666ee8;
+    width: 94px;
+    height: 40px;
+    margin-left: -3px;
 }
-
+.filelist .head .push_btn .el-button>i{
+    margin-left: -10px;
+}
+.filelist .head .push_btn .newflie{
+    margin-left: 30px;
+}
 
 /* 搜索 */
 
 .filelist .search {
-    padding: 30px 20px 0;
+    margin: 20px 20px -2px;
 }
 
 .filelist .search .search_form {
     display: flex;
 }
 
-.filelist .search .search_form .classify {
-    padding-right: 15px;
-}
 
 .filelist .search .search_form .classify .el-form-item__content {
     display: inline-block;
@@ -69,6 +68,7 @@
 
 .filelist .search .search_form .input-with-select {
     width: 30%;
+    margin-left: 20px;
 }
 
 .filelist .search .search_form .input-with-select .el-input-group__append {
@@ -82,7 +82,8 @@
 /* 表格内容 */
 
 .filelist .TableContent {
-    padding: 0 20px;
+    margin: 0 auto;
+    width: 96%;
 }
 
 .filelist .TableContent .el-table .el-table__header-wrapper .el-table__header .has-gutter tr th {
@@ -111,7 +112,9 @@
     background-color: #ffffff;
     text-align: left;
     margin: 0 auto;
-    height: 970px;
+    min-height: 819px;
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+    border-radius: 5px;
 }
 
 
@@ -122,13 +125,15 @@
     justify-content: space-between;
     height: 83px;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 30px 0 20px;
     border-bottom: 2px solid #f2f2f2;
 }
 
 .newlyFiles .head .title {
-    font-size: 18px;
+    font-size: 24px;
     color: #333333;
+    padding-left: 5px;
+    border-left: 5px solid #666ee8;
 }
 
 .newlyFiles .head .push_btn {
@@ -137,38 +142,38 @@
     cursor: pointer;
 }
 
-.newlyFiles .head .push_btn i {
-    width: 110px;
-    height: 36px;
+.newlyFiles .head .push_btn .newclassify {
     background-color: #666ee8;
     border-radius: 5px;
-    text-align: center;
-    line-height: 36px;
+    border-color: #666ee8;
+    width: 92px;
+    height: 40px;
 }
-
-.newlyFiles .head .push_btn i span {
-    padding-left: 10px;
+.newlyFiles .head .push_btn .newclassify>i{
+    margin-left: -14px;
 }
 
 .newlyFiles .head .push_btn .back {
-    width: 111px;
-    height: 35px;
-    line-height: 35px;
-    text-align: center;
     color: #666ee8;
     border: 1px solid #666ee8;
     display: inline-block;
     border-radius: 5px;
-    border: 1px solid #666ee8;
-    margin-left: 10px;
+    margin-left: 30px;
     font-weight: 700;
+    background: none;
+    width: 92px;
+    height: 40px;
+}
+.newlyFiles .head .push_btn .back>span{
+    margin-left: -17px;
 }
 
 
 /* 内容 */
 
 .newlyFiles .newlyContent {
-    padding: 20px 30px;
+    margin: 30px auto 0;
+    width: 96%;
 }
 
 .newlyFiles .newlyContent .el-table .el-table__header-wrapper .el-table__header .has-gutter tr th {
@@ -186,7 +191,7 @@
 
 .newlyFiles .pagenum {
     text-align: right;
-    padding: 20px 0;
+    padding: 20px ;
 }
 
 

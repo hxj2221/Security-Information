@@ -3,6 +3,8 @@
     width: 1240px;
     padding: 0 20px;
     margin: 0 auto;
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+    border-radius: 5px;
 }
 
 
@@ -39,26 +41,25 @@
     border-color: #666EE8;
 }
 
-.allManage .allManage_nav .nav_list .bgColor {
+.allManage>.allManage_nav>.nav_list>.bgColor {
     background-color: #666EE8;
     color: #ffffff !important;
     border-color: #666EE8;
 }
 
-.allManage .allManage_nav i {
-    width: 110px;
-    height: 36px;
+.allManage>.allManage_nav>.el-button {
     background-color: #666EE8;
+    border-color: #666EE8;
     font-size: 14px;
     color: #ffffff;
-    line-height: 36px;
+    width: 94px;
+    height: 40px;
     border-radius: 5px;
     cursor: pointer;
+    margin-right: 10px;
 }
 
-.allManage .allManage_nav i span {
-    padding-left: 10px;
-}
+
 
 
 /* 内容 */
@@ -98,7 +99,7 @@
 .allManage .allManage_cont .right .search {
     width: 367px;
     height: 36px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     margin-left: 0;
 }
 
@@ -117,8 +118,6 @@
 }
 
 .allManage .allManage_cont .right .right_con .el-table__header-wrapper .el-table__header .has-gutter tr th {
-    background-color: #666EE866;
-    color: #333333;
     text-align: center;
 }
 
