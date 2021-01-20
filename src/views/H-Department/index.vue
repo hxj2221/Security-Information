@@ -9,7 +9,7 @@
           <el-input
             v-model="search"
             class="departNameipt"
-            placeholder="请输入内容"
+            placeholder="请输入科室名称"
           ></el-input>
           <el-button
             class="departNamesch"
@@ -19,18 +19,19 @@
           >
         </div>
       </div>
-      <div>
+      <!-- <div>
         <input
           type="file"
           name="image"
           accept="image/*"
           @change="onchangeImgFun"
-        />
-        <!-- <img :src="portrait" alt="" class="my-avatar" /> -->
-      </div>
+        /> -->
+      <!-- <img :src="portrait" alt="" class="my-avatar" /> -->
+      <!-- </div> -->
       <el-table
         :data="dormitory"
         class="departtable"
+        style="width: 96%"
         :header-cell-style="{ background: '#c2c5f6' }"
         :cell-style="{ background: '#fff' }"
         row-key="id"
@@ -39,19 +40,28 @@
           hasChildren: 'hasChildren',
         }"
       >
-        <el-table-column label="序号" type="index"> </el-table-column>
-        <el-table-column prop="title" label="科室名称"> </el-table-column>
-        <el-table-column prop="number" label="科室编号"> </el-table-column>
-        <el-table-column prop="usernumber" label="员工数量"> </el-table-column>
-        <el-table-column prop="head_department.name" label="负责人">
+        <el-table-column width="140" label="序号" type="index">
+        </el-table-column>
+        <el-table-column width="220" prop="title" label="科室名称">
+        </el-table-column>
+        <el-table-column width="180" prop="number" label="科室编号">
+        </el-table-column>
+        <el-table-column width="140" prop="usernumber" label="员工数量">
+        </el-table-column>
+        <el-table-column width="140" prop="head_department.name" label="负责人">
         </el-table-column>
         <el-table-column
+          width="140"
           prop="createname.name"
           label="创建人员"
         ></el-table-column>
 
-        <el-table-column prop="create_time" label="创建时间"></el-table-column>
-        <el-table-column label="科室状态">
+        <el-table-column
+          width="200"
+          prop="create_time"
+          label="创建时间"
+        ></el-table-column>
+        <el-table-column width="180" label="科室状态">
           <template slot-scope="scope">
             <el-switch
               v-model="scope.row.status"
@@ -63,8 +73,7 @@
             />
           </template>
         </el-table-column>
-
-        <el-table-column label="操作">
+        <el-table-column width="200" fixed="right" label="操作">
           <template slot-scope="scope">
             <el-button
               class="departEdit"
@@ -82,23 +91,6 @@
           </template>
         </el-table-column>
       </el-table>
-
-      <!-- 分页 -->
-      <!-- 咱不需要 -->
-      <!-- <div class="departpag">
-        <div class="block">
-          <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page="currentPage"
-            :page-sizes="[8, 10, 20]"
-            :page-size="8"
-            layout="total, sizes, prev, pager, next, jumper"
-            :total="dormitory.length"
-          >
-          </el-pagination>
-        </div>
-      </div> -->
     </div>
 
     <!-- 新增 -->

@@ -5,7 +5,7 @@
       <headpow></headpow>
       <el-table
         :data="tableData"
-        style="width: 100%; margin-bottom: 20px"
+        style="width: 96%; margin-left: 2%"
         :header-cell-style="getRowClass"
         row-key="id"
         border
@@ -31,11 +31,7 @@
         </el-table-column>
         <el-table-column prop="level" label="等级" width="180">
         </el-table-column>
-        <el-table-column prop="icon" label="左侧图标">
-          <!-- <template slot-scope="scope"> -->
-          <!-- <i class="el-icon-s-help"></i> -->
-          <!-- </template> -->
-        </el-table-column>
+        <el-table-column prop="icon" label="左侧图标"> </el-table-column>
         <el-table-column prop="name" label="接口地址"></el-table-column>
         <el-table-column prop="url" label="前端路由"> </el-table-column>
         <el-table-column label="角色状态">
@@ -46,24 +42,19 @@
               :inactive-value="0"
               active-color="#13ce66"
               inactive-color="#ff4949"
+              @change="changeSwitch($event, scope.row, scope.row.id)"
             />
           </template>
         </el-table-column>
-        <el-table-column fixed="right" label="操作" width="400">
+        <el-table-column fixed="right" label="操作" width="300">
           <template slot-scope="scope">
-            <el-button
-              @click="handleClick(scope.row.id)"
-              type="text"
-              size="small"
+            <el-button size="mini" @click="handleClick(scope.row.id)"
               >添加子级</el-button
             >
-            <el-button
-              type="text"
-              size="small"
-              @click="handleEdit(scope.row.id)"
+            <el-button size="mini" @click="handleEdit(scope.row.id)"
               >编辑</el-button
             >
-            <el-button type="text" size="small" @click="delpow(scope.row.id)"
+            <el-button size="mini" type="danger" @click="delpow(scope.row.id)"
               >删除</el-button
             >
           </template>
@@ -104,10 +95,22 @@
               </el-select>
             </el-form-item>
             <el-form-item label="排序" width="100">
-              <el-input v-model="powpx" auto-complete="off"></el-input>
+              <el-input
+                v-model="powpx"
+                placeholder="数字越大，排序越小"
+                auto-complete="off"
+              ></el-input>
             </el-form-item>
             <el-form-item label="状态" width="100">
-              <el-input v-model="powstatu" auto-complete="off"></el-input>
+              <template>
+                <el-switch
+                  v-model="powstatu"
+                  :active-value="1"
+                  :inactive-value="0"
+                  active-color="#13ce66"
+                  inactive-color="#ff4949"
+                />
+              </template>
             </el-form-item>
             <el-form-item label="标题" width="150">
               <el-input v-model="powlab" auto-complete="off"></el-input>
@@ -128,8 +131,6 @@
           </div>
         </el-dialog>
       </div>
-      <!-- 添加子级 -->
-
       <!-- 编辑权限 -->
       <div>
         <el-dialog
@@ -168,7 +169,16 @@
               <el-input v-model="editpowpx" auto-complete="off"></el-input>
             </el-form-item>
             <el-form-item label="状态" width="100">
-              <el-input v-model="editpowstatu" auto-complete="off"></el-input>
+              <template>
+                <el-switch
+                  v-model="editpowstatu"
+                  :active-value="1"
+                  :inactive-value="0"
+                  active-color="#13ce66"
+                  inactive-color="#ff4949"
+                />
+              </template>
+              <!-- <el-input v-model="editpowstatu" auto-complete="off"></el-input> -->
             </el-form-item>
             <el-form-item label="标题" width="150">
               <el-input v-model="editpowlab" auto-complete="off"></el-input>
@@ -209,7 +219,7 @@ export default {
       seldata: [], //权限下拉框
       selvalue: "0",
       powpx: "",
-      powstatu: "",
+      powstatu: 1,
       powlab: "",
       powicon: "",
       powaps: "",
@@ -234,6 +244,7 @@ export default {
       addsonid: "",
     };
   },
+  // 加载数据
   created() {
     service.rulelist().then((res) => {
       console.log(res);
@@ -241,6 +252,7 @@ export default {
     });
   },
   methods: {
+    // 编辑/添加权限下拉值
     selchang() {
       console.log(this.editselvalue);
     },
@@ -256,12 +268,24 @@ export default {
         url: this.powweb,
       };
       service.savepower(data).then((res) => {
-        //alert(res);
-        console.log(res);
-        this.reload();
+        if (res.code == 20010) {
+          this.$message({
+            message: res.msg,
+            type: "success",
+            duration: 1000,
+          });
+          this.reload();
+        } else {
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+        }
       });
       this.dialogVisible = false;
     },
+
     // 添加权限
     fathpowadd() {
       this.dialogVisible = true;
@@ -271,26 +295,9 @@ export default {
         this.seldata = res.data;
       });
     },
-    // 权限编辑
-    // 编辑
-    handleEdit(id) {
-      this.dialogedit = true;
-      console.log(id);
-      let param = {
-        id: id,
-      };
-      service.getpowid(param).then((res) => {
-        console.log(res.data);
-        this.editseldata = res.data.lists;
-        this.editselvalue = res.data.info.pid;
-        this.editpowpx = res.data.info.sort;
-        this.editpowstatu = res.data.info.status;
-        this.editpowlab = res.data.info.title;
-        this.editpowicon = res.data.info.icon;
-        this.editpowaps = res.data.info.name;
-        this.editid = res.data.info.id;
-        this.editpowweb = res.data.info.url;
-      });
+    // 添加权限的icon关闭
+    dialogeditright() {
+      this.dialogVisible = false;
     },
     // 添加下级
     handleClick(id) {
@@ -323,7 +330,77 @@ export default {
         url: this.addsonpowweb,
       };
       service.savepower(data).then((res) => {
+        if (res.code == 20010) {
+          this.$message({
+            message: res.msg,
+            type: "success",
+            duration: 1000,
+          });
+          this.reload();
+        } else {
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.reload();
+        }
         console.log(res);
+      });
+    },
+    // 编辑权限
+    dialogBeforeCl() {
+      this.dialogedit = false;
+    },
+    // switch开关
+    changeSwitch(val, row, id) {
+      console.log(row.status);
+      this.$confirm("此操作将修改状态, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          let data = {
+            id: id,
+            status: row.status,
+          };
+          console.log(data);
+          service.powstatus(data).then((res) => {
+            console.log(res);
+            this.$message({
+              type: "success",
+              message: res.msg,
+              duration: 1000,
+            });
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "success",
+            message: "已取消操作",
+            duration: 1000,
+          });
+        });
+    },
+    // 编辑
+    handleEdit(id) {
+      this.dialogedit = true;
+      console.log(id);
+      let param = {
+        id: id,
+      };
+      service.getpowid(param).then((res) => {
+        console.log(res.data);
+        this.editseldata = res.data.lists;
+        this.editselvalue = res.data.info.pid;
+        this.editpowpx = res.data.info.sort;
+        this.editpowstatu = res.data.info.status;
+        this.editpowlab = res.data.info.title;
+        this.editpowicon = res.data.info.icon;
+        this.editpowaps = res.data.info.name;
+        this.editid = res.data.info.id;
+        this.editpowweb = res.data.info.url;
       });
     },
     // 编辑权限确认
@@ -347,6 +424,7 @@ export default {
       });
       this.dialogedit = false;
     },
+    // 删除
     delpow(id) {
       console.log(id);
       let param = {
@@ -355,15 +433,20 @@ export default {
       service.delpow(param).then((res) => {
         console.log(res);
         if (res.code == "20010") {
+          this.$message({
+            message: res.msg,
+            type: "success",
+            duration: 1000,
+          });
           this.reload();
+        } else {
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
         }
       });
-    },
-    dialogeditright() {
-      this.dialogVisible = false;
-    },
-    dialogBeforeCl() {
-      this.dialogedit = false;
     },
 
     getRowClass({ rowIndex }) {
