@@ -28,22 +28,26 @@
 }
 
 .mainBl>.header>.btn>.el-button {
-    width: 92px;
-    height: 40px;
     background-color: #666EE8;
     border-radius: 5px;
     color: #fff;
     text-align: center;
     font-weight: 900;
     cursor: pointer;
-    border:3px solid #666EE8;
+    
 }
-
+.mainBl>.header>.btn>.addAde{
+    width: 92px;
+    height: 40px;
+    border: 1px solid #666EE8;
+}
 .mainBl>.header>.btn>.exportAde {
     background-color: #fff;
     border: 1px solid #666EE8;
     color: #666EE8;
     margin-left: 30px;
+    width: 92px;
+    height: 40px;
 }
 
 .mainBl>.header>.btn>.exportAde:hover {
