@@ -386,26 +386,8 @@ export default {
   fileupload: async (data: object) => {
     return await service.post(`${baseUrl}api/file/addfile`, data).then(res => res).catch(err => err)
   },
-<<<<<<< HEAD
-=======
-
-  // 文件库
-  // 文件列表
-  FileList: async () => {
-    return await service.get(`${baseUrl}api/file/listS`).then(res => res).catch(err => err)
-  },
-  // 新建分类列表
-  FileAddList: async () => {
-    return await service.get(`${baseUrl}api/fileclass/lists`).then(res => res).catch(err => err)
-  },
-  // 工作台
-  // dashboard: async () => {
-  //   return await service.get(`${baseUrl}api/home/Lz_workbench`).then(res => res).catch(err => err)
-
-  // },
   // img
   getupimg: async (data: object) => {
     return await service.post(`${baseUrl}api/srk/create_base64_file`, data).then(res => res).catch(err => err)
   },
->>>>>>> ed7730812a1e5891c4376a513e8559e896ffe7d2
 }
