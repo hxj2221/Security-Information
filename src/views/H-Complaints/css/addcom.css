@@ -20,7 +20,8 @@
 }
 
 .addcom .el-button{
-    border: none;
+    width:92px;
+  height: 40px;
 }
 .addcom .row-bg{
     margin-top: 30px;
@@ -29,8 +30,30 @@
 .addcom-form-basic{
     text-align: left;
 }
+.addcom-form-basic .el-input__inner{
+    width: 100%;
+}
+.addcom-form-basic .el-select{
+    width: 100%;
+}
 .addcom-form-basic .input-with-select{
-    width: 60%;
+    width: 100%;
+    
+}
+.addcom-form-basic .el-cascader{
+    width: 100%;
+}
+.addcom-form-basic .el-date-editor{
+    width: 100%;
+}
+.addcom-form-basic .el-input-group--append{
+    width: 100%;
+}
+.addcom-form-basic .el-input-group{
+    width: 100%;
+}
+.Addcom-agent .el-input__inner{
+    width: 100%;
 }
 .addcom-form-basic .row-bg .grid-content span{
     font-size: 12px;

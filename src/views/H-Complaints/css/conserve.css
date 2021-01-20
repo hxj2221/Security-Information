@@ -12,8 +12,9 @@ body{
   box-shadow: 2px 0 10px 0px rgba(134, 134, 134, 0.445);
 }
 .conserve button{
-  margin-right: 3%;
-  width: 8%;
+  margin-right:15px;
+  width:92px;
+  height: 40px;
 
 }
 .conserve .return .el-icon-hospital-passwordai207{
@@ -43,7 +44,4 @@ color: #FFF;
 .conserve .return span{
   background-color: #FFF;
   color: #6f77e9;
-}
-.addcom .el-button {
-  /* border: none; */
 }
