@@ -7,7 +7,7 @@
         <div class="push_btn">
           <el-button type="primary" icon="el-icon-circle-plus" @click="uploadclassify()" >上传文件
         </el-button>
-        <el-button type="primary" icon="el-icon-circle-plus" @click="newclassify()" >新建分类
+        <el-button type="primary" class="newflie" icon="el-icon-circle-plus" @click="newclassify()" >新建分类
         </el-button>
         </div>
       </div>

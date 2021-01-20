@@ -58,22 +58,20 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogFormVisible = false">取 消</el-button>
-          <el-button style="background: #666EE8;
-    border: #666EE8;" type="primary" @click="dialogFormVisible = false">确 定</el-button>
+          <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
         </div>
       </el-dialog>
       <!-- 编辑 -->
       <el-dialog title="编辑字段" :visible.sync="dialogVisible">
         <el-form :model="form">
           <el-form-item label="字段信息" required>
-            <el-input type="textarea" placeholder="请输入内容" v-model="form.name">
+            <el-input type="textarea" :rows="8" placeholder="请输入内容" v-model="form.name">
             </el-input>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button style="background: #666EE8;
-    border: #666EE8;" type="primary" @click="dialogVisible = false">确 定</el-button>
+          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
         </div>
       </el-dialog>
     </div>

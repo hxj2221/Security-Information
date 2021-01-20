@@ -6,6 +6,9 @@
   background-color: #fff;
   text-align: left;
   margin: 0 auto;
+  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+  border-radius: 5px;
+  min-height: 680px;
 }
 
 .addAll .formBasics {
@@ -22,17 +25,15 @@
   font-size: 24px;
   padding-bottom: 10px;
 }
-.addAll .formBasics .form_con .info{
-  display: flex;
+
+.addAll .formBasics .form_con{
+  margin: 0 40px;
 }
-.addAll .formBasics .form_con .info .el-form-item:nth-child(2){
-  margin: 0 164px;
+.addAll .formBasics .form_con .info .grid-content .el-form-item .el-form-item__content .el-select{
+  width: 100%;
 }
-.addAll .formBasics .form_con .info .el-form-item .el-input{
-  width: 217px;
-}
-.addAll .formBasics .form_con .info .el-form-item .inp .el-select .el-input {
-  width: 60px;
+.addAll .formBasics .form_con .info .grid-content .el-form-item .el-form-item__content .el-date-editor.el-input, .el-date-editor.el-input__inner{
+  width: 100%;
 }
 .addAll .formBasics .form_con .info .last .el-select .el-input{
   width: 562px;
@@ -42,6 +43,7 @@
 .addAll .table_info {
   padding-left: 2%;
   width: 96%;
+  margin-bottom: 100px;
 }
 
 .addAll .table_info h2 {
@@ -78,35 +80,24 @@
 /* 新增不良底部固定按钮 */
 .addAll .root{
   width: 1240px;
-  height: 59px;
+  height: 91px;
   position: fixed;
   bottom: 0;
   background-color: #fff;
   box-shadow: 0px 5px 30px rgba(204, 204, 204, 1);
   text-align: right;
-  line-height: 59px;
+  line-height: 91px;
   cursor: pointer;
   z-index: 9999;
 }
-.addAll .root i {
-  width: 111px;
-  height: 36px;
+.addAll .root .AdeSure{
   background-color: #666EE8;
-  color: #fff;
-  text-align: center;
-  line-height: 36px;
-  margin: 0 10px;
-  border-radius: 5px;
-  font-size: 14px;
+  border-color: #666EE8;
 }
-
-.addAll .root i>span {
-  padding-left: 10px;
-  font-weight: 700;
-}
-
-.addAll .rooti:last-child {
+.addAll .root .AdeBack{
+  background:none;
+  border-color: #666EE8;
   color: #666EE8;
-  background-color: #fff;
-  border: 1px solid #666EE8;
+  margin-right: 40px;
+  margin-left: 30px;
 }

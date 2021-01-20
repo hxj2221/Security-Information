@@ -30,9 +30,9 @@
     data() {
       return {
         // 主页面
-        MainShow:true,
+        MainShow:false,
         // 增加
-        adeAdd:false,
+        adeAdd:true,
         // 详情
         detailShow:false
       };
