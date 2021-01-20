@@ -237,7 +237,24 @@ export default {
     });
     service.docaddtree().then((res) => {
       console.log(res);
-      this.editseldata = res.data;
+      if(res.code==20010){
+        this.editseldata = res.data;
+      }
+       //else if (res.code == 20401) {
+      //       this.$message({
+      //         message: "请重新登陆",
+      //         type: "error",
+      //         duration: 1000,
+      //       });
+      //       this.$router.push('/login')
+      //     } else if (res.code == 20403) {
+      //       this.$message({
+      //         message: res.msg,
+      //         type: "error",
+      //         duration: 1000,
+      //       });
+      //       this.$router.push('/dashboard')
+      //     }
     });
   },
   methods: {
