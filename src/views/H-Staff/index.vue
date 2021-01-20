@@ -23,7 +23,7 @@
         <el-input
           v-model="search"
           class="staffNameipt"
-          placeholder="请输入内容"
+          placeholder="请输入员工姓名"
         ></el-input>
         <el-button class="staffNamesch" icon="el-icon-search" @click="seachAll"
           >搜索</el-button
@@ -32,30 +32,43 @@
       <!-- 表格部分 -->
       <div class="staffTable">
         <el-table
+          style="width: 96%"
           :data="tables"
           :header-cell-style="{ background: '#C2C5F6' }"
           :cell-style="{ background: '#fff' }"
         >
-          <el-table-column label="序号" type="index"> </el-table-column>
-          <el-table-column prop="job_number" label="工号"> </el-table-column>
-          <el-table-column prop="name" label="员工姓名"> </el-table-column>
-          <el-table-column prop="sex.name" label="员工性别"> </el-table-column>
-          <el-table-column prop="age" label="员工年龄"> </el-table-column>
-          <el-table-column prop="phone" label="手机号码"> </el-table-column>
-          <el-table-column prop="department[0].title" label="所属科室">
+          <el-table-column width="70" label="序号" type="index">
           </el-table-column>
-          <el-table-column prop="auth_grouap[0].title" label="角色">
+          <el-table-column width="150" prop="job_number" label="工号">
+          </el-table-column>
+          <el-table-column width="120" prop="name" label="员工姓名">
+          </el-table-column>
+          <el-table-column width="120" prop="sex.name" label="员工性别">
+          </el-table-column>
+          <el-table-column width="120" prop="age" label="员工年龄">
+          </el-table-column>
+          <el-table-column width="150" prop="phone" label="手机号码">
           </el-table-column>
           <el-table-column
+            width="130"
+            prop="department[0].title"
+            label="所属科室"
+          >
+          </el-table-column>
+          <el-table-column width="120" prop="auth_grouap[0].title" label="角色">
+          </el-table-column>
+          <el-table-column
+            width="120"
             prop="user[0].name"
             label="创建人员"
           ></el-table-column>
 
           <el-table-column
+            width="180"
             prop="create_time"
             label="创建时间"
           ></el-table-column>
-          <el-table-column label="员工状态">
+          <el-table-column width="120" label="员工状态">
             <template slot-scope="scope">
               <el-switch
                 v-model="scope.row.status"
@@ -68,7 +81,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="操作">
+          <el-table-column width="150" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
                 class="staffFotedit"
@@ -202,18 +215,18 @@ export default {
         id: row.id,
       };
       service.staffState(params).then((res) => {
-        console.log(res)
+        console.log(res);
         if (row.status == 1) {
           this.$message({
             type: "success",
             message: "员工启用成功",
-            duration:1000
+            duration: 1000,
           });
         } else {
           this.$message({
             type: "error",
             message: "员工停用",
-            duration:1000
+            duration: 1000,
           });
         }
       });
@@ -263,14 +276,14 @@ export default {
                 type: "success",
                 message: "删除成功!",
                 delete: row.splice(val, 1),
-                duration:1000
+                duration: 1000,
               });
             })
             .catch(() => {
               this.$message({
                 type: "info",
                 message: "已取消删除",
-                duration:1000
+                duration: 1000,
               });
             });
         }

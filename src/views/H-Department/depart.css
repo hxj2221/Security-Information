@@ -9,7 +9,6 @@
     background: #fff;
     border-radius: 5px;
     box-shadow: 0 0 2px rgb(184, 183, 183);
-    /* margin-bottom: 50px; */
     padding-bottom: 150px;
 }
 
@@ -115,6 +114,8 @@
     color: #fff;
     background-color: #666ee8;
     border-radius: 5px;
+    width: 92px;
+    height: 40px;
 }
 
 .departEdit {
@@ -168,6 +169,8 @@
     border-top: 2px solid #ccc;
     border-bottom: 2px solid #ccc;
     border-radius: 5px;
+    width: 92px;
+    height: 40px;
 }
 
 .departaddb:hover {
@@ -177,6 +180,8 @@
 .departaddb {
     border: 2px solid #ccc;
     border-radius: 5px;
+    width: 92px;
+    height: 40px;
 }
 
 .departaddWidhr {

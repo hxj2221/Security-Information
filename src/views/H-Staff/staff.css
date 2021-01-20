@@ -56,7 +56,7 @@
 }
 
 .staffAdd {
-    border: 3px solid #666ee8;
+    border: 3px solid #666ee8;
     background: #666ee8;
     position: absolute;
     left: 85%;
@@ -103,8 +103,10 @@
 
 .staffNamesch {
     color: #fff;
-    border: 3px solid #666ee8;
+    border: 3px solid #666ee8;
     background: #666ee8;
+    width: 92px;
+    height: 40px;
 }
 
 .staffTable {
@@ -153,6 +155,7 @@
     margin-left: -20px;
     width: 81%;
 }
+
 .staffSpan {
     color: #000;
     font-size: 20px;
