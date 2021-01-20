@@ -267,6 +267,7 @@ export default {
       this.tableData = res.data;
       this.total = res.allNews;
     });
+    
   },
 };
 </script>

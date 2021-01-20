@@ -12,8 +12,8 @@
           <el-col :span="8">
             <el-form-item label="业务编号" disabled>
               <el-input
+              v-model="form.number"
                 disabled="disabled"
-                placeholder="提交后自动生成"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -295,6 +295,7 @@ export default {
       myHeaders: { Authorization: token },
       // 表单
       form: {
+        number:'',
         communicate_time: "",
         communication: "",
         department_id: "",
@@ -462,6 +463,7 @@ export default {
   },
   created() {
     this.bus.$on("selDep", (item) => {
+      this.form.number=item.number
       this.depList = item.data;
       this.tableData1 = item.event;
     });
