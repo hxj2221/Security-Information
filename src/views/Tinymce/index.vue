@@ -11,12 +11,12 @@
     >
     </tinymce-editor>
     <!-- 功能按钮 -->
-    <div class="tinyFooter">
+    <!-- <div class="tinyFooter"> -->
       <!-- <el-button type="primary" size="medium" plain @click="clear">清空内容</el-button> -->
-      <el-button type="info" size="medium" plain @click="disabled = !disabled"
+      <!-- <el-button type="info" size="medium" plain @click="disabled = !disabled"
         >禁用</el-button
       >
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -49,18 +49,18 @@ export default {
   width: 60%;
   min-height: 85%;
   margin: 20px 0;
-  border: 1px solid rgba(173, 216, 230, 1);
+  // border: 1px solid rgba(173, 216, 230, 1);
   background-color: #fff;
   overflow: auto;
   display: flex;
   flex-flow: column wrap;
   justify-content: space-around;
-  align-items: center;
+  // align-items: center;
 
   &Editor {
     width: 96%;
     // margin-bottom: 20px;
-    padding: 20px;
+    // padding: 20px 0;
   }
 
   &Footer {

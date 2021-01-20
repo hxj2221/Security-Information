@@ -137,13 +137,22 @@ export default {
           passwords: this.ruleForm.newpassword1,
         };
         service.Fpassword(data).then((res) => {
-          if (res.data.msg == "找回成功") {
+          console.log(res)
+          if (res.code == 20010) {
             this.$emit("forgetLogin");
             this.$message({
-              message: "找回成功",
+              message:res.data,
               type: "success",
+               duration: 1000,
             });
-          } 
+          } else{
+            this.$message({
+            showClose: true,
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          }
          
         });
       }
