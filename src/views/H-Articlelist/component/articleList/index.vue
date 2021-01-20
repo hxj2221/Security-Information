@@ -43,15 +43,14 @@
           </el-table-column>
           <el-table-column prop="name" label="发布人" show-overflow-tooltip>
           </el-table-column>
-          <el-table-column label="操作">
+          <el-table-column label="操作" width="150"   fixed="right">
             <template slot-scope="scope">
               <el-button @click="handleClick" type="text" size="small"
                 >查看</el-button
               >
-              -<el-button type="text" size="small" @click="edit"
+              <el-button type="text" size="small" @click="edit"
                 >编辑</el-button
               >
-              -
               <el-button
                 type="text"
                 size="small"
@@ -574,13 +573,27 @@ export default {
   },
   methods: {
     handleDelete(index, item) {
-      item.splice(index, 1);
-      this.$message({
-        showClose: true,
-        message: "删除成功",
-        type: "success",
-        duration:1000
-      });
+     
+       this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+            confirmButtonText: "确定",
+            cancelButtonText: "取消",
+            type: "warning",
+          })
+            .then(() => {
+              this.$message({
+                type: "success",
+                message: "删除成功!",
+                delete: item.splice(index, 1),
+                duration:1000
+              });
+            })
+            .catch(() => {
+              this.$message({
+                type: "info",
+                message: "已取消删除",
+                duration:1000
+              });
+            })
     },
     //级选择器
     handleChange() {},

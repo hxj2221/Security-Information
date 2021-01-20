@@ -44,7 +44,7 @@
     </div>
     <!-- 内容 -->
     <el-table class="elTable" :data="tableData" :header-cell-style="getRowClass">
-      <el-table-column type="index" label="序号">
+      <el-table-column type="index" label="序号" width="100">
       </el-table-column>
       <el-table-column prop="event_num" label="事件编码" width="180">
       </el-table-column>
@@ -54,13 +54,13 @@
       </el-table-column>
       <el-table-column prop="age" label="年龄">
       </el-table-column>
-      <el-table-column prop="occur_time" :formatter="getDate" label="事发日期" width="150">
+      <el-table-column prop="occur_time" :formatter="getDate" label="事发日期" width="180">
       </el-table-column>
       <el-table-column prop="occurscene.title" label="发生场所">
       </el-table-column>
       <el-table-column prop="degreeweight.title" label="轻重程度" :show-overflow-tooltip='true'>
       </el-table-column>
-      <el-table-column prop="create_time" label="上报时间" width="150">
+      <el-table-column prop="create_time" label="上报时间" width="180">
       </el-table-column>
       <el-table-column prop="department.title" label="患者科室">
       </el-table-column>

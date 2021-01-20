@@ -128,7 +128,6 @@
                   :limit="3"
                   :on-exceed="handleExceed"
                   :file-list="fileList"
-                  @on-change="handleChange"
                   :http-request="getFile"
                 >
                   <el-button size="small" type="primary">点击上传</el-button>
@@ -188,7 +187,7 @@
               <span style="margin-left: 10px">{{ scope.row.name }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="操作">
+          <el-table-column label="操作" width="100" fixed="right">
             <template slot-scope="scope">
               <el-link
                 type="primary"
@@ -330,21 +329,35 @@ export default {
     };
   },
   methods: {
-    handleChange(val) {},
     getFile(item) {
-      console.log(item.file);
-      this.file = item.file;
+      // console.log(item.file);
+      this.file = item;
+      console.log(this.file)
     },
     // 编辑
     handleEdit(index, row) {},
     handleDelete(index, row) {
-      row.splice(index, 1);
-      this.$message({
-        showClose: true,
-        message: "删除成功",
-        type: "success",
-        duration: 1000,
-      });
+      
+       this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+            confirmButtonText: "确定",
+            cancelButtonText: "取消",
+            type: "warning",
+          })
+            .then(() => {
+              this.$message({
+                type: "success",
+                message: "删除成功!",
+                delete: row.splice(index, 1),
+                duration:1000
+              });
+            })
+            .catch(() => {
+              this.$message({
+                type: "info",
+                message: "已取消删除",
+                duration:1000
+              });
+            })
     },
     // 分页
     handleSizeChange(val) {
@@ -411,15 +424,15 @@ export default {
 
     //上传附件 确定
     define() {
-      let params = {
+      let data = {
         file_name: this.dialogForm.file_name,
         event_number: 12,
         // event_number: this.tableData1[0].event_number,
         file_describe: this.dialogForm.file_describe,
         file: this.file,
       };
-      service.uplode(params).then((res) => {
-        console.log(params);
+      service.uplode(data).then((res) => {
+        console.log(data)
         console.log(res);
         if (res.code == 20010) {
           this.$message({

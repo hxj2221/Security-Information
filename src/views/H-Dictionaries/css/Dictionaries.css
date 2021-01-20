@@ -1,6 +1,6 @@
 .allManage {
     background: #ffffff;
-    width: 1240px;
+    width: 95%;
     padding: 0 20px;
     margin: 0 auto;
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
@@ -64,22 +64,18 @@
 
 /* 内容 */
 
-.allManage>.allManage_cont {
-    display: flex;
+.allManage .allManage_cont .right{
+    text-align: left
 }
 
 
 /* 侧边导航 */
 
-.allManage>.allManage_cont .left {
-    margin-right: 49px;
-}
-
 .allManage>.allManage_cont .left .side_nav .side_nav_list {
     list-style: none;
     font-size: 14px;
     color: #333333;
-    width: 180px;
+    width: 222px;
     height: 44px;
     border: 1px solid #f0f1fd;
     line-height: 44px;
@@ -100,7 +96,6 @@
     width: 367px;
     height: 36px;
     margin-bottom: 20px;
-    margin-left: 0;
 }
 
 .allManage .allManage_cont .right .search .el-input-group__append {
@@ -111,11 +106,6 @@
 
 
 /* 表格 */
-
-.allManage .allManage_cont .right {
-    width: 985px;
-    text-align: left;
-}
 
 .allManage .allManage_cont .right .right_con .el-table__header-wrapper .el-table__header .has-gutter tr th {
     text-align: center;
@@ -132,6 +122,7 @@
     margin-top: 105px;
     padding-bottom: 117px;
     text-align: right;
+    margin-right: 36px;
 }
 
 

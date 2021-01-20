@@ -104,8 +104,9 @@
     display: inline-block;
 }
 
-
+/* 弹框 */
 .addRecord_enclosure_dialog_div >.el-form{
+
     width: 80%;
     margin: 0 auto;
 }

@@ -71,7 +71,7 @@
           </el-switch>
         </el-table-column>
         <el-table-column prop="name" label="修改人员"> </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="操作" width="150"   fixed="right">
           <template slot-scope="scope">
             <el-button type="text" size="small" @click="dialogVisible = true"
               >编辑</el-button
@@ -89,8 +89,6 @@
       <div class="columnList_table_paging">
        
     <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
       :current-page="currentPage"
       :page-sizes="[8, 10, 20]"
       :page-size="8"
@@ -165,7 +163,7 @@ export default {
       value: "",
       input: "",
       input1: "",
-      currentPage1:1
+      currentPage:1
     };
   },
 
@@ -181,13 +179,26 @@ export default {
         .catch((_) => {});
     },
     handDel(i, row) {
-      row.splice(i, 1);
-       this.$message({
-          showClose: true,
-          message: '删除成功',
-          type: 'success',
-          duration:1000
-        });
+       this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+            confirmButtonText: "确定",
+            cancelButtonText: "取消",
+            type: "warning",
+          })
+            .then(() => {
+              this.$message({
+                type: "success",
+                message: "删除成功!",
+                delete: row.splice(i, 1),
+                duration:1000
+              });
+            })
+            .catch(() => {
+              this.$message({
+                type: "info",
+                message: "已取消删除",
+                duration:1000
+              });
+            })
     },
   },
 };
