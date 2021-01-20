@@ -312,7 +312,7 @@ export default {
       this.addStaff.status = res.status;
       // this.addStaff.head_department = res.head_department;
       this.addStaff.position = res.position;
-      this.addStaff.auth_grouap = res.auth_grouap[0].title;
+      this.addStaff.auth_grouap = res.auth_grouap[0].id;
       this.role_id = res.role_id;
       this.addStaff.status = res.status;
     },
@@ -334,7 +334,7 @@ export default {
         age: this.addStaff.age,
         cardnumber: this.addStaff.cardnumber,
         department_id: this.department_id,
-        role_id: this.role_id,
+        role_id: this.addStaff.auth_grouap,
         status: this.addStaff.status,
         // head_department: this.addStaff.head_department,
       };
