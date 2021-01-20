@@ -59,7 +59,7 @@
           </el-table-column>
           <el-table-column
             width="120"
-            prop="user[0].name"
+            prop="user[0].id"
             label="创建人员"
           ></el-table-column>
 

@@ -90,8 +90,8 @@
             </div>
             <el-checkbox v-model="agree" class="check">阅读并同意以上说明</el-checkbox>
             <span slot="footer" class="dialog-footer">
-              <el-button @click="dialogVisible = false">取 消</el-button>
-              <el-button type="primary" @click="dialogVisible = false">继续</el-button>
+              <el-button @click="backss">取 消</el-button>
+              <el-button type="primary" @click="dialogVisible = false" :disabled="agree==true?false:true">继续</el-button>
             </span>
           </el-dialog>
         </div>
@@ -271,7 +271,7 @@ export default {
     handleClose(done) {
       this.$confirm("确认关闭？")
         .then((_) => {
-          this.dialogVisible = false;
+         this.backss()
         })
         .catch((_) => {});
     },
@@ -289,6 +289,7 @@ export default {
         event_number: index.event_number,
       };
       service.componrdetaile(qs.stringify(params)).then((res) => {
+        console.log(res)
          if(res.code==20010){
               this.lookdata = res.data;
           }
@@ -335,6 +336,7 @@ export default {
       this.add = false;
       this.look = false;
       this.operations = false;
+      this.dialogVisible = false
       this.reload()
     },
     // 添加投诉

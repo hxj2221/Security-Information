@@ -338,8 +338,8 @@ export default {
     return await service.get(`${baseUrl}api/record/upload_attachment`, { params }).then(res => res).catch(err => err)
   },
   // 上传附件 确定
-  uplode: async (params: any) => {
-    return await service.post(`${baseUrl}api/record/upload_attachment`, params).then(res => res).catch(err => err)
+  uplode: async (data: any) => {
+    return await service.post(`${baseUrl}api/record/upload_attachment`, data).then(res => res).catch(err => err)
   },
   // 医患详情
   details: async (data: any) => {

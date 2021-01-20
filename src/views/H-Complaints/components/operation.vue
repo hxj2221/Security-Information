@@ -36,8 +36,8 @@
           class="infinite-list"
           style="overflow: auto; height: 870px; texr-aligin: center"
         >
-          <Look style="width: 100%; margin: 0px 0px; padding: 0px 0px">
-            <div slot="title"></div>
+          <Look style="width: 100%; ">
+            <div slot="title" ></div>
           </Look>
         </ul>
       </el-drawer>
@@ -160,8 +160,10 @@
                     <el-input
                       type="textarea"
                       v-model="treatment"
+                       :autosize="{ minRows: 2, maxRows: 4}"
                       placeholder="请填写"
-                      autosize
+                      maxlength="200"
+                     
                     ></el-input></div
                 ></el-col>
               </el-row>
@@ -172,8 +174,9 @@
                     <el-input
                       type="textarea"
                       v-model="response"
+                      maxlength="200"
                       placeholder="请填写"
-                      autosize
+                       :autosize="{ minRows: 2, maxRows: 4}"
                     ></el-input></div
                 ></el-col>
               </el-row>
@@ -202,8 +205,9 @@
                       <el-input
                         type="textarea"
                         v-model="analysis"
+                        maxlength="200"
                         placeholder="请填写"
-                        autosize
+                         :autosize="{ minRows: 2, maxRows: 4}"
                       ></el-input></div
                   ></el-col>
                 </el-row>
@@ -215,7 +219,8 @@
                         type="textarea"
                         v-model="responsibility"
                         placeholder="请填写"
-                        autosize
+                        maxlength="200"
+                        :autosize="{ minRows: 2, maxRows: 4}"
                       ></el-input></div
                   ></el-col>
                 </el-row>
@@ -226,8 +231,9 @@
                       <el-input
                         type="textarea"
                         v-model="measures"
+                        maxlength="200"
                         placeholder="请填写"
-                        autosize
+                         :autosize="{ minRows: 2, maxRows: 4}"
                       ></el-input></div
                   ></el-col>
                 </el-row>
@@ -252,12 +258,13 @@
                 <el-col :span="6" :push="1"
                   ><div class="grid-content bg-purple">
                     <span class="label">审批操作:</span>
-                    <el-select v-model="checkstate" placeholder="请选择事件状态">
+                    <el-select v-model="checkstate" placeholder="请选择事件状态"  @change="changestate">
                       <el-option
                        v-for="item in opdata[1].examine"
                         :key="item.state_val"
                         :label="item.title"
                         :value="item.state_val"
+                       
                       >
                       </el-option>
                     </el-select></div
@@ -275,7 +282,8 @@
                         type="textarea"
                         v-model="preliminary"
                         placeholder="请填写"
-                        autosize
+                        maxlength="200"
+                        :autosize="{ minRows: 2, maxRows: 4}"
                       ></el-input></div
                   ></el-col>
                 </el-row>
@@ -290,7 +298,8 @@
                         type="textarea"
                         v-model="preliminary"
                         placeholder="请填写"
-                        autosize
+                        maxlength="200"
+                        :autosize="{ minRows: 2, maxRows: 4}"
                       ></el-input></div
                   ></el-col>
                 </el-row>
@@ -327,6 +336,9 @@
                         type="input"
                          style="margin-left: 10px"
                         v-model="needtime"
+                        maxlength="2"
+                         oninput="value=value.replace(/[^\d]/g,'')"
+               onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )"
                         placeholder="请填写"
                         autosize
                       ></el-input></div
@@ -363,7 +375,8 @@
                         type="textarea"
                         v-model="facts"
                         placeholder="请填写"
-                        autosize
+                        maxlength="200"
+                         :autosize="{ minRows: 2, maxRows: 4}"
                       ></el-input></div
                   ></el-col>
                 </el-row>
@@ -374,8 +387,9 @@
                       <el-input
                         type="textarea"
                         v-model="focus"
+                        maxlength="200"
                         placeholder="请填写"
-                        autosize
+                         :autosize="{ minRows: 2, maxRows: 4}"
                       ></el-input></div
                   ></el-col>
                 </el-row>
@@ -400,6 +414,7 @@
                       style="margin-left: 10px"
                         type="input"
                         v-model="date"
+                        
                         placeholder="请填写"
                         autosize
                       ></el-input></div
@@ -425,9 +440,10 @@
                       >
                       <el-input
                         type="textarea"
+                        maxlength="200"
                         v-model="preliminary"
                         placeholder="请填写"
-                        autosize
+                         :autosize="{ minRows: 2, maxRows: 4}"
                       ></el-input></div
                   ></el-col>
                 </el-row>
@@ -438,6 +454,7 @@
                   <el-col :span="6" :push="1"
                     ><div class="grid-content bg-purple">
                       <span class="label">选择下发科室:</span>
+                      <br/>
                           <el-cascader
                 ref="cascader"
                 :options="opdata[1].department"
@@ -467,8 +484,9 @@
                       <el-input
                         type="textarea"
                         v-model="preliminary"
+                        maxlength="200"
                         placeholder="请填写"
-                        autosize
+                        :autosize="{ minRows: 2, maxRows: 4}"
                       ></el-input></div
                   ></el-col>
                 </el-row>
@@ -479,8 +497,9 @@
                       <el-input
                         type="textarea"
                         v-model="management"
+                        maxlength="200"
                         placeholder="请填写"
-                        autosize
+                         :autosize="{ minRows: 2, maxRows: 4}"
                       ></el-input></div
                   ></el-col>
                 </el-row>
@@ -557,7 +576,8 @@
                         type="textarea"
                         v-model="economic"
                         placeholder="请填写"
-                        autosize
+                        maxlength="200"
+                         :autosize="{ minRows: 2, maxRows: 4}"
                       ></el-input></div
                   ></el-col>
                 </el-row>
@@ -568,8 +588,9 @@
                       <el-input
                         type="textarea"
                         v-model="preliminary"
+                        maxlength="200"
                         placeholder="请填写"
-                        autosize
+                         :autosize="{ minRows: 2, maxRows: 4}"
                       ></el-input></div
                   ></el-col>
                 </el-row>
@@ -603,6 +624,7 @@
                       <el-input
                         type="input"
                         v-model="agentname"
+                        maxlength="3"
                         placeholder="请填写"
                         autosize
                       ></el-input></div
@@ -621,6 +643,9 @@
                         type="input"
                         v-model="agentphone"
                         placeholder="请填写"
+                        maxlength="11"
+                         oninput="value=value.replace(/[^\d]/g,'')"
+               onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )"
                         autosize
                       ></el-input></div
                   ></el-col>
@@ -734,11 +759,14 @@
               <el-input
                 type="textarea"
                 v-model="filedescribe"
+                 maxlength="50"
                 placeholder="请输入文件描述"
+                 :autosize="{ minRows: 2, maxRows: 2}"
               ></el-input>
             </el-form-item>
             
             <el-form-item label="上传附件：" class="uploadfile">
+              <input type="file" class="upfile" ref="file" />
               <!-- 
                  :http-request='upfilesubmit' -->
             <!-- <el-upload
@@ -757,7 +785,7 @@
                  :auto-upload="false">
             <el-button slot="trigger" size="small" type="primary"   :disabled='(filetitle==""||filedescribe=="")?true:false' >选取文件</el-button>
             </el-upload> -->
-             <el-upload
+             <!-- <el-upload
              action='http://bt1.wlqqlp.com:8082/index.php/api/srk/create_base64_file'
                  class="upload-demo"
                  :limit='1'
@@ -766,12 +794,12 @@
                  :on-change="handleChange"
                  :auto-upload="false">
             <el-button slot="trigger" size="small" type="primary"   :disabled='(filetitle==""||filedescribe=="")?true:false' >选取文件</el-button>
-            </el-upload>
+            </el-upload> -->
             </el-form-item>
           </el-form>
           <span slot="footer" class="dialog-footer">
             <el-button @click="upfiles = false">取 消</el-button>
-            <el-button type="primary" @click="upfilesubmit">确 定</el-button>
+            <el-button type="primary" @click="upfilesubmit" >确 定</el-button>
           </span>
         </el-dialog>
       </div>
@@ -810,7 +838,7 @@ export default {
          file_name:'',
          represent:''
       },
-      comde:'',//
+      comde:'',//下发科室
       date: "", //约定日期
       liable: "", //责任人
       liablelist: [], //责任人列表
@@ -852,44 +880,81 @@ export default {
     };
   },
   methods: {
-    // //这个file参数 也就是文件信息，你使用 插件 时 你就可以打印出文件信息 看看嘛
-   getBase64() {
-      return new Promise((resolve, reject) => {
-        let reader = new FileReader();
-        let fileResult = "";
-        reader.readAsDataURL(this.fileList[0].raw);　　　　　//开始转
-        reader.onload = function() {
-          fileResult = reader.result;
-        };　　　　　//转 失败
-        reader.onerror = function(error) {
-          reject(error);
-        };　　　　　//转 结束  咱就 resolve 出去
-        reader.onloadend = function() {
-          resolve(fileResult);
-        };
-      });
-    },
-  upfilesubmit(){
-      let file=this.fileList[0]
-      console.log(file.raw)
-      this.getBase64(file).then(resBase64 => {
-        this.base64file = resBase64.split(',')[1]　　//直接拿到base64信息
-        console.log(this.base64file)
-          let params={
+    upfilesubmit(){
+    console.log(this.$refs.file.files[0])
+         let params={
         // event_number:this.$parent.opdata[0].event_number,//编号
-        base64_file:this.base64file,
+        file:this.$refs.file.files[0],
         //  file_name:this.filetitle,
         // represent:this.filedescribe
       }
       console.log(params)
-      service.uploadfilebase(params).then(res=>{
+      service.uploadfiles(params).then(res=>{
         console.log(res)
       })
-        })
-    
-      this.upfilesss=true
-      this.upfiles = false
     },
+    changestate(){
+       this.economic=''//直接经济损失
+      this.management=''//管理措施
+      this.eventtype=''//投诉类别
+      this.accountability=''//责任度
+      this.comde=''//下发科室
+      this.date= "" //约定日期
+      this.liable= "" //责任人
+      this.agentname= "" //经办人姓名
+      this.agentphone= "" //经办人联系方式
+      this.treatment= "" // 诊疗经过
+      this.response= "" //针对性答复
+      this.needtime= "" //输入天数
+      this.issue="" //下发科室
+      this.facts= "" //主要事实
+      this.focus="" //争议焦点
+      this.analysis= "" //根因分析
+      this.responsibility= "" //责任意见
+      this.measures=""//整改措施
+      this.preliminary= "" //初步意见
+      this.peopel= "" //当事员工
+    },
+    // //这个file参数 也就是文件信息，你使用 插件 时 你就可以打印出文件信息 看看嘛
+  //  getBase64() {
+  //     return new Promise((resolve, reject) => {
+  //       let reader = new FileReader();
+  //       let fileResult = "";
+  //       reader.readAsDataURL(this.fileList[0].raw);　　　　　//开始转
+  //       reader.onload = function() {
+  //         fileResult = reader.result;
+  //       };　　　　　//转 失败
+  //       reader.onerror = function(error) {
+  //         reject(error);
+  //       };　　　　　//转 结束  咱就 resolve 出去
+  //       reader.onloadend = function() {
+  //         resolve(fileResult);
+  //       };
+  //     });
+  //   },
+  // upfilesubmit(){
+  //     let file=this.fileList[0]
+  //     console.log(file.raw)
+  //     this.getBase64(file).then(resBase64 => {
+  //       this.base64file = resBase64.split(',')[1]　　//直接拿到base64信息
+  //       console.log(this.base64file)
+  //         let params={
+  //       // event_number:this.$parent.opdata[0].event_number,//编号
+  //       base64_file:this.base64file,
+  //       //  file_name:this.filetitle,
+  //       // represent:this.filedescribe
+  //     }
+  //     console.log(params)
+  //     service.uploadfilebase(params).then(res=>{
+  //       console.log(res)
+  //     }).catch(res=>{
+  //       console.log(res)
+  //     })
+  //       })
+    
+  //     this.upfilesss=true
+  //     this.upfiles = false
+  //   },
       handleChange(file, fileList) {
       
      if(this.filedescribe!==''&&this.filetitle!==''){
