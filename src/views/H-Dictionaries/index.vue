@@ -7,45 +7,56 @@
           <li class="list" v-for="(item,index) in Nav" :key="item.index" v-bind:class="{bgColor:index==nowIndex}"
             @click="change(index)">{{item.name}}</li>
         </ul>
-        <el-button type="primary" icon="el-icon-circle-plus" @click="increase()" >新增
+        <el-button type="primary" icon="el-icon-circle-plus" @click="increase()">新增
         </el-button>
       </div>
       <div class="allManage_cont">
-        <!-- 侧边导航 -->
-        <div class="left">
-          <ul class="side_nav">
-            <li class="side_nav_list" v-for="item in SideNav" :key="item.index">{{item.name}}</li>
-          </ul>
-        </div>
-        <!-- 右边内容 -->
-        <div class="right">
-          <el-input placeholder="请输入内容" v-model="search" class="input-with-select search">
-            <el-button slot="append" icon="el-icon-search"></el-button>
-          </el-input>
-          <el-table class="right_con" ref="singleTable" :header-cell-style="getRowClass" :data="tableData" style="width:100%">
-            <el-table-column type="index" label="序号" width="90">
-            </el-table-column>
-            <el-table-column property="field" label="字段" width="350">
-            </el-table-column>
-            <el-table-column property="date" label="创建时间" width="180">
-            </el-table-column>
-            <el-table-column property="name" label="创建人" width="180">
-            </el-table-column>
-            <el-table-column label="操作" width="180">
-              <template slot-scope="scope">
-                <el-button type="text" size="small" @click="edit()">编辑</el-button>
-                <el-button @click.native.prevent="deleteRow(scope.$index, tableData)" type="text" size="small">删除
-                </el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-        </div>
+        <el-row  type="flex" class="row-bg" justify="space-around">
+          <!-- 侧边导航 -->
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+
+              <div class="left">
+                <ul class="side_nav">
+                  <li class="side_nav_list" v-for="item in SideNav" :key="item.index">{{item.name}}</li>
+                </ul>
+              </div>
+            </div>
+          </el-col>
+          <!-- 右边内容 -->
+          <el-col :span="18">
+            <div class="grid-content bg-purple-light">
+              <div class="right">
+                <el-input placeholder="请输入内容" v-model="search" class="input-with-select search">
+                  <el-button slot="append" icon="el-icon-search"></el-button>
+                </el-input>
+                <el-table class="right_con" ref="singleTable" :header-cell-style="getRowClass" :data="tableData">
+                  <el-table-column type="index" label="序号">
+                  </el-table-column>
+                  <el-table-column property="field" label="字段">
+                  </el-table-column>
+                  <el-table-column property="date" label="创建时间">
+                  </el-table-column>
+                  <el-table-column property="name" label="创建人">
+                  </el-table-column>
+                  <el-table-column label="操作">
+                    <template slot-scope="scope">
+                      <el-button type="text" size="small" @click="edit()">编辑</el-button>
+                      <el-button @click.native.prevent="deleteRow(scope.$index, tableData)" type="text" size="small">删除
+                      </el-button>
+                    </template>
+                  </el-table-column>
+                </el-table>
+              </div>
+            </div>
+          </el-col>
+        </el-row>
       </div>
       <!-- 分页 -->
       <div class="block">
-        <el-pagination @size-change="handleSizeChange" @current-change="currentChage"
-          :current-page="currentPage4" :page-sizes="pageNumList" :page-size="100"
-          layout="total, sizes, prev, pager, next, jumper" :total="pageCount">
+        <el-pagination @size-change="handleSizeChange" @current-change="currentChage" :current-page="currentPage4"
+          :page-sizes="pageNumList" :page-size="100" layout="total, sizes, prev, pager, next, jumper"
+          :total="pageCount">
         </el-pagination>
       </div>
       <!-- 新增 -->
@@ -58,22 +69,20 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogFormVisible = false">取 消</el-button>
-          <el-button style="background: #666EE8;
-    border: #666EE8;" type="primary" @click="dialogFormVisible = false">确 定</el-button>
+          <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
         </div>
       </el-dialog>
       <!-- 编辑 -->
       <el-dialog title="编辑字段" :visible.sync="dialogVisible">
         <el-form :model="form">
           <el-form-item label="字段信息" required>
-            <el-input type="textarea" placeholder="请输入内容" v-model="form.name">
+            <el-input type="textarea" :rows="8" placeholder="请输入内容" v-model="form.name">
             </el-input>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button style="background: #666EE8;
-    border: #666EE8;" type="primary" @click="dialogVisible = false">确 定</el-button>
+          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
         </div>
       </el-dialog>
     </div>
@@ -162,19 +171,11 @@
           field: '省卫生热线12320',
           date: '2019-11-12 12:08:12',
           name: '王小虎',
-        }, {
-          field: '卫健委维权处',
-          date: '2019-11-12 12:08:12',
-          name: '王小虎',
-        }, {
-          field: '卫健委信访',
-          date: '2019-11-12 12:08:12',
-          name: '王小虎',
         }],
-        currentPage4:1,//分页
-        pageNumList:[8,10,20],//页数
-        pageCount:0,//总数量
-        pageSize:8,//默认条数
+        currentPage4: 1, //分页
+        pageNumList: [8, 10, 20], //页数
+        pageCount: 0, //总数量
+        pageSize: 8, //默认条数
         // 编辑
         form: {
           name: '',
@@ -190,14 +191,16 @@
         this.nowIndex = index;
       },
       // 表格操作
-       // 设置表头颜色
-    getRowClass({ rowIndex }) {
-      if (rowIndex == 0) {
-        return "background:#c2c5f6;color:#000";
-      } else {
-        return "";
-      }
-    },
+      // 设置表头颜色
+      getRowClass({
+        rowIndex
+      }) {
+        if (rowIndex == 0) {
+          return "background:#c2c5f6;color:#000";
+        } else {
+          return "";
+        }
+      },
       // 编辑
       edit() {
         this.dialogVisible = !this.dialogVisible
@@ -208,11 +211,11 @@
       },
       // 分页
       // 每页显示条数
-      handleSizeChange(val){
+      handleSizeChange(val) {
         console.log(val)
       },
       // 页面跳转
-      currentChage(val){
+      currentChage(val) {
         console.log(val)
       },
       // 新增

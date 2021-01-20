@@ -1,349 +1,355 @@
 <template>
   <div class="AdeDetail">
-    <div class="top">
-      <span class="left">投诉案件调查表</span>
-      <div class="right">
-        <i class="el-icon-printer"><span>打印记录表</span></i>
-        <i class="fa fa-reply fa-2" aria-hidden="true" @click="back()"><span>返回</span></i>
+    <div style="position: fixed;
+    top: 73px;z-index: 999;width:78.6%">
+      <div class="top">
+        <span class="left">投诉案件调查表</span>
+        <div class="right">
+          <i class="el-icon-printer print"><span style="padding-left:3px">打印记录表</span></i>
+          <el-button type="primary" icon="iconfont el-icon-hospital-passwordai207" class="back" @click="back">返回
+          </el-button>
+        </div>
       </div>
     </div>
-    <div class="head-txt">
-      <div class="txt">
-        <el-row>
-          <el-col :span="8">
+    <div>
+      <div class="head-txt">
+        <div class="txt">
+          <el-row>
+            <el-col :span="8">
+              <div class="grid-content bg-purple">
+                <span class="tit">医院名称：</span>
+                <span>第二人民医院</span>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div style="height:30px" class="grid-content bg-purple-light"></div>
+            </el-col>
+            <el-col :span="8">
+              <div class="grid-content bg-purple">
+                <span class="tit">事件编号：</span>
+                <span>{{event_num}}</span>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="8">
+              <div class="grid-content bg-purple">
+                <span class="tit">事发时间：</span>
+                <span>{{occur_time |Date }}</span>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div style="height:30px" class="grid-content bg-purple-light"></div>
+            </el-col>
+            <el-col :span="8">
+              <div class="grid-content bg-purple">
+                <span class="tit">事发地点：</span>
+                <span>{{occur_scene}}</span>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="8">
+              <div class="grid-content bg-purple">
+                <span class="tit">不良类型：</span>
+                <span>{{event_type}}</span>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div style="height:30px" class="grid-content bg-purple-light"></div>
+            </el-col>
+            <el-col :span="8">
+              <div class="grid-content bg-purple">
+                <span class="tit">上报人：</span>
+                <span>{{create_uid}}</span>
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+      </div>
+      <!-- 基本信息 -->
+      <div class="cent_info">
+        <p>基本信息</p>
+        <el-row class="tab">
+          <el-col :span="4">
             <div class="grid-content bg-purple">
-              <span class="tit">医院名称：</span>
-              <span>第二人民医院</span>
+              <p class="tit">患者姓名</p>
             </div>
           </el-col>
-          <el-col :span="8">
-            <div style="height:30px" class="grid-content bg-purple-light"></div>
-          </el-col>
-          <el-col :span="8">
+          <el-col :span="4">
             <div class="grid-content bg-purple">
-              <span class="tit">事件编号：</span>
-              <span>{{event_num}}</span>
+              <p class="con">{{patient_name}}</p>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="tit">性别/年龄</p>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="con">{{sex}}/{{age}}{{specific_age}}</p>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="tit">住院号</p>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="con">{{admission_id}}</p>
             </div>
           </el-col>
         </el-row>
-        <el-row>
-          <el-col :span="8">
+        <el-row class="tab">
+          <el-col :span="4">
             <div class="grid-content bg-purple">
-              <span class="tit">事发时间：</span>
-              <span>{{occur_time |Date }}</span>
+              <p class="tit">入院日期</p>
             </div>
           </el-col>
-          <el-col :span="8">
-            <div style="height:30px" class="grid-content bg-purple-light"></div>
-          </el-col>
-          <el-col :span="8">
+          <el-col :span="4">
             <div class="grid-content bg-purple">
-              <span class="tit">事发地点：</span>
-              <span>{{occur_scene}}</span>
+              <p class="con">{{hospitalized_time |date}}</p>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="tit">科室</p>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="con">{{department_id}}</p>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="tit">床号</p>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="con">{{bed_number}}</p>
             </div>
           </el-col>
         </el-row>
-        <el-row>
-          <el-col :span="8">
+        <el-row class="tab">
+          <el-col :span="4">
             <div class="grid-content bg-purple">
-              <span class="tit">不良类型：</span>
-              <span>{{event_type}}</span>
+              <p class="tit">不良发生时间</p>
             </div>
           </el-col>
-          <el-col :span="8">
-            <div style="height:30px" class="grid-content bg-purple-light"></div>
-          </el-col>
-          <el-col :span="8">
+          <el-col :span="20">
             <div class="grid-content bg-purple">
-              <span class="tit">上报人：</span>
-              <span>{{create_uid}}</span>
+              <p class="con">{{occur_time | Date }}</p>
+
+            </div>
+          </el-col>
+        </el-row>
+        <el-row class="tab">
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="tit">不良报告时间</p>
+            </div>
+          </el-col>
+          <el-col :span="20">
+            <div class="grid-content bg-purple">
+              <p class="con">{{create_time |formatDate}}</p>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row class="tab">
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="tit">主管医师</p>
+            </div>
+          </el-col>
+          <el-col :span="20">
+            <div class="grid-content bg-purple">
+              <p class="con">{{Indications_uid}}</p>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row class="tab">
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="tit">主管护士</p>
+            </div>
+          </el-col>
+          <el-col :span="20">
+            <div class="grid-content bg-purple">
+              <p class="con">{{nurse_uid}}</p>
+
+            </div>
+          </el-col>
+        </el-row>
+        <el-row class="tab">
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="tit">在场相关人员</p>
+            </div>
+          </el-col>
+          <el-col :span="20">
+            <div class="grid-content bg-purple">
+              <p class="con">{{stakeholder}}</p>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row class="tab">
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="tit">入院诊断</p>
+            </div>
+          </el-col>
+          <el-col :span="20">
+            <div class="grid-content bg-purple">
+              <p class="con">{{admitting_diagnosis}}</p>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row class="tab">
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="tit">诊疗经过</p>
+            </div>
+          </el-col>
+          <el-col :span="20">
+            <div class="grid-content bg-purple">
+              <p class="con">{{diagnosis_process}}</p>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row class="tab">
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="tit">患者目前情况</p>
+            </div>
+          </el-col>
+          <el-col :span="20">
+            <div class="grid-content bg-purple">
+              <p class="con">{{patient_situation}}</p>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row class="tab">
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="tit">不良事件描述</p>
+            </div>
+          </el-col>
+          <el-col :span="20">
+            <div class="grid-content bg-purple">
+              <p class="con">{{event_describe}}</p>
             </div>
           </el-col>
         </el-row>
       </div>
-    </div>
-    <!-- 基本信息 -->
-    <div class="cent_info">
-      <p>基本信息</p>
-      <el-row class="tab">
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">患者姓名</p>
-          </div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="con">{{patient_name}}</p>
-          </div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">性别/年龄</p>
-          </div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="con">{{sex}}/{{age}}{{specific_age}}</p>
-          </div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">住院号</p>
-          </div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="con">{{admission_id}}</p>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row class="tab">
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">入院日期</p>
-          </div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="con">{{hospitalized_time |date}}</p>
-          </div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">科室</p>
-          </div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="con">{{department_id}}</p>
-          </div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">床号</p>
-          </div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="con">{{bed_number}}</p>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row class="tab">
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">不良发生时间</p>
-          </div>
-        </el-col>
-        <el-col :span="20">
-          <div class="grid-content bg-purple">
-            <p class="con">{{occur_time | Date }}</p>
+      <!-- 关联患者信息 -->
+      <div class="cent_info">
+        <p>关联患者信息</p>
+        <el-row class="tab">
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="tit">患者姓名</p>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="con"></p>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="tit">性别</p>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="con"></p>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="tit">年龄</p>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="con"></p>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row class="tab">
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="tit">医保类型</p>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="con"></p>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="tit">手机</p>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="con"></p>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="tit">最新就诊日期</p>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="con"></p>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row class="tab">
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="tit">所在病区</p>
+            </div>
+          </el-col>
+          <el-col :span="20">
+            <div class="grid-content bg-purple">
+              <p class="con"></p>
 
-          </div>
-        </el-col>
-      </el-row>
-      <el-row class="tab">
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">不良报告时间</p>
-          </div>
-        </el-col>
-        <el-col :span="20">
-          <div class="grid-content bg-purple">
-            <p class="con">{{create_time |formatDate}}</p>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row class="tab">
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">主管医师</p>
-          </div>
-        </el-col>
-        <el-col :span="20">
-          <div class="grid-content bg-purple">
-            <p class="con">{{Indications_uid}}</p>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row class="tab">
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">主管护士</p>
-          </div>
-        </el-col>
-        <el-col :span="20">
-          <div class="grid-content bg-purple">
-            <p class="con">{{nurse_uid}}</p>
-
-          </div>
-        </el-col>
-      </el-row>
-      <el-row class="tab">
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">在场相关人员</p>
-          </div>
-        </el-col>
-        <el-col :span="20">
-          <div class="grid-content bg-purple">
-            <p class="con">{{stakeholder}}</p>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row class="tab">
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">入院诊断</p>
-          </div>
-        </el-col>
-        <el-col :span="20">
-          <div class="grid-content bg-purple">
-            <p class="con">{{admitting_diagnosis}}</p>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row class="tab">
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">诊疗经过</p>
-          </div>
-        </el-col>
-        <el-col :span="20">
-          <div class="grid-content bg-purple">
-            <p class="con">{{diagnosis_process}}</p>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row class="tab">
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">患者目前情况</p>
-          </div>
-        </el-col>
-        <el-col :span="20">
-          <div class="grid-content bg-purple">
-            <p class="con">{{patient_situation}}</p>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row class="tab">
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">不良事件描述</p>
-          </div>
-        </el-col>
-        <el-col :span="20">
-          <div class="grid-content bg-purple">
-            <p class="con">{{event_describe}}</p>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
-    <!-- 关联患者信息 -->
-    <div class="cent_info">
-      <p>关联患者信息</p>
-      <el-row class="tab">
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">患者姓名</p>
-          </div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="con"></p>
-          </div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">性别</p>
-          </div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="con"></p>
-          </div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">年龄</p>
-          </div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="con"></p>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row class="tab">
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">医保类型</p>
-          </div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="con"></p>
-          </div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">手机</p>
-          </div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="con"></p>
-          </div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">最新就诊日期</p>
-          </div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="con"></p>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row class="tab">
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">所在病区</p>
-          </div>
-        </el-col>
-        <el-col :span="20">
-          <div class="grid-content bg-purple">
-            <p class="con"></p>
-
-          </div>
-        </el-col>
-      </el-row>
-      <el-row class="tab">
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">所在病房</p>
-          </div>
-        </el-col>
-        <el-col :span="20">
-          <div class="grid-content bg-purple">
-            <p class="con"></p>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row class="tab">
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <p class="tit">诊断信息</p>
-          </div>
-        </el-col>
-        <el-col :span="20">
-          <div class="grid-content bg-purple">
-            <p class="con"></p>
-          </div>
-        </el-col>
-      </el-row>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row class="tab">
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="tit">所在病房</p>
+            </div>
+          </el-col>
+          <el-col :span="20">
+            <div class="grid-content bg-purple">
+              <p class="con"></p>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row class="tab">
+          <el-col :span="4">
+            <div class="grid-content bg-purple">
+              <p class="tit">诊断信息</p>
+            </div>
+          </el-col>
+          <el-col :span="20">
+            <div class="grid-content bg-purple">
+              <p class="con"></p>
+            </div>
+          </el-col>
+        </el-row>
+      </div>
     </div>
   </div>
 </template>
@@ -354,27 +360,27 @@
     props: {},
     data() {
       return {
-        event_num: '',//事件编号
-        patient_name: '',//患者姓名
-        sex: '',//性别
-        age: '',//年龄
-        specific_age: '',//年龄类型
-        event_describe: '',//不良事件描述
-        diagnosis_process: '',//诊疗经过
-        patient_situation: '',//患者目前状况
-        admitting_diagnosis: '',//入院诊断
-        bed_number: "",//床号
-        hospitalized_time: "",//入院日期
-        department_id: "",//科室
-        stakeholder: '',//在场相关人员
-        Indications_uid: "",//主管医师
-        nurse_uid: "",//主管护士
-        admission_id: '',//住院号
-        create_time: '',//不良报告时间
-        occur_time: '',//不良发生时间
-        occur_scene: '',//事发地点
-        event_type: "",//不良类型
-        create_uid: "",//上报人
+        event_num: '', //事件编号
+        patient_name: '', //患者姓名
+        sex: '', //性别
+        age: '', //年龄
+        specific_age: '', //年龄类型
+        event_describe: '', //不良事件描述
+        diagnosis_process: '', //诊疗经过
+        patient_situation: '', //患者目前状况
+        admitting_diagnosis: '', //入院诊断
+        bed_number: "", //床号
+        hospitalized_time: "", //入院日期
+        department_id: "", //科室
+        stakeholder: '', //在场相关人员
+        Indications_uid: "", //主管医师
+        nurse_uid: "", //主管护士
+        admission_id: '', //住院号
+        create_time: '', //不良报告时间
+        occur_time: '', //不良发生时间
+        occur_scene: '', //事发地点
+        event_type: "", //不良类型
+        create_uid: "", //上报人
       };
     },
     methods: {
@@ -407,27 +413,27 @@
     created() {
       let that = this;
       this.bus.$on('detail', function (item) {
-        that.event_num = item.event_num//事件编号
-        that.patient_name = item.patient_name;//患者姓名
-        that.sex = item.sex;//性别
-        that.age = item.age;//年龄
-        that.specific_age = item.specific_age//年龄类别
-        that.event_describe = item.event_describe;//不良事件描述
-        that.diagnosis_process = item.diagnosis_process;//诊疗经过
-        that.patient_situation = item.patient_situation;//患者目前状况
-        that.admitting_diagnosis = item.admitting_diagnosis;//入院诊断
-        that.bed_number = item.bed_number;//床号
-        that.hospitalized_time = item.hospitalized_time;//入院日期
-        that.department_id = item.department_id;//科室
-        that.stakeholder = item.stakeholder;//在场相关人员
-        that.Indications_uid = item.Indications_uid;//主管医师
-        that.nurse_uid = item.nurse_uid;//主管护士
-        that.admission_id = item.admission_id;//住院号
-        that.create_time = item.create_time;//不良报告时间
-        that.occur_time = item.occur_time;//不良发生时间
-        that.occur_scene = item.department.title;//事发地点
-        that.event_type = item.eventtype.title;//不良类型
-        that.create_uid = item.create_uid//上报人
+        that.event_num = item.event_num //事件编号
+        that.patient_name = item.patient_name; //患者姓名
+        that.sex = item.sex; //性别
+        that.age = item.age; //年龄
+        that.specific_age = item.specific_age //年龄类别
+        that.event_describe = item.event_describe; //不良事件描述
+        that.diagnosis_process = item.diagnosis_process; //诊疗经过
+        that.patient_situation = item.patient_situation; //患者目前状况
+        that.admitting_diagnosis = item.admitting_diagnosis; //入院诊断
+        that.bed_number = item.bed_number; //床号
+        that.hospitalized_time = item.hospitalized_time; //入院日期
+        that.department_id = item.department_id; //科室
+        that.stakeholder = item.stakeholder; //在场相关人员
+        that.Indications_uid = item.Indications_uid; //主管医师
+        that.nurse_uid = item.nurse_uid; //主管护士
+        that.admission_id = item.admission_id; //住院号
+        that.create_time = item.create_time; //不良报告时间
+        that.occur_time = item.occur_time; //不良发生时间
+        that.occur_scene = item.department.title; //事发地点
+        that.event_type = item.eventtype.title; //不良类型
+        that.create_uid = item.create_uid //上报人
       })
     }
   }

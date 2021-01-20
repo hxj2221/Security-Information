@@ -7,7 +7,7 @@
         <div class="push_btn">
           <el-button type="primary" icon="el-icon-circle-plus" @click="uploadclassify()" >上传文件
         </el-button>
-        <el-button type="primary" icon="el-icon-circle-plus" @click="newclassify()" >新建分类
+        <el-button type="primary" class="newflie" icon="el-icon-circle-plus" @click="newclassify()" >新建分类
         </el-button>
         </div>
       </div>
@@ -36,21 +36,21 @@
       </div>
       <!-- 表格内容 -->
       <div class="TableContent">
-        <el-table :data="tableData">
-          <el-table-column prop="id" label="ID" width="180"> </el-table-column>
-          <el-table-column prop="file_name" label="文件名" width="180">
+        <el-table :data="tableData" :header-cell-style="getRowClass">
+          <el-table-column prop="id" label="ID"> </el-table-column>
+          <el-table-column prop="file_name" label="文件名">
           </el-table-column>
-          <el-table-column prop="file_describe" label="文件描述" width="260">
+          <el-table-column prop="file_describe" label="文件描述">
           </el-table-column>
-          <el-table-column prop="file_size" label="文件大小" width="180">
+          <el-table-column prop="file_size" label="文件大小">
           </el-table-column>
-          <el-table-column prop="create_time" label="更新时间" width="180">
+          <el-table-column prop="create_time" label="更新时间" width="230">
           </el-table-column>
-          <el-table-column prop="class_id" label="文件分类" width="180">
+          <el-table-column prop="class_id" label="文件分类">
           </el-table-column>
-          <el-table-column prop="uid" label="上传人员" width="180">
+          <el-table-column prop="uid" label="上传人员">
           </el-table-column>
-          <el-table-column label="操作" width="180">
+          <el-table-column label="操作" fixed="right">
             <template slot-scope="scope">
               <el-button
                 style="color: #666ee8"
@@ -155,9 +155,11 @@ export default {
   props: {},
   data() {
     return {
-      currentPage: 1,
-      dialogVisible: false,
-      ruleForm: {},
+      currentPage: 1,//页数
+      dialogVisible: false,//文件上传弹框
+      ruleForm: {
+        
+      },//文件上传内容
       name: "",
       region: "",
       desc: "",
@@ -185,6 +187,16 @@ export default {
     });
   },
   methods: {
+    // 设置表头颜色
+      getRowClass({
+        rowIndex
+      }) {
+        if (rowIndex == 0) {
+          return "background:#c2c5f6;color:#000";
+        } else {
+          return "";
+        }
+      },
     submitForm() {
       let data = {
         file_name: this.name,

@@ -268,6 +268,10 @@ export default {
   delpow: async (data: Object) => {
     return await service.post(`${baseUrl}api/auths/del`, data).then(res => res).catch(err => err)
   },
+  // 权限状态
+  powstatus: async (data: object) => {
+    return await service.post(`${baseUrl}api/auths/editstatus`, data).then(res => res).catch(err => err)
+  },
   //个人信息
   personxq: async () => {
     return await service.get(`${baseUrl}api/home/personal`).then(res => res).catch(err => err)

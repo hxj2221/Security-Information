@@ -169,19 +169,28 @@
     methods: {},
     created() {
       service.dashboard().then(res => {
-        // console.log(res)
-        this.Info=res.data.data
-        this.staff=res.data.staff
-        this.examine=res.data.examine
-        this.survey=res.data.survey
-        this.infor=res.data.infor
-        this.todaynew=res.data.todaynew
-        this.isputes=res.data.isputes
-        this.bad=res.data.bad
-        this.all_infor=res.data.all_infor
-        this.name=res.data.user[0].name
-        this.department=res.data.user[0].department[0].title
-        this.authgrouap=res.data.user[0].authgrouap[0].title
+        console.log(res)
+        if(res.code==20403){
+          this.$message({
+            message:res.msg,
+            type:"error",
+            duration:1000,
+          });
+        }else{
+          this.Info=res.data.data
+          this.staff=res.data.staff
+          this.examine=res.data.examine
+          this.survey=res.data.survey
+          this.infor=res.data.infor
+          this.todaynew=res.data.todaynew
+          this.isputes=res.data.isputes
+          this.bad=res.data.bad
+          this.all_infor=res.data.all_infor
+          this.name=res.data.user[0].name
+          this.department=res.data.user[0].department[0].title
+          this.authgrouap=res.data.user[0].authgrouap[0].title
+        }
+        
       })
     },
   }

@@ -1,10 +1,8 @@
 .mainBl {
     background-color: #fff;
     text-align: left;
-    padding-bottom: 1px;
-    padding: 0 20px 50px;
     width: 95%;
-    min-height: 680px;
+    min-height: 773px;
     margin: 0 auto;
     border-radius: 5px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
@@ -19,21 +17,24 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid #f2f2f2;
-    padding: 0 26px;
+    padding: 0 30px 0 20px;
 }
 
 .mainBl>.header>h4 {
     color: #666EE8;
+    border-left: 5px solid #666ee8;
+    padding-left: 5px;
+    font-size: 24px;
 }
 
 .mainBl>.header>.btn>.el-button {
-    /* width: 110px; */
+    width: 92px;
+    height: 40px;
     background-color: #666EE8;
     border-radius: 5px;
     color: #fff;
     text-align: center;
     font-weight: 900;
-    margin: 0 10px;
     cursor: pointer;
     border:3px solid #666EE8;
 }
@@ -42,7 +43,7 @@
     background-color: #fff;
     border: 1px solid #666EE8;
     color: #666EE8;
-    margin: 0;
+    margin-left: 30px;
 }
 
 .mainBl>.header>.btn>.exportAde:hover {
@@ -60,7 +61,7 @@
 .mainBl .searchAll {
     padding-top: 10px;
     margin-bottom: 10px;
-    padding: 0 20px;
+    padding: 0 15px;
 }
 .mainBl .searchAll .searchAll_search:last-child{
     display: flex;
@@ -68,7 +69,7 @@
 
 .mainBl .searchAll .searchAll_search {
     display: flex;
-    margin: 23px 0;
+    margin: 20px 0;
 }
 .mainBl .searchAll .searchAll_search .el-form-item{
     margin-bottom: 0;
@@ -85,7 +86,7 @@
 }
 
 .mainBl .elTable{
-    width: 95%;
+    width: 96%;
     margin: 0 auto;
 }
 .mainBl .elTable .el-table__header-wrapper .el-table__header .has-gutter tr th {
@@ -102,4 +103,5 @@
 .mainBl>.paging {
     text-align: right;
     margin: 40px 0;
+    padding: 0px 65px 53px;
 }

@@ -5,9 +5,9 @@ import service from '@/service/index';
     <div class="head">
       <h4 class="title">编辑分类</h4>
       <div class="push_btn">
-        <el-button type="primary" icon="el-icon-circle-plus" @click="dialogFormVisible = true" >新建分类
+        <el-button type="primary" class="newclassify" icon="el-icon-circle-plus" @click="dialogFormVisible = true" >新建分类
         </el-button>
-        <el-button class="back" type="primary" icon="iconfontel-icon-hospital-passwordai207" size="default" @click="back">返回文件列表</el-button>
+        <el-button class="back" type="primary" size="default" @click="back">返回文件列表</el-button>
       </div>
     </div>
     <!-- 内容 -->
@@ -35,8 +35,8 @@ import service from '@/service/index';
                 v-model="scope.row.status"
                 :active-value="1"
                 :inactive-value="0"
-                active-color="#02538C"
-                inactive-color="#B9B9B9"
+                active-color="#13ce66"
+                inactive-color="#ff4949"
                 @change="changeSwitch($event, scope.row, scope.row.id)"
               />
             </template>
