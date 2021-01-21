@@ -44,7 +44,7 @@
     </div>
     <!-- 内容 -->
     <el-table class="elTable" :data="tableData" :header-cell-style="getRowClass">
-      <el-table-column type="index" label="序号" width="100">
+      <el-table-column type="index" label="序号" width="50">
       </el-table-column>
       <el-table-column prop="event_num" label="事件编码" width="180">
       </el-table-column>

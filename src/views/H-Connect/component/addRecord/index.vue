@@ -105,7 +105,7 @@
       <!--主要表格 -->
       <div class="addRecord_enclosure_content">
         <el-table :data="tableData" :header-cell-style="getRowClass">
-          <el-table-column type="index" label="ID">
+          <el-table-column type="index" label="ID" width="50">
           </el-table-column>
           <el-table-column prop="file" label="文件名">
           </el-table-column>
@@ -144,7 +144,7 @@
       </div>
       <div class="addRecord_relation_content">
         <el-table :data="tableData1" :header-cell-style="getRowClass">
-          <el-table-column label="序号" type="index" width="100"> </el-table-column>
+          <el-table-column label="序号" type="index" width="50"> </el-table-column>
           <el-table-column label="事件编码" prop="event_number">
           </el-table-column>
           <el-table-column label="投诉人姓名" prop="complaint_name">
