@@ -11,7 +11,7 @@
   zoom: 1;
 }
 .comlist{
-  min-height: 850px;
+  min-height: 805px;
 }
 .Complaints-header>span {
   padding-left: 5px;
@@ -47,7 +47,7 @@
 
 .Complaints-screen {
   position: relative;
-  margin-top: 20px;
+  margin: 20px 15px 0;
 }
 
 .Complaints-screen .el-form .el-form-item {
