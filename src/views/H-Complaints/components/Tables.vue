@@ -58,10 +58,10 @@
         <el-table-column prop="sex" label="性别" width="100"> </el-table-column>
         <el-table-column prop="age" width="80" label="年龄/岁"> </el-table-column>
         <el-table-column prop="complaint_phone" width="110" label="手机号码"> </el-table-column>
-        <el-table-column prop="department[0].title" label="投诉科室" width="110" :show-overflow-tooltip='true'></el-table-column>
+        <el-table-column prop="department" label="投诉科室" width="110" :show-overflow-tooltip='true'></el-table-column>
         <el-table-column prop="complaint_type.title" width="140" label="投诉方式"> </el-table-column>
         <el-table-column prop="create_time" width="100" label="投诉时间"> </el-table-column>
-        <el-table-column prop="pass_names" width="150" label="流转部门"> </el-table-column>
+        <el-table-column prop="pass_names" width="120" label="流转部门" :show-overflow-tooltip='true'> </el-table-column>
         <el-table-column prop="state.title" width="150" label="事件状态"> </el-table-column>
         <slot name="column">
           <el-table-column fixed="right" label="操作" width="150%">
@@ -90,7 +90,7 @@
 </template>
 <script>
 import service from "@/service/index";
-
+import moment from 'moment'
 export default {
   components: {},
 
@@ -459,6 +459,7 @@ export default {
   },
   created() {
     service.ComList(this.number, this.currentPage4).then((res) => {
+      console.log(res)
       if (res.code == 20010) {
         this.tableData = res.data[0];
         this.total = res.data[1].count;

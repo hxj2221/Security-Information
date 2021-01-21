@@ -173,7 +173,6 @@ import qs from "qs";
 export default {
   inject: ["reload"],
   components: { Complaintslist, Addcom, Look, Conserve, Table, Operation },
-
   data() {
     return {
       operationdata: "",
