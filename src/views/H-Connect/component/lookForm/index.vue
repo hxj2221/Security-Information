@@ -272,25 +272,7 @@
         this.con = item.info;
       });
     },
-<<<<<<< HEAD
   };
-=======
-  },
-  created() {
-    this.bus.$on("details", (item) => {
-      this.connent = item.data;
-      // 沟通记录
-      this.hosp_name = item.data.hosp_name;
-      this.patient_name = item.data.hosp_name;
-      this.communicate_time = item.data.communicate_time;
-      this.communication = item.data.communication;
-      this.record_of_communication = item.data.record_of_communication;
-      //
-      this.con = item.info;
-    });
-  },
-};
->>>>>>> fc18cd0194d7d3eae8808010ed7990d3657e733f
 </script>
 <style scoped>
 </style>

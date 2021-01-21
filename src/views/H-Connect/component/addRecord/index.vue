@@ -223,7 +223,6 @@
           date: "2016-05-02",
           filetype: "jpg",
           name: "王小虎",
-<<<<<<< HEAD
         }, ],
         currentPage: 4,
         // 表格2  关联信息
@@ -234,25 +233,11 @@
         fileList: [],
         file: {},
       };
-=======
-        },
-      ],
-      currentPage: 4,
-      // 表格2  关联信息
-      tableData1: [],
-      // 弹框
-      dialogVisible: false,
-      dialogForm: {},
-      fileList: [],
-      file: {},
-    };
-  },
-  methods: {
-    getFile(item) {
-      this.file = item;
->>>>>>> fc18cd0194d7d3eae8808010ed7990d3657e733f
     },
     methods: {
+      getFile(item) {
+      this.file = item;
+    },
       // 设置表头颜色
       getRowClass({
         rowIndex
@@ -277,7 +262,6 @@
             cancelButtonText: "取消",
             type: "warning",
           })
-<<<<<<< HEAD
           .then(() => {
             this.$message({
               type: "success",
@@ -394,109 +378,6 @@
           })
           .catch((_) => {});
       },
-=======
-            .then(() => {
-              this.$message({
-                type: "success",
-                message: "删除成功!",
-                delete: row.splice(index, 1),
-                duration:1000
-              });
-            })
-            .catch(() => {
-              this.$message({
-                type: "info",
-                message: "已取消删除",
-                duration:1000
-              });
-            })
-    },
-    // 分页
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
-    },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
-    },
-    handleSee(index, row) {
-      console.log(index, row);
-    },
-    // 返回
-    mySubmit() {
-      this.$emit("abcClick");
-    },
-    mysubmit() {
-      let data = {
-        // event_number: this.tableData1[0].event_number,
-        event_number: 12,
-        communicate_time: this.form.communicate_time,
-        communication: this.form.communication,
-        department_id: this.form.department_id,
-        patient_name: this.form.patient_name,
-        hosp_name: this.form.hosp_name,
-        note_taker: this.form.note_taker,
-        record_of_communication: this.form.record_of_communication,
-      };
-      service.patientAdd(data).then((res) => {
-        if (res.code == 20010) {
-          const loading = this.$loading({
-            lock: true,
-            text: "保存中",
-            spinner: "el-icon-loading",
-            background: "rgba(0, 0, 0, 0.7)",
-          });
-          setTimeout(() => {
-            loading.close();
-            this.$emit("abcClick");
-            this.reload();
-          }, 2000);
-        } else {
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-        }
-      });
-      // this.$emit("abcClick");
-    },
-    // 点击上传附件按钮
-    upLode_define() {
-      let params = {
-        // event_number: this.tableData1[0].event_number,
-        event_number: 12,
-      };
-      service.upLode(params).then((res) => {
-        this.dialogVisible = true;
-      });
-    },
-
-    //上传附件 确定
-    define() {
-      let data = {
-        file_name: this.dialogForm.file_name,
-        event_number: 12,
-        // event_number: this.tableData1[0].event_number,
-        file_describe: this.dialogForm.file_describe,
-        file: this.file,
-      };
-      service.uplode(data).then((res) => {
-        if (res.code == 20010) {
-          this.$message({
-            message: res.msg,
-            type: "success",
-            duration: 1000,
-          });
-        } else {
-          this.$message({
-            showClose: true,
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-        }
-      });
->>>>>>> fc18cd0194d7d3eae8808010ed7990d3657e733f
     },
     created() {
       this.bus.$on("selDep", (item) => {
