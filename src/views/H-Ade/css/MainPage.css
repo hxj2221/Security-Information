@@ -2,8 +2,8 @@
     background-color: #fff;
     text-align: left;
     width: 95%;
-    min-height: 773px;
-    margin: 0 auto;
+    min-height: 798px;
+    margin: 12px auto 0;
     border-radius: 5px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
 }
@@ -28,22 +28,26 @@
 }
 
 .mainBl>.header>.btn>.el-button {
-    width: 92px;
-    height: 40px;
     background-color: #666EE8;
     border-radius: 5px;
     color: #fff;
     text-align: center;
     font-weight: 900;
     cursor: pointer;
-    border:3px solid #666EE8;
+    
 }
-
+.mainBl>.header>.btn>.addAde{
+    width: 92px;
+    height: 40px;
+    border: 1px solid #666EE8;
+}
 .mainBl>.header>.btn>.exportAde {
     background-color: #fff;
     border: 1px solid #666EE8;
     color: #666EE8;
     margin-left: 30px;
+    width: 92px;
+    height: 40px;
 }
 
 .mainBl>.header>.btn>.exportAde:hover {
@@ -61,7 +65,7 @@
 .mainBl .searchAll {
     padding-top: 10px;
     margin-bottom: 10px;
-    padding: 0 15px;
+    padding: 0 30px;
 }
 .mainBl .searchAll .searchAll_search:last-child{
     display: flex;
@@ -86,17 +90,9 @@
 }
 
 .mainBl .elTable{
-    width: 96%;
+    width: 94%;
     margin: 0 auto;
 }
-.mainBl .elTable .el-table__header-wrapper .el-table__header .has-gutter tr th {
-    text-align: center;
-}
-
-.mainBl .elTable .el-table__body-wrapper .el-table__body .el-table__row td {
-    text-align: center;
-}
-
 
 /* 分页 */
 

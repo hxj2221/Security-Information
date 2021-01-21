@@ -4,7 +4,7 @@
     <div class="header">
       <h4>不良事件</h4>
       <div class="btn">
-        <el-button type="primary" icon="el-icon-circle-plus" class="addAde" @click="Add()" >新增
+        <el-button type="primary" icon="el-icon-circle-plus" class="addAde" @click="Add()">新增
         </el-button>
         <el-button type="primary" icon="iconfont el-icon-hospital-passwordexport" class="exportAde">导出</el-button>
       </div>
@@ -75,7 +75,7 @@
     <!-- 分页 -->
     <div class="paging">
       <div class="block">
-        <el-pagination @size-change="handleSizeChange" @current-change="currentChage" :current-page="currentPage4"
+        <el-pagination style="margin-bottom:100px" @size-change="handleSizeChange" @current-change="currentChage" :current-page="currentPage4"
           :page-sizes="pageNumList" :page-size="100" layout="total, sizes, prev, pager, next, jumper"
           :total="pageCount">
         </el-pagination>
@@ -169,6 +169,26 @@
       // 新增
       Add() {
         this.$emit('pageAdd')
+        service.AdeSel().then(res => {
+          // console.log(res)
+          if (res.code == 20010) {
+            this.bus.$emit("eventNum", res.event_num)
+          } else if (res.code == 20401) {
+            this.$message({
+              message: "请重新登陆",
+              type: "error",
+              duration: 1000,
+            });
+            this.$router.push('/login')
+          } else if (res.code == 20403) {
+            this.$message({
+              message: res.msg,
+              type: "error",
+              duration: 1000,
+            });
+            this.$router.push('/dashboard')
+          }
+        })
       },
       // 查看
       handleClick(row, index) {
@@ -181,6 +201,20 @@
             this.$emit('pageDetail')
             this.details = res.data
             this.bus.$emit('detail', this.details)
+          } else if (res.code == 20401) {
+            this.$message({
+              message: "请重新登陆",
+              type: "error",
+              duration: 1000,
+            });
+            this.$router.push('/login')
+          } else if (res.code == 20403) {
+            this.$message({
+              message: res.msg,
+              type: "error",
+              duration: 1000,
+            });
+            this.$router.push('/dashboard')
           }
         })
       },
@@ -200,9 +234,25 @@
           }
           // console.log(params)
           service.AdeSearch(params).then(res => {
-            // console.log(res)
-            this.tableData = res.data
-            this.pageCount = res.allnews
+            console.log(res)
+            if (res.code == 20010) {
+              this.tableData = res.data
+              this.pageCount = res.allnews
+            } else if (res.code == 20401) {
+              this.$message({
+                message: "请重新登陆",
+                type: "error",
+                duration: 1000,
+              });
+              this.$router.push('/login')
+            } else if (res.code == 20403) {
+              this.$message({
+                message: res.msg,
+                type: "error",
+                duration: 1000,
+              });
+              this.$router.push('/dashboard')
+            }
           })
         } else {
           let params = {
@@ -211,8 +261,24 @@
           }
           service.AdeList(params).then(res => {
             // console.log(res)
-            this.tableData = res.data
-            this.pageCount = res.allnews
+            if (res.code == 20010) {
+              this.tableData = res.data
+              this.pageCount = res.allnews
+            } else if (res.code == 20401) {
+              this.$message({
+                message: "请重新登陆",
+                type: "error",
+                duration: 1000,
+              });
+              this.$router.push('/login')
+            } else if (res.code == 20403) {
+              this.$message({
+                message: res.msg,
+                type: "error",
+                duration: 1000,
+              });
+              this.$router.push('/dashboard')
+            }
           })
         }
       },
@@ -235,8 +301,24 @@
           }
           service.AdeSearch(params).then(res => {
             // console.log(res)
-            this.tableData = res.data
-            this.pageCount = res.allnews
+            if (res.code == 20010) {
+              this.tableData = res.data
+              this.pageCount = res.allnews
+            } else if (res.code == 20401) {
+              this.$message({
+                message: "请重新登陆",
+                type: "error",
+                duration: 1000,
+              });
+              this.$router.push('/login')
+            } else if (res.code == 20403) {
+              this.$message({
+                message: res.msg,
+                type: "error",
+                duration: 1000,
+              });
+              this.$router.push('/dashboard')
+            }
           })
         } else {
           let params = {
@@ -245,8 +327,24 @@
           }
           service.AdeList(params).then(res => {
             // console.log(res)
-            this.tableData = res.data
-            this.pageCount = res.allnews
+            if (res.code == 20010) {
+              this.tableData = res.data
+              this.pageCount = res.allnews
+            } else if (res.code == 20401) {
+              this.$message({
+                message: "请重新登陆",
+                type: "error",
+                duration: 1000,
+              });
+              this.$router.push('/login')
+            } else if (res.code == 20403) {
+              this.$message({
+                message: res.msg,
+                type: "error",
+                duration: 1000,
+              });
+              this.$router.push('/dashboard')
+            }
           })
         }
       },
@@ -266,9 +364,25 @@
             pageSize: this.pageSize
           }
           service.AdeSearch(params).then(res => {
-            // console.log(res)
-            this.tableData = res.data
-            this.pageCount = res.allnews
+            if (res.code == 20010) {
+              this.tableData = res.data
+              this.pageCount = res.allnews
+            } else if (res.code == 20401) {
+              this.$message({
+                message: "请重新登陆",
+                type: "error",
+                duration: 1000,
+              });
+              this.$router.push('/login')
+            } else if (res.code == 20403) {
+              this.$message({
+                message: res.msg,
+                type: "error",
+                duration: 1000,
+              });
+              this.$router.push('/dashboard')
+            }
+
           })
         } else {
           let params = {
@@ -276,9 +390,26 @@
             pageSize: this.pageSize
           }
           service.AdeList(params).then(res => {
+            if (res.code == 20010) {
+              this.tableData = res.data
+              this.pageCount = res.allnews
+            } else if (res.code == 20401) {
+              this.$message({
+                message: "请重新登陆",
+                type: "error",
+                duration: 1000,
+              });
+              this.$router.push('/login')
+            } else if (res.code == 20403) {
+              this.$message({
+                message: res.msg,
+                type: "error",
+                duration: 1000,
+              });
+              this.$router.push('/dashboard')
+            }
             // console.log(res)
-            this.tableData = res.data
-            this.pageCount = res.allnews
+
           })
         }
       },
@@ -291,9 +422,26 @@
         pageSize: this.pageSize
       }
       service.AdeList(params).then(res => {
-        // console.log(res)
-        this.tableData = res.data
-        this.pageCount = res.allnews
+        console.log(res)
+        if (res.cede == 20401) {
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        } else if (res.code == 20403) {
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
+        } else {
+          this.tableData = res.data
+          this.pageCount = res.allnews
+        }
+
       })
       // 下拉框内容
       service.AdeSel().then(res => {

@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="look" v-if="lookdata!=''">
-      <slot name="title">
+     
+      <div
+          class="look-content"
+        >
+         <slot name="title">
         <div class="look-top">
           <span>投诉详情-调查中</span>
           <div>
@@ -27,12 +31,11 @@
             style="border-bottom: 2px solid #cccccc70; width: 100%; height: 30px"
           ></div>
         </div>
+         <br/> <br/> <br/> <br/> <br/> <br/>
       </slot>
       <!-- 打印内容 -->
       <slot name="content">
-        <div
-          class="look-content"
-        >
+       
           <div class="look-content-title">
             <span>投诉事件调查表</span>
           </div>
@@ -106,7 +109,7 @@
             <!-- 审批节点 -->
              <!-- 科室改进 -->
              <div  v-if="lookdata.improves">
-            <div v-for="i in lookdata.improves" :key="i">
+            <div v-for="i in lookdata.improves" :key="i.feedback_time">
             <div class="box-Information" > 
               <div class="box-top">
                   <el-row type="flex" class="row-bg" justify="space-between">
@@ -136,7 +139,7 @@
                   >
                 </el-row>
               </div>
-              <div class="box-content" v-for="item in i.improves" :key="item">
+              <div class="box-content" v-for="item in i.improves" :key="item.department.title">
                 <el-row>
                   <el-col :span="4"
                     ><div class="grid-content bg-purple">
@@ -229,7 +232,7 @@
             <div v-if="lookdata.investigate">
             <div
               class="box-contents"
-              v-for="item in lookdata.investigate" :key="item">
+              v-for="item in lookdata.investigate" :key="item.investigate_number">
              <div class="box-top" v-if="item.investigate_number"> 
                 <el-row type="flex" class="row-bg" justify="space-between">
                   <el-col :span="3" :push="2">
@@ -268,7 +271,7 @@
               <!-- 科室调查 -->
               <div v-if="item.investigate_number==true">
               <div
-              v-for="items in item.investigate" :key="items.department.title"
+              v-for="items in item.investigate" :key="items.improvement_number"
               >
                 <div
                   class="box-content-child clearfix"
@@ -293,7 +296,7 @@
                     >
                     <el-col :span="20">
                       <div class="grid-content bg-purple-light">
-                        <span class="value" v-if="item.dutyuser">{{items.dutyuser.name}}/{{items.dutyuser.phone}}</span>
+                        <span class="value" v-if="items.dutyuser">{{items.dutyuser.name}}/{{items.dutyuser.phone}}</span>
                          <span class="value" v-else>无</span>
                       </div></el-col
                     >
@@ -358,10 +361,11 @@
                   </div>
                 </div>
               </div>
+              <hr />
                 </div>
                 <!-- 审批操作 -->
                 <div v-if="item.examine">
-               <div class="box-Information" v-for="itemssss in item.examine" :key="itemssss.department.title">
+               <div class="box-Information" v-for="itemssss in item.examine" :key="itemssss.id">
               <div class="box-top">
                 <el-row type="flex" class="row-bg" justify="space-between">
                   <el-col :span="3" :push="2"
@@ -629,12 +633,12 @@
                 <el-row>
                   <el-col :span="4"
                     ><div class="grid-content bg-purple">
-                      <span class="label">直接经济损失：</span>
+                      <span class="label look-texaerasss">直接经济损失：</span>
                     </div></el-col
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value">无</span>
+                      <span class="value look-texaerasss">无</span>
                     </div></el-col
                   >
                 </el-row>
@@ -660,9 +664,11 @@
                   </div>
                
               </div>
-            </div>
-            </div>
               <hr />
+            </div>
+            
+            </div>
+              
             </div>
              </div>
             <!-- 投诉人信息 -->
@@ -780,13 +786,13 @@
                 <el-row>
                   <el-col :span="4"
                     ><div class="grid-content bg-purple">
-                      <span class="label">投诉原因：</span>
+                      <span class="label look-texaeras">投诉原因：</span>
                     </div></el-col
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value" v-if="lookdata.cause">{{lookdata.cause}}</span>
-                      <span class="value" v-else>无</span>
+                      <span class="value look-texaeras" v-if="lookdata.cause">{{lookdata.cause}}</span>
+                      <span class="value look-texaeras" v-else>无</span>
                     </div></el-col>
                 </el-row>
                 <div
@@ -896,15 +902,15 @@
                     </div></el-col
                   >
                 </el-row>
-                <el-row>
+                <el-row >
                   <el-col :span="4"
                     ><div class="grid-content bg-purple">
-                      <span class="label">诊断信息：</span>
+                      <span class="label look-texaeras" >诊断信息：</span>
                     </div></el-col
                   >
                   <el-col :span="20"
                     ><div class="grid-content bg-purple-light">
-                      <span class="value"
+                      <span class="value look-texaeras"
                         >{{item.诊断信息}}</span
                       >
                     </div></el-col
@@ -921,8 +927,9 @@
             </div>
             </div>
           </div>
-        </div>
+      
       </slot>
+        </div>
     </div>
   </div>
 </template>
