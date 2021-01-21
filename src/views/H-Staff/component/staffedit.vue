@@ -338,11 +338,7 @@ export default {
         age: this.addStaff.age,
         cardnumber: this.addStaff.cardnumber,
         department_id: this.department_id,
-<<<<<<< HEAD
-        role_id: addStaff.auth_grouap,
-=======
         role_id: this.addStaff.auth_grouap,
->>>>>>> 0e9a3ffdf6291d84dc7843efad1c97682d09170b
         status: this.addStaff.status,
         // head_department: this.addStaff.head_department,
       };
