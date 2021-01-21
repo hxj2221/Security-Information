@@ -1,14 +1,14 @@
 /* 新增 */
 .addAll {
-  width: 1240px;
+  width: 95%;
   padding-bottom: 114px;
   position: relative;
   background-color: #fff;
   text-align: left;
-  margin: 0 auto;
+  margin: 12px auto 0;
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
   border-radius: 5px;
-  min-height: 680px;
+  min-height: 805px;
 }
 
 .addAll .formBasics {
@@ -22,7 +22,7 @@
 
 .addAll .formBasics h2 {
   text-align: left;
-  font-size: 24px;
+  font-size: 18px;
   padding-bottom: 10px;
 }
 .addAll .formBasics .form_con{
@@ -40,16 +40,16 @@
 
 /* 关联患者信息 */
 .addAll .table_info {
-  padding-left: 2%;
-  width: 96%;
+  width: 94%;
+  margin: 0 auto;
   margin-bottom: 100px;
 }
 
 .addAll .table_info h2 {
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 700;
   color: #666EE8;
-  margin: 0 0 10px;
+  margin: 0 0 24px;
   text-align: left;
 }
 .addAll .table_info .info .el-table__header-wrapper .el-table__header .has-gutter tr th{
@@ -78,7 +78,7 @@
 
 /* 新增不良底部固定按钮 */
 .addAll .root{
-  width: 1240px;
+  width: 80.7%;
   height: 91px;
   position: fixed;
   bottom: 0;

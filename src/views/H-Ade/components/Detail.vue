@@ -1,7 +1,7 @@
 <template>
   <div class="AdeDetail">
     <div style="position: fixed;
-    top: 73px;z-index: 999;width:78.6%">
+    top: 85px;z-index: 999;width:78.6%">
       <div class="top">
         <span class="left">投诉案件调查表</span>
         <div class="right">

@@ -166,28 +166,28 @@ import service from '@/service/index';
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-form-item style="width:90%" label="入院诊断" required>
+            <el-form-item style="width:100%" label="入院诊断" required>
               <el-input clearable type="textarea" v-model="addAde.admitting_diagnosis"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-form-item style="width:90%" label="诊疗经过" required>
+            <el-form-item style="width:100%" label="诊疗经过" required>
               <el-input clearable type="textarea" v-model="addAde.diagnosis_process"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-form-item style="width:90%" label="患者目前情况" required>
+            <el-form-item style="width:100%" label="患者目前情况" required>
               <el-input clearable type="textarea" v-model="addAde.patient_situation"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-form-item style="width:90%" label="不良事件描述" required>
+            <el-form-item style="width:100%" label="不良事件描述" required>
               <el-input clearable type="textarea" v-model="addAde.event_describe"></el-input>
             </el-form-item>
           </el-col>

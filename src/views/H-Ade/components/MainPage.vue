@@ -75,7 +75,7 @@
     <!-- 分页 -->
     <div class="paging">
       <div class="block">
-        <el-pagination @size-change="handleSizeChange" @current-change="currentChage" :current-page="currentPage4"
+        <el-pagination style="margin-bottom:100px" @size-change="handleSizeChange" @current-change="currentChage" :current-page="currentPage4"
           :page-sizes="pageNumList" :page-size="100" layout="total, sizes, prev, pager, next, jumper"
           :total="pageCount">
         </el-pagination>
