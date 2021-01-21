@@ -63,7 +63,7 @@
         </el-row>
         <el-row :gutter="20">
           <el-col :span="8">
-            <el-form-item class="ssks" label="上级科室" required>
+            <el-form-item class="ssks" label="上级科室">
               <el-select
                 class="dialog-input-text"
                 v-model="adddepartsel"
