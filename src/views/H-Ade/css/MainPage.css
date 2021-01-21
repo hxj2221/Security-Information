@@ -95,6 +95,12 @@
     margin: 0 auto;
 }
 
+.mainBl .elTable .el-table td, .el-table th{
+    text-align: center !important;
+}
+.el-table td, .el-table th{
+    text-align: center;
+}
 /* 分页 */
 
 .mainBl>.paging {

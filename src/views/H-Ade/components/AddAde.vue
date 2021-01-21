@@ -198,7 +198,7 @@ import service from '@/service/index';
     <div class="table_info">
       <h2>关联患者信息（调用HIS）</h2>
       <el-table class="info" :data="tableData" :header-cell-style="getRowClass">
-        <el-table-column type="index" label="序号">
+        <el-table-column type="index" label="序号" width="100">
         </el-table-column>
         <el-table-column prop="name" label="姓名">
         </el-table-column>
@@ -214,9 +214,9 @@ import service from '@/service/index';
         </el-table-column>
         <el-table-column prop="diagnosis" label="诊断">
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="操作" fixed="right">
           <template slot-scope="scope">
-            <el-button @click="handleClick(scope.row)" type="text" size="small">取消关联</el-button>
+            <el-button style="color:#666ee8" @click="handleClick(scope.row)" type="text" size="small">取消关联</el-button>
           </template>
         </el-table-column>
       </el-table>

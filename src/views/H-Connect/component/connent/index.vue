@@ -28,8 +28,8 @@
       <!-- 表单表格部分 -->
       <div class="connent_myTable">
         <!--  -->
-        <el-table :data="tableData">
-          <el-table-column label="序号" type="index"> </el-table-column>
+        <el-table :data="tableData" :header-cell-style="getRowClass">
+          <el-table-column label="序号" type="index" width="100"> </el-table-column>
 
           <el-table-column label="记录编号" prop="number"> </el-table-column>
 
@@ -49,10 +49,10 @@
           <el-table-column label="主要沟通事项" prop="record_of_communication" :show-overflow-tooltip="true">
           </el-table-column>
 
-          <el-table-column fixed="right" label="操作">
-            <template slot-scope="scope">
-              <el-link type="primary" :underline="false" @click="details(scope.$index, scope.row)">记录详情</el-link>
-              <el-link type="primary" :underline="false" @click="complaint(scope.$index, scope.row)">投诉详情</el-link>
+          <el-table-column fixed="right" label="操作" width="200">
+            <template slot-scope="scope" >
+              <el-link style="color:#666ee8" :underline="false" @click="details(scope.$index, scope.row)" >记录详情</el-link>
+              <el-link style="color:#666ee8" :underline="false" @click="complaint(scope.$index, scope.row)">投诉详情</el-link>
               <el-link type="danger" :underline="false" @click="handleDel(scope.$index, tableData)">删除</el-link>
             </template>
           </el-table-column>
@@ -122,6 +122,16 @@
       }
     },
     methods: {
+      // 设置表头颜色
+      getRowClass({
+        rowIndex
+      }) {
+        if (rowIndex == 0) {
+          return "background:#c2c5f6;color:#000";
+        } else {
+          return "";
+        }
+      },
       // 时间戳转为日期格式
       getDate: function (row, column, cellValue, index) {
         // console.log(new Date(cellValue * 1000))

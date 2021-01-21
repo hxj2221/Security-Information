@@ -121,7 +121,7 @@
           </el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
-              <el-link :underline="false" @click="handleEdit(scope.$index, scope.row)">下载</el-link>
+              <el-link :underline="false" style="color:#666ee8" @click="handleEdit(scope.$index, scope.row)">下载</el-link>
               <el-link :underline="false" type="danger" @click="handleDelete(scope.$index, tableData)">删除</el-link>
             </template>
           </el-table-column>
@@ -144,7 +144,7 @@
       </div>
       <div class="addRecord_relation_content">
         <el-table :data="tableData1" :header-cell-style="getRowClass">
-          <el-table-column label="序号" type="index"> </el-table-column>
+          <el-table-column label="序号" type="index" width="100"> </el-table-column>
           <el-table-column label="事件编码" prop="event_number">
           </el-table-column>
           <el-table-column label="投诉人姓名" prop="complaint_name">
@@ -163,9 +163,9 @@
           </el-table-column>
           <el-table-column label="事件状态" prop="state.state_val">
           </el-table-column>
-          <el-table-column label="操作" fixed="right">
+          <el-table-column label="操作" fixed="right" style="font-size:12px">
             <template slot-scope="scope">
-              <el-link type="primary" @click="handleSee(scope.$index, scope.row)">查看</el-link>
+              <el-link :underline="false" style="color:#666ee8" @click="handleSee(scope.$index, scope.row)">查看</el-link>
             </template>
           </el-table-column>
         </el-table>

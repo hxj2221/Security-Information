@@ -115,13 +115,10 @@
     margin-bottom: 30px;
     width: 94%;
     margin: 0 auto;
+    font-size: 12px;
     
 }
 
-.connent_myTable .el-table th {
-    color: #000;
-    background-color: #c2c5f6;   
-}
 
 .connent_myTable .el-table td,
 .el-table th {
