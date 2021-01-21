@@ -167,6 +167,7 @@
                 style="margin-top: 40px"
                 v-model="addStaff.auth_grouap"
                 placeholder="请选择"
+                @change="departsel"
               >
                 <el-option
                   v-for="item in optionrole"
@@ -318,6 +319,9 @@ export default {
     },
   },
   methods: {
+    departsel() {
+      console.log(this.addStaff.auth_grouap);
+    },
     // 保存
     staffaddvueyes() {
       let params = {
@@ -334,10 +338,11 @@ export default {
         age: this.addStaff.age,
         cardnumber: this.addStaff.cardnumber,
         department_id: this.department_id,
-        role_id: this.addStaff.auth_grouap,
+        role_id: addStaff.auth_grouap,
         status: this.addStaff.status,
         // head_department: this.addStaff.head_department,
       };
+      console.log(params);
       service.staffEdit(params).then((res) => {
         console.log(res);
 

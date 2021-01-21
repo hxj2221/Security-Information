@@ -134,6 +134,14 @@ export default {
   created() {
     service.rolelist().then((res) => {
       console.log(res);
+      if (res.code == 20403) {
+        this.$message({
+          type: "error",
+          message: res.msg,
+          duration: 1000,
+        });
+        this.$router.push("/dashboard");
+      }
       this.tables = res.data;
       this.total = res.allNews;
     });
@@ -172,7 +180,6 @@ export default {
       };
       service.roleserch(data).then((res) => {
         this.tables = this.tables1 = res.data;
-        //this.tables = this.tables1 = res.datas;
         console.log(res);
         this.total = res.allNews;
       });
@@ -213,28 +220,6 @@ export default {
           });
         });
     },
-    // changeSwitch(val, row, id) {
-    //   let data = {
-    //     id: id,
-    //     status: row.status,
-    //   };
-    //   console.log(data);
-    //   service.rolestatus(data).then((res) => {
-    //     console.log(res);
-    //   });
-    //   console.log(row.status);
-    //   if (row.status == 1) {
-    //     this.$message({
-    //       type: "success",
-    //       message: "员工启用成功",
-    //     });
-    //   } else {
-    //     this.$message({
-    //       type: "success",
-    //       message: "员工停用成功",
-    //     });
-    //   }
-    // },
     // 编辑
     handleEdit(id) {
       this.rolevue = false;
@@ -252,34 +237,33 @@ export default {
     },
     // 删除角色
     delrole(id) {
-      console.log(id);
-      let param = {
-        id: id,
-      };
-      console.log(param);
-      service.roledel(param).then((res) => {
-        console.log(res);
-        console.log(index, row);
-        this.$confirm("此操作将永久删除该角色, 是否继续?", "提示", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning",
-        })
-          .then(() => {
+      this.$confirm("此操作将删除该角色, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          let data = {
+            id: id,
+          };
+          console.log(data);
+          service.roledel(data).then((res) => {
+            console.log(res);
             this.$message({
               type: "success",
-              message: "删除成功!",
-              delete: row.splice(index, 1),
+              message: res.msg,
+              duration: 1000,
             });
-          })
-          .catch(() => {
-            this.$message({
-              type: "info",
-              message: "已取消删除",
-            });
+            this.reload();
           });
-        this.reload();
-      });
+        })
+        .catch(() => {
+          this.$message({
+            type: "success",
+            message: "已取消操作",
+            duration: 1000,
+          });
+        });
     },
     // 序号
     indexMethod(index) {

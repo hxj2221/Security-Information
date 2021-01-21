@@ -168,10 +168,7 @@
 
 <script>
 import userthre from "../component/userthre";
-// import { changeinfor } from "../../network/H-person";
-// import { personxq } from "../../network/H-person";
 import service from "@/service/index";
-// import options from "./coun.js";
 import {
   provinceAndCityData,
   regionData,
@@ -268,9 +265,18 @@ export default {
       console.log(data);
       service.changeinfor(data).then((res) => {
         if (res.code == 20010) {
+          this.$message({
+            type: "success",
+            message: res.msg,
+            duration: 1000,
+          });
           this.reload();
         } else {
-          alert("修改失败，请刷新后重试！！！");
+          this.$message({
+            type: "warning",
+            message: res.msg,
+            duration: 1000,
+          });
         }
         console.log(res);
       });

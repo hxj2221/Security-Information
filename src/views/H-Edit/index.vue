@@ -248,6 +248,14 @@ export default {
   created() {
     service.rulelist().then((res) => {
       console.log(res);
+      if (res.code == 20403) {
+        this.$message({
+          type: "error",
+          message: res.msg,
+          duration: 1000,
+        });
+        this.$router.push("/dashboard");
+      }
       this.tableData = res.data;
     });
   },

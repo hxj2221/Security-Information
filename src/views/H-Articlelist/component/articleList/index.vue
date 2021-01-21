@@ -619,7 +619,6 @@ export default {
     },
     dilog(e) {
       this.dialogVisible = !this.dialogVisible;
-      console.log(e);
       if (e == 1) {
         this.dlog = this.name[0].label;
         this.isShow = false;

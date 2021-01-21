@@ -392,28 +392,24 @@ export default {
     });
   },
   methods: {
-    // 手机
-    phoneyes() {
-      let data = {
-        phone: this.phone,
-        pcaptcha: this.phonecode,
-      };
-      service.phonechange(data).then((res) => {
-        console.log(res);
-        if (res.msg == "身份验证通过!") {
-          this.phonenew = true;
-          this.phoneyz = false;
-        }
-      });
-    },
+    // 手机验证码
     phonebtncode() {
       let data = {
         phone: this.phone,
       };
       service.phoneyz(data).then((res) => {
         console.log(res);
+        this.$message({
+          type: "success",
+          message: res.msg,
+          duration: 1000,
+        });
         if (res.code == 20020) {
-          alert(res.msg);
+          this.$message({
+            type: "error",
+            message: res.msg,
+            duration: 1000,
+          });
         } else if (res.code == 20010) {
           let timer = setInterval(() => {
             this.isCodeIng = true;
@@ -433,6 +429,26 @@ export default {
         }
       });
     },
+    // 手机确认
+    phoneyes() {
+      let data = {
+        phone: this.phone,
+        pcaptcha: this.phonecode,
+      };
+      service.phonechange(data).then((res) => {
+        console.log(res);
+        this.$message({
+          type: "success",
+          message: res.msg,
+          duration: 1000,
+        });
+        if (res.msg == "身份验证通过!") {
+          this.phonenew = true;
+          this.phoneyz = false;
+        }
+      });
+    },
+    // 修改手机获取验证码
     changephonebtncode() {
       let data = {
         phone: this.changephone,
@@ -440,7 +456,11 @@ export default {
       service.phoneyz(data).then((res) => {
         console.log(res);
         if (res.code == 20020) {
-          alert(res.msg);
+          this.$message({
+            type: "error",
+            message: res.msg,
+            duration: 1000,
+          });
         } else if (res.code == 20010) {
           let timer = setInterval(() => {
             this.isCodeIng = true;
@@ -460,11 +480,12 @@ export default {
         }
       });
     },
+    // 取消
     phoneno() {
       this.phoneyz = false;
     },
 
-    //新手机
+    //修改手机确认
     phonenewyes() {
       let data = {
         phone: this.changephone,
@@ -472,12 +493,18 @@ export default {
       };
       service.phonehb(data).then((res) => {
         console.log(res);
+        this.$message({
+          type: "success",
+          message: res.msg,
+          duration: 1000,
+        });
         if (res.code == "20010") {
           this.phonenew = false;
         }
         this.reload();
       });
     },
+    // 修改手机取消
     phonenewno() {
       this.phonenew = false;
     },

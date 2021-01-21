@@ -59,7 +59,7 @@
           </el-table-column>
           <el-table-column
             width="120"
-            prop="user[0].id"
+            prop="user[0].name"
             label="创建人员"
           ></el-table-column>
 
@@ -167,6 +167,14 @@ export default {
 
     service.stafflist().then((res) => {
       console.log(res);
+      if (res.code == 20403) {
+        this.$message({
+          type: "error",
+          message: res.msg,
+          duration: 1000,
+        });
+        this.$router.push("/dashboard");
+      }
       this.tables = res.data[0];
       this.total = res.data[1].count;
       for (let i = 1; i < res.data.length; i++) {
@@ -210,26 +218,39 @@ export default {
     },
     //员工状态
     changeSwitch(val, row) {
-      // 员工状态
-      let params = {
-        id: row.id,
-      };
-      service.staffState(params).then((res) => {
-        console.log(res);
-        if (row.status == 1) {
+      console.log(row.status);
+      this.$confirm("此操作将修改状态, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          let data = {
+            id: row.id,
+            status: row.status,
+          };
+          console.log(data);
+          service.staffState(data).then((res) => {
+            console.log(res);
+            this.$message({
+              type: "success",
+              message: res.msg,
+              duration: 1000,
+            });
+          });
+        })
+        .catch(() => {
+          if (row.status == 1) {
+            row.status = 0;
+          } else {
+            row.status = 1;
+          }
           this.$message({
             type: "success",
-            message: "员工启用成功",
+            message: "已取消操作",
             duration: 1000,
           });
-        } else {
-          this.$message({
-            type: "error",
-            message: "员工停用",
-            duration: 1000,
-          });
-        }
-      });
+        });
     },
     // 编辑
     handleEdit(index, row, id) {

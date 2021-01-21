@@ -4,6 +4,7 @@
 }
 .Complaints-content .cell{
     color: #000000;
+    text-align: center;
     /* background-color: #c2c5f6; */
 }
 .Complaints-content .el-button--small{
