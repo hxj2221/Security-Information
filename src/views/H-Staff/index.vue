@@ -232,11 +232,29 @@ export default {
           console.log(data);
           service.staffState(data).then((res) => {
             console.log(res);
-            this.$message({
-              type: "success",
-              message: res.msg,
-              duration: 1000,
-            });
+            if (res.code == 20010) {
+              if (row.status == 1) {
+                this.$message({
+                  type: "success",
+                  message: res.msg,
+                  duration: 1000,
+                });
+              }
+              else{
+                 this.$message({
+                  type: "error",
+                  message: res.msg,
+                  duration: 1000,
+                });
+              }
+            }
+            else{
+              this.$message({
+                  type: "error",
+                  message: res.msg,
+                  duration: 1000,
+                });
+            }
           });
         })
         .catch(() => {
