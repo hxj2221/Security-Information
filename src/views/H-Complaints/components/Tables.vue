@@ -52,31 +52,17 @@
         style="width: 94%; margin-left: 3%; text-align: center"
         :header-cell-style="getRowClass"
       >
-<<<<<<< HEAD
-        <el-table-column type="index" width="50" label="序号"> </el-table-column>
-        <el-table-column prop="event_number" width="160" label="事件编码"></el-table-column>
-        <el-table-column prop="complaint_name" width="120" label="投诉人姓名"> </el-table-column>
-        <el-table-column prop="sex" label="性别" width="100"> </el-table-column>
-        <el-table-column prop="age" width="80" label="年龄/岁"> </el-table-column>
-        <el-table-column prop="complaint_phone" width="110" label="手机号码"> </el-table-column>
-        <el-table-column prop="department" label="投诉科室" width="110" :show-overflow-tooltip='true'></el-table-column>
-        <el-table-column prop="complaint_type.title" width="140" label="投诉方式"> </el-table-column>
-        <el-table-column prop="create_time" width="100" label="投诉时间"> </el-table-column>
-        <el-table-column prop="pass_names" width="120" label="流转部门" :show-overflow-tooltip='true'> </el-table-column>
-        <el-table-column prop="state.title" width="150" label="事件状态"> </el-table-column>
-=======
         <el-table-column type="index"  label="序号"> </el-table-column>
-        <el-table-column prop="event_number"  label="事件编码"></el-table-column>
+        <el-table-column prop="event_number" width="150"  label="事件编码"></el-table-column>
         <el-table-column prop="complaint_name"  label="投诉人姓名"> </el-table-column>
         <el-table-column prop="sex" label="性别"> </el-table-column>
         <el-table-column prop="age"  label="年龄/岁"> </el-table-column>
-        <el-table-column prop="complaint_phone" label="手机号码"> </el-table-column>
-        <el-table-column prop="department[0].title" label="投诉科室"  :show-overflow-tooltip='true'></el-table-column>
+        <el-table-column prop="complaint_phone" width="110" label="手机号码"> </el-table-column>
+        <el-table-column prop="department" label="投诉科室"  :show-overflow-tooltip='true'></el-table-column>
         <el-table-column prop="complaint_type.title"  label="投诉方式"> </el-table-column>
         <el-table-column prop="create_time"  label="投诉时间"> </el-table-column>
-        <el-table-column prop="pass_names"  label="流转部门"> </el-table-column>
-        <el-table-column prop="state.title"  label="事件状态"> </el-table-column>
->>>>>>> 5c99d351fd5508228f263578e9ddf20308e91f53
+        <el-table-column prop="pass_names" :show-overflow-tooltip='true' label="流转部门"> </el-table-column>
+        <el-table-column prop="state.title" width="110" label="事件状态"> </el-table-column>
         <slot name="column">
           <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">

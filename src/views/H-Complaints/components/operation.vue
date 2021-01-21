@@ -397,7 +397,7 @@
               <!-- 医患沟通 -->
               <div
                 v-show="
-                  checkstate == 4 ||
+                checkstate == 4 ||
                   checkstate == 5 ||
                   checkstate == 6 ||
                   checkstate == 7 ||
@@ -406,7 +406,7 @@
                   checkstate==10
                 "
               >
-                <el-row type="flex" class="row-bg" justify="space-between" >
+                <el-row type="flex" class="row-bg" justify="space-between" v-if="checkstate !== 4">
                   <el-col :span="6" :push="1"
                     ><div class="grid-content bg-purple" >
                       <span class="label">约定日期:</span>
@@ -1194,7 +1194,6 @@ export default {
       let params={
         event_number:this.$parent.opdata[0].event_number,//编号
         examine_textone:this.preliminary,//初步意见
-        appointment_time:this.date//约定时间
       }
        service.communicate(params).then(res=>{
         console.log(res)

@@ -13,10 +13,10 @@
           </p>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item  >个人信息</el-dropdown-item >
-          <el-dropdown-item @click.native="logOut">修改密码</el-dropdown-item>
-          <el-dropdown-item @click.native="logOut">消息通知</el-dropdown-item>
-          <el-dropdown-item @click.native="logOut">退出系统</el-dropdown-item>
+          <el-dropdown-item  @click=" this.$router.push('/Personal')" >个人信息</el-dropdown-item >
+          <el-dropdown-item @click="logOut">修改密码</el-dropdown-item>
+          <el-dropdown-item @click="logOut">消息通知</el-dropdown-item>
+          <el-dropdown-item @click="logOut">退出系统</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -42,6 +42,9 @@ export default {
     },
     logOut(){
       this.$router.push({ name: "login" });
+    },
+    mine(){
+      this.$router.push('/Personal')
     }
   }
 }
