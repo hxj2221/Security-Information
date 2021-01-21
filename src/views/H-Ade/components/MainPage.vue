@@ -43,7 +43,8 @@
       </el-form>
     </div>
     <!-- 内容 -->
-    <el-table class="elTable" :data="tableData" :header-cell-style="getRowClass">
+    <div style="min-height: 600px;">
+      <el-table class="elTable" :data="tableData" :header-cell-style="getRowClass">
       <el-table-column type="index" label="序号" width="50">
       </el-table-column>
       <el-table-column prop="event_num" label="事件编码" width="180">
@@ -72,10 +73,12 @@
         </template>
       </el-table-column>
     </el-table>
+    </div>
+    
     <!-- 分页 -->
     <div class="paging">
       <div class="block">
-        <el-pagination style="margin-bottom:100px" @size-change="handleSizeChange" @current-change="currentChage" :current-page="currentPage4"
+        <el-pagination @size-change="handleSizeChange" @current-change="currentChage" :current-page="currentPage4"
           :page-sizes="pageNumList" :page-size="100" layout="total, sizes, prev, pager, next, jumper"
           :total="pageCount">
         </el-pagination>
