@@ -175,7 +175,6 @@ export default {
   },
   created() {
     this.bus.$on("details", (item) => {
-      console.log(item.info);
       this.connent = item.data;
       // 沟通记录
       this.hosp_name = item.data.hosp_name;

@@ -76,7 +76,7 @@
           >
           </el-table-column>
 
-          <el-table-column  width="100"     fixed="right"
+          <el-table-column  width="180"     fixed="right"
  label="操作">
             <template slot-scope="scope">
               <el-link
@@ -167,7 +167,6 @@ export default {
   },
   watch: {
     seachTime: function (val, oldVal) {
-      console.log(val, oldVal);
       if (val !== null) {
         this.beginDate = val[0];
         this.endDate = val[1];
@@ -187,24 +186,19 @@ export default {
         pageNum: this.currentPage,
         pageSize: this.number,
       };
-      console.log(data);
       service.seachpag(data).then((res) => {
-        console.log(res);
         this.tableData = this.tableDatas = res.data;
         this.total = res.allNews;
       });
     },
     //  分页
     handleSizeChange(val) {
-      console.log(val)
       this.num = val;
       let data = {
         pageSize: val,//每页几条
         pageNum: this.currentPage,//第几页
       };
-      console.log(data)
       service.patientList(data).then((res) => {
-        console.log(res);
         this.tableData = res.data;
         this.total = res.allNews;
       });
@@ -212,14 +206,11 @@ export default {
     //
     handleCurrentChange(val) {
       this.currentPage = val;
-      console.log(val)
       let data = {
         pageSize: this.num,
         pageNum: this.currentPage,
       };
-      console.log(data)
       service.patientList(data).then((res) => {
-        console.log(res);
         this.tableData = res.data;
         this.total = res.allNews;
       });
@@ -228,7 +219,6 @@ export default {
     // 新增记录
     addRecord() {
       service.selDep().then((res) => {
-        console.log(res);
         this.bus.$emit("selDep", res);
         this.$emit("abcClick");
       });
@@ -236,12 +226,10 @@ export default {
     },
     // 记录详情
     details(val, row) {
-      console.log(val, row.id);
       let data = {
         id: row.id,
       };
       service.details(data).then((res) => {
-        console.log(res.data);
         this.bus.$emit("details", res);
         this.$emit("abClick");
       });
@@ -261,9 +249,7 @@ export default {
        pageSize:this.num,
         pageNum:this.currentPage,
    }
-   console.log(params)
     service.patientList(params).then((res) => {
-      console.log(res);
       this.tableData = res.data;
       this.total = res.allNews;
     });

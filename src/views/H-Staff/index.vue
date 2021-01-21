@@ -166,7 +166,6 @@ export default {
     });
 
     service.stafflist().then((res) => {
-      console.log(res);
       this.tables = res.data[0];
       this.total = res.data[1].count;
       for (let i = 1; i < res.data.length; i++) {
@@ -183,9 +182,7 @@ export default {
         pNum: this.num, //每页显示数量
         count: this.pageSize, //每页显示的数量
       };
-      console.log(data);
       service.stafflist(data).then((res) => {
-        console.log(res.data);
         this.tables1 = this.tables = res.data[0];
         this.total = res.data[1].count;
       });
@@ -215,7 +212,6 @@ export default {
         id: row.id,
       };
       service.staffState(params).then((res) => {
-        console.log(res);
         if (row.status == 1) {
           this.$message({
             type: "success",
@@ -239,7 +235,6 @@ export default {
         id: id,
       };
       service.staffedits(params).then((res) => {
-        console.log(res);
         this.childedit = res.data.user;
         if (res.data.user.sex.name == "女") {
           this.childedit.sex = "0";
@@ -250,7 +245,6 @@ export default {
         }
       });
       service.getrole().then((res) => {
-        console.log(res);
         this.all = res.data;
         this.bus.$emit("ReceiveMessage", this.all);
         // this.$parent.fathpowadd();
@@ -261,10 +255,7 @@ export default {
       let params = {
         id: row[val].id,
       };
-      console.log(params);
       service.staffDel(params).then((res) => {
-        // this.reload();
-        console.log(res);
         if (res.code == 20010) {
           this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
             confirmButtonText: "确定",
@@ -297,13 +288,11 @@ export default {
         current: this.currentPage,
       };
       service.stafflist(data).then((res) => {
-        console.log(res);
         this.tables = res.data[0];
       });
     },
     handleCurrentChange(val) {
       this.currentPage = val;
-      console.log(`当前页: ${val}`);
       let data = {
         //  name: this.search,
         // department_id: this.staffbeldepart,
@@ -311,7 +300,6 @@ export default {
         current: this.currentPage,
       };
       service.stafflist(data).then((res) => {
-        console.log(res);
         this.tables = res.data[0];
       });
     },
