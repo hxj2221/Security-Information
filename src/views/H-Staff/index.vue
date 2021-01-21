@@ -162,12 +162,10 @@ export default {
   created() {
     // 获取员工列表
     service.staffList().then((res) => {
-      console.log(res)
       this.optionbeldepart = res.data;
     });
 
     service.stafflist().then((res) => {
-<<<<<<< HEAD
       console.log(res);
       if (res.code == 20403) {
         this.$message({
@@ -177,8 +175,6 @@ export default {
         });
         this.$router.push("/dashboard");
       }
-=======
->>>>>>> 0e9a3ffdf6291d84dc7843efad1c97682d09170b
       this.tables = res.data[0];
       this.total = res.data[1].count;
       for (let i = 1; i < res.data.length; i++) {
@@ -195,7 +191,9 @@ export default {
         pNum: this.num, //每页显示数量
         count: this.pageSize, //每页显示的数量
       };
+      console.log(data);
       service.stafflist(data).then((res) => {
+        console.log(res.data);
         this.tables1 = this.tables = res.data[0];
         this.total = res.data[1].count;
       });
@@ -220,7 +218,6 @@ export default {
     },
     //员工状态
     changeSwitch(val, row) {
-<<<<<<< HEAD
       console.log(row.status);
       this.$confirm("此操作将修改状态, 是否继续?", "提示", {
         confirmButtonText: "确定",
@@ -240,39 +237,6 @@ export default {
               message: res.msg,
               duration: 1000,
             });
-=======
-      // 员工状态
-      let params = {
-        id: row.id,
-      };
-      service.staffState(params).then((res) => {
-<<<<<<< HEAD
-        console.log(res);
-        if (res.code == 20010) {
-          if (row.status == 1) {
-            this.$message({
-              type: "success",
-              message: res.msg,
-              duration: 1000,
-            });
-          } else{
-            this.$message({
-              type: "error",
-              message: "员工停用成功",
-              duration: 1000,
-            });
-          }
-        } else {
-          this.$message({
-            type: "error",
-            message: res.msg,
-=======
-        if (row.status == 1) {
-          this.$message({
-            type: "success",
-            message: "员工启用成功",
-            duration: 1000,
->>>>>>> 0e9a3ffdf6291d84dc7843efad1c97682d09170b
           });
         })
         .catch(() => {
@@ -284,7 +248,6 @@ export default {
           this.$message({
             type: "success",
             message: "已取消操作",
->>>>>>> d0f740fd3af90961f9c31938264cbbc2857e54ae
             duration: 1000,
           });
         });
@@ -297,6 +260,7 @@ export default {
         id: id,
       };
       service.staffedits(params).then((res) => {
+        console.log(res);
         this.childedit = res.data.user;
         if (res.data.user.sex.name == "女") {
           this.childedit.sex = "0";
@@ -307,6 +271,7 @@ export default {
         }
       });
       service.getrole().then((res) => {
+        console.log(res);
         this.all = res.data;
         this.bus.$emit("ReceiveMessage", this.all);
         // this.$parent.fathpowadd();
@@ -317,7 +282,10 @@ export default {
       let params = {
         id: row[val].id,
       };
+      console.log(params);
       service.staffDel(params).then((res) => {
+        // this.reload();
+        console.log(res);
         if (res.code == 20010) {
           this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
             confirmButtonText: "确定",
@@ -350,11 +318,13 @@ export default {
         current: this.currentPage,
       };
       service.stafflist(data).then((res) => {
+        console.log(res);
         this.tables = res.data[0];
       });
     },
     handleCurrentChange(val) {
       this.currentPage = val;
+      console.log(`当前页: ${val}`);
       let data = {
         //  name: this.search,
         // department_id: this.staffbeldepart,
@@ -362,6 +332,7 @@ export default {
         current: this.currentPage,
       };
       service.stafflist(data).then((res) => {
+        console.log(res);
         this.tables = res.data[0];
       });
     },
