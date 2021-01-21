@@ -63,7 +63,7 @@
 
           <el-table-column label="记录人" prop="note_taker"> </el-table-column>
 
-          <el-table-column label="沟通日期" prop="communicate_time">
+          <el-table-column label="沟通日期" prop="communicate_time" :formatter="getDate">
           </el-table-column>
 
           <el-table-column label="关联投诉编号" prop="event_number">
@@ -76,8 +76,7 @@
           >
           </el-table-column>
 
-          <el-table-column  width="180"     fixed="right"
- label="操作">
+          <el-table-column width="200" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-link
                 type="primary"
@@ -90,6 +89,12 @@
                 :underline="false"
                 @click="complaint(scope.$index, scope.row)"
                 >投诉详情</el-link
+              >
+              <el-link
+                type="danger"
+                :underline="false"
+                @click="handleDel(scope.$index, tableData)"
+                >删除</el-link
               >
             </template>
           </el-table-column>
@@ -177,6 +182,53 @@ export default {
     },
   },
   methods: {
+      // 时间戳转为日期格式
+      getDate: function (row, column, cellValue, index) {
+        // console.log(new Date(cellValue * 1000))
+        var date = new Date(cellValue * 1000);
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        m = m < 10 ? ('0' + m) : m;
+        var d = date.getDate();
+        d = d < 10 ? ('0' + d) : d;
+        var h = date.getHours();
+        var minute = date.getMinutes();
+        minute = minute < 10 ? ('0' + minute) : minute;
+        var second = date.getSeconds();
+        second = minute < 10 ? ('0' + second) : second;
+        return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+      },
+    // 删除
+    handleDel(val,row) {
+         let params = {
+        id: row[val].id,
+      };
+      service.patientDel(params).then((res) => {
+        console.log(res)
+        if (res.code == 20010) {
+          this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+            confirmButtonText: "确定",
+            cancelButtonText: "取消",
+            type: "warning",
+          })
+            .then(() => {
+              this.$message({
+                type: "success",
+                message: "删除成功!",
+                delete: row.splice(val, 1),
+                duration: 1000,
+              });
+            })
+            .catch(() => {
+              this.$message({
+                type: "info",
+                message: "已取消删除",
+                duration: 1000,
+              });
+            });
+        }
+      });
+    },
     // 搜索
     searchBtn() {
       let data = {
@@ -195,8 +247,8 @@ export default {
     handleSizeChange(val) {
       this.num = val;
       let data = {
-        pageSize: val,//每页几条
-        pageNum: this.currentPage,//第几页
+        pageSize: val, //每页几条
+        pageNum: this.currentPage, //第几页
       };
       service.patientList(data).then((res) => {
         this.tableData = res.data;
@@ -245,15 +297,14 @@ export default {
     },
   },
   created() {
-   let params={
-       pageSize:this.num,
-        pageNum:this.currentPage,
-   }
+    let params = {
+      pageSize: this.num,
+      pageNum: this.currentPage,
+    };
     service.patientList(params).then((res) => {
       this.tableData = res.data;
       this.total = res.allNews;
     });
-    
   },
 };
 </script>

@@ -326,6 +326,10 @@ export default {
     return await service.post(`${baseUrl}api/record/record`, data).then(res => res).catch(err => err)
   },
   // 医患添加
+  patientDel: async (params: any) => {
+    return await service.get(`${baseUrl}api/record/delrecord`, { params }).then(res => res).catch(err => err)
+  },
+  // 医患添加
   patientAdd: async (data: any) => {
     return await service.post(`${baseUrl}api/record/addrecord`, data).then(res => res).catch(err => err)
   },

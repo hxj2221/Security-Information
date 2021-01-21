@@ -59,7 +59,7 @@
           </el-table-column>
           <el-table-column
             width="120"
-            prop="user[0].id"
+            prop="user[0].name"
             label="创建人员"
           ></el-table-column>
 
@@ -162,6 +162,7 @@ export default {
   created() {
     // 获取员工列表
     service.staffList().then((res) => {
+      console.log(res)
       this.optionbeldepart = res.data;
     });
 
@@ -212,16 +213,25 @@ export default {
         id: row.id,
       };
       service.staffState(params).then((res) => {
-        if (row.status == 1) {
-          this.$message({
-            type: "success",
-            message: "员工启用成功",
-            duration: 1000,
-          });
+        console.log(res);
+        if (res.code == 20010) {
+          if (row.status == 1) {
+            this.$message({
+              type: "success",
+              message: res.msg,
+              duration: 1000,
+            });
+          } else{
+            this.$message({
+              type: "error",
+              message: "员工停用成功",
+              duration: 1000,
+            });
+          }
         } else {
           this.$message({
             type: "error",
-            message: "员工停用",
+            message: res.msg,
             duration: 1000,
           });
         }
