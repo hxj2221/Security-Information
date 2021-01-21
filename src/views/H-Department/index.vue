@@ -125,6 +125,14 @@ export default {
   created() {
     service.departlist().then((res) => {
       console.log(res);
+      if (res.code == 20403) {
+        this.$message({
+          type: "error",
+          message: res.msg,
+          duration: 1000,
+        });
+        this.$router.push("/dashboard");
+      }
       this.dormitory = res.data;
     });
   },
@@ -194,25 +202,42 @@ export default {
       this.departvue = true;
     },
     // switch开关
-    changeSwitch(val, row, id) {
-      let data = {
-        id: id,
-        status: row.status,
-      };
-      console.log(data);
-      service.departstatus(data).then((res) => {
-        console.log(res);
-      });
+    changeSwitch(val, row) {
       console.log(row.status);
-      if (row.status == 1) {
-        this.$message({
-          type: "success",
-          message: "科室启用成功",
+      this.$confirm("此操作将修改状态, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          let data = {
+            id: row.id,
+            status: row.status,
+          };
+          console.log(data);
+          service.departstatus(data).then((res) => {
+            console.log(res);
+            this.$message({
+              type: "success",
+              message: res.msg,
+              duration: 1000,
+            });
+          });
+        })
+        .catch(() => {
+          if (row.status == 1) {
+            row.status = 0;
+          } else {
+            row.status = 1;
+          }
+          this.$message({
+            type: "success",
+            message: "已取消操作",
+            duration: 1000,
+          });
         });
-      } else {
-        this.$message.error("科室停用成功");
-      }
     },
+
     // 序号
     // indexMethod(index) {
     //   return index * 1;
@@ -233,33 +258,33 @@ export default {
     },
     //删除：
     handleDelete(id) {
-      console.log(id);
-      let data = {
-        id: id,
-      };
-      console.log(data);
-      service.departdel(data).then((res) => {
-        console.log(res);
-        this.reload();
-      });
-      // this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-      //   confirmButtonText: "确定",
-      //   cancelButtonText: "取消",
-      //   type: "warning",
-      // })
-      //   .then(() => {
-      //     this.$message({
-      //       type: "success",
-      //       message: "删除成功!",
-      //       delete: row.splice(index, 1),
-      //     });
-      //   })
-      //   .catch(() => {
-      //     this.$message({
-      //       type: "info",
-      //       message: "已取消删除",
-      //     });
-      //   });
+      this.$confirm("此操作将修改状态, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          let data = {
+            id: id,
+          };
+          console.log(data);
+          service.departdel(data).then((res) => {
+            console.log(res);
+            this.$message({
+              type: "success",
+              message: res.msg,
+              duration: 1000,
+            });
+            this.reload();
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "success",
+            message: "已取消操作",
+            duration: 1000,
+          });
+        });
     },
   },
 };

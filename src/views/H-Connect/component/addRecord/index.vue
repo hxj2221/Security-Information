@@ -331,9 +331,7 @@ export default {
   },
   methods: {
     getFile(item) {
-      // console.log(item.file);
       this.file = item;
-      console.log(this.file)
     },
     // 编辑
     handleEdit(index, row) {},
@@ -387,7 +385,6 @@ export default {
         record_of_communication: this.form.record_of_communication,
       };
       service.patientAdd(data).then((res) => {
-        console.log(res);
         if (res.code == 20010) {
           const loading = this.$loading({
             lock: true,
@@ -416,9 +413,7 @@ export default {
         // event_number: this.tableData1[0].event_number,
         event_number: 12,
       };
-      console.log(params);
       service.upLode(params).then((res) => {
-        console.log(res);
         this.dialogVisible = true;
       });
     },
@@ -433,8 +428,6 @@ export default {
         file: this.file,
       };
       service.uplode(data).then((res) => {
-        console.log(data)
-        console.log(res);
         if (res.code == 20010) {
           this.$message({
             message: res.msg,

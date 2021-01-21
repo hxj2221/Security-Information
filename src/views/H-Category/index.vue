@@ -287,9 +287,7 @@ export default {
       
     };
   },
-  watch(){
- console.log(body.clientWidth)
-  },
+
   methods: {
     // 柱状图
     drawChart() {

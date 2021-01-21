@@ -284,13 +284,10 @@ export default {
       for (let i = 0; i <= val.length - 1; i++) {
         let a = val[i];
         this.staffroleselC = a;
-        console.log(this.staffroleselC);
       }
     },
     // 保存
     staffaddvueyes() {
-      // let params = this.addStaff
-      console.log(this.addStaff.address);
       //1  正常   0 禁用
       let data = {
         // job_number: this.addStaff.job_number,
@@ -310,9 +307,7 @@ export default {
         role_id: this.staffroleselC,
         department_id: this.addStaff.staffdepart,
       };
-      console.log(data);
       service.staffAdd(data).then((res) => {
-        console.log(res);
         if (res.code == "20010") {
           const loading = this.$loading({
             lock: true,
@@ -335,7 +330,6 @@ export default {
       });
     },
     handleChange(cityvalue) {
-      //       console.log(
       //         CodeToText[cityvalue[0]],
       //         CodeToText[cityvalue[1]],
       //         CodeToText[cityvalue[2]]
@@ -358,7 +352,6 @@ export default {
     // 获取到的科室和角色
     let self = this;
     this.bus.$on("ReceiveMessage", function (item) {
-      console.log(item);
       self.optiondepart = item.department;
       self.optionrole = item.auth_grouap;
       self.addStaff.job_number = item.job_number;
