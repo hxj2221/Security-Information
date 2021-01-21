@@ -2,53 +2,56 @@
     background: none;
 }
 .lookForm_all_in{
-    width: 60%;
-    min-height:680px;
+    width: 95%;
+    min-height:805px;
     background: #fff;
     margin: 0 auto;
     box-shadow: 0 0 2px rgb(184, 183, 183);
     border-radius: 5px;
-    padding-bottom: 150px
+    padding-bottom: 121px;
 }
 /* top */
-.lookForm_top {
-    margin: 0 20px;
-    padding: 25px 15px 10px;
-}
 
 .lookForm_top_button {
     overflow: hidden;
+    height: 91px;
+    border-bottom: 3px solid #f2f2f2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+}
+.lookForm_top_button .lookForm_top_button_left .el-button{
+    border-color: #666ee8;
+    height: 40px;
+}
+.lookForm_top_button .lookForm_top_button_right .el-button{
+    border-color: #666ee8;
+    height: 40px;
+    line-height: 8px;
 }
 .lookForm_top_button .el-button{
     border: 1px solid #666ee8;   
     color: #666ee8;
     background:none;
 }
-.lookForm_top_button_left {
-    float: left;
-}
-
-.lookForm_top_button_right {
-    float: right;
-}
 
 .lookForm_top_content {
-    padding: 10px 20px;
+    font-size: 16px;
+    text-align: left;
+    margin: 30px 0;
 }
-.lookForm_top_content>.el-form .el-input>.el-input__inner{
-    border: none;
+.lookForm_top_content .grid-content>span{
+    display: flex;
+    line-height: 40px;
 }
-.lookForm_top_content>.el-form>.el-row{
-    overflow: hidden;
-}
-.lookForm_top_content>.el-form>.el-row>.el-col:last-child{
-    /* background-color: skyblue; */
-    float: right;
+.lookForm_top_content .grid-content>span>span{
+    width: 50%;
 }
 
 .lookForm_all hr {
     border: none;
-    width: 90%;
+    width: 77%;
     height: 2px;
     margin: 0 auto;
     background-color: #e0e2fa;
@@ -57,21 +60,12 @@
 
 /* center */
 .lookForm_center {
-    padding: 0 40px;
-    margin-bottom: 30px;
+    margin: 20px 12% 30px;
 }
 
 .lookForm_center_top {
-    overflow: hidden;
+    font-size: 16px;
     margin-bottom: 30px;
-}
-
-.lookForm_center_top_left {
-    float: left;
-}
-
-.lookForm_center_top_right {
-    float: right;
 }
 
 .lookForm_center_top_right>p {
@@ -83,40 +77,26 @@
     font-size: 11px;
 }
 
-.lookForm_center_form>table {
-    width: 100%;
+.lookForm_center_form {
+   font-size: 14px;
+   border: 1px solid #797979;
+   border-top: none;
+   text-align: left;
 }
-
-.lookForm_center_form>table>tr>th {
+.lookForm_center_form .grid-content>.label{
+    border-top: 1px solid #797979;
     background-color: #f2f2f2;
+    padding-left: 10px;
+    line-height: 30px;
+    border-right:1px solid #797979;
+    display: block;
 }
 
-.lookForm_center_form>table>tr {
-
-    font-size: 14px;
-}
-
-.lookForm_center_form>table>tr>th {
-    width: 20%;
-    height: 30px;
-    padding: 5px 0;
-    font-weight: 400;
-    text-align: left;
-    padding-left: 5px;
-}
-
-.lookForm_center_form>table>tr>td {
-    width: 80%;
-    padding: 10px 0 10px 10px;
-    text-align: left;
-    margin-left: 5px;
-}
-
-.lookForm_center_form>table>tr>td>li {
-
-    list-style: none;
-    margin-top: 15px;
-    margin-bottom: 15px;
+.lookForm_center_form .bg-purple-light>.value{
+    padding-left: 10px;
+    line-height: 30px;
+    border-bottom: 1px solid #797979;
+    display: block;
 }
 
 /* bottom */
@@ -127,25 +107,33 @@
 .lookForm_bottom_top {
     /* padding: 0 40px; */
     overflow: hidden;
-    margin-bottom: 20px;
+    margin: 0 11% 20px;
 }
 
 .lookForm_bottom_top>h6 {
     float: left;
 }
 
-.lookForm_bottom_form>table {
-    width: 100%;
+.lookForm_bottom_form {
+    width: 80%;
     font-size: 14px;
+    text-align: left;
+    margin: 0 auto;
+    border: 1px solid #797979;
+    border-left: none;
+    border-bottom: none;
+    line-height: 30px;
 }
-
-.lookForm_bottom_form>table>tr>th {
-    font-weight: normal;
-    padding: 10px;
+.lookForm_bottom_form .tab{
+    border-bottom: 1px solid #797979;
 }
-
-.lookForm_bottom_form>table>tr>td {
-    padding: 10px;
-    color: #00f;
-    cursor: pointer;
+.lookForm_bottom_form .tab .grid-content .tit{
+    background-color: #f2f2f2;
+    border-right: 1px solid #797979;
+    border-left: 1px solid #797979;
+    padding-left: 10px;
+}
+.lookForm_bottom_form .tab .grid-content .con{
+    padding-left: 10px;
+    color: #666ee8;
 }

@@ -1,7 +1,6 @@
 <template>
   <div class="AdeDetail">
-    <div style="position: fixed;
-    top: 85px;z-index: 999;width:78.6%">
+    <div>
       <div class="top">
         <span class="left">投诉案件调查表</span>
         <div class="right">
@@ -14,54 +13,55 @@
     <div>
       <div class="head-txt">
         <div class="txt">
-          <el-row>
-            <el-col :span="8">
+          <el-row type="flex" class="row-bg" justify="center">
+            <el-col :span="6">
               <div class="grid-content bg-purple">
-                <span class="tit">医院名称：</span>
-                <span>第二人民医院</span>
+                <span>
+                  <span>医院名称：</span>第二人民医院
+                </span>
               </div>
             </el-col>
-            <el-col :span="8">
+            <el-col :span="6">
               <div style="height:30px" class="grid-content bg-purple-light"></div>
             </el-col>
-            <el-col :span="8">
+            <el-col :span="6">
               <div class="grid-content bg-purple">
-                <span class="tit">事件编号：</span>
-                <span>{{event_num}}</span>
+                <span>
+                  <span>事件编号：</span>{{event_num}}
+                </span>
               </div>
             </el-col>
           </el-row>
-          <el-row>
-            <el-col :span="8">
+          <el-row type="flex" class="row-bg" justify="center">
+            <el-col :span="6">
               <div class="grid-content bg-purple">
-                <span class="tit">事发时间：</span>
-                <span>{{occur_time |Date }}</span>
+                <span><span>事发时间：</span>{{occur_time |Date }}</span>
               </div>
             </el-col>
-            <el-col :span="8">
+            <el-col :span="6">
               <div style="height:30px" class="grid-content bg-purple-light"></div>
             </el-col>
-            <el-col :span="8">
+            <el-col :span="6">
               <div class="grid-content bg-purple">
-                <span class="tit">事发地点：</span>
-                <span>{{occur_scene}}</span>
+                <span>
+                  <span>事发地点：</span>{{occur_scene}}
+                </span>
               </div>
             </el-col>
           </el-row>
-          <el-row>
-            <el-col :span="8">
-              <div class="grid-content bg-purple">
-                <span class="tit">不良类型：</span>
-                <span>{{event_type}}</span>
+          <el-row type="flex" class="row-bg" justify="center">
+            <el-col :span="6">
+              <div class="grid-content bg-purple"><span><span>不良类型：</span>{{event_type}}</span>
               </div>
             </el-col>
-            <el-col :span="8">
+            <el-col :span="6">
               <div style="height:30px" class="grid-content bg-purple-light"></div>
             </el-col>
-            <el-col :span="8">
+            <el-col :span="6">
               <div class="grid-content bg-purple">
-                <span class="tit">上报人：</span>
-                <span>{{create_uid}}</span>
+                <span>
+                  <span>上报人：</span>{{create_uid}}
+                </span>
               </div>
             </el-col>
           </el-row>

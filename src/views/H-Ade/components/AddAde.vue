@@ -197,7 +197,7 @@ import service from '@/service/index';
     <!-- 关联 -->
     <div class="table_info">
       <h2>关联患者信息（调用HIS）</h2>
-      <el-table class="info" :data="tableData">
+      <el-table class="info" :data="tableData" :header-cell-style="getRowClass">
         <el-table-column type="index" label="序号">
         </el-table-column>
         <el-table-column prop="name" label="姓名">
@@ -295,6 +295,16 @@ import service from '@/service/index';
       };
     },
     methods: {
+      // 设置表头颜色
+      getRowClass({
+        rowIndex
+      }) {
+        if (rowIndex == 0) {
+          return "background:#c2c5f6;color:#000";
+        } else {
+          return "";
+        }
+      },
       // 提交
       sure() {
         let params = this.addAde
