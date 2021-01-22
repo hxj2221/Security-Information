@@ -16,7 +16,7 @@
 .filelist .head {
     display: flex;
     justify-content: space-between;
-    height: 83px;
+    height: 91px;
     align-items: center;
     padding: 0 30px;
     border-bottom: 2px solid #f2f2f2;
@@ -39,14 +39,10 @@
     background-color: #666ee8;
     border-radius: 5px;
     cursor: pointer;
-    border-color: #666ee8;
-    width: 94px;
+    border: 3px solid #666ee8;
     height: 40px;
-    margin-left: -3px;
 }
-.filelist .head .push_btn .el-button>i{
-    margin-left: -10px;
-}
+
 .filelist .head .push_btn .newflie{
     margin-left: 30px;
 }
@@ -85,7 +81,7 @@
 .filelist .TableContent {
     margin: 0 auto;
     width: 94%;
-    min-height: 500px;
+    min-height: 665px;
 }
 
 .filelist .TableContent .el-table .el-table__header-wrapper .el-table__header .has-gutter tr th {
@@ -100,11 +96,15 @@
 
 
 /* 分页 */
-
-.filelist .pagenum {
-    text-align: right;
-    padding: 20px 30px;
+.staffpag {
+    overflow: hidden;
+    padding: 25px 40px;
 }
+
+.staffpag>.block {
+    text-align: right;
+}
+
 
 
 /* 新增分类 */
@@ -114,7 +114,7 @@
     background-color: #ffffff;
     text-align: left;
     margin: 0 auto;
-    min-height: 819px;
+    min-height: 805px;
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
     border-radius: 5px;
 }
@@ -127,7 +127,7 @@
     justify-content: space-between;
     height: 83px;
     align-items: center;
-    padding: 0 30px 0 20px;
+    padding: 0 30px;
     border-bottom: 2px solid #f2f2f2;
 }
 
@@ -163,19 +163,21 @@
     margin-left: 30px;
     font-weight: 700;
     background: none;
-    width: 92px;
+    /* width: 92px; */
     height: 40px;
+    text-align: center;
 }
-.newlyFiles .head .push_btn .back>span{
-    margin-left: -17px;
-}
+
 
 
 /* 内容 */
 
 .newlyFiles .newlyContent {
     margin: 30px auto 0;
-    width: 96%;
+    width: 94%;
+}
+.newlyFiles .newlyContent .TableContent{
+    min-height: 720px;
 }
 
 .newlyFiles .newlyContent .el-table .el-table__header-wrapper .el-table__header .has-gutter tr th {
@@ -193,9 +195,8 @@
 
 .newlyFiles .pagenum {
     text-align: right;
-    padding: 20px ;
+    padding: 25px 40px;
 }
-
 
 /* 新增分类弹框 */
 
@@ -207,14 +208,3 @@
     text-align: right;
 }
 
-
-/* 分页 */
-
-.staffpag {
-    overflow: hidden;
-    margin: 20px 40px;
-}
-
-.staffpag>.block {
-    float: right;
-}

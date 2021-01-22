@@ -5,7 +5,6 @@
     background: #fff;
     border-radius: 5px;
     box-shadow: 0 0 2px rgb(184, 183, 183);
-    padding-bottom: 116px;
     margin: 0 auto;
 }
 
@@ -37,20 +36,18 @@
 /* .connent_top_right {
     float: right;
 } */
-.connent_top_right>.el-button{
-    width: 92px;
-    height: 40px;
-}
+
 .connent_top_right>.el-button:first-child {
      background: #666ee8;
-     padding-left: 6px;
      border: 3px solid #666EE8;
+     text-align: center;
 }
 .connent_top_right>.el-button:last-child{
      color: #666ee8;
      background:none;
-    border-color: #666EE8;
+    border:1px solid #666EE8;
     margin-left: 30px;
+
 } 
 .connent_Tableall>.seach>.block>.el-button {
     background: #666ee8;
@@ -116,7 +113,7 @@
     width: 94%;
     margin: 0 auto;
     font-size: 12px;
-    
+    min-height: 723px;    
 }
 
 
@@ -136,7 +133,7 @@
 
 .connent_paging {
     overflow: hidden;
-    margin: 38px 30px 0;
+    margin: 25px 30px;
 }
 
 .connent_paging>.block {

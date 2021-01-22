@@ -10,48 +10,8 @@
         <el-button type="primary" icon="el-icon-circle-plus" @click="increase()">新增
         </el-button>
       </div>
-      <div class="allManage_cont">
-        <el-row  type="flex" class="row-bg" justify="space-around">
-          <!-- 侧边导航 -->
-          <el-col :span="4">
-            <div class="grid-content bg-purple">
-
-              <div class="left">
-                <ul class="side_nav">
-                  <li class="side_nav_list" v-for="item in SideNav" :key="item.index">{{item.name}}</li>
-                </ul>
-              </div>
-            </div>
-          </el-col>
-          <!-- 右边内容 -->
-          <el-col :span="18">
-            <div class="grid-content bg-purple-light">
-              <div class="right">
-                <el-input placeholder="请输入内容" v-model="search" class="input-with-select search">
-                  <el-button slot="append" icon="el-icon-search"></el-button>
-                </el-input>
-                <el-table class="right_con" ref="singleTable" :header-cell-style="getRowClass" :data="tableData">
-                  <el-table-column type="index" label="序号">
-                  </el-table-column>
-                  <el-table-column property="field" label="字段">
-                  </el-table-column>
-                  <el-table-column property="date" label="创建时间">
-                  </el-table-column>
-                  <el-table-column property="name" label="创建人">
-                  </el-table-column>
-                  <el-table-column label="操作">
-                    <template slot-scope="scope">
-                      <el-button type="text" size="small" @click="edit()">编辑</el-button>
-                      <el-button @click.native.prevent="deleteRow(scope.$index, tableData)" type="text" size="small">删除
-                      </el-button>
-                    </template>
-                  </el-table-column>
-                </el-table>
-              </div>
-            </div>
-          </el-col>
-        </el-row>
-      </div>
+      <!-- 内容 -->
+        <Complain v-show="isShow"></Complain>
       <!-- 分页 -->
       <div class="block">
         <el-pagination @size-change="handleSizeChange" @current-change="currentChage" :current-page="currentPage4"
@@ -92,18 +52,21 @@
 <script>
   // 引入css样式
   import './css/Dictionaries.css'
-  // import AdminHead from './components/AdminHead'
+
+  import Complain from './components/Complain/content'
+
+  import service from '@/service/index'
+
 
   export default {
     components: {
-
+      Complain
     },
-
     data() {
       return {
         // 顶部导航
         Nav: [{
-            name: '投诉纠纷分'
+            name: '投诉纠纷'
           },
           {
             name: '不良信息'
@@ -116,62 +79,6 @@
           },
         ],
         nowIndex: 0,
-        // 左侧导航
-        SideNav: [{
-          name: '信息来源'
-        }, {
-          name: '临床医技科室'
-        }, {
-          name: '投诉人与患者关系'
-        }, {
-          name: '投诉类别'
-        }, {
-          name: '调查科室'
-        }, {
-          name: '抄送部门'
-        }, {
-          name: '审批操作'
-        }, {
-          name: '辅助检查'
-        }, {
-          name: '治疗意见'
-        }, ],
-        // 搜索框
-        search: '',
-        // 表格
-        tableData: [{
-          field: '口头陈诉',
-          date: '2019-11-12 12:08:12',
-          name: '王冕',
-        }, {
-          field: '医院电话投诉',
-          date: '2019-11-12 12:08:12',
-          name: '王小虎',
-        }, {
-          field: '书面投诉',
-          date: '2019-11-12 12:08:12',
-          name: '王小虎',
-        }, {
-          field: '省卫生热线12320',
-          date: '2019-11-12 12:08:12',
-          name: '王小虎',
-        }, {
-          field: '卫健委维权处',
-          date: '2019-11-12 12:08:12',
-          name: '王小虎',
-        }, {
-          field: '卫健委信访',
-          date: '2019-11-12 12:08:12',
-          name: '王小虎',
-        }, {
-          field: '书面投诉',
-          date: '2019-11-12 12:08:12',
-          name: '王小虎',
-        }, {
-          field: '省卫生热线12320',
-          date: '2019-11-12 12:08:12',
-          name: '王小虎',
-        }],
         currentPage4: 1, //分页
         pageNumList: [8, 10, 20], //页数
         pageCount: 0, //总数量
@@ -182,25 +89,24 @@
         },
         dialogFormVisible: false,
         dialogVisible: false,
+        isShow:true,//切换内容
       };
     },
-
+    
     methods: {
       // 顶部导航
       change(index) {
         this.nowIndex = index;
+        console.log(index)
+        this.isShow=!this.isShow
+
       },
+      handleClick(tab, event) {
+        console.log(tab, event);
+      },
+
       // 表格操作
-      // 设置表头颜色
-      getRowClass({
-        rowIndex
-      }) {
-        if (rowIndex == 0) {
-          return "background:#c2c5f6;color:#000";
-        } else {
-          return "";
-        }
-      },
+
       // 编辑
       edit() {
         this.dialogVisible = !this.dialogVisible

@@ -4,16 +4,12 @@
     <div class="staffThre">
       <span class="staffSpan">编辑员工信息</span>
       <div style="padding-right: 30px">
-        <el-button class="staffgr" @click="staffaddvueyes">保存</el-button>
-        <el-button
-          class="staffb"
-          icon="iconfont el-icon-hospital-passwordai207"
-          @click="staffaddvueno"
-          >返回</el-button
-        >
+        <el-button type="primary" class="staffgr" icon="iconfont el-icon-hospital-passwordbaocun" @click="staffaddvueyes">保存
+      </el-button>
+      <el-button type="primary" class="staffb" icon="iconfont el-icon-hospital-passwordai207" @click="staffaddvueno">返回
+      </el-button>
       </div>
     </div>
-    <hr class="staffWidhr" />
     <!-- edit -->
     <div class="addmain">
       <el-form ref="form" :model="addStaff">

@@ -12,7 +12,6 @@
         >
       </div>
     </div>
-    <hr class="roleaddWidhr" />
     <div class="addmain">
       <el-form ref="form">
         <el-row :gutter="20">
@@ -81,7 +80,7 @@
       <p
         style="
           display: flex;
-          margin-left: 15px;
+          margin-left: 40px;
           font-size: 20px;
           color: #858bed;
           font-weight: bold;
@@ -91,7 +90,7 @@
       </p>
       <div
         class="role_div"
-        style="width: 50%; text-align: left; margin: 20px 40px"
+        style="text-align: left; margin: 10px 70px"
       >
         <el-radio-group v-model="radio" @change="radiochange">
           <el-radio :label="2">本科室</el-radio>
@@ -99,11 +98,11 @@
         </el-radio-group>
       </div>
     </div>
-    <div>
+    <div style="min-height:490px">
       <p
         style="
           display: flex;
-          margin-left: 15px;
+          margin-left: 40px;
           font-size: 20px;
           color: #858bed;
           font-weight: bold;

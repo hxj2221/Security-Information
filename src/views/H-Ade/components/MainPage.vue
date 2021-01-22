@@ -44,7 +44,7 @@
     </div>
     <!-- 内容 -->
     <div style="min-height: 600px;">
-      <el-table class="elTable" :data="tableData" :header-cell-style="getRowClass">
+      <el-table class="elTable"  max-height="600" :data="tableData" :header-cell-style="getRowClass">
       <el-table-column type="index" label="序号" width="50">
       </el-table-column>
       <el-table-column prop="event_num" label="事件编码" width="180">

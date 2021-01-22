@@ -6,7 +6,7 @@
         <h6>医患沟通记录</h6>
       </div>
       <div class="connent_top_right">
-        <el-button type="primary" icon="el-icon-circle-plus" @click="addRecord()">新增记录
+        <el-button type="primary" icon="el-icon-circle-plus" @click="addRecord()">新增
         </el-button>
         <el-button type="primary" icon="iconfont el-icon-hospital-passwordexport">导出</el-button>
       </div>
@@ -28,7 +28,7 @@
       <!-- 表单表格部分 -->
       <div class="connent_myTable">
         <!--  -->
-        <el-table :data="tableData" :header-cell-style="getRowClass">
+        <el-table :data="tableData" max-height="662" :header-cell-style="getRowClass">
           <el-table-column label="序号" type="index" width="50"> </el-table-column>
 
           <el-table-column label="记录编号" prop="number"> </el-table-column>
@@ -50,10 +50,13 @@
           </el-table-column>
 
           <el-table-column fixed="right" label="操作" width="200">
-            <template slot-scope="scope" >
-              <el-link style="color:#666ee8" :underline="false" @click="details(scope.$index, scope.row)" >记录详情</el-link>
-              <el-link style="color:#666ee8" :underline="false" @click="complaint(scope.$index, scope.row)">投诉详情</el-link>
-              <el-link type="danger" :underline="false" @click="handleDel(scope.$index, tableData)">删除</el-link>
+            <template slot-scope="scope">
+              <el-button style="color:#666ee8" type="text" size="small" @click="details(scope.$index, scope.row)">记录详情
+              </el-button>
+              <el-button style="color:#666ee8" type="text" size="small" @click="complaint(scope.$index, scope.row)">投诉详情
+              </el-button>
+              <el-button style="color:#ff0000" type="text" size="small" @click="handleDel(scope.$index, tableData)">删除
+              </el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -256,7 +259,15 @@
       },
     },
     created() {
-      let params = {
+      let number=this.$route.query.event_number
+      if(number){
+        service.comtocon(number).then((res) => {
+        this.tableData = res.data;
+        this.total = res.allNews;
+      });
+      }
+      else{
+       let params = {
         pageSize: this.num,
         pageNum: this.currentPage,
       };
@@ -264,6 +275,8 @@
         this.tableData = res.data;
         this.total = res.allNews;
       });
+      }
+     
     },
   };
 </script>

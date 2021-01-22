@@ -420,14 +420,12 @@ inject: ["reload"],
     },
     //保存提交事件
     keepform() {
-      console.log(this.nature)
       if (this.comde !== "" && this.comde !== null&&this.comde.length!==0&&this.incidentdata !== ""&&this.comdata !== ""&&this.comname !== ""&&
       this.comgender!==''&&this.comagenumber !== ""&&this.comphone!== ""&&this.commode!== ""&&this.relation!==''&&this.consulttime!==''
       &&this.nature!==''&&this.comtype!==''&&this.agentname!==''&&this. agentphone!=='') {
         let comde = this.comde.map((x) => {
           return x[0];
         });
-        console.log(comde)
       let params = {
         event_number: this.comnumber, //业务编号
         event_type: this.comtype, //投诉类型
@@ -447,7 +445,6 @@ inject: ["reload"],
         handle_name: this.agentname, //经办人姓名
         handle_phone: this.agentphone, //经办人手机号
       };
-      console.log(params)
       service.AddComponent(params).then((res) => {
         if(res.code==20010){
            this.$message({
@@ -584,6 +581,7 @@ inject: ["reload"],
     },
     backss() {
       this.reload()
+      sessionStorage.removeItem('add')
     },
     // 设置表头颜色
     getRowClass({ rowIndex }) {
@@ -595,7 +593,7 @@ inject: ["reload"],
     },
   },
   created() {
-    service.AddCom().then((res) => {
+      service.AddCom().then((res) => {
         if (res.code == 20010) {
           this.comnumber = res.data.event_number; // 事件编号
           this.commodes = res.data.ComplaintType; // 事件编号
@@ -628,6 +626,8 @@ inject: ["reload"],
         //   });
         // }
       })
+ 
+    
     }
 };
 </script>

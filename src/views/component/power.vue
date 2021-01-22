@@ -11,11 +11,9 @@
       <el-button class="powerRole" style="margin-left: -5px" @click="editpow"
         >编辑权限</el-button
       >
-      <el-button class="powerAdd" icon="el-icon-zoom-in" @click="staffadd"
-        >新增</el-button
-      >
+      <el-button type="primary" icon="el-icon-circle-plus" class="powerAdd" @click="staffadd">新增
+        </el-button>
     </div>
-    <hr class="powerWidhr" />
   </div>
 </template>
 

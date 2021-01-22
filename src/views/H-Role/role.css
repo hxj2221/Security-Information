@@ -4,13 +4,12 @@
 }
 
 .rolealBg {
-    margin-top: -12px;
-    width: 100%;
-    min-height: 100%;
+    width: 95%;
+    margin: 0 auto;
+    min-height: 805px;
     background: #fff;
     border-radius: 5px;
     box-shadow: 0 0 2px rgb(184, 183, 183);
-    padding-bottom: 150px;
 }
 
 .roleheadThre {
@@ -78,6 +77,7 @@
     /* justify-content: center; */
     /* margin-left: 45px; */
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .roleNameIpt {
@@ -87,15 +87,18 @@
     margin-left: 4%;
 }
 
-.staffNamesch {
+.roleNamesch {
     font-size: 14px;
     color: #fff;
     background-color: #666ee8;
     border-radius: 5px;
+    border-color: #666ee8;
 }
 
 .roleTable {
-    margin: 0 30px;
+    width: 94%;
+    margin: 0 auto;
+    min-height: 665px;
 }
 
 .roleTable .el-table td,
@@ -104,7 +107,7 @@
 }
 
 .roleEdit {
-    width: 45px;
+    color: #666ee8;
 }
 
 .roleEdit span {
@@ -116,7 +119,7 @@
 }
 
 .roleDel {
-    width: 45px;
+    color: #ff0000;
 }
 
 .rolePag {
@@ -127,99 +130,6 @@
 .el-table::before {
     height: 0px;
 }
-
-
-/* add */
-
-.roleaddalBg {
-    background-color: #fff;
-    height: 65%;
-    margin-left: -20px;
-    width: 81%;
-}
-
-.roleaddThre {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    color: #cccccc;
-    padding-top: 30px;
-    padding-left: 60px;
-}
-
-.roleaddSpan {
-    color: #000;
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.roleaddgr:hover {
-    background-color: #666ee8;
-}
-
-.roleaddgr {
-    border-left: 2px solid #ccc;
-    border-top: 2px solid #ccc;
-    border-bottom: 2px solid #ccc;
-    border-radius: 5px;
-}
-
-.roleaddb:hover {
-    background-color: #666ee8;
-}
-
-.roleaddb {
-    border: 2px solid #ccc;
-    border-radius: 5px;
-}
-
-.roleaddWidhr {
-    margin-top: 15px;
-    margin-bottom: 12px;
-    background-color: #ccc;
-    height: 1px;
-    border: none;
-}
-
-.roleaddF {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    width: 100%;
-}
-
-.roleaddFlex {
-    display: flex;
-    flex-wrap: wrap;
-    width: 270px;
-    height: 100px
-}
-
-.roleaddP {
-    font-size: 16px;
-}
-
-.roleadda {
-    width: 250px;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    height: 40px;
-}
-
-.roleaddFlex2 {
-    display: flex;
-    flex-wrap: wrap;
-    width: 270px;
-    margin-top: 50px;
-}
-
-.roleaddFlex3 {
-    display: flex;
-    flex-wrap: wrap;
-    width: 270px;
-    height: 100px
-}
-
 
 /*  */
 
@@ -275,7 +185,7 @@
 
 .rolepag {
     overflow: hidden;
-    margin: 20px 25px;
+    padding: 25px 25px;
 }
 
 .rolepag>.block {

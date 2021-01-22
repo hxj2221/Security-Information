@@ -12,7 +12,7 @@
       </div>
     </div>
     <!-- table -->
-    <div class="articleList_table">
+    <!-- <div class="articleList_table"> -->
       <!-- 搜索部门 -->
       <div class="articleList_table_search">
         <el-cascader
@@ -27,12 +27,13 @@
       </div>
       <!-- 表格部分 -->
       <div class="articleList_table_table">
-        <!-- 表格 -->
+        <div style="min-height:720px">
+           <!-- 表格 -->
         <el-table
+        max-height="662"
           ref="multipleTable"
           :data="tableData"
           tooltip-effect="dark"
-          style="width: 100%"
         >
           <el-table-column type="selection" width="55"> </el-table-column>
           <el-table-column label="标题">
@@ -71,14 +72,10 @@
               :value="item.value"
             >
             </el-option>
-            <!-- <el-option
-              label="移至栏目"
-
-              value="移至栏目"
-            ></el-option>
-            <el-option label="删除" value="删除"></el-option> -->
           </el-select>
         </div>
+        </div>
+       
         <!-- 弹框 -->
         <div class="articleList_table_table_select">
           <el-dialog
@@ -106,7 +103,6 @@
             </span>
           </el-dialog>
         </div>
-
         <!-- 分页 -->
         <div class="articleList_table_table_paging">
           <el-pagination
@@ -121,7 +117,7 @@
         </div>
       </div>
     </div>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>

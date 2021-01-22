@@ -9,34 +9,32 @@
           class="roleNameIpt"
           placeholder="请输入角色名称"
         ></el-input>
-        <el-button class="staffNamesch" icon="el-icon-search" @click="roleserch"
-          >搜索</el-button
-        >
+        <el-button class="roleNamesch" type="primary" icon="el-icon-search" @click="roleserch()"></el-button>
       </div>
       <!-- 表格 -->
       <div class="roleTable">
         <el-table
+        max-height="662"
           :data="tables"
-          style="width: 96%"
           tooltip-effect="dark"
-          :header-cell-style="{ background: '#C2C5F6' }"
+          :header-cell-style="{ background: '#C2C5F6',color:'#000' }"
           :cell-style="{ background: '#fff' }"
         >
           <el-table-column
-            width="150px"
+            width="50px"
             label="序号"
             type="index"
             :index="indexMethod"
           >
           </el-table-column>
-          <el-table-column width="150px" prop="sort" label="角色排序">
+          <el-table-column  prop="sort" label="角色排序">
           </el-table-column>
-          <el-table-column width="180px" prop="title" label="角色名称">
+          <el-table-column  prop="title" label="角色名称">
           </el-table-column>
-          <el-table-column width="150px" prop="number" label="员工数量">
+          <el-table-column  prop="number" label="员工数量">
           </el-table-column>
           <el-table-column
-            width="150px"
+            
             prop="user.name"
             label="创建人员"
           ></el-table-column>
@@ -46,7 +44,7 @@
             prop="create_time"
             label="创建时间"
           ></el-table-column>
-          <el-table-column width="200px" label="角色状态">
+          <el-table-column  label="角色状态">
             <template slot-scope="scope">
               <el-switch
                 v-model="scope.row.status"
@@ -60,18 +58,19 @@
             ></el-table-column
           >
 
-          <el-table-column width="300px" fixed="right" label="操作">
+          <el-table-column  fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
                 class="roleEdit"
-                size="mini"
+                type="text"
+                size="small"
                 @click="handleEdit(scope.row.id)"
                 >编辑</el-button
               >
               <el-button
                 class="roleDel"
-                size="mini"
-                type="danger"
+                size="small"
+                type="text"
                 @click="delrole(scope.row.id)"
                 >删除</el-button
               >

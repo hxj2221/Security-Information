@@ -47,12 +47,12 @@
       </div>
     <div class="Complaints-content">
       <el-table
-        max-height='550px'
+        max-height='662'
         :data="tableData"
         style="width: 94%; margin-left: 3%; text-align: center"
         :header-cell-style="getRowClass"
       >
-        <el-table-column type="index"  label="序号"> </el-table-column>
+        <el-table-column type="index" width="50" label="序号"> </el-table-column>
         <el-table-column prop="event_number" width="150"  label="事件编码"></el-table-column>
         <el-table-column prop="complaint_name"  label="投诉人姓名"> </el-table-column>
         <el-table-column prop="sex" label="性别"> </el-table-column>
@@ -459,7 +459,6 @@ export default {
   },
   created() {
     service.ComList(this.number, this.currentPage4).then((res) => {
-      console.log(res)
       if (res.code == 20010) {
         this.tableData = res.data[0];
         this.total = res.data[1].count;

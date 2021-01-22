@@ -26,7 +26,7 @@
                   <el-button type="text" size="small" @click="looks(scope.row)"
                     >查看</el-button
                   >
-                  <el-button type="text" size="small" @click="record(scope.row)"
+                  <el-button type="text" size="small" @click="records(scope.row)"
                     >医患记录</el-button
                   >
                   <el-button type="text" size="small" @click="handle(scope.row)"
@@ -129,7 +129,7 @@
               icon="el-icon-s-order"
               class="detail"
               slot="reference"
-              @click="drawer = true"
+              @click="detail"
               >投诉详情</el-button
             >
           </div>
@@ -185,28 +185,17 @@ export default {
       agree: "",
       operations: false,
       drawer: false,
+      event_number:''
     };
   },
 
   methods: {
-    // 操作页面
-    handle(index) {
-      let params = {
-        event_number: index.event_number,
-        };
-        //操作页面数据接口
-      service.Issue(index.event_number).then((res) => {
-        if (res.code == 20010) {
-          this.list = false;
-          this.add = false;
-          this.look = false;
-          this.operations = true;
-          this.operationdata = index;
-          this.opdata = res.data;
-          let params = {
-           event_number: index.event_number,
+    detail(){
+      this.drawer = true
+       //详情数据接口
+       let params = {
+           event_number:this.event_number,
           };
-          //详情数据接口
           service.componrdetaile(qs.stringify(params)).then((res) => {
           if(res.code==20010){
               this.lookdata = res.data;
@@ -235,6 +224,23 @@ export default {
           });
         }
         });
+    },
+    // 操作页面
+    handle(index) {
+      let params = {
+        event_number: index.event_number,
+        };
+        this.event_number=index.event_number
+        //操作页面数据接口
+      service.Issue(index.event_number).then((res) => {
+        if (res.code == 20010) {
+          this.list = false;
+          this.add = false;
+          this.look = false;
+          this.operations = true;
+          this.operationdata = index;
+          this.opdata = res.data;
+          
         }
        else if(res.code=20401){
           this.$message({
@@ -263,8 +269,12 @@ export default {
       });
     },
     records(index) {
+      console.log(index)
       //跳转到医患记录
-      this.$router.push("/Connect");
+      this.$router.push({
+            path:'/Connect',
+            query:{event_number:index.event_number}
+           })
     },
     // 弹窗点击事件
     handleClose(done) {
@@ -316,14 +326,6 @@ export default {
           });
         }
       });
-    },
-    // 添加页面保存
-    keepform() {
-      this.list = true;
-      this.add = false;
-      this.look = false;
-      this.operations = false;
-      this.reload()
     },
     // 打印
     stamp() {
