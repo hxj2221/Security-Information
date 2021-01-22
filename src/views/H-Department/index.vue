@@ -89,10 +89,10 @@
     inject: ["reload"],
     data() {
       return {
-        departvue: false,
+        departvue: true,
         currentPage: 1,
         adddep: false,
-        editdep: true,
+        editdep: false,
         currentRow: [], //选中的值
         dormitory: [],
         search: "",

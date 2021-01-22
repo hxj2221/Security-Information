@@ -6,7 +6,7 @@
         <h6>医患沟通记录</h6>
       </div>
       <div class="connent_top_right">
-        <el-button type="primary" icon="el-icon-circle-plus" @click="addRecord()">新增记录
+        <el-button type="primary" icon="el-icon-circle-plus" @click="addRecord()">新增
         </el-button>
         <el-button type="primary" icon="iconfont el-icon-hospital-passwordexport">导出</el-button>
       </div>

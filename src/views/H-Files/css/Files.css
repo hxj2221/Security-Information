@@ -39,14 +39,10 @@
     background-color: #666ee8;
     border-radius: 5px;
     cursor: pointer;
-    border-color: #666ee8;
-    width: 94px;
+    border: 3px solid #666ee8;
     height: 40px;
-    margin-left: -3px;
 }
-.filelist .head .push_btn .el-button>i{
-    margin-left: -10px;
-}
+
 .filelist .head .push_btn .newflie{
     margin-left: 30px;
 }

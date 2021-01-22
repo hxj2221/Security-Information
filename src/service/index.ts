@@ -404,7 +404,7 @@ export default {
   },
   // 字典管理
   // 列表
-  DicList: async () => {
-    return await service.get(`${baseUrl}api/Dictionary/lists`).then(res => res).catch(err => err)
+  DicList: async (params:any) => {
+    return await service.get(`${baseUrl}api/Dictionary/gettype`,{params}).then(res => res).catch(err => err)
   },
 }

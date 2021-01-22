@@ -15,8 +15,8 @@
   font-size: 24px;
   font-weight: 700;
   color: #666EE8;
-  width: 96%;
-  padding-left: 2%;
+  width: 94%;
+  margin: 0 auto;
   padding-top: 27px;
 }
 
@@ -78,7 +78,7 @@
 
 /* 新增不良底部固定按钮 */
 .addAll .root{
-  width: 80.7%;
+  width: 79.7%;
   height: 91px;
   position: fixed;
   bottom: 0;
