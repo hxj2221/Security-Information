@@ -4,20 +4,21 @@
 }
 
 .departalBg {
-    width: 100%;
+    width: 95%;
+    margin: 0 auto;
     min-height: 100%;
     background: #fff;
     border-radius: 5px;
     box-shadow: 0 0 2px rgb(184, 183, 183);
-    padding-bottom: 150px;
+    min-height: 805px;
 }
 
 .departheadThre {
     display: flex;
     font-size: 14px;
     color: #cccccc;
-    padding-top: 30px;
-    padding-left: 60px;
+    /* padding-top: 30px;
+    padding-left: 60px; */
 }
 
 .departStaf:hover {
@@ -63,13 +64,6 @@
     color: none;
 }
 
-.departWidhr {
-    width: 97%;
-    height: 2px;
-    background-color: #ebe9e9;
-    border: none;
-    margin-bottom: 20px;
-}
 
 .departIptsech {
     /* float: left; */
@@ -97,10 +91,11 @@
 .departtable {
     table-layout: fixed;
     /* margin: auto; */
-    margin-left: 2%;
+    margin: 0 auto;
     text-align: center;
     /* margin-left: -1px; */
-    width: 96%;
+    width: 94%;
+    min-height: 665px;
 }
 
 .departNameipt {
@@ -114,12 +109,12 @@
     color: #fff;
     background-color: #666ee8;
     border-radius: 5px;
-    width: 92px;
-    height: 40px;
+    border-color: #666ee8;
+    margin-top: 20px;
 }
 
 .departEdit {
-    width: 45px;
+    color: #666ee8;
 }
 
 .departEdit span {
@@ -131,7 +126,7 @@
 }
 
 .departDel {
-    width: 45px;
+    color: #ff0000;
 }
 
 .el-table::before {
@@ -150,8 +145,7 @@
     justify-content: space-between;
     font-size: 14px;
     color: #cccccc;
-    padding-top: 30px;
-    padding-left: 60px;
+   
 }
 
 .departaddSpan {
@@ -178,7 +172,7 @@
 }
 
 .departaddb {
-    border: 2px solid #ccc;
+    border-color: #666ee8;
     border-radius: 5px;
     width: 92px;
     height: 40px;
@@ -228,12 +222,12 @@
 /* 分页 */
 
 .departpag {
-    margin: 20px 25px;
+    padding: 25px 25px;
     overflow: hidden;
 }
 
 .departpag>.block {
-    float: right;
+    text-align: right;
 }
 
 .el-input__inner {

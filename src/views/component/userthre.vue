@@ -19,7 +19,6 @@
         >
       </div>
     </div>
-    <hr class="userthreWidhr" />
   </div>
 </template>
 

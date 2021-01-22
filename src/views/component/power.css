@@ -7,9 +7,11 @@
     display: flex;
     font-size: 14px;
     color: #cccccc;
-    padding-top: 30px;
+    height: 91px;
+    align-items: center;
+    border-bottom: 1px solid #f2f2f2;
     padding-left: 30px;
-    margin-bottom: 20px;
+    padding-right: 30px;
 }
 
 .powerheadThre>.el-button+.el-button {
@@ -57,11 +59,10 @@
 .powerAdd {
     color: #fff;
     background: #666ee8;
+    border: 3px solid #666ee8;
     border-radius: 5px;
     position: relative;
-    left: 70%;
-    /* right: 6%; */
-    /* top: 80px; */
+    left: 69.4%;
     width: 92px;
     height: 40px;
 }

@@ -50,10 +50,13 @@
           </el-table-column>
 
           <el-table-column fixed="right" label="操作" width="200">
-            <template slot-scope="scope" >
-              <el-link style="color:#666ee8" :underline="false" @click="details(scope.$index, scope.row)" >记录详情</el-link>
-              <el-link style="color:#666ee8" :underline="false" @click="complaint(scope.$index, scope.row)">投诉详情</el-link>
-              <el-link type="danger" :underline="false" @click="handleDel(scope.$index, tableData)">删除</el-link>
+            <template slot-scope="scope">
+              <el-button style="color:#666ee8" type="text" size="small" @click="details(scope.$index, scope.row)">记录详情
+              </el-button>
+              <el-button style="color:#666ee8" type="text" size="small" @click="complaint(scope.$index, scope.row)">投诉详情
+              </el-button>
+              <el-button style="color:#ff0000" type="text" size="small" @click="handleDel(scope.$index, tableData)">删除
+              </el-button>
             </template>
           </el-table-column>
         </el-table>

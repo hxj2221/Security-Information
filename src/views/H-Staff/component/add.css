@@ -1,11 +1,12 @@
 .addstaffall {
-    width: 100%;
+    width: 95%;
     height: 100%;
-    min-height: 680px;
+    margin: 0 auto;
+    min-height: 805px;
     background: #fff;
     border-radius: 5px;
     box-shadow: 0 0 2px rgb(184, 183, 183);
-    padding-bottom: 150px;
+    padding-bottom: 118px;
 }
 
 
@@ -16,13 +17,10 @@
     justify-content: space-between;
     font-size: 14px;
     color: #cccccc;
-    padding-top: 30px;
-    padding-left: 25px;
-    margin-bottom: 20px;
-}
-
-.addstaffall .staffThre .staffThre_div {
-    padding-right: 25px;
+    height: 91px;
+    align-items: center;
+    border-bottom: 1px solid #f2f2f2;
+    padding: 0 30px;
 }
 
 .staffSpan {
@@ -39,6 +37,7 @@
     background: #666ee8;
     width: 92px;
     height: 40px;
+    margin-right: 20px;
 }
 
 .staffb {
@@ -47,27 +46,17 @@
     background: none;
     width: 92px;
     height: 40px;
+    margin-left: 30px;
 }
 
 .staffb:hover {
     background-color: #666ee8;
 }
 
-.addstaffall .staffWidhr {
-    /* margin: 0 20px; */
-    width: 97%;
-    height: 2px;
-    background-color: #ebe9e9;
-    border: none;
-    margin-bottom: 20px;
-}
-
-
 /* add */
 
 .addmain {
-    margin: 0 20px;
-    margin-bottom: 20px;
+    margin: 20px 70px;
 }
 
 .addmain .el-from .el-input {

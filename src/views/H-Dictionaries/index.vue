@@ -31,7 +31,7 @@
                   <el-button slot="append" icon="el-icon-search"></el-button>
                 </el-input>
                 <el-table class="right_con" ref="singleTable" :header-cell-style="getRowClass" :data="tableData">
-                  <el-table-column type="index" label="序号">
+                  <el-table-column type="index" label="序号" width="50">
                   </el-table-column>
                   <el-table-column property="field" label="字段">
                   </el-table-column>
@@ -41,8 +41,8 @@
                   </el-table-column>
                   <el-table-column label="操作">
                     <template slot-scope="scope">
-                      <el-button type="text" size="small" @click="edit()">编辑</el-button>
-                      <el-button @click.native.prevent="deleteRow(scope.$index, tableData)" type="text" size="small">删除
+                      <el-button class="edit" type="text" size="small" @click="edit()">编辑</el-button>
+                      <el-button class="del" @click.native.prevent="deleteRow(scope.$index, tableData)" type="text" size="small">删除
                       </el-button>
                     </template>
                   </el-table-column>
