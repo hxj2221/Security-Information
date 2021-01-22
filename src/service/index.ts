@@ -398,4 +398,9 @@ export default {
   getupimg: async (data: object) => {
     return await service.post(`${baseUrl}api/srk/create_base64_file`, data).then(res => res).catch(err => err)
   },
+  // 字典管理
+  // 列表
+  DicList: async () => {
+    return await service.get(`${baseUrl}api/Dictionary/lists`).then(res => res).catch(err => err)
+  },
 }

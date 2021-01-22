@@ -15,7 +15,6 @@
           <!-- 侧边导航 -->
           <el-col :span="4">
             <div class="grid-content bg-purple">
-
               <div class="left">
                 <ul class="side_nav">
                   <li class="side_nav_list" v-for="item in SideNav" :key="item.index">{{item.name}}</li>
@@ -94,6 +93,8 @@
   import './css/Dictionaries.css'
   // import AdminHead from './components/AdminHead'
 
+  import service from '@/service/index'
+
   export default {
     components: {
 
@@ -103,7 +104,7 @@
       return {
         // 顶部导航
         Nav: [{
-            name: '投诉纠纷分'
+            name: '投诉纠纷'
           },
           {
             name: '不良信息'
@@ -184,7 +185,11 @@
         dialogVisible: false,
       };
     },
-
+    created(){
+      service.DicList().then(res=>{
+        console.log(res)
+      })
+    },
     methods: {
       // 顶部导航
       change(index) {
