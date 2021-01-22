@@ -1,28 +1,18 @@
 <template>
   <div class="head">
-    <div  class="headStart">
-      {{ name }}
-    </div>
-
-
+    <div  class="headStart"> {{ name }} </div>
     <div class="headEnd">
-      <el-dropdown>
-        <span>
-          <p class="headEndCtx" >
-            <span >{{ admin }}</span>
-          </p>
-        </span>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item  @click=" this.$router.push('/Personal')" >个人信息</el-dropdown-item >
-          <el-dropdown-item @click="logOut">修改密码</el-dropdown-item>
-          <el-dropdown-item @click="logOut">消息通知</el-dropdown-item>
-          <el-dropdown-item @click="logOut">退出系统</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
+      <el-menu class="el-menu-demo" mode="horizontal" @select="handleSelect" style="border:none;background:none;height:20px;color:#fff">
+       <el-submenu index="2">
+        <template slot="title">{{ admin }}</template>
+         <el-menu-item index="2-1" @click="toMine">个人信息</el-menu-item>
+         <el-menu-item index="2-2" @click="edit">修改密码</el-menu-item>
+         <el-menu-item index="2-1" @click="newaa">消息通知</el-menu-item>
+         <el-menu-item index="2-3" @click="logOut">退出系统</el-menu-item>
+      </el-submenu>
+     </el-menu>
     </div>
-
-  
-  </div>
+</div>
 </template>
 
 <script >
@@ -31,20 +21,33 @@ export default {
   Component:{HeadEdit},
   data(){
     return{
+       activeIndex: '1',
+        activeIndex2: '1',
       name:'兰州大学第二医院',
       isFold:true,
       admin:sessionStorage.getItem('account')
     }
   },
   methods:{
+     handleSelect(key, keyPath) {
+        console.log(key, keyPath);
+      },
     handleFold(){
       this.isFold=!this.isFold;
     },
     logOut(){
       this.$router.push({ name: "login" });
     },
-    mine(){
-      this.$router.push('/Personal')
+    toMine(){
+      console.log(1)
+      this.$router.push('Personal')
+    },
+    newaa(){
+      this.$router.push('Notify')
+    },
+    edit(){
+      console.log(1)
+      this.$router.push('/Account')
     }
   }
 }
@@ -89,7 +92,6 @@ export default {
 
   &End {
    
-    width: 210px;
     // border-left: 2px solid black;
       position: absolute;
     right: 0px;
@@ -112,6 +114,10 @@ export default {
       // padding-left: 2px;
       color: #fdfeff;
     }
+   
   }
+   .ul li div{
+      max-height: 30px;
+    }
 }
 </style>

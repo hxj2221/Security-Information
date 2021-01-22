@@ -119,9 +119,13 @@ export default {
   uploadfiles: async (data: any) => {
     return await service.post(`${baseUrl}api/Complaintprocess/event_uploadfiles`, data).then(res => res).catch(err => err)
   },
-  //   上传附件index.php/api/srk/create_base64_file
+  //   上传附件
   uploadfilebase: async (data: any) => {
-    return await service.post(`${baseUrl}index.php/api/srk/create_base64_file`, data).then(res => res).catch(err => err)
+    return await service.post(`${baseUrl}api/Complaintprocess/event_base64_uploadfiles`, data).then(res => res).catch(err => err)
+  },
+  // 跳转医患
+  comtocon: async (event_number: any) => {
+    return await service.get(`${baseUrl}api/record/record`,{ params:{event_number:event_number}}).then(res => res).catch(err => err)
   },
   // 不良事件列表
   AdeList: async (params: any) => {
