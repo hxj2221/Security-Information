@@ -47,7 +47,7 @@
       </div>
     <div class="Complaints-content">
       <el-table
-        max-height='550px'
+        max-height='662'
         :data="tableData"
         style="width: 94%; margin-left: 3%; text-align: center"
         :header-cell-style="getRowClass"

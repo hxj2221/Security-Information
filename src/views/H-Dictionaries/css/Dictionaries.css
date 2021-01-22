@@ -1,7 +1,7 @@
 .allManage {
     background: #ffffff;
     width: 95%;
-    padding: 0 20px;
+    min-height: 805px;
     margin: 0 auto;
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
     border-radius: 5px;
@@ -15,8 +15,9 @@
     justify-content: space-between;
     align-items: center;
     height: 84px;
-    border-bottom: 2px solid #cccccc;
+    border-bottom: 1px solid #f2f2f2;
     margin-bottom: 20px;
+    padding: 0 30px;
 }
 
 .allManage .allManage_nav .nav_list {
@@ -56,7 +57,6 @@
     height: 40px;
     border-radius: 5px;
     cursor: pointer;
-    margin-right: 10px;
 }
 
 
@@ -64,10 +64,20 @@
 
 /* 内容 */
 
-.allManage .allManage_cont .right{
-    text-align: left
+.allManage .allManage_cont{
+    width: 94%;
+    margin: 0 auto;
 }
-
+.allManage .allManage_cont .right{
+    text-align: left;
+    min-height: 735px;
+}
+.allManage .allManage_cont .right .edit{
+    color: #666EE8;
+}
+.allManage .allManage_cont .right .del{
+    color: #ff0000;
+}
 
 /* 侧边导航 */
 
@@ -119,10 +129,9 @@
 /* 分页 */
 
 .allManage .block {
-    margin-top: 105px;
-    padding-bottom: 117px;
     text-align: right;
-    margin-right: 36px;
+    margin-right: 42px;
+    padding: 25px 0;
 }
 
 

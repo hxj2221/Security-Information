@@ -4,21 +4,22 @@
 }
 
 .personall {
-    width: 100%;
-    min-height: 100%;
+    width: 95%;
+    min-height: 79%;
     /* height: 60%; */
     margin: 0 auto;
     background: #fff;
     border-radius: 5px;
     box-shadow: 0 0 2px rgb(184, 183, 183);
-    padding-bottom: 150px;
+    padding-bottom: 116px;
 }
 
 
 /* add */
 
 .personmain {
-    margin: 0 30px 100px;
+    width: 90%;
+    margin: 0 auto;
     /* padding-bottom: 50px; */
 }
 
@@ -86,8 +87,10 @@
 }
 
 .personb {
-    border: 2px solid #ccc;
+    border-color: #666ee8;
+    color: #666ee8;
     border-radius: 5px;
+
 }
 
 .personb:hover {
@@ -98,6 +101,7 @@
 .person_button {
     overflow: hidden;
     margin-left: 40px;
+    margin-top: 40px;
 }
 
 .person_button>.el-button {
