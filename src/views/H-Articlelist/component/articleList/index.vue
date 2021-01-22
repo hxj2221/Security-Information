@@ -30,6 +30,7 @@
         <div style="min-height:720px">
            <!-- 表格 -->
         <el-table
+        max-height="662"
           ref="multipleTable"
           :data="tableData"
           tooltip-effect="dark"

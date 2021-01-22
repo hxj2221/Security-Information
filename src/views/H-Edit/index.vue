@@ -4,7 +4,7 @@
       <!-- 头部 -->
       <headpow></headpow>
       <div class="jurisdiction">
-        <el-table :data="tableData" :header-cell-style="getRowClass" row-key="id" border :tree-props="{
+        <el-table :data="tableData" :header-cell-style="getRowClass" max-height="750" row-key="id" border :tree-props="{
           children: '_child',
           hasChildren: 'hasChildren',
           id: 'id',

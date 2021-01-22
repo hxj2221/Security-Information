@@ -14,6 +14,7 @@
       <!-- 表格 -->
       <div class="roleTable">
         <el-table
+        max-height="662"
           :data="tables"
           tooltip-effect="dark"
           :header-cell-style="{ background: '#C2C5F6',color:'#000' }"

@@ -19,7 +19,7 @@
         /> -->
       <!-- <img :src="portrait" alt="" class="my-avatar" /> -->
       <!-- </div> -->
-      <el-table :data="dormitory" class="departtable"
+      <el-table :data="dormitory" class="departtable" max-height="662"
         :header-cell-style="{ background: '#c2c5f6',color:'#000' }" :cell-style="{ background: '#fff' }" :tree-props="{
           children: '_child',
           hasChildren: 'hasChildren',

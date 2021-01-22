@@ -36,7 +36,7 @@
       </div>
       <!-- 表格内容 -->
       <div class="TableContent">
-        <el-table :data="tableData" :header-cell-style="getRowClass">
+        <el-table :data="tableData" max-height="662" :header-cell-style="getRowClass">
           <el-table-column prop="id" label="ID"> </el-table-column>
           <el-table-column prop="file_name" label="文件名">
           </el-table-column>

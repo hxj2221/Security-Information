@@ -30,6 +30,7 @@
       <!-- 表格部分 -->
       <div class="staffIptTab">
         <el-table
+        max-height="662"
           :data="tables"
           :header-cell-style="{ background: '#C2C5F6',color:'#000' }"
           :cell-style="{ background: '#fff' }"

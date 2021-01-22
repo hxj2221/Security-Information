@@ -13,9 +13,9 @@
 }
 .H-edit .jurisdiction{
     width: 92%;
+    min-height: 800px;
     margin: 0 auto;
     margin-top: 20px;
-    padding-bottom: 220px;
 }
 
 .H-edit .content {
