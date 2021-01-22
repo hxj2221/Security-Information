@@ -255,7 +255,15 @@
       },
     },
     created() {
-      let params = {
+      let number=this.$route.query.event_number
+      if(number){
+        service.comtocon(number).then((res) => {
+        this.tableData = res.data;
+        this.total = res.allNews;
+      });
+      }
+      else{
+       let params = {
         pageSize: this.num,
         pageNum: this.currentPage,
       };
@@ -263,6 +271,8 @@
         this.tableData = res.data;
         this.total = res.allNews;
       });
+      }
+     
     },
   };
 </script>

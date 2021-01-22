@@ -431,32 +431,6 @@
                     </div></el-col
                   >
                 </el-row>
-                <div v-if="itemssss.event_state.state_val==1">
-                   <el-row >
-                  <el-col :span="4"
-                    ><div class="grid-content bg-purple">
-                      <span class="label">下发科室：</span>
-                    </div></el-col
-                  >
-                  <el-col :span="20"
-                    ><div class="grid-content bg-purple-light">
-                      <span class="value">{{itemssss.Issue?itemssss.Issue:'无'}}</span>
-                    </div></el-col
-                  >
-                </el-row>
-                   <el-row >
-                  <el-col :span="4"
-                    ><div class="grid-content bg-purple">
-                      <span class="label">输入天数：</span>
-                    </div></el-col
-                  >
-                  <el-col :span="20"
-                    ><div class="grid-content bg-purple-light">
-                      <span class="value">{{itemssss.reply_time	?itemssss.reply_time:'无'}}</span>
-                    </div></el-col
-                  >
-                </el-row>
-                  </div>
                 <!-- 院内讨论显示内容 -->
                 <div v-if="itemssss.event_state.state_val==3">
                   <el-row>

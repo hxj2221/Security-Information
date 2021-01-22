@@ -410,15 +410,26 @@
                   <el-col :span="6" :push="1"
                     ><div class="grid-content bg-purple" >
                       <span class="label">约定日期:</span>
-                      <el-input
+                      <!-- <el-input
                       style="margin-left: 10px"
                         type="input"
                         v-model="date"
                         
                         placeholder="请填写"
                         autosize
-                      ></el-input></div
-                  ></el-col>
+                      ></el-input>
+                       -->
+                       <br/>
+                       <el-date-picker
+                       :picker-options="pickerOptions"
+                       style="margin-left: 10px"
+                        v-model="date"
+                        type="date"
+                        placeholder="选择日期"
+                        format="yyyy 年 MM 月 dd 日"
+                        value-format="timestamp">
+                       </el-date-picker>
+                      </div></el-col>
                 </el-row>
                 <el-row type="flex" class="row-bg" justify="space-between"  v-show="
                   checkstate == 4||
@@ -598,7 +609,7 @@
             </div>
             <div
               class="box-feedback"
-              v-show="checkstate == 0 || checkstate == -1 || checkstate == -2"
+              v-show="checkstate == -1 || checkstate == -2|| checkstate == 1"
             >
               <div class="box-top">
                 <el-row type="flex" class="row-bg" justify="space-between">
@@ -818,6 +829,39 @@ export default {
   data() {
      const tokens=sessionStorage.getItem('token')
     return {
+      pickerOptions: {
+          disabledDate(time) {
+            return time.getTime()<Date.now();
+          },
+          shortcuts: [{
+            text: '今天',
+            onClick(picker) {
+              picker.$emit('pick', new Date());
+            }
+          }, {
+            text: '明天',
+            onClick(picker) {
+              const date = new Date();
+              date.setTime(date.getTime() + 3600 * 1000 * 24);
+              picker.$emit('pick', date);
+            }
+          }, {
+            text: '三天后',
+            onClick(picker) {
+              const date = new Date();
+              date.setTime(date.getTime() + 3600 * 1000 * 24 * 3);
+              picker.$emit('pick', date);
+            }
+          },
+           {
+            text: '一周后',
+            onClick(picker) {
+              const date = new Date();
+              date.setTime(date.getTime() + 3600 * 1000 * 24 * 7);
+              picker.$emit('pick', date);
+            }
+          }]
+        },
         importHeaders:{ token: tokens},
       dis:false,
       upfiledatas:{},
@@ -882,16 +926,20 @@ export default {
   methods: {
     upfilesubmit(){
     console.log(this.$refs.file.files[0])
-         let params={
-        // event_number:this.$parent.opdata[0].event_number,//编号
-        file:this.$refs.file.files[0],
-        //  file_name:this.filetitle,
-        // represent:this.filedescribe
+    this.getBase64(this.$refs.file.files[0]).then(res=>{
+      // console.log(res)
+        let params={
+        event_number:this.$parent.opdata[0].event_number,//编号
+        base64_file:res,
+         file_name:this.filetitle,
+        represent:this.filedescribe
       }
-      console.log(params)
-      service.uploadfiles(params).then(res=>{
+      // console.log(params)
+      service.uploadfilebase(params).then(res=>{
         console.log(res)
       })
+    })
+       
     },
     changestate(){
        this.economic=''//直接经济损失
@@ -915,23 +963,23 @@ export default {
       this.preliminary= "" //初步意见
       this.peopel= "" //当事员工
     },
-    // //这个file参数 也就是文件信息，你使用 插件 时 你就可以打印出文件信息 看看嘛
-  //  getBase64() {
-  //     return new Promise((resolve, reject) => {
-  //       let reader = new FileReader();
-  //       let fileResult = "";
-  //       reader.readAsDataURL(this.fileList[0].raw);　　　　　//开始转
-  //       reader.onload = function() {
-  //         fileResult = reader.result;
-  //       };　　　　　//转 失败
-  //       reader.onerror = function(error) {
-  //         reject(error);
-  //       };　　　　　//转 结束  咱就 resolve 出去
-  //       reader.onloadend = function() {
-  //         resolve(fileResult);
-  //       };
-  //     });
-  //   },
+    //这个file参数 也就是文件信息，你使用 插件 时 你就可以打印出文件信息 看看嘛
+   getBase64(file) {
+      return new Promise((resolve, reject) => {
+        let reader = new FileReader();
+        let fileResult = "";
+        reader.readAsDataURL(file);　　　　　//开始转
+        reader.onload = function() {
+          fileResult = reader.result;
+        };　　　　　//转 失败
+        reader.onerror = function(error) {
+          reject(error);
+        };　　　　　//转 结束  咱就 resolve 出去
+        reader.onloadend = function() {
+          resolve(fileResult);
+        };
+      });
+    },
   // upfilesubmit(){
   //     let file=this.fileList[0]
   //     console.log(file.raw)
@@ -961,6 +1009,7 @@ export default {
           file.name=this.filetitle
       file.filedescribe=this.filedescribe
        this.fileList.push(file)
+       console.log(this.fileList)
        }
      
       },
@@ -1080,6 +1129,7 @@ export default {
     },
     //提交
     submit(){
+      console.log(this.date)
      if(this.$parent.opdata[0].state.state_val==1){//科室提交
      let params={
         event_number:this.$parent.opdata[0].event_number,//编号
