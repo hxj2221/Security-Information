@@ -144,14 +144,19 @@
       <!--主要表格 -->
       <div class="addRecord_enclosure_content">
         <el-table :data="tableData" :header-cell-style="getRowClass">
-          <el-table-column type="index" label="ID"> </el-table-column>
-          <el-table-column prop="file" label="文件名"> </el-table-column>
-          <el-table-column
-            prop="filecontent"
-            label="文件描述"
-            :show-overflow-tooltip="true"
-            width="207"
-          >
+          <el-table-column type="index" label="ID" width="50">
+          </el-table-column>
+          <el-table-column prop="file" label="文件名">
+          </el-table-column>
+          <el-table-column prop="filecontent" label="文件描述"  :show-overflow-tooltip='true' width="207">
+          </el-table-column>
+          <el-table-column prop="filesize" label="文件大小">
+          </el-table-column>
+          <el-table-column prop="date" label="更新时间">
+          </el-table-column>
+          <el-table-column prop="filetype" label="文件类型">
+          </el-table-column>
+          <el-table-column prop="name" label="上传人员">
           </el-table-column>
           <el-table-column prop="filesize" label="文件大小"> </el-table-column>
           <el-table-column prop="date" label="更新时间"> </el-table-column>

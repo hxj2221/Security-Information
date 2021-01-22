@@ -5,7 +5,7 @@
     background-color: #ffffff;
     text-align: left;
     margin: 0 auto;
-    min-height: 810px;
+    min-height: 805px;
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
     border-radius: 5px;
 }
@@ -18,7 +18,7 @@
     justify-content: space-between;
     height: 83px;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 30px;
     border-bottom: 2px solid #f2f2f2;
 }
 
@@ -59,6 +59,7 @@
 
 .filelist .search .search_form {
     display: flex;
+    margin-left: 30px;
 }
 
 
@@ -83,7 +84,8 @@
 
 .filelist .TableContent {
     margin: 0 auto;
-    width: 96%;
+    width: 94%;
+    min-height: 500px;
 }
 
 .filelist .TableContent .el-table .el-table__header-wrapper .el-table__header .has-gutter tr th {
@@ -101,7 +103,7 @@
 
 .filelist .pagenum {
     text-align: right;
-    padding: 20px 0;
+    padding: 20px 30px;
 }
 
 
@@ -210,7 +212,7 @@
 
 .staffpag {
     overflow: hidden;
-    margin: 20px 25px;
+    margin: 20px 40px;
 }
 
 .staffpag>.block {

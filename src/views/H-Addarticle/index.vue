@@ -106,13 +106,10 @@
     <!-- 底部 -->
     <div class="addArticle_bottom">
       <div class="addArticle_bottom_stlye">
-        <el-button icon="el-icon-back" @click="myreturn">返回</el-button>
-        <el-button
-          type="primary"
-          icon="el-icon-document-checked"
-          @click="mysubmit"
-          >确定</el-button
-        >
+        <el-button type="primary"  icon="iconfont el-icon-hospital-passwordbaocun" @click="mysubmit">确定
+      </el-button>
+      <el-button type="primary" icon="iconfont el-icon-hospital-passwordai207" @click="myreturn">返回
+      </el-button>        
       </div>
     </div>
   </div>

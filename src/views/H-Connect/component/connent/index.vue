@@ -29,7 +29,7 @@
       <div class="connent_myTable">
         <!--  -->
         <el-table :data="tableData" :header-cell-style="getRowClass">
-          <el-table-column label="序号" type="index" width="100"> </el-table-column>
+          <el-table-column label="序号" type="index" width="50"> </el-table-column>
 
           <el-table-column label="记录编号" prop="number"> </el-table-column>
 

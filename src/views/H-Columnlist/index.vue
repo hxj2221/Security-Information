@@ -15,7 +15,6 @@
         <el-button @click="articleList">返回文章列表</el-button>
       </div>
     </div>
-    <hr />
     <!-- 弹框 -->
     <el-dialog
       title="添加分类"
@@ -56,7 +55,7 @@
     </el-dialog>
     <!-- table -->
     <div class="columnList_table">
-      <el-table :data="tableData" border style="width: 100%">
+      <el-table :data="tableData">
         <el-table-column prop="weight" label="权重"> </el-table-column>
         <el-table-column prop="classification" label="分类名称">
         </el-table-column>
