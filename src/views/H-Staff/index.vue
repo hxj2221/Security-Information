@@ -171,7 +171,7 @@ export default {
         this.$message({
           type: "error",
           message: res.msg,
-          duration: 1000,
+          duration: 1500,
         });
         this.$router.push("/dashboard");
       }
@@ -218,57 +218,42 @@ export default {
     },
     //员工状态
     changeSwitch(val, row) {
-      console.log(row.status);
-      this.$confirm("此操作将修改状态, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-      })
-        .then(() => {
-          let data = {
-            id: row.id,
-            status: row.status,
-          };
-          console.log(data);
-          service.staffState(data).then((res) => {
-            console.log(res);
-            if (res.code == 20010) {
-              if (row.status == 1) {
-                this.$message({
-                  type: "success",
-                  message: res.msg,
-                  duration: 1000,
-                });
-              }
-              else{
-                 this.$message({
-                  type: "error",
-                  message: res.msg,
-                  duration: 1000,
-                });
-              }
-            }
-            else{
+      console.log(val,row)
+      let data = {
+        id: row.id,
+        status: row.status,
+      };
+      service.staffState(data).then((res) => {
+        if (res.code == 20010) {
+          this.$confirm("此处操作将修改状态，是否继续?", "提示", {
+            confirmButtonText: "确定",
+            cancelButtonText: "取消",
+            type: "warning",
+          }).then(() => {
+            if (row.status == 1) {
               this.$message({
-                  type: "error",
-                  message: res.msg,
-                  duration: 1000,
-                });
+                type: "success",
+                message: res.msg,
+                duration: 1500,
+              });
+            } else {
+              this.$message({
+                type: "error",
+                message: res.msg,
+                duration: 1500,
+              });
+             
             }
           });
-        })
-        .catch(() => {
-          if (row.status == 1) {
-            row.status = 0;
-          } else {
-            row.status = 1;
-          }
+        } else {
+           row.status = 1;
           this.$message({
-            type: "success",
-            message: "已取消操作",
-            duration: 1000,
+            type: "error",
+            message: res.msg,
+            duration: 1500,
           });
-        });
+        }
+      });
     },
     // 编辑
     handleEdit(index, row, id) {
@@ -297,36 +282,32 @@ export default {
     },
     //删除：
     handleDelete(val, row) {
-      let params = {
-        id: row[val].id,
-      };
-      console.log(params);
-      service.staffDel(params).then((res) => {
-        // this.reload();
-        console.log(res);
-        if (res.code == 20010) {
-          this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-            confirmButtonText: "确定",
-            cancelButtonText: "取消",
-            type: "warning",
-          })
-            .then(() => {
-              this.$message({
-                type: "success",
-                message: "删除成功!",
-                delete: row.splice(val, 1),
-                duration: 1000,
-              });
-            })
-            .catch(() => {
-              this.$message({
-                type: "info",
-                message: "已取消删除",
-                duration: 1000,
-              });
+      this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          let params = {
+            id: row[val].id,
+          };
+          service.staffDel(params).then((res) => {
+            this.$message({
+              type: "success",
+              message: "删除成功!",
+              delete: row.splice(val, 1),
+              duration: 1500,
             });
-        }
-      });
+            this.reload();
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+            duration: 1500,
+          });
+        });
     },
     // 分页
     handleSizeChange(val) {
