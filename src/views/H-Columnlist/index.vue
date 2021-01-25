@@ -6,8 +6,8 @@
         <h5>文章分类</h5>
       </div>
       <div class="columnList_top_right">
-        <el-button type="primary" icon="el-icon-circle-plus" @click="dialogVisible = true">新增记录</el-button>
-        <el-button @click="articleList">返回文章列表</el-button>
+        <el-button type="primary" style="border:3px solid #666ee8" icon="el-icon-circle-plus" @click="dialogVisible = true">新增记录</el-button>
+        <el-button type="primary" style="border:1px solid #666ee8;padding: 14px"  @click="articleList">返回文章列表</el-button>
       </div>
     </div>
     <!-- 弹框 -->

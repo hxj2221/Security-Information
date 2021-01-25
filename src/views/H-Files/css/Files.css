@@ -37,10 +37,8 @@
 
 .filelist .head .push_btn .el-button {
     background-color: #666ee8;
-    border-radius: 5px;
     cursor: pointer;
     border: 3px solid #666ee8;
-    height: 40px;
 }
 
 .filelist .head .push_btn .newflie{

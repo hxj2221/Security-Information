@@ -2,16 +2,15 @@
     margin: 0;
     padding: 0;
 }
-
+/* 
 .staffaddalBg {
     width: 100%;
     min-height:680px;
     background: #fff;
     border-radius: 5px;
     box-shadow: 0 0 2px rgb(184, 183, 183);
-    /* margin-bottom: 50px; */
     padding-bottom: 150px;
-}
+} */
 
 /* .staffThre {
     display: flex;
@@ -28,7 +27,7 @@
     font-weight: 700;
 } */
 
-.staffgr {
+/* .staffaddalBg .staffgr {
     border-left: 2px solid #ccc;
     border-top: 2px solid #ccc;
     border-bottom: 2px solid #ccc;
@@ -37,20 +36,14 @@
     height: 36px;
 }
 
-.staffgr:hover {
-    background-color: #666ee8;
-}
 
-.staffb {
+.staffaddalBg>.staffb {
     border: 2px solid #ccc;
     border-radius: 5px;
     width: 74px;
     height: 36px;
 }
 
-.staffb:hover {
-    background-color: #666ee8;
-}
 
 
 .staffF {
@@ -108,4 +101,4 @@
     border: 2px solid #ccc;
     border-radius: 5px;
     height: 40px;
-}
+} */

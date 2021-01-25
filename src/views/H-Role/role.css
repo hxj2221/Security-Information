@@ -20,19 +20,9 @@
     padding-left: 60px;
 }
 
-.roleStaff:hover {
-    background-color: #666ee8;
-}
 
 .roleStaff {
-    border-left: 2px solid #ccc;
-    border-top: 2px solid #ccc;
-    border-bottom: 2px solid #ccc;
     border-radius: 5px;
-}
-
-.rolerole:hover {
-    background-color: #666ee8;
 }
 
 .rolerole {
@@ -40,14 +30,8 @@
     border-radius: 5px;
 }
 
-.role:hover {
-    background-color: #666ee8;
-}
 
 .role {
-    border-right: 2px solid #ccc;
-    border-top: 2px solid #ccc;
-    border-bottom: 2px solid #ccc;
     border-radius: 5px;
 }
 
@@ -59,9 +43,6 @@
     left: 85%;
 }
 
-.roleAdd :hover {
-    color: none;
-}
 
 
 /* .roleWidhr {

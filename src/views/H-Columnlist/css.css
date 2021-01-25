@@ -27,16 +27,14 @@
 }
 
 .columnList_top_right>.el-button:first-child {
-    border: 3px solid #666ee8;
+    
     background: #666ee8;
-    height: 40px;
-    border-color: #666ee8;
+    margin-right: 20px;
 }
 .columnList_top_right>.el-button:last-child {
     border: 1px solid #666ee8;   
     color: #666ee8;
     background:none;
-    height: 40px;
     border-color: #666ee8;
 }
 

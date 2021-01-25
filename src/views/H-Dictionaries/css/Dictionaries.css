@@ -15,7 +15,7 @@
     justify-content: space-between;
     align-items: center;
     height: 84px;
-    border-bottom: 1px solid #f2f2f2;
+    border-bottom: 2px solid #f2f2f2;
     margin-bottom: 20px;
     padding: 0 30px;
 }
@@ -24,24 +24,36 @@
     list-style: none;
     font-size: 14px;
     display: flex;
-    border: 1px solid #cccccc;
 }
 
 .allManage .allManage_nav .nav_list .list {
-    width: 102px;
-    border: 1px solid #cccccc;
-    height: 36px;
-    line-height: 36px;
+    /* width: 102px; */
+    border: 0.5px solid #cccccc;
+    padding: 12px 20px;
     cursor: pointer;
     color: #cccccc;
 }
-
+.allManage .allManage_nav .nav_list .list:first-child{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.allManage .allManage_nav .nav_list .list:nth-child(2){
+    border-left: none;
+    border-right: none;
+}
+.allManage .allManage_nav .nav_list .list:nth-child(3){
+    border-right: none;
+}
 .allManage .allManage_nav .nav_list .bgColor:first-child {
     background-color: #666EE8;
     color: #ffffff;
     border-color: #666EE8;
 }
-
+.allManage .allManage_nav .nav_list .list:last-child{
+    width: 56px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
 .allManage>.allManage_nav>.nav_list>.bgColor {
     background-color: #666EE8;
     color: #ffffff !important;
@@ -49,13 +61,9 @@
 }
 
 .allManage>.allManage_nav>.el-button {
-    background-color: #666EE8;
-    border-color: #666EE8;
-    font-size: 14px;
+    border: 3px solid #666EE8;
+    background: #666EE8;
     color: #ffffff;
-    width: 94px;
-    height: 40px;
-    border-radius: 5px;
     cursor: pointer;
 }
 

@@ -16,40 +16,25 @@
     color: #000;
 }
 
-.userthrehead>>>.el-button+.el-button {
-    margin: 0;
-}
-
-.userthregr:hover {
-    background-color: #666ee8;
-}
-
-.userthregr {
+.userthrehead>ul{
+    list-style: none;
+    display: flex;
+    font-size: 14px;
+    border:0.5px solid #cccccc;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-}
-
-.userthreb:hover {
-    background-color: #666ee8;
-}
-
-.userthreb {
-    border: 2px solid #ccc;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    width: 99px;
-    height: 42px;
-}
-
-.userthrec:hover {
-    background-color: #666ee8;
-}
-
-.userthrec {
-    border: 2px solid #ccc;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
+.userthrehead>ul>li{
+    padding: 12px 20px;
+}
+
+.userthrehead>ul>.userthreb{
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+}
+
 
 .userthreWidhr {
     width: 96%;

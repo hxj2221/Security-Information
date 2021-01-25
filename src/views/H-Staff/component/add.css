@@ -11,46 +11,30 @@
 
 
 /* top */
-
-.addstaffall .staffThre {
+.addstaffall .staffThre{
     display: flex;
     justify-content: space-between;
-    font-size: 14px;
-    color: #cccccc;
     height: 91px;
     align-items: center;
-    border-bottom: 1px solid #f2f2f2;
     padding: 0 30px;
+    border-bottom: 2px solid #f2f2f2; 
+    font-size: 14px;
 }
-
-.staffSpan {
-    height: 28px;
+.addstaffall .staffThre .staffSpan{
     padding-left: 5px;
-    color: #000;
-    border-left: 5px solid#666ee8;
+    border-left: 5px solid #666ee8;
     font-size: 24px;
+    font-weight: normal;
 }
-
-.staffgr {
-    color: #fff;
-    border: 3px solid #666ee8;
+.addstaffall .staffThre .staffgr{
     background: #666ee8;
-    width: 92px;
-    height: 40px;
-    margin-right: 20px;
+    border-color: #666ee8;
 }
-
-.staffb {
-    border: 1px solid #666ee8;
-    color: #666ee8;
+.addstaffall .staffThre .staffback{
     background: none;
-    width: 92px;
-    height: 40px;
+    border-color: #666ee8;
+    color: #666ee8;
     margin-left: 30px;
-}
-
-.staffb:hover {
-    background-color: #666ee8;
 }
 
 /* add */
@@ -86,7 +70,7 @@
 
 /* 边框 */
 
-.dialog-input-text .el-input__inner {
+/* .dialog-input-text .el-input__inner {
     -webkit-appearance: none;
     background-color: #FFF;
     background-image: none;
@@ -103,4 +87,4 @@
     -webkit-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
     transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
     width: 100%;
-}
+} */
