@@ -144,12 +144,14 @@
         m = m < 10 ? ('0' + m) : m;
         var d = date.getDate();
         d = d < 10 ? ('0' + d) : d;
-        var h = date.getHours();
-        var minute = date.getMinutes();
-        minute = minute < 10 ? ('0' + minute) : minute;
-        var second = date.getSeconds();
-        second = minute < 10 ? ('0' + second) : second;
-        return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+        // var h = date.getHours();
+        // var minute = date.getMinutes();
+        // minute = minute < 10 ? ('0' + minute) : minute;
+        // var second = date.getSeconds();
+        // second = minute < 10 ? ('0' + second) : second;
+        return y + '-' + m + '-' + d ;
+
+        // return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
       },
       // 删除
       handleDel(val, row) {
@@ -227,7 +229,6 @@
           this.bus.$emit("selDep", res);
           this.$emit("abcClick");
         });
-        // this.$emit("abcClick");
       },
       // 记录详情
       details(val, row) {

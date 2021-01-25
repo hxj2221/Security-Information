@@ -321,6 +321,14 @@ export default {
   AriList: async (params: any) => {
     return await service.get(`${baseUrl}api/article/article_cate_add`, { params }).then(res => res).catch(err => err)
   },
+   // 关联投诉 (get)
+   Related : async () => {
+    return await service.get(`${baseUrl}api/record/addevent`).then(res => res).catch(err => err)
+  },
+   // 关联投诉(post)
+   related : async (data:any) => {
+    return await service.post(`${baseUrl}api/record/addevent`,data).then(res => res).catch(err => err)
+  },
   // 医患列表
   patientList: async (params: any) => {
     return await service.get(`${baseUrl}api/record/record`, { params }).then(res => res).catch(err => err)

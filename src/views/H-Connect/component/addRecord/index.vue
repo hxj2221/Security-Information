@@ -146,22 +146,19 @@
         <el-table :data="tableData" :header-cell-style="getRowClass">
           <el-table-column type="index" label="ID" width="50">
           </el-table-column>
-          <el-table-column prop="file" label="文件名">
+          <el-table-column prop="file_name" label="文件名"> </el-table-column>
+          <el-table-column
+            prop="file_describe"
+            label="文件描述"
+            :show-overflow-tooltip="true"
+            width="207"
+          >
           </el-table-column>
-          <el-table-column prop="filecontent" label="文件描述"  :show-overflow-tooltip='true' width="207">
+          <el-table-column prop="size" label="文件大小"> </el-table-column>
+          <el-table-column prop="update_time" label="更新时间">
           </el-table-column>
-          <el-table-column prop="filesize" label="文件大小">
-          </el-table-column>
-          <el-table-column prop="date" label="更新时间">
-          </el-table-column>
-          <el-table-column prop="filetype" label="文件类型">
-          </el-table-column>
-          <el-table-column prop="name" label="上传人员">
-          </el-table-column>
-          <el-table-column prop="filesize" label="文件大小"> </el-table-column>
-          <el-table-column prop="date" label="更新时间"> </el-table-column>
-          <el-table-column prop="filetype" label="文件类型"> </el-table-column>
-          <el-table-column prop="name" label="上传人员"> </el-table-column>
+          <el-table-column prop="file_type" label="文件类型"> </el-table-column>
+          <el-table-column prop="user.name" label="上传人员"> </el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
               <el-link
@@ -213,15 +210,15 @@
           <el-table-column label="年龄" prop="age"> </el-table-column>
           <el-table-column label="手机号码" prop="complaint_phone">
           </el-table-column>
-          <el-table-column label="投诉科室" prop="pass_department">
+          <el-table-column label="投诉科室" prop="department_id">
           </el-table-column>
-          <el-table-column label="信息来源" prop="pass_department">
+          <el-table-column label="信息来源" prop="complaint_type.title">
           </el-table-column>
           <el-table-column label="投诉时间" prop="create_time">
           </el-table-column>
-          <el-table-column label="流转部门" prop="pass_department">
+          <el-table-column label="流转部门" prop="pass_names">
           </el-table-column>
-          <el-table-column label="事件状态" prop="state.state_val">
+          <el-table-column label="事件状态" prop="state.title">
           </el-table-column>
           <el-table-column label="操作" fixed="right" style="font-size: 12px">
             <template slot-scope="scope">
@@ -234,10 +231,7 @@
             </template>
           </el-table-column>
         </el-table>
-        <el-button
-          type="primary"
-          icon="el-icon-circle-plus"
-          @click="dialogTableVisible = true"
+        <el-button type="primary" icon="el-icon-circle-plus" @click="addevent"
           >添加投诉信息</el-button
         >
         <!-- 弹框 -->
@@ -245,18 +239,27 @@
           <el-table
             ref="multipleTable"
             :data="gridData"
-            tooltip-effect="dark"
             style="width: 100%"
-            @selection-change="handleSelectionChange"
+            @selection-change="updatehandleSelectionChange"
+            @select="select"
+            @select-all="selectAll"
           >
             <el-table-column type="selection"> </el-table-column>
-            <el-table-column label="事件编码" prop="number"> </el-table-column>
-            <el-table-column prop="name" label="投诉人姓名"> </el-table-column>
-            <el-table-column prop="department" label="投诉科室">
+            <el-table-column label="事件编码" prop="event_number">
             </el-table-column>
-            <el-table-column prop="all" label="信息来源"> </el-table-column>
-            <el-table-column prop="status" label="事件状态"> </el-table-column>
+            <el-table-column prop="complaint_name" label="投诉人姓名">
+            </el-table-column>
+            <el-table-column prop="department_id" label="投诉科室">
+            </el-table-column>
+            <el-table-column prop="complaint_type.title" label="信息来源">
+            </el-table-column>
+            <el-table-column prop="state.title" label="事件状态">
+            </el-table-column>
           </el-table>
+          <div class="diog_button">
+            <el-button @click="dialogTableVisible = false">返回</el-button>
+            <el-button type="primary" @click="event">保存</el-button>
+          </div>
         </el-dialog>
       </div>
     </div>
@@ -292,32 +295,10 @@ export default {
   props: {},
   data() {
     return {
-      gridData: [
-        {
-          number: 1233,
-          name: "王小虎",
-          department: "医务处",
-          all: "医务处",
-          status: "处理中",
-        },
-        {
-          number: 1233,
-          name: "王小虎",
-          department: "医务处",
-          all: "医务处",
-          status: "处理中",
-        },
-
-        {
-          number: 1233,
-          name: "王小虎",
-          department: "医务处",
-          all: "医务处",
-          status: "处理中",
-        },
-      ],
+      val: {},
+      event_number: "",
+      gridData: [],
       dialogTableVisible: false,
-      multipleSelection: [],
 
       imgUrl: "http://bt1.wlqqlp.com:8082/api/record/upload_attachment",
       myHeaders: {
@@ -337,19 +318,8 @@ export default {
       // 科室
       depList: [],
       // 表格1  附件信息
-      tableData: [
-        {
-          id: "1",
-          file: "hhh",
-          filecontent: "hauhuhhajkfd",
-          files: "123",
-          filesize: "120kb",
-          date: "2016-05-02",
-          filetype: "jpg",
-          name: "王小虎",
-        },
-      ],
-      currentPage: 4,
+      tableData: [],
+      currentPage: 1,
       // 表格2  关联信息
       tableData1: [],
       // 弹框
@@ -360,19 +330,49 @@ export default {
     };
   },
   methods: {
-    // 彈框
-    // toggleSelection(rows) {
-    //   if (rows) {
-    //     rows.forEach((row) => {
-    //       this.$refs.multipleTable.toggleRowSelection(row);
-    //     });
-    //   } else {
-    //     this.$refs.multipleTable.clearSelection();
-    //   }
-    // },
-    handleSelectionChange(val) {
-      this.multipleSelection = val;
+    // 关联投诉
+    addevent() {
+      this.dialogTableVisible = true;
+      service.Related().then((res) => {
+        console.log(res);
+        this.gridData = res.event;
+      });
     },
+    // 弹框
+    event() {
+      //保存
+      console.log(this.val);
+      let data = {
+        event_number: this.val[0].event_number,
+      };
+      service.related(data).then((res) => {
+        console.log(res);
+        this.tableData1 = res.event;
+        this.tableData = res.recordEnclosure;
+        this.event_number = res.event[0].event_number;
+        this.dialogTableVisible = false;
+      });
+    },
+
+    updatehandleSelectionChange(val) {
+      this.val = val;
+    },
+    select(selection, row) {
+      if (selection.length > 1) {
+        let del_row = selection.shift();
+        this.$refs.multipleTable.toggleRowSelection(del_row, false);
+      }
+    },
+    selectAll(selection) {
+      if (selection.length > 1) {
+        selection.length = 1;
+      }
+    },
+    // handleSelectionChange(val,row) {
+    //   console.log(val,row);
+    //   this.radioSelected = val.name; //选中行的name
+    //   this.multipleSelection = val; //选中的一行数据
+    // },
     getFile(item) {
       this.file = item;
     },
@@ -429,8 +429,8 @@ export default {
     },
     mysubmit() {
       let data = {
-        // event_number: this.tableData1[0].event_number,
-        event_number: 12,
+        number: this.form.number,
+        event_number: this.event_number,
         communicate_time: this.form.communicate_time,
         communication: this.form.communication,
         department_id: this.form.department_id,
@@ -466,8 +466,7 @@ export default {
     // 点击上传附件按钮
     upLode_define() {
       let params = {
-        // event_number: this.tableData1[0].event_number,
-        event_number: 12,
+        event_number: this.event_number,
       };
       console.log(params);
       service.upLode(params).then((res) => {
@@ -479,8 +478,7 @@ export default {
     define() {
       let data = {
         file_name: this.dialogForm.file_name,
-        event_number: 12,
-        // event_number: this.tableData1[0].event_number,
+        event_number: this.event_number,
         file_describe: this.dialogForm.file_describe,
         file: this.file,
       };
@@ -515,8 +513,9 @@ export default {
   },
   created() {
     this.bus.$on("selDep", (item) => {
+      console.log(item);
       this.form.number = item.number;
-      this.depList = item.data;
+      this.depList = item.department;
       this.tableData1 = item.event;
     });
   },

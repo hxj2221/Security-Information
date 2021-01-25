@@ -167,6 +167,21 @@
     margin-bottom: 20px;
 }
 
+.addRecord_relation_content .diog_button{
+   overflow: hidden;
+}
+.addRecord_relation_content .diog_button>button{
+    float: right;
+    margin-left: 30px;
+}
+.addRecord_relation_content .diog_button>button:first-child{
+    border-color: #666ee8;
+    color: #666ee8;
+}
+.addRecord_relation_content .diog_button>button:last-child{
+    background-color: #666ee8;
+    border-color: #666EE8;
+}
 /* 固定定位按钮 样式*/
 .addRecord_button {
     width: 79.7%;
