@@ -2,7 +2,7 @@
   <div>
     <div class="operation" style="min-height: 800px" v-if="operationdata!=''&&opdata!=''">
       <div class="operation-top">
-        <span>投诉详情-调查中</span>
+        <span>投诉详情-{{opdata[0].state.title}}</span>
         <div>
           <slot name="records">
             <el-button type="primary" icon="el-icon-edit" class="records"
@@ -94,7 +94,7 @@
               >
               <el-col :span="4"
                 ><div class="grid-content bg-purple-light">
-                  <span class="value">{{ opdata[0].handle_name }}</span>
+                  <span class="value">{{ opdata[0].complaint_name }}</span>
                 </div></el-col
               >
               <el-col :span="4"
@@ -131,6 +131,7 @@
               <el-col :span="7" :push="1"
                 ><div class="grid-content bg-purple">
                   <span class="feedback-title"><b>科室反馈</b></span>
+                  
                 </div></el-col
               >
             </el-row>
@@ -237,6 +238,70 @@
                       ></el-input></div
                   ></el-col>
                 </el-row>
+                <!-- 附件 -->
+            <div>
+              <el-row
+                type="flex"
+                class="row-bg"
+                justify="space-between"
+                style="margin: 20px 0"
+              >
+                <el-col :span="15" :push="1"
+                  ><div class="grid-content bg-purple">
+                    <span class="label">附件信息:</span>
+                  </div></el-col
+                >
+                <el-col :span="2" :pull="1"
+                  ><div class="grid-content bg-purple">
+                    <el-button
+                      type="primary"
+                      icon="el-icon-circle-plus"
+                      @click="upfile()"
+                      style="background-color: #666ee8; border: none"
+                      >上传附件</el-button
+                    >
+                  </div></el-col
+                >
+              </el-row>
+              <el-row
+                type="flex"
+                class="row-bg"
+                justify="space-between"
+                v-show="fileList.length !== 0"
+              >
+                <el-col :span="22" :push="1"
+                  ><div class="grid-content bg-purple">
+                    <el-table
+                     v-show="fileList.length !== 0?true:false"
+                      :data="fileList"
+                      style="width: 100%"
+                      :header-cell-style="getRowClass"
+                    >
+                      <el-table-column type="index" width="50" label="序号"></el-table-column>
+                      <el-table-column prop="name" label="文件名" width="width">
+                      </el-table-column>
+                      <el-table-column prop="filedescribe" label="描述" width="width">
+                      </el-table-column>
+                      <el-table-column prop="size" label="文件大小" width="width">
+                      </el-table-column>
+                      <el-table-column fixed="right" label="操作" width="100">
+                        <template slot-scope="scope">
+                          <slot name="fileoper">
+                            <el-button
+                              @click="handleClick(scope.row)"
+                              type="text"
+                              size="small"
+                              >下载</el-button
+                            >
+                            <el-button type="text" size="small" @click="handleRemove">删除</el-button>
+                          </slot>
+                        </template>
+                      </el-table-column>
+                    </el-table>
+                  </div></el-col
+                >
+              </el-row>
+            </div>
               </div>
           </div>
         </div>
@@ -329,9 +394,9 @@
                   ></el-col>
                 </el-row>
                 <el-row type="flex" class="row-bg" justify="space-between">
-                  <el-col :span="6" :push="1"
-                    ><div class="grid-content bg-purple">
-                      <span class="label">输入天数:</span>
+                  <el-col :span="6" :push="1"><div class="grid-content bg-purple">
+                      <span class="label">截止时间:</span>
+                      <br/>
                       <el-input
                         type="input"
                          style="margin-left: 10px"
@@ -341,8 +406,17 @@
                onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )"
                         placeholder="请填写"
                         autosize
-                      ></el-input></div
-                  ></el-col>
+                      ></el-input>
+                      <!-- <el-date-picker
+                       :picker-options="pickerOptions"
+                       style="margin-left: 10px"
+                        v-model="needtime"
+                        type="date"
+                        placeholder="选择日期"
+                        format="yyyy 年 MM 月 dd 日"
+                        value-format="timestamp">
+                       </el-date-picker> -->
+                      </div></el-col>
                 </el-row>
               </div>
               <!-- 院内讨论 -->
@@ -666,6 +740,7 @@
             <!-- 附件 -->
             <div
               v-if="
+              checkstate ==1||
                 checkstate ==3 ||
                 checkstate == 5 ||
                 checkstate == 6 ||
@@ -708,7 +783,7 @@
                 <el-col :span="22" :push="1"
                   ><div class="grid-content bg-purple">
                     <el-table
-                     v-show="upfilesss"
+                     v-show="fileList.length !== 0?true:false"
                       :data="fileList"
                       style="width: 100%"
                       :header-cell-style="getRowClass"
@@ -777,40 +852,24 @@
             </el-form-item>
             
             <el-form-item label="上传附件：" class="uploadfile">
-              <input type="file" class="upfile" ref="file" />
-              <!-- 
-                 :http-request='upfilesubmit' -->
-            <!-- <el-upload
-                  action="http://bt1.wlqqlp.com:8082/api/Complaintprocess/event_uploadfiles"
-                  class="upload-demo"
-                  ref="upload"
-                 :disabled='(filetitle==""||filedescribe=="")?true:false'
-                 :multiple='false'
-                 data='datalist'
-                 :headers="importHeaders"
-                 :on-preview="handlePreview"
-                 :on-remove="handleRemove"
-                 :on-change="handleChange"
-                 :on-success="onSuccess"
-                 :on-error="onError"
-                 :auto-upload="false">
-            <el-button slot="trigger" size="small" type="primary"   :disabled='(filetitle==""||filedescribe=="")?true:false' >选取文件</el-button>
-            </el-upload> -->
-             <!-- <el-upload
-             action='http://bt1.wlqqlp.com:8082/index.php/api/srk/create_base64_file'
+             <el-upload
+                 action='http://bt1.wlqqlp.com:8082/index.php/api/srk/create_base64_file'
                  class="upload-demo"
                  :limit='1'
-                :disabled='(filetitle==""||filedescribe=="")?true:false'
+                 :disabled='(filetitle==""||filedescribe=="")?true:false'
                  :multiple='false'
+                 :file-list='listsss'
                  :on-change="handleChange"
+                 :on-exceed='exceed'
                  :auto-upload="false">
-            <el-button slot="trigger" size="small" type="primary"   :disabled='(filetitle==""||filedescribe=="")?true:false' >选取文件</el-button>
-            </el-upload> -->
+             <el-button slot="trigger" size="small" type="primary"   :disabled='(filetitle==""||filedescribe=="")?true:false' >选取文件</el-button>
+           <div slot="tip" class="el-upload__tip">一次只能上传一个文件，且不超过5MB</div>
+            </el-upload>
             </el-form-item>
           </el-form>
           <span slot="footer" class="dialog-footer">
-            <el-button @click="upfiles = false">取 消</el-button>
-            <el-button type="primary" @click="upfilesubmit" >确 定</el-button>
+            <el-button @click="Close">取 消</el-button>
+            <el-button type="primary" @click="upfilesubmit" :disabled='(filetitle==""||filedescribe=="")?true:false'>确 定</el-button>
           </span>
         </el-dialog>
       </div>
@@ -827,11 +886,10 @@ export default {
     Look,
   },
   data() {
-     const tokens=sessionStorage.getItem('token')
     return {
       pickerOptions: {
           disabledDate(time) {
-            return time.getTime()<Date.now();
+            return time.getTime() <= Date.now()- 3600 * 1000 * 24;
           },
           shortcuts: [{
             text: '今天',
@@ -862,11 +920,9 @@ export default {
             }
           }]
         },
-        importHeaders:{ token: tokens},
       dis:false,
       upfiledatas:{},
       upfilesss:false,
-      token:tokens,
       economic:'',//直接经济损失
       management:'',//管理措施
       eventtype:'',//投诉类别
@@ -876,12 +932,6 @@ export default {
          {id:2,title:"二级"},
           {id:3,title:"三级"}
       ],
-      datalist:{
-         event_number:'',//编号
-         file:'',
-         file_name:'',
-         represent:''
-      },
       comde:'',//下发科室
       date: "", //约定日期
       liable: "", //责任人
@@ -918,25 +968,81 @@ export default {
           lable: "终止",
         },
       ],
-      fileList: [
-      ],
-      base64file:'',
+      fileList: [],//已上传成功的附件列表
+      base64file:'',//上传文件转为的base64码
+      file:{},//单次上传文件
+      listsss:[],//未上传文件列表
     };
   },
   methods: {
+    //关闭上传文件弹窗
+     Close() {
+        this.listsss=[]
+        this.upfiles = false
+        this.upfilesss=false
+        this.filedescribe=''
+        this.filetitle=''
+        this.file={}
+    },
+    //超出限制的上传文件提示
+    exceed(){
+       this.$message({
+            message: "单次只能上传一个文件",
+            type: "error",
+            duration: 1000,
+          });
+    },
+    //删除上传文件
+     handleRemove(file, fileList) { },
+     //上传文件接口
     upfilesubmit(){
-    console.log(this.$refs.file.files[0])
-    this.getBase64(this.$refs.file.files[0]).then(res=>{
-      // console.log(res)
+      //将选择的文件转为base64码
+    this.getBase64(this.file.raw).then(res=>{
+      //接口参数
         let params={
         event_number:this.$parent.opdata[0].event_number,//编号
         base64_file:res,
-         file_name:this.filetitle,
+        file_name:this.filetitle,
         represent:this.filedescribe
       }
-      // console.log(params)
       service.uploadfilebase(params).then(res=>{
-        console.log(res)
+         if(res.code==20010){
+          this.$message({
+                  message: '上传附件成功',
+                  type: "success",
+                  duration: 1000,
+                });
+                  this.listsss=[]//上传附件弹窗内显示的选择文件列表
+                  this.upfiles = false
+                  this.upfilesss=true//文件列表
+                  this.filedescribe=''
+                  this.filetitle=''
+                  this.fileList.push(this.file)
+                  this.file={}
+        }
+         else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
+        }
+         else{
+          this.$message({
+                  message: '上传失败',
+                  type: "error",
+                  duration: 1000,
+                });
+        }
       })
     })
        
@@ -963,7 +1069,7 @@ export default {
       this.preliminary= "" //初步意见
       this.peopel= "" //当事员工
     },
-    //这个file参数 也就是文件信息，你使用 插件 时 你就可以打印出文件信息 看看嘛
+    //这个file参数 也就是文件信息将文件转为base64码
    getBase64(file) {
       return new Promise((resolve, reject) => {
         let reader = new FileReader();
@@ -980,44 +1086,15 @@ export default {
         };
       });
     },
-  // upfilesubmit(){
-  //     let file=this.fileList[0]
-  //     console.log(file.raw)
-  //     this.getBase64(file).then(resBase64 => {
-  //       this.base64file = resBase64.split(',')[1]　　//直接拿到base64信息
-  //       console.log(this.base64file)
-  //         let params={
-  //       // event_number:this.$parent.opdata[0].event_number,//编号
-  //       base64_file:this.base64file,
-  //       //  file_name:this.filetitle,
-  //       // represent:this.filedescribe
-  //     }
-  //     console.log(params)
-  //     service.uploadfilebase(params).then(res=>{
-  //       console.log(res)
-  //     }).catch(res=>{
-  //       console.log(res)
-  //     })
-  //       })
-    
-  //     this.upfilesss=true
-  //     this.upfiles = false
-  //   },
       handleChange(file, fileList) {
-      
-     if(this.filedescribe!==''&&this.filetitle!==''){
-          file.name=this.filetitle
-      file.filedescribe=this.filedescribe
-       this.fileList.push(file)
-       console.log(this.fileList)
-       }
-     
+       this.file=fileList[0]
       },
     getCascaderObj() {
       console.log(this.comde);
     },
     //下发
     issuesss(){
+      console.log(this.needtime)
        if(this.checkstate==1){//下发科室调查
        if(this.comde!==''&&this.comde!==null&&this.needtime!==''){
         let comde = this.comde.map((x) => {
@@ -1791,9 +1868,7 @@ export default {
     handleClose() {
       this.dialogVisibless = false;
     },
-    Close() {
-      this.upfiles = false;
-    },
+   
     //   投诉详情
     detaile() {
       if (this.dialogVisibless != true) {
@@ -1817,7 +1892,6 @@ export default {
     },
   },
   created() {
-   this.token=sessionStorage.getItem('token')
   },
 };
 </script>

@@ -237,11 +237,7 @@
                 <el-row type="flex" class="row-bg" justify="space-between">
                   <el-col :span="3" :push="2">
                     <div class="grid-content bg-purple">
-                      <span v-if="item.investigate_number==1"><b>第一次调查</b></span>
-                       <span v-else-if="item.investigate_number==2"><b>第二次调查</b></span >
-                      <span  v-else-if="item.investigate_number==3" ><b>第三次调查</b></span>
-                       <span v-else-if="item.investigate_number==4"><b>第四次调查</b></span>
-
+                      <span v-if="item.investigate_number"><b>第{{item.investigate_number}}次调查</b></span>
                     </div></el-col
                   >
                   <el-col :span="3"

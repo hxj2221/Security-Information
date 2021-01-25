@@ -123,6 +123,10 @@ export default {
   uploadfilebase: async (data: any) => {
     return await service.post(`${baseUrl}api/Complaintprocess/event_base64_uploadfiles`, data).then(res => res).catch(err => err)
   },
+  //附件列表
+  truefilelist: async (data: any) => {
+    return await service.post(`${baseUrl}api/tsevent/filelist`, data).then(res => res).catch(err => err)
+  },
   // 跳转医患
   comtocon: async (event_number: any) => {
     return await service.get(`${baseUrl}api/record/record`,{ params:{event_number:event_number}}).then(res => res).catch(err => err)
