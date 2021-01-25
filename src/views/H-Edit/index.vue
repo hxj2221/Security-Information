@@ -15,7 +15,7 @@
           id: 'id',
           title: 'title',
           sort: 'sort',
-          icon: 'icon',
+          icon: 'item.icon',
           name: 'name',
           url: 'url',
         }"
@@ -31,7 +31,11 @@
         </el-table-column>
         <el-table-column prop="level" label="等级" width="180">
         </el-table-column>
-        <el-table-column prop="icon" label="左侧图标"> </el-table-column>
+        <el-table-column label="左侧图标">
+          <template v-for="item in tableData">
+            <i :key="item.id" :class="item.icon"></i>
+          </template>
+        </el-table-column>
         <el-table-column prop="name" label="接口地址"></el-table-column>
         <el-table-column prop="url" label="前端路由"> </el-table-column>
         <el-table-column label="角色状态">
@@ -67,6 +71,7 @@
           :visible.sync="dialogVisible"
           width="width"
           :before-close="dialogeditright"
+          :close-on-click-modal="false"
         >
           <el-form label-width="80px" ref="editForm">
             <el-form-item prop="staffName" label="上级" width="120">
@@ -98,7 +103,6 @@
               <el-input
                 v-model="powpx"
                 placeholder="数字越大，排序越小"
-                auto-complete="off"
               ></el-input>
             </el-form-item>
             <el-form-item label="状态" width="100">
@@ -136,6 +140,7 @@
         <el-dialog
           title="编辑权限"
           :visible.sync="dialogedit"
+          :close-on-click-modal="false"
           width="width"
           :before-close="dialogBeforeCl"
         >
@@ -145,6 +150,7 @@
                 v-model="editselvalue"
                 @change="selchang"
                 placeholder="请选择"
+                required
               >
                 <el-option label="作为顶级" :value="0"></el-option>
                 <template v-for="v in editseldata">
@@ -165,7 +171,7 @@
                 </template>
               </el-select>
             </el-form-item>
-            <el-form-item label="排序" width="100">
+            <el-form-item label="排序" width="100" required>
               <el-input v-model="editpowpx" auto-complete="off"></el-input>
             </el-form-item>
             <el-form-item label="状态" width="100">
@@ -180,16 +186,16 @@
               </template>
               <!-- <el-input v-model="editpowstatu" auto-complete="off"></el-input> -->
             </el-form-item>
-            <el-form-item label="标题" width="150">
+            <el-form-item label="标题" width="150" required>
               <el-input v-model="editpowlab" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="图标" width="120">
+            <el-form-item label="图标" width="120" required>
               <el-input v-model="editpowicon" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="后端接口" width="120">
+            <el-form-item label="后端接口" width="120" required>
               <el-input v-model="editpowaps" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="前端路由" width="120">
+            <el-form-item label="前端路由" width="120" required>
               <el-input v-model="editpowweb" auto-complete="off"></el-input>
             </el-form-item>
           </el-form>
@@ -266,32 +272,66 @@ export default {
     },
     // 权限确认
     dialog() {
-      let data = {
-        sort: this.powpx,
-        status: this.powstatu,
-        title: this.powlab,
-        icon: this.powicon,
-        pid: this.selvalue,
-        name: this.powaps,
-        url: this.powweb,
-      };
-      service.savepower(data).then((res) => {
-        if (res.code == 20010) {
-          this.$message({
-            message: res.msg,
-            type: "success",
-            duration: 1000,
-          });
-          this.reload();
-        } else {
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-        }
-      });
-      this.dialogVisible = false;
+      if (this.powpx != "^[0-9]*$") {
+        this.$message({
+          message: "排序必须是整数",
+          type: "error",
+          duration: 1300,
+        });
+        console.log(this.powpx);
+      } else if (this.powlab == "" || this.powlab == null) {
+        this.$message({
+          message: "请输入标题",
+          type: "error",
+          duration: 1300,
+        });
+      } else if (this.powicon == "" || this.powicon == null) {
+        this.$message({
+          message: "请输入图标",
+          type: "error",
+          duration: 1300,
+        });
+      } else if (this.powaps == "" || this.powaps == null) {
+        this.$message({
+          message: "请输入后端接口",
+          type: "error",
+          duration: 1300,
+        });
+      } else if (this.powweb == "" || this.powweb == null) {
+        this.$message({
+          message: "请输入前端路由",
+          type: "error",
+          duration: 1300,
+        });
+      } else {
+        let data = {
+          sort: this.powpx,
+          status: this.powstatu,
+          title: this.powlab,
+          icon: this.powicon,
+          pid: this.selvalue,
+          name: this.powaps,
+          url: this.powweb,
+        };
+        service.savepower(data).then((res) => {
+          if (res.code == 20010) {
+            this.$message({
+              message: res.msg,
+              type: "success",
+              duration: 1000,
+            });
+            this.reload();
+          }
+          // else {
+          //   this.$message({
+          //     message: res.msg,
+          //     type: "error",
+          //     duration: 1000,
+          //   });
+          // }
+        });
+        //this.dialogVisible = false;
+      }
     },
 
     // 添加权限
@@ -390,7 +430,7 @@ export default {
             row.status = 1;
           }
           this.$message({
-            type: "success",
+            type: "info",
             message: "已取消操作",
             duration: 1000,
           });
@@ -418,48 +458,103 @@ export default {
     },
     // 编辑权限确认
     editdialog() {
-      let data = {
-        sort: this.editpowpx,
-        status: this.editpowstatu,
-        name: this.editpowaps,
-        icon: this.editpowicon,
-        title: this.editpowlab,
-        pid: this.editselvalue,
-        id: this.editid,
-        url: this.editpowweb,
-      };
-      console.log(data);
-      service.editsavepower(data).then((res) => {
-        console.log(res);
-        if ((res.code = "20010")) {
-          this.reload();
-        }
-      });
-      this.dialogedit = false;
+      if (this.editpowpx == "" || this.editpowpx == null) {
+        this.$message({
+          message: "请输入排序",
+          type: "error",
+          duration: 1300,
+        });
+      } else if (this.editpowlab == "" || this.editpowlab == null) {
+        this.$message({
+          message: "请输入标题",
+          type: "error",
+          duration: 1300,
+        });
+      } else if (this.editpowicon == "" || this.editpowicon == null) {
+        this.$message({
+          message: "请输入图标",
+          type: "error",
+          duration: 1300,
+        });
+      } else if (this.editpowaps == "" || this.editpowaps == null) {
+        this.$message({
+          message: "请输入后端接口",
+          type: "error",
+          duration: 1300,
+        });
+      } else if (this.editpowweb == "" || this.editpowweb == null) {
+        this.$message({
+          message: "请输入前端路由",
+          type: "error",
+          duration: 1300,
+        });
+      } else {
+        let data = {
+          sort: this.editpowpx,
+          status: this.editpowstatu,
+          name: this.editpowaps,
+          icon: this.editpowicon,
+          title: this.editpowlab,
+          pid: this.editselvalue,
+          id: this.editid,
+          url: this.editpowweb,
+        };
+        console.log(data);
+        service.editsavepower(data).then((res) => {
+          console.log(res);
+          if (res.code == 20010) {
+            this.$message({
+              message: "保存成功！",
+              type: "success",
+              duration: 2000,
+            });
+            setTimeout(() => {
+              this.reload();
+            }, 1000);
+          }
+          // 暂不需要
+          // else {
+          //   this.$message({
+          //     message: "请注意" + res.msg,
+          //     type: "error",
+          //     duration: 1300,
+          //   });
+          // }
+        });
+      }
     },
     // 删除
     delpow(id) {
+      this.$confirm("此操作将修改状态, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          let data = {
+            id: id,
+          };
+          console.log(data);
+          service.delpow(data).then((res) => {
+            console.log(res);
+            this.$message({
+              type: "success",
+              message: res.msg,
+              duration: 1500,
+            });
+            setTimeout(() => {
+              this.reload();
+            }, 2000);
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消操作",
+            duration: 1300,
+          });
+        });
       console.log(id);
-      let param = {
-        id: id,
-      };
-      service.delpow(param).then((res) => {
-        console.log(res);
-        if (res.code == "20010") {
-          this.$message({
-            message: res.msg,
-            type: "success",
-            duration: 1000,
-          });
-          this.reload();
-        } else {
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-        }
-      });
     },
 
     getRowClass({ rowIndex }) {

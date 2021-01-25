@@ -10,6 +10,8 @@
           v-model="staffbeldepart"
           placeholder="请选择"
           class="staffSel"
+          clearable
+          @clear="delValue"
         >
           <el-option label="请选择" value=""></el-option>
           <el-option
@@ -24,6 +26,8 @@
           v-model="search"
           class="staffNameipt"
           placeholder="请输入员工姓名"
+          clearable
+          @clear="delValue"
         ></el-input>
         <el-button class="staffNamesch" icon="el-icon-search" @click="seachAll"
           >搜索</el-button
@@ -191,7 +195,9 @@ export default {
         pNum: this.num, //每页显示数量
         count: this.pageSize, //每页显示的数量
       };
+      console.log(data);
       service.stafflist(data).then((res) => {
+        console.log(res.data);
         this.tables1 = this.tables = res.data[0];
         this.total = res.data[1].count;
       });
@@ -251,7 +257,7 @@ export default {
             row.status = 1;
           }
           this.$message({
-            type: "success",
+            type: "info",
             message: "已取消操作",
             duration: 1000,
           });
@@ -265,6 +271,7 @@ export default {
         id: id,
       };
       service.staffedits(params).then((res) => {
+        console.log(res);
         this.childedit = res.data.user;
         if (res.data.user.sex.name == "女") {
           this.childedit.sex = "0";
@@ -275,6 +282,7 @@ export default {
         }
       });
       service.getrole().then((res) => {
+        console.log(res);
         this.all = res.data;
         this.bus.$emit("ReceiveMessage", this.all);
         // this.$parent.fathpowadd();
@@ -285,7 +293,10 @@ export default {
       let params = {
         id: row[val].id,
       };
+      console.log(params);
       service.staffDel(params).then((res) => {
+        // this.reload();
+        console.log(res);
         if (res.code == 20010) {
           this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
             confirmButtonText: "确定",
@@ -312,27 +323,49 @@ export default {
     },
     // 分页
     handleSizeChange(val) {
-      this.staffbeldepart = "";
+      // 如果值多，有分页需要把该值一并传
+      //this.staffbeldepart = "";
       this.num = val;
       let data = {
         pNum: this.num,
         current: this.currentPage,
+        name: this.search,
+        department_id: this.staffbeldepart,
       };
       service.stafflist(data).then((res) => {
+        console.log(res);
         this.tables = res.data[0];
+        this.total = res.data[1].count;
       });
     },
     handleCurrentChange(val) {
-      this.staffbeldepart = "";
+      //this.staffbeldepart = "";
       this.currentPage = val;
+      console.log(`当前页: ${val}`);
       let data = {
-        //  name: this.search,
-        // department_id: this.staffbeldepart,
         pNum: this.num,
         current: this.currentPage,
+        name: this.search,
+        department_id: this.staffbeldepart,
       };
       service.stafflist(data).then((res) => {
+        console.log(res);
         this.tables = res.data[0];
+      });
+    },
+    // 清空搜索框时事件
+    delValue() {
+      let data = {
+        name: this.search,
+        department_id: this.staffbeldepart,
+        pNum: this.num, //每页显示数量
+        count: this.pageSize, //每页显示的数量
+      };
+      console.log(data);
+      service.stafflist(data).then((res) => {
+        console.log(res.data);
+        this.tables1 = this.tables = res.data[0];
+        this.total = res.data[1].count;
       });
     },
   },

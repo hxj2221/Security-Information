@@ -5,10 +5,19 @@
       <div class="head">
         <h4 class="title">文件列表</h4>
         <div class="push_btn">
-          <el-button type="primary" icon="el-icon-circle-plus" @click="uploadclassify()" >上传文件
-        </el-button>
-        <el-button type="primary" class="newflie" icon="el-icon-circle-plus" @click="newclassify()" >新建分类
-        </el-button>
+          <el-button
+            type="primary"
+            icon="el-icon-circle-plus"
+            @click="uploadclassify()"
+            >上传文件
+          </el-button>
+          <el-button
+            type="primary"
+            class="newflie"
+            icon="el-icon-circle-plus"
+            @click="newclassify()"
+            >新建分类
+          </el-button>
         </div>
       </div>
       <!-- 搜索 -->
@@ -38,30 +47,26 @@
       <div class="TableContent">
         <el-table :data="tableData" :header-cell-style="getRowClass">
           <el-table-column prop="id" label="ID"> </el-table-column>
-          <el-table-column prop="file_name" label="文件名">
-          </el-table-column>
+          <el-table-column prop="file_name" label="文件名"> </el-table-column>
           <el-table-column prop="file_describe" label="文件描述">
           </el-table-column>
-          <el-table-column prop="file_size" label="文件大小">
-          </el-table-column>
+          <el-table-column prop="file_size" label="文件大小"> </el-table-column>
           <el-table-column prop="create_time" label="更新时间" width="230">
           </el-table-column>
-          <el-table-column prop="class_id" label="文件分类">
-          </el-table-column>
-          <el-table-column prop="uid" label="上传人员">
-          </el-table-column>
+          <el-table-column prop="class_id" label="文件分类"> </el-table-column>
+          <el-table-column prop="uid" label="上传人员"> </el-table-column>
           <el-table-column label="操作" fixed="right">
             <template slot-scope="scope">
               <el-button
                 style="color: #666ee8"
-                @click="handleClick(scope.row)"
+                @click="handleClick(scope.row.id)"
                 type="text"
                 size="small"
                 >下载</el-button
               >
               <el-button
                 style="color: #1e1e1e"
-                @click.native.prevent="deleteRow(scope.$index, tableData)"
+                @click="deleteRow(scope.$index, scope.row.id)"
                 type="text"
                 size="small"
               >
@@ -140,6 +145,18 @@
             <el-button @click="resetForm">取消</el-button>
           </el-form-item>
         </form>
+
+        <form
+          action="http://bt1.wlqqlp.com:8082/api/file/addfile"
+          enctype="multipart/form-data"
+          method="post"
+        >
+          文件名称: <input type="text" name="file_name" /><br />
+          文件描述:<input type="text" name="file_describe" /><br />
+          文件分类:<input type="text" name="class_id" /><br />
+          <input type="file" name="file" />
+          <input type="submit" value="上传" />
+        </form>
       </el-form>
     </el-dialog>
   </div>
@@ -149,17 +166,17 @@ import "./css/Files.css";
 import AddFiles from "./components/AddFiles";
 import service from "@/service/index";
 export default {
+  inject: ["reload"],
   components: {
     AddFiles,
   },
   props: {},
   data() {
     return {
-      currentPage: 1,//页数
-      dialogVisible: false,//文件上传弹框
-      ruleForm: {
-        
-      },//文件上传内容
+      fileUrl: "",
+      currentPage: 1, //页数
+      dialogVisible: false, //文件上传弹框
+      ruleForm: {}, //文件上传内容
       name: "",
       region: "",
       desc: "",
@@ -188,15 +205,13 @@ export default {
   },
   methods: {
     // 设置表头颜色
-      getRowClass({
-        rowIndex
-      }) {
-        if (rowIndex == 0) {
-          return "background:#c2c5f6;color:#000";
-        } else {
-          return "";
-        }
-      },
+    getRowClass({ rowIndex }) {
+      if (rowIndex == 0) {
+        return "background:#c2c5f6;color:#000";
+      } else {
+        return "";
+      }
+    },
     submitForm() {
       let data = {
         file_name: this.name,
@@ -228,12 +243,50 @@ export default {
       console.log(this.editselvalue);
     },
     // 删除
-    deleteRow(index, rows) {
-      rows.splice(index, 1);
+    deleteRow(id) {
+      console.log(id);
+      let data = {
+        id: id,
+      };
+      service.filedel(data).then((res) => {
+        console.log(res);
+        this.$message({
+          type: "success",
+          message: res.msg,
+          duration: 1200,
+        });
+        this.reload();
+      });
     },
     // 下载
-    handleClick(row) {
-      console.log(row);
+    handleClick(id) {
+      console.log(id);
+      let param = {
+        id: id,
+      };
+      service.filedown(param).then((res) => {
+        let a = document.createElement("a"); //创建a标签
+        a.href = `http://bt1.wlqqlp.com:8082/api/file/download?id=` + id; //通过a与id去下载
+        document.body.appendChild(a); //添加a
+        a.click(); //下载
+        URL.revokeObjectURL(a.href); // 释放URL 对象
+        document.body.removeChild(a); // 删除 a 标签
+        // const data = res; // 后端打回来的流文件
+        // // 第一个参数是流文件 ，第二是格式， 这个在后端会提前声明的
+        // console.log(data);
+        // const url = window.URL.createObjectURL(
+        //   new Blob([data], {
+        //     type:
+        //       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        //   })
+        // );
+        // const link = document.createElement("a");
+        // link.style.display = "none";
+        // link.href = url;
+        // document.body.appendChild(link);
+        // link.click();
+        // document.body.removeChild(link);
+      });
     },
     // 上传文件
     uploadclassify() {

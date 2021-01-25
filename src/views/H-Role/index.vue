@@ -8,6 +8,8 @@
           v-model="search"
           class="roleNameIpt"
           placeholder="请输入角色名称"
+          clearable
+          @clear="delValue"
         ></el-input>
         <el-button class="staffNamesch" icon="el-icon-search" @click="roleserch"
           >搜索</el-button
@@ -203,7 +205,7 @@ export default {
             this.$message({
               type: "success",
               message: res.msg,
-              duration: 1000,
+              duration: 1500,
             });
           });
         })
@@ -214,9 +216,9 @@ export default {
             row.status = 1;
           }
           this.$message({
-            type: "success",
+            type: "info",
             message: "已取消操作",
-            duration: 1000,
+            duration: 1300,
           });
         });
     },
@@ -252,16 +254,18 @@ export default {
             this.$message({
               type: "success",
               message: res.msg,
-              duration: 1000,
+              duration: 1500,
             });
-            this.reload();
+            setTimeout(() => {
+              this.reload();
+            }, 2000);
           });
         })
         .catch(() => {
           this.$message({
-            type: "success",
+            type: "info",
             message: "已取消操作",
-            duration: 1000,
+            duration: 1300,
           });
         });
     },
@@ -294,28 +298,47 @@ export default {
     },
     // 分页
     handleSizeChange(val) {
+      //this.search = "";
       console.log(`每页 ${val}条`);
       this.num = val;
       let data = {
         pageSize: this.num,
         pageNum: this.currentPage,
-      };
-      service.rolelist(data).then((res) => {
-        console.log(res);
-        this.tables = res.data;
-      });
-    },
-    handleCurrentChange(val) {
-      this.currentPage = val;
-      console.log(`当前页:${val}`);
-      let data = {
-        pageSize: this.num,
-        pageNum: this.currentPage,
+        title: this.search,
       };
       console.log(data);
       service.rolelist(data).then((res) => {
         console.log(res);
         this.tables = res.data;
+        this.total = res.allNews;
+      });
+    },
+    handleCurrentChange(val) {
+      //this.search = "";
+      this.currentPage = val;
+      console.log(`当前页:${val}`);
+      let data = {
+        pageSize: this.num,
+        pageNum: this.currentPage,
+        title: this.search,
+      };
+      console.log(data);
+      service.rolelist(data).then((res) => {
+        console.log(res);
+        this.tables = res.data;
+      });
+    },
+    //清空输入框时事件
+    delValue() {
+      let data = {
+        title: this.search,
+        pageSize: this.num,
+        pageNum: this.currentPage,
+      };
+      service.roleserch(data).then((res) => {
+        this.tables = this.tables1 = res.data;
+        console.log(res);
+        this.total = res.allNews;
       });
     },
   },

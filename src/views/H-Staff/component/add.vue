@@ -308,23 +308,20 @@ export default {
         department_id: this.addStaff.staffdepart,
       };
       service.staffAdd(data).then((res) => {
-        if (res.code == "20010") {
-          const loading = this.$loading({
-            lock: true,
-            text: "保存中",
-            spinner: "el-icon-loading",
-            background: "rgba(0, 0, 0, 0.7)",
+        if (res.code == 20010) {
+          this.$message({
+            message: "保存成功！",
+            type: "success",
+            duration: 2000,
           });
           setTimeout(() => {
-            loading.close();
             this.reload();
           }, 2000);
-          this.$parent.fathstaffyes();
         } else {
           this.$message({
-            message: res.msg,
+            message: "请注意" + res.msg,
             type: "error",
-            duration: 1000,
+            duration: 1300,
           });
         }
       });

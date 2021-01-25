@@ -10,6 +10,8 @@
             v-model="search"
             class="departNameipt"
             placeholder="请输入科室名称"
+            clearable
+            @clear="delValue"
           ></el-input>
           <el-button
             class="departNamesch"
@@ -220,7 +222,7 @@ export default {
             this.$message({
               type: "success",
               message: res.msg,
-              duration: 1000,
+              duration: 1500,
             });
           });
         })
@@ -231,9 +233,9 @@ export default {
             row.status = 1;
           }
           this.$message({
-            type: "success",
+            type: "info",
             message: "已取消操作",
-            duration: 1000,
+            duration: 1300,
           });
         });
     },
@@ -273,18 +275,29 @@ export default {
             this.$message({
               type: "success",
               message: res.msg,
-              duration: 1000,
+              duration: 1500,
             });
-            this.reload();
+            setTimeout(() => {
+              this.reload();
+            }, 2000);
           });
         })
         .catch(() => {
           this.$message({
-            type: "success",
+            type: "info",
             message: "已取消操作",
-            duration: 1000,
+            duration: 1300,
           });
         });
+    },
+    delValue() {
+      let param = {
+        name: this.search,
+      };
+      service.departserc(param).then((res) => {
+        this.dormitory = this.tables1 = res.data;
+        console.log(res);
+      });
     },
   },
 };

@@ -326,6 +326,10 @@ export default {
     return await service.post(`${baseUrl}api/record/record`, data).then(res => res).catch(err => err)
   },
   // 医患添加
+  patientDel: async (params: any) => {
+    return await service.get(`${baseUrl}api/record/delrecord`, { params }).then(res => res).catch(err => err)
+  },
+  // 医患添加
   patientAdd: async (data: any) => {
     return await service.post(`${baseUrl}api/record/addrecord`, data).then(res => res).catch(err => err)
   },
@@ -390,8 +394,16 @@ export default {
   fileupload: async (data: object) => {
     return await service.post(`${baseUrl}api/file/addfile`, data).then(res => res).catch(err => err)
   },
+  // 文件库文件下载
+  filedown: async (params: any) => {
+    return await service.get(`${baseUrl}api/file/download`, { params }).then(res => res).catch(err => err)
+  },
+  // 文件库删除
+  filedel: async (params: any) => {
+    return await service.post(`${baseUrl}api/file/delfile`, params).then(res => res).catch(err => err)
+  },
   // img
   getupimg: async (data: object) => {
-    return await service.post(`${baseUrl}api/srk/create_base64_file`, data).then(res => res).catch(err => err)
+    return await service.post(`${baseUrl}api/srk/create_base64_file`, { data }).then(res => res).catch(err => err)
   },
 }
