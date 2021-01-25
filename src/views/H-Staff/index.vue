@@ -221,34 +221,6 @@ export default {
     },
     //员工状态
     changeSwitch(val, row) {
-<<<<<<< HEAD
-      console.log(row.status);
-      this.$confirm("此操作将修改状态, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-      })
-        .then(() => {
-          let data = {
-            id: row.id,
-            status: row.status,
-          };
-          console.log(data);
-          service.staffState(data).then((res) => {
-            console.log(res);
-            if (res.code == 20020) {
-              if (row.status == 1) {
-                row.status = 0;
-              } else {
-                row.status = 1;
-              }
-            }
-            this.$message({
-              type: "success",
-              message: res.msg,
-              duration: 1000,
-            });
-=======
       console.log(val,row)
       let data = {
         id: row.id,
@@ -275,20 +247,13 @@ export default {
               });
              
             }
->>>>>>> 9604a1fd8d1b1c5a06303ad9a6761e7e74ceb38a
           });
         } else {
            row.status = 1;
           this.$message({
-<<<<<<< HEAD
-            type: "info",
-            message: "已取消操作",
-            duration: 1000,
-=======
             type: "error",
             message: res.msg,
             duration: 1500,
->>>>>>> 9604a1fd8d1b1c5a06303ad9a6761e7e74ceb38a
           });
         }
       });
