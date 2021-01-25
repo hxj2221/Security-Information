@@ -10,48 +10,11 @@
         <el-button type="primary" icon="el-icon-circle-plus" @click="increase()">新增
         </el-button>
       </div>
-      <div class="allManage_cont">
-        <el-row  type="flex" class="row-bg" justify="space-around">
-          <!-- 侧边导航 -->
-          <el-col :span="4">
-            <div class="grid-content bg-purple">
-
-              <div class="left">
-                <ul class="side_nav">
-                  <li class="side_nav_list" v-for="item in SideNav" :key="item.index">{{item.name}}</li>
-                </ul>
-              </div>
-            </div>
-          </el-col>
-          <!-- 右边内容 -->
-          <el-col :span="18">
-            <div class="grid-content bg-purple-light">
-              <div class="right">
-                <el-input placeholder="请输入内容" v-model="search" class="input-with-select search">
-                  <el-button slot="append" icon="el-icon-search"></el-button>
-                </el-input>
-                <el-table class="right_con" ref="singleTable" :header-cell-style="getRowClass" :data="tableData">
-                  <el-table-column type="index" label="序号">
-                  </el-table-column>
-                  <el-table-column property="field" label="字段">
-                  </el-table-column>
-                  <el-table-column property="date" label="创建时间">
-                  </el-table-column>
-                  <el-table-column property="name" label="创建人">
-                  </el-table-column>
-                  <el-table-column label="操作">
-                    <template slot-scope="scope">
-                      <el-button type="text" size="small" @click="edit()">编辑</el-button>
-                      <el-button @click.native.prevent="deleteRow(scope.$index, tableData)" type="text" size="small">删除
-                      </el-button>
-                    </template>
-                  </el-table-column>
-                </el-table>
-              </div>
-            </div>
-          </el-col>
-        </el-row>
-      </div>
+      <!-- 内容 -->
+      <Complain :tableData="complain" v-show="isShow"></Complain>
+      <Ade :tableData="ade" v-show="isShow1"></Ade>
+      <Connect v-show="isShow2"></Connect>
+      <Other v-show="isShow3"></Other>
       <!-- 分页 -->
       <div class="block">
         <el-pagination @size-change="handleSizeChange" @current-change="currentChage" :current-page="currentPage4"
@@ -63,26 +26,13 @@
       <el-dialog class="newly" title="新增字段" :visible.sync="dialogFormVisible">
         <el-form class="newly_con" :model="form">
           <el-form-item class="info" label="字段信息" required>
-            <el-input type="textarea" :rows="8" placeholder="请输入内容" v-model="form.name">
+            <el-input type="textarea" :rows="8" placeholder="请输入内容" v-model="form.title">
             </el-input>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogFormVisible = false">取 消</el-button>
-          <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
-        </div>
-      </el-dialog>
-      <!-- 编辑 -->
-      <el-dialog title="编辑字段" :visible.sync="dialogVisible">
-        <el-form :model="form">
-          <el-form-item label="字段信息" required>
-            <el-input type="textarea" :rows="8" placeholder="请输入内容" v-model="form.name">
-            </el-input>
-          </el-form-item>
-        </el-form>
-        <div slot="footer" class="dialog-footer">
-          <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+          <el-button type="primary" @click="sure">确 定</el-button>
         </div>
       </el-dialog>
     </div>
@@ -92,18 +42,27 @@
 <script>
   // 引入css样式
   import './css/Dictionaries.css'
-  // import AdminHead from './components/AdminHead'
+
+  import Complain from './components/Complain/content'
+  import Ade from './components/Ade/content'
+  import Connect from './components/Connect/content'
+  import Other from './components/Other/content'
+
+  import service from '@/service/index'
 
   export default {
+    inject: ["reload"],
     components: {
-
+      Complain,
+      Ade,
+      Connect,
+      Other
     },
-
     data() {
       return {
         // 顶部导航
         Nav: [{
-            name: '投诉纠纷分'
+            name: '投诉纠纷'
           },
           {
             name: '不良信息'
@@ -116,72 +75,21 @@
           },
         ],
         nowIndex: 0,
-        // 左侧导航
-        SideNav: [{
-          name: '信息来源'
-        }, {
-          name: '临床医技科室'
-        }, {
-          name: '投诉人与患者关系'
-        }, {
-          name: '投诉类别'
-        }, {
-          name: '调查科室'
-        }, {
-          name: '抄送部门'
-        }, {
-          name: '审批操作'
-        }, {
-          name: '辅助检查'
-        }, {
-          name: '治疗意见'
-        }, ],
-        // 搜索框
-        search: '',
-        // 表格
-        tableData: [{
-          field: '口头陈诉',
-          date: '2019-11-12 12:08:12',
-          name: '王冕',
-        }, {
-          field: '医院电话投诉',
-          date: '2019-11-12 12:08:12',
-          name: '王小虎',
-        }, {
-          field: '书面投诉',
-          date: '2019-11-12 12:08:12',
-          name: '王小虎',
-        }, {
-          field: '省卫生热线12320',
-          date: '2019-11-12 12:08:12',
-          name: '王小虎',
-        }, {
-          field: '卫健委维权处',
-          date: '2019-11-12 12:08:12',
-          name: '王小虎',
-        }, {
-          field: '卫健委信访',
-          date: '2019-11-12 12:08:12',
-          name: '王小虎',
-        }, {
-          field: '书面投诉',
-          date: '2019-11-12 12:08:12',
-          name: '王小虎',
-        }, {
-          field: '省卫生热线12320',
-          date: '2019-11-12 12:08:12',
-          name: '王小虎',
-        }],
         currentPage4: 1, //分页
         pageNumList: [8, 10, 20], //页数
         pageCount: 0, //总数量
         pageSize: 8, //默认条数
-        // 编辑
+        // 新增
         form: {
-          name: '',
+          title: '',
         },
         dialogFormVisible: false,
-        dialogVisible: false,
+        isShow: true, //投诉纠纷
+        isShow1: false, //不良信息
+        isShow2: false, //患者信息
+        isShow3: false, //其他
+        complain: [], //投诉
+        ade: [], //不良
       };
     },
 
@@ -189,26 +97,44 @@
       // 顶部导航
       change(index) {
         this.nowIndex = index;
+        this[index]()
+      },
+      // 投诉纠纷
+      0() {
+        this.isShow = true
+        this.isShow1 = false
+        this.isShow2 = false
+        this.isShow3 = false
+      },
+      // 不良信息
+      1() {
+        this.isShow = false
+        this.isShow1 = true
+        this.isShow2 = false
+        this.isShow3 = false
+        let param = {
+          type: 6
+        }
+        service.DicList(param).then(res => {
+          // console.log(res)
+          this.ade = res.data
+        })
+      },
+      // 患者信息
+      2() {
+        this.isShow = false
+        this.isShow1 = false
+        this.isShow2 = true
+        this.isShow3 = false
+      },
+      // 其他
+      3() {
+        this.isShow = false
+        this.isShow1 = false
+        this.isShow2 = false
+        this.isShow3 = true
       },
       // 表格操作
-      // 设置表头颜色
-      getRowClass({
-        rowIndex
-      }) {
-        if (rowIndex == 0) {
-          return "background:#c2c5f6;color:#000";
-        } else {
-          return "";
-        }
-      },
-      // 编辑
-      edit() {
-        this.dialogVisible = !this.dialogVisible
-      },
-      // 删除
-      deleteRow(index, rows) {
-        rows.splice(index, 1);
-      },
       // 分页
       // 每页显示条数
       handleSizeChange(val) {
@@ -222,6 +148,46 @@
       increase() {
         this.dialogFormVisible = !this.dialogFormVisible
       },
+      // 确认新增
+      sure() {
+        let params = {
+          title: this.form.title,
+          type: 1
+        }
+        console.log(params)
+        service.DicAdd(params).then(res => {
+          console.log(res)
+          if (res.code == 20010) {
+            this.reload();
+            this.$message({
+              message: '添加成功',
+              type: 'success',
+              duration: 1000,
+            });
+            this.dialogFormVisible = false
+          } else if (res.code == 20401) {
+            this.$message({
+              message: "请重新登陆",
+              type: "error",
+              duration: 1000,
+            });
+            this.$router.push('/login')
+          } else if (res.code == 20403) {
+            this.$message({
+              message: res.msg,
+              type: "error",
+              duration: 1000,
+            });
+            this.$router.push('/dashboard')
+          } else {
+            this.$message({
+              message: res.msg,
+              type: "error",
+              duration: 1000,
+            });
+          }
+        })
+      }
     },
   };
 </script>

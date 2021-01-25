@@ -1,7 +1,7 @@
 .allManage {
     background: #ffffff;
     width: 95%;
-    padding: 0 20px;
+    min-height: 805px;
     margin: 0 auto;
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
     border-radius: 5px;
@@ -15,8 +15,9 @@
     justify-content: space-between;
     align-items: center;
     height: 84px;
-    border-bottom: 2px solid #cccccc;
+    border-bottom: 1px solid #f2f2f2;
     margin-bottom: 20px;
+    padding: 0 30px;
 }
 
 .allManage .allManage_nav .nav_list {
@@ -56,7 +57,6 @@
     height: 40px;
     border-radius: 5px;
     cursor: pointer;
-    margin-right: 10px;
 }
 
 
@@ -64,14 +64,24 @@
 
 /* 内容 */
 
-.allManage .allManage_cont .right{
-    text-align: left
+.allManage .allManage_cont{
+    width: 94%;
+    margin: 0 auto;
 }
-
+.allManage .allManage_cont .right{
+    text-align: left;
+    min-height: 735px;
+}
+.allManage .allManage_cont .right .edit{
+    color: #666EE8;
+}
+.allManage .allManage_cont .right .del{
+    color: #ff0000;
+}
 
 /* 侧边导航 */
 
-.allManage>.allManage_cont .left .side_nav .side_nav_list {
+.allManage_cont .left .side_nav .side_nav_list {
     list-style: none;
     font-size: 14px;
     color: #333333;
@@ -79,12 +89,24 @@
     height: 44px;
     border: 1px solid #f0f1fd;
     line-height: 44px;
+    cursor: pointer;
+}
+.allManage_cont .left .side_nav .NavbgColor:first-child {
+    background-color: #666EE8;
+    color: #ffffff;
+    border-color: #666EE8;
 }
 
-.allManage .allManage_cont .left .side_nav .side_nav_list:hover {
+.allManage_cont .left .side_nav>.NavbgColor {
+    background-color: #666EE8;
+    color: #ffffff !important;
+    border-color: #666EE8;
+}
+
+/* .allManage_cont .left .side_nav .side_nav_list:hover {
     color: #ffffff;
     background-color: #666EE8;
-}
+} */
 
 
 /* 右边内容 */
@@ -92,13 +114,13 @@
 
 /* 搜索 */
 
-.allManage .allManage_cont .right .search {
+.allManage_cont .right .search {
     width: 367px;
     height: 36px;
     margin-bottom: 20px;
 }
 
-.allManage .allManage_cont .right .search .el-input-group__append {
+.allManage_cont .right .search .el-input-group__append {
     background-color: #666EE8;
     border-color: #666EE8;
     color: #ffffff;
@@ -107,11 +129,11 @@
 
 /* 表格 */
 
-.allManage .allManage_cont .right .right_con .el-table__header-wrapper .el-table__header .has-gutter tr th {
+.allManage_cont .right .right_con .el-table__header-wrapper .el-table__header .has-gutter tr th {
     text-align: center;
 }
 
-.allManage .allManage_cont .right .right_con .el-table__body-wrapper .el-table__body .el-table__row td {
+.allManage_cont .right .right_con .el-table__body-wrapper .el-table__body .el-table__row td {
     text-align: center;
 }
 
@@ -119,10 +141,9 @@
 /* 分页 */
 
 .allManage .block {
-    margin-top: 105px;
-    padding-bottom: 117px;
     text-align: right;
-    margin-right: 36px;
+    margin-right: 42px;
+    padding: 25px 0;
 }
 
 

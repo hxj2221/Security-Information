@@ -3,7 +3,7 @@
 .AdeDetail {
     width: 95%;
     font-size: 14px;
-    margin: 12px auto 100px;
+    margin: 0 auto 100px;
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
     border-radius: 5px;
     min-height: 805px;
@@ -65,9 +65,9 @@
 
 
 .AdeDetail .head-txt {
-    padding: 56px 10px 20px;
-    border-bottom: 2px solid #f2f2f2;
-    margin: 55px 14% 0;
+    padding: 0px 10px 20px;
+    
+    margin: 30px 3% 0;
     font-size: 16px;
 }
 
@@ -75,6 +75,13 @@
     padding: 10px 0;
     text-align: left;
     line-height: 40px;
+}
+.AdeDetail .head-txt .txt .row-bg .grid-content>span{
+    display: flex;
+}
+.AdeDetail .head-txt .txt .row-bg .grid-content>span>span{
+    display: flex;
+    width: 50%;
 }
 
 
@@ -84,11 +91,13 @@
 .AdeDetail .cent_info {
     text-align: left;
     margin: 0 14%;
+    border-top: 2px solid #e0e2fa;
 }
 
 .AdeDetail .cent_info>p {
     margin: 18px 0;
     font-size: 16px;
+    font-weight: bold;
 }
 
 .AdeDetail .cent_info .tab {

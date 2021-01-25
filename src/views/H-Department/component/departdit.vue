@@ -15,7 +15,6 @@
         >
       </div>
     </div>
-    <hr class="staffWidhr" />
     <div class="addmain">
       <el-form ref="form">
         <el-row :gutter="20">

@@ -1,18 +1,16 @@
 <template>
-  <div class="addrole">
+  <div class="addrole" style="
+    margin: 0 auto;
+">
     <div class="roleaddThre">
       <span class="roleaddSpan">新增角色信息</span>
       <div>
-        <el-button class="roleaddgr" @click="roleaddvueyes">保存</el-button>
-        <el-button
-          class="roleaddb"
-          icon="iconfont el-icon-hospital-passwordai207"
-          @click="roleaddvueno"
-          >返回</el-button
-        >
+        <el-button type="primary" class="roleaddgr" icon="iconfont el-icon-hospital-passwordbaocun" @click="roleaddvueyes">保存
+      </el-button>
+      <el-button type="primary" class="roleaddb" icon="iconfont el-icon-hospital-passwordai207" @click="roleaddvueno">返回
+      </el-button>
       </div>
     </div>
-    <hr class="roleaddWidhr" />
     <div class="addmain">
       <el-form ref="form">
         <el-row :gutter="20">
@@ -79,11 +77,11 @@
         </el-row>
       </el-form>
     </div>
-    <div style="margin-top: 10px">
+    <div>
       <p
         style="
           display: flex;
-          margin-left: 15px;
+          margin-left: 40px;
           font-size: 20px;
           color: #858bed;
           font-weight: bold;
@@ -91,18 +89,18 @@
       >
         查看权限
       </p>
-      <div class="role_div" style="width: 50%; text-align: left">
+      <div class="role_div">
         <el-radio-group v-model="radio" @change="radiochange">
           <el-radio :label="2">本科室</el-radio>
           <el-radio :label="1">全部</el-radio>
         </el-radio-group>
       </div>
     </div>
-    <div>
+    <div style="min-height:510px">
       <p
         style="
           display: flex;
-          margin-left: 15px;
+          margin-left: 40px;
           font-size: 20px;
           color: #858bed;
           font-weight: bold;
@@ -239,7 +237,7 @@ export default {
 
 <style scoped>
 @import "addrole.css";
-* {
+/* * {
   margin: 0;
   padding: 0;
 }
@@ -291,5 +289,5 @@ export default {
 }
 .H-edit .content .power .el-checkbox-group {
   padding-left: 20px;
-}
+} */
 </style>

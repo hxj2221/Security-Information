@@ -5,11 +5,11 @@
 
 .departAll {
     width: 100%;
-    min-height: 100%;
+    min-height: 805px;
     background: #fff;
     border-radius: 5px;
     box-shadow: 0 0 2px rgb(184, 183, 183);
-    padding-bottom: 200px;
+    padding-bottom: 115px;
 }
 
 .departAll .departaddThre {
@@ -17,9 +17,11 @@
     justify-content: space-between;
     font-size: 14px;
     color: #cccccc;
-    padding-top: 30px;
-    padding-left: 60px;
-    margin-bottom: 20px;
+    height: 91px;
+    align-items: center;
+    border-bottom: 1px solid #f2f2f2;
+    padding: 0 30px;
+
 }
 
 .departaddSpan {
@@ -42,6 +44,9 @@
     border-radius: 5px;
     background-color: #666ee8;
     color: #fff;
+    margin-right: 20px;
+    width: 92px;
+    height: 40px;
 }
 
 .departaddb:hover {
@@ -49,8 +54,11 @@
 }
 
 .departaddb {
-    border: 2px solid #ccc;
+    
+    color: #666ee8;
     border-radius: 5px;
+    background: none;
+    border-color:  #666ee8;
 }
 
 .staffWidhr {
@@ -63,7 +71,7 @@
 }
 
 .addmain {
-    margin: 0 25px;
+    margin: 20px 60px;
     margin-bottom: 20px;
 }
 

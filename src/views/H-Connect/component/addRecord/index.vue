@@ -8,16 +8,13 @@
 
     <div class="addRecord_myform">
       <el-form ref="form" :model="form">
-        <el-row :gutter="20">
-          <el-col :span="8">
+        <el-row type="flex" class="row-bg" justify="space-around">
+          <el-col :span="6">
             <el-form-item label="业务编号" disabled>
-              <el-input
-              v-model="form.number"
-                disabled="disabled"
-              ></el-input>
+              <el-input v-model="form.number" disabled="disabled"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="沟通日期" required>
               <el-date-picker
                 type="date"
@@ -26,20 +23,20 @@
               ></el-date-picker>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="沟通地点" required>
               <el-input v-model="form.communication"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
-        <el-row :gutter="20">
-          <el-col :span="8">
+        <el-row type="flex" class="row-bg" justify="space-around">
+          <el-col :span="6">
             <el-form-item label="患者姓名" required>
               <el-input v-model="form.patient_name"></el-input>
             </el-form-item>
           </el-col>
 
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="患者所在科室">
               <el-select v-model="form.department_id" placeholder="活动区域">
                 <el-option
@@ -52,20 +49,20 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="8"></el-col>
+          <el-col :span="6"></el-col>
         </el-row>
-        <el-row :gutter="20">
-          <el-col :span="8">
+        <el-row type="flex" class="row-bg" justify="space-around">
+          <el-col :span="6">
             <el-form-item label="主持人姓名" required>
               <el-input v-model="form.hosp_name"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="记录人姓名" required>
               <el-input v-model="form.note_taker"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="8"> </el-col>
+          <el-col :span="6"> </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
@@ -75,8 +72,9 @@
                 v-model="form.record_of_communication"
                 max="200"
                 min="10"
-              ></el-input> </el-form-item
-          ></el-col>
+              ></el-input>
+            </el-form-item>
+          </el-col>
         </el-row>
       </el-form>
     </div>
@@ -89,8 +87,7 @@
         <div class="addRecord_enclosure_top_right">
           <el-button
             type="primary"
-            size="small"
-            icon="el-icon-circle-plus-outline"
+            icon="el-icon-circle-plus"
             @click="upLode_define"
             >上传附件</el-button
           >
@@ -146,55 +143,32 @@
       </div>
       <!--主要表格 -->
       <div class="addRecord_enclosure_content">
-        <el-table :data="tableData" style="width: 100%">
-          <el-table-column label="ID">
-            <template slot-scope="scope">
-              <span style="margin-left: 10px">{{ scope.row.id }}</span>
-            </template>
+        <el-table :data="tableData" :header-cell-style="getRowClass">
+          <el-table-column type="index" label="ID" width="50">
           </el-table-column>
-          <el-table-column label="文件名">
-            <template slot-scope="scope">
-              <span style="margin-left: 10px">{{ scope.row.file }}</span>
-            </template>
+          <el-table-column prop="file_name" label="文件名"> </el-table-column>
+          <el-table-column
+            prop="file_describe"
+            label="文件描述"
+            :show-overflow-tooltip="true"
+            width="207"
+          >
           </el-table-column>
-          <el-table-column label="文件描述">
-            <template slot-scope="scope">
-              <el-popover trigger="hover" placement="top">
-                <p>{{ scope.row.filecontent }}</p>
-                <div slot="reference" class="name-wrapper">
-                  <el-tag size="medium">{{ scope.row.files }}</el-tag>
-                </div>
-              </el-popover>
-            </template>
+          <el-table-column prop="size" label="文件大小"> </el-table-column>
+          <el-table-column prop="update_time" label="更新时间">
           </el-table-column>
-          <el-table-column label="文件大小">
-            <template slot-scope="scope">
-              <span style="margin-left: 10px">{{ scope.row.filesize }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="更新时间">
-            <template slot-scope="scope">
-              <span style="margin-left: 10px">{{ scope.row.date }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="文件类型">
-            <template slot-scope="scope">
-              <span style="margin-left: 10px">{{ scope.row.filetype }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="上传人员">
-            <template slot-scope="scope">
-              <span style="margin-left: 10px">{{ scope.row.name }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="操作" width="100" fixed="right">
+          <el-table-column prop="file_type" label="文件类型"> </el-table-column>
+          <el-table-column prop="user.name" label="上传人员"> </el-table-column>
+          <el-table-column label="操作">
             <template slot-scope="scope">
               <el-link
-                type="primary"
+                :underline="false"
+                style="color: #666ee8"
                 @click="handleEdit(scope.$index, scope.row)"
                 >下载</el-link
               >
               <el-link
+                :underline="false"
                 type="danger"
                 @click="handleDelete(scope.$index, tableData)"
                 >删除</el-link
@@ -225,55 +199,85 @@
         <h5>关联投诉信息</h5>
       </div>
       <div class="addRecord_relation_content">
-        <el-table :data="tableData1" style="width: 100%">
-          <el-table-column label="序号" type="index"> </el-table-column>
+        <el-table :data="tableData1" :header-cell-style="getRowClass">
+          <el-table-column label="序号" type="index" width="100">
+          </el-table-column>
           <el-table-column label="事件编码" prop="event_number">
           </el-table-column>
-
           <el-table-column label="投诉人姓名" prop="complaint_name">
           </el-table-column>
           <el-table-column label="姓别" prop="sex"> </el-table-column>
           <el-table-column label="年龄" prop="age"> </el-table-column>
           <el-table-column label="手机号码" prop="complaint_phone">
           </el-table-column>
-          <el-table-column label="投诉科室" prop="pass_department">
+          <el-table-column label="投诉科室" prop="department_id">
           </el-table-column>
-          <el-table-column label="信息来源" prop="pass_department">
+          <el-table-column label="信息来源" prop="complaint_type.title">
           </el-table-column>
           <el-table-column label="投诉时间" prop="create_time">
           </el-table-column>
-          <el-table-column label="流转部门" prop="pass_department">
+          <el-table-column label="流转部门" prop="pass_names">
           </el-table-column>
-          <el-table-column label="事件状态" prop="state.state_val">
+          <el-table-column label="事件状态" prop="state.title">
           </el-table-column>
-          <el-table-column label="操作">
+          <el-table-column label="操作" fixed="right" style="font-size: 12px">
             <template slot-scope="scope">
               <el-link
-                type="primary"
+                :underline="false"
+                style="color: #666ee8"
                 @click="handleSee(scope.$index, scope.row)"
                 >查看</el-link
               >
             </template>
           </el-table-column>
         </el-table>
-        <el-button
-          type="primary"
-          size="small"
-          icon="el-icon-circle-plus-outline"
+        <el-button type="primary" icon="el-icon-circle-plus" @click="addevent"
           >添加投诉信息</el-button
         >
+        <!-- 弹框 -->
+        <el-dialog title="关联投诉信息" :visible.sync="dialogTableVisible">
+          <el-table
+            ref="multipleTable"
+            :data="gridData"
+            style="width: 100%"
+            @selection-change="updatehandleSelectionChange"
+            @select="select"
+            @select-all="selectAll"
+          >
+            <el-table-column type="selection"> </el-table-column>
+            <el-table-column label="事件编码" prop="event_number">
+            </el-table-column>
+            <el-table-column prop="complaint_name" label="投诉人姓名">
+            </el-table-column>
+            <el-table-column prop="department_id" label="投诉科室">
+            </el-table-column>
+            <el-table-column prop="complaint_type.title" label="信息来源">
+            </el-table-column>
+            <el-table-column prop="state.title" label="事件状态">
+            </el-table-column>
+          </el-table>
+          <div class="diog_button">
+            <el-button @click="dialogTableVisible = false">返回</el-button>
+            <el-button type="primary" @click="event">保存</el-button>
+          </div>
+        </el-dialog>
       </div>
     </div>
     <!-- 固定定位按钮 -->
     <div class="addRecord_button">
       <div class="button_stlye">
-        <el-button icon="el-icon-back" @click="mySubmit">返回</el-button>
         <el-button
           type="primary"
-          icon="el-icon-document-checked"
+          icon="iconfont el-icon-hospital-passwordbaocun"
           @click="mysubmit"
-          >提交</el-button
-        >
+          >提交
+        </el-button>
+        <el-button
+          type="primary"
+          icon="iconfont el-icon-hospital-passwordai207"
+          @click="mySubmit"
+          >返回
+        </el-button>
       </div>
     </div>
   </div>
@@ -291,11 +295,18 @@ export default {
   props: {},
   data() {
     return {
+      val: {},
+      event_number: "",
+      gridData: [],
+      dialogTableVisible: false,
+
       imgUrl: "http://bt1.wlqqlp.com:8082/api/record/upload_attachment",
-      myHeaders: { Authorization: token },
+      myHeaders: {
+        Authorization: token,
+      },
       // 表单
       form: {
-        number:'',
+        number: "",
         communicate_time: "",
         communication: "",
         department_id: "",
@@ -307,19 +318,8 @@ export default {
       // 科室
       depList: [],
       // 表格1  附件信息
-      tableData: [
-        {
-          id: "1",
-          file: "hhh",
-          filecontent: "hauhuhhajkfd",
-          files: "123",
-          filesize: "120kb",
-          date: "2016-05-02",
-          filetype: "jpg",
-          name: "王小虎",
-        },
-      ],
-      currentPage: 4,
+      tableData: [],
+      currentPage: 1,
       // 表格2  关联信息
       tableData1: [],
       // 弹框
@@ -330,33 +330,88 @@ export default {
     };
   },
   methods: {
+    // 关联投诉
+    addevent() {
+      this.dialogTableVisible = true;
+      service.Related().then((res) => {
+        console.log(res);
+        this.gridData = res.event;
+      });
+    },
+    // 弹框
+    event() {
+      //保存
+      console.log(this.val);
+      let data = {
+        event_number: this.val[0].event_number,
+      };
+      service.related(data).then((res) => {
+        console.log(res);
+        this.tableData1 = res.event;
+        this.tableData = res.recordEnclosure;
+        this.event_number = res.event[0].event_number;
+        this.dialogTableVisible = false;
+      });
+    },
+
+    updatehandleSelectionChange(val) {
+      this.val = val;
+    },
+    select(selection, row) {
+      if (selection.length > 1) {
+        let del_row = selection.shift();
+        this.$refs.multipleTable.toggleRowSelection(del_row, false);
+      }
+    },
+    selectAll(selection) {
+      if (selection.length > 1) {
+        selection.length = 1;
+      }
+    },
+    // handleSelectionChange(val,row) {
+    //   console.log(val,row);
+    //   this.radioSelected = val.name; //选中行的name
+    //   this.multipleSelection = val; //选中的一行数据
+    // },
     getFile(item) {
       this.file = item;
+    },
+    // 设置表头颜色
+    getRowClass({ rowIndex }) {
+      if (rowIndex == 0) {
+        return "background:#c2c5f6;color:#000";
+      } else {
+        return "";
+      }
+    },
+    getFile(item) {
+      // console.log(item.file);
+      this.file = item;
+      console.log(this.file);
     },
     // 编辑
     handleEdit(index, row) {},
     handleDelete(index, row) {
-      
-       this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-            confirmButtonText: "确定",
-            cancelButtonText: "取消",
-            type: "warning",
-          })
-            .then(() => {
-              this.$message({
-                type: "success",
-                message: "删除成功!",
-                delete: row.splice(index, 1),
-                duration:1000
-              });
-            })
-            .catch(() => {
-              this.$message({
-                type: "info",
-                message: "已取消删除",
-                duration:1000
-              });
-            })
+      this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          this.$message({
+            type: "success",
+            message: "删除成功!",
+            delete: row.splice(index, 1),
+            duration: 1000,
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+            duration: 1000,
+          });
+        });
     },
     // 分页
     handleSizeChange(val) {
@@ -374,8 +429,8 @@ export default {
     },
     mysubmit() {
       let data = {
-        // event_number: this.tableData1[0].event_number,
-        event_number: 12,
+        number: this.form.number,
+        event_number: this.event_number,
         communicate_time: this.form.communicate_time,
         communication: this.form.communication,
         department_id: this.form.department_id,
@@ -385,6 +440,7 @@ export default {
         record_of_communication: this.form.record_of_communication,
       };
       service.patientAdd(data).then((res) => {
+        console.log(res);
         if (res.code == 20010) {
           const loading = this.$loading({
             lock: true,
@@ -410,24 +466,25 @@ export default {
     // 点击上传附件按钮
     upLode_define() {
       let params = {
-        // event_number: this.tableData1[0].event_number,
-        event_number: 12,
+        event_number: this.event_number,
       };
+      console.log(params);
       service.upLode(params).then((res) => {
+        console.log(res);
         this.dialogVisible = true;
       });
     },
-
     //上传附件 确定
     define() {
       let data = {
         file_name: this.dialogForm.file_name,
-        event_number: 12,
-        // event_number: this.tableData1[0].event_number,
+        event_number: this.event_number,
         file_describe: this.dialogForm.file_describe,
         file: this.file,
       };
       service.uplode(data).then((res) => {
+        console.log(data);
+        console.log(res);
         if (res.code == 20010) {
           this.$message({
             message: res.msg,
@@ -456,8 +513,9 @@ export default {
   },
   created() {
     this.bus.$on("selDep", (item) => {
-      this.form.number=item.number
-      this.depList = item.data;
+      console.log(item);
+      this.form.number = item.number;
+      this.depList = item.department;
       this.tableData1 = item.event;
     });
   },

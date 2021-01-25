@@ -4,12 +4,12 @@
 }
 
 .staffalBg {
-    width: 100%;
-    min-height: 680px;
+    width: 95%;
+    min-height: 805px;
     background: #fff;
     border-radius: 5px;
     box-shadow: 0 0 2px rgb(184, 183, 183);
-    padding-bottom: 150px;
+    margin: 0 auto;
 }
 
 .staffheadThre {
@@ -66,17 +66,9 @@
     color: none;
 }
 
-.staffWidhr {
-    width: 92%;
-    margin: auto;
-    margin-top: 15px;
-    margin-bottom: 12px;
-}
-
 .staffIptsech {
     display: flex;
-    margin-left: 25px;
-    margin-bottom: 20px;
+    margin: 20px 30px;
 }
 
 .staffBelong {
@@ -108,6 +100,18 @@
     width: 92px;
     height: 40px;
 }
+.staffIptsech .searchbtn{
+    background-color: #666ee8;
+    border-color: #666ee8;
+}
+.staffIptTab{
+    width: 94%;
+    margin: 0 auto;
+    min-height: 665px;
+}
+.staffIptTab .el-table td, .el-table th.is-leaf{
+    text-align: center;
+}
 
 .staffTable {
     margin: 0 15px;
@@ -124,7 +128,7 @@
 }
 
 .staffFotedit {
-    width: 45px;
+    color: #666ee8;
 }
 
 .staffFotedit span {
@@ -132,7 +136,7 @@
 }
 
 .staffFotdel {
-    width: 45px;
+    color: #ff0000;
 }
 
 .staffFotdel span {
@@ -286,7 +290,7 @@
 
 .staffpag {
     overflow: hidden;
-    margin: 20px 25px;
+    padding: 25px 25px;
 }
 
 .staffpag>.block {

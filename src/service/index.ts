@@ -119,9 +119,13 @@ export default {
   uploadfiles: async (data: any) => {
     return await service.post(`${baseUrl}api/Complaintprocess/event_uploadfiles`, data).then(res => res).catch(err => err)
   },
-  //   上传附件index.php/api/srk/create_base64_file
+  //   上传附件
   uploadfilebase: async (data: any) => {
-    return await service.post(`${baseUrl}index.php/api/srk/create_base64_file`, data).then(res => res).catch(err => err)
+    return await service.post(`${baseUrl}api/Complaintprocess/event_base64_uploadfiles`, data).then(res => res).catch(err => err)
+  },
+  // 跳转医患
+  comtocon: async (event_number: any) => {
+    return await service.get(`${baseUrl}api/record/record`,{ params:{event_number:event_number}}).then(res => res).catch(err => err)
   },
   // 不良事件列表
   AdeList: async (params: any) => {
@@ -317,6 +321,14 @@ export default {
   AriList: async (params: any) => {
     return await service.get(`${baseUrl}api/article/article_cate_add`, { params }).then(res => res).catch(err => err)
   },
+   // 关联投诉 (get)
+   Related : async () => {
+    return await service.get(`${baseUrl}api/record/addevent`).then(res => res).catch(err => err)
+  },
+   // 关联投诉(post)
+   related : async (data:any) => {
+    return await service.post(`${baseUrl}api/record/addevent`,data).then(res => res).catch(err => err)
+  },
   // 医患列表
   patientList: async (params: any) => {
     return await service.get(`${baseUrl}api/record/record`, { params }).then(res => res).catch(err => err)
@@ -405,5 +417,22 @@ export default {
   // img
   getupimg: async (data: object) => {
     return await service.post(`${baseUrl}api/srk/create_base64_file`, { data }).then(res => res).catch(err => err)
+  },
+  // 字典管理
+  // 列表
+  DicList: async (params:any) => {
+    return await service.get(`${baseUrl}api/Dictionary/gettype`,{params}).then(res => res).catch(err => err)
+  },
+  // 天加
+  DicAdd: async (params:any) => {
+    return await service.post(`${baseUrl}api/Dictionary/add`,params).then(res => res).catch(err => err)
+  },
+  // 编辑
+  DicEdit: async (params:any) => {
+    return await service.post(`${baseUrl}api/Dictionary/edit`,params).then(res => res).catch(err => err)
+  },
+  // 删除
+  DicDel: async (params:any) => {
+    return await service.post(`${baseUrl}api/Dictionary/del`,params).then(res => res).catch(err => err)
   },
 }

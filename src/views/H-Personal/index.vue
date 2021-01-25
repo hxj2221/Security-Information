@@ -152,7 +152,7 @@
       </el-form>
     </div>
     <div class="person_button">
-      <el-button class="persongr" icon="el-icon-s-claim" @click="personsave"
+      <el-button class="persongr" icon="iconfont el-icon-hospital-passwordbaocun" @click="personsave"
         >保存</el-button
       >
       <el-button

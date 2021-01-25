@@ -29,40 +29,38 @@
           clearable
           @clear="delValue"
         ></el-input>
-        <el-button class="staffNamesch" icon="el-icon-search" @click="seachAll"
-          >搜索</el-button
-        >
+        <el-button class="searchbtn" type="primary" icon="el-icon-search" @click="seachAll()"></el-button>
       </div>
       <!-- 表格部分 -->
-      <div class="staffTable">
+      <div class="staffIptTab">
         <el-table
-          style="width: 96%"
+        max-height="662"
           :data="tables"
-          :header-cell-style="{ background: '#C2C5F6' }"
+          :header-cell-style="{ background: '#C2C5F6',color:'#000' }"
           :cell-style="{ background: '#fff' }"
         >
-          <el-table-column width="70" label="序号" type="index">
+          <el-table-column width="50" label="序号" type="index">
           </el-table-column>
-          <el-table-column width="150" prop="job_number" label="工号">
+          <el-table-column prop="job_number" label="工号">
           </el-table-column>
-          <el-table-column width="120" prop="name" label="员工姓名">
+          <el-table-column prop="name" label="员工姓名">
           </el-table-column>
-          <el-table-column width="120" prop="sex.name" label="员工性别">
+          <el-table-column prop="sex.name" label="员工性别">
           </el-table-column>
-          <el-table-column width="120" prop="age" label="员工年龄">
+          <el-table-column  prop="age" label="员工年龄">
           </el-table-column>
-          <el-table-column width="150" prop="phone" label="手机号码">
+          <el-table-column  prop="phone" label="手机号码">
           </el-table-column>
           <el-table-column
-            width="130"
+            
             prop="department[0].title"
             label="所属科室"
           >
           </el-table-column>
-          <el-table-column width="120" prop="auth_grouap[0].title" label="角色">
+          <el-table-column prop="auth_grouap[0].title" label="角色">
           </el-table-column>
           <el-table-column
-            width="120"
+           
             prop="user[0].name"
             label="创建人员"
           ></el-table-column>
@@ -72,7 +70,7 @@
             prop="create_time"
             label="创建时间"
           ></el-table-column>
-          <el-table-column width="120" label="员工状态">
+          <el-table-column  label="员工状态">
             <template slot-scope="scope">
               <el-switch
                 v-model="scope.row.status"
@@ -85,18 +83,19 @@
             </template>
           </el-table-column>
 
-          <el-table-column width="150" fixed="right" label="操作">
+          <el-table-column fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
                 class="staffFotedit"
-                size="mini"
+                size="small"
+                type="text"
                 @click="handleEdit(scope.$index, scope.row, scope.row.id)"
                 >编辑</el-button
               >
               <el-button
                 class="staffFotdel"
-                size="mini"
-                type="danger"
+                size="small"
+                type="text"
                 @click="handleDelete(scope.$index, tables)"
                 >删除</el-button
               >
@@ -175,7 +174,7 @@ export default {
         this.$message({
           type: "error",
           message: res.msg,
-          duration: 1000,
+          duration: 1500,
         });
         this.$router.push("/dashboard");
       }
@@ -222,6 +221,7 @@ export default {
     },
     //员工状态
     changeSwitch(val, row) {
+<<<<<<< HEAD
       console.log(row.status);
       this.$confirm("此操作将修改状态, 是否继续?", "提示", {
         confirmButtonText: "确定",
@@ -248,20 +248,50 @@ export default {
               message: res.msg,
               duration: 1000,
             });
+=======
+      console.log(val,row)
+      let data = {
+        id: row.id,
+        status: row.status,
+      };
+      service.staffState(data).then((res) => {
+        if (res.code == 20010) {
+          this.$confirm("此处操作将修改状态，是否继续?", "提示", {
+            confirmButtonText: "确定",
+            cancelButtonText: "取消",
+            type: "warning",
+          }).then(() => {
+            if (row.status == 1) {
+              this.$message({
+                type: "success",
+                message: res.msg,
+                duration: 1500,
+              });
+            } else {
+              this.$message({
+                type: "error",
+                message: res.msg,
+                duration: 1500,
+              });
+             
+            }
+>>>>>>> 9604a1fd8d1b1c5a06303ad9a6761e7e74ceb38a
           });
-        })
-        .catch(() => {
-          if (row.status == 1) {
-            row.status = 0;
-          } else {
-            row.status = 1;
-          }
+        } else {
+           row.status = 1;
           this.$message({
+<<<<<<< HEAD
             type: "info",
             message: "已取消操作",
             duration: 1000,
+=======
+            type: "error",
+            message: res.msg,
+            duration: 1500,
+>>>>>>> 9604a1fd8d1b1c5a06303ad9a6761e7e74ceb38a
           });
-        });
+        }
+      });
     },
     // 编辑
     handleEdit(index, row, id) {
@@ -290,36 +320,32 @@ export default {
     },
     //删除：
     handleDelete(val, row) {
-      let params = {
-        id: row[val].id,
-      };
-      console.log(params);
-      service.staffDel(params).then((res) => {
-        // this.reload();
-        console.log(res);
-        if (res.code == 20010) {
-          this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-            confirmButtonText: "确定",
-            cancelButtonText: "取消",
-            type: "warning",
-          })
-            .then(() => {
-              this.$message({
-                type: "success",
-                message: "删除成功!",
-                delete: row.splice(val, 1),
-                duration: 1000,
-              });
-            })
-            .catch(() => {
-              this.$message({
-                type: "info",
-                message: "已取消删除",
-                duration: 1000,
-              });
+      this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          let params = {
+            id: row[val].id,
+          };
+          service.staffDel(params).then((res) => {
+            this.$message({
+              type: "success",
+              message: "删除成功!",
+              delete: row.splice(val, 1),
+              duration: 1500,
             });
-        }
-      });
+            this.reload();
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+            duration: 1500,
+          });
+        });
     },
     // 分页
     handleSizeChange(val) {

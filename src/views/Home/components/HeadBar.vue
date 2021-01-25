@@ -1,91 +1,54 @@
 <template>
   <div class="head">
-    <div v-if="!isFold" class="headStart">
-      {{ name }}
-    </div>
-    <div v-else class="headStartFold">
-      <i class="el-icon-platform-eleme"></i>
-    </div>
-
-    <div class="headMiddle">
-      <i class="el-icon-s-fold" @click="handleFold" v-if="!isFold"></i>
-      <i class="el-icon-s-unfold" @click="handleFold" v-else></i>
-      <!-- 面包屑 -->
-      <!-- <el-breadcrumb separator-class="el-icon-arrow-right" class="">
-        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-      </el-breadcrumb> -->
-    </div>
-
+    <div  class="headStart"> {{ name }} </div>
     <div class="headEnd">
-      <el-dropdown>
-        <span>
-          <p class="headEndCtx">
-            <el-avatar :src="avatarUrl" :alt="'头像'"></el-avatar>
-            <span v-html="admin">{{ admin }}</span>
-          </p>
-        </span>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item @click.native="dialogVisible = true"
-            >个人信息</el-dropdown-item
-          >
-          <el-dropdown-item @click.native="logOut">修改密码</el-dropdown-item>
-          <el-dropdown-item @click.native="logOut">消息通知</el-dropdown-item>
-          <el-dropdown-item @click.native="logOut">退出系统</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
+      <el-menu class="el-menu-demo" mode="horizontal" @select="handleSelect" style="border:none;background:none;height:20px;color:#fff">
+       <el-submenu index="2">
+        <template slot="title">{{ admin }}</template>
+         <el-menu-item index="2-1" @click="toMine">个人信息</el-menu-item>
+         <el-menu-item index="2-2" @click="edit">修改密码</el-menu-item>
+         <el-menu-item index="2-1" @click="newaa">消息通知</el-menu-item>
+         <el-menu-item index="2-3" @click="logOut">退出系统</el-menu-item>
+      </el-submenu>
+     </el-menu>
     </div>
-
-    <head-edit
-      :dialogVisible="dialogVisible"
-      :avatarUrl="avatarUrl"
-      @changeAvatar="changeAvatar"
-      @closeDialog="closeDialog"
-    ></head-edit>
-  </div>
+</div>
 </template>
 
-<script lang="ts">
-import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import { State, Getter, Action } from "vuex-class";
+<script >
 import HeadEdit from "./HeadEdit/HeadEdit.vue";
-
-@Component({
-  components: { HeadEdit },
-})
-export default class HeadBar extends Vue {
-  name: string = "兰州大学第二医院";
-  avatarUrl: string = require("@/assets/avatar/avatar.jpg");
-  dialogVisible: boolean = false;
-
-  // vuex数据
-  @State((state) => state.app.isFold) isFold!: boolean;
-  @Action("app/UpdateIsFold") UpdateIsFold!: Function;
-
-  // 计算属性
-  get admin() {
-    return sessionStorage.getItem("name")
-      ? sessionStorage.getItem("name") + "&nbsp&nbsp"
-      : "admin";
-  }
-
-  // 与vue2中的methods部分中的function相似（该处这样实现）
-  public logOut() {
-    this.$router.push({ name: "login" });
-  }
-
-  public handleFold() {
-    this.UpdateIsFold(!this.isFold);
-  }
-
-  // 修改头像（获得修改后头像地址）
-  public changeAvatar(newAvatar) {
-    this.avatarUrl = newAvatar;
-  }
-
-  // 关闭编辑对话框，用于同步父子组件状态
-  public closeDialog(val) {
-    this.dialogVisible = val;
+export default {
+  Component:{HeadEdit},
+  data(){
+    return{
+       activeIndex: '1',
+        activeIndex2: '1',
+      name:'兰州大学第二医院',
+      isFold:true,
+      admin:sessionStorage.getItem('account')
+    }
+  },
+  methods:{
+     handleSelect(key, keyPath) {
+        console.log(key, keyPath);
+      },
+    handleFold(){
+      this.isFold=!this.isFold;
+    },
+    logOut(){
+      this.$router.push({ name: "login" });
+    },
+    toMine(){
+      console.log(1)
+      this.$router.push('Personal')
+    },
+    newaa(){
+      this.$router.push('Notify')
+    },
+    edit(){
+      console.log(1)
+      this.$router.push('/Account')
+    }
   }
 }
 </script>
@@ -128,12 +91,14 @@ export default class HeadBar extends Vue {
   }
 
   &End {
-    width: 210px;
-    border-left: 2px solid black;
-
+   
+    // border-left: 2px solid black;
+      position: absolute;
+    right: 0px;
     &Ctx {
       // color: ;
       display: flex;
+    
       justify-content: center;
       align-items: center;
       font-size: 1.5rem;
@@ -142,18 +107,17 @@ export default class HeadBar extends Vue {
 
       // border: 1px solid yellow;
 
-      img {
-        width: 30px;
-        height: 30px;
-        border-radius: 15px;
-
-        // background-image: linear-gradient(to right,#002140, #002140);
-      }
+    
     }
     span {
+   
       // padding-left: 2px;
       color: #fdfeff;
     }
+   
   }
+   .ul li div{
+      max-height: 30px;
+    }
 }
 </style>
