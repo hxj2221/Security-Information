@@ -10,6 +10,8 @@
           v-model="staffbeldepart"
           placeholder="请选择"
           class="staffSel"
+          clearable
+          @clear="delValue"
         >
           <el-option label="请选择" value=""></el-option>
           <el-option
@@ -24,6 +26,8 @@
           v-model="search"
           class="staffNameipt"
           placeholder="请输入员工姓名"
+          clearable
+          @clear="delValue"
         ></el-input>
         <el-button class="searchbtn" type="primary" icon="el-icon-search" @click="seachAll()"></el-button>
       </div>
@@ -217,6 +221,34 @@ export default {
     },
     //员工状态
     changeSwitch(val, row) {
+<<<<<<< HEAD
+      console.log(row.status);
+      this.$confirm("此操作将修改状态, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          let data = {
+            id: row.id,
+            status: row.status,
+          };
+          console.log(data);
+          service.staffState(data).then((res) => {
+            console.log(res);
+            if (res.code == 20020) {
+              if (row.status == 1) {
+                row.status = 0;
+              } else {
+                row.status = 1;
+              }
+            }
+            this.$message({
+              type: "success",
+              message: res.msg,
+              duration: 1000,
+            });
+=======
       console.log(val,row)
       let data = {
         id: row.id,
@@ -243,13 +275,20 @@ export default {
               });
              
             }
+>>>>>>> 9604a1fd8d1b1c5a06303ad9a6761e7e74ceb38a
           });
         } else {
            row.status = 1;
           this.$message({
+<<<<<<< HEAD
+            type: "info",
+            message: "已取消操作",
+            duration: 1000,
+=======
             type: "error",
             message: res.msg,
             duration: 1500,
+>>>>>>> 9604a1fd8d1b1c5a06303ad9a6761e7e74ceb38a
           });
         }
       });
@@ -310,28 +349,49 @@ export default {
     },
     // 分页
     handleSizeChange(val) {
+      // 如果值多，有分页需要把该值一并传
+      //this.staffbeldepart = "";
       this.num = val;
       let data = {
         pNum: this.num,
         current: this.currentPage,
+        name: this.search,
+        department_id: this.staffbeldepart,
+      };
+      service.stafflist(data).then((res) => {
+        console.log(res);
+        this.tables = res.data[0];
+        this.total = res.data[1].count;
+      });
+    },
+    handleCurrentChange(val) {
+      //this.staffbeldepart = "";
+      this.currentPage = val;
+      console.log(`当前页: ${val}`);
+      let data = {
+        pNum: this.num,
+        current: this.currentPage,
+        name: this.search,
+        department_id: this.staffbeldepart,
       };
       service.stafflist(data).then((res) => {
         console.log(res);
         this.tables = res.data[0];
       });
     },
-    handleCurrentChange(val) {
-      this.currentPage = val;
-      console.log(`当前页: ${val}`);
+    // 清空搜索框时事件
+    delValue() {
       let data = {
-        //  name: this.search,
-        // department_id: this.staffbeldepart,
-        pNum: this.num,
-        current: this.currentPage,
+        name: this.search,
+        department_id: this.staffbeldepart,
+        pNum: this.num, //每页显示数量
+        count: this.pageSize, //每页显示的数量
       };
+      console.log(data);
       service.stafflist(data).then((res) => {
-        console.log(res);
-        this.tables = res.data[0];
+        console.log(res.data);
+        this.tables1 = this.tables = res.data[0];
+        this.total = res.data[1].count;
       });
     },
   },

@@ -2,7 +2,7 @@
   <div>
     <div class="Complaints-background clearfix">
       <!-- 列表页面 -->
-      <Complaintslist v-show="list">
+      <Complaintslist v-if="list">
         <el-button
           type="primary"
           icon="el-icon-circle-plus"
@@ -30,8 +30,9 @@
                     >医患记录</el-button
                   >
                   <el-button type="text" size="small" @click="handle(scope.row)"
-                    >操作</el-button
-                  >
+                    >操作</el-button>
+                    <el-button type="text" v-show="scope.row.state.state_val==-1" size="small" @click="handle(scope.row)"
+                    >修改</el-button>
                 </template>
               </el-table-column>
             </div>
@@ -39,7 +40,7 @@
         </div>
       </Complaintslist>
       <!-- 添加投诉 -->
-      <Addcom v-show="add">
+      <Addcom v-if="add==true">
         <div slot="dialog" class="dialog">
           <el-dialog
             title="医疗投诉处理基本要求"
@@ -98,7 +99,7 @@
         <div slot="conserve"></div>
       </Addcom>
       <!-- 查看 -->
-      <Look v-show="look" :lookdata="lookdata">
+      <Look v-if="look==true" :lookdata="lookdata">
         <el-button
           type="primary"
           icon="el-icon-printer"
@@ -117,7 +118,7 @@
           >返回</el-button
         >
       </Look>
-      <Operation v-show="operations" :operationdata="operationdata" :opdata="opdata">
+      <Operation v-if="operations==true" :operationdata="operationdata" :opdata="opdata" :filelist='filelisttrue'>
         <div slot="records">
           <el-button type="primary" icon="el-icon-edit" class="records" @click="records()"
             >医患记录</el-button
@@ -185,7 +186,8 @@ export default {
       agree: "",
       operations: false,
       drawer: false,
-      event_number:''
+      event_number:'',
+      filelisttrue:[]
     };
   },
 
@@ -240,7 +242,6 @@ export default {
           this.operations = true;
           this.operationdata = index;
           this.opdata = res.data;
-          
         }
        else if(res.code=20401){
           this.$message({
@@ -269,7 +270,6 @@ export default {
       });
     },
     records(index) {
-      console.log(index)
       //跳转到医患记录
       this.$router.push({
             path:'/Connect',
@@ -298,7 +298,6 @@ export default {
         event_number: index.event_number,
       };
       service.componrdetaile(qs.stringify(params)).then((res) => {
-        console.log(res)
          if(res.code==20010){
               this.lookdata = res.data;
           }

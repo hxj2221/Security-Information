@@ -52,4 +52,7 @@
 .powerheadThre .list .editpowlist:hover{
     background-color: #666ee8;
     color: #fff;
+    background: #666ee8;
+    border: 3px solid #666ee8;
+    border-radius: 5px;
 }

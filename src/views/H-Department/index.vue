@@ -6,8 +6,24 @@
       <!-- 搜索部分 -->
       <div class="departIptsech">
         <div class="departIptsech_div">
+<<<<<<< HEAD
+          <el-input
+            v-model="search"
+            class="departNameipt"
+            placeholder="请输入科室名称"
+            clearable
+            @clear="delValue"
+          ></el-input>
+          <el-button
+            class="departNamesch"
+            icon="el-icon-search"
+            @click="departsearch"
+            >搜索</el-button
+          >
+=======
           <el-input v-model="search" class="departNameipt" placeholder="请输入科室名称"></el-input>
           <el-button class="departNamesch" type="primary" icon="el-icon-search" @click="departsearch()"></el-button>
+>>>>>>> 9604a1fd8d1b1c5a06303ad9a6761e7e74ceb38a
         </div>
       </div>
       <!-- <div>
@@ -210,11 +226,32 @@
             }
             this.$message({
               type: "success",
+<<<<<<< HEAD
+              message: res.msg,
+              duration: 1500,
+            });
+          });
+        })
+        .catch(() => {
+          if (row.status == 1) {
+            row.status = 0;
+          } else {
+            row.status = 1;
+          }
+          this.$message({
+            type: "info",
+            message: "已取消操作",
+            duration: 1300,
+          });
+        });
+    },
+=======
               message: "已取消操作",
               duration: 1000,
             });
           });
       },
+>>>>>>> 9604a1fd8d1b1c5a06303ad9a6761e7e74ceb38a
 
       // 序号
       // indexMethod(index) {
@@ -259,6 +296,35 @@
           .catch(() => {
             this.$message({
               type: "success",
+<<<<<<< HEAD
+              message: res.msg,
+              duration: 1500,
+            });
+            setTimeout(() => {
+              this.reload();
+            }, 2000);
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消操作",
+            duration: 1300,
+          });
+        });
+    },
+    delValue() {
+      let param = {
+        name: this.search,
+      };
+      service.departserc(param).then((res) => {
+        this.dormitory = this.tables1 = res.data;
+        console.log(res);
+      });
+    },
+  },
+};
+=======
               message: "已取消操作",
               duration: 1000,
             });
@@ -266,6 +332,7 @@
       },
     },
   };
+>>>>>>> 9604a1fd8d1b1c5a06303ad9a6761e7e74ceb38a
 </script>
 
 <style>

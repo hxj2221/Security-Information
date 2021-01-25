@@ -209,7 +209,7 @@ body{
     position: relative;
 }
 
-.operation .upfile .uploadfiles{
+/* .operation .upfile .uploadfiles{
     background-color: #FFF;
     color: #666666ab;
     border: 1px solid #666666ab;
@@ -217,4 +217,19 @@ body{
     position: absolute;
     bottom: 18%;
     left: 110px;
+} */
+.operation .upfile .uploadfile{
+    position: relative;
 }
+.operation .upfile .uploadfile .upload-demo .el-upload button{
+position: absolute;
+left: 0px;
+top: 5px;
+}
+/* .operation .upfile .uploadfile .upload-demo .el-upload .el-upload__tip{
+    position: absolute;
+    
+    left: 0px;
+    top: 5px;
+    width: 90%;
+    } */

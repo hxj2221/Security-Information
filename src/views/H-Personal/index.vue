@@ -134,7 +134,6 @@
                 :options="options"
                 v-model="selectedOptions"
                 @change="handleChange"
-                :separator="' '"
               ></el-cascader>
             </el-form-item>
           </el-col>
@@ -193,7 +192,7 @@ export default {
       personEmailipt: "",
       personCardipt: "",
       personPositioniPt: "",
-      selectedOptions: "",
+      selectedOptions: [],
       options: regionData,
       personaddreiPt: "",
       jobnum: "",
@@ -260,7 +259,7 @@ export default {
         cardnumber: this.personCardipt,
         position: this.personPositioniPt,
         eraddress: this.personaddreiPt,
-        address: this.address,
+        address: this.selectedOptions,
       };
       console.log(data);
       service.changeinfor(data).then((res) => {

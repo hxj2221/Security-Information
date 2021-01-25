@@ -260,10 +260,8 @@ export default {
         address: [], //地址
       },
       department: "", //所属科室
-
       role_id: "",
       department_id: "",
-
       // 性别循环
       optiongen: [
         {
@@ -279,7 +277,6 @@ export default {
           label: "未知",
         },
       ],
-
       // 科室
       optiondepart: [],
       // 角色
@@ -334,31 +331,27 @@ export default {
         age: this.addStaff.age,
         cardnumber: this.addStaff.cardnumber,
         department_id: this.department_id,
-        role_id: addStaff.auth_grouap,
+        role_id: this.addStaff.auth_grouap,
         status: this.addStaff.status,
         // head_department: this.addStaff.head_department,
       };
       console.log(params);
       service.staffEdit(params).then((res) => {
         console.log(res);
-
         if (res.code == 20010) {
-          const loading = this.$loading({
-            lock: true,
-            text: "保存中",
-            spinner: "el-icon-loading",
-            background: "rgba(0, 0, 0, 0.7)",
+          this.$message({
+            message: "保存成功！",
+            type: "success",
+            duration: 1600,
           });
           setTimeout(() => {
-            loading.close();
             this.reload();
-            this.$parent.fathstaffno();
-          }, 1500);
+          }, 2000);
         } else {
           this.$message({
-            message: res.msg,
+            message: "请注意" + res.msg,
             type: "error",
-            duration: 1000,
+            duration: 1300,
           });
         }
       });

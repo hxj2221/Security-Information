@@ -43,7 +43,13 @@
           </el-col>
           <el-col :span="8">
             <el-form-item label="排序" required>
-              <el-input class="dialog-input-text" type="input" autosize v-model="px" placeholder="请输入内容"></el-input>
+              <el-input
+                class="dialog-input-text"
+                type="input"
+                autosize
+                v-model="px"
+                placeholder="数字越小,排序越高"
+              ></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8"> </el-col>
@@ -116,6 +122,10 @@
         powlist: [],
         px: "",
       };
+    },
+    // 查看权限
+    radiochange() {
+      console.log(this.radio);
     },
     watch: {
       listaddchild(res) {
