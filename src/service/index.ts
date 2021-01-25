@@ -407,4 +407,16 @@ export default {
   DicList: async (params:any) => {
     return await service.get(`${baseUrl}api/Dictionary/gettype`,{params}).then(res => res).catch(err => err)
   },
+  // 天加
+  DicAdd: async (params:any) => {
+    return await service.post(`${baseUrl}api/Dictionary/add`,params).then(res => res).catch(err => err)
+  },
+  // 编辑
+  DicEdit: async (params:any) => {
+    return await service.post(`${baseUrl}api/Dictionary/edit`,params).then(res => res).catch(err => err)
+  },
+  // 删除
+  DicDel: async (params:any) => {
+    return await service.post(`${baseUrl}api/Dictionary/del`,params).then(res => res).catch(err => err)
+  },
 }
