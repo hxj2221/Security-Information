@@ -1,3 +1,4 @@
+import service from '@/service/index';
 <template>
   <div>
     <div class="allManage_cont">
@@ -24,16 +25,15 @@
                 :data="tableData">
                 <el-table-column type="index" label="序号" width="50">
                 </el-table-column>
-                <el-table-column prop="title" label="字段">
+                <el-table-column property="title" label="字段" :show-overflow-tooltip='true'>
                 </el-table-column>
-                <el-table-column prop="update_time" label="创建时间">
+                <el-table-column property="update_time" label="创建时间">
                 </el-table-column>
-                <el-table-column prop="username.name" label="创建人">
+                <el-table-column property="username.name" label="创建人">
                 </el-table-column>
                 <el-table-column label="操作">
                   <template slot-scope="scope">
-                    <el-button class="edit" type="text" size="small" @click="edit(scope.$index, scope.row)">编辑
-                    </el-button>
+                    <el-button class="edit" type="text" size="small" @click="edit(scope.$index, scope.row)">编辑</el-button>
                     <el-button class="del" @click.native.prevent="deleteRow(scope.$index, tableData)" type="text"
                       size="small">删除
                     </el-button>
@@ -62,9 +62,7 @@
 </template>
 
 <script>
-  import '../../css/Dictionaries.css'
-
-  import service from '@/service/index'
+import service from '@/service/index'
   export default {
     components: {},
     props: {
@@ -74,20 +72,14 @@
       return {
         search: '', //搜索
         SideNav: [{
-          name: '投诉方式（来源）',
-          type:1
+          name: '轻重程度',
+          type:6
         }, {
-          name: '事件状态',
-          type:2
+          name: '发生场所',
+          type:7
         }, {
-          name: '与患者关系',
-          type:3
-        }, {
-          name: '投诉类别',
-          type:4
-        }, {
-          name: '事件性质',
-          type:5
+          name: '不良类型',
+          type:8
         }, ],
         tableData:[],
         // 编辑
@@ -95,7 +87,7 @@
           title: '',
         },
         dialogVisible: false,
-        nowIndex: 0,
+        nowIndex:0
       };
     },
     created(){
@@ -108,6 +100,20 @@
       });
     },
     methods: {
+      // 导航
+      change(index,item) {
+        this.nowIndex = index;
+        // console.log(item.type)
+        let params={
+          type:item.type
+        }
+        // console.log(params)
+        service.DicList(params).then(res=>{
+          // console.log(res)
+          this.tableData=res.data
+        })
+
+      },
       // 搜索
       searchCon() {
 
@@ -122,24 +128,10 @@
           return "";
         }
       },
-      // 导航
-      change(index,item) {
-        // console.log(index)
-        this.nowIndex = index;
-        console.log(item.type)
-        let params={
-          type:item.type
-        }
-        service.DicList(params).then(res=>{
-          // console.log(res)
-          this.tableData=res.data
-        })
-
-      },
-      // 编辑
+     // 编辑
       edit(index, row) {
         this.dialogVisible = !this.dialogVisible
-        console.log(row)
+        // console.log(row)
         this.form = row
       },
       // 确认更改
@@ -149,9 +141,9 @@
           type: this.form.type,
           id: this.form.id
         }
-        console.log(params)
+        // console.log(params)
         service.DicEdit(params).then(res => {
-          console.log(res)
+          // console.log(res)
           if (res.code == 20010) {
             this.$message({
               message: '编辑成功',
@@ -184,13 +176,13 @@
       },
       // 删除
       deleteRow(val, row) {
-        console.log(row[val].id)
+        // console.log(row[val].id)
         let params = {
           id: row[val].id
         }
-        console.log(params)
+        // console.log(params)
         service.DicDel(params).then(res => {
-          console.log(res)
+          // console.log(res)
           if (res.code == 20010) {
             this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
                 confirmButtonText: "确定",

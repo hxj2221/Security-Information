@@ -29,7 +29,15 @@
           </el-col>
           <el-col :span="8">
             <el-form-item label="科室排序" required>
+<<<<<<< HEAD
+              <el-input
+                class="dialog-input-text"
+                v-model="departpxipt"
+                placeholder="数字越小,排序越高"
+              ></el-input>
+=======
               <el-input class="dialog-input-text" v-model="departpxipt"></el-input>
+>>>>>>> 9604a1fd8d1b1c5a06303ad9a6761e7e74ceb38a
             </el-form-item>
           </el-col>
           <el-col :span="8">
@@ -97,6 +105,28 @@
         options: [],
         numb: "",
       };
+<<<<<<< HEAD
+      service.departsave(data).then((res) => {
+        console.log(res);
+        if (res.code == 20010) {
+          this.$message({
+            message: "保存成功！",
+            type: "success",
+            duration: 2000,
+          });
+          setTimeout(() => {
+            this.reload();
+          }, 2000);
+        } else {
+          this.$message({
+            message: "请注意" + res.msg,
+            type: "error",
+            duration: 1300,
+          });
+        }
+      });
+      //this.$parent.fathdepartyes();
+=======
     },
     created() {
       service.departadd().then((res) => {
@@ -104,6 +134,7 @@
         this.options = res.data.lists;
         this.numb = res.data.number;
       });
+>>>>>>> 9604a1fd8d1b1c5a06303ad9a6761e7e74ceb38a
     },
     methods: {
       // sel

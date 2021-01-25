@@ -91,11 +91,22 @@
     line-height: 44px;
     cursor: pointer;
 }
+.allManage_cont .left .side_nav .NavbgColor:first-child {
+    background-color: #666EE8;
+    color: #ffffff;
+    border-color: #666EE8;
+}
 
-.allManage_cont .left .side_nav .side_nav_list:hover {
+.allManage_cont .left .side_nav>.NavbgColor {
+    background-color: #666EE8;
+    color: #ffffff !important;
+    border-color: #666EE8;
+}
+
+/* .allManage_cont .left .side_nav .side_nav_list:hover {
     color: #ffffff;
     background-color: #666EE8;
-}
+} */
 
 
 /* 右边内容 */

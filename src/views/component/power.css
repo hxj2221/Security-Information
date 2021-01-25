@@ -62,14 +62,19 @@
     border: 3px solid #666ee8;
     border-radius: 5px;
     position: relative;
+<<<<<<< HEAD
+    left: 65%;
+=======
     left: 69.4%;
+>>>>>>> 9604a1fd8d1b1c5a06303ad9a6761e7e74ceb38a
     width: 92px;
     height: 40px;
 }
 
-.powerAdd :hover {
+
+/* .powerAdd :hover {
     color: none;
-}
+} */
 
 .powerWidhr {
     margin: 0 auto;

@@ -410,13 +410,33 @@ export default {
   fileupload: async (data: object) => {
     return await service.post(`${baseUrl}api/file/addfile`, data).then(res => res).catch(err => err)
   },
+  // 文件库文件下载
+  filedown: async (params: any) => {
+    return await service.get(`${baseUrl}api/file/download`, { params }).then(res => res).catch(err => err)
+  },
+  // 文件库删除
+  filedel: async (params: any) => {
+    return await service.post(`${baseUrl}api/file/delfile`, params).then(res => res).catch(err => err)
+  },
   // img
   getupimg: async (data: object) => {
-    return await service.post(`${baseUrl}api/srk/create_base64_file`, data).then(res => res).catch(err => err)
+    return await service.post(`${baseUrl}api/srk/create_base64_file`, { data }).then(res => res).catch(err => err)
   },
   // 字典管理
   // 列表
   DicList: async (params:any) => {
     return await service.get(`${baseUrl}api/Dictionary/gettype`,{params}).then(res => res).catch(err => err)
+  },
+  // 天加
+  DicAdd: async (params:any) => {
+    return await service.post(`${baseUrl}api/Dictionary/add`,params).then(res => res).catch(err => err)
+  },
+  // 编辑
+  DicEdit: async (params:any) => {
+    return await service.post(`${baseUrl}api/Dictionary/edit`,params).then(res => res).catch(err => err)
+  },
+  // 删除
+  DicDel: async (params:any) => {
+    return await service.post(`${baseUrl}api/Dictionary/del`,params).then(res => res).catch(err => err)
   },
 }

@@ -69,7 +69,7 @@
                 type="input"
                 autosize
                 v-model="px"
-                placeholder="请输入内容"
+                placeholder="数字越小,排序越高"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -202,18 +202,21 @@ export default {
       };
       service.roleadd(data).then((res) => {
         console.log(res);
-        if (res.code == "20010") {
-          const loading = this.$loading({
-            lock: true,
-            text: "保存中",
-            spinner: "el-icon-loading",
-            background: "rgba(0, 0, 0, 0.7)",
+        if (res.code == 20010) {
+          this.$message({
+            message: "保存成功！",
+            type: "success",
+            duration: 2000,
           });
           setTimeout(() => {
-            loading.close();
             this.reload();
           }, 2000);
-          this.$parent.fathroleyes();
+        } else {
+          this.$message({
+            message: "请注意" + res.msg,
+            type: "error",
+            duration: 1300,
+          });
         }
       });
     },
