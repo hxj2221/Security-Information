@@ -53,16 +53,10 @@
       <!-- 分页 -->
       <div class="departpag">
         <div class="block">
-          <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page="currentPage"
-            :page-sizes="nums"
-            :page-size="num"
-            layout="total, sizes, prev, pager, next, jumper"
-            :total="total"
-          >
-          </el-pagination>
+         <el-pagination @size-change="handleSizeChange" @current-change="currentChage" :current-page="currentPage4"
+          :page-sizes="pageNumList" :page-size="100" layout="total, sizes, prev, pager, next, jumper"
+          :total="pageCount">
+        </el-pagination>
         </div>
       </div>
     </div>
@@ -90,7 +84,6 @@
     data() {
       return {
         departvue: true,
-        currentPage: 1,
         adddep: false,
         editdep: false,
         currentRow: [], //选中的值
@@ -98,6 +91,10 @@
         search: "",
         departchildedit: [],
         tables1: [],
+        currentPage4: 1, //分页
+        pageCount: 0, //总数量
+        pageNumList: [8, 10, 20], //显示个数选择器
+        pageSize: 8,
       };
     },
     created() {
@@ -114,8 +111,17 @@
         this.dormitory = res.data;
       });
     },
-    computed: {},
     methods: {
+       // 分页
+      // 当前页
+      currentChage(val) {
+        console.log(val)
+      },
+      // 每页条数
+      handleSizeChange(val) {
+        console.log(val)
+        }
+      },
       onchangeImgFun(e) {
         var file = e.target.files[0];
         // 获取图片的大小，做大小限制有用
@@ -163,7 +169,7 @@
         };
         service.departserc(param).then((res) => {
           this.dormitory = this.tables1 = res.data;
-          console.log(res);
+          // console.log(res);
         });
       },
       // 子
@@ -215,11 +221,6 @@
             });
           });
       },
-
-      // 序号
-      // indexMethod(index) {
-      //   return index * 1;
-      // },
       // 编辑
       handleEdit(id) {
         this.editdep = true;
@@ -264,7 +265,6 @@
             });
           });
       },
-    },
   };
 </script>
 

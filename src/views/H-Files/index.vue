@@ -69,7 +69,7 @@
                 >下载</el-button
               >
               <el-button
-                style="color: #1e1e1e"
+                style="color: #ff0000"
                 @click="deleteRow(scope.$index, scope.row.id)"
                 type="text"
                 size="small"
@@ -83,16 +83,10 @@
       <!-- 分页 -->
       <div class="staffpag">
         <div class="block">
-          <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page="currentPage"
-            :page-sizes="[8, 10, 20]"
-            :page-size="8"
-            layout="total, sizes, prev, pager, next, jumper"
-            :total="tableData.length"
-          >
-          </el-pagination>
+          <el-pagination @size-change="handleSizeChange" @current-change="currentChage" :current-page="currentPage4"
+          :page-sizes="pageNumList" :page-size="100" layout="total, sizes, prev, pager, next, jumper"
+          :total="pageCount">
+        </el-pagination>
         </div>
       </div>
     </div>
@@ -178,7 +172,10 @@ export default {
   data() {
     return {
       fileUrl: "",
-      currentPage: 1, //页数
+      currentPage4: 1, //分页
+      pageCount: 0, //总数量
+      pageNumList: [8, 10, 20], //显示个数选择器
+      pageSize: 8,
       dialogVisible: false, //文件上传弹框
       ruleForm: {}, //文件上传内容
       name: "",
@@ -305,7 +302,7 @@ export default {
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
     },
-    handleCurrentChange(val) {
+    currentChage(val) {
       console.log(`当前页: ${val}`);
     },
   },

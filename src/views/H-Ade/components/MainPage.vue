@@ -63,7 +63,7 @@
       </el-table-column>
       <el-table-column prop="create_time" label="上报时间" width="180">
       </el-table-column>
-      <el-table-column prop="department.title" label="患者科室">
+      <el-table-column prop="department.title" label="患者科室" :show-overflow-tooltip='true'>
       </el-table-column>
       <el-table-column prop="create_uid" label="上报人">
       </el-table-column>

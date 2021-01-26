@@ -89,7 +89,7 @@
     text-align: center;
 }
 
-.filelist .TableContent .el-table .el-table__body-wrapper .el-table__body .el-table__row td {
+.filelist .TableContent .el-table td, .el-table th {
     text-align: center;
 }
 
