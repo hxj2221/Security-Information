@@ -14,27 +14,47 @@
     padding-left: 5px;
     border-left: 5px solid #666ee8;
     color: #000;
+    font-size: 24px;
+    font-weight: normal;
 }
 
 .userthrehead>ul{
     list-style: none;
     display: flex;
     font-size: 14px;
-    border:0.5px solid #cccccc;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    
 }
 .userthrehead>ul>li{
     padding: 12px 20px;
+    border:0.5px solid #cccccc;
+    cursor: pointer;
 }
 
+.userthrehead>ul>.userthregr{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
 .userthrehead>ul>.userthreb{
-    border-left: 1px solid #cccccc;
-    border-right: 1px solid #cccccc;
+    border-left: none;
+    border-right: none;
 }
-
+.userthrehead>ul>.userthrec{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+/* 鼠标经过 */
+.userthrehead>ul>.userthregr:hover{
+    background: #666ee8;
+    color: #fff;
+}
+.userthrehead>ul>.userthreb:hover{
+    background: #666ee8;
+    color: #fff;
+}
+.userthrehead>ul>.userthrec:hover{
+    background: #666ee8;
+    color: #fff;
+}
 
 .userthreWidhr {
     width: 96%;
