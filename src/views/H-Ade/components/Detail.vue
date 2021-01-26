@@ -4,7 +4,7 @@
       <div class="top">
         <span class="left">投诉案件调查表</span>
         <div class="right">
-          <i class="el-icon-printer print"><span style="padding-left:3px">打印记录表</span></i>
+          <el-button type="primary" icon="iconfont el-icon-hospital-passworddayin" class="print">打印记录表</el-button>
           <el-button type="primary" icon="iconfont el-icon-hospital-passwordai207" class="back" @click="back">返回
           </el-button>
         </div>
@@ -22,7 +22,7 @@
               </div>
             </el-col>
             <el-col :span="6">
-              <div style="height:30px" class="grid-content bg-purple-light"></div>
+              <div class="grid-content bg-purple-light"></div>
             </el-col>
             <el-col :span="6">
               <div class="grid-content bg-purple">
@@ -39,7 +39,7 @@
               </div>
             </el-col>
             <el-col :span="6">
-              <div style="height:30px" class="grid-content bg-purple-light"></div>
+              <div class="grid-content bg-purple-light"></div>
             </el-col>
             <el-col :span="6">
               <div class="grid-content bg-purple">
@@ -55,7 +55,7 @@
               </div>
             </el-col>
             <el-col :span="6">
-              <div style="height:30px" class="grid-content bg-purple-light"></div>
+              <div class="grid-content bg-purple-light"></div>
             </el-col>
             <el-col :span="6">
               <div class="grid-content bg-purple">
@@ -69,7 +69,16 @@
       </div>
       <!-- 基本信息 -->
       <div class="cent_info">
-        <p>基本信息</p>
+        <div style="padding-bottom:10px;padding-left:57px">
+          <el-row type="flex" class="row-bg">
+          <el-col :span="3">
+            <div class="grid-content bg-purple">
+              <span><b>基本信息</b></span>
+            </div>
+          </el-col>
+        </el-row>
+        </div>
+        
         <el-row class="tab">
           <el-col :span="4">
             <div class="grid-content bg-purple">
@@ -247,7 +256,16 @@
       </div>
       <!-- 关联患者信息 -->
       <div class="cent_info">
-        <p>关联患者信息</p>
+        <div style="padding-bottom:10px;padding-left:57px">
+          <el-row type="flex" class="row-bg">
+          <el-col :span="3">
+            <div class="grid-content bg-purple">
+              <span><b>关联患者信息</b></span>
+            </div>
+          </el-col>
+        </el-row>
+        </div>
+        
         <el-row class="tab">
           <el-col :span="4">
             <div class="grid-content bg-purple">
