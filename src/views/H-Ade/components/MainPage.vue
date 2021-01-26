@@ -67,7 +67,7 @@
         </el-table-column>
         <el-table-column prop="create_uid" label="上报人">
         </el-table-column>
-        <el-table-column fixed="right" label="操作">
+        <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button style="color:#666ee8" @click="handleClick(scope.$index,scope.row)" type="text" size="small">查看
             </el-button>
