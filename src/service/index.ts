@@ -427,7 +427,7 @@ export default {
   DicList: async (params:any) => {
     return await service.get(`${baseUrl}api/Dictionary/gettype`,{params}).then(res => res).catch(err => err)
   },
-  // 天加
+  // 添加
   DicAdd: async (params:any) => {
     return await service.post(`${baseUrl}api/Dictionary/add`,params).then(res => res).catch(err => err)
   },
