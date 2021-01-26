@@ -17,10 +17,6 @@
       <Other v-show="isShow3"></Other>
       <!-- 分页 -->
       <div class="block">
-        <el-pagination @size-change="handleSizeChange" @current-change="currentChage" :current-page="currentPage4"
-          :page-sizes="pageNumList" :page-size="100" layout="total, sizes, prev, pager, next, jumper"
-          :total="pageCount">
-        </el-pagination>
       </div>
       <!-- 新增 -->
       <el-dialog class="newly" title="新增字段" :visible.sync="dialogFormVisible">
@@ -75,10 +71,6 @@
           },
         ],
         nowIndex: 0,
-        currentPage4: 1, //分页
-        pageNumList: [8, 10, 20], //页数
-        pageCount: 0, //总数量
-        pageSize: 8, //默认条数
         // 新增
         form: {
           title: '',
@@ -135,15 +127,6 @@
         this.isShow3 = true
       },
       // 表格操作
-      // 分页
-      // 每页显示条数
-      handleSizeChange(val) {
-        console.log(val)
-      },
-      // 页面跳转
-      currentChage(val) {
-        console.log(val)
-      },
       // 新增
       increase() {
         this.dialogFormVisible = !this.dialogFormVisible

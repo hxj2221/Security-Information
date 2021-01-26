@@ -53,7 +53,7 @@
     },
     created() {
       service.AdeList().then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.cede == 20401) {
           this.$message({
             message: "请重新登陆",
