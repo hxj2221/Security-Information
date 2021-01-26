@@ -24,6 +24,7 @@
 
 .filelist .head .title {
     font-size: 24px;
+    font-weight: normal;
     color: #333333;
     padding-left: 5px;
     border-left: 5px solid #666ee8;
@@ -123,7 +124,7 @@
 .newlyFiles .head {
     display: flex;
     justify-content: space-between;
-    height: 83px;
+    height: 91px;
     align-items: center;
     padding: 0 30px;
     border-bottom: 2px solid #f2f2f2;
@@ -131,9 +132,10 @@
 
 .newlyFiles .head .title {
     font-size: 24px;
+    font-weight: normal;
     color: #333333;
-    padding-left: 5px;
     border-left: 5px solid #666ee8;
+    padding-left: 5px;
 }
 
 .newlyFiles .head .push_btn {
@@ -143,27 +145,16 @@
 }
 
 .newlyFiles .head .push_btn .newclassify {
-    background-color: #666ee8;
-    border-radius: 5px;
-    border-color: #666ee8;
-    width: 92px;
-    height: 40px;
-}
-.newlyFiles .head .push_btn .newclassify>i{
-    margin-left: -14px;
+    border: 3px solid #666ee8;
+    background: #666ee8;
 }
 
 .newlyFiles .head .push_btn .back {
     color: #666ee8;
     border: 1px solid #666ee8;
-    display: inline-block;
-    border-radius: 5px;
     margin-left: 30px;
-    font-weight: 700;
     background: none;
-    /* width: 92px; */
-    height: 40px;
-    text-align: center;
+    padding: 13px 20px;
 }
 
 
