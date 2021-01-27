@@ -33,7 +33,8 @@
       <el-table
         :data="dormitory"
         class="departtable"
-        max-height="530"
+        max-height="662"
+        row-key="id"
         :header-cell-style="{ background: '#c2c5f6', color: '#000' }"
         :cell-style="{ background: '#fff' }"
         :tree-props="{
@@ -43,8 +44,14 @@
       >
         <el-table-column width="50" label="序号" type="index">
         </el-table-column>
-        <el-table-column prop="title" label="科室名称" :show-overflow-tooltip='true'> </el-table-column>
-        <el-table-column prop="number" label="科室编号" width="150"> </el-table-column>
+        <el-table-column
+          prop="title"
+          label="科室名称"
+          :show-overflow-tooltip="true"
+        >
+        </el-table-column>
+        <el-table-column prop="number" label="科室编号" width="150">
+        </el-table-column>
         <el-table-column prop="usernumber" label="员工数量"> </el-table-column>
         <el-table-column prop="head_department.name" label="负责人">
         </el-table-column>
@@ -136,6 +143,7 @@ export default {
         this.$router.push("/dashboard");
       }
       this.dormitory = res.data;
+      console.log(this.dormitory);
     });
   },
   computed: {},
@@ -241,9 +249,9 @@ export default {
     },
 
     // 序号
-    // indexMethod(index) {
-    //   return index * 1;
-    // },
+    indexMethod(index) {
+      return index * 1;
+    },
     // 编辑
     handleEdit(id) {
       this.editdep = true;
