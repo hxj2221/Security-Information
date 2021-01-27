@@ -57,7 +57,7 @@
             label="所属科室"
           >
           </el-table-column>
-          <el-table-column prop="auth_grouap[0].title" label="角色">
+          <el-table-column prop="auth_grouap" label="角色">
           </el-table-column>
           <el-table-column
            
@@ -169,7 +169,6 @@ export default {
     });
 
     service.stafflist().then((res) => {
-      console.log(res);
       if (res.code == 20403) {
         this.$message({
           type: "error",
@@ -180,8 +179,8 @@ export default {
       }
       this.tables = res.data[0];
       this.total = res.data[1].count;
-      for (let i = 1; i < res.data.length; i++) {
-        this.id = res.data[i].id;
+      for (let i = 1; i < this.tables.length; i++) {
+        this.id = this.tables[i].id;
       }
     });
   },
