@@ -71,7 +71,6 @@
             title="添加权限"
             :visible.sync="dialogVisible"
             width="width"
-            :before-close="dialogeditright"
             :close-on-click-modal="false"
           >
             <el-form label-width="80px" ref="editForm">
@@ -268,6 +267,10 @@ export default {
     });
   },
   methods: {
+    // 新增
+    fathpowadd(){
+      this.dialogVisible=true
+    },
     // 编辑/添加权限下拉值
     selchang() {
       console.log(this.editselvalue);
@@ -302,21 +305,6 @@ export default {
       });
       //this.dialogVisible = false;
       // }
-    },
-    // 加载数据
-    created() {
-      service.rulelist().then((res) => {
-        console.log(res);
-        if (res.code == 20403) {
-          this.$message({
-            type: "error",
-            message: res.msg,
-            duration: 1000,
-          });
-          this.$router.push("/dashboard");
-        }
-        console.log(res);
-      });
     },
     // 编辑权限
     dialogBeforeCl() {
@@ -440,6 +428,10 @@ export default {
           });
         });
       console.log(id);
+    },
+    // 添加子级
+    handleClick(){
+
     },
     // 表头颜色
     getRowClass({ rowIndex }) {
