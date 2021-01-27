@@ -18,13 +18,7 @@
           </el-col>
           <el-col :span="8">
             <el-form-item label="年龄">
-              <el-input placeholder="请输入内容" v-model="personAgeipt" class="">
-                <template slot="append">
-                  <el-select type="input" style="width: 90px" autosize v-model="personagesel" placeholder="请选择">
-                    <el-option v-for="item in optionages" :key="item.value" :label="item.label" :value="item.value">
-                    </el-option>
-                  </el-select>
-                </template>
+              <el-input placeholder="请输入内容" v-model="personAgeipt">
               </el-input>
             </el-form-item>
           </el-col>
