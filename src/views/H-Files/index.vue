@@ -22,24 +22,46 @@
       </div>
       <!-- 搜索 -->
       <div class="search">
-        <el-form class="search_form" ref="form" :model="form">
+        <el-form class="search_form" ref="form">
           <el-form-item class="classify" label="文件分类">
-            <el-select v-model="form.region" placeholder="全部">
-              <el-option
-                v-for="item in form.options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              >
-              </el-option>
+            <el-select
+              @change="searchselchang"
+              v-model="selregion"
+              placeholder="请选择"
+              clearable
+              @clear="delValue"
+            >
+              <!-- <el-option label="请选择" value=""></el-option> -->
+              <template v-for="v in options">
+                <el-option
+                  :key="v.id"
+                  :label="v.class_name"
+                  :value="v.id"
+                ></el-option>
+                <template v-if="v._child">
+                  <el-option
+                    v-for="vv in v._child"
+                    :key="vv.id"
+                    :label="'|——' + vv.class_name"
+                    :value="vv.id"
+                  >
+                  </el-option>
+                </template>
+              </template>
             </el-select>
           </el-form-item>
           <el-input
             placeholder="请输入内容"
-            v-model="form.input"
+            v-model="searchipt"
             class="input-with-select"
+            clearable
+            @clear="delValue"
           >
-            <el-button slot="append" icon="el-icon-search"></el-button>
+            <el-button
+              slot="append"
+              icon="el-icon-search"
+              @click="filesearch"
+            ></el-button>
           </el-input>
         </el-form>
       </div>
@@ -70,7 +92,7 @@
               >
               <el-button
                 style="color: #1e1e1e"
-                @click="deleteRow(scope.$index, scope.row.id)"
+                @click="deleteRow(scope.row.id)"
                 type="text"
                 size="small"
               >
@@ -79,20 +101,20 @@
             </template>
           </el-table-column>
         </el-table>
-      </div>
-      <!-- 分页 -->
-      <div class="staffpag">
-        <div class="block">
-          <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page="currentPage"
-            :page-sizes="[8, 10, 20]"
-            :page-size="8"
-            layout="total, sizes, prev, pager, next, jumper"
-            :total="tableData.length"
-          >
-          </el-pagination>
+        <!-- 分页 -->
+        <div class="staffpag">
+          <div class="block">
+            <el-pagination
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+              :current-page="currentPage"
+              :page-sizes="nums"
+              :page-size="num"
+              layout="total, sizes, prev, pager, next, jumper"
+              :total="total"
+            >
+            </el-pagination>
+          </div>
         </div>
       </div>
     </div>
@@ -100,17 +122,13 @@
     <add-files v-show="addIsShow" @newly="newclassify()"></add-files>
     <!-- 上传 -->
     <el-dialog title="上传文件" :visible.sync="dialogVisible">
-      <el-form :model="ruleForm" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="文件标题" prop="name">
-          <el-input v-model="ruleForm.name"></el-input>
-        </el-form-item>
-        <el-form-item label="文件分类" prop="region">
+      <el-form label-width="100px" class="demo-ruleForm">
+        <el-form-item label="文件分类">
           <el-select
             @change="selchang"
             v-model="editselvalue"
             placeholder="请选择"
           >
-            <el-option label="作为顶级" :value="0"></el-option>
             <template v-for="v in editseldata">
               <el-option
                 :key="v.id"
@@ -129,46 +147,45 @@
             </template>
           </el-select>
         </el-form-item>
-        <form
-          action="http://bt1.wlqqlp.com:8082/api/file/addfile"
-          enctype="multipart/form-data"
-          method="post"
-        >
-          <!-- 文件名称: <input type="text" name="file_name" /><br />
-          文件描述:<input type="text" name="file_describe" /><br />
-          文件分类:<input type="text" name="class_id" /><br /> -->
-          <input type="file" name="file" />
-          <!-- <input type="submit" value="上传" /> -->
-
-          <el-form-item label="文件描述" prop="desc">
-            <el-input type="textarea" v-model="ruleForm.desc"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <input type="submit" value="上传" @click="submitForm" />
-            <!-- <el-button type="primary" @click="submitForm">上传</el-button> -->
-            <el-button @click="resetForm">取消</el-button>
-          </el-form-item>
-        </form>
-
-        <form
-          action="http://bt1.wlqqlp.com:8082/api/file/addfile"
-          enctype="multipart/form-data"
-          method="post"
-        >
-          文件名称: <input type="text" name="file_name" /><br />
-          文件描述:<input type="text" name="file_describe" /><br />
-          文件分类:<input type="text" name="class_id" /><br />
-          <input type="file" name="file" />
-          <input type="submit" value="上传" />
-        </form>
+        <el-form-item label="文件标题">
+          <el-input v-model="name"></el-input>
+        </el-form-item>
+        <el-form-item label="文件描述">
+          <el-input
+            type="textarea"
+            v-model="filedescribe"
+            maxlength="50"
+            placeholder="请输入文件描述"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="上传附件：" class="uploadfile">
+          <el-upload
+            action="http://bt1.wlqqlp.com:8082/api/file/event_base64_uploadfiles"
+            :limit="1"
+            :multiple="false"
+            :file-list="listsss"
+            :on-change="handleChange"
+            :on-exceed="exceed"
+            :auto-upload="false"
+          >
+            <el-button slot="trigger" size="small" type="primary"
+              >选取文件</el-button
+            >
+            <div slot="tip">未知</div>
+          </el-upload>
+        </el-form-item>
       </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="Close">取 消</el-button>
+        <el-button type="primary" @click="upfilesubmit">确 定</el-button>
+      </span>
     </el-dialog>
   </div>
 </template>
 <script>
-import "./css/Files.css";
 import AddFiles from "./components/AddFiles";
 import service from "@/service/index";
+
 export default {
   inject: ["reload"],
   components: {
@@ -177,31 +194,39 @@ export default {
   props: {},
   data() {
     return {
-      fileUrl: "",
-      currentPage: 1, //页数
       dialogVisible: false, //文件上传弹框
       ruleForm: {}, //文件上传内容
       name: "",
-      region: "",
+      selregion: "",
+      listsss: [], //未上传文件列表
+      filedescribe: "",
       desc: "",
       editseldata: [],
-      editselvalue: 0,
+      editselvalue: "",
       fileList: [],
-      persondata: [],
-      form: {
-        input: "",
-        region: "",
-      },
       tableData: [],
       filesIsShow: true,
       addIsShow: false,
+      searchipt: "",
+      options: [],
+      tables1: [],
+      currentPage: 1,
+      total: 0, //总条数
+      page: 1, //初始显示第几页
+      pageSize: 1, //每页显示多少数据
+      nums: [8, 10, 20],
+      num: 8,
     };
   },
   created() {
     service.filelist().then((res) => {
       console.log(res);
       this.tableData = res.data;
+      this.options = res.tree;
+      this.total = res.allNews;
     });
+    let token = sessionStorage.getItem("token");
+    console.log(token);
     service.filetree().then((res) => {
       console.log(res);
       this.editseldata = res.data;
@@ -216,32 +241,82 @@ export default {
         return "";
       }
     },
-    submitForm() {
+    // 搜索
+    filesearch() {
       let data = {
-        file_name: this.name,
-        file_describe: this.desc,
-        class_id: this.editselvalue,
+        file_name: this.searchipt,
+        class_id: this.selregion,
       };
-      service.fileupload(data).then((res) => {
+      console.log(data);
+      service.filelist(data).then((res) => {
         console.log(res);
+        this.tables1 = this.tableData = res.data;
+        this.total = res.allNews;
       });
     },
-    resetForm() {},
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
+    searchselchang() {
+      console.log(this.selregion);
     },
-    handlePreview(file) {
-      console.log(file);
+    // 上传文件显示
+    uploadclassify() {
+      this.dialogVisible = true;
     },
-    beforeRemove(file, fileList) {
-      return this.$confirm(`确定移除 ${file.name}？`);
+    // 上传文件取消
+    Close() {
+      this.dialogVisible = false;
     },
-    handleExceed(files, fileList) {
-      this.$message.warning(
-        `当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${
-          files.length + fileList.length
-        } 个文件`
-      );
+    handleChange(file, fileList) {
+      this.file = fileList[0];
+    },
+    //超出限制的上传文件提示
+    exceed() {
+      this.$message({
+        message: "单次只能上传一个文件",
+        type: "error",
+        duration: 1000,
+      });
+    },
+    // 上传
+    upfilesubmit() {
+      this.getBase64(this.file.raw).then((res) => {
+        let data = {
+          file_name: this.name,
+          file_describe: this.filedescribe,
+          class_id: this.editselvalue,
+          base64_file: res,
+        };
+        console.log(data);
+        service.fileupload(data).then((res) => {
+          console.log(res);
+          if (res.code == 20010) {
+            this.$message({
+              message: res.msg,
+              type: "success",
+              duration: 1300,
+            });
+            this.reload();
+          }
+        });
+      });
+    },
+    //文件转换64
+    getBase64(file) {
+      return new Promise((resolve, reject) => {
+        let reader = new FileReader();
+        let fileResult = "";
+        reader.readAsDataURL(file); //开始转
+        reader.onload = function () {
+          fileResult = reader.result;
+        }; //转 失败
+        reader.onerror = function (error) {
+          reject(error);
+          console.log(reject);
+        }; //转 结束  咱就 resolve 出去
+        reader.onloadend = function () {
+          resolve(fileResult);
+          console.log(fileResult);
+        };
+      });
     },
     selchang() {
       console.log(this.editselvalue);
@@ -264,38 +339,93 @@ export default {
     },
     // 下载
     handleClick(id) {
-      console.log(id);
-      let param = {
-        id: id,
-      };
-      service.filedown(param).then((res) => {
-        let a = document.createElement("a"); //创建a标签
-        a.href = `http://bt1.wlqqlp.com:8082/api/file/download?id=` + id; //通过a与id去下载
-        document.body.appendChild(a); //添加a
-        a.click(); //下载
-        URL.revokeObjectURL(a.href); // 释放URL 对象
-        document.body.removeChild(a); // 删除 a 标签
-        // const data = res; // 后端打回来的流文件
-        // // 第一个参数是流文件 ，第二是格式， 这个在后端会提前声明的
-        // console.log(data);
-        // const url = window.URL.createObjectURL(
-        //   new Blob([data], {
-        //     type:
-        //       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        //   })
-        // );
-        // const link = document.createElement("a");
-        // link.style.display = "none";
-        // link.href = url;
-        // document.body.appendChild(link);
-        // link.click();
-        // document.body.removeChild(link);
+      this.axios({
+        methods: "post",
+        url: "http://bt1.wlqqlp.com:8082/api/file/download",
+        data: {
+          id: id,
+        },
+        responseType: "arraybuffer",
+      }).then((response) => {
+        // 用返回二进制数据创建一个Blob实例
+        let blob = new Blob([response.data], {
+          type:
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        }); // for .xlsx files
+
+        // 通过URL.createObjectURL生成文件路径
+        let url = window.URL.createObjectURL(blob);
+
+        // 创建a标签
+        let ele = document.createElement("a");
+        ele.style.display = "none";
+
+        // 设置href属性为文件路径，download属性可以设置文件名称
+        ele.href = url;
+        ele.download = "测试文件";
+
+        // 将a标签添加到页面并模拟点击
+        document.querySelectorAll("body")[0].appendChild(ele);
+        ele.click();
+
+        // 移除a标签
+        ele.remove();
       });
+      console.log(id);
+      // let param = {
+      //   id: id,
+      // };
+      // service.filedown(param).then((res) => {
+      //   console.log(res);
+      //   // const link = document.createElement("a");
+      //   // let blob = new Blob([res], {
+      //   //   type: "application/octet-stream",
+      //   // }); // res指的是后端返回的文件流
+      //   // link.style.display = "none";
+      //   // link.href = URL.createObjectURL(blob);
+      //   // // link.download = res.headers['content-disposition'] //下载后文件名
+      //   // // link.download = "attendance"; //下载的文件名
+      //   // document.body.appendChild(link);
+      //   // link.click();
+      //   // document.body.removeChild(link);
+      //   var blob = new Blob([res], {
+      //     type: "application/octet-stream",
+      //   }); //接收的是blob，若接收的是文件流，需要转化
+      //   if (typeof window.chrome !== "undefined") {
+      //     // Chrome version
+      //     var link = document.createElement("a");
+      //     link.href = window.URL.createObjectURL(blob);
+      //     //link.download = filename;
+      //     link.click();
+      //   } else if (typeof window.navigator.msSaveBlob !== "undefined") {
+      //     // IE version
+      //     var blob = new Blob([res], { type: "application/force-download" });
+      //     window.navigator.msSaveBlob(blob);
+      //   } else {
+      //     // Firefox version
+      //     var file = new File([res], {
+      //       type: "application/force-download",
+      //     });
+      //     window.open(URL.createObjectURL(file));
+      //   }
+
+      //   // const sjres = res;
+      //   // var blob = new Blob([sjres]);
+      //   // var url = window.URL.createObjectURL(blob);
+      //   // var a = document.createElement("a");
+      //   // a.href = url;
+      //   // a.click();
+      //   // this.isDisabled = false;
+      //   // 不安全，无法带token
+      //   // let a = document.createElement("a"); //创建a标签
+      //   // a.href = `http://bt1.wlqqlp.com:8082/api/file/download?id=` + id; //通过a与id去下载
+      //   // document.body.appendChild(a); //添加a
+      //   // a.click(); //下载
+      //   // URL.revokeObjectURL(a.href); // 释放URL 对象
+      //   // document.body.removeChild(a); // 删除 a 标签
+      // });
     },
-    // 上传文件
-    uploadclassify() {
-      this.dialogVisible = true;
-    },
+
     // 新增分类
     newclassify() {
       this.filesIsShow = !this.filesIsShow;
@@ -303,13 +433,55 @@ export default {
     },
     // 分页
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
+      // 如果值多，有分页需要把该值一并传
+      //this.staffbeldepart = "";
+      this.num = val;
+      let data = {
+        pageSize: this.num,
+        pageNum: this.currentPage,
+        file_name: this.searchipt,
+        class_id: this.selregion,
+      };
+      console.log(data);
+      service.filelist(data).then((res) => {
+        console.log(res);
+        this.tables1 = this.tableData = res.data;
+        this.total = res.allNews;
+      });
     },
     handleCurrentChange(val) {
+      //this.staffbeldepart = "";
+      this.currentPage = val;
       console.log(`当前页: ${val}`);
+      let data = {
+        pageSize: this.num,
+        pageNum: this.currentPage,
+        file_name: this.searchipt,
+        class_id: this.selregion,
+      };
+      console.log(data);
+      service.filelist(data).then((res) => {
+        console.log(res);
+        this.tables1 = this.tableData = res.data;
+        this.total = res.allNews;
+      });
+    },
+    // 清空
+    delValue() {
+      let data = {
+        file_name: "",
+        pageSize: this.num,
+        pageNum: this.currentPage,
+      };
+      service.filelist(data).then((res) => {
+        this.tables = this.tableData = res.data;
+        console.log(res);
+        this.total = res.allNews;
+      });
     },
   },
 };
 </script>
 <style>
+@import "./css/Files.css";
 </style>

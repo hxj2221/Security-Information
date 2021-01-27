@@ -24,7 +24,6 @@
     padding: 0 30px;
 }
 
-
 .roleaddSpan {
     height: 28px;
     padding-left: 5px;
@@ -62,7 +61,6 @@
     border-color: #666ee8;
 }
 
-
 .addmain {
     width: 94%;
     margin: 20px 70px;
@@ -97,17 +95,18 @@
     top: 67%
 }
 
-.role_div{
+.role_div {
     width: 19%;
     padding: 10px 0;
 }
+
 
 /*  */
 
 .roleFs {
     /* display: flex; */
     /* margin-left: 9%; */
-    /* height: 80%; */
+    height: 80%;
     /* margin-top: 2%; */
     width: 65%;
     margin-left: 70px;

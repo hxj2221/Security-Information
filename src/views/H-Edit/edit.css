@@ -3,6 +3,22 @@
     padding: 0;
 }
 
+.departEdit {
+    color: #666ee8;
+}
+
+.departEdit span {
+    margin-left: -30%;
+}
+
+.departDel span {
+    margin-left: -30%;
+}
+
+.departDel {
+    color: #ff0000;
+}
+
 .H-edit {
     width: 95%;
     margin: 0 auto;
@@ -11,7 +27,8 @@
     border-radius: 5px;
     box-shadow: 0 0 2px rgb(184, 183, 183);
 }
-.H-edit .jurisdiction{
+
+.H-edit .jurisdiction {
     width: 92%;
     min-height: 800px;
     margin: 0 auto;
