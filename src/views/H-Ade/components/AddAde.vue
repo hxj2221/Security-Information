@@ -378,8 +378,8 @@ import service from '@/service/index';
     created() {
       // 下拉框
       service.AdeSel().then(res => {
-        // console.log(res)
-        if (res.cede == 20010) {
+        console.log(res)
+        if (res.code == 20010) {
           this.options = res.choice_type //不良类型
           this.options1 = res.address //发生场所
           this.options4 = res.degree_weight //轻重程度

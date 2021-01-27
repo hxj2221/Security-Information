@@ -17,7 +17,7 @@
             class="departNamesch"
             icon="el-icon-search"
             @click="departsearch"
-            >搜索</el-button
+            ></el-button
           >
         </div>
       </div>
@@ -33,7 +33,7 @@
       <el-table
         :data="dormitory"
         class="departtable"
-        max-height="662"
+        max-height="595"
         row-key="id"
         :header-cell-style="{ background: '#c2c5f6', color: '#000' }"
         :cell-style="{ background: '#fff' }"

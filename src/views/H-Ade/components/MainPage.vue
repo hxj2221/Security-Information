@@ -57,11 +57,11 @@
         </el-table-column>
         <el-table-column prop="occur_time" :formatter="getDate" label="事发日期" width="180">
         </el-table-column>
-        <el-table-column prop="occurscene.title" label="发生场所">
+        <el-table-column prop="occurscene.title" label="发生场所" :show-overflow-tooltip='true'>
         </el-table-column>
         <el-table-column prop="degreeweight.title" label="轻重程度" :show-overflow-tooltip='true'>
         </el-table-column>
-        <el-table-column prop="create_time" label="上报时间" width="180">
+        <el-table-column prop="create_time" label="上报时间"   width="180">
         </el-table-column>
         <el-table-column prop="department.title" label="患者科室" :show-overflow-tooltip='true'>
         </el-table-column>
@@ -187,7 +187,7 @@
       Add() {
         this.$emit('pageAdd')
         service.AdeSel().then(res => {
-          // console.log(res)
+          console.log(res)
           if (res.code == 20010) {
             this.bus.$emit("eventNum", res.event_num)
           } else if (res.code == 20401) {
