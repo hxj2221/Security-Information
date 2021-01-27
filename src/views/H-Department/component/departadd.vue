@@ -168,7 +168,6 @@ export default {
         pid: this.adddepartsel,
         sort: this.departpxipt,
       };
-<<<<<<< HEAD
       service.departsave(data).then((res) => {
         console.log(res);
         if (res.code == 20010) {
@@ -190,51 +189,6 @@ export default {
     },
     departaddvueno() {
       this.$parent.fathdepartno();
-=======
-    },
-    created() {
-      service.departadd().then((res) => {
-        // console.log(res.data);
-        this.options = res.data.lists;
-        this.numb = res.data.number;
-      });
-    },
-    methods: {
-      // sel
-      departsel() {
-        console.log(this.adddepartsel);
-      },
-      //
-      departaddvueyes() {
-        let data = {
-          title: this.departNameipt,
-          status: this.valuestatus,
-          pid: this.adddepartsel,
-          sort: this.departpxipt,
-        };
-        service.departsave(data).then((res) => {
-          // console.log(res);
-          if (res.code == 20010) {
-            const loading = this.$loading({
-              lock: true,
-              text: "保存中",
-              spinner: "el-icon-loading",
-              background: "rgba(0, 0, 0, 0.7)",
-            });
-            setTimeout(() => {
-              loading.close();
-              this.reload();
-            }, 2000);
-          } else {
-            alert("添加失败");
-          }
-        });
-        this.$parent.fathdepartyes();
-      },
-      departaddvueno() {
-        this.$parent.fathdepartno();
-      },
->>>>>>> 606af793b7c9b209f598a4a6277a7d091d01159e
     },
   },
 };
