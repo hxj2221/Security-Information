@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="H-edit">
+    <div class="H-editAll">
       <!-- 头部 -->
       <headpow></headpow>
       <div class="jurisdiction">
@@ -500,6 +500,7 @@ export default {
         // }
       });
       // }
+<<<<<<< HEAD
     },
 
     // 添加权限
@@ -654,6 +655,8 @@ export default {
           // }
         });
       }
+=======
+>>>>>>> dd53c6cda7c730ab3fe59bea781cec00d4a87e15
     },
     // 删除
     delpow(id) {

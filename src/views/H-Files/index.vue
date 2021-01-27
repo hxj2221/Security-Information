@@ -147,6 +147,39 @@
             </template>
           </el-select>
         </el-form-item>
+<<<<<<< HEAD
+        <form
+          action="http://bt1.wlqqlp.com:8082/api/file/addfile"
+          enctype="multipart/form-data"
+          method="post"
+        >
+          <!-- 文件名称: <input type="text" name="file_name" /><br />
+          文件描述:<input type="text" name="file_describe" /><br />
+          文件分类:<input type="text" name="class_id" /><br /> -->
+          <!-- <input type="file" name="file" /> -->
+          <!-- <input type="submit" value="上传" /> -->
+
+          <el-form-item label="文件描述" prop="desc">
+            <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+          </el-form-item>
+          <el-form-item style="text-align: left;">
+            <input type="submit" style="padding: 8px 15px;margin-right:30px" class="upload" value="上传附件" @click="submitForm" />
+            <el-button type="primary" style="background:none;color:#000" @click="resetForm">取消</el-button>
+          </el-form-item>
+        </form>
+
+        <form
+          action="http://bt1.wlqqlp.com:8082/api/file/addfile"
+          enctype="multipart/form-data"
+          method="post"
+        >
+          文件名称: <input type="text" name="file_name" /><br />
+          文件描述:<input type="text" name="file_describe" /><br />
+          文件分类:<input type="text" name="class_id" /><br />
+          <input type="file" name="file" />
+          <input type="submit" value="上传" />
+        </form>
+=======
         <el-form-item label="文件标题">
           <el-input v-model="name"></el-input>
         </el-form-item>
@@ -174,6 +207,7 @@
             <div slot="tip">未知</div>
           </el-upload>
         </el-form-item>
+>>>>>>> 65f4df4ecd0cbc625267884ec54d1c568e7c94f8
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="Close">取 消</el-button>
