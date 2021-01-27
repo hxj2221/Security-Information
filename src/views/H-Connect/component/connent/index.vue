@@ -26,7 +26,7 @@
         </div>
       </div>
       <!-- 表单表格部分 -->
-      <div class="connent_myTable">
+      <div class="connent_myTable" style="min-height: 730px;">
         <!--  -->
         <el-table :data="tableData" max-height="662" :header-cell-style="getRowClass">
           <el-table-column label="序号" type="index" width="50"> </el-table-column>

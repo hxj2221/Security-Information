@@ -43,7 +43,7 @@
       </el-form>
     </div>
     <!-- 内容 -->
-    <div style="min-height: 600px;">
+    <div style="min-height: 608px;">
       <el-table class="elTable" max-height="600" :data="tableData" :header-cell-style="getRowClass">
         <el-table-column type="index" label="序号" width="50">
         </el-table-column>
