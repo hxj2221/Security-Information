@@ -14,10 +14,13 @@
 }
 
 .powerheadThre .list li {
-    border: 1px solid #ccc;
-    padding: 12px 20px;
+    border: 1px solid #666ee8;
+    color: #666ee8;
+    /* padding: 12px 20px; */
+    width: 92px;
+    height: 40px;
+    line-height: 40px;
     cursor: pointer;
-    color: #ccc;
 }
 
 .powerheadThre .list .stafflist {
