@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="H-edit">
+    <div class="H-editAll">
       <!-- 头部 -->
       <headpow></headpow>
       <div class="jurisdiction">

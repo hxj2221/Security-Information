@@ -131,16 +131,15 @@
           <!-- 文件名称: <input type="text" name="file_name" /><br />
           文件描述:<input type="text" name="file_describe" /><br />
           文件分类:<input type="text" name="class_id" /><br /> -->
-          <input type="file" name="file" />
+          <!-- <input type="file" name="file" /> -->
           <!-- <input type="submit" value="上传" /> -->
 
           <el-form-item label="文件描述" prop="desc">
             <el-input type="textarea" v-model="ruleForm.desc"></el-input>
           </el-form-item>
-          <el-form-item>
-            <input type="submit" value="上传" @click="submitForm" />
-            <!-- <el-button type="primary" @click="submitForm">上传</el-button> -->
-            <el-button @click="resetForm">取消</el-button>
+          <el-form-item style="text-align: left;">
+            <input type="submit" style="padding: 8px 15px;margin-right:30px" class="upload" value="上传附件" @click="submitForm" />
+            <el-button type="primary" style="background:none;color:#000" @click="resetForm">取消</el-button>
           </el-form-item>
         </form>
 
