@@ -33,7 +33,7 @@
       <el-table
         :data="dormitory"
         class="departtable"
-        max-height="595"
+        max-height="570"
         row-key="id"
         :header-cell-style="{ background: '#c2c5f6', color: '#000' }"
         :cell-style="{ background: '#fff' }"
