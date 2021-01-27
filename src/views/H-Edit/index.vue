@@ -220,26 +220,7 @@ export default {
   data() {
     return {
       name: "", //权限名
-      dialogVisible: false,
-      dialogedit: false,
       dialogaddson: false,
-      tableData: [],
-      seldata: [], //权限下拉框
-      selvalue: "0",
-      powpx: "",
-      powstatu: 1,
-      powlab: "",
-      powicon: "",
-      powaps: "",
-      powweb: "",
-      editseldata: [],
-      editselvalue: 2,
-      editpowpx: "",
-      editpowstatu: "",
-      editpowlab: "",
-      editpowicon: "",
-      editpowaps: "",
-      editpowweb: "",
       editid: "",
       addsonseldata: [],
       addsonselvalue: 2,
@@ -250,6 +231,25 @@ export default {
       addsonpowaps: "",
       addsonpowweb: "",
       addsonid: "",
+      tableData: [], //权限内容
+      dialogVisible: false, //添加权限弹框
+      selvalue: "0", //上级下拉框
+      seldata: [], //顶级下拉框
+      powpx: "", //排序
+      powstatu: 1, //状态
+      powlab: "", //标题
+      powicon: "", //图标
+      powaps: "", //后端接口
+      powweb: "", //前端路由
+      dialogedit: false, //编辑权限弹框
+      editselvalue: 2, //上级下拉框
+      editseldata: [], //顶级下拉框
+      editpowpx: "", //排序
+      editpowstatu: "", //状态
+      editpowlab: "", //标题
+      editpowicon: "", //图标
+      editpowaps: "", //后端接口
+      editpowweb: "", //前端路由
     };
   },
   // 加载数据
@@ -274,38 +274,6 @@ export default {
     },
     // 权限确认
     dialog() {
-      // if (this.powpx != "^[0-9]*$") {
-      //   this.$message({
-      //     message: "排序必须是整数",
-      //     type: "error",
-      //     duration: 1300,
-      //   });
-      //   console.log(this.powpx);
-      // } else if (this.powlab == "" || this.powlab == null) {
-      //   this.$message({
-      //     message: "请输入标题",
-      //     type: "error",
-      //     duration: 1300,
-      //   });
-      // } else if (this.powicon == "" || this.powicon == null) {
-      //   this.$message({
-      //     message: "请输入图标",
-      //     type: "error",
-      //     duration: 1300,
-      //   });
-      // } else if (this.powaps == "" || this.powaps == null) {
-      //   this.$message({
-      //     message: "请输入后端接口",
-      //     type: "error",
-      //     duration: 1300,
-      //   });
-      // } else if (this.powweb == "" || this.powweb == null) {
-      //   this.$message({
-      //     message: "请输入前端路由",
-      //     type: "error",
-      //     duration: 1300,
-      //   });
-      // } else {
       let data = {
         sort: this.powpx,
         status: this.powstatu,
@@ -324,54 +292,6 @@ export default {
           });
           this.reload();
         }
-        // else {
-        //   this.$message({
-        //     message: res.msg,
-        //     type: "error",
-        //     duration: 1000,
-        //   });
-        // }
-      });
-      //this.dialogVisible = false;
-      // }
-    },
-    data() {
-      return {
-        tableData: [], //权限内容
-        dialogVisible: false, //添加权限弹框
-        selvalue: "", //上级下拉框
-        seldata: "", //顶级下拉框
-        powpx: "", //排序
-        powstatu: "", //状态
-        powlab: "", //标题
-        powicon: "", //图标
-        powaps: "", //后端接口
-        powweb: "", //前端路由
-        dialogedit: false, //编辑权限弹框
-        editselvalue: "", //上级下拉框
-        editseldata: "", //顶级下拉框
-        editpowpx: "", //排序
-        editpowstatu: "", //状态
-        editpowlab: "", //标题
-        editpowicon: "", //图标
-        editpowaps: "", //后端接口
-        editpowweb: "", //前端路由
-      };
-    },
-
-    // 加载数据
-    created() {
-      service.rulelist().then((res) => {
-        console.log(res);
-        if (res.code == 20403) {
-          this.$message({
-            type: "error",
-            message: res.msg,
-            duration: 1000,
-          });
-          this.$router.push("/dashboard");
-        }
-        console.log(res);
       });
     },
     // 编辑权限
@@ -399,6 +319,7 @@ export default {
               message: res.msg,
               duration: 1000,
             });
+            this.reload();
           });
         })
         .catch(() => {
@@ -436,37 +357,6 @@ export default {
     },
     // 编辑权限确认
     editdialog() {
-      // if (this.editpowpx == "" || this.editpowpx == null) {
-      //   this.$message({
-      //     message: "请输入排序",
-      //     type: "error",
-      //     duration: 1300,
-      //   });
-      // } else if (this.editpowlab == "" || this.editpowlab == null) {
-      //   this.$message({
-      //     message: "请输入标题",
-      //     type: "error",
-      //     duration: 1300,
-      //   });
-      // } else if (this.editpowicon == "" || this.editpowicon == null) {
-      //   this.$message({
-      //     message: "请输入图标",
-      //     type: "error",
-      //     duration: 1300,
-      //   });
-      // } else if (this.editpowaps == "" || this.editpowaps == null) {
-      //   this.$message({
-      //     message: "请输入后端接口",
-      //     type: "error",
-      //     duration: 1300,
-      //   });
-      // } else if (this.editpowweb == "" || this.editpowweb == null) {
-      //   this.$message({
-      //     message: "请输入前端路由",
-      //     type: "error",
-      //     duration: 1300,
-      //   });
-      // } else {
       let data = {
         sort: this.editpowpx,
         status: this.editpowstatu,
@@ -490,17 +380,7 @@ export default {
             this.reload();
           }, 1000);
         }
-        // 暂不需要
-        // else {
-        //   this.$message({
-        //     message: "请注意" + res.msg,
-        //     type: "error",
-        //     duration: 1300,
-        //   });
-        // }
       });
-      // }
-<<<<<<< HEAD
     },
 
     // 添加权限
@@ -591,76 +471,34 @@ export default {
     },
     // 编辑权限确认
     editdialog() {
-      if (this.editpowpx == "" || this.editpowpx == null) {
-        this.$message({
-          message: "请输入排序",
-          type: "error",
-          duration: 1300,
-        });
-      } else if (this.editpowlab == "" || this.editpowlab == null) {
-        this.$message({
-          message: "请输入标题",
-          type: "error",
-          duration: 1300,
-        });
-      } else if (this.editpowicon == "" || this.editpowicon == null) {
-        this.$message({
-          message: "请输入图标",
-          type: "error",
-          duration: 1300,
-        });
-      } else if (this.editpowaps == "" || this.editpowaps == null) {
-        this.$message({
-          message: "请输入后端接口",
-          type: "error",
-          duration: 1300,
-        });
-      } else if (this.editpowweb == "" || this.editpowweb == null) {
-        this.$message({
-          message: "请输入前端路由",
-          type: "error",
-          duration: 1300,
-        });
-      } else {
-        let data = {
-          sort: this.editpowpx,
-          status: this.editpowstatu,
-          name: this.editpowaps,
-          icon: this.editpowicon,
-          title: this.editpowlab,
-          pid: this.editselvalue,
-          id: this.editid,
-          url: this.editpowweb,
-        };
-        console.log(data);
-        service.editsavepower(data).then((res) => {
-          console.log(res);
-          if (res.code == 20010) {
-            this.$message({
-              message: "保存成功！",
-              type: "success",
-              duration: 2000,
-            });
-            setTimeout(() => {
-              this.reload();
-            }, 1000);
-          }
-          // 暂不需要
-          // else {
-          //   this.$message({
-          //     message: "请注意" + res.msg,
-          //     type: "error",
-          //     duration: 1300,
-          //   });
-          // }
-        });
-      }
-=======
->>>>>>> dd53c6cda7c730ab3fe59bea781cec00d4a87e15
+      let data = {
+        sort: this.editpowpx,
+        status: this.editpowstatu,
+        name: this.editpowaps,
+        icon: this.editpowicon,
+        title: this.editpowlab,
+        pid: this.editselvalue,
+        id: this.editid,
+        url: this.editpowweb,
+      };
+      console.log(data);
+      service.editsavepower(data).then((res) => {
+        console.log(res);
+        if (res.code == 20010) {
+          this.$message({
+            message: "保存成功！",
+            type: "success",
+            duration: 2000,
+          });
+          setTimeout(() => {
+            this.reload();
+          }, 1000);
+        }
+      });
     },
     // 删除
     delpow(id) {
-      this.$confirm("此操作将修改状态, 是否继续?", "提示", {
+      this.$confirm("此操作将删除该权限, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
@@ -677,6 +515,7 @@ export default {
               message: res.msg,
               duration: 1500,
             });
+            this.reload();
             setTimeout(() => {
               this.reload();
             }, 2000);

@@ -34,6 +34,7 @@
         :data="dormitory"
         class="departtable"
         max-height="662"
+        row-key="id"
         :header-cell-style="{ background: '#c2c5f6', color: '#000' }"
         :cell-style="{ background: '#fff' }"
         :tree-props="{
@@ -136,6 +137,7 @@ export default {
         this.$router.push("/dashboard");
       }
       this.dormitory = res.data;
+      console.log(this.dormitory);
     });
   },
   computed: {},
@@ -241,9 +243,9 @@ export default {
     },
 
     // 序号
-    // indexMethod(index) {
-    //   return index * 1;
-    // },
+    indexMethod(index) {
+      return index * 1;
+    },
     // 编辑
     handleEdit(id) {
       this.editdep = true;

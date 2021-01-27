@@ -72,6 +72,8 @@
           max-height="662"
           :header-cell-style="getRowClass"
         >
+          <el-table-column width="50" label="序号" type="index">
+          </el-table-column>
           <el-table-column prop="id" label="ID"> </el-table-column>
           <el-table-column prop="file_name" label="文件名"> </el-table-column>
           <el-table-column prop="file_describe" label="文件描述">
@@ -147,39 +149,6 @@
             </template>
           </el-select>
         </el-form-item>
-<<<<<<< HEAD
-        <form
-          action="http://bt1.wlqqlp.com:8082/api/file/addfile"
-          enctype="multipart/form-data"
-          method="post"
-        >
-          <!-- 文件名称: <input type="text" name="file_name" /><br />
-          文件描述:<input type="text" name="file_describe" /><br />
-          文件分类:<input type="text" name="class_id" /><br /> -->
-          <!-- <input type="file" name="file" /> -->
-          <!-- <input type="submit" value="上传" /> -->
-
-          <el-form-item label="文件描述" prop="desc">
-            <el-input type="textarea" v-model="ruleForm.desc"></el-input>
-          </el-form-item>
-          <el-form-item style="text-align: left;">
-            <input type="submit" style="padding: 8px 15px;margin-right:30px" class="upload" value="上传附件" @click="submitForm" />
-            <el-button type="primary" style="background:none;color:#000" @click="resetForm">取消</el-button>
-          </el-form-item>
-        </form>
-
-        <form
-          action="http://bt1.wlqqlp.com:8082/api/file/addfile"
-          enctype="multipart/form-data"
-          method="post"
-        >
-          文件名称: <input type="text" name="file_name" /><br />
-          文件描述:<input type="text" name="file_describe" /><br />
-          文件分类:<input type="text" name="class_id" /><br />
-          <input type="file" name="file" />
-          <input type="submit" value="上传" />
-        </form>
-=======
         <el-form-item label="文件标题">
           <el-input v-model="name"></el-input>
         </el-form-item>
@@ -207,7 +176,6 @@
             <div slot="tip">未知</div>
           </el-upload>
         </el-form-item>
->>>>>>> 65f4df4ecd0cbc625267884ec54d1c568e7c94f8
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="Close">取 消</el-button>
@@ -373,91 +341,66 @@ export default {
     },
     // 下载
     handleClick(id) {
-      this.axios({
-        methods: "post",
-        url: "http://bt1.wlqqlp.com:8082/api/file/download",
-        data: {
-          id: id,
-        },
-        responseType: "arraybuffer",
-      }).then((response) => {
-        // 用返回二进制数据创建一个Blob实例
-        let blob = new Blob([response.data], {
-          type:
-            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        }); // for .xlsx files
-
-        // 通过URL.createObjectURL生成文件路径
-        let url = window.URL.createObjectURL(blob);
-
-        // 创建a标签
-        let ele = document.createElement("a");
-        ele.style.display = "none";
-
-        // 设置href属性为文件路径，download属性可以设置文件名称
-        ele.href = url;
-        ele.download = "测试文件";
-
-        // 将a标签添加到页面并模拟点击
-        document.querySelectorAll("body")[0].appendChild(ele);
-        ele.click();
-
-        // 移除a标签
-        ele.remove();
-      });
       console.log(id);
-      // let param = {
-      //   id: id,
-      // };
-      // service.filedown(param).then((res) => {
-      //   console.log(res);
-      //   // const link = document.createElement("a");
-      //   // let blob = new Blob([res], {
-      //   //   type: "application/octet-stream",
-      //   // }); // res指的是后端返回的文件流
-      //   // link.style.display = "none";
-      //   // link.href = URL.createObjectURL(blob);
-      //   // // link.download = res.headers['content-disposition'] //下载后文件名
-      //   // // link.download = "attendance"; //下载的文件名
-      //   // document.body.appendChild(link);
-      //   // link.click();
-      //   // document.body.removeChild(link);
-      //   var blob = new Blob([res], {
-      //     type: "application/octet-stream",
-      //   }); //接收的是blob，若接收的是文件流，需要转化
-      //   if (typeof window.chrome !== "undefined") {
-      //     // Chrome version
-      //     var link = document.createElement("a");
-      //     link.href = window.URL.createObjectURL(blob);
-      //     //link.download = filename;
-      //     link.click();
-      //   } else if (typeof window.navigator.msSaveBlob !== "undefined") {
-      //     // IE version
-      //     var blob = new Blob([res], { type: "application/force-download" });
-      //     window.navigator.msSaveBlob(blob);
-      //   } else {
-      //     // Firefox version
-      //     var file = new File([res], {
-      //       type: "application/force-download",
-      //     });
-      //     window.open(URL.createObjectURL(file));
-      //   }
-
-      //   // const sjres = res;
-      //   // var blob = new Blob([sjres]);
-      //   // var url = window.URL.createObjectURL(blob);
-      //   // var a = document.createElement("a");
-      //   // a.href = url;
-      //   // a.click();
-      //   // this.isDisabled = false;
-      //   // 不安全，无法带token
-      //   // let a = document.createElement("a"); //创建a标签
-      //   // a.href = `http://bt1.wlqqlp.com:8082/api/file/download?id=` + id; //通过a与id去下载
-      //   // document.body.appendChild(a); //添加a
-      //   // a.click(); //下载
-      //   // URL.revokeObjectURL(a.href); // 释放URL 对象
-      //   // document.body.removeChild(a); // 删除 a 标签
-      // });
+      let param = {
+        id: id,
+      };
+      service.filedown(param).then((res) => {
+        //   console.log(res);
+        const link = document.createElement("a");
+        let blob = new Blob([res], { type: "application/pdf;charset=utf-8" }); // res指的是后端返回的文件流
+        link.style.display = "none";
+        link.href = URL.createObjectURL(blob);
+        //link.download = "测试"; //下载的文件名
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        //   // const link = document.createElement("a");
+        //   // let blob = new Blob([res], {
+        //   //   type: "application/octet-stream",
+        //   // }); // res指的是后端返回的文件流
+        //   // link.style.display = "none";
+        //   // link.href = URL.createObjectURL(blob);
+        //   // // link.download = res.headers['content-disposition'] //下载后文件名
+        //   // // link.download = "attendance"; //下载的文件名
+        //   // document.body.appendChild(link);
+        //   // link.click();
+        //   // document.body.removeChild(link);
+        //   var blob = new Blob([res], {
+        //     type: "application/octet-stream",
+        //   }); //接收的是blob，若接收的是文件流，需要转化
+        //   if (typeof window.chrome !== "undefined") {
+        //     // Chrome version
+        //     var link = document.createElement("a");
+        //     link.href = window.URL.createObjectURL(blob);
+        //     //link.download = filename;
+        //     link.click();
+        //   } else if (typeof window.navigator.msSaveBlob !== "undefined") {
+        //     // IE version
+        //     var blob = new Blob([res], { type: "application/force-download" });
+        //     window.navigator.msSaveBlob(blob);
+        //   } else {
+        //     // Firefox version
+        //     var file = new File([res], {
+        //       type: "application/force-download",
+        //     });
+        //     window.open(URL.createObjectURL(file));
+        //   }
+        //   // const sjres = res;
+        //   // var blob = new Blob([sjres]);
+        //   // var url = window.URL.createObjectURL(blob);
+        //   // var a = document.createElement("a");
+        //   // a.href = url;
+        //   // a.click();
+        //   // this.isDisabled = false;
+        //   // 不安全，无法带token
+        //   // let a = document.createElement("a"); //创建a标签
+        //   // a.href = `http://bt1.wlqqlp.com:8082/api/file/download?id=` + id; //通过a与id去下载
+        //   // document.body.appendChild(a); //添加a
+        //   // a.click(); //下载
+        //   // URL.revokeObjectURL(a.href); // 释放URL 对象
+        //   // document.body.removeChild(a); // 删除 a 标签
+      });
     },
 
     // 新增分类
@@ -512,6 +455,9 @@ export default {
         console.log(res);
         this.total = res.allNews;
       });
+    },
+    indexMethod(index) {
+      return index * 1;
     },
   },
 };
