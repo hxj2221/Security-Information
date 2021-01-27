@@ -43,8 +43,8 @@
       </el-form>
     </div>
     <!-- 内容 -->
-    <div style="min-height: 500px;">
-      <el-table class="elTable" max-height="500" :data="tableData" :header-cell-style="getRowClass">
+    <div style="min-height: 490px;">
+      <el-table class="elTable" max-height="490" :data="tableData" :header-cell-style="getRowClass">
         <el-table-column type="index" label="序号" width="50">
         </el-table-column>
         <el-table-column prop="event_num" label="事件编码" width="180">

@@ -38,7 +38,7 @@
     </el-dialog>
     <!-- table -->
     <div class="columnList_table">
-      <el-table :data="tableData" max-height="662">
+      <el-table :data="tableData" max-height="661">
         <el-table-column prop="weight" label="权重"> </el-table-column>
         <el-table-column prop="classification" label="分类名称">
         </el-table-column>

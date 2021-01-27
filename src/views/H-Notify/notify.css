@@ -4,13 +4,13 @@
 }
 
 .notifyalBg {
-    width: 100%;
+    width: 95%;
     min-height: 76%;
     margin: 0 auto;
     background: #fff;
     border-radius: 5px;
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
-    padding-bottom: 130px;
+    padding-bottom: 125px;
 }
 
 .notifyThre {

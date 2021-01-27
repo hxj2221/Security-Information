@@ -81,7 +81,7 @@
 .filelist .TableContent {
     margin: 0 auto;
     width: 94%;
-    min-height: 551px;
+    min-height: 550px;
 }
 
 .filelist .TableContent .el-table .el-table__header-wrapper .el-table__header .has-gutter tr th {
@@ -167,7 +167,7 @@
     width: 94%;
 }
 .newlyFiles .newlyContent .TableContent{
-    min-height: 634px;
+    min-height: 632px;
 }
 
 .newlyFiles .newlyContent .el-table .el-table__header-wrapper .el-table__header .has-gutter tr th {
