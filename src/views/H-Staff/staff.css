@@ -20,38 +20,21 @@
     padding-left: 60px;
 }
 
-.staff:hover {
-    background-color: #666ee8;
-}
 
 .staff:visited {
     background-color: #666ee8;
 }
 
-.staff {
-    border-left: 2px solid #ccc;
-    border-top: 2px solid #ccc;
-    border-bottom: 2px solid #ccc;
-    border-radius: 5px;
-}
 
-.staffDepart:hover {
-    background-color: #666ee8;
-}
 
 .staffDepart {
-    border: 2px solid #ccc;
+    
     border-radius: 5px;
 }
 
-.staffRole:hover {
-    background-color: #666ee8;
-}
 
 .staffRole {
-    border-right: 2px solid #ccc;
-    border-top: 2px solid #ccc;
-    border-bottom: 2px solid #ccc;
+  
     border-radius: 5px;
 }
 
@@ -62,9 +45,6 @@
     left: 85%;
 }
 
-.staffAdd :hover {
-    color: none;
-}
 
 .staffIptsech {
     display: flex;
@@ -164,37 +144,6 @@
     color: #000;
     font-size: 20px;
     font-weight: 700;
-}
-
-.staffgr:hover {
-    background-color: #666ee8;
-}
-
-.staffgr {
-    border-left: 2px solid #ccc;
-    border-top: 2px solid #ccc;
-    border-bottom: 2px solid #ccc;
-    border-radius: 5px;
-}
-
-.staffb:hover {
-    background-color: #666ee8;
-}
-
-.staffb {
-    border: 2px solid #ccc;
-    border-radius: 5px;
-}
-
-.staffc:hover {
-    background-color: #666ee8;
-}
-
-.staffc {
-    border-right: 2px solid #ccc;
-    border-top: 2px solid #ccc;
-    border-bottom: 2px solid #ccc;
-    border-radius: 5px;
 }
 
 .staffWidhr {

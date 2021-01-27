@@ -33,7 +33,6 @@
     border-radius: 5px;
     color: #fff;
     text-align: center;
-    font-weight: 900;
     cursor: pointer;
     
 }
@@ -47,10 +46,6 @@
     margin-left: 30px;
 }
 
-.mainBl>.header>.btn>.exportAde:hover {
-    background-color: #666EE8;
-    color: #fff;
-}
 
 .mainBl>.header>.btn>.el-button>span {
     font-size: 14px;

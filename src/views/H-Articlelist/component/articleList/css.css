@@ -66,6 +66,9 @@
     width: 94%;
     margin: 0 auto;
 }
+.articleList_table_table .el-button{
+    color: #666ee8;
+}
 .articleList_table_table .el-table th {
     background-color: #c2c5f6;
     color: #000;
@@ -84,4 +87,6 @@
     text-align: right;
     padding: 25px 0px;
 }
+
+
 

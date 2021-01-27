@@ -80,7 +80,10 @@ import service from '@/service/index'
         }, {
           name: '不良类型',
           type:8
-        }, ],
+        }, {
+          name: '不良事件状态',
+          type:9
+        },],
         tableData:[],
         // 编辑
         form: {

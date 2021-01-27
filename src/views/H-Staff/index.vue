@@ -46,12 +46,32 @@
         >
           <el-table-column width="50" label="序号" type="index">
           </el-table-column>
+<<<<<<< HEAD
           <el-table-column prop="job_number" label="工号"> </el-table-column>
           <el-table-column prop="name" label="员工姓名"> </el-table-column>
           <el-table-column prop="sex.name" label="员工性别"> </el-table-column>
           <el-table-column prop="age" label="员工年龄"> </el-table-column>
           <el-table-column prop="phone" label="手机号码"> </el-table-column>
           <el-table-column prop="department[0].title" label="所属科室">
+=======
+          <el-table-column prop="job_number" label="工号">
+          </el-table-column>
+          <el-table-column prop="name" label="员工姓名">
+          </el-table-column>
+          <el-table-column prop="sex.name" label="员工性别">
+          </el-table-column>
+          <el-table-column  prop="age" label="员工年龄">
+          </el-table-column>
+          <el-table-column  prop="phone" label="手机号码">
+          </el-table-column>
+          <el-table-column
+            
+            prop="department[0].title"
+            label="所属科室"
+          >
+          </el-table-column>
+          <el-table-column prop="auth_grouap" label="角色">
+>>>>>>> 606af793b7c9b209f598a4a6277a7d091d01159e
           </el-table-column>
           <el-table-column prop="auth_grouap" label="角色"> </el-table-column>
           <el-table-column
@@ -163,7 +183,6 @@ export default {
     });
 
     service.stafflist().then((res) => {
-      console.log(res);
       if (res.code == 20403) {
         this.$message({
           type: "error",
@@ -174,8 +193,8 @@ export default {
       }
       this.tables = res.data[0];
       this.total = res.data[1].count;
-      for (let i = 1; i < res.data.length; i++) {
-        this.id = res.data[i].id;
+      for (let i = 1; i < this.tables.length; i++) {
+        this.id = this.tables[i].id;
       }
     });
   },
@@ -215,7 +234,11 @@ export default {
     },
     //员工状态
     changeSwitch(val, row) {
+<<<<<<< HEAD
       console.log(val, row);
+=======
+      console.log(val,row)
+>>>>>>> 606af793b7c9b209f598a4a6277a7d091d01159e
       let data = {
         id: row.id,
         status: row.status,

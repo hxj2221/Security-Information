@@ -196,7 +196,7 @@
     <!-- 表格  关联投诉信息 -->
     <div class="addRecord_relation">
       <div class="addRecord_relation_top">
-        <h5>关联投诉信息</h5>
+        <h2>关联投诉信息</h2>
       </div>
       <div class="addRecord_relation_content">
         <el-table :data="tableData1" :header-cell-style="getRowClass">

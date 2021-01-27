@@ -3,10 +3,10 @@
     <!-- top -->
     <div class="staffThre">
       <span class="staffSpan">编辑员工信息</span>
-      <div style="padding-right: 30px">
+      <div>
         <el-button type="primary" class="staffgr" icon="iconfont el-icon-hospital-passwordbaocun" @click="staffaddvueyes">保存
       </el-button>
-      <el-button type="primary" class="staffb" icon="iconfont el-icon-hospital-passwordai207" @click="staffaddvueno">返回
+      <el-button type="primary" class="staffback" icon="iconfont el-icon-hospital-passwordai207" @click="staffaddvueno">返回
       </el-button>
       </div>
     </div>

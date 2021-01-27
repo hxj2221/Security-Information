@@ -5,7 +5,7 @@ import service from '@/service/index';
     <div class="formBasics">
       <h2>基本信息</h2>
       <el-form class="form_con" ref="addAde" :model="addAde">
-        <el-row type="flex" class="row-bg info" justify="space-between">
+        <el-row type="flex" class="row-bg info" justify="space-around">
           <el-col :span="6">
             <div class="grid-content bg-purple">
               <el-form-item label="业务编号">
@@ -35,7 +35,7 @@ import service from '@/service/index';
             </div>
           </el-col>
         </el-row>
-        <el-row type="flex" class="row-bg info" justify="space-between">
+        <el-row type="flex" class="row-bg info" justify="space-around">
           <el-col :span="6">
             <div class="grid-content bg-purple">
               <el-form-item label="患者姓名" required>
@@ -70,7 +70,7 @@ import service from '@/service/index';
             </div>
           </el-col>
         </el-row>
-        <el-row type="flex" class="row-bg info" justify="space-between">
+        <el-row type="flex" class="row-bg info" justify="space-around">
           <el-col :span="6">
             <div class="grid-content bg-purple">
               <el-form-item label="入院日期" required>
@@ -97,7 +97,7 @@ import service from '@/service/index';
             </div>
           </el-col>
         </el-row>
-        <el-row type="flex" class="row-bg info" justify="space-between">
+        <el-row type="flex" class="row-bg info" justify="space-around">
           <el-col :span="6">
             <div class="grid-content bg-purple">
               <el-form-item label="住院号" required>
@@ -122,7 +122,7 @@ import service from '@/service/index';
             </div>
           </el-col>
         </el-row>
-        <el-row type="flex" class="row-bg info" justify="space-between">
+        <el-row type="flex" class="row-bg info" justify="space-around">
           <el-col :span="6">
             <div class="grid-content bg-purple">
               <el-form-item label="主管医师" required>
@@ -145,7 +145,7 @@ import service from '@/service/index';
             </div>
           </el-col>
         </el-row>
-        <el-row type="flex" class="row-bg info info_last" justify="space-between">
+        <el-row type="flex" class="row-bg info info_last" justify="space-around">
           <el-col :span="6">
             <div class="grid-content bg-purple">
               <el-form-item label="上报人" required>
@@ -153,7 +153,7 @@ import service from '@/service/index';
               </el-form-item>
             </div>
           </el-col>
-          <el-col :span="15">
+          <el-col :span="14">
             <div class="grid-content last bg-purple">
               <el-form-item label="轻重程度" required label-width="180">
                 <el-select clearable v-model="addAde.degree_weight_id" placeholder="请选择">
@@ -164,29 +164,29 @@ import service from '@/service/index';
             </div>
           </el-col>
         </el-row>
-        <el-row>
-          <el-col :span="24">
-            <el-form-item style="width:100%" label="入院诊断" required>
+        <el-row type="flex" class="row-bg">
+          <el-col :span="22" :push="1">
+            <el-form-item label="入院诊断" required>
               <el-input clearable type="textarea" v-model="addAde.admitting_diagnosis"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
-        <el-row>
-          <el-col :span="24">
-            <el-form-item style="width:100%" label="诊疗经过" required>
+        <el-row type="flex" class="row-bg">
+          <el-col :span="22" :push="1">
+            <el-form-item label="诊疗经过" required>
               <el-input clearable type="textarea" v-model="addAde.diagnosis_process"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
-        <el-row>
-          <el-col :span="24">
-            <el-form-item style="width:100%" label="患者目前情况" required>
+        <el-row type="flex" class="row-bg">
+          <el-col :span="22" :push="1">
+            <el-form-item label="患者目前情况" required>
               <el-input clearable type="textarea" v-model="addAde.patient_situation"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
-        <el-row>
-          <el-col :span="24">
+        <el-row type="flex" class="row-bg">
+          <el-col :span="22" :push="1">
             <el-form-item style="width:100%" label="不良事件描述" required>
               <el-input clearable type="textarea" v-model="addAde.event_describe"></el-input>
             </el-form-item>

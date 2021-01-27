@@ -4,10 +4,10 @@
       <div class="lookForm_top">
         <div class="lookForm_top_button">
           <div class="lookForm_top_button_left">
-            <el-button>医院沟通记录</el-button>
+            <span>医院沟通记录</span>
           </div>
           <div class="lookForm_top_button_right">
-            <el-button type="primary" class="el-icon-printer print">打印记录表</el-button>
+            <el-button type="primary" icon="iconfont el-icon-hospital-passworddayin">打印记录表</el-button>
             <el-button type="primary" icon="iconfont el-icon-hospital-passwordai207" @click="upper">返回
             </el-button>
           </div>
@@ -75,7 +75,7 @@
       <div class="lookForm_center">
         <div class="lookForm_center_top">
           <el-row type="flex" class="row-bg" justify="space-between">
-            <el-col :span="3" >
+            <el-col :span="3">
               <div class="grid-content bg-purple">
                 <span><b>医患沟通记录</b></span>
               </div>
@@ -161,69 +161,69 @@
         </div>
         <div class="lookForm_bottom_form">
           <el-row class="tab">
-          <el-col :span="4">
-            <div class="grid-content bg-purple">
-              <p class="tit">文件名1</p>
-            </div>
-          </el-col>
-          <el-col :span="4">
-            <div class="grid-content bg-purple">
-              <p class="con">查看</p>
-            </div>
-          </el-col>
-          <el-col :span="4">
-            <div class="grid-content bg-purple">
-              <p class="tit">文件名2</p>
-            </div>
-          </el-col>
-          <el-col :span="4">
-            <div class="grid-content bg-purple">
-              <p class="con">查看</p>
-            </div>
-          </el-col>
-          <el-col :span="4">
-            <div class="grid-content bg-purple">
-              <p class="tit">文件名3</p>
-            </div>
-          </el-col>
-          <el-col :span="4">
-            <div class="grid-content bg-purple">
-              <p class="con">查看</p>
-            </div>
-          </el-col>
-        </el-row>
-       <el-row class="tab">
-          <el-col :span="4">
-            <div class="grid-content bg-purple">
-              <p class="tit">文件名4</p>
-            </div>
-          </el-col>
-          <el-col :span="4">
-            <div class="grid-content bg-purple">
-              <p class="con">查看</p>
-            </div>
-          </el-col>
-          <el-col :span="4">
-            <div class="grid-content bg-purple">
-              <p class="tit">文件名5</p>
-            </div>
-          </el-col>
-          <el-col :span="4">
-            <div class="grid-content bg-purple">
-              <p class="con">查看</p>
-            </div>
-          </el-col>
-          <el-col :span="4">
-            <div class="grid-content bg-purple">
-              <p class="tit">文件名6</p>
-            </div>
-          </el-col>
-          <el-col :span="4">
-            <div class="grid-content bg-purple">
-              <p class="con">查看</p>
-            </div>
-          </el-col>
-        </el-row>
+            <el-col :span="4">
+              <div class="grid-content bg-purple">
+                <p class="tit">文件名1</p>
+              </div>
+            </el-col>
+            <el-col :span="4">
+              <div class="grid-content bg-purple">
+                <p class="con">查看</p>
+              </div>
+            </el-col>
+            <el-col :span="4">
+              <div class="grid-content bg-purple">
+                <p class="tit">文件名2</p>
+              </div>
+            </el-col>
+            <el-col :span="4">
+              <div class="grid-content bg-purple">
+                <p class="con">查看</p>
+              </div>
+            </el-col>
+            <el-col :span="4">
+              <div class="grid-content bg-purple">
+                <p class="tit">文件名3</p>
+              </div>
+            </el-col>
+            <el-col :span="4">
+              <div class="grid-content bg-purple">
+                <p class="con">查看</p>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row class="tab">
+            <el-col :span="4">
+              <div class="grid-content bg-purple">
+                <p class="tit">文件名4</p>
+              </div>
+            </el-col>
+            <el-col :span="4">
+              <div class="grid-content bg-purple">
+                <p class="con">查看</p>
+              </div>
+            </el-col>
+            <el-col :span="4">
+              <div class="grid-content bg-purple">
+                <p class="tit">文件名5</p>
+              </div>
+            </el-col>
+            <el-col :span="4">
+              <div class="grid-content bg-purple">
+                <p class="con">查看</p>
+              </div>
+            </el-col>
+            <el-col :span="4">
+              <div class="grid-content bg-purple">
+                <p class="tit">文件名6</p>
+              </div>
+            </el-col>
+            <el-col :span="4">
+              <div class="grid-content bg-purple">
+                <p class="con">查看</p>
+              </div>
+            </el-col>
+          </el-row>
           <!-- <table border="1" cellspacing="0">
             <tr v-for="(item,i) in con" :key="i">
               <th>{{item.file_name}}</th>

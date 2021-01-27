@@ -1,16 +1,12 @@
 <template>
   <div>
     <div class="powerheadThre">
-      <el-button class="powerStaff" @click="staff">员工列表</el-button>
-      <el-button style="margin-left: -5px" class="powerDepart" @click="depart"
-        >科室列表</el-button
-      >
-      <el-button class="powerRole" style="margin-left: -5px" @click="role"
-        >角色列表</el-button
-      >
-      <el-button class="powerRole" style="margin-left: -5px" @click="editpow"
-        >编辑权限</el-button
-      >
+      <ul class="list">
+        <li class="stafflist" @click="staff">员工列表</li>
+        <li class="departlist" @click="depart">科室列表</li>
+        <li class="rolelist" @click="role">角色列表</li>
+        <li class="editpowlist" @click="editpow">编辑权限</li>
+      </ul>
       <el-button type="primary" icon="el-icon-circle-plus" class="powerAdd" @click="staffadd">新增
         </el-button>
     </div>

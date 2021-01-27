@@ -3,8 +3,8 @@
     <!-- top -->
     <div class="departaddThre">
       <span class="departaddSpan">编辑科室信息</span>
-      <div style="padding-right: 30px">
-        <el-button class="departaddgr" @click="departeditvueyes"
+      <div>
+        <el-button class="departaddgr" icon="iconfont el-icon-hospital-passwordbaocun" @click="departeditvueyes"
           >保存</el-button
         >
         <el-button

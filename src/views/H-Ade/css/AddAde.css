@@ -15,19 +15,18 @@
   font-size: 24px;
   font-weight: 700;
   color: #666EE8;
-  width: 94%;
+  /* width: 94%; */
   margin: 0 auto;
-  padding-top: 27px;
+  padding-top: 20px;
 }
 
 .addAll .formBasics h2 {
   text-align: left;
   font-size: 18px;
   padding-bottom: 10px;
+  margin-left: 30px;
 }
-.addAll .formBasics .form_con{
-  margin: 0 40px;
-}
+
 .addAll .formBasics .form_con .info .grid-content .el-form-item .el-form-item__content .el-select{
   width: 100%;
 }
@@ -40,8 +39,6 @@
 
 /* 关联患者信息 */
 .addAll .table_info {
-  width: 94%;
-  margin: 0 auto;
   margin-bottom: 100px;
 }
 
@@ -49,8 +46,13 @@
   font-size: 18px;
   font-weight: 700;
   color: #666EE8;
-  margin: 0 0 24px;
+  margin: 30px 0 24px;
+  padding-left: 30px;
   text-align: left;
+}
+.addAll .table_info .info{
+  width: 94%;
+  margin: 0 auto;
 }
 .addAll .table_info .info .el-table__header-wrapper .el-table__header .has-gutter tr th{
   background-color: #666EE866;
