@@ -292,8 +292,6 @@ export default {
           });
           this.reload();
         }
-<<<<<<< HEAD
-=======
         // else {
         //   this.$message({
         //     message: res.msg,
@@ -318,7 +316,6 @@ export default {
           this.$router.push("/dashboard");
         }
         console.log(res);
->>>>>>> 4e03505e1218afb920386f510129188a9ee4e284
       });
     },
     // 编辑权限
@@ -408,124 +405,7 @@ export default {
           }, 1000);
         }
       });
-<<<<<<< HEAD
-    },
-
-    // 添加权限
-    fathpowadd() {
-      this.dialogVisible = true;
-      this.selvalue = "0";
-      service.addpower().then((res) => {
-        console.log(res);
-        this.seldata = res.data;
-      });
-    },
-    // 添加权限的icon关闭
-    dialogeditright() {
-      this.dialogVisible = false;
-    },
-    // 添加下级
-    handleClick(id) {
-      this.dialogVisible = true;
-      console.log(id);
-      let param = {
-        id: id,
-      };
-      service.addpower().then((res) => {
-        console.log(res);
-        this.seldata = res.data;
-      });
-      service.getpowid(param).then((res) => {
-        console.log(res.data);
-        this.addsonseldata = res.data.lists;
-        this.addsonselvalue = res.data.info.pid;
-        this.selvalue = res.data.info.id;
-      });
-    },
-    // 添加下级确认
-    addsondialog() {
-      let data = {
-        sort: this.addsonpowpx,
-        status: this.addsonpowstatu,
-        name: this.addsonpowaps,
-        icon: this.addsonpowicon,
-        title: this.addsonpowlab,
-        pid: this.addsonselvalue,
-        id: this.addsonid,
-        url: this.addsonpowweb,
-      };
-      service.savepower(data).then((res) => {
-        if (res.code == 20010) {
-          this.$message({
-            message: res.msg,
-            type: "success",
-            duration: 1000,
-          });
-          this.reload();
-        } else {
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.reload();
-        }
-        this.$message({
-          type: "info",
-          message: "已取消操作",
-          duration: 1000,
-        });
-      });
-    },
-    // 编辑
-    handleEdit(id) {
-      this.dialogedit = true;
-      console.log(id);
-      let param = {
-        id: id,
-      };
-      service.getpowid(param).then((res) => {
-        console.log(res.data);
-        this.editseldata = res.data.lists;
-        this.editselvalue = res.data.info.pid;
-        this.editpowpx = res.data.info.sort;
-        this.editpowstatu = res.data.info.status;
-        this.editpowlab = res.data.info.title;
-        this.editpowicon = res.data.info.icon;
-        this.editpowaps = res.data.info.name;
-        this.editid = res.data.info.id;
-        this.editpowweb = res.data.info.url;
-      });
-    },
-    // 编辑权限确认
-    editdialog() {
-      let data = {
-        sort: this.editpowpx,
-        status: this.editpowstatu,
-        name: this.editpowaps,
-        icon: this.editpowicon,
-        title: this.editpowlab,
-        pid: this.editselvalue,
-        id: this.editid,
-        url: this.editpowweb,
-      };
-      console.log(data);
-      service.editsavepower(data).then((res) => {
-        console.log(res);
-        if (res.code == 20010) {
-          this.$message({
-            message: "保存成功！",
-            type: "success",
-            duration: 2000,
-          });
-          setTimeout(() => {
-            this.reload();
-          }, 1000);
-        }
-      });
-=======
       // }
->>>>>>> 4e03505e1218afb920386f510129188a9ee4e284
     },
     // 删除
     delpow(id) {
