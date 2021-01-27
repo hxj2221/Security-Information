@@ -16,6 +16,14 @@
     /* min-height: 811px; */
     margin: 20px auto 0;
 }
+.H-editAll .jurisdiction .departEdit{
+    border: none;
+    color: #666ee8;
+}
+.H-editAll .jurisdiction .departDel{
+    border: none;
+    color: #ff0000;
+}
 
 .H-editAll .content {
     border: 1px solid #e0e0e0;
