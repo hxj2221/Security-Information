@@ -93,7 +93,7 @@
                 >下载</el-button
               >
               <el-button
-                style="color: #1e1e1e"
+                style="color: #ff0000"
                 @click="deleteRow(scope.row.id)"
                 type="text"
                 size="small"
