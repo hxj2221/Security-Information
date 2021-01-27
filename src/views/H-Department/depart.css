@@ -11,6 +11,7 @@
     border-radius: 5px;
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
     min-height: 805px;
+    /* padding-bottom: 75px; */
 }
 
 .departheadThre {
@@ -83,7 +84,7 @@
     text-align: center;
     /* margin-left: -1px; */
     width: 94%;
-    min-height: 665px;
+    /* min-height: 676px; */
 }
 
 .departNameipt {
@@ -198,16 +199,16 @@
 
 /* 分页 */
 
-.departpag {
+/* .departpag {
     padding: 25px 25px;
     overflow: hidden;
 }
 
 .departpag>.block {
     text-align: right;
-}
+} */
 
-.el-input__inner {
+/* .el-input__inner {
     -webkit-appearance: none;
     background-color: #FFF;
     background-image: none;
@@ -224,4 +225,4 @@
     -webkit-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
     transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
     width: 100%;
-}
+} */

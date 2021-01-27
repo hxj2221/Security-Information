@@ -103,7 +103,8 @@
             </template>
           </el-table-column>
         </el-table>
-        <!-- 分页 -->
+      </div>
+      <!-- 分页 -->
         <div class="staffpag">
           <div class="block">
             <el-pagination
@@ -117,8 +118,7 @@
             >
             </el-pagination>
           </div>
-        </div>
-      </div>
+          </div>
     </div>
     <!-- 新增分类 -->
     <add-files v-show="addIsShow" @newly="newclassify()"></add-files>

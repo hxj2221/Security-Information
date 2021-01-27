@@ -7,7 +7,7 @@
         <el-table
           :data="tableData"
           :header-cell-style="getRowClass"
-          max-height="750"
+          max-height="630"
           row-key="id"
           border
           :tree-props="{
@@ -292,6 +292,33 @@ export default {
           });
           this.reload();
         }
+<<<<<<< HEAD
+=======
+        // else {
+        //   this.$message({
+        //     message: res.msg,
+        //     type: "error",
+        //     duration: 1000,
+        //   });
+        // }
+      });
+      //this.dialogVisible = false;
+      // }
+    },
+    // 加载数据
+    created() {
+      service.rulelist().then((res) => {
+        console.log(res);
+        if (res.code == 20403) {
+          this.$message({
+            type: "error",
+            message: res.msg,
+            duration: 1000,
+          });
+          this.$router.push("/dashboard");
+        }
+        console.log(res);
+>>>>>>> 4e03505e1218afb920386f510129188a9ee4e284
       });
     },
     // 编辑权限
@@ -381,6 +408,7 @@ export default {
           }, 1000);
         }
       });
+<<<<<<< HEAD
     },
 
     // 添加权限
@@ -495,6 +523,9 @@ export default {
           }, 1000);
         }
       });
+=======
+      // }
+>>>>>>> 4e03505e1218afb920386f510129188a9ee4e284
     },
     // 删除
     delpow(id) {

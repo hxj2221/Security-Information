@@ -14,7 +14,7 @@
     <div class="addmain">
       <el-form ref="form" :model="addStaff">
         <el-row :gutter="20">
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="员工编号" disabled>
               <el-input
                 class="dialog-input-text"
@@ -25,7 +25,7 @@
               ></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="员工姓名" required>
               <el-input
                 class="dialog-input-text"
@@ -35,19 +35,19 @@
               ></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="年龄" required>
               <el-input type="number" v-model="addStaff.age"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="性别" required>
               <el-select
                 class="dialog-input-text"
                 type="input"
                 autosize
                 v-model="addStaff.sex"
-                style="margin-top: 40px"
+                
                 placeholder="请选择"
               >
                 <el-option
@@ -141,7 +141,7 @@
                 type="input"
                 autosize
                 v-model="department_id"
-                style="margin-top: 40px"
+                
                 placeholder="请选择"
               >
                 <el-option
@@ -160,7 +160,7 @@
                 class="dialog-input-text"
                 type="input"
                 autosize
-                style="margin-top: 40px"
+                
                 v-model="addStaff.auth_grouap"
                 placeholder="请选择"
                 @change="departsel"
@@ -176,7 +176,7 @@
             </el-form-item>
           </el-col>
           <!-- <el-col :span="8">
-            <el-form-item style="margin-top: 40px" label="科室负责人">
+            <el-form-item  label="科室负责人">
               <el-switch
                 v-model="addStaff.head_department"
                 :active-value="0"
@@ -201,7 +201,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item style="margin-top: 40px" label="员工状态">
+            <el-form-item  label="员工状态">
               <el-switch
                 v-model="addStaff.status"
                 :active-value="1"
