@@ -27,7 +27,7 @@
       </div>
       <!-- 表格部分 -->
       <div class="articleList_table_table">
-        <div style="min-height:709px">
+        <div style="min-height:590px">
            <!-- 表格 -->
         <el-table
         max-height="662"

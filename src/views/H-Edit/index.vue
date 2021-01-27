@@ -7,7 +7,7 @@
         <el-table
           :data="tableData"
           :header-cell-style="getRowClass"
-          max-height="750"
+          max-height="630"
           row-key="id"
           border
           :tree-props="{
