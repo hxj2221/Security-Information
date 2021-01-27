@@ -129,7 +129,7 @@ export default {
   },
   // 跳转医患
   comtocon: async (event_number: any) => {
-    return await service.get(`${baseUrl}api/record/record`,{ params:{event_number:event_number}}).then(res => res).catch(err => err)
+    return await service.get(`${baseUrl}api/record/record`, { params: { event_number: event_number } }).then(res => res).catch(err => err)
   },
   // 不良事件列表
   AdeList: async (params: any) => {
@@ -315,23 +315,44 @@ export default {
   },
   // 文章列表 (post)
   detailList: async () => {
-    return await service.post(`${baseUrl}api/article/article_cate`).then(res => res).catch(err => err)
+    return await service.post(`${baseUrl}api/article/article`).then(res => res).catch(err => err)
   },
-  // 文章列表（get）
-  detaillist: async () => {
-    return await service.get(`${baseUrl}api/article/article_cate`).then(res => res).catch(err => err)
-  },
-  // 添加文章
+
+  // 文章分类
   AriList: async (params: any) => {
-    return await service.get(`${baseUrl}api/article/article_cate_add`, { params }).then(res => res).catch(err => err)
+    return await service.get(`${baseUrl}api/article/article_cate`, { params }).then(res => res).catch(err => err)
   },
-   // 关联投诉 (get)
-   Related : async () => {
+  // 文章分类编辑
+  AriEdit: async (params: any) => {
+    return await service.get(`${baseUrl}api/article/article_cate_eit`, { params }).then(res => res).catch(err => err)
+  },
+  // 文章分类编辑
+  Ariedit: async (data: any) => {
+    return await service.post(`${baseUrl}api/article/article_cate_eit`, data).then(res => res).catch(err => err)
+  },
+  // 文章分类删除
+  AriDel: async (params: any) => {
+    return await service.get(`${baseUrl}api/Article/classification_del`, { params }).then(res => res).catch(err => err)
+  },
+  // 文章分类更改状态
+  AriStatus: async (data: any) => {
+    return await service.post(`${baseUrl}api/Article/classification_status`, data).then(res => res).catch(err => err)
+  },
+  // 添加分类（post）
+  AriAdd: async (data: any) => {
+    return await service.post(`${baseUrl}api/article/article_cate_add`, data).then(res => res).catch(err => err)
+  },
+  // 添加分类（get）
+  Ariadd: async () => {
+    return await service.get(`${baseUrl}api/article/article_cate_add`).then(res => res).catch(err => err)
+  },
+  // 关联投诉 (get)
+  Related: async () => {
     return await service.get(`${baseUrl}api/record/addevent`).then(res => res).catch(err => err)
   },
-   // 关联投诉(post)
-   related : async (data:any) => {
-    return await service.post(`${baseUrl}api/record/addevent`,data).then(res => res).catch(err => err)
+  // 关联投诉(post)
+  related: async (data: any) => {
+    return await service.post(`${baseUrl}api/record/addevent`, data).then(res => res).catch(err => err)
   },
   // 医患列表
   patientList: async (params: any) => {
@@ -355,11 +376,11 @@ export default {
   },
   // 点击上传附件按钮
   upLode: async (params: any) => {
-    return await service.get(`${baseUrl}api/record/upload_attachment`, { params }).then(res => res).catch(err => err)
+    return await service.get(`${baseUrl}api/record/event_base64_uploadfiles`, { params }).then(res => res).catch(err => err)
   },
   // 上传附件 确定
   uplode: async (data: any) => {
-    return await service.post(`${baseUrl}api/record/upload_attachment`, data).then(res => res).catch(err => err)
+    return await service.post(`${baseUrl}api/record/event_base64_uploadfiles`, data).then(res => res).catch(err => err)
   },
   // 医患详情
   details: async (data: any) => {
@@ -424,19 +445,19 @@ export default {
   },
   // 字典管理
   // 列表
-  DicList: async (params:any) => {
-    return await service.get(`${baseUrl}api/Dictionary/gettype`,{params}).then(res => res).catch(err => err)
+  DicList: async (params: any) => {
+    return await service.get(`${baseUrl}api/Dictionary/gettype`, { params }).then(res => res).catch(err => err)
   },
   // 添加
-  DicAdd: async (params:any) => {
-    return await service.post(`${baseUrl}api/Dictionary/add`,params).then(res => res).catch(err => err)
+  DicAdd: async (params: any) => {
+    return await service.post(`${baseUrl}api/Dictionary/add`, params).then(res => res).catch(err => err)
   },
   // 编辑
-  DicEdit: async (params:any) => {
-    return await service.post(`${baseUrl}api/Dictionary/edit`,params).then(res => res).catch(err => err)
+  DicEdit: async (params: any) => {
+    return await service.post(`${baseUrl}api/Dictionary/edit`, params).then(res => res).catch(err => err)
   },
   // 删除
-  DicDel: async (params:any) => {
-    return await service.post(`${baseUrl}api/Dictionary/del`,params).then(res => res).catch(err => err)
+  DicDel: async (params: any) => {
+    return await service.post(`${baseUrl}api/Dictionary/del`, params).then(res => res).catch(err => err)
   },
 }
