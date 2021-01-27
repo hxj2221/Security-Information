@@ -54,7 +54,6 @@
           <el-table-column prop="department[0].title" label="所属科室">
           </el-table-column>
           <el-table-column prop="auth_grouap" label="角色"> </el-table-column>
-          <el-table-column prop="auth_grouap" label="角色"> </el-table-column>
           <el-table-column
             prop="user[0].name"
             label="创建人员"
@@ -164,6 +163,7 @@ export default {
     });
 
     service.stafflist().then((res) => {
+      // console.log(res)
       if (res.code == 20403) {
         this.$message({
           type: "error",

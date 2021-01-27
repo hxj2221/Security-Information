@@ -266,6 +266,7 @@ export default {
     // 上传文件取消
     Close() {
       this.dialogVisible = false;
+      this.reload();
     },
     handleChange(file, fileList) {
       this.file = fileList[0];
