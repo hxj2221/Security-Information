@@ -91,6 +91,9 @@
       return {
         departvue: true,
         currentPage: 1,
+        nums: [8, 10, 20],
+        num: 8,
+        total:0,
         adddep: false,
         editdep: false,
         currentRow: [], //选中的值
@@ -151,6 +154,10 @@
           _this.errorStr = "图片大小超出范围";
         }
       },
+      handleSizeChange(){
+
+      },
+      handleCurrentChange(){},
       // 新增
       fathpowadd() {
         this.departvue = !this.departvue;
@@ -224,12 +231,12 @@
       handleEdit(id) {
         this.editdep = true;
         this.departvue = false;
-        console.log(id);
+        // console.log(id);
         let param = {
           id: id,
         };
         service.departedit(param).then((res) => {
-          console.log(res);
+          // console.log(res);
           this.departchildedit = res;
           //this.departchildedit = res.user.sex;
         });
@@ -245,9 +252,9 @@
             let data = {
               id: id,
             };
-            console.log(data);
+            // console.log(data);
             service.departdel(data).then((res) => {
-              console.log(res);
+              // console.log(res);
               this.$message({
                 type: "success",
                 message: res.msg,

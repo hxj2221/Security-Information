@@ -14,25 +14,25 @@
       <el-form ref="form">
         <div class="searchAll_search">
           <el-form-item label="患者姓名" label-width="80px">
-            <el-input clearable v-model="patient_name" placeholder="请输入内容"></el-input>
+            <el-input clearable v-model="patient_name" placeholder="请输入内容" @clear="clean"></el-input>
           </el-form-item>
           <el-form-item label="发生地点" label-width="80px">
-            <el-select clearable v-model="occur_scene" placeholder="请选择">
+            <el-select clearable v-model="occur_scene" placeholder="请选择" @clear="clean">
               <el-option label="请选择" value=""></el-option>
               <el-option v-for="item in options" :key="item.id" :label="item.title" :value="item.id">
               </el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="事发日期" label-width="80px">
-            <el-date-picker style="width:240px" v-model="occur_time" type="daterange" range-separator="至"
-              start-placeholder="开始日期" end-placeholder="结束日期" format="yyyy-MM-dd" value-format="yyyy-MM-dd"
-              :picker-options="pickerOptions">
+            <el-date-picker style="width:240px" clearable @clear="clean" v-model="occur_time" type="daterange"
+              range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" format="yyyy-MM-dd"
+              value-format="yyyy-MM-dd" :picker-options="pickerOptions">
             </el-date-picker>
           </el-form-item>
         </div>
         <div class="searchAll_search">
           <el-form-item label="轻重程度" label-width="80px">
-            <el-select clearable style="width: 562px;" v-model="degree_weight_id" placeholder="请选择">
+            <el-select clearable style="width: 562px;" v-model="degree_weight_id" placeholder="请选择" @clear="clean">
               <el-option label="请选择" value=""></el-option>
               <el-option v-for="item in options1" :key="item.id" :label="item.title" :value="item.id">
               </el-option>
@@ -44,37 +44,38 @@
     </div>
     <!-- 内容 -->
     <div style="min-height: 600px;">
-      <el-table class="elTable"  max-height="600" :data="tableData" :header-cell-style="getRowClass">
-      <el-table-column type="index" label="序号" width="50">
-      </el-table-column>
-      <el-table-column prop="event_num" label="事件编码" width="180">
-      </el-table-column>
-      <el-table-column prop="patient_name" label="患者姓名">
-      </el-table-column>
-      <el-table-column prop="sex" label="性别">
-      </el-table-column>
-      <el-table-column prop="age" label="年龄">
-      </el-table-column>
-      <el-table-column prop="occur_time" :formatter="getDate" label="事发日期" width="180">
-      </el-table-column>
-      <el-table-column prop="occurscene.title" label="发生场所">
-      </el-table-column>
-      <el-table-column prop="degreeweight.title" label="轻重程度" :show-overflow-tooltip='true'>
-      </el-table-column>
-      <el-table-column prop="create_time" label="上报时间" width="180">
-      </el-table-column>
-      <el-table-column prop="department.title" label="患者科室">
-      </el-table-column>
-      <el-table-column prop="create_uid" label="上报人">
-      </el-table-column>
-      <el-table-column fixed="right" label="操作">
-        <template slot-scope="scope">
-          <el-button style="color:#666ee8" @click="handleClick(scope.$index,scope.row)" type="text" size="small">查看</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+      <el-table class="elTable" max-height="600" :data="tableData" :header-cell-style="getRowClass">
+        <el-table-column type="index" label="序号" width="50">
+        </el-table-column>
+        <el-table-column prop="event_num" label="事件编码" width="180">
+        </el-table-column>
+        <el-table-column prop="patient_name" label="患者姓名">
+        </el-table-column>
+        <el-table-column prop="sex" label="性别">
+        </el-table-column>
+        <el-table-column prop="age" label="年龄">
+        </el-table-column>
+        <el-table-column prop="occur_time" :formatter="getDate" label="事发日期" width="180">
+        </el-table-column>
+        <el-table-column prop="occurscene.title" label="发生场所">
+        </el-table-column>
+        <el-table-column prop="degreeweight.title" label="轻重程度" :show-overflow-tooltip='true'>
+        </el-table-column>
+        <el-table-column prop="create_time" label="上报时间" width="180">
+        </el-table-column>
+        <el-table-column prop="department.title" label="患者科室" :show-overflow-tooltip='true'>
+        </el-table-column>
+        <el-table-column prop="create_uid" label="上报人">
+        </el-table-column>
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-button style="color:#666ee8" @click="handleClick(scope.$index,scope.row)" type="text" size="small">查看
+            </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
     </div>
-    
+
     <!-- 分页 -->
     <div class="paging">
       <div class="block">
@@ -97,7 +98,9 @@
       return {
         // 检索
         patient_name: '', //患者姓名
-        occur_time: '', // 事发日期
+        occur_time: [], // 事发日期
+        starttime:'',//开始日期
+        endtime:'',//结束日期
         occur_scene: '', //发生地点
         degree_weight_id: '', //轻重程度      
         pickerOptions: {
@@ -141,6 +144,17 @@
         pageSize: 8,
         eventNum: '', // 事件编码
       };
+    },
+    watch: {
+      occur_time: function (val, oldVal) {
+        if (val !== null) {
+          this.starttime = val[0];
+          this.endtime = val[1];
+        } else {
+          this.starttime = null;
+          this.endtime = null;
+        }
+      },
     },
     methods: {
       // 设置表头颜色
@@ -228,8 +242,8 @@
           // console.log(this.occur_time)
           let params = {
             patient_name: this.patient_name,
-            starttime: this.occur_time[0],
-            endtime: this.occur_time[1],
+            starttime: this.starttime,
+            endtime: this.endtime,
             occur_scene: this.occur_scene,
             degree_weight_id: this.degree_weight_id,
             pageNum: this.currentPage4,
@@ -285,6 +299,40 @@
           })
         }
       },
+      // 清除搜索
+      clean() {
+        let params = {
+          patient_name: this.patient_name,
+          starttime: this.starttime,
+          endtime: this.endtime,
+          occur_scene: this.occur_scene,
+          degree_weight_id: this.degree_weight_id,
+          pageNum: this.currentPage4,
+          pageSize: this.pageSize
+        }
+        console.log(params)
+        service.AdeSearch(params).then(res => {
+          // console.log(res)
+          if (res.code == 20010) {
+            this.tableData = res.data
+            this.pageCount = res.allnews
+          } else if (res.code == 20401) {
+            this.$message({
+              message: "请重新登陆",
+              type: "error",
+              duration: 1000,
+            });
+            this.$router.push('/login')
+          } else if (res.code == 20403) {
+            this.$message({
+              message: res.msg,
+              type: "error",
+              duration: 1000,
+            });
+            this.$router.push('/dashboard')
+          }
+        })      
+      },
 
       // 分页
       // 当前页
@@ -295,8 +343,8 @@
           .patient_name !== '' || this.occur_scene !== '' || this.degree_weight_id !== '') {
           let params = {
             patient_name: this.patient_name,
-            starttime: this.occur_time[0],
-            endtime: this.occur_time[1],
+            starttime: this.starttime,
+            endtime: this.endtime,
             occur_scene: this.occur_scene,
             degree_weight_id: this.degree_weight_id,
             pageNum: this.currentPage4,
@@ -359,8 +407,8 @@
           .patient_name !== '' || this.occur_scene !== '' || this.degree_weight_id !== '') {
           let params = {
             patient_name: this.patient_name,
-            starttime: this.occur_time[0],
-            endtime: this.occur_time[1],
+            starttime: this.starttime,
+            endtime: this.endtime,
             occur_scene: this.occur_scene,
             degree_weight_id: this.degree_weight_id,
             pageNum: this.currentPage4,
@@ -425,7 +473,7 @@
         pageSize: this.pageSize
       }
       service.AdeList(params).then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.cede == 20401) {
           this.$message({
             message: "请重新登陆",

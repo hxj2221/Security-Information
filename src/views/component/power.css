@@ -4,6 +4,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 30px;
+    border-bottom: 3px solid #f2f2f2;
 }    
 .powerheadThre .list{
     list-style: none;
@@ -14,6 +15,7 @@
     border: 1px solid #ccc;
     padding: 12px 20px;
     cursor: pointer;
+    color: #ccc;
 }  
 .powerheadThre .list .stafflist{
     border-top-left-radius: 5px;
@@ -52,7 +54,4 @@
 .powerheadThre .list .editpowlist:hover{
     background-color: #666ee8;
     color: #fff;
-    background: #666ee8;
-    border: 3px solid #666ee8;
-    border-radius: 5px;
 }

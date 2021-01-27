@@ -20,7 +20,7 @@
           </el-table-column>
           <el-table-column prop="level" label="等级" width="180">
           </el-table-column>
-          <el-table-column label="左侧图标">
+          <el-table-column prop="icon" label="左侧图标">
             <template v-for="item in tableData">
               <i :key="item.id" :class="item.icon"></i>
             </template>
@@ -88,8 +88,8 @@
         </div>
         <!-- 编辑权限 -->
         <div>
-          <el-dialog title="编辑权限" :visible.sync="dialogedit" :close-on-click-modal="false" width="width"
-            :before-close="dialogBeforeCl">
+          <el-dialog title="编辑权限" :visible.sync="dialogedit" :close-on-click-modal="false"
+            >
             <el-form label-width="80px" ref="editForm">
               <el-form-item label="上级" width="120">
                 <el-select v-model="editselvalue" @change="selchang" placeholder="请选择" required>
@@ -144,8 +144,52 @@
     components: {
       headpow,
     },
-    // 权限确认
-    dialog() {
+    data(){
+      return{
+        tableData:[],//权限内容
+        dialogVisible:false,//添加权限弹框
+        selvalue:'',//上级下拉框
+        seldata:'',//顶级下拉框
+        powpx:'',//排序
+        powstatu:'',//状态
+        powlab:'',//标题
+        powicon:'',//图标
+        powaps:'',//后端接口
+        powweb:'',//前端路由
+        dialogedit:false,//编辑权限弹框
+        editselvalue:'',//上级下拉框
+        editseldata:'',//顶级下拉框
+        editpowpx:'',//排序
+        editpowstatu:'',//状态
+        editpowlab:'',//标题
+        editpowicon:'',//图标
+        editpowaps:'',//后端接口
+        editpowweb:'',//前端路由
+      }
+    },
+    
+    // 加载数据
+    created() {
+      service.rulelist().then((res) => {
+        console.log(res);
+        if (res.code == 20403) {
+          this.$message({
+            type: "error",
+            message: res.msg,
+            duration: 1000,
+          });
+          this.$router.push("/dashboard");
+        }
+        this.tableData = res.data;
+      });
+    },
+    methods: {
+      // 编辑/添加权限下拉值
+      selchang() {
+        console.log(this.editselvalue);
+      },
+      // 权限确认
+      dialog() {
       if (this.powpx != "^[0-9]*$") {
         this.$message({
           message: "排序必须是整数",
@@ -207,69 +251,6 @@
         //this.dialogVisible = false;
       }
     },
-
-    // 添加权限
-    fathpowadd() {
-      this.dialogVisible = true;
-      this.selvalue = "0";
-      service.addpower().then((res) => {
-        console.log(res);
-        this.seldata = res.data;
-      });
-    },
-    // 添加权限的icon关闭
-    dialogeditright() {
-      this.dialogVisible = false;
-    },
-    // 加载数据
-    created() {
-      service.rulelist().then((res) => {
-        console.log(res);
-        if (res.code == 20403) {
-          this.$message({
-            type: "error",
-            message: res.msg,
-            duration: 1000,
-          });
-          this.$router.push("/dashboard");
-        }
-        this.tableData = res.data;
-      });
-    },
-    methods: {
-      // 编辑/添加权限下拉值
-      selchang() {
-        console.log(this.editselvalue);
-      },
-      // 权限确认
-      dialog() {
-        let data = {
-          sort: this.powpx,
-          status: this.powstatu,
-          title: this.powlab,
-          icon: this.powicon,
-          pid: this.selvalue,
-          name: this.powaps,
-          url: this.powweb,
-        };
-        service.savepower(data).then((res) => {
-          if (res.code == 20010) {
-            this.$message({
-              message: res.msg,
-              type: "success",
-              duration: 1000,
-            });
-            this.reload();
-          } else {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-          }
-        });
-        this.dialogVisible = false;
-      },
 
       // 添加权限
       fathpowadd() {
@@ -457,7 +438,7 @@
           });
         console.log(id);
       },
-
+      // 表头颜色
       getRowClass({
         rowIndex
       }) {

@@ -149,9 +149,8 @@
 /* 分页 */
 
 .allManage .block {
-    text-align: right;
     margin-right: 42px;
-    padding: 25px 0;
+    padding: 25px 0 60px;
 }
 
 

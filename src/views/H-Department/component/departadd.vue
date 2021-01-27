@@ -104,7 +104,7 @@
     },
     created() {
       service.departadd().then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.options = res.data.lists;
         this.numb = res.data.number;
       });
@@ -123,7 +123,7 @@
           sort: this.departpxipt,
         };
         service.departsave(data).then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.code == 20010) {
             const loading = this.$loading({
               lock: true,

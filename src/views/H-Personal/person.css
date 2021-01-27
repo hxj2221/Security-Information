@@ -73,38 +73,20 @@
     width: 100%;
 }
 
-.persongr {
-    border-left: 2px solid #ccc;
-    border-top: 2px solid #ccc;
-    border-bottom: 2px solid #ccc;
-    border-radius: 5px;
-    background-color: #666ee8;
+/* 按钮 */
+.personall .person_button{
+    text-align: left;
+    margin-left: 30px;
+    margin-top: 30px;
+}
+.personall .person_button .persongr{
+    background: #666ee8;
     color: #fff;
+    border: 1px solid #666ee8;
 }
-
-.persongr:hover {
-    background-color: #666ee8;
-}
-
-.personb {
-    border-color: #666ee8;
+.personall .person_button .personb{
+    background: none;
+    border: 1px solid #666ee8;
     color: #666ee8;
-    border-radius: 5px;
-
-}
-
-.personb:hover {
-    background-color: #666ee8;
-    color: #fff;
-}
-
-.person_button {
-    overflow: hidden;
-    margin-left: 40px;
-    margin-top: 40px;
-}
-
-.person_button>.el-button {
-    float: left;
-    margin-left: 40px;
+    margin-left: 30px;
 }

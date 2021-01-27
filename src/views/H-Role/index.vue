@@ -11,7 +11,7 @@
       <div class="roleTable">
         <el-table max-height="662" :data="tables" tooltip-effect="dark"
           :header-cell-style="{ background: '#C2C5F6',color:'#000' }" :cell-style="{ background: '#fff' }">
-          <el-table-column width="50px" label="序号" type="index" :index="indexMethod">
+          <el-table-column width="50px" label="序号" type="index">
           </el-table-column>
           <el-table-column prop="sort" label="角色排序">
           </el-table-column>

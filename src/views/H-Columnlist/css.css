@@ -94,7 +94,9 @@
 .el-table th {
     text-align: center;
 }
-
+.columnList_table>.el-table .el-button:first-child {
+    color: #666ee8;
+}
 .columnList_table>.el-table .el-button:last-child {
     color: #f00;
 }
