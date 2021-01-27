@@ -21,12 +21,12 @@ const service = axios.default.create({
 })
 
 service.interceptors.request.use((config: AxiosRequestConfig) => {
-  
+
   if (sessionStorage.getItem('token')) {
-  
+
     config.headers.token = sessionStorage.getItem('token');  //让请求头携带验证token
     // config.headers.admin = localStorage.getItem('user'); // 让每个请求携带自定义token 请根据实际情况自行修改
-  
+    //console.log(config.headers.token)
 
   }
   return config
@@ -47,10 +47,10 @@ service.interceptors.response.use((response: AxiosResponse) => {
       duration: 3 * 1000
     });
     return { code: 100 }
-  } else{
+  } else {
     let res = response.data;
     if (response.data.token) {
-      
+
       // sessionStorage.setItem('token', response.data.token)
     }
     // if (code === -1) {

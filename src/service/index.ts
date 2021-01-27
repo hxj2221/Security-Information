@@ -129,7 +129,7 @@ export default {
   },
   // 跳转医患
   comtocon: async (event_number: any) => {
-    return await service.get(`${baseUrl}api/record/record`,{ params:{event_number:event_number}}).then(res => res).catch(err => err)
+    return await service.get(`${baseUrl}api/record/record`, { params: { event_number: event_number } }).then(res => res).catch(err => err)
   },
   // 不良事件列表
   AdeList: async (params: any) => {
@@ -325,13 +325,13 @@ export default {
   AriList: async (params: any) => {
     return await service.get(`${baseUrl}api/article/article_cate_add`, { params }).then(res => res).catch(err => err)
   },
-   // 关联投诉 (get)
-   Related : async () => {
+  // 关联投诉 (get)
+  Related: async () => {
     return await service.get(`${baseUrl}api/record/addevent`).then(res => res).catch(err => err)
   },
-   // 关联投诉(post)
-   related : async (data:any) => {
-    return await service.post(`${baseUrl}api/record/addevent`,data).then(res => res).catch(err => err)
+  // 关联投诉(post)
+  related: async (data: any) => {
+    return await service.post(`${baseUrl}api/record/addevent`, data).then(res => res).catch(err => err)
   },
   // 医患列表
   patientList: async (params: any) => {
@@ -376,7 +376,7 @@ export default {
   },
   // 文件库新增分类treelist
   docaddtree: async () => {
-    return await service.get(`${baseUrl}user/Fileclass/classtree`).then(res => res).catch(err => err)
+    return await service.get(`${baseUrl}api/fileclass/addclass`).then(res => res).catch(err => err)
   },
   // 文件库新增分类tree
   docadd: async (data: object) => {
@@ -399,16 +399,16 @@ export default {
     return await service.post(`${baseUrl}api/fileclass/editclass`, data).then(res => res).catch(err => err)
   },
   // 文件库文件list
-  filelist: async () => {
-    return await service.get(`${baseUrl}api/file/lists`).then(res => res).catch(err => err)
+  filelist: async (params: any) => {
+    return await service.get(`${baseUrl}api/file/lists`, { params }).then(res => res).catch(err => err)
   },
   // 文件库文件分类
   filetree: async () => {
-    return await service.get(`${baseUrl}api/file/addfile`).then(res => res).catch(err => err)
+    return await service.get(`${baseUrl}api/file/event_base64_uploadfiles`).then(res => res).catch(err => err)
   },
   // 文件库文件上传
   fileupload: async (data: object) => {
-    return await service.post(`${baseUrl}api/file/addfile`, data).then(res => res).catch(err => err)
+    return await service.post(`${baseUrl}api/file/event_base64_uploadfiles`, data).then(res => res).catch(err => err)
   },
   // 文件库文件下载
   filedown: async (params: any) => {
@@ -424,19 +424,19 @@ export default {
   },
   // 字典管理
   // 列表
-  DicList: async (params:any) => {
-    return await service.get(`${baseUrl}api/Dictionary/gettype`,{params}).then(res => res).catch(err => err)
+  DicList: async (params: any) => {
+    return await service.get(`${baseUrl}api/Dictionary/gettype`, { params }).then(res => res).catch(err => err)
   },
   // 添加
-  DicAdd: async (params:any) => {
-    return await service.post(`${baseUrl}api/Dictionary/add`,params).then(res => res).catch(err => err)
+  DicAdd: async (params: any) => {
+    return await service.post(`${baseUrl}api/Dictionary/add`, params).then(res => res).catch(err => err)
   },
   // 编辑
-  DicEdit: async (params:any) => {
-    return await service.post(`${baseUrl}api/Dictionary/edit`,params).then(res => res).catch(err => err)
+  DicEdit: async (params: any) => {
+    return await service.post(`${baseUrl}api/Dictionary/edit`, params).then(res => res).catch(err => err)
   },
   // 删除
-  DicDel: async (params:any) => {
-    return await service.post(`${baseUrl}api/Dictionary/del`,params).then(res => res).catch(err => err)
+  DicDel: async (params: any) => {
+    return await service.post(`${baseUrl}api/Dictionary/del`, params).then(res => res).catch(err => err)
   },
 }
