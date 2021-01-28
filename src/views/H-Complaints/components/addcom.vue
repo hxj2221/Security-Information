@@ -422,7 +422,7 @@ inject: ["reload"],
     keepform() {
       if (this.comde !== "" && this.comde !== null&&this.comde.length!==0&&this.incidentdata !== ""&&this.comdata !== ""&&this.comname !== ""&&
       this.comgender!==''&&this.comagenumber !== ""&&this.comphone!== ""&&this.commode!== ""&&this.relation!==''&&this.consulttime!==''
-      &&this.nature!==''&&this.comtype!==''&&this.agentname!==''&&this. agentphone!=='') {
+      &&this.nature!==''&&this.comtype!==''&&this.agentname!==''&&this. agentphone!==''&& this.address!=='') {
         let one=new Array
         let two=new Array
        for(let i in this.comde){
@@ -438,6 +438,7 @@ inject: ["reload"],
         event_number: this.comnumber, //业务编号
         event_type: this.comtype, //投诉类型
         cause: this.reason, //投诉原因
+        address:this.address,//联系地址
         occur_time:this.incidentdata, //事发时间
         department_id: comdes, //投诉科室
         create_time:this.comdata, //投诉日期
@@ -453,6 +454,7 @@ inject: ["reload"],
         handle_name: this.agentname, //经办人姓名
         handle_phone: this.agentphone, //经办人手机号
       };
+      console.log(params)
       service.AddComponent(params).then((res) => {
         if(res.code==20010){
            this.$message({
@@ -487,6 +489,13 @@ inject: ["reload"],
         }
         
       });
+       }
+         else if(this.address == ""|| this.address == null){
+          this.$message({
+            message:'请输入联系地址',
+            type: "error",
+            duration: 1000,
+          });
        }
        else if(this.comde == ""|| this.comde == null){
           this.$message({

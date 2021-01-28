@@ -249,7 +249,7 @@
                        </el-table-column>
                         <el-table-column
                           prop="file_size"
-                          label="文件大小/kb"
+                          label="文件大小"
                           width="width"
                         >
                         </el-table-column>
@@ -421,7 +421,7 @@
                        </el-table-column>
                         <el-table-column
                           prop="file_size"
-                          label="文件大小/kb"
+                          label="文件大小"
                           width="width"
                         >
                         </el-table-column>
@@ -957,7 +957,7 @@
                       </el-table-column>
                       <el-table-column
                         prop="file_size"
-                        label="文件大小/kb"
+                        label="文件大小"
                         width="width"
                       >
                       </el-table-column>
@@ -1013,6 +1013,7 @@
                  maxlength="50"
                 placeholder="请输入文件描述"
                  :autosize="{ minRows: 2, maxRows: 2}"
+                 style="max-heiht:100px"
               ></el-input>
             </el-form-item>
             
