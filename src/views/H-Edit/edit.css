@@ -11,12 +11,7 @@
     border-radius: 5px;
     box-shadow: 0 0 2px rgb(184, 183, 183);
 }
-<<<<<<< HEAD
-
-.H-editAll .jurisdiction {
-=======
 .H-edit .jurisdiction{
->>>>>>> ecae58e4c9eb9b6297fcdcd5047ba439fdf32bf2
     width: 92%;
     min-height: 800px;
     margin: 0 auto;

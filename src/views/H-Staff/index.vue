@@ -39,43 +39,24 @@
       <!-- 表格部分 -->
       <div class="staffIptTab">
         <el-table
-<<<<<<< HEAD
-          height="300px"
-=======
           max-height="662"
->>>>>>> ecae58e4c9eb9b6297fcdcd5047ba439fdf32bf2
           :data="tables"
           :header-cell-style="{ background: '#C2C5F6', color: '#000' }"
           :cell-style="{ background: '#fff' }"
         >
           <el-table-column width="50" label="序号" type="index">
           </el-table-column>
-<<<<<<< HEAD
-          <el-table-column prop="job_number" label="工号" width="120">
-          </el-table-column>
-          <el-table-column prop="name" label="员工姓名"> </el-table-column>
-          <el-table-column prop="sex.name" label="员工性别"> </el-table-column>
-          <el-table-column prop="age" label="员工年龄"> </el-table-column>
-          <el-table-column prop="phone" label="手机号码" width="108">
-          </el-table-column>
-=======
           <el-table-column prop="job_number" label="工号"> </el-table-column>
           <el-table-column prop="name" label="员工姓名"> </el-table-column>
           <el-table-column prop="sex.name" label="员工性别"> </el-table-column>
           <el-table-column prop="age" label="员工年龄"> </el-table-column>
           <el-table-column prop="phone" label="手机号码"> </el-table-column>
->>>>>>> ecae58e4c9eb9b6297fcdcd5047ba439fdf32bf2
           <el-table-column prop="department[0].title" label="所属科室">
           </el-table-column>
           <el-table-column
             prop="auth_grouap"
-<<<<<<< HEAD
-            :show-overflow-tooltip="true"
-            label="角色"
-=======
             label="角色"
             :show-overflow-tooltip="true"
->>>>>>> ecae58e4c9eb9b6297fcdcd5047ba439fdf32bf2
           >
           </el-table-column>
           <el-table-column

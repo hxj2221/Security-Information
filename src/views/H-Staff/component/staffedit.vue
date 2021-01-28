@@ -57,10 +57,7 @@
                 type="input"
                 autosize
                 v-model="addStaff.sex"
-<<<<<<< HEAD
-=======
                 style="margin-top: 40px"
->>>>>>> ecae58e4c9eb9b6297fcdcd5047ba439fdf32bf2
                 placeholder="请选择"
               >
                 <el-option
@@ -154,10 +151,7 @@
                 type="input"
                 autosize
                 v-model="department_id"
-<<<<<<< HEAD
-=======
                 style="margin-top: 40px"
->>>>>>> ecae58e4c9eb9b6297fcdcd5047ba439fdf32bf2
                 placeholder="请选择"
               >
                 <el-option
@@ -176,11 +170,7 @@
                 class="dialog-input-text"
                 type="input"
                 autosize
-<<<<<<< HEAD
-                multiple
-=======
                 style="margin-top: 40px"
->>>>>>> ecae58e4c9eb9b6297fcdcd5047ba439fdf32bf2
                 v-model="addStaff.auth_grouap"
                 placeholder="请选择"
                 @change="departsel"
@@ -221,11 +211,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-<<<<<<< HEAD
-            <el-form-item label="员工状态">
-=======
             <el-form-item style="margin-top: 40px" label="员工状态">
->>>>>>> ecae58e4c9eb9b6297fcdcd5047ba439fdf32bf2
               <el-switch
                 v-model="addStaff.status"
                 :active-value="1"
