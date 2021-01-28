@@ -88,7 +88,7 @@
           </el-col>
           <el-col :span="6">
             <el-form-item label="角色" required>
-              <el-select type="input" autosize v-model="addStaff.auth_grouap" placeholder="请选择" @change="departsel">
+              <el-select type="input" autosize v-model="addStaff.auth_grouap" placeholder="请选择">
                 <el-option v-for="item in optionrole" :key="item.id" :label="item.title" :value="item.id">
                 </el-option>
               </el-select>
@@ -135,7 +135,6 @@
     Aepyee
   } from "@/network/Sta.js";
 
-<<<<<<< HEAD
 import qs from "qs";
 import service from "@/service/index";
 //地址级联选择器
@@ -173,6 +172,7 @@ export default {
         password: "", //密码
         address: [], //地址
       },
+      department_id:'',
       addressC: [],
       staffroleselC: [],
       // 性别循环
@@ -246,6 +246,10 @@ export default {
         }
       });
     },
+    // 返回
+    staffaddvueno(){
+      this.$parent.fathstaffno();
+    },
     handleChange(cityvalue) {
       CodeToText[cityvalue[0]],
         CodeToText[cityvalue[1]],
@@ -258,146 +262,6 @@ export default {
         CodeToText[cityvalue[2]];
       console.log(this.addressC);
       console.log(this.addStaff.address);
-=======
-  import qs from "qs";
-  import service from "@/service/index";
-  //地址级联选择器
-  import {
-    provinceAndCityData,
-    regionData,
-    provinceAndCityDataPlus,
-    regionDataPlus,
-    CodeToText,
-    TextToCode,
-  } from "element-china-area-data";
-  export default {
-    components: {},
-    inject: ["reload"],
-    props: {},
-    data() {
-      return {
-        options: regionData,
-        addStaff: {
-          job_number: "", // 员工编号
-          // staffNumInput: "",
-          name: "", // 姓名
-          age: "", //年龄
-          // staffAgesel: "", //年龄岁月天
-          sex: "", //性别
-          phone: "", //手机号
-          email: "", //电子邮箱
-          cardnumber: "", //证件号码
-          position: "", //职位
-          eraddress: "", //详细地址
-          staffdepart: "", //所属科室
-          staffrolesel: [], //角色
-          head_department: "", //科室负责人
-          status: 1, //员工状态
-          password: "", //密码
-          address: [], //地址
-        },
-        addressC: [],
-        staffroleselC: [],
-        // 性别循环
-        optiongen: [{
-            value: "1",
-            label: "男",
-          },
-          {
-            value: "0",
-            label: "女",
-          },
-          {
-            value: "2",
-            label: "未知",
-          },
-        ],
-        // 科室
-        optiondepart: [],
-        // 角色
-        optionrole: [],
-      };
-    },
-    methods: {
-      stffaddrolesel(val) {
-        // for (let i = 0; i <= val.length - 1; i++) {
-        //   let a = val[i];
-        //   this.staffroleselC = a;
-        // }
-        console.log(this.addStaff.staffrolesel);
-      },
-
-      // 保存
-      staffaddvueyes() {
-        //1  正常   0 禁用
-        let data = {
-          // job_number: this.addStaff.job_number,
-          name: this.addStaff.name,
-          password: this.addStaff.password,
-          sex: this.addStaff.sex,
-          email: this.addStaff.email,
-          phone: this.addStaff.phone,
-          address: this.addStaff.address,
-          eraddress: this.addStaff.eraddress,
-          position: this.addStaff.position,
-          age: this.addStaff.age,
-          // specific_age: this.addStaff.age,
-          cardnumber: this.addStaff.cardnumber,
-          head_department: this.addStaff.head_department,
-          status: this.addStaff.status,
-          role_id: this.addStaff.staffrolesel,
-          department_id: this.addStaff.staffdepart,
-        };
-        console.log(data);
-        service.staffAdd(data).then((res) => {
-          if (res.code == "20010") {
-            this.$message({
-              type: "success",
-              message: res.msg,
-              duration: 1500,
-            });
-            setTimeout(() => {
-              this.reload();
-            }, 2000);
-            // const loading = this.$loading({
-            //   lock: true,
-            //   text: "保存中",
-            //   spinner: "el-icon-loading",
-            //   background: "rgba(0, 0, 0, 0.7)",
-            // });
-            // setTimeout(() => {
-            //   loading.close();
-            //   this.reload();
-            // }, 2000);
-            // this.$parent.fathstaffyes();
-          } else {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-          }
-        });
-      },
-      handleChange(cityvalue) {
-        //         CodeToText[cityvalue[0]],
-        //         CodeToText[cityvalue[1]],
-        //         CodeToText[cityvalue[2]]
-        //       );
-        //       this.addressC =
-        //         CodeToText[cityvalue[0]] +
-        //         "/" +
-        //         CodeToText[cityvalue[1]] +
-        //         "/" +
-        //         CodeToText[cityvalue[2]];
-        // console.log(this.addressC)
-        //       console.log(this.addStaff.address);
-      },
-      // 子调用父
-      staffaddvueno() {
-        this.$parent.fathstaffno();
-      },
->>>>>>> 64be6c10d3f3464666f289499703e545c0347e77
     },
     created() {
       // 获取到的科室和角色
@@ -408,7 +272,8 @@ export default {
         self.addStaff.job_number = item.job_number;
       });
     },
-  };
+  }
+}
 </script>
 <style scoped>
   @import "add.css";

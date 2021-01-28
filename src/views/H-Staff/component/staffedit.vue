@@ -65,23 +65,11 @@
         <el-row :gutter="20">
           <el-col :span="6">
             <el-form-item label="地址" required>
-<<<<<<< HEAD
               <el-cascader
-                class="dialog-input-text"
-                style="
-                  display: block;
-                  position: relative;
-                  font-size: 14px;
-                  line-height: 40px;
-                "
                 size="large"
                 :options="options"
                 v-model="address"
               >
-=======
-              <el-cascader 
-                size="large" :options="options" v-model="addStaff.address">
->>>>>>> 64be6c10d3f3464666f289499703e545c0347e77
               </el-cascader>
             </el-form-item>
           </el-col>
@@ -103,13 +91,10 @@
           </el-col>
           <el-col :span="6">
             <el-form-item label="角色" required>
-<<<<<<< HEAD
               <el-select
-                class="dialog-input-text"
                 type="input"
                 autosize
                 multiple
-                style="margin-top: 40px"
                 v-model="addStaff.auth_grouap"
                 placeholder="请选择"
                 @change="departsel"
@@ -120,10 +105,6 @@
                   :label="item.title"
                   :value="item.id"
                 >
-=======
-              <el-select type="input" autosize v-model="addStaff.auth_grouap" placeholder="请选择" @change="departsel">
-                <el-option v-for="item in optionrole" :key="item.id" :label="item.title" :value="item.id">
->>>>>>> 64be6c10d3f3464666f289499703e545c0347e77
                 </el-option>
               </el-select>
             </el-form-item>
@@ -164,7 +145,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 // 添加员工，调后台
 //  import { Aepyee } from "@/network/Sta.js";
 import qs from "qs";
@@ -229,120 +209,7 @@ export default {
       address: [],
     };
   },
-  watch: {
-    childed(res) {
-      //console.log(res.role_id);
-      console.log(res);
-      console.log(res.address); //数据已经拿到
-      this.id = res.id;
-      this.addStaff.job_number = res.job_number;
-      this.addStaff.name = res.name;
-      this.addStaff.password = res.password;
-      this.addStaff.sex = res.sex;
-      this.addStaff.email = res.email;
-      this.addStaff.phone = res.phone;
-      this.address = res.address;
-      this.addStaff.eraddress = res.eraddress;
-      this.addStaff.position = res.position;
-      this.addStaff.age = res.age;
-      this.addStaff.cardnumber = res.cardnumber;
-      // this.department = res.department[0].id;
-      this.department_id = res.department_id;
-      this.addStaff.status = res.status;
-      // this.addStaff.head_department = res.head_department;
-      this.addStaff.position = res.position;
-      this.addStaff.auth_grouap = res.auth_grouap.id;
-      this.role_id = res.role_id;
-      this.addStaff.status = res.status;
-    },
-  },
-  methods: {
-    departsel() {
-      console.log(this.addStaff.auth_grouap);
-    },
-    // 保存
-    staffaddvueyes() {
-      let params = {
-        password: this.addStaff.password,
-        job_number: this.addStaff.job_number,
-        id: this.id,
-        name: this.addStaff.name,
-        sex: this.addStaff.sex,
-        email: this.addStaff.email,
-        phone: this.addStaff.phone,
-        address: this.address,
-        eraddress: this.addStaff.eraddress,
-        position: this.addStaff.position,
-        age: this.addStaff.age,
-        cardnumber: this.addStaff.cardnumber,
-        department_id: this.department_id,
-        role_id: this.addStaff.auth_grouap,
-        status: this.addStaff.status,
-        // head_department: this.addStaff.head_department,
-=======
-  // 添加员工，调后台
-  //  import { Aepyee } from "@/network/Sta.js";
-  import qs from "qs";
-  import service from "@/service/index";
-  //地址级联选择器
-  import {
-    provinceAndCityData,
-    regionData,
-    provinceAndCityDataPlus,
-    regionDataPlus,
-    CodeToText,
-    TextToCode,
-  } from "element-china-area-data";
-  export default {
-    props: ["childed"],
-    inject: ["reload"],
-    components: {},
-    data() {
-      return {
-        options: regionData,
-        addStaff: {
-          job_number: "", // 员工编号
-          // staffNumInput: "",
-          name: "", // 姓名
-          age: "", //年龄
-          // staffAgesel: "", //年龄岁月天
-          sex: "", //性别
-          phone: "", //手机号
-          email: "", //电子邮箱
-          cardnumber: "", //证件号码
-          position: "", //职位
-          eraddress: "", //详细地址
-          auth_grouap: [], //角色
-          // head_department: "", //科室负责人
-          status: "", //员工状态
-          password: "", //密码
-          address: [], //地址
-        },
-        department: "", //所属科室
-        role_id: "",
-        department_id: "",
-        // 性别循环
-        optiongen: [{
-            value: "1",
-            label: "男",
-          },
-          {
-            value: "0",
-            label: "女",
-          },
-          {
-            value: "2",
-            label: "未知",
-          },
-        ],
-        // 科室
-        optiondepart: [],
-        // 角色
-        optionrole: [],
-        id: "",
->>>>>>> 64be6c10d3f3464666f289499703e545c0347e77
-      };
-    },
+
     watch: {
       childed(res) {
         console.log(res.role_id);
