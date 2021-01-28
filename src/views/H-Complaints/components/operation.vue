@@ -139,17 +139,7 @@
         </div>
 
         <!-- 科室反馈 -->
-<<<<<<< HEAD
-        <div
-          class="box-feedback"
-          v-show="
-            operationdata.state.state_val == 1 ||
-            operationdata.state.state_val == 11
-          "
-        >
-=======
         <div class="box-feedback" v-if="operationdata.state.state_val == 1||operationdata.state.state_val == 11" >
->>>>>>> dd53c6cda7c730ab3fe59bea781cec00d4a87e15
           <!-- -->
           <div class="box-top">
             <el-row type="flex" class="row-bg" justify="space-between">
@@ -204,16 +194,97 @@
                     ></el-input></div
                 ></el-col>
               </el-row>
+               <!-- 附件 -->
+              <div>
+                <el-row
+                  type="flex"
+                  class="row-bg"
+                  justify="space-between"
+                  style="margin: 20px 0"
+                >
+                  <el-col :span="15" :push="1"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">附件信息:</span>
+                    </div></el-col
+                  >
+                  <el-col :span="2" :pull="1"
+                    ><div class="grid-content bg-purple">
+                      <el-button
+                        type="primary"
+                        icon="el-icon-circle-plus"
+                        @click="upfile()"
+                        style="background-color: #666ee8; border: none"
+                        >上传附件</el-button
+                      >
+                    </div></el-col
+                  >
+                </el-row>
+                <el-row
+                  type="flex"
+                  class="row-bg"
+                  justify="space-between"
+                >
+                  <el-col :span="22" :push="1"
+                    ><div class="grid-content bg-purple">
+                      <el-table
+                        :data="fileList"
+                        style="width: 100%"
+                        :header-cell-style="getRowClass"
+                      >
+                        <el-table-column
+                          type="index"
+                          width="50"
+                          label="序号"
+                        ></el-table-column>
+                        <el-table-column
+                          prop="file_name"
+                          label="文件名"
+                          width="width"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                          prop="represent"
+                          label="描述"
+                          width="width"
+                        >
+                        </el-table-column>
+                          <el-table-column
+                        prop="username.name"
+                        label="提交人"
+                        width="width"
+                      >
+                      </el-table-column>
+                       <el-table-column
+                        prop="create_time"
+                        label="上传时间"
+                        width="width"
+                      >
+                       </el-table-column>
+                        <el-table-column
+                          prop="file_size"
+                          label="文件大小/kb"
+                          width="width"
+                        >
+                        </el-table-column>
+                        <el-table-column fixed="right" label="操作" width="100">
+                          <template slot-scope="scope">
+                            <slot name="fileoper">
+                             
+                              <el-button
+                                type="text"
+                                size="small"
+                                @click="handleRemove(scope.row)"
+                                >删除</el-button
+                              >
+                            </slot>
+                          </template>
+                        </el-table-column>
+                      </el-table>
+                    </div></el-col
+                  >
+                </el-row>
+              </div>
             </div>
-<<<<<<< HEAD
-            <!-- 科室改进完成 -->
-            <div v-show="operationdata.state.state_val == 11">
-              <el-row type="flex" class="row-bg" justify="space-between">
-                <el-col :span="6" :push="1"
-                  ><div class="grid-content bg-purple">
-                    <span class="label">选择责任人:</span>
-                    <el-select v-model="peopel" multiple placeholder="请选择">
-=======
               <!-- 科室改进完成 -->
               <div v-if="operationdata.state.state_val == 11">
                 <el-row type="flex" class="row-bg" justify="space-between">
@@ -221,7 +292,6 @@
                     ><div class="grid-content bg-purple">
                       <span class="label">选择责任人:</span>
                        <el-select v-model="peopel" multiple placeholder="请选择">
->>>>>>> dd53c6cda7c730ab3fe59bea781cec00d4a87e15
                       <el-option
                         v-for="item in opdata[1].user"
                         :key="item.id"
@@ -258,57 +328,6 @@
                     ></el-input></div
                 ></el-col>
               </el-row>
-<<<<<<< HEAD
-              <el-row type="flex" class="row-bg" justify="space-between">
-                <el-col :span="20" :push="1"
-                  ><div class="grid-content bg-purple">
-                    <span class="label">整改措施:</span>
-                    <el-input
-                      type="textarea"
-                      v-model="measures"
-                      maxlength="200"
-                      placeholder="请填写"
-                      :autosize="{ minRows: 2, maxRows: 4 }"
-                    ></el-input></div
-                ></el-col>
-=======
-              <el-row
-                type="flex"
-                class="row-bg"
-                justify="space-between"
-              >
-                <el-col :span="22" :push="1"
-                  ><div class="grid-content bg-purple">
-                    <el-table
-                      :data="fileList"
-                      style="width: 100%"
-                      :header-cell-style="getRowClass"
-                    >
-                      <el-table-column type="index" width="50" label="序号"></el-table-column>
-                      <el-table-column prop="name" label="文件名" width="width">
-                      </el-table-column>
-                      <el-table-column prop="filedescribe" label="描述" width="width">
-                      </el-table-column>
-                      <el-table-column prop="size" label="文件大小" width="width">
-                      </el-table-column>
-                      <el-table-column fixed="right" label="操作" width="100">
-                        <template slot-scope="scope">
-                          <slot name="fileoper">
-                            <el-button
-                              @click="handleClick(scope.row)"
-                              type="text"
-                              size="small"
-                              >下载</el-button
-                            >
-                            <el-button type="text" size="small" @click="handleRemove">删除</el-button>
-                          </slot>
-                        </template>
-                      </el-table-column>
-                    </el-table>
-                  </div></el-col
-                >
->>>>>>> dd53c6cda7c730ab3fe59bea781cec00d4a87e15
-              </el-row>
               <!-- 附件 -->
               <div>
                 <el-row
@@ -338,12 +357,10 @@
                   type="flex"
                   class="row-bg"
                   justify="space-between"
-                  v-show="fileList.length !== 0"
                 >
                   <el-col :span="22" :push="1"
                     ><div class="grid-content bg-purple">
                       <el-table
-                        v-show="fileList.length !== 0 ? true : false"
                         :data="fileList"
                         style="width: 100%"
                         :header-cell-style="getRowClass"
@@ -354,20 +371,32 @@
                           label="序号"
                         ></el-table-column>
                         <el-table-column
-                          prop="name"
+                          prop="file_name"
                           label="文件名"
                           width="width"
                         >
                         </el-table-column>
                         <el-table-column
-                          prop="filedescribe"
+                          prop="represent"
                           label="描述"
                           width="width"
                         >
                         </el-table-column>
+                         <el-table-column
+                        prop="username.name"
+                        label="提交人"
+                        width="width"
+                      >
+                      </el-table-column>
+                       <el-table-column
+                        prop="create_time"
+                        label="上传时间"
+                        width="width"
+                      >
+                       </el-table-column>
                         <el-table-column
-                          prop="size"
-                          label="文件大小"
+                          prop="file_size"
+                          label="文件大小/kb"
                           width="width"
                         >
                         </el-table-column>
@@ -375,15 +404,9 @@
                           <template slot-scope="scope">
                             <slot name="fileoper">
                               <el-button
-                                @click="handleClick(scope.row)"
                                 type="text"
                                 size="small"
-                                >下载</el-button
-                              >
-                              <el-button
-                                type="text"
-                                size="small"
-                                @click="handleRemove"
+                                @click="handleRemove(scope.row)"
                                 >删除</el-button
                               >
                             </slot>
@@ -398,17 +421,7 @@
           </div>
         </div>
         <!-- 审批操作 -->
-<<<<<<< HEAD
-        <div
-          class="box-feedback"
-          v-show="
-            operationdata.state.state_val !== 1 &&
-            operationdata.state.state_val !== 11
-          "
-        >
-=======
         <div class="box-feedback" v-if="operationdata.state.state_val !== 1&&operationdata.state.state_val !== 11">
->>>>>>> dd53c6cda7c730ab3fe59bea781cec00d4a87e15
           <div class="box-top">
             <el-row type="flex" class="row-bg" justify="space-between">
               <el-col :span="7" :push="1"
@@ -425,15 +438,7 @@
                 <el-col :span="6" :push="1"
                   ><div class="grid-content bg-purple">
                     <span class="label">审批操作:</span>
-<<<<<<< HEAD
-                    <el-select
-                      v-model="checkstate"
-                      placeholder="请选择事件状态"
-                      @change="changestate"
-                    >
-=======
                     <el-select v-model="checkstate" placeholder="请选择事件状态"  @change="changestate" clearable>
->>>>>>> dd53c6cda7c730ab3fe59bea781cec00d4a87e15
                       <el-option
                         v-for="item in opdata[1].examine"
                         :key="item.state_val"
@@ -479,18 +484,8 @@
                 </el-row>
               </div>
               <!-- 科室自查 -->
-<<<<<<< HEAD
-              <div v-show="checkstate == 1">
-                <el-row
-                  type="flex"
-                  class="row-bg"
-                  justify="space-between"
-                  style="margin-top: 10px"
-                >
-=======
               <div v-if="checkstate == 1">
                 <el-row type="flex" class="row-bg" justify="space-between" style="margin-top:10px">
->>>>>>> dd53c6cda7c730ab3fe59bea781cec00d4a87e15
                   <el-col :span="6" :push="1"
                     ><div class="grid-content bg-purple">
                       <span class="label">选择下发科室:</span>
@@ -507,6 +502,7 @@
                         :show-all-levels="false"
                         v-model="comde"
                         clearable
+                        collapse-tags
                         style="margin-left: 10px"
                       ></el-cascader></div
                   ></el-col>
@@ -515,13 +511,8 @@
                   <el-col :span="6" :push="1"
                     ><div class="grid-content bg-purple">
                       <span class="label">截止时间:</span>
-<<<<<<< HEAD
-                      <br />
-                      <el-input
-=======
                       <br/>
                       <!-- <el-input
->>>>>>> dd53c6cda7c730ab3fe59bea781cec00d4a87e15
                         type="input"
                         style="margin-left: 10px"
                         v-model="needtime"
@@ -539,24 +530,6 @@
                         type="datetime"
                         format="yyyy-MM-dd HH:mm"
                         placeholder="选择日期"
-<<<<<<< HEAD
-                        value-format="timestamp"
-                      >
-                      </el-date-picker>
-                      -->
-                    </div></el-col
-                  >
-                </el-row>
-              </div>
-              <!-- 院内讨论 -->
-              <div v-show="checkstate == 3">
-                <el-row
-                  type="flex"
-                  class="row-bg"
-                  justify="space-between"
-                  style="margin-top: 20px"
-                >
-=======
                         value-format="timestamp">
                        </el-date-picker>
                       </div></el-col>
@@ -565,7 +538,6 @@
               <!-- 院内讨论 -->
               <div v-if="checkstate == 3">
                  <el-row type="flex" class="row-bg" justify="space-between" style="margin-top:20px">
->>>>>>> dd53c6cda7c730ab3fe59bea781cec00d4a87e15
                   <el-col :span="6" :push="1"
                     ><div class="grid-content bg-purple">
                       <span class="label">选择抄送部门:</span>
@@ -581,6 +553,7 @@
                         }"
                         :show-all-levels="false"
                         v-model="comde"
+                        collapse-tags
                         clearable
                         style="margin-left: 10px"
                       ></el-cascader></div
@@ -615,13 +588,8 @@
               </div>
               <!-- 医患沟通 -->
               <div
-<<<<<<< HEAD
-                v-show="
-                  checkstate == 4 ||
-=======
                 v-if="
                 checkstate == 4 ||
->>>>>>> dd53c6cda7c730ab3fe59bea781cec00d4a87e15
                   checkstate == 5 ||
                   checkstate == 6 ||
                   checkstate == 7 ||
@@ -661,21 +629,6 @@
                       </el-date-picker></div
                   ></el-col>
                 </el-row>
-<<<<<<< HEAD
-                <el-row
-                  type="flex"
-                  class="row-bg"
-                  justify="space-between"
-                  v-show="
-                    checkstate == 4 ||
-                    checkstate == 6 ||
-                    checkstate == 7 ||
-                    checkstate == 8 ||
-                    checkstate == 9 ||
-                    checkstate == 10
-                  "
-                >
-=======
                 <el-row type="flex" class="row-bg" justify="space-between"  v-if="
                   checkstate == 4||
                   checkstate == 6 ||
@@ -684,7 +637,6 @@
                   checkstate == 9 ||
                   checkstate == 10
                 ">
->>>>>>> dd53c6cda7c730ab3fe59bea781cec00d4a87e15
                   <el-col :span="20" :push="1"
                     ><div class="grid-content bg-purple">
                       <span class="label" v-show="checkstate == 4"
@@ -731,6 +683,7 @@
                         }"
                         :show-all-levels="false"
                         v-model="comde"
+                        collapse-tags
                         style="margin-left: 10px"
                         clearabl
                       ></el-cascader></div
@@ -739,13 +692,9 @@
               </div>
 
               <!-- 医院改进完成 -->
-<<<<<<< HEAD
-              <div v-show="checkstate == 14">
-=======
               <div v-if="checkstate == 14">
                
               
->>>>>>> dd53c6cda7c730ab3fe59bea781cec00d4a87e15
                 <el-row type="flex" class="row-bg" justify="space-between">
                   <el-col :span="20" :push="1"
                     ><div class="grid-content bg-purple">
@@ -773,13 +722,8 @@
                   ></el-col>
                 </el-row>
               </div>
-<<<<<<< HEAD
-              <!-- 结束 -->
-              <div v-show="checkstate == 20">
-=======
                 <!-- 结束 -->
               <div v-if="checkstate == 20">
->>>>>>> dd53c6cda7c730ab3fe59bea781cec00d4a87e15
                 <el-row type="flex" class="row-bg" justify="space-between">
                   <el-col :span="6" :push="1"
                     ><div class="grid-content bg-purple">
@@ -796,6 +740,7 @@
                         }"
                         :show-all-levels="false"
                         v-model="comde"
+                        collapse-tags
                         clearable
                         style="margin-left: 10px"
                       ></el-cascader></div
@@ -874,11 +819,7 @@
             </div>
             <div
               class="box-feedback"
-<<<<<<< HEAD
-              v-show="checkstate == -1 || checkstate == -2 || checkstate == 1"
-=======
               v-if="checkstate == -1 || checkstate == -2|| checkstate == 1"
->>>>>>> dd53c6cda7c730ab3fe59bea781cec00d4a87e15
             >
               <div class="box-top">
                 <el-row type="flex" class="row-bg" justify="space-between">
@@ -935,12 +876,7 @@
             <!-- 附件 -->
             <div
               v-if="
-<<<<<<< HEAD
-                checkstate == 1 ||
-                checkstate == 3 ||
-=======
                 checkstate ==3 ||
->>>>>>> dd53c6cda7c730ab3fe59bea781cec00d4a87e15
                 checkstate == 5 ||
                 checkstate == 6 ||
                 checkstate == 8 ||
@@ -977,10 +913,6 @@
                 <el-col :span="22" :push="1"
                   ><div class="grid-content bg-purple">
                     <el-table
-<<<<<<< HEAD
-                      v-show="fileList.length !== 0 ? true : false"
-=======
->>>>>>> dd53c6cda7c730ab3fe59bea781cec00d4a87e15
                       :data="fileList"
                       style="width: 100%"
                       :header-cell-style="getRowClass"
@@ -990,17 +922,29 @@
                         width="50"
                         label="序号"
                       ></el-table-column>
-                      <el-table-column prop="name" label="文件名" width="width">
+                      <el-table-column prop="file_name" label="文件名" width="width">
                       </el-table-column>
                       <el-table-column
-                        prop="filedescribe"
+                        prop="represent"
                         label="描述"
                         width="width"
                       >
                       </el-table-column>
+                       <el-table-column
+                        prop="username.name"
+                        label="提交人"
+                        width="width"
+                      >
+                      </el-table-column>
+                       <el-table-column
+                        prop="create_time"
+                        label="上传时间"
+                        width="width"
+                      >
+                      </el-table-column>
                       <el-table-column
-                        prop="size"
-                        label="文件大小"
+                        prop="file_size"
+                        label="文件大小/kb"
                         width="width"
                       >
                       </el-table-column>
@@ -1008,15 +952,9 @@
                         <template slot-scope="scope">
                           <slot name="fileoper">
                             <el-button
-                              @click="handleClick(scope.row)"
                               type="text"
                               size="small"
-                              >下载</el-button
-                            >
-                            <el-button
-                              type="text"
-                              size="small"
-                              @click="handleRemove"
+                              @click="handleRemove(scope.row)"
                               >删除</el-button
                             >
                           </slot>
@@ -1135,13 +1073,9 @@
 <script>
 import service from "@/service";
 import Look from "../components/Look";
-<<<<<<< HEAD
-import qs from "qs";
-=======
-import { formatDate } from '@/util/index.ts'
 import qs from 'qs'
->>>>>>> dd53c6cda7c730ab3fe59bea781cec00d4a87e15
 export default {
+   inject: ["reload"],
   props: { operationdata: {}, opdata: {} },
   components: {
     Look,
@@ -1258,89 +1192,90 @@ export default {
       });
     },
     //删除上传文件
-<<<<<<< HEAD
-    handleRemove(file, fileList) {},
-    //上传文件接口
-    upfilesubmit() {
-      //将选择的文件转为base64码
-      this.getBase64(this.file.raw).then((res) => {
-        //接口参数
-        let params = {
-          event_number: this.$parent.opdata[0].event_number, //编号
-          base64_file: res,
-          file_name: this.filetitle,
-          represent: this.filedescribe,
-        };
-        service.uploadfilebase(params).then((res) => {
+     handleRemove(index) {
+        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+           service.deletes(index.id).then(res=>{
           if (res.code == 20010) {
-            this.$message({
-              message: "上传附件成功",
-              type: "success",
-              duration: 1000,
-            });
-            this.listsss = []; //上传附件弹窗内显示的选择文件列表
-            this.upfiles = false;
-            this.upfilesss = true; //文件列表
-            this.filedescribe = "";
-            this.filetitle = "";
-            this.fileList.push(this.file);
-            this.file = {};
-          } else if (res.code == 20401) {
-            this.$message({
-              message: "请重新登陆",
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push("/login");
-          } else if (res.code == 20403) {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push("/dashboard");
-          } else {
-            this.$message({
-              message: "上传失败",
-              type: "error",
-              duration: 1000,
-            });
-          }
+              this.$message({
+                message: res.msg,
+                type: "success",
+                duration: 1000,
+              });
+       if(this.$parent.opdata[0].state.state_val==1||this.$parent.opdata[0].state.state_val==11){
+        //科室自查
+        if(this.$parent.opdata[0].state.state_val==1){
+         let params={
+            event_number:this.$parent.opdata[0].event_number,//编号
+            state:2}
+         service.truefilelist(params).then(res=>{
+                  this.fileList=res.data
+        })
+        }
+        //科室改进完成
+        else{
+             let params={
+                event_number:this.$parent.opdata[0].event_number,//编号
+                state:12
+              }
+               service.truefilelist(params).then(res=>{
+                 this.fileList=res.data
+               })
+        }
+        }
+      //其他
+       else{
+         let params={
+        event_number:this.$parent.opdata[0].event_number,//编号
+        state:this.checkstate
+      }
+     service.truefilelist(params).then(res=>{
+       this.fileList=res.data
+     })
+        }
+      } else if (res.code == 20401) {
+              this.$message({
+                message: "请重新登陆",
+                type: "error",
+                duration: 1000,
+              });
+              this.$router.push("/login");
+            } else if (res.code == 20403) {
+              this.$message({
+                message: res.msg,
+                type: "error",
+                duration: 1000,
+              });
+              this.$router.push("/dashboard");
+            } else {
+              this.$message({
+                message: res.msg,
+                type: "error",
+                duration: 1000,
+              });
+            }
+       })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });          
         });
-      });
-    },
-    changestate() {
-      this.economic = ""; //直接经济损失
-      this.management = ""; //管理措施
-      this.eventtype = ""; //投诉类别
-      this.accountability = ""; //责任度
-      this.comde = ""; //下发科室
-      this.date = ""; //约定日期
-      this.liable = ""; //责任人
-      this.agentname = ""; //经办人姓名
-      this.agentphone = ""; //经办人联系方式
-      this.treatment = ""; // 诊疗经过
-      this.response = ""; //针对性答复
-      this.needtime = ""; //输入天数
-      this.issue = ""; //下发科室
-      this.facts = ""; //主要事实
-      this.focus = ""; //争议焦点
-      this.analysis = ""; //根因分析
-      this.responsibility = ""; //责任意见
-      this.measures = ""; //整改措施
-      this.preliminary = ""; //初步意见
-      this.peopel = ""; //当事员工
-=======
-     handleRemove(file, fileList) { },
+      
+     },
      //上传文件接口
     upfilesubmit(){
-      console.log(this.$parent.opdata[0].state.state_val)
       //将选择的文件转为base64码
     this.getBase64(this.file.raw).then(res=>{
       //接口参数
       //科室自查   科室改进
       if(this.$parent.opdata[0].state.state_val==1||this.$parent.opdata[0].state.state_val==11){
-         let params={
+        //科室自查
+        if(this.$parent.opdata[0].state.state_val==1){
+             let params={
         event_number:this.$parent.opdata[0].event_number,//编号
         base64_file:res,
         file_name:this.filetitle,
@@ -1348,22 +1283,28 @@ export default {
         adress:'Complaintprocess/event_base64_uploadfiles',
         state:2
       }
-      console.log(params)
       service.uploadfilebase(params).then(res=>{
-        console.log(res)
          if(res.code==20010){
           this.$message({
                   message: '上传附件成功',
                   type: "success",
                   duration: 1000,
                 });
-                  this.listsss=[]//上传附件弹窗内显示的选择文件列表
+                 
+                             let params={
+        event_number:this.$parent.opdata[0].event_number,//编号
+        state:2
+      }
+     service.truefilelist(params).then(res=>{
+               this.fileList=res.data
+                this.listsss=[]//上传附件弹窗内显示的选择文件列表
                   this.upfiles = false
                   this.upfilesss=true//文件列表
                   this.filedescribe=''
                   this.filetitle=''
-                  this.fileList.push(this.file)
                   this.file={}
+           
+     })
         }
          else if(res.code==20401){
           this.$message({
@@ -1389,19 +1330,18 @@ export default {
                 });
         }
       })
-      }
-      //其他
-       else{
+        }
+        //科室改进完成
+        else{
           let params={
         event_number:this.$parent.opdata[0].event_number,//编号
         base64_file:res,
         file_name:this.filetitle,
         represent:this.filedescribe,
         adress:'Complaintprocess/event_base64_uploadfiles',
-        state:this.changestate
+        state:12
       }
       service.uploadfilebase(params).then(res=>{
-        console.log(res)
          if(res.code==20010){
           this.$message({
                   message: '上传附件成功',
@@ -1413,8 +1353,74 @@ export default {
                   this.upfilesss=true//文件列表
                   this.filedescribe=''
                   this.filetitle=''
-                  this.fileList.push(this.file)
                   this.file={}
+                 let params={
+                    event_number:this.$parent.opdata[0].event_number,//编号
+                    // adress:'Complaintprocess/event_base64_uploadfiles',
+                    state:12
+                  }
+               service.truefilelist(params).then(res=>{
+                 this.fileList=res.data
+               })
+                  }
+         else if(res.code==20401){
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/login')
+        }
+        else if(res.code==20403){
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push('/dashboard')
+        }
+         else{
+          this.$message({
+                  message: '上传失败',
+                  type: "error",
+                  duration: 1000,
+                });
+        }
+      })
+        }
+        }
+      
+      //其他
+       else{
+          let params={
+        event_number:this.$parent.opdata[0].event_number,//编号
+        base64_file:res,
+        file_name:this.filetitle,
+        represent:this.filedescribe,
+        adress:'Complaintprocess/event_base64_uploadfiles',
+        state:this.checkstate
+      }
+      service.uploadfilebase(params).then(res=>{
+         if(res.code==20010){
+          this.$message({
+                  message: '上传附件成功',
+                  type: "success",
+                  duration: 1000,
+                });
+                  this.listsss=[]//上传附件弹窗内显示的选择文件列表
+                  this.upfiles = false
+                  this.upfilesss=true//文件列表
+                  this.filedescribe=''
+                  this.filetitle=''
+                  this.file={}
+                   let params={
+        event_number:this.$parent.opdata[0].event_number,//编号
+        // adress:'Complaintprocess/event_base64_uploadfiles',
+        state:this.checkstate
+      }
+     service.truefilelist(params).then(res=>{
+       this.fileList=res.data
+     })
         }
          else if(res.code==20401){
           this.$message({
@@ -1444,6 +1450,7 @@ export default {
     })
        
     },
+    //当状态发生改变时
     changestate(){
       this.economic=''//直接经济损失
       this.management=''//管理措施
@@ -1465,7 +1472,14 @@ export default {
       this.measures=""//整改措施
       this.preliminary= "" //初步意见
       this.peopel= "" //当事员工
->>>>>>> dd53c6cda7c730ab3fe59bea781cec00d4a87e15
+       let params={
+        event_number:this.$parent.opdata[0].event_number,//编号
+        state:this.checkstate
+      }
+     service.truefilelist(params).then(res=>{
+       this.fileList=res.data
+     })
+
     },
     //这个file参数 也就是文件信息将文件转为base64码
     getBase64(file) {
@@ -1485,40 +1499,38 @@ export default {
       });
     },
     handleChange(file, fileList) {
-<<<<<<< HEAD
-      this.file = fileList[0];
-    },
-=======
        this.file=fileList[0]
      },
->>>>>>> dd53c6cda7c730ab3fe59bea781cec00d4a87e15
-    getCascaderObj() {
-      console.log(this.comde);
-    },
     //下发
     issuesss() {
-      console.log(this.needtime);
+     
       if (this.checkstate == 1) {
         //下发科室调查
         if (this.comde !== "" && this.comde !== null && this.needtime !== "") {
-          let comde = this.comde.map((x) => {
-            return x[0];
-          });
-          console.log(comde);
+        let one=new Array
+        let two=new Array
+       for(let i in this.comde){
+        if(this.comde[i].length == 1){
+          one.push(this.comde[i][0])
+        }
+        else if(this.comde[i].length == 2){
+           two.push(this.comde[i][1])
+        }
+        }
+         let comdes = one.concat(two);
           let data = {
             event_number: this.$parent.opdata[0].event_number, //编号
-            department_ids: comde, //下发科室
+            department_ids: comdes, //下发科室
             reply_time: this.needtime, // 输入天数
           };
           service.Issuedepartment(data).then((res) => {
-            console.log(res);
             if (res.code == 20010) {
               this.$message({
                 message: res.msg,
                 type: "success",
                 duration: 1000,
               });
-              this.$router.go(0);
+              this.reload();
             } else if (res.code == 20401) {
               this.$message({
                 message: "请重新登陆",
@@ -1556,24 +1568,29 @@ export default {
         }
       } else if (this.checkstate == 11) {
         if (this.comde !== "" && this.comde !== null) {
-          let comde = this.comde.map((x) => {
-            return x[0];
-          });
-          console.log(comde);
+          let one=new Array
+        let two=new Array
+       for(let i in this.comde){
+        if(this.comde[i].length == 1){
+          one.push(this.comde[i][0])
+        }
+        else if(this.comde[i].length == 2){
+           two.push(this.comde[i][1])
+        }
+        }
+         let comdes = one.concat(two);
           let data = {
             event_number: this.$parent.opdata[0].event_number, //编号
-            department_ids: comde, //下发科室
+            department_ids: comdes, //下发科室
           };
-          console.log(qs.stringify(data));
           service.ImproveDepartment(data).then((res) => {
-            console.log(res);
             if (res.code == 20010) {
               this.$message({
                 message: res.msg,
                 type: "success",
                 duration: 1000,
               });
-              this.$router.go(0);
+              this.reload();
             } else if (res.code == 20401) {
               this.$message({
                 message: "请重新登陆",
@@ -1601,7 +1618,6 @@ export default {
     },
     //提交
     submit() {
-      console.log(this.date);
       if (this.$parent.opdata[0].state.state_val == 1) {
         //科室提交
         let params = {
@@ -1611,14 +1627,13 @@ export default {
           event_reply: this.response, //针对答复
         };
         service.departmentsubmit(params).then((res) => {
-          console.log(res);
           if (res.code == 20010) {
             this.$message({
               message: res.msg,
               type: "success",
               duration: 1000,
             });
-            this.$router.go(0);
+            this.reload();
           } else if (res.code == 20401) {
             this.$message({
               message: "请重新登陆",
@@ -1649,24 +1664,31 @@ export default {
           this.facts !== "" &&
           this.focus !== ""
         ) {
-          let comde = this.comde.map((x) => {
-            return x[0];
-          });
+          let one=new Array
+        let two=new Array
+       for(let i in this.comde){
+        if(this.comde[i].length == 1){
+          one.push(this.comde[i][0])
+        }
+        else if(this.comde[i].length == 2){
+           two.push(this.comde[i][1])
+        }
+        }
+         let comdes = one.concat(two);
           let params = {
             event_number: this.$parent.opdata[0].event_number, //编号
-            copy_department: comde, //抄送部门
+            copy_department: comdes, //抄送部门
             examine_textone: this.facts, //主要事实
             examine_texttwo: this.focus, //争议焦点
           };
           service.discussion(params).then((res) => {
-            console.log(res);
             if (res.code == 20010) {
               this.$message({
                 message: res.msg,
                 type: "success",
                 duration: 1000,
               });
-              this.$router.go(0);
+              this.reload();
             } else if (res.code == 20401) {
               this.$message({
                 message: "请重新登陆",
@@ -1715,14 +1737,13 @@ export default {
           examine_textone: this.preliminary, //初步意见
         };
         service.communicate(params).then((res) => {
-          console.log(res);
           if (res.code == 20010) {
             this.$message({
               message: res.msg,
               type: "success",
               duration: 1000,
             });
-            this.$router.go(0);
+            this.reload();
           } else if (res.code == 20401) {
             this.$message({
               message: "请重新登陆",
@@ -1752,14 +1773,13 @@ export default {
           appointment_time: this.date, //约定时间
         };
         service.mediate(params).then((res) => {
-          console.log(res);
           if (res.code == 20010) {
             this.$message({
               message: res.msg,
               type: "success",
               duration: 1000,
             });
-            this.$router.go(0);
+            this.reload();
           } else if (res.code == 20401) {
             this.$message({
               message: "请重新登陆",
@@ -1790,14 +1810,13 @@ export default {
           appointment_time: this.date, //约定时间
         };
         service.appraisal(params).then((res) => {
-          console.log(res);
           if (res.code == 20010) {
             this.$message({
               message: res.msg,
               type: "success",
               duration: 1000,
             });
-            this.$router.go(0);
+            this.reload();
           } else if (res.code == 20401) {
             this.$message({
               message: "请重新登陆",
@@ -1828,14 +1847,13 @@ export default {
           appointment_time: this.date, //约定时间
         };
         service.delay(params).then((res) => {
-          console.log(res);
           if (res.code == 20010) {
             this.$message({
               message: res.msg,
               type: "success",
               duration: 1000,
             });
-            this.$router.go(0);
+            this.reload();
           } else if (res.code == 20401) {
             this.$message({
               message: "请重新登陆",
@@ -1872,7 +1890,7 @@ export default {
               type: "success",
               duration: 1000,
             });
-            this.$router.go(0);
+            this.reload();
           } else if (res.code == 20401) {
             this.$message({
               message: "请重新登陆",
@@ -1903,14 +1921,13 @@ export default {
           appointment_time: this.date, //约定时间
         };
         service.termination(params).then((res) => {
-          console.log(res);
           if (res.code == 20010) {
             this.$message({
               message: res.msg,
               type: "success",
               duration: 1000,
             });
-            this.$router.go(0);
+            this.reload();
           } else if (res.code == 20401) {
             this.$message({
               message: "请重新登陆",
@@ -1941,14 +1958,13 @@ export default {
           appointment_time: this.date, //约定时间
         };
         service.litigation(params).then((res) => {
-          console.log(res);
           if (res.code == 20010) {
             this.$message({
               message: res.msg,
               type: "success",
               duration: 1000,
             });
-            this.$router.go(0);
+            this.reload();
           } else if (res.code == 20401) {
             this.$message({
               message: "请重新登陆",
@@ -1980,16 +1996,14 @@ export default {
           examine_texttwo: this.responsibility, //责任意见
           examine_textthree: this.measures, //整改措施
         };
-        console.log(params);
         service.ImproveDepartmentsubmission(params).then((res) => {
-          console.log(res);
           if (res.code == 20010) {
             this.$message({
               message: res.msg,
               type: "success",
               duration: 1000,
             });
-            this.$router.go(0);
+            this.reload();
           } else if (res.code == 20401) {
             this.$message({
               message: "请重新登陆",
@@ -2020,14 +2034,13 @@ export default {
         service
           .Hospitalimprovement(params)
           .then((res) => {
-            console.log(res);
             if (res.code == 20010) {
               this.$message({
                 message: res.msg,
                 type: "success",
                 duration: 1000,
               });
-              this.$router.go(0);
+              this.reload();
             } else if (res.code == 20401) {
               this.$message({
                 message: "请重新登陆",
@@ -2065,14 +2078,13 @@ export default {
           examine_texttwo: this.management, //管理措施
         };
         service.ImprovementEnd(params).then((res) => {
-          console.log(res);
           if (res.code == 20010) {
             this.$message({
               message: res.msg,
               type: "success",
               duration: 1000,
             });
-            this.$router.go(0);
+            this.reload();
           } else if (res.code == 20401) {
             this.$message({
               message: "请重新登陆",
@@ -2105,9 +2117,17 @@ export default {
           this.eventtype !== "" &&
           this.eventtype !== null
         ) {
-          let comde = this.comde.map((x) => {
-            return x[0];
-          });
+          let one=new Array
+        let two=new Array
+       for(let i in this.comde){
+        if(this.comde[i].length == 1){
+          one.push(this.comde[i][0])
+        }
+        else if(this.comde[i].length == 2){
+           two.push(this.comde[i][1])
+        }
+        }
+         let comdes = one.concat(two);
           let accountability = this.accountability.map((x) => {
             return x[0];
           });
@@ -2116,7 +2136,7 @@ export default {
           });
           let params = {
             event_number: this.$parent.opdata[0].event_number, //编号
-            responsibility_did: comde, //责任科室
+            responsibility_did: comdes, //责任科室
             event_type: eventtype, //投诉类型
             responsibility_how: accountability, //责任度
             examine_textone: this.economic, //直接经济损失
@@ -2129,7 +2149,7 @@ export default {
                 type: "success",
                 duration: 1000,
               });
-              this.$router.go(0);
+              this.reload();
             } else if (res.code == 20401) {
               this.$message({
                 message: "请重新登陆",
@@ -2161,14 +2181,13 @@ export default {
         service
           .send(this.$parent.opdata[0].event_number, this.preliminary)
           .then((res) => {
-            console.log(res);
             if (res.code === 20010) {
               this.$message({
                 message: res.msg,
                 type: "success",
                 duration: 1000,
               });
-              this.$router.go(0);
+              this.reload();
             } else if (res.code == 20401) {
               this.$message({
                 message: "请重新登陆",
@@ -2196,8 +2215,6 @@ export default {
     // 驳回
     reject() {
       if (this.checkstate == -1) {
-        console.log(this.$parent.opdata[0].event_number);
-        console.log(this.preliminary);
         service
           .reject(this.$parent.opdata[0].event_number, this.preliminary)
           .then((res) => {
@@ -2207,7 +2224,7 @@ export default {
                 type: "success",
                 duration: 1000,
               });
-              this.$router.go(0);
+              this.reload();
             } else if (res.code == 20401) {
               this.$message({
                 message: "请重新登陆",
@@ -2258,23 +2275,73 @@ export default {
       }
     },
   },
-<<<<<<< HEAD
-  created() {},
-=======
   created() {
     if(this.$parent.opdata!==''){
-       let params={
+      if(this.$parent.opdata[0].state.state_val==11){
+     let params={
+            event_number:this.$parent.opdata[0].event_number,//编号
+            state:12
+          }
+         service.truefilelist(params).then(res=>{
+      
+        if (res.code == 20010) {
+              this.fileList=res.data
+            } else if (res.code == 20401) {
+              this.$message({
+                message: "请重新登陆",
+                type: "error",
+                duration: 1000,
+              });
+              this.$router.push("/login");
+            } else if (res.code == 20403) {
+              this.$message({
+                message: res.msg,
+                type: "error",
+                duration: 1000,
+              });
+              this.$router.push("/dashboard");
+            } else {
+              this.$message({
+                message: res.msg,
+                type: "error",
+                duration: 1000,
+              });
+            }
+     })
+      }
+      else{
+         let params={
         event_number:this.$parent.opdata[0].event_number,//编号
-        // adress:'Complaintprocess/event_base64_uploadfiles',
-        state:this.$parent.opdata[0].state.state_val
+        state:2
       }
      service.truefilelist(params).then(res=>{
-       console.log(res)
-       this.fileList=res.data
+      if (res.code == 20010) {
+              this.fileList=res.data
+            } else if (res.code == 20401) {
+              this.$message({
+                message: "请重新登陆",
+                type: "error",
+                duration: 1000,
+              });
+              this.$router.push("/login");
+            } else if (res.code == 20403) {
+              this.$message({
+                message: res.msg,
+                type: "error",
+                duration: 1000,
+              });
+              this.$router.push("/dashboard");
+            } else {
+              this.$message({
+                message: res.msg,
+                type: "error",
+                duration: 1000,
+              });
+            }
      })
+      }
     }
   },
->>>>>>> dd53c6cda7c730ab3fe59bea781cec00d4a87e15
 };
 </script>
 <style scoped>

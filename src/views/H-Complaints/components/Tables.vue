@@ -459,7 +459,6 @@ export default {
   },
   created() {
     service.ComList(this.number, this.currentPage4).then((res) => {
-      console.log(res)
       if (res.code == 20010) {
         this.tableData = res.data[0];
         this.total = res.data[1].count;

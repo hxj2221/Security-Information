@@ -123,6 +123,10 @@ export default {
   uploadfilebase: async (data: any) => {
     return await service.post(`${baseUrl}api/Complaintprocess/event_base64_uploadfiles`, data).then(res => res).catch(err => err)
   },
+  //   删除附件
+  deletes: async (id: any) => {
+    return await service.get(`${baseUrl}api/tsevent/filedel`, {params:{id}}).then(res => res).catch(err => err)
+  },
   //附件列表
   truefilelist: async (data: any) => {
     return await service.post(`${baseUrl}api/tsevent/filelist`, data).then(res => res).catch(err => err)
