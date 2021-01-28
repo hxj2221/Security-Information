@@ -27,10 +27,10 @@
       </div>
       <!-- 表格部分 -->
       <div class="articleList_table_table">
-        <div style="min-height:720px">
+        <div style="min-height:590px">
            <!-- 表格 -->
         <el-table
-        max-height="662"
+        max-height="595"
           ref="multipleTable"
           :data="tableData"
           tooltip-effect="dark"
@@ -107,7 +107,6 @@
         <!-- 分页 -->
         <div class="articleList_table_table_paging">
           <el-pagination
-           
             :current-page="currentPage"
             :page-sizes="[8, 10, 20]"
             :page-size="8"

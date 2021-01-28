@@ -5,7 +5,7 @@
     /* height: 750px; */
     background: #fff;
     border-radius: 5px;
-    box-shadow: 0 0 2px rgb(184, 183, 183);
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
 }
 
 /*  top*/
@@ -57,6 +57,11 @@
 
 .articleList_table_search>.el-input {
     width: auto;
+}
+.articleList_table_search .el-input-group__append{
+    background-color: #666EE8;
+    border-color: #666EE8;
+    color: #ffffff;
 }
 
 

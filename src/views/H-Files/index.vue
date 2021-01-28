@@ -69,7 +69,7 @@
       <div class="TableContent">
         <el-table
           :data="tableData"
-          max-height="662"
+          max-height="550"
           :header-cell-style="getRowClass"
         >
           <el-table-column width="50" label="序号" type="index">
@@ -93,7 +93,7 @@
                 >下载</el-button
               >
               <el-button
-                style="color: #1e1e1e"
+                style="color: #ff0000"
                 @click="deleteRow(scope.row.id)"
                 type="text"
                 size="small"

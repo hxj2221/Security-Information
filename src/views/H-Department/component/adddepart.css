@@ -4,12 +4,13 @@
 }
 
 .departAll {
-    width: 100%;
+    width: 95%;
+    margin: 0 auto;
     min-height: 805px;
     background: #fff;
     border-radius: 5px;
-    box-shadow: 0 0 2px rgb(184, 183, 183);
-    padding-bottom: 115px;
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+    /* padding-bottom: 115px; */
 }
 
 .departAll .departaddThre {
@@ -55,7 +56,11 @@
     margin-bottom: 20px;
 }
 
-.addmain .el-from .el-input {
+.addmain .el-form-item .el-select{
+    width: 100%;
+}
+
+/* .addmain .el-from .el-input {
     margin: 0;
     display: block !important;
     width: 218px;
@@ -81,12 +86,12 @@
 
 .el-select__tags {
     top: 67%
-}
+} */
 
 
 /* 边框 */
 
-.dialog-input-text .el-input__inner {
+/* .dialog-input-text .el-input__inner {
     -webkit-appearance: none;
     background-color: #FFF;
     background-image: none;
@@ -103,4 +108,4 @@
     -webkit-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
     transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
     width: 100%;
-}
+} */

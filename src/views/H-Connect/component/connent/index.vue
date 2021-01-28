@@ -28,7 +28,7 @@
       <!-- 表单表格部分 -->
       <div class="connent_myTable">
         <!--  -->
-        <el-table :data="tableData" max-height="662" :header-cell-style="getRowClass">
+        <el-table :data="tableData" max-height="545" :header-cell-style="getRowClass">
           <el-table-column label="序号" type="index" width="50"> </el-table-column>
 
           <el-table-column label="记录编号" prop="number"> </el-table-column>

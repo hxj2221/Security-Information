@@ -5,12 +5,12 @@
 
 .accountalBg {
     width: 95%;
-    min-height: 75%;
+    min-height: 805px;
     margin: 0 auto;
     background: #fff;
     border-radius: 5px;
-    box-shadow: 0 0 2px rgb(184, 183, 183);
-    padding-bottom: 150px;
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+    /* padding-bottom: 150px; */
 }
 
 .accountF {

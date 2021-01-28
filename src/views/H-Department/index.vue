@@ -22,8 +22,13 @@
       <el-table
         :data="dormitory"
         class="departtable"
+<<<<<<< HEAD
         max-height="620"
         row-key="id"
+=======
+        max-height="550"
+        row-key='id'
+>>>>>>> 64be6c10d3f3464666f289499703e545c0347e77
         :header-cell-style="{ background: '#c2c5f6', color: '#000' }"
         :cell-style="{ background: '#fff' }"
         :tree-props="{
@@ -33,9 +38,18 @@
       >
         <el-table-column width="50" label="序号" type="index">
         </el-table-column>
+<<<<<<< HEAD
         <el-table-column prop="title" label="科室名称"> </el-table-column>
         <el-table-column prop="number" label="科室编号"> </el-table-column>
         <el-table-column prop="usernumber" label="员工数量"> </el-table-column>
+=======
+        <el-table-column prop="title" label="科室名称">
+        </el-table-column>
+        <el-table-column prop="number" label="科室编号" width="150">
+        </el-table-column>
+        <el-table-column prop="usernumber" label="员工数量">
+        </el-table-column>
+>>>>>>> 64be6c10d3f3464666f289499703e545c0347e77
         <el-table-column prop="head_department.name" label="负责人">
         </el-table-column>
         <el-table-column
@@ -79,6 +93,24 @@
           </template>
         </el-table-column>
       </el-table>
+<<<<<<< HEAD
+=======
+      <!-- 分页 -->
+      <!-- <div class="departpag">
+        <div class="block">
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="nums"
+            :page-size="num"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total"
+          >
+          </el-pagination>
+        </div>
+      </div> -->
+>>>>>>> 64be6c10d3f3464666f289499703e545c0347e77
     </div>
 
     <!-- 新增 -->

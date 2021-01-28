@@ -9,13 +9,20 @@
     min-height: 805px;
     background: #fff;
     border-radius: 5px;
-    box-shadow: 0 0 2px rgb(184, 183, 183);
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
 }
+<<<<<<< HEAD
 
 .H-editAll .jurisdiction {
     width: 92%;
     min-height: 811px;
     margin: 20px auto 0;
+=======
+.H-editAll .jurisdiction{
+    width: 92%;
+    margin: 0 auto;
+    margin-top: 20px;
+>>>>>>> 64be6c10d3f3464666f289499703e545c0347e77
 }
 
 .H-editAll .content {
