@@ -165,9 +165,9 @@
     margin: 30px auto 0;
     width: 94%;
 }
-.newlyFiles .newlyContent .TableContent{
+/* .newlyFiles .newlyContent .TableContent{
     min-height: 600px;
-}
+} */
 
 .newlyFiles .newlyContent .el-table .el-table__header-wrapper .el-table__header .has-gutter tr th {
     background-color: #666ee866;
