@@ -14,7 +14,7 @@ import service from '@/service/index';
     <div class="newlyContent">
       <div class="TableContent">
         <el-table
-          max-height="662"
+          max-height="600"
           :data="tableData"
           row-key="id"
           default-expand-all
