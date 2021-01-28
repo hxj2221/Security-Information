@@ -58,6 +58,11 @@
 .articleList_table_search>.el-input {
     width: auto;
 }
+.articleList_table_search .el-input-group__append{
+    background-color: #666EE8;
+    border-color: #666EE8;
+    color: #ffffff;
+}
 
 
 /* table  表格部分 */
