@@ -47,7 +47,7 @@
       </div>
     <div class="Complaints-content">
       <el-table
-        max-height='546'
+        max-height='548'
         :data="tableData"
         style="width: 94%; margin-left: 3%; text-align: center"
         :header-cell-style="getRowClass"
@@ -59,7 +59,7 @@
         <el-table-column prop="age"  label="年龄/岁"> </el-table-column>
         <el-table-column prop="complaint_phone" width="110" label="手机号码"> </el-table-column>
         <el-table-column prop="department" label="投诉科室"  :show-overflow-tooltip='true'></el-table-column>
-        <el-table-column prop="complaint_type.title"  label="投诉方式"> </el-table-column>
+        <el-table-column prop="complaint_type.title"  label="投诉方式" :show-overflow-tooltip='true'> </el-table-column>
         <el-table-column prop="create_time"  label="投诉时间"> </el-table-column>
         <el-table-column prop="pass_names" :show-overflow-tooltip='true' label="流转部门"> </el-table-column>
         <el-table-column prop="state.title" width="110" label="事件状态" :show-overflow-tooltip='true'> </el-table-column>

@@ -69,14 +69,16 @@
     <!-- table -->
     <div class="columnList_table">
       <el-table
+      max-height="590"
+      style="width: 94%;
+    margin: 0 auto;"
         :data="tableData"
-        style="width: 100%; margin-bottom: 20px"
         row-key="id"
         border
         default-expand-all
         :tree-props="{ children: '_child', hasChildren: 'hasChildren' }"
       >
-        <el-table-column type="index" label="编号"> </el-table-column>
+        <el-table-column type="index" label="编号" width="50"> </el-table-column>
 
         <el-table-column prop="id" label="权重"> </el-table-column>
         <el-table-column prop="title" label="分类名称"> </el-table-column>

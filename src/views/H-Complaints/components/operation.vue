@@ -249,7 +249,7 @@
                        </el-table-column>
                         <el-table-column
                           prop="file_size"
-                          label="文件大小/kb"
+                          label="文件大小"
                           width="width"
                         >
                         </el-table-column>
@@ -421,7 +421,7 @@
                        </el-table-column>
                         <el-table-column
                           prop="file_size"
-                          label="文件大小/kb"
+                          label="文件大小"
                           width="width"
                         >
                         </el-table-column>
@@ -922,7 +922,6 @@
                 type="flex"
                 class="row-bg"
                 justify="space-between"
-                v-show="fileList.length !== 0"
               >
                 <el-col :span="22" :push="1"
                   ><div class="grid-content bg-purple">
@@ -958,7 +957,7 @@
                       </el-table-column>
                       <el-table-column
                         prop="file_size"
-                        label="文件大小/kb"
+                        label="文件大小"
                         width="width"
                       >
                       </el-table-column>
@@ -1014,6 +1013,7 @@
                  maxlength="50"
                 placeholder="请输入文件描述"
                  :autosize="{ minRows: 2, maxRows: 2}"
+                 style="max-heiht:100px"
               ></el-input>
             </el-form-item>
             
@@ -1584,8 +1584,8 @@ export default {
           });
         }
       }
-      }
-    },
+      },
+   
     //提交
     submit() {
       if (this.$parent.opdata[0].state.state_val == 1) {
@@ -2275,7 +2275,8 @@ export default {
       } else {
         return "";
       }
-  },
+  }
+},
   created() {
     if(this.$parent.opdata!==''){
       if(this.$parent.opdata[0].state.state_val==11){
@@ -2303,14 +2304,14 @@ export default {
               this.$router.push("/dashboard");
             } else {
               this.$message({
-                message: res.msg,
+                message: '获取附件列表错误，请刷新重试',
                 type: "error",
                 duration: 1000,
               });
             }
      })
       }
-      else{
+      else if(this.$parent.opdata[0].state.state_val==1){
          let params={
         event_number:this.$parent.opdata[0].event_number,//编号
         state:2
@@ -2334,7 +2335,7 @@ export default {
               this.$router.push("/dashboard");
             } else {
               this.$message({
-                message: res.msg,
+                message: '获取附件列表错误，请刷新重试',
                 type: "error",
                 duration: 1000,
               });

@@ -7,7 +7,7 @@
         <el-table
           :data="tableData"
           :header-cell-style="getRowClass"
-          max-height="630"
+          max-height="600"
           row-key="id"
           border
           :tree-props="{
@@ -51,7 +51,7 @@
               />
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="300">
+          <el-table-column  label="操作" >
             <template slot-scope="scope">
               <el-button
                 class="roleEdit"
@@ -454,11 +454,6 @@ export default {
           });
           this.reload();
         }
-        this.$message({
-          type: "info",
-          message: "已取消操作",
-          duration: 1000,
-        });
       });
     },
     // 编辑

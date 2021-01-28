@@ -39,6 +39,14 @@ export default {
   AddComponent: async (params: any) => {
     return await service.post(`${baseUrl}api/tsevent/add`, params).then(res => res).catch(err => err)
   },
+   // 修改投诉页面数据
+   EditComponent: async (event_number:any) => {
+    return await service.get(`${baseUrl}api/tsevent/edit`,{params:{event_number}}).then(res => res).catch(err => err)
+  },
+  // 修改投诉
+  editomponent: async (data:any) => {
+    return await service.post(`${baseUrl}api/tsevent/edit`,data).then(res => res).catch(err => err)
+  },
   // 获取详情
   componrdetaile: async (data: any) => {
     return await service.post(`${baseUrl}api/tsevent/details`, data).then(res => res).catch(err => err)
@@ -53,7 +61,7 @@ export default {
   },
   // 投诉驳回
   reject: async (event_number: any, examine_textone: any) => {
-    return await service.get(`${baseUrl}api/complaintprocess/complaintReturn`, { params: { event_number: event_number, examine_textone: examine_textone } }).then(res => res).catch(err => err)
+    return await service.get(`${baseUrl}api/complaintprocess/complaintReject`, { params: { event_number: event_number, examine_textone: examine_textone } }).then(res => res).catch(err => err)
   },
   // 下发科室调查
   Issuedepartment: async (data: any) => {
@@ -116,16 +124,16 @@ export default {
     return await service.post(`${baseUrl}api/Complaintprocess/eventEnd`, data).then(res => res).catch(err => err)
   },
   //   上传附件
-  uploadfiles: async (data: any) => {
-    return await service.post(`${baseUrl}api/Complaintprocess/event_uploadfiles`, data).then(res => res).catch(err => err)
-  },
+  // uploadfiles: async (data: any) => {
+  //   return await service.post(`${baseUrl}api/Complaintprocess/event_uploadfiles`, data).then(res => res).catch(err => err)
+  // },
   //   上传附件
   uploadfilebase: async (data: any) => {
     return await service.post(`${baseUrl}api/Complaintprocess/event_base64_uploadfiles`, data).then(res => res).catch(err => err)
   },
   //   删除附件
   deletes: async (id: any) => {
-    return await service.get(`${baseUrl}api/tsevent/filedel`, {params:{id}}).then(res => res).catch(err => err)
+    return await service.get(`${baseUrl}api/tsevent/filedel`, { params: { id } }).then(res => res).catch(err => err)
   },
   //附件列表
   truefilelist: async (data: any) => {
@@ -401,7 +409,7 @@ export default {
   },
   // 文件库新增分类treelist
   docaddtree: async () => {
-    return await service.get(`${baseUrl}user/Fileclass/classtree`).then(res => res).catch(err => err)
+    return await service.get(`${baseUrl}api/fileclass/addclass`).then(res => res).catch(err => err)
   },
   // 文件库新增分类tree
   docadd: async (data: object) => {
@@ -424,16 +432,16 @@ export default {
     return await service.post(`${baseUrl}api/fileclass/editclass`, data).then(res => res).catch(err => err)
   },
   // 文件库文件list
-  filelist: async () => {
-    return await service.get(`${baseUrl}api/file/lists`).then(res => res).catch(err => err)
+  filelist: async (params: any) => {
+    return await service.get(`${baseUrl}api/file/lists`, { params }).then(res => res).catch(err => err)
   },
   // 文件库文件分类
   filetree: async () => {
-    return await service.get(`${baseUrl}api/file/addfile`).then(res => res).catch(err => err)
+    return await service.get(`${baseUrl}api/file/event_base64_uploadfiles`).then(res => res).catch(err => err)
   },
   // 文件库文件上传
   fileupload: async (data: object) => {
-    return await service.post(`${baseUrl}api/file/addfile`, data).then(res => res).catch(err => err)
+    return await service.post(`${baseUrl}api/file/event_base64_uploadfiles`, data).then(res => res).catch(err => err)
   },
   // 文件库文件下载
   filedown: async (params: any) => {

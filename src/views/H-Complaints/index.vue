@@ -29,9 +29,9 @@
                   <el-button type="text" size="small" @click="records(scope.row)"
                     >医患记录</el-button
                   >
-                  <el-button type="text" size="small" @click="handle(scope.row)"
+                  <el-button type="text" v-if="scope.row.state.state_val!==-1" size="small" @click="handle(scope.row)"
                     >操作</el-button>
-                    <el-button type="text" v-show="scope.row.state.state_val==-1" size="small" @click="handle(scope.row)"
+                   <el-button type="text" v-if="scope.row.state.state_val==-1" size="small" @click="handle(scope.row)"
                     >修改</el-button>
                 </template>
               </el-table-column>
@@ -157,6 +157,9 @@
       </el-drawer>
       </div>
       </Operation>
+       <Edit v-if="editshows==true" :editdata='editdata'>
+        <div slot="conserve"></div>
+      </Edit>
     </div>
   </div>
 </template>
@@ -168,14 +171,17 @@ import Look from "../H-Complaints/components/Look";
 import Conserve from "../H-Complaints/components/conserve";
 import Table from "../H-Complaints/components/Tables";
 import Operation from "../H-Complaints/components/operation";
+import Edit from "../H-Complaints/components/edit";
+
 // 添加投诉
 import service from "@/service/index";
 import qs from "qs";
 export default {
   inject: ["reload"],
-  components: { Complaintslist, Addcom, Look, Conserve, Table, Operation },
+  components: { Complaintslist, Addcom, Look, Conserve, Table, Operation,Edit},
   data() {
     return {
+      editdata:'',//修改页面数据
       operationdata: "",
       opdata: "", //操作详情
       lookdata: "", //详情数据
@@ -187,6 +193,7 @@ export default {
       operations: false,
       drawer: false,
       event_number:'',
+      editshows:false,
       filelisttrue:[]
     };
   },
@@ -229,17 +236,31 @@ export default {
     },
     // 操作页面
     handle(index) {
-      let params = {
-        event_number: index.event_number,
-        };
-        this.event_number=index.event_number
-        //操作页面数据接口
+      console.log(index)
+      if(index.state.state_val==-1){
+          this.list = false;
+          this.add = false;
+          this.look = false;
+          this.operations = false;
+          this.editshows=true
+          this.editdata=index
+      }
+      else if(index.state.state_val==-2){
+        this.$message({
+            message: "已退回！无法操作",
+            type: "error",
+            duration: 1000,
+          });
+      }
+      else{
+            //操作页面数据接口
       service.Issue(index.event_number).then((res) => {
         if (res.code == 20010) {
           this.list = false;
           this.add = false;
           this.look = false;
           this.operations = true;
+            this.editshows=false
           this.operationdata = index;
           this.opdata = res.data;
         }
@@ -268,6 +289,8 @@ export default {
         }
       
       });
+      }
+    
     },
     records(index) {
       //跳转到医患记录
@@ -293,6 +316,7 @@ export default {
       this.list = false;
       this.add = false;
       this.look = true;
+      this.editshows=false
       this.operations = false;
       let params = {
         event_number: index.event_number,
@@ -337,6 +361,7 @@ export default {
       this.look = false;
       this.operations = false;
       this.dialogVisible = false
+      this.editshows=false
       this.reload()
     },
     // 添加投诉
@@ -344,13 +369,22 @@ export default {
       this.list = false;
       this.add = true;
       this.look = false;
+      this.editshows=false
       this.dialogVisible = true;
       this.operations = false;
     },
     // 导出事件
     exportcom() {
       console.log(2);
-    }
+    },
+     // 设置表头颜色
+    getRowClass( rowIndex) {
+      if (rowIndex == 0) {
+        return "background:#c2c5f6;color:#000";
+      } else {
+        return "";
+      }
+  },
   },
   created() {
   },
