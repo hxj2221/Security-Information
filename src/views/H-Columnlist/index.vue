@@ -157,7 +157,7 @@
       </div>
     </el-dialog>
     <!-- 分页 -->
-    <div class="columnList_table_paging">
+    <!-- <div class="columnList_table_paging">
       <el-pagination
         :current-page="currentPage"
         :page-sizes="[8, 10, 20]"
@@ -166,7 +166,7 @@
         :total="tableData.length"
       >
       </el-pagination>
-    </div>
+    </div> -->
   </div>
 </template>
 
