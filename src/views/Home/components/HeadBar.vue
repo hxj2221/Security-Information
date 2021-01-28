@@ -4,7 +4,7 @@
     <div class="headEnd">
       <el-menu class="el-menu-demo" mode="horizontal" @select="handleSelect" style="border:none;background:none;height:20px;color:#fff">
        <el-submenu index="2">
-        <template slot="title">{{ admin }}</template>
+        <template slot="title" style="color:white">{{ admin }}</template>
          <el-menu-item index="2-1" @click="toMine">个人信息</el-menu-item>
          <el-menu-item index="2-2" @click="edit">修改密码</el-menu-item>
          <el-menu-item index="2-1" @click="newaa">消息通知</el-menu-item>
@@ -61,6 +61,7 @@ export default {
   flex-flow: row nowrap;
   line-height: 50px;
   background-color: #002140;
+
   // background-image: linear-gradient(to right,rgba(0,128,128, 0.8), rgba(255,248,220, 1));
   // border-bottom: 10px solid rgb(168, 82, 82);
 

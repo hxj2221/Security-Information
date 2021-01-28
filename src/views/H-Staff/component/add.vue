@@ -154,8 +154,20 @@
           </el-col>
           <el-col :span="6">
             <el-form-item label="角色" required>
-              <el-select type="input" autosize v-model="addStaff.auth_grouap" placeholder="请选择">
-                <el-option v-for="item in optionrole" :key="item.id" :label="item.title" :value="item.id">
+              <el-select
+                type="input"
+                autosize
+                multiple
+                v-model="addStaff.auth_grouap"
+                placeholder="请选择"
+                @change="departsel"
+              >
+                <el-option
+                  v-for="item in optionrole"
+                  :key="item.id"
+                  :label="item.title"
+                  :value="item.id"
+                >
                 </el-option>
               </el-select>
             </el-form-item>
@@ -343,6 +355,7 @@ export default {
       this.$parent.fathstaffno();
     },
     handleChange(cityvalue) {
+<<<<<<< HEAD
        let options = this.options;
       let nameArray = [];
       for (let i = 0; i < id.length; i++) {
@@ -373,6 +386,19 @@ export default {
       //         CodeToText[cityvalue[2]];
       // console.log(this.addressC)
       //       console.log(this.addStaff.address);
+=======
+      CodeToText[cityvalue[0]],
+        CodeToText[cityvalue[1]],
+        CodeToText[cityvalue[2]];
+      this.addressC =
+        CodeToText[cityvalue[0]] +
+        "/" +
+        CodeToText[cityvalue[1]] +
+        "/" +
+        CodeToText[cityvalue[2]];
+      console.log(this.addressC);
+      console.log(this.addStaff.address);
+>>>>>>> aca24a8141d9610b4427e88fedc2c54a052f7d33
     },
     // 子调用父
     staffaddvueno() {
