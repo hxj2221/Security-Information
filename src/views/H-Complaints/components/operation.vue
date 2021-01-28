@@ -547,15 +547,15 @@
                onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )"
                         placeholder="请填写"
                         autosize
-                      ></el-input>
-                      <!-- <el-date-picker
+                      ></el-input>-->
+                   <el-date-picker
                        :picker-options="pickerOptions"
                        style="margin-left: 10px"
                         v-model="needtime"
                         type="date"
                         placeholder="选择日期"
                         value-format="timestamp">
-                       </el-date-picker> -->
+                       </el-date-picker> 
                       </div></el-col>
                 </el-row>
               </div>

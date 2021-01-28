@@ -83,10 +83,23 @@
       <!-- 分页 -->
       <div class="staffpag">
         <div class="block">
+<<<<<<< HEAD
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="nums"
+            :page-size="num"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total"
+          >
+          </el-pagination>
+=======
           <el-pagination @size-change="handleSizeChange" @current-change="currentChage" :current-page="currentPage4"
           :page-sizes="pageNumList" :page-size="100" layout="total, sizes, prev, pager, next, jumper"
           :total="pageCount">
         </el-pagination>
+>>>>>>> ecae58e4c9eb9b6297fcdcd5047ba439fdf32bf2
         </div>
       </div>
     </div>
@@ -100,6 +113,8 @@
         </el-form-item>
         <el-form-item label="文件分类" prop="region">
           <el-select
+            style="float: left"
+            class="newlyClassify"
             @change="selchang"
             v-model="editselvalue"
             placeholder="请选择"
@@ -137,6 +152,7 @@
         </el-form-item>
         <el-form-item label="上传附件：" class="uploadfile">
           <el-upload
+            style="float: left"
             action="http://bt1.wlqqlp.com:8082/api/file/event_base64_uploadfiles"
             :limit="1"
             :multiple="false"
@@ -296,6 +312,43 @@ export default {
         id: id,
       };
       service.filedown(param).then((res) => {
+<<<<<<< HEAD
+        console.log(res);
+        var blob = new Blob([res], {
+          type: "application/octet-stream",
+        }); //接收的是blob，若接收的是文件流，需要转化
+        if (typeof window.chrome !== "undefined") {
+          // Chrome version
+          var link = document.createElement("a");
+          link.href = window.URL.createObjectURL(blob);
+          //link.download = filename;
+          link.click();
+        } else if (typeof window.navigator.msSaveBlob !== "undefined") {
+          // IE version
+          var blob = new Blob([res], { type: "application/force-download" });
+          window.navigator.msSaveBlob(blob);
+        } else {
+          // Firefox version
+          var file = new File([res], {
+            type: "application/force-download",
+          });
+          window.open(URL.createObjectURL(file));
+        }
+        //   // const sjres = res;
+        //   // var blob = new Blob([sjres]);
+        //   // var url = window.URL.createObjectURL(blob);
+        //   // var a = document.createElement("a");
+        //   // a.href = url;
+        //   // a.click();
+        //   // this.isDisabled = false;
+        //   // 不安全，无法带token
+        //   // let a = document.createElement("a"); //创建a标签
+        //   // a.href = `http://bt1.wlqqlp.com:8082/api/file/download?id=` + id; //通过a与id去下载
+        //   // document.body.appendChild(a); //添加a
+        //   // a.click(); //下载
+        //   // URL.revokeObjectURL(a.href); // 释放URL 对象
+        //   // document.body.removeChild(a); // 删除 a 标签
+=======
         let a = document.createElement("a"); //创建a标签
         a.href = `http://bt1.wlqqlp.com:8082/api/file/download?id=` + id; //通过a与id去下载
         document.body.appendChild(a); //添加a
@@ -317,6 +370,7 @@ export default {
         // document.body.appendChild(link);
         // link.click();
         // document.body.removeChild(link);
+>>>>>>> ecae58e4c9eb9b6297fcdcd5047ba439fdf32bf2
       });
     },
     // 上传文件
