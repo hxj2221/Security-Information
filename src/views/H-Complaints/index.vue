@@ -29,7 +29,7 @@
                   <el-button type="text" size="small" @click="records(scope.row)"
                     >医患记录</el-button
                   >
-                  <el-button type="text" size="small" @click="handle(scope.row)"
+                  <el-button type="text" size="small" v-show="scope.row.state.state_val!==-1" @click="handle(scope.row)"
                     >操作</el-button>
                     <el-button type="text" v-show="scope.row.state.state_val==-1" size="small" @click="handle(scope.row)"
                     >修改</el-button>
