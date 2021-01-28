@@ -350,33 +350,24 @@ export default {
       };
       service.filedown(param).then((res) => {
         console.log(res);
-        var blob = new Blob([res], {
-          type: "application/octet-stream",
-        }); //接收的是blob，若接收的是文件流，需要转化
-        if (typeof window.chrome !== "undefined") {
-          // Chrome version
-          var link = document.createElement("a");
-          link.href = window.URL.createObjectURL(blob);
-          //link.download = filename;
-          link.click();
-        } else if (typeof window.navigator.msSaveBlob !== "undefined") {
-          // IE version
-          var blob = new Blob([res], { type: "application/force-download" });
-          window.navigator.msSaveBlob(blob);
-        } else {
-          // Firefox version
-          var file = new File([res], {
-            type: "application/force-download",
-          });
-          window.open(URL.createObjectURL(file));
-        }
-        //   // const sjres = res;
-        //   // var blob = new Blob([sjres]);
-        //   // var url = window.URL.createObjectURL(blob);
-        //   // var a = document.createElement("a");
-        //   // a.href = url;
-        //   // a.click();
-        //   // this.isDisabled = false;
+        var filename = res.data.file_name;
+        console.log(filename);
+        const a = document.createElement("a"); //创建a标签
+        a.style.display = "none";
+        a.href = "http://bt1.wlqqlp.com:8082/" + res.data.fileurl; // 指定下载链接
+        // a.download = "ds"; //指定下载文件名
+        a.click(); //触发下载
+        // URL.revokeObjectURL(a.href); //释放URL对象
+        // const link = document.createElement("a"); // 生成一个a标签。
+        // link.download = "res.data.file_name"; // dowload属性指定文件名
+        // link.href = "http://bt1.wlqqlp.com:8082/" + res.data.fileurl; // href属性指定下载链接
+        // link.click(); // click()事件触发下载
+
+        // var a = document.createElement("a");
+        // a.href = "http://bt1.wlqqlp.com:8082/" + res.data.fileurl;
+        // a.download = res.data.file_name;
+        // a.click();
+        // this.isDisabled = false;
         //   // 不安全，无法带token
         //   // let a = document.createElement("a"); //创建a标签
         //   // a.href = `http://bt1.wlqqlp.com:8082/api/file/download?id=` + id; //通过a与id去下载

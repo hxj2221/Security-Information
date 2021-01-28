@@ -39,18 +39,18 @@
       <!-- 表格部分 -->
       <div class="staffIptTab">
         <el-table
-          max-height="540"
+          max-height="662"
           :data="tables"
           :header-cell-style="{ background: '#C2C5F6', color: '#000' }"
           :cell-style="{ background: '#fff' }"
         >
           <el-table-column width="50" label="序号" type="index">
           </el-table-column>
-          <el-table-column prop="job_number" label="工号" width="120"> </el-table-column>
+          <el-table-column prop="job_number" label="工号"> </el-table-column>
           <el-table-column prop="name" label="员工姓名"> </el-table-column>
           <el-table-column prop="sex.name" label="员工性别"> </el-table-column>
           <el-table-column prop="age" label="员工年龄"> </el-table-column>
-          <el-table-column prop="phone" label="手机号码" width="110"> </el-table-column>
+          <el-table-column prop="phone" label="手机号码"> </el-table-column>
           <el-table-column prop="department[0].title" label="所属科室">
           </el-table-column>
           <el-table-column
@@ -228,41 +228,40 @@ export default {
     },
     //员工状态
     changeSwitch(val, row) {
-      console.log(val, row);
-      let data = {
-        id: row.id,
-        status: row.status,
-      };
-      service.staffState(data).then((res) => {
-        if (res.code == 20010) {
-          this.$confirm("此处操作将修改状态，是否继续?", "提示", {
-            confirmButtonText: "确定",
-            cancelButtonText: "取消",
-            type: "warning",
-          }).then(() => {
-            if (row.status == 1) {
-              this.$message({
-                type: "success",
-                message: res.msg,
-                duration: 1500,
-              });
-            } else {
-              this.$message({
-                type: "error",
-                message: res.msg,
-                duration: 1500,
-              });
-            }
+      console.log(row.id);
+      this.$confirm("此操作将修改状态, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          let data = {
+            id: row.id,
+            status: row.status,
+          };
+          console.log(data);
+          service.staffState(data).then((res) => {
+            console.log(res);
+            this.$message({
+              type: "success",
+              message: res.msg,
+              duration: 1500,
+            });
+            this.reload();
           });
-        } else {
-          row.status = 1;
+        })
+        .catch(() => {
+          if (row.status == 1) {
+            row.status = 0;
+          } else {
+            row.status = 1;
+          }
           this.$message({
-            type: "error",
-            message: res.msg,
-            duration: 1500,
+            type: "info",
+            message: "已取消操作",
+            duration: 1300,
           });
-        }
-      });
+        });
     },
     // 编辑
     handleEdit(index, row, id) {
