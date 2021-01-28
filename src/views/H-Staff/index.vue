@@ -226,7 +226,7 @@ export default {
         this.staffvue = true;
       }, 3000);
     },
-    //员工状态
+   //员工状态
     changeSwitch(val, row) {
       console.log(row.id);
       this.$confirm("此操作将修改状态, 是否继续?", "提示", {

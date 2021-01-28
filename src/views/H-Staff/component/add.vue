@@ -110,8 +110,11 @@
             <el-form-item label="地址" required>
               <el-cascader
                 size="large"
+                ref="cascader"
                 :options="options"
                 v-model="addStaff.address"
+                :props='props'
+                @change="handleChange"
               >
               </el-cascader>
             </el-form-item>
@@ -232,6 +235,20 @@ export default {
   data() {
     return {
       options: regionData,
+       props: {
+    value: 'id',//设置每个menu的ID值
+    label: 'name',//设置每个menu的name值
+    children: 'children',//子级
+    checkStrictly: true//遵守父子节点不互相关联--可以选择级联面板的任何一级
+  },
+      // props: {
+      //   value: "id", //设置每个menu的ID值
+      //   label: "name", //设置每个menu的name值
+      //   children: "children", //子级
+      //   checkStrictly: true, //遵守父子节点不互相关联--可以选择级联面板的任何一级
+      // },
+      // label: "",
+      // code: "",
       addStaff: {
         job_number: "", // 员工编号
         // staffNumInput: "",
@@ -320,17 +337,7 @@ export default {
           setTimeout(() => {
             this.reload();
           }, 2000);
-          // const loading = this.$loading({
-          //   lock: true,
-          //   text: "保存中",
-          //   spinner: "el-icon-loading",
-          //   background: "rgba(0, 0, 0, 0.7)",
-          // });
-          // setTimeout(() => {
-          //   loading.close();
-          //   this.reload();
-          // }, 2000);
-          // this.$parent.fathstaffyes();
+          
         } else {
           this.$message({
             message: res.msg,
@@ -345,17 +352,36 @@ export default {
       this.$parent.fathstaffno();
     },
     handleChange(cityvalue) {
-      CodeToText[cityvalue[0]],
-        CodeToText[cityvalue[1]],
-        CodeToText[cityvalue[2]];
-      this.addressC =
-        CodeToText[cityvalue[0]] +
-        "/" +
-        CodeToText[cityvalue[1]] +
-        "/" +
-        CodeToText[cityvalue[2]];
-      console.log(this.addressC);
-      console.log(this.addStaff.address);
+       let options = this.options;
+      let nameArray = [];
+      for (let i = 0; i < id.length; i++) {
+        let index = options.findIndex(item => {
+          return item[this.props.value] == id[i];
+        });
+        nameArray.push(options[index][this.props.label]);
+        if (i < id.length - 1 && options[index].children == undefined) {
+          let list = new Promise(resolve => {
+            this.props.lazyLoad(id[i], list => {
+              resolve(list);
+            });
+          });
+          this.$set(options[index], "children",  list);
+          options = options[index].children;
+        } else {
+          options = options[index].children;
+        }
+      }
+      return { value: id, label: nameArray };
+
+      // console.log(cityvalue)
+      //       this.addressC =
+      //         CodeToText[cityvalue[0]] +
+      //         "/" +
+      //         CodeToText[cityvalue[1]] +
+      //         "/" +
+      //         CodeToText[cityvalue[2]];
+      // console.log(this.addressC)
+      //       console.log(this.addStaff.address);
     },
     // 子调用父
     staffaddvueno() {
