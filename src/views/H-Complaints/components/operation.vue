@@ -1681,22 +1681,6 @@ export default {
               });
             }
           });
-          this.$router.push('/login')
-        }
-        else if(res.code==20403){
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        }
-         else{
-          this.$message({
-                  message: res.msg,
-                  type: "error",
-                  duration: 1000,
-                });
         }
       }
        else if(this.checkstate==14){//改进完成（医院）

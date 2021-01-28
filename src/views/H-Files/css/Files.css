@@ -164,6 +164,7 @@
 .newlyFiles .newlyContent {
     margin: 30px auto 0;
     width: 94%;
+    min-height: 580px;
 }
 /* .newlyFiles .newlyContent .TableContent{
     min-height: 600px;

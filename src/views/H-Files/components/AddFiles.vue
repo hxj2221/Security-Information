@@ -12,7 +12,7 @@ import service from '@/service/index';
     </div>
     <!-- 内容 -->
     <div class="newlyContent">
-      <div class="TableContent">
+      <div class="TableContent" style="max-height:600px">
         <el-table
           max-height="600"
           :data="tableData"
