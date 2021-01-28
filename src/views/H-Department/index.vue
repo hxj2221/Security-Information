@@ -19,7 +19,6 @@
         /> -->
       <!-- <img :src="portrait" alt="" class="my-avatar" /> -->
       <!-- </div> -->
-<<<<<<< HEAD
       <el-table
         :data="dormitory"
         class="departtable"
@@ -28,10 +27,6 @@
         :header-cell-style="{ background: '#c2c5f6', color: '#000' }"
         :cell-style="{ background: '#fff' }"
         :tree-props="{
-=======
-      <el-table :data="dormitory" class="departtable" max-height="662"
-        :header-cell-style="{ background: '#c2c5f6',color:'#000' }" :cell-style="{ background: '#fff' }" :tree-props="{
->>>>>>> 8e2df6f9db4f45152c0c0863aa28c1ab0db1407a
           children: '_child',
           hasChildren: 'hasChildren',
         }">

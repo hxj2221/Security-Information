@@ -43,17 +43,12 @@
         </el-table>
         <!-- 添加权限 -->
         <div>
-<<<<<<< HEAD
-          <el-dialog title="添加权限" :visible.sync="dialogVisible" width="width" :before-close="dialogeditright"
-            :close-on-click-modal="false">
-=======
           <el-dialog
             title="添加权限"
             :visible.sync="dialogVisible"
             width="width"
             :close-on-click-modal="false"
           >
->>>>>>> 89522821e93b8ed37e7dc8ddfc43208abc792d37
             <el-form label-width="80px" ref="editForm">
               <el-form-item prop="staffName" label="上级" width="120">
                 <el-select v-model="selvalue" @change="selchang" placeholder="请选择">
@@ -147,13 +142,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-  import headpow from "../component/power";
-  import service from "@/service/index";
-  export default {
-    components: {
-      headpow,
-=======
 import headpow from "../component/power";
 import service from "@/service/index";
 export default {
@@ -209,274 +197,6 @@ export default {
       this.tableData = res.data;
     });
   },
-  methods: {
-    // 新增
-    fathpowadd(){
-      this.dialogVisible=true
-    },
-    // 编辑/添加权限下拉值
-    selchang() {
-      console.log(this.editselvalue);
->>>>>>> 89522821e93b8ed37e7dc8ddfc43208abc792d37
-    },
-    data(){
-      return{
-        tableData:[],//权限内容
-        dialogVisible:false,//添加权限弹框
-        selvalue:'',//上级下拉框
-        seldata:'',//顶级下拉框
-        powpx:'',//排序
-        powstatu:'',//状态
-        powlab:'',//标题
-        powicon:'',//图标
-        powaps:'',//后端接口
-        powweb:'',//前端路由
-        dialogedit:false,//编辑权限弹框
-        editselvalue:'',//上级下拉框
-        editseldata:'',//顶级下拉框
-        editpowpx:'',//排序
-        editpowstatu:'',//状态
-        editpowlab:'',//标题
-        editpowicon:'',//图标
-        editpowaps:'',//后端接口
-        editpowweb:'',//前端路由
-      }
-    },
-<<<<<<< HEAD
-    
-    // 加载数据
-    created() {
-      service.rulelist().then((res) => {
-        console.log(res);
-        if (res.code == 20403) {
-          this.$message({
-            type: "error",
-            message: res.msg,
-            duration: 1000,
-          });
-          this.$router.push("/dashboard");
-        }
-<<<<<<< HEAD
-        console.log(res);
-      });
-    },
-    // 编辑权限
-    dialogBeforeCl() {
-      this.dialogedit = false;
-    },
-    // switch开关
-    changeSwitch(val, row, id) {
-      console.log(row.status);
-      this.$confirm("此操作将修改状态, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-      })
-        .then(() => {
-          let data = {
-            id: id,
-            status: row.status,
-          };
-          console.log(data);
-          service.powstatus(data).then((res) => {
-            console.log(res);
-            this.$message({
-              type: "success",
-              message: res.msg,
-              duration: 1000,
-            });
-          });
-        })
-        .catch(() => {
-          if (row.status == 1) {
-            row.status = 0;
-          } else {
-            row.status = 1;
-          }
-          this.$message({
-            type: "info",
-            message: "已取消操作",
-            duration: 1000,
-          });
-        });
-    },
-    // 编辑
-    handleEdit(id) {
-      this.dialogedit = true;
-      console.log(id);
-      let param = {
-        id: id,
-      };
-      service.getpowid(param).then((res) => {
-        console.log(res.data);
-        this.editseldata = res.data.lists;
-        this.editselvalue = res.data.info.pid;
-        this.editpowpx = res.data.info.sort;
-        this.editpowstatu = res.data.info.status;
-        this.editpowlab = res.data.info.title;
-        this.editpowicon = res.data.info.icon;
-        this.editpowaps = res.data.info.name;
-        this.editid = res.data.info.id;
-        this.editpowweb = res.data.info.url;
-      });
-    },
-    // 编辑权限确认
-    editdialog() {
-      // if (this.editpowpx == "" || this.editpowpx == null) {
-      //   this.$message({
-      //     message: "请输入排序",
-      //     type: "error",
-      //     duration: 1300,
-      //   });
-      // } else if (this.editpowlab == "" || this.editpowlab == null) {
-      //   this.$message({
-      //     message: "请输入标题",
-      //     type: "error",
-      //     duration: 1300,
-      //   });
-      // } else if (this.editpowicon == "" || this.editpowicon == null) {
-      //   this.$message({
-      //     message: "请输入图标",
-      //     type: "error",
-      //     duration: 1300,
-      //   });
-      // } else if (this.editpowaps == "" || this.editpowaps == null) {
-      //   this.$message({
-      //     message: "请输入后端接口",
-      //     type: "error",
-      //     duration: 1300,
-      //   });
-      // } else if (this.editpowweb == "" || this.editpowweb == null) {
-      //   this.$message({
-      //     message: "请输入前端路由",
-      //     type: "error",
-      //     duration: 1300,
-      //   });
-      // } else {
-      let data = {
-        sort: this.editpowpx,
-        status: this.editpowstatu,
-        name: this.editpowaps,
-        icon: this.editpowicon,
-        title: this.editpowlab,
-        pid: this.editselvalue,
-        id: this.editid,
-        url: this.editpowweb,
-      };
-      console.log(data);
-      service.editsavepower(data).then((res) => {
-        console.log(res);
-        if (res.code == 20010) {
-          this.$message({
-            message: "保存成功！",
-            type: "success",
-            duration: 2000,
-          });
-          setTimeout(() => {
-            this.reload();
-          }, 1000);
-        }
-        // 暂不需要
-        // else {
-        //   this.$message({
-        //     message: "请注意" + res.msg,
-        //     type: "error",
-        //     duration: 1300,
-        //   });
-        // }
-      });
-      // }
-    },
-
-    // 添加权限
-    fathpowadd() {
-      this.dialogVisible = true;
-      this.selvalue = "0";
-      service.addpower().then((res) => {
-        console.log(res);
-        this.seldata = res.data;
-      });
-    },
-    // 添加权限的icon关闭
-    dialogeditright() {
-      this.dialogVisible = false;
-    },
-    // 添加下级
-    handleClick(id) {
-      this.dialogVisible = true;
-      console.log(id);
-      let param = {
-        id: id,
-      };
-      service.addpower().then((res) => {
-        console.log(res);
-        this.seldata = res.data;
-      });
-      service.getpowid(param).then((res) => {
-        console.log(res.data);
-        this.addsonseldata = res.data.lists;
-        this.addsonselvalue = res.data.info.pid;
-        this.selvalue = res.data.info.id;
-      });
-    },
-    // 添加下级确认
-    addsondialog() {
-      let data = {
-        sort: this.addsonpowpx,
-        status: this.addsonpowstatu,
-        name: this.addsonpowaps,
-        icon: this.addsonpowicon,
-        title: this.addsonpowlab,
-        pid: this.addsonselvalue,
-        id: this.addsonid,
-        url: this.addsonpowweb,
-      };
-      service.savepower(data).then((res) => {
-        if (res.code == 20010) {
-          this.$message({
-            message: res.msg,
-            type: "success",
-            duration: 1000,
-          });
-          this.reload();
-        } else {
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.reload();
-        }
-        this.$message({
-          type: "info",
-          message: "已取消操作",
-          duration: 1000,
-        });
-      });
-    },
-    // 编辑
-    handleEdit(id) {
-      this.dialogedit = true;
-      console.log(id);
-      let param = {
-        id: id,
-      };
-      service.getpowid(param).then((res) => {
-        console.log(res.data);
-        this.editseldata = res.data.lists;
-        this.editselvalue = res.data.info.pid;
-        this.editpowpx = res.data.info.sort;
-        this.editpowstatu = res.data.info.status;
-        this.editpowlab = res.data.info.title;
-        this.editpowicon = res.data.info.icon;
-        this.editpowaps = res.data.info.name;
-        this.editid = res.data.info.id;
-        this.editpowweb = res.data.info.url;
-=======
-        this.tableData = res.data;
->>>>>>> 8e2df6f9db4f45152c0c0863aa28c1ab0db1407a
-      });
-    },
     methods: {
       // 编辑/添加权限下拉值
       selchang() {
@@ -527,32 +247,19 @@ export default {
         };
         service.savepower(data).then((res) => {
           if (res.code == 20010) {
-<<<<<<< HEAD
-            this.$message({
-              message: "保存成功！",
+ this.$message({
+              message: res.msg,
               type: "success",
-              duration: 2000,
+              duration: 1000,
             });
-            setTimeout(() => {
-              this.reload();
-            }, 1000);
+            this.reload();
           }
-          // 暂不需要
-          // else {
-          //   this.$message({
-          //     message: "请注意" + res.msg,
-          //     type: "error",
-          //     duration: 1300,
-          //   });
-          // }
-        });
+        })
       }
-=======
-=======
+      },
     // 编辑权限
     dialogBeforeCl() {
       this.dialogedit = false;
->>>>>>> 8e2df6f9db4f45152c0c0863aa28c1ab0db1407a
     },
     // switch开关
     changeSwitch(val, row, id) {
@@ -570,14 +277,13 @@ export default {
           console.log(data);
           service.powstatus(data).then((res) => {
             console.log(res);
->>>>>>> 89522821e93b8ed37e7dc8ddfc43208abc792d37
             this.$message({
               message: res.msg,
               type: "success",
               duration: 1000,
             });
             this.reload();
-          }
+          })
           // else {
           //   this.$message({
           //     message: res.msg,
@@ -587,7 +293,7 @@ export default {
           // }
         });
         //this.dialogVisible = false;
-      }
+      
     },
 
       // 添加权限
@@ -774,37 +480,18 @@ export default {
               duration: 1300,
             });
           });
-<<<<<<< HEAD
         console.log(id);
       },
       // 表头颜色
-      getRowClass({
-        rowIndex
-      }) {
+      getRowClass( rowIndex) {
         if (rowIndex == 0) {
           return "background:#c2c5f6;color:#000";
         } else {
           return "";
         }
-      },
-=======
-        });
-      console.log(id);
-    },
-    // 添加子级
-    handleClick(){
-
-    },
-    // 表头颜色
-    getRowClass({ rowIndex }) {
-      if (rowIndex == 0) {
-        return "background:#c2c5f6;color:#000";
-      } else {
-        return "";
       }
->>>>>>> 89522821e93b8ed37e7dc8ddfc43208abc792d37
-    },
-  };
+    }
+  }
 </script>
 
 <style scoped>
