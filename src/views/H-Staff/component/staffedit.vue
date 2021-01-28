@@ -296,7 +296,7 @@ export default {
       this.addStaff.status = res.status;
       // this.addStaff.head_department = res.head_department;
       this.addStaff.position = res.position;
-      this.addStaff.auth_grouap = res.auth_grouap[0].id;
+      this.addStaff.auth_grouap = res.auth_grouap.id;
       this.role_id = res.role_id;
       this.addStaff.status = res.status;
     },

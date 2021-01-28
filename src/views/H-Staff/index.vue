@@ -46,11 +46,11 @@
         >
           <el-table-column width="50" label="序号" type="index">
           </el-table-column>
-          <el-table-column prop="job_number" label="工号"> </el-table-column>
+          <el-table-column prop="job_number" label="工号" width="120"> </el-table-column>
           <el-table-column prop="name" label="员工姓名"> </el-table-column>
           <el-table-column prop="sex.name" label="员工性别"> </el-table-column>
           <el-table-column prop="age" label="员工年龄"> </el-table-column>
-          <el-table-column prop="phone" label="手机号码"> </el-table-column>
+          <el-table-column prop="phone" label="手机号码" width="120"> </el-table-column>
           <el-table-column prop="department[0].title" label="所属科室">
           </el-table-column>
           <el-table-column
