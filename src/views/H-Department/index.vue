@@ -34,7 +34,7 @@
         </el-table-column>
         <el-table-column prop="title" label="科室名称">
         </el-table-column>
-        <el-table-column prop="number" label="科室编号">
+        <el-table-column prop="number" label="科室编号" width="150">
         </el-table-column>
         <el-table-column prop="usernumber" label="员工数量">
         </el-table-column>
