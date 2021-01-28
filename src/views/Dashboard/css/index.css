@@ -116,11 +116,11 @@
 .box2 .bg .con_info{
   padding: 15px 15px;
   margin-top: 25px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.0470588235294118);
+  box-shadow: 0px 0px 10px rgb(0 0 0 / 5%);
   border-left: 4px solid rgba(82, 193, 245, 1);
-  width: 45%;
+  width: 42%;
   display: inline-block;
-  margin: 0 2px;
+  margin: 0px 15px;
 }
 .box2 .bg .con_info .info{
   display: flex;

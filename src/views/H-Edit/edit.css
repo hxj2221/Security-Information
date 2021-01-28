@@ -3,34 +3,41 @@
     padding: 0;
 }
 
-.H-edit {
+.H-editAll {
     width: 95%;
     margin: 0 auto;
     min-height: 805px;
     background: #fff;
     border-radius: 5px;
-    box-shadow: 0 0 2px rgb(184, 183, 183);
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
 }
-.H-edit .jurisdiction{
+<<<<<<< HEAD
+
+.H-editAll .jurisdiction {
     width: 92%;
-    min-height: 800px;
+    min-height: 811px;
+    margin: 20px auto 0;
+=======
+.H-editAll .jurisdiction{
+    width: 92%;
     margin: 0 auto;
     margin-top: 20px;
+>>>>>>> 5cbdadc21e9ec1697080c41839beb7f0285eccf2
 }
 
-.H-edit .content {
+.H-editAll .content {
     border: 1px solid #e0e0e0;
     width: 95%;
     margin: 0 auto;
 }
 
-.H-edit .content .title {
+.H-editAll .content .title {
     border-bottom: 1px solid #e0e0e0;
     background-color: #f8f8f8;
     padding-left: 10px;
 }
 
-.H-edit .content .power {
+.H-editAll .content .power {
     padding-left: 10px;
     display: flex;
     border-bottom: 1px solid #e0e0e0;
@@ -38,18 +45,18 @@
     line-height: 40px;
 }
 
-.H-edit .content .power:last-child {
+.H-editAll .content .power:last-child {
     border-bottom: none;
 }
 
-.H-edit .content .power .tit {
+.H-editAll .content .power .tit {
     padding-right: 10px;
     text-align: right;
     border-right: 1px solid #e0e0e0;
     width: 200px;
 }
 
-.H-edit .content .power .el-checkbox-group {
+.H-editAll .content .power .el-checkbox-group {
     padding-left: 20px;
 }
 

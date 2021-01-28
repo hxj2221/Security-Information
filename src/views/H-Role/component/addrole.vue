@@ -14,34 +14,34 @@
     <div class="addmain">
       <el-form ref="form">
         <el-row :gutter="20">
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="角色编号" disabled>
               <el-input class="dialog-input-text" type="input" autosize placeholder="10001" disabled></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="角色名称" required>
               <el-input class="dialog-input-text" type="input" autosize v-model="roleNameipt"></el-input>
             </el-form-item>
           </el-col>
 
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item style="margin-top: 40px" label="角色状态">
               <el-switch v-model="valuestatus" :active-value="1" :inactive-value="0" active-color="#13ce66"
                 inactive-color="#ff4949">
               </el-switch>
             </el-form-item>
           </el-col>
-          <el-col :span="8"> </el-col>
+          <el-col :span="6"> </el-col>
         </el-row>
         <el-row :gutter="20">
-          <el-col :span="16">
+          <el-col :span="12">
             <el-form-item label="角色描述" required>
               <el-input class="dialog-input-text" type="input" autosize v-model="rolecreate" placeholder="请输入内容">
               </el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="排序" required>
               <el-input
                 class="dialog-input-text"
@@ -52,7 +52,7 @@
               ></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="8"> </el-col>
+          <el-col :span="6"> </el-col>
         </el-row>
       </el-form>
     </div>

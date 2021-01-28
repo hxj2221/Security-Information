@@ -24,10 +24,9 @@
     <div class="addmain">
       <el-form ref="form" :model="addStaff">
         <el-row :gutter="20">
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="员工编号" disabled>
               <el-input
-                class="dialog-input-text"
                 type="input"
                 autosize
                 disabled="disabled"
@@ -35,29 +34,26 @@
               ></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="员工姓名" required>
               <el-input
-                class="dialog-input-text"
                 type="input"
                 autosize
                 v-model="addStaff.name"
               ></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="年龄" required>
               <el-input type="number" v-model="addStaff.age"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="性别" required>
               <el-select
-                class="dialog-input-text"
                 type="input"
                 autosize
                 v-model="addStaff.sex"
-                style="margin-top: 40px"
                 placeholder="请选择"
               >
                 <el-option
@@ -72,40 +68,36 @@
           </el-col>
         </el-row>
         <el-row :gutter="20">
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="手机号码" required>
               <el-input
-                class="dialog-input-text"
                 type="input"
                 autosize
                 v-model="addStaff.phone"
               ></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="电子邮箱" required>
               <el-input
-                class="dialog-input-text"
                 type="input"
                 autosize
                 v-model="addStaff.email"
               ></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="证件号码" required>
               <el-input
-                class="dialog-input-text"
                 type="input"
                 autosize
                 v-model="addStaff.cardnumber"
               ></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="职位" required>
               <el-input
-                class="dialog-input-text"
                 type="input"
                 autosize
                 v-model="addStaff.position"
@@ -114,16 +106,9 @@
           </el-col>
         </el-row>
         <el-row :gutter="20">
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="地址" required>
               <el-cascader
-                class="dialog-input-text"
-                style="
-                  display: block;
-                  position: relative;
-                  font-size: 14px;
-                  line-height: 40px;
-                "
                 size="large"
                 :options="options"
                 v-model="addStaff.address"
@@ -131,27 +116,24 @@
               </el-cascader>
             </el-form-item>
           </el-col>
-          <el-col :span="16">
+          <el-col :span="12">
             <el-form-item label="详细地址" required>
               <el-input
-                class="dialog-input-text"
                 type="input"
                 autosize
                 v-model="addStaff.eraddress"
               ></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="8"> </el-col>
+          <el-col :span="6"> </el-col>
         </el-row>
         <el-row :gutter="20">
-          <el-col :span="8">
-            <el-form-item class="ssks" label="所属科室" required>
+          <el-col :span="6">
+            <el-form-item label="所属科室" required>
               <el-select
-                class="dialog-input-text"
                 type="input"
                 autosize
                 v-model="department_id"
-                style="margin-top: 40px"
                 placeholder="请选择"
               >
                 <el-option
@@ -164,13 +146,15 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="角色" required>
               <el-select
-                class="dialog-input-text"
                 type="input"
                 autosize
-                style="margin-top: 40px"
+<<<<<<< HEAD
+=======
+                multiple
+>>>>>>> 5cbdadc21e9ec1697080c41839beb7f0285eccf2
                 v-model="addStaff.auth_grouap"
                 placeholder="请选择"
                 @change="departsel"
@@ -185,8 +169,8 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <!-- <el-col :span="8">
-            <el-form-item style="margin-top: 40px" label="科室负责人">
+          <!-- <el-col :span="6">
+            <el-form-item  label="科室负责人">
               <el-switch
                 v-model="addStaff.head_department"
                 :active-value="0"
@@ -197,20 +181,19 @@
               </el-switch>
             </el-form-item>
           </el-col> -->
-          <el-col :span="8"> </el-col>
+          <el-col :span="12"> </el-col>
         </el-row>
         <el-row :gutter="20">
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="密码" required>
               <el-input
-                class="dialog-input-text"
                 type="password"
                 v-model="addStaff.password"
                 placeholder="******"
               ></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item style="margin-top: 40px" label="员工状态">
               <el-switch
                 v-model="addStaff.status"
@@ -222,8 +205,8 @@
               </el-switch>
             </el-form-item>
           </el-col>
-          <el-col :span="8"> </el-col>
-          <el-col :span="8"> </el-col>
+          <el-col :span="6"> </el-col>
+          <el-col :span="6"> </el-col>
         </el-row>
       </el-form>
     </div>
@@ -294,6 +277,7 @@ export default {
       id: "",
     };
   },
+<<<<<<< HEAD
   watch: {
     childed(res) {
       console.log(res.role_id);
@@ -347,6 +331,12 @@ export default {
       };
       console.log(params);
       service.staffEdit(params).then((res) => {
+=======
+
+    watch: {
+      childed(res) {
+        console.log(res.role_id);
+>>>>>>> 5cbdadc21e9ec1697080c41839beb7f0285eccf2
         console.log(res);
         if (res.code == 20010) {
           this.$message({

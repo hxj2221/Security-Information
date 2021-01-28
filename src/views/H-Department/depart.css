@@ -9,7 +9,7 @@
     min-height: 100%;
     background: #fff;
     border-radius: 5px;
-    box-shadow: 0 0 2px rgb(184, 183, 183);
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
     min-height: 805px;
 }
 
@@ -83,7 +83,6 @@
     text-align: center;
     /* margin-left: -1px; */
     width: 94%;
-    min-height: 665px;
 }
 
 .departNameipt {
@@ -207,7 +206,7 @@
     text-align: right;
 }
 
-.el-input__inner {
+/* .el-input__inner {
     -webkit-appearance: none;
     background-color: #FFF;
     background-image: none;
@@ -224,4 +223,4 @@
     -webkit-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
     transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
     width: 100%;
-}
+} */
