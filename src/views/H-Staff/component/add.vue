@@ -113,11 +113,8 @@
                 ref="cascader"
                 :options="options"
                 v-model="addStaff.address"
-<<<<<<< HEAD
                 :props='props'
                 @change="handleChange"
-=======
->>>>>>> bf06cf299154d679bc91e7987c9d364a01e41c43
               >
               </el-cascader>
             </el-form-item>
@@ -355,7 +352,6 @@ export default {
       this.$parent.fathstaffno();
     },
     handleChange(cityvalue) {
-<<<<<<< HEAD
        let options = this.options;
       let nameArray = [];
       for (let i = 0; i < id.length; i++) {
@@ -386,19 +382,6 @@ export default {
       //         CodeToText[cityvalue[2]];
       // console.log(this.addressC)
       //       console.log(this.addStaff.address);
-=======
-      CodeToText[cityvalue[0]],
-        CodeToText[cityvalue[1]],
-        CodeToText[cityvalue[2]];
-      this.addressC =
-        CodeToText[cityvalue[0]] +
-        "/" +
-        CodeToText[cityvalue[1]] +
-        "/" +
-        CodeToText[cityvalue[2]];
-      console.log(this.addressC);
-      console.log(this.addStaff.address);
->>>>>>> aca24a8141d9610b4427e88fedc2c54a052f7d33
     },
     // 子调用父
     staffaddvueno() {
