@@ -101,7 +101,8 @@
             </template>
           </el-table-column>
         </el-table>
-        <!-- 分页 -->
+      </div>
+      <!-- 分页 -->
         <div class="staffpag">
           <div class="block">
             <el-pagination
@@ -116,7 +117,6 @@
             </el-pagination>
           </div>
         </div>
-      </div>
     </div>
     <!--新增-->
     <Staff v-show="add"></Staff>
