@@ -454,11 +454,6 @@ export default {
           });
           this.reload();
         }
-        this.$message({
-          type: "info",
-          message: "已取消操作",
-          duration: 1000,
-        });
       });
     },
     // 编辑

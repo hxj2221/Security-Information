@@ -126,7 +126,7 @@
                 "
                 size="large"
                 :options="options"
-                v-model="addStaff.address"
+                v-model="address"
               >
               </el-cascader>
             </el-form-item>
@@ -170,6 +170,7 @@
                 class="dialog-input-text"
                 type="input"
                 autosize
+                multiple
                 style="margin-top: 40px"
                 v-model="addStaff.auth_grouap"
                 placeholder="请选择"
@@ -267,7 +268,7 @@ export default {
         // head_department: "", //科室负责人
         status: "", //员工状态
         password: "", //密码
-        address: [], //地址
+        // address: [], //地址
       },
       department: "", //所属科室
       role_id: "",
@@ -292,13 +293,14 @@ export default {
       // 角色
       optionrole: [],
       id: "",
+      address: [],
     };
   },
   watch: {
     childed(res) {
-      console.log(res.role_id);
+      //console.log(res.role_id);
       console.log(res);
-      // console.log(res.address); //数据已经拿到
+      console.log(res.address); //数据已经拿到
       this.id = res.id;
       this.addStaff.job_number = res.job_number;
       this.addStaff.name = res.name;
@@ -306,7 +308,7 @@ export default {
       this.addStaff.sex = res.sex;
       this.addStaff.email = res.email;
       this.addStaff.phone = res.phone;
-      this.addStaff.address = res.address;
+      this.address = res.address;
       this.addStaff.eraddress = res.eraddress;
       this.addStaff.position = res.position;
       this.addStaff.age = res.age;
@@ -316,7 +318,7 @@ export default {
       this.addStaff.status = res.status;
       // this.addStaff.head_department = res.head_department;
       this.addStaff.position = res.position;
-      this.addStaff.auth_grouap = res.auth_grouap[0].id;
+      this.addStaff.auth_grouap = res.auth_grouap.id;
       this.role_id = res.role_id;
       this.addStaff.status = res.status;
     },
@@ -335,7 +337,7 @@ export default {
         sex: this.addStaff.sex,
         email: this.addStaff.email,
         phone: this.addStaff.phone,
-        address: this.addStaff.address,
+        address: this.address,
         eraddress: this.addStaff.eraddress,
         position: this.addStaff.position,
         age: this.addStaff.age,

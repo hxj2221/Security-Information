@@ -209,15 +209,15 @@ const asyncRoutes = [
         //     roles: ['admin','admin1','admin2','admin3']
         // }
       },
-      {
-        name: '测试',
-        iconCls: 'el-icon-help',
-        path: '/a',
-        component: () => import('../views/H-Files/a.vue'),
-        // meta: {
-        //     roles: ['admin','admin1','admin2','admin3']
-        // }
-      }
+      // {
+      //   name: '测试',
+      //   iconCls: 'el-icon-help',
+      //   path: '/a',
+      //   component: () => import('../views/H-Files/a.vue'),
+      //   // meta: {
+      //   //     roles: ['admin','admin1','admin2','admin3']
+      //   // }
+      // }
     ]
   },
   {

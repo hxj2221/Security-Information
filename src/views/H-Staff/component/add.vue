@@ -257,7 +257,7 @@ export default {
         eraddress: "", //详细地址
         staffdepart: "", //所属科室
         staffrolesel: [], //角色
-        head_department: "", //科室负责人
+        //head_department: "", //科室负责人
         status: 1, //员工状态
         password: "", //密码
         address: [], //地址
@@ -304,13 +304,13 @@ export default {
         sex: this.addStaff.sex,
         email: this.addStaff.email,
         phone: this.addStaff.phone,
-        address: this.addStaff.address,
+        address: this.addressC,
         eraddress: this.addStaff.eraddress,
         position: this.addStaff.position,
         age: this.addStaff.age,
         // specific_age: this.addStaff.age,
         cardnumber: this.addStaff.cardnumber,
-        head_department: this.addStaff.head_department,
+        // head_department: this.addStaff.head_department,
         status: this.addStaff.status,
         role_id: this.addStaff.staffrolesel,
         department_id: this.addStaff.staffdepart,
@@ -326,17 +326,6 @@ export default {
           setTimeout(() => {
             this.reload();
           }, 2000);
-          // const loading = this.$loading({
-          //   lock: true,
-          //   text: "保存中",
-          //   spinner: "el-icon-loading",
-          //   background: "rgba(0, 0, 0, 0.7)",
-          // });
-          // setTimeout(() => {
-          //   loading.close();
-          //   this.reload();
-          // }, 2000);
-          // this.$parent.fathstaffyes();
         } else {
           this.$message({
             message: res.msg,
@@ -347,18 +336,17 @@ export default {
       });
     },
     handleChange(cityvalue) {
-      //         CodeToText[cityvalue[0]],
-      //         CodeToText[cityvalue[1]],
-      //         CodeToText[cityvalue[2]]
-      //       );
-      //       this.addressC =
-      //         CodeToText[cityvalue[0]] +
-      //         "/" +
-      //         CodeToText[cityvalue[1]] +
-      //         "/" +
-      //         CodeToText[cityvalue[2]];
-      // console.log(this.addressC)
-      //       console.log(this.addStaff.address);
+      CodeToText[cityvalue[0]],
+        CodeToText[cityvalue[1]],
+        CodeToText[cityvalue[2]];
+      this.addressC =
+        CodeToText[cityvalue[0]] +
+        "/" +
+        CodeToText[cityvalue[1]] +
+        "/" +
+        CodeToText[cityvalue[2]];
+      console.log(this.addressC);
+      console.log(this.addStaff.address);
     },
     // 子调用父
     staffaddvueno() {
