@@ -43,18 +43,24 @@
     margin: 20px 70px;
 }
 
-.addmain .el-from .el-input {
+.addmain .el-form-item .el-form-item__content .el-select{
+    width: 100%;
+}
+.addmain .el-form-item .el-form-item__content .el-cascader{
+    width: 100%;
+}
+/* .addmain .el-from .el-input {
     margin: 0;
     display: block !important;
     width: 218px;
-}
+} */
 
-.addmain .el-form .el-row {
+/* .addmain .el-form .el-row {
     display: flex;
     justify-content: space-around;
-}
+} */
 
-.addmain .el-date-editor {
+/* .addmain .el-date-editor {
     display: block;
     width: auto;
 }
@@ -65,7 +71,7 @@
 
 .el-select__tags {
     top: 67%
-}
+} */
 
 
 /* 边框 */

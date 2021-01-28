@@ -56,7 +56,11 @@
     margin-bottom: 20px;
 }
 
-.addmain .el-from .el-input {
+.addmain .el-form-item .el-select{
+    width: 100%;
+}
+
+/* .addmain .el-from .el-input {
     margin: 0;
     display: block !important;
     width: 218px;
@@ -82,7 +86,7 @@
 
 .el-select__tags {
     top: 67%
-}
+} */
 
 
 /* 边框 */
