@@ -226,43 +226,42 @@ export default {
         this.staffvue = true;
       }, 3000);
     },
-    //员工状态
+   //员工状态
     changeSwitch(val, row) {
-      console.log(val, row);
-      let data = {
-        id: row.id,
-        status: row.status,
-      };
-      service.staffState(data).then((res) => {
-        if (res.code == 20010) {
-          this.$confirm("此处操作将修改状态，是否继续?", "提示", {
-            confirmButtonText: "确定",
-            cancelButtonText: "取消",
-            type: "warning",
-          }).then(() => {
-            if (row.status == 1) {
-              this.$message({
-                type: "success",
-                message: res.msg,
-                duration: 1500,
-              });
-            } else {
-              this.$message({
-                type: "error",
-                message: res.msg,
-                duration: 1500,
-              });
-            }
+      console.log(row.id);
+      this.$confirm("此操作将修改状态, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          let data = {
+            id: row.id,
+            status: row.status,
+          };
+          console.log(data);
+          service.staffState(data).then((res) => {
+            console.log(res);
+            this.$message({
+              type: "success",
+              message: res.msg,
+              duration: 1500,
+            });
+            this.reload();
           });
-        } else {
-          row.status = 1;
+        })
+        .catch(() => {
+          if (row.status == 1) {
+            row.status = 0;
+          } else {
+            row.status = 1;
+          }
           this.$message({
-            type: "error",
-            message: res.msg,
-            duration: 1500,
+            type: "info",
+            message: "已取消操作",
+            duration: 1300,
           });
-        }
-      });
+        });
     },
     // 编辑
     handleEdit(index, row, id) {

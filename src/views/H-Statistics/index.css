@@ -1,0 +1,78 @@
+.Statistics_all{
+    width: 100%;
+    min-height:680px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgb(184, 183, 183);
+    padding-bottom: 50px;
+    color: #606266;
+}
+/* 头部样式 */
+.Statistics_top {
+    padding: 20px 15px;
+    overflow: hidden;
+}
+
+.Statistics_top_left {
+    float: left;
+}
+
+.Statistics_top_right {
+    float: right;
+}
+.Statistics_top_right >.el-button{
+    border: 3px solid #666ee8;
+    background: #666ee8;
+}
+.Statistics_top_right>.el-select {
+    margin-right: 5px;
+}
+.Statistics_hr {
+    margin: 0 15px 20px;
+    font-weight: 400;
+    background-color: #e6e0e0;
+    border: none;
+    height: 2px;
+}
+/* 选筛选部分样式 */
+.Statistics_screen {
+    /* display: flex;
+    justify-content: space-around; */
+    overflow: hidden;
+    margin: 0 15px;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+.Statistics_screen p {
+    float: left;
+    font-size: 12px;
+    line-height: 32px;
+}
+/* 筛选投诉类别样式 */
+.Statistics_screen .el-input {
+    margin-left: 4px;
+    height: 32px;
+}
+
+.Statistics_screen .el-input__inner {
+    margin-left: 4px;
+    height: 32px;
+}
+
+.Statistics_screen .el-input--suffix .el-input__inner {
+    margin-left: 4px;
+    height: 32px;
+}
+
+.Statistics_screen .el-input__icon {
+    height: 116%;
+}
+.Statistics_screen_one {
+    float: left;
+}
+.Statistics_screen>.el-button {
+    float: left;
+    border: 3px solid #666ee8;
+    background: #666ee8;
+}

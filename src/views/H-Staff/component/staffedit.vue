@@ -296,7 +296,6 @@ export default {
   },
   watch: {
     childed(res) {
-      console.log(res.role_id);
       console.log(res);
       // console.log(res.address); //数据已经拿到
       this.id = res.id;
