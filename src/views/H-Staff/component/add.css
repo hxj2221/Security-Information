@@ -40,7 +40,9 @@
 /* add */
 
 .addmain {
-    margin: 20px 70px;
+    width: 94%;
+    margin: 0 auto;
+    padding-top: 20px;
 }
 
 .addmain .el-form-item .el-form-item__content .el-select{

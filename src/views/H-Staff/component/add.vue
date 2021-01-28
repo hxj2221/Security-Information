@@ -70,7 +70,7 @@
               </el-cascader>
             </el-form-item>
           </el-col>
-          <el-col :span="16">
+          <el-col :span="12">
             <el-form-item label="详细地址" required>
               <el-input type="input" autosize v-model="addStaff.eraddress"></el-input>
             </el-form-item>
@@ -106,7 +106,7 @@
               </el-switch>
             </el-form-item>
           </el-col> -->
-          <el-col :span="6"> </el-col>
+          <el-col :span="12"> </el-col>
         </el-row>
         <el-row :gutter="20">
           <el-col :span="6">
