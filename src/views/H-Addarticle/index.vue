@@ -119,6 +119,8 @@
 // import AdminHead from './components/AdminHead'
 import "@/views/H-Addarticle/css.css";
 import Tinymce from "@/views/Tinymce/index.vue";
+// 引入service
+import service from "@/service/index";
 export default {
   components: {
     Tinymce,
@@ -490,8 +492,17 @@ export default {
     myreturn() {
       this.$router.go(-1);
     },
-    mysubmit() {},
+    mysubmit() {
+      service.Arilist().then(res=>{
+        console.log(res)
+      })
+    },
   },
+  created(){
+    service.AriList().then(res=>{
+      console.log(res)
+    })
+  }
 };
 </script>
 

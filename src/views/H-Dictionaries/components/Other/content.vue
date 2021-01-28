@@ -33,7 +33,8 @@ import service from '@/service/index';
                 </el-table-column>
                 <el-table-column label="操作">
                   <template slot-scope="scope">
-                    <el-button class="edit" type="text" size="small" @click="edit(scope.$index, scope.row)">编辑</el-button>
+                    <el-button class="edit" type="text" size="small" @click="edit(scope.$index, scope.row)">编辑
+                    </el-button>
                     <el-button class="del" @click.native.prevent="deleteRow(scope.$index, tableData)" type="text"
                       size="small">删除
                     </el-button>
@@ -62,10 +63,9 @@ import service from '@/service/index';
 </template>
 
 <script>
-import service from '@/service/index'
+  import service from '@/service/index'
   export default {
-    components: {
-    },
+    components: {},
     props: {},
     data() {
       return {
@@ -82,7 +82,7 @@ import service from '@/service/index'
           name: '事件性质'
         }, ],
         tableData: [],
-        nowIndex:0,
+        nowIndex: 0,
         // 编辑
         form: {
           title: '',
@@ -90,27 +90,27 @@ import service from '@/service/index'
         dialogVisible: false,
       };
     },
-    created(){
-      let params={
-        type:this.SideNav[0].type
+    created() {
+      let params = {
+        type: this.SideNav[0].type
       }
-      service.DicList(params).then(res=>{
+      service.DicList(params).then(res => {
         // console.log(res)
-        this.tableData=res.data
+        this.tableData = res.data
       });
     },
     methods: {
       // 导航
-      change(index,item) {
+      change(index, item) {
         // console.log(index)
         this.nowIndex = index;
         // console.log(item.type)
-        let params={
-          type:item.type
+        let params = {
+          type: item.type
         }
-        service.DicList(params).then(res=>{
+        service.DicList(params).then(res => {
           // console.log(res)
-          this.tableData=res.data
+          this.tableData = res.data
         })
 
       },
@@ -204,6 +204,26 @@ import service from '@/service/index'
                   duration: 1000,
                 });
               });
+          } else if (res.code == 20401) {
+            this.$message({
+              message: "请重新登陆",
+              type: "error",
+              duration: 1000,
+            });
+            this.$router.push('/login')
+          } else if (res.code == 20403) {
+            this.$message({
+              message: res.msg,
+              type: "error",
+              duration: 1000,
+            });
+            this.$router.push('/dashboard')
+          } else {
+            this.$message({
+              message: res.msg,
+              type: "error",
+              duration: 1000,
+            });
           }
         })
       },

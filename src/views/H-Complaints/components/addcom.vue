@@ -104,12 +104,12 @@
               <el-cascader
                 ref="cascader"
                 :options="comdes"
+                collapse-tags
                 :props="{
                   value: 'id',
                   label: 'title',
                   children: '_child',
                   multiple: 'true',
-                  checkStrictly:'true'
                 }"
                 :show-all-levels="false"
                 v-model="comde"
@@ -423,15 +423,23 @@ inject: ["reload"],
       if (this.comde !== "" && this.comde !== null&&this.comde.length!==0&&this.incidentdata !== ""&&this.comdata !== ""&&this.comname !== ""&&
       this.comgender!==''&&this.comagenumber !== ""&&this.comphone!== ""&&this.commode!== ""&&this.relation!==''&&this.consulttime!==''
       &&this.nature!==''&&this.comtype!==''&&this.agentname!==''&&this. agentphone!=='') {
-        let comde = this.comde.map((x) => {
-          return x[0];
-        });
+        let one=new Array
+        let two=new Array
+       for(let i in this.comde){
+        if(this.comde[i].length == 1){
+          one.push(this.comde[i][0])
+        }
+        else if(this.comde[i].length == 2){
+           two.push(this.comde[i][1])
+        }
+        }
+         let comdes = one.concat(two);
       let params = {
         event_number: this.comnumber, //业务编号
         event_type: this.comtype, //投诉类型
         cause: this.reason, //投诉原因
         occur_time:this.incidentdata, //事发时间
-        department_id: comde, //投诉科室
+        department_id: comdes, //投诉科室
         create_time:this.comdata, //投诉日期
         ComplaintType: this.commode, //投诉方式
         complaint_name: this.comname, //投诉人姓名

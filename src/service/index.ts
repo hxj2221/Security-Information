@@ -123,6 +123,10 @@ export default {
   uploadfilebase: async (data: any) => {
     return await service.post(`${baseUrl}api/Complaintprocess/event_base64_uploadfiles`, data).then(res => res).catch(err => err)
   },
+  //   删除附件
+  deletes: async (id: any) => {
+    return await service.get(`${baseUrl}api/tsevent/filedel`, {params:{id}}).then(res => res).catch(err => err)
+  },
   //附件列表
   truefilelist: async (data: any) => {
     return await service.post(`${baseUrl}api/tsevent/filelist`, data).then(res => res).catch(err => err)
@@ -315,15 +319,36 @@ export default {
   },
   // 文章列表 (post)
   detailList: async () => {
-    return await service.post(`${baseUrl}api/article/article_cate`).then(res => res).catch(err => err)
+    return await service.post(`${baseUrl}api/article/article`).then(res => res).catch(err => err)
   },
-  // 文章列表（get）
-  detaillist: async () => {
-    return await service.get(`${baseUrl}api/article/article_cate`).then(res => res).catch(err => err)
-  },
-  // 添加文章
+
+  // 文章分类
   AriList: async (params: any) => {
-    return await service.get(`${baseUrl}api/article/article_cate_add`, { params }).then(res => res).catch(err => err)
+    return await service.get(`${baseUrl}api/article/article_cate`, { params }).then(res => res).catch(err => err)
+  },
+  // 文章分类编辑
+  AriEdit: async (params: any) => {
+    return await service.get(`${baseUrl}api/article/article_cate_eit`, { params }).then(res => res).catch(err => err)
+  },
+  // 文章分类编辑
+  Ariedit: async (data: any) => {
+    return await service.post(`${baseUrl}api/article/article_cate_eit`, data).then(res => res).catch(err => err)
+  },
+  // 文章分类删除
+  AriDel: async (params: any) => {
+    return await service.get(`${baseUrl}api/Article/classification_del`, { params }).then(res => res).catch(err => err)
+  },
+  // 文章分类更改状态
+  AriStatus: async (data: any) => {
+    return await service.post(`${baseUrl}api/Article/classification_status`, data).then(res => res).catch(err => err)
+  },
+  // 添加分类（post）
+  AriAdd: async (data: any) => {
+    return await service.post(`${baseUrl}api/article/article_cate_add`, data).then(res => res).catch(err => err)
+  },
+  // 添加分类（get）
+  Ariadd: async () => {
+    return await service.get(`${baseUrl}api/article/article_cate_add`).then(res => res).catch(err => err)
   },
   // 关联投诉 (get)
   Related: async () => {
@@ -355,11 +380,11 @@ export default {
   },
   // 点击上传附件按钮
   upLode: async (params: any) => {
-    return await service.get(`${baseUrl}api/record/upload_attachment`, { params }).then(res => res).catch(err => err)
+    return await service.get(`${baseUrl}api/record/event_base64_uploadfiles`, { params }).then(res => res).catch(err => err)
   },
   // 上传附件 确定
   uplode: async (data: any) => {
-    return await service.post(`${baseUrl}api/record/upload_attachment`, data).then(res => res).catch(err => err)
+    return await service.post(`${baseUrl}api/record/event_base64_uploadfiles`, data).then(res => res).catch(err => err)
   },
   // 医患详情
   details: async (data: any) => {
@@ -376,7 +401,7 @@ export default {
   },
   // 文件库新增分类treelist
   docaddtree: async () => {
-    return await service.get(`${baseUrl}api/fileclass/addclass`).then(res => res).catch(err => err)
+    return await service.get(`${baseUrl}user/Fileclass/classtree`).then(res => res).catch(err => err)
   },
   // 文件库新增分类tree
   docadd: async (data: object) => {
@@ -399,16 +424,16 @@ export default {
     return await service.post(`${baseUrl}api/fileclass/editclass`, data).then(res => res).catch(err => err)
   },
   // 文件库文件list
-  filelist: async (params: any) => {
-    return await service.get(`${baseUrl}api/file/lists`, { params }).then(res => res).catch(err => err)
+  filelist: async () => {
+    return await service.get(`${baseUrl}api/file/lists`).then(res => res).catch(err => err)
   },
   // 文件库文件分类
   filetree: async () => {
-    return await service.get(`${baseUrl}api/file/event_base64_uploadfiles`).then(res => res).catch(err => err)
+    return await service.get(`${baseUrl}api/file/addfile`).then(res => res).catch(err => err)
   },
   // 文件库文件上传
   fileupload: async (data: object) => {
-    return await service.post(`${baseUrl}api/file/event_base64_uploadfiles`, data).then(res => res).catch(err => err)
+    return await service.post(`${baseUrl}api/file/addfile`, data).then(res => res).catch(err => err)
   },
   // 文件库文件下载
   filedown: async (params: any) => {

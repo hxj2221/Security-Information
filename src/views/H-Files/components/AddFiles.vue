@@ -69,10 +69,10 @@ import service from '@/service/index';
     </div>
     <!-- 分页 -->
     <div class="pagenum">
-     <!-- <el-pagination @size-change="handleSizeChange" @current-change="currentChage"
+     <el-pagination @size-change="handleSizeChange" @current-change="currentChage"
           :current-page="currentPage4" :page-sizes="pageNumList" :page-size="100"
           layout="total, sizes, prev, pager, next, jumper" :total="pageCount">
-        </el-pagination> -->
+        </el-pagination>
     </div>
     <!-- 新增分类 -->
     <el-dialog
@@ -233,11 +233,11 @@ export default {
   },
   created() {
     service.doclist().then((res) => {
-      // console.log(res);
+      console.log(res);
       this.tableData = res.data;
     });
     service.docaddtree().then((res) => {
-      // console.log(res);
+      console.log(res);
       if(res.code==20010){
         this.editseldata = res.data;
       }

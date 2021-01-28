@@ -10,10 +10,10 @@
     /* min-height: 100%; */
     background: #fff;
     border-radius: 5px;
-    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+    box-shadow: 0 0 2px rgb(184, 183, 183);
 }
 
-.addrole .roleaddThre {
+.addrole .roleaddThre{
     display: flex;
     justify-content: space-between;
     height: 91px;
@@ -21,21 +21,18 @@
     font-size: 14px;
     padding: 0 30px;
 }
-
-.addrole .roleaddThre .roleaddSpan {
+.addrole .roleaddThre .roleaddSpan{
     font-size: 24px;
     font-weight: normal;
     padding-left: 5px;
     border-left: 5px solid #666ee8;
 }
-
-.addrole .roleaddThre .roleaddgr {
+.addrole .roleaddThre .roleaddgr{
     background: #666ee8;
     border-color: #666ee8;
     color: #fff;
 }
-
-.addrole .roleaddThre .roleaddb {
+.addrole .roleaddThre .roleaddb{
     background: none;
     border-color: #666ee8;
     color: #666ee8;
@@ -76,18 +73,17 @@
     top: 67%
 }
 
-.role_div {
+.role_div{
     width: 19%;
     padding: 10px 0;
 }
-
 
 /*  */
 
 .roleFs {
     /* display: flex; */
     /* margin-left: 9%; */
-    height: 80%;
+    /* height: 80%; */
     /* margin-top: 2%; */
     width: 65%;
     margin-left: 70px;
@@ -131,10 +127,9 @@
 }
 
 .H-edit {
-    background-color:#fff;
+    background-color: rgb(255, 255, 255);
     width: 95%;
-    min-height: 805px;
-    margin: 0 auto;
+    min-height: 150px;
     padding-top: 30px;
     border-radius: 5px;
     box-shadow: 1px 0 10px rgb(204, 204, 204);
@@ -206,3 +201,4 @@
     transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
     width: 100%;
 }
+

@@ -200,10 +200,7 @@
 
 <style lang="less" scoped>
   .dash {
-    width: 95%;
-    margin: 0 auto;
-    border-radius: 5px;
-    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+    width: 100%;
     // border: 2px solid blue;
     // height: 100%;
     background: linear-gradient(#fff, #f9f9f9);
@@ -212,7 +209,7 @@
     flex-flow: column wrap;
     justify-content: space-around;
     align-items: center;
-    // margin: 10px auto;
+    margin: 10px auto;
     font-size: 1.5rem;
     padding: 20px 10px;
 

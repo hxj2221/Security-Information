@@ -39,13 +39,18 @@
       <!-- 表格部分 -->
       <div class="staffIptTab">
         <el-table
+<<<<<<< HEAD
           height="300px"
+=======
+          max-height="662"
+>>>>>>> ecae58e4c9eb9b6297fcdcd5047ba439fdf32bf2
           :data="tables"
           :header-cell-style="{ background: '#C2C5F6', color: '#000' }"
           :cell-style="{ background: '#fff' }"
         >
           <el-table-column width="50" label="序号" type="index">
           </el-table-column>
+<<<<<<< HEAD
           <el-table-column prop="job_number" label="工号" width="120">
           </el-table-column>
           <el-table-column prop="name" label="员工姓名"> </el-table-column>
@@ -53,12 +58,24 @@
           <el-table-column prop="age" label="员工年龄"> </el-table-column>
           <el-table-column prop="phone" label="手机号码" width="108">
           </el-table-column>
+=======
+          <el-table-column prop="job_number" label="工号"> </el-table-column>
+          <el-table-column prop="name" label="员工姓名"> </el-table-column>
+          <el-table-column prop="sex.name" label="员工性别"> </el-table-column>
+          <el-table-column prop="age" label="员工年龄"> </el-table-column>
+          <el-table-column prop="phone" label="手机号码"> </el-table-column>
+>>>>>>> ecae58e4c9eb9b6297fcdcd5047ba439fdf32bf2
           <el-table-column prop="department[0].title" label="所属科室">
           </el-table-column>
           <el-table-column
             prop="auth_grouap"
+<<<<<<< HEAD
             :show-overflow-tooltip="true"
             label="角色"
+=======
+            label="角色"
+            :show-overflow-tooltip="true"
+>>>>>>> ecae58e4c9eb9b6297fcdcd5047ba439fdf32bf2
           >
           </el-table-column>
           <el-table-column
@@ -71,7 +88,7 @@
             prop="create_time"
             label="创建时间"
           ></el-table-column>
-          <el-table-column label="员工状态" width="80">
+          <el-table-column label="员工状态">
             <template slot-scope="scope">
               <el-switch
                 v-model="scope.row.status"
@@ -98,8 +115,8 @@
                 size="small"
                 type="text"
                 @click="handleDelete(scope.$index, tables)"
-                >删除</el-button
-              >
+                >删除
+              </el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -136,7 +153,11 @@ import headpow from "../component/power";
 // import { stList } from "@/network/Sta.js";
 import service from "@/service/index";
 export default {
-  components: { Staff, headpow, Edit },
+  components: {
+    Staff,
+    headpow,
+    Edit,
+  },
   inject: ["reload"],
   data() {
     return {
@@ -164,12 +185,18 @@ export default {
     };
   },
   created() {
-    // 获取员工列表
+    // 搜索下拉框内容
     service.staffList().then((res) => {
+      console.log(res);
       this.optionbeldepart = res.data;
     });
-
+    // 获取员工列表
     service.stafflist().then((res) => {
+      console.log(res.data[0]);
+      if (res.code == 20010) {
+        this.tables = res.data[0];
+        this.total = res.data[1].count;
+      }
       if (res.code == 20403) {
         this.$message({
           type: "error",
@@ -178,11 +205,10 @@ export default {
         });
         this.$router.push("/dashboard");
       }
-      this.tables = res.data[0];
-      this.total = res.data[1].count;
-      for (let i = 1; i < this.tables.length; i++) {
-        this.id = this.tables[i].id;
-      }
+
+      // for (let i = 1; i < res.data.length; i++) {
+      //   this.id = res.data[i].id;
+      // }
     });
   },
   methods: {
@@ -196,7 +222,7 @@ export default {
       };
       console.log(data);
       service.stafflist(data).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.tables1 = this.tables = res.data[0];
         this.total = res.data[1].count;
       });

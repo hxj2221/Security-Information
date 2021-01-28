@@ -9,7 +9,7 @@
     min-height: 805px;
     background: #fff;
     border-radius: 5px;
-    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+    box-shadow: 0 0 2px rgb(184, 183, 183);
 }
 
 .roleheadThre {
@@ -80,7 +80,7 @@
 .roleTable {
     width: 94%;
     margin: 0 auto;
-    min-height: 550px;
+    min-height: 665px;
 }
 
 .roleTable .el-table td,

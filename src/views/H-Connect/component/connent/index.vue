@@ -18,7 +18,7 @@
       <div class="seach">
         <p>沟通日期</p>
         <div class="block">
-          <el-date-picker v-model="seachTime" type="daterange" align="right" unlink-panels range-separator="至"
+          <el-date-picker v-model="seachTime" type="daterange" align="right" unlink-panels range-separator="至" style="width:100%"
             start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions">
           </el-date-picker>
           <el-input v-model="input" maxlength="10" placeholder="输入患者姓名"></el-input>
@@ -26,9 +26,9 @@
         </div>
       </div>
       <!-- 表单表格部分 -->
-      <div class="connent_myTable" style="min-height: 612px;">
+      <div class="connent_myTable">
         <!--  -->
-        <el-table :data="tableData" max-height="540" :header-cell-style="getRowClass">
+        <el-table :data="tableData" max-height="662" :header-cell-style="getRowClass">
           <el-table-column label="序号" type="index" width="50"> </el-table-column>
 
           <el-table-column label="记录编号" prop="number"> </el-table-column>

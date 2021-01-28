@@ -20,7 +20,7 @@
               <el-input placeholder="请输入内容" v-model="search" class="input-with-select search">
                 <el-button slot="append" icon="el-icon-search" @click="searchCon"></el-button>
               </el-input>
-              <el-table class="right_con" ref="singleTable" max-height="550" :header-cell-style="getRowClass"
+              <el-table class="right_con" ref="singleTable" max-height="662" :header-cell-style="getRowClass"
                 :data="tableData">
                 <el-table-column type="index" label="序号" width="50">
                 </el-table-column>
@@ -134,7 +134,6 @@
           // console.log(res)
           this.tableData=res.data
         })
-
       },
       // 编辑
       edit(index, row) {
@@ -212,10 +211,29 @@
                   duration: 1000,
                 });
               });
+          }else if(res.code==20401){
+            this.$message({
+              message: "请重新登陆",
+              type: "error",
+              duration: 1000,
+            });
+            this.$router.push('/login')
+          }else if (res.code == 20403) {
+            this.$message({
+              message: res.msg,
+              type: "error",
+              duration: 1000,
+            });
+            this.$router.push('/dashboard')
+          } else {
+            this.$message({
+              message: res.msg,
+              type: "error",
+              duration: 1000,
+            });
           }
         })
       },
-
     },
   }
 </script>

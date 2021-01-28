@@ -121,13 +121,16 @@
                   :headers="myHeaders"
                   class="upload-demo"
                   :action="imgUrl"
-                  multiple
-                  :limit="3"
+                  :limit='1'
+                 :disabled='(dialogForm.file_name==""||dialogForm.file_describe=="")?true:false'
+                 :multiple='false'
+                  :on-change="handleChange"
                   :on-exceed="handleExceed"
                   :file-list="fileList"
                   :http-request="getFile"
+                  :auto-upload="false"
                 >
-                  <el-button size="small" type="primary">点击上传</el-button>
+                  <el-button size="small" type="primary" :disabled='(dialogForm.file_name==""||dialogForm.file_describe=="")?true:false'>点击上传</el-button>
                   <div slot="tip" class="el-upload__tip">
                     只能上传jpg/png文件，且不超过500kb
                   </div>
@@ -137,7 +140,7 @@
           </div>
           <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="define">确 定</el-button>
+            <el-button type="primary" @click="define" :disabled='(dialogForm.file_name==""||dialogForm.file_describe=="")?true:false'>确 定</el-button>
           </span>
         </el-dialog>
       </div>
@@ -300,7 +303,7 @@ export default {
       gridData: [],
       dialogTableVisible: false,
 
-      imgUrl: "http://bt1.wlqqlp.com:8082/api/record/upload_attachment",
+      imgUrl: "http://bt1.wlqqlp.com:8082/api/record/event_base64_uploadfiles",
       myHeaders: {
         Authorization: token,
       },
@@ -474,31 +477,77 @@ export default {
         this.dialogVisible = true;
       });
     },
+    // 超出限制的上传文件
+    handleExceed() {
+      this.$message({
+        message: "上传文件超出",
+        type: "error",
+        duration: 1000,
+      });
+    },
+    handleChange(file, fileList) {
+      this.file = fileList[0];
+    },
+    // 将文件信息转化为base64码
+    getBase64(file) {
+      return new Promise((resolve, reject) => {
+        let reader = new FileReader();
+        let fileResult = "";
+        reader.readAsDataURL(file); //开始转
+        reader.onload = function () {
+          fileResult = reader.result;
+        }; //转 失败
+        reader.onerror = function (error) {
+          reject(error);
+        }; //转 结束  咱就 resolve 出去
+        reader.onloadend = function () {
+          resolve(fileResult);
+        };
+      });
+    },
     //上传附件 确定
     define() {
-      let data = {
-        file_name: this.dialogForm.file_name,
-        event_number: this.event_number,
-        file_describe: this.dialogForm.file_describe,
-        file: this.file,
-      };
-      service.uplode(data).then((res) => {
-        console.log(data);
-        console.log(res);
-        if (res.code == 20010) {
-          this.$message({
-            message: res.msg,
-            type: "success",
-            duration: 1000,
-          });
-        } else {
-          this.$message({
-            showClose: true,
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-        }
+      this.getBase64(this.file.raw).then((res) => {
+        console.log(res)
+        //接口参数
+        let data = {
+          event_number: this.event_number, //编号
+          base64_file	: res,
+          file_name: this.dialogForm.file_name,
+          file_describe: this.dialogForm.file_describe,
+        };
+        console.log(data)
+        service.uplode(data).then((res) => {
+          console.log(res);
+          if (res.code == 20010) {
+            this.$message({
+              message: "上传附件成功",
+              type: "success",
+              duration: 1000,
+            });
+           this.dialogVisible = false
+          } else if (res.code == 20401) {
+            this.$message({
+              message: "请重新登陆",
+              type: "error",
+              duration: 1000,
+            });
+            this.$router.push("/login");
+          } else if (res.code == 20403) {
+            this.$message({
+              message: res.msg,
+              type: "error",
+              duration: 1000,
+            });
+            this.$router.push("/dashboard");
+          } else {
+            this.$message({
+              message: "上传失败",
+              type: "error",
+              duration: 1000,
+            });
+          }
+        });
       });
     },
     handleExceed() {},
