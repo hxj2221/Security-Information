@@ -1,77 +1,57 @@
-.powerheadThre {
+.powerheadThre{
     height: 91px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 30px;
     border-bottom: 3px solid #f2f2f2;
-}
-
-.powerheadThre .list {
+}    
+.powerheadThre .list{
     list-style: none;
     display: flex;
     font-size: 14px;
-}
-
-.powerheadThre .list li {
+}  
+.powerheadThre .list li{
     border: 1px solid #ccc;
     padding: 12px 20px;
     cursor: pointer;
     color: #ccc;
-}
-
-.powerheadThre .list .stafflist {
+}  
+.powerheadThre .list .stafflist{
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
-
-.powerheadThre .list .departlist {
+.powerheadThre .list .departlist{
     border-left: none;
     border-right: none;
-}
-
-.powerheadThre .list .rolelist {
+}        
+.powerheadThre .list .rolelist{
     border-right: none;
 }
-
-.powerheadThre .list .editpowlist {
+.powerheadThre .list .editpowlist{
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
-
-.powerheadThre .powerAdd {
+.powerheadThre .powerAdd{
     background-color: #666ee8;
     color: #fff;
     border: 3px solid #666ee8;
     font-weight: normal;
 }
-
-
 /* 鼠标经过 */
-
-.powerheadThre .list .stafflist:hover {
+.powerheadThre .list .stafflist:hover{
     background-color: #666ee8;
     color: #fff;
 }
-
-.powerheadThre .list .departlist:hover {
+.powerheadThre .list .departlist:hover{
     background-color: #666ee8;
     color: #fff;
 }
-
-.powerheadThre .list .rolelist:hover {
+.powerheadThre .list .rolelist:hover{
     background-color: #666ee8;
     color: #fff;
 }
-
-.powerheadThre .list .editpowlist:hover {
+.powerheadThre .list .editpowlist:hover{
     background-color: #666ee8;
     color: #fff;
-    background: #666ee8;
-    border: 3px solid #666ee8;
-    border-radius: 5px;
-    position: relative;
-    left: 65%;
-    width: 92px;
-    height: 40px;
 }

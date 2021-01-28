@@ -53,8 +53,12 @@
           <el-table-column prop="phone" label="手机号码"> </el-table-column>
           <el-table-column prop="department[0].title" label="所属科室">
           </el-table-column>
-          <el-table-column prop="auth_grouap" label="角色"> </el-table-column>
-          <el-table-column prop="auth_grouap" label="角色"> </el-table-column>
+          <el-table-column
+            prop="auth_grouap"
+            label="角色"
+            :show-overflow-tooltip="true"
+          >
+          </el-table-column>
           <el-table-column
             prop="user[0].name"
             label="创建人员"
@@ -92,25 +96,25 @@
                 size="small"
                 type="text"
                 @click="handleDelete(scope.$index, tables)"
-                >删除</el-button
-              >
+                >删除
+              </el-button>
             </template>
           </el-table-column>
         </el-table>
-        <!-- 分页 -->
-        <div class="staffpag">
-          <div class="block">
-            <el-pagination
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              :current-page="currentPage"
-              :page-sizes="nums"
-              :page-size="num"
-              layout="total, sizes, prev, pager, next, jumper"
-              :total="total"
-            >
-            </el-pagination>
-          </div>
+      </div>
+      <!-- 分页 -->
+      <div class="staffpag">
+        <div class="block">
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="nums"
+            :page-size="num"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total"
+          >
+          </el-pagination>
         </div>
       </div>
     </div>
@@ -130,7 +134,11 @@ import headpow from "../component/power";
 // import { stList } from "@/network/Sta.js";
 import service from "@/service/index";
 export default {
-  components: { Staff, headpow, Edit },
+  components: {
+    Staff,
+    headpow,
+    Edit,
+  },
   inject: ["reload"],
   data() {
     return {
@@ -158,12 +166,18 @@ export default {
     };
   },
   created() {
-    // 获取员工列表
+    // 搜索下拉框内容
     service.staffList().then((res) => {
+      console.log(res);
       this.optionbeldepart = res.data;
     });
-
+    // 获取员工列表
     service.stafflist().then((res) => {
+      console.log(res.data[0]);
+      if (res.code == 20010) {
+        this.tables = res.data[0];
+        this.total = res.data[1].count;
+      }
       if (res.code == 20403) {
         this.$message({
           type: "error",
@@ -172,11 +186,10 @@ export default {
         });
         this.$router.push("/dashboard");
       }
-      this.tables = res.data[0];
-      this.total = res.data[1].count;
-      for (let i = 1; i < this.tables.length; i++) {
-        this.id = this.tables[i].id;
-      }
+
+      // for (let i = 1; i < res.data.length; i++) {
+      //   this.id = res.data[i].id;
+      // }
     });
   },
   methods: {
@@ -190,7 +203,7 @@ export default {
       };
       console.log(data);
       service.stafflist(data).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.tables1 = this.tables = res.data[0];
         this.total = res.data[1].count;
       });

@@ -4,18 +4,25 @@
 }
 
 .H-edit {
+    background-color: rgb(255, 255, 255);
     width: 95%;
-    margin: 0 auto;
-    min-height: 805px;
-    background: #fff;
+    min-height: 150px;
+    padding-top: 30px;
     border-radius: 5px;
-    box-shadow: 0 0 2px rgb(184, 183, 183);
+    box-shadow: 1px 0 10px rgb(204, 204, 204);
+    text-align: left;
+    padding-bottom: 50px;
 }
-.H-edit .jurisdiction{
-    width: 92%;
-    min-height: 800px;
-    margin: 0 auto;
-    margin-top: 20px;
+
+.H-edit .edit-top {
+    text-align: right;
+    margin: 20px;
+    margin-top: 0;
+}
+
+.H-edit .edit-top button {
+    background-color: #949aef;
+    border: none;
 }
 
 .H-edit .content {

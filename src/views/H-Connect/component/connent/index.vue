@@ -18,7 +18,7 @@
       <div class="seach">
         <p>沟通日期</p>
         <div class="block">
-          <el-date-picker v-model="seachTime" type="daterange" align="right" unlink-panels range-separator="至"
+          <el-date-picker v-model="seachTime" type="daterange" align="right" unlink-panels range-separator="至" style="width:100%"
             start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions">
           </el-date-picker>
           <el-input v-model="input" maxlength="10" placeholder="输入患者姓名"></el-input>

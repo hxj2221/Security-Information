@@ -36,13 +36,14 @@
           tooltip-effect="dark"
         >
           <el-table-column type="selection" width="55"> </el-table-column>
-          <el-table-column label="标题">
-            <template slot-scope="scope">{{ scope.row.title }}</template>
+           <el-table-column label="编号" type="index">
           </el-table-column>
-          <el-table-column prop="column" label="栏目"> </el-table-column>
-          <el-table-column prop="date" label="发布时间" show-overflow-tooltip>
+          <el-table-column label="标题" prop="title">
           </el-table-column>
-          <el-table-column prop="name" label="发布人" show-overflow-tooltip>
+          <el-table-column prop="classification.title" label="栏目"> </el-table-column>
+          <el-table-column prop="create_time" label="发布时间" show-overflow-tooltip>
+          </el-table-column>
+          <el-table-column prop="user.name" label="发布人" show-overflow-tooltip>
           </el-table-column>
           <el-table-column label="操作" width="150"   fixed="right">
             <template slot-scope="scope">
@@ -627,9 +628,7 @@ export default {
   created(){
     service.detailList().then(res=>{
       console.log(res)
-    })
-    service.detaillist().then(res=>{
-      console.log(res)
+      this.tableData=res.data.lists
     })
    
   }
