@@ -148,25 +148,8 @@
           </el-col>
           <el-col :span="6">
             <el-form-item label="角色" required>
-<<<<<<< HEAD
-              <el-select
-                type="input"
-                autosize
-                multiple
-                v-model="addStaff.auth_grouap"
-                placeholder="请选择"
-                @change="departsel"
-              >
-                <el-option
-                  v-for="item in optionrole"
-                  :key="item.id"
-                  :label="item.title"
-                  :value="item.id"
-                >
-=======
               <el-select type="input" autosize v-model="addStaff.auth_grouap" placeholder="请选择">
                 <el-option v-for="item in optionrole" :key="item.id" :label="item.title" :value="item.id">
->>>>>>> 5cbdadc21e9ec1697080c41839beb7f0285eccf2
                 </el-option>
               </el-select>
             </el-form-item>
@@ -350,7 +333,6 @@ export default {
       this.$parent.fathstaffno();
     },
     handleChange(cityvalue) {
-<<<<<<< HEAD
       //         CodeToText[cityvalue[0]],
       //         CodeToText[cityvalue[1]],
       //         CodeToText[cityvalue[2]]
@@ -363,25 +345,11 @@ export default {
       //         CodeToText[cityvalue[2]];
       // console.log(this.addressC)
       //       console.log(this.addStaff.address);
-=======
-      CodeToText[cityvalue[0]],
-        CodeToText[cityvalue[1]],
-        CodeToText[cityvalue[2]];
-      this.addressC =
-        CodeToText[cityvalue[0]] +
-        "/" +
-        CodeToText[cityvalue[1]] +
-        "/" +
-        CodeToText[cityvalue[2]];
-      console.log(this.addressC);
-      console.log(this.addStaff.address);
->>>>>>> 5cbdadc21e9ec1697080c41839beb7f0285eccf2
     },
     // 子调用父
     staffaddvueno() {
       this.$parent.fathstaffno();
     },
-<<<<<<< HEAD
   },
   created() {
     // 获取到的科室和角色
@@ -393,10 +361,6 @@ export default {
     });
   },
 };
-=======
-  }
-}
->>>>>>> 5cbdadc21e9ec1697080c41839beb7f0285eccf2
 </script>
 <style scoped>
 @import "add.css";

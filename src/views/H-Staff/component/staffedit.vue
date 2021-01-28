@@ -151,10 +151,7 @@
               <el-select
                 type="input"
                 autosize
-<<<<<<< HEAD
-=======
                 multiple
->>>>>>> 5cbdadc21e9ec1697080c41839beb7f0285eccf2
                 v-model="addStaff.auth_grouap"
                 placeholder="请选择"
                 @change="departsel"
@@ -277,7 +274,6 @@ export default {
       id: "",
     };
   },
-<<<<<<< HEAD
   watch: {
     childed(res) {
       console.log(res.role_id);
@@ -331,12 +327,6 @@ export default {
       };
       console.log(params);
       service.staffEdit(params).then((res) => {
-=======
-
-    watch: {
-      childed(res) {
-        console.log(res.role_id);
->>>>>>> 5cbdadc21e9ec1697080c41839beb7f0285eccf2
         console.log(res);
         if (res.code == 20010) {
           this.$message({
