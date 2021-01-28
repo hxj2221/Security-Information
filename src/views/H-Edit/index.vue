@@ -43,8 +43,17 @@
         </el-table>
         <!-- 添加权限 -->
         <div>
+<<<<<<< HEAD
           <el-dialog title="添加权限" :visible.sync="dialogVisible" width="width" :before-close="dialogeditright"
             :close-on-click-modal="false">
+=======
+          <el-dialog
+            title="添加权限"
+            :visible.sync="dialogVisible"
+            width="width"
+            :close-on-click-modal="false"
+          >
+>>>>>>> 89522821e93b8ed37e7dc8ddfc43208abc792d37
             <el-form label-width="80px" ref="editForm">
               <el-form-item prop="staffName" label="上级" width="120">
                 <el-select v-model="selvalue" @change="selchang" placeholder="请选择">
@@ -138,11 +147,77 @@
 </template>
 
 <script>
+<<<<<<< HEAD
   import headpow from "../component/power";
   import service from "@/service/index";
   export default {
     components: {
       headpow,
+=======
+import headpow from "../component/power";
+import service from "@/service/index";
+export default {
+  components: { headpow },
+  inject: ["reload"],
+  data() {
+    return {
+      name: "", //权限名
+      dialogaddson: false,
+      editid: "",
+      addsonseldata: [],
+      addsonselvalue: 2,
+      addsonpowpx: "",
+      addsonpowstatu: "",
+      addsonpowlab: "",
+      addsonpowicon: "",
+      addsonpowaps: "",
+      addsonpowweb: "",
+      addsonid: "",
+      tableData: [], //权限内容
+      dialogVisible: false, //添加权限弹框
+      selvalue: "0", //上级下拉框
+      seldata: [], //顶级下拉框
+      powpx: "", //排序
+      powstatu: 1, //状态
+      powlab: "", //标题
+      powicon: "", //图标
+      powaps: "", //后端接口
+      powweb: "", //前端路由
+      dialogedit: false, //编辑权限弹框
+      editselvalue: 2, //上级下拉框
+      editseldata: [], //顶级下拉框
+      editpowpx: "", //排序
+      editpowstatu: "", //状态
+      editpowlab: "", //标题
+      editpowicon: "", //图标
+      editpowaps: "", //后端接口
+      editpowweb: "", //前端路由
+    };
+  },
+  // 加载数据
+  created() {
+    service.rulelist().then((res) => {
+      console.log(res);
+      if (res.code == 20403) {
+        this.$message({
+          type: "error",
+          message: res.msg,
+          duration: 1000,
+        });
+        this.$router.push("/dashboard");
+      }
+      this.tableData = res.data;
+    });
+  },
+  methods: {
+    // 新增
+    fathpowadd(){
+      this.dialogVisible=true
+    },
+    // 编辑/添加权限下拉值
+    selchang() {
+      console.log(this.editselvalue);
+>>>>>>> 89522821e93b8ed37e7dc8ddfc43208abc792d37
     },
     data(){
       return{
@@ -167,6 +242,7 @@
         editpowweb:'',//前端路由
       }
     },
+<<<<<<< HEAD
     
     // 加载数据
     created() {
@@ -233,6 +309,28 @@
         };
         service.savepower(data).then((res) => {
           if (res.code == 20010) {
+=======
+    // 编辑权限
+    dialogBeforeCl() {
+      this.dialogedit = false;
+    },
+    // switch开关
+    changeSwitch(val, row, id) {
+      console.log(row.status);
+      this.$confirm("此操作将修改状态, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          let data = {
+            id: id,
+            status: row.status,
+          };
+          console.log(data);
+          service.powstatus(data).then((res) => {
+            console.log(res);
+>>>>>>> 89522821e93b8ed37e7dc8ddfc43208abc792d37
             this.$message({
               message: res.msg,
               type: "success",
@@ -436,6 +534,7 @@
               duration: 1300,
             });
           });
+<<<<<<< HEAD
         console.log(id);
       },
       // 表头颜色
@@ -448,6 +547,22 @@
           return "";
         }
       },
+=======
+        });
+      console.log(id);
+    },
+    // 添加子级
+    handleClick(){
+
+    },
+    // 表头颜色
+    getRowClass({ rowIndex }) {
+      if (rowIndex == 0) {
+        return "background:#c2c5f6;color:#000";
+      } else {
+        return "";
+      }
+>>>>>>> 89522821e93b8ed37e7dc8ddfc43208abc792d37
     },
   };
 </script>
