@@ -5,8 +5,8 @@
     min-height: 805px;
     background: #fff;
     border-radius: 5px;
-    box-shadow: 0 0 2px rgb(184, 183, 183);
-    padding-bottom: 118px;
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+    /* padding-bottom: 118px; */
 }
 
 
@@ -70,7 +70,7 @@
 
 /* 边框 */
 
-.dialog-input-text .el-input__inner {
+/* .dialog-input-text .el-input__inner {
     -webkit-appearance: none;
     background-color: #FFF;
     background-image: none;
@@ -87,4 +87,4 @@
     -webkit-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
     transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
     width: 100%;
-}
+} */

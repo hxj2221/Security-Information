@@ -22,7 +22,7 @@
       <el-table
         :data="dormitory"
         class="departtable"
-        max-height="620"
+        max-height="573"
         row-key='id'
         :header-cell-style="{ background: '#c2c5f6', color: '#000' }"
         :cell-style="{ background: '#fff' }"
@@ -57,7 +57,7 @@
         </el-table-column>
       </el-table>
       <!-- 分页 -->
-      <div class="departpag">
+      <!-- <div class="departpag">
         <div class="block">
           <el-pagination
             @size-change="handleSizeChange"
@@ -70,7 +70,7 @@
           >
           </el-pagination>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <!-- 新增 -->

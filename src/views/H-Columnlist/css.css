@@ -3,7 +3,7 @@
     min-height:805px;
     background: #fff;
     border-radius: 5px;
-    box-shadow: 0 0 2px rgb(184, 183, 183);
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
     margin: 0 auto;
 }
 
@@ -17,7 +17,7 @@
     justify-content: space-between;
     padding: 0 30px;
     align-items: center;
-    border-bottom: 1px solid #f2f2f2;
+    border-bottom: 2px solid #f2f2f2;
 }
 .columnList_top .columnList_top_left h5{
     font-size: 24px;
