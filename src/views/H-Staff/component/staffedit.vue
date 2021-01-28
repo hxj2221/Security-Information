@@ -4,10 +4,20 @@
     <div class="staffThre">
       <span class="staffSpan">编辑员工信息</span>
       <div>
-        <el-button type="primary" class="staffgr" icon="iconfont el-icon-hospital-passwordbaocun" @click="staffaddvueyes">保存
-      </el-button>
-      <el-button type="primary" class="staffback" icon="iconfont el-icon-hospital-passwordai207" @click="staffaddvueno">返回
-      </el-button>
+        <el-button
+          type="primary"
+          class="staffgr"
+          icon="iconfont el-icon-hospital-passwordbaocun"
+          @click="staffaddvueyes"
+          >保存
+        </el-button>
+        <el-button
+          type="primary"
+          class="staffback"
+          icon="iconfont el-icon-hospital-passwordai207"
+          @click="staffaddvueno"
+          >返回
+        </el-button>
       </div>
     </div>
     <!-- edit -->
@@ -47,7 +57,6 @@
                 type="input"
                 autosize
                 v-model="addStaff.sex"
-                
                 placeholder="请选择"
               >
                 <el-option
@@ -141,7 +150,6 @@
                 type="input"
                 autosize
                 v-model="department_id"
-                
                 placeholder="请选择"
               >
                 <el-option
@@ -160,7 +168,7 @@
                 class="dialog-input-text"
                 type="input"
                 autosize
-                
+                multiple
                 v-model="addStaff.auth_grouap"
                 placeholder="请选择"
                 @change="departsel"
@@ -201,7 +209,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item  label="员工状态">
+            <el-form-item label="员工状态">
               <el-switch
                 v-model="addStaff.status"
                 :active-value="1"

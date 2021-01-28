@@ -105,20 +105,20 @@
         </el-table>
       </div>
       <!-- 分页 -->
-        <div class="staffpag">
-          <div class="block">
-            <el-pagination
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              :current-page="currentPage"
-              :page-sizes="nums"
-              :page-size="num"
-              layout="total, sizes, prev, pager, next, jumper"
-              :total="total"
-            >
-            </el-pagination>
-          </div>
-          </div>
+      <div class="staffpag">
+        <div class="block">
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="nums"
+            :page-size="num"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total"
+          >
+          </el-pagination>
+        </div>
+      </div>
     </div>
     <!-- 新增分类 -->
     <add-files v-show="addIsShow" @newly="newclassify()"></add-files>
@@ -127,6 +127,8 @@
       <el-form label-width="100px" class="demo-ruleForm">
         <el-form-item label="文件分类">
           <el-select
+            style="float: left"
+            class="newlyClassify"
             @change="selchang"
             v-model="editselvalue"
             placeholder="请选择"
@@ -162,6 +164,7 @@
         </el-form-item>
         <el-form-item label="上传附件：" class="uploadfile">
           <el-upload
+            style="float: left"
             action="http://bt1.wlqqlp.com:8082/api/file/event_base64_uploadfiles"
             :limit="1"
             :multiple="false"
@@ -346,46 +349,27 @@ export default {
         id: id,
       };
       service.filedown(param).then((res) => {
-        //   console.log(res);
-        const link = document.createElement("a");
-        let blob = new Blob([res], { type: "application/pdf;charset=utf-8" }); // res指的是后端返回的文件流
-        link.style.display = "none";
-        link.href = URL.createObjectURL(blob);
-        //link.download = "测试"; //下载的文件名
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        //   // const link = document.createElement("a");
-        //   // let blob = new Blob([res], {
-        //   //   type: "application/octet-stream",
-        //   // }); // res指的是后端返回的文件流
-        //   // link.style.display = "none";
-        //   // link.href = URL.createObjectURL(blob);
-        //   // // link.download = res.headers['content-disposition'] //下载后文件名
-        //   // // link.download = "attendance"; //下载的文件名
-        //   // document.body.appendChild(link);
-        //   // link.click();
-        //   // document.body.removeChild(link);
-        //   var blob = new Blob([res], {
-        //     type: "application/octet-stream",
-        //   }); //接收的是blob，若接收的是文件流，需要转化
-        //   if (typeof window.chrome !== "undefined") {
-        //     // Chrome version
-        //     var link = document.createElement("a");
-        //     link.href = window.URL.createObjectURL(blob);
-        //     //link.download = filename;
-        //     link.click();
-        //   } else if (typeof window.navigator.msSaveBlob !== "undefined") {
-        //     // IE version
-        //     var blob = new Blob([res], { type: "application/force-download" });
-        //     window.navigator.msSaveBlob(blob);
-        //   } else {
-        //     // Firefox version
-        //     var file = new File([res], {
-        //       type: "application/force-download",
-        //     });
-        //     window.open(URL.createObjectURL(file));
-        //   }
+        console.log(res);
+        var blob = new Blob([res], {
+          type: "application/octet-stream",
+        }); //接收的是blob，若接收的是文件流，需要转化
+        if (typeof window.chrome !== "undefined") {
+          // Chrome version
+          var link = document.createElement("a");
+          link.href = window.URL.createObjectURL(blob);
+          //link.download = filename;
+          link.click();
+        } else if (typeof window.navigator.msSaveBlob !== "undefined") {
+          // IE version
+          var blob = new Blob([res], { type: "application/force-download" });
+          window.navigator.msSaveBlob(blob);
+        } else {
+          // Firefox version
+          var file = new File([res], {
+            type: "application/force-download",
+          });
+          window.open(URL.createObjectURL(file));
+        }
         //   // const sjres = res;
         //   // var blob = new Blob([sjres]);
         //   // var url = window.URL.createObjectURL(blob);

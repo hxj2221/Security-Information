@@ -39,22 +39,28 @@
       <!-- 表格部分 -->
       <div class="staffIptTab">
         <el-table
-          max-height="530"
+          height="300px"
           :data="tables"
           :header-cell-style="{ background: '#C2C5F6', color: '#000' }"
           :cell-style="{ background: '#fff' }"
         >
           <el-table-column width="50" label="序号" type="index">
           </el-table-column>
-          <el-table-column prop="job_number" label="工号" width="120"> </el-table-column>
+          <el-table-column prop="job_number" label="工号" width="120">
+          </el-table-column>
           <el-table-column prop="name" label="员工姓名"> </el-table-column>
           <el-table-column prop="sex.name" label="员工性别"> </el-table-column>
           <el-table-column prop="age" label="员工年龄"> </el-table-column>
-          <el-table-column prop="phone" label="手机号码" width="108"> </el-table-column>
+          <el-table-column prop="phone" label="手机号码" width="108">
+          </el-table-column>
           <el-table-column prop="department[0].title" label="所属科室">
           </el-table-column>
-          <el-table-column prop="auth_grouap" label="角色"> </el-table-column>
-          <el-table-column prop="auth_grouap" label="角色"> </el-table-column>
+          <el-table-column
+            prop="auth_grouap"
+            :show-overflow-tooltip="true"
+            label="角色"
+          >
+          </el-table-column>
           <el-table-column
             prop="user[0].name"
             label="创建人员"
@@ -99,20 +105,20 @@
         </el-table>
       </div>
       <!-- 分页 -->
-        <div class="staffpag">
-          <div class="block">
-            <el-pagination
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              :current-page="currentPage"
-              :page-sizes="nums"
-              :page-size="num"
-              layout="total, sizes, prev, pager, next, jumper"
-              :total="total"
-            >
-            </el-pagination>
-          </div>
+      <div class="staffpag">
+        <div class="block">
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="nums"
+            :page-size="num"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total"
+          >
+          </el-pagination>
         </div>
+      </div>
     </div>
     <!--新增-->
     <Staff v-show="add"></Staff>

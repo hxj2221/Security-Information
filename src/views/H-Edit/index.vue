@@ -53,13 +53,25 @@
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="300">
             <template slot-scope="scope">
-              <el-button class="departEdit" @click="handleClick(scope.row.id)"
+              <el-button
+                class="roleEdit"
+                type="text"
+                size="small"
+                @click="handleClick(scope.row.id)"
                 >添加子级</el-button
               >
-              <el-button class="departEdit" @click="handleEdit(scope.row.id)"
+              <el-button
+                class="roleEdit"
+                type="text"
+                size="small"
+                @click="handleEdit(scope.row.id)"
                 >编辑</el-button
               >
-              <el-button class="departDel" @click="delpow(scope.row.id)"
+              <el-button
+                class="roleDel"
+                size="small"
+                type="text"
+                @click="delpow(scope.row.id)"
                 >删除</el-button
               >
             </template>
@@ -292,33 +304,6 @@ export default {
           });
           this.reload();
         }
-<<<<<<< HEAD
-=======
-        // else {
-        //   this.$message({
-        //     message: res.msg,
-        //     type: "error",
-        //     duration: 1000,
-        //   });
-        // }
-      });
-      //this.dialogVisible = false;
-      // }
-    },
-    // 加载数据
-    created() {
-      service.rulelist().then((res) => {
-        console.log(res);
-        if (res.code == 20403) {
-          this.$message({
-            type: "error",
-            message: res.msg,
-            duration: 1000,
-          });
-          this.$router.push("/dashboard");
-        }
-        console.log(res);
->>>>>>> 4e03505e1218afb920386f510129188a9ee4e284
       });
     },
     // 编辑权限
@@ -408,7 +393,6 @@ export default {
           }, 1000);
         }
       });
-<<<<<<< HEAD
     },
 
     // 添加权限
@@ -523,9 +507,6 @@ export default {
           }, 1000);
         }
       });
-=======
-      // }
->>>>>>> 4e03505e1218afb920386f510129188a9ee4e284
     },
     // 删除
     delpow(id) {
