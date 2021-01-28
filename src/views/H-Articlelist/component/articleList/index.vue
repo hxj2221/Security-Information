@@ -107,7 +107,6 @@
         <!-- 分页 -->
         <div class="articleList_table_table_paging">
           <el-pagination
-           
             :current-page="currentPage"
             :page-sizes="[8, 10, 20]"
             :page-size="8"
