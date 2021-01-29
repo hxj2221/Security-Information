@@ -39,6 +39,14 @@ export default {
   AddComponent: async (params: any) => {
     return await service.post(`${baseUrl}api/tsevent/add`, params).then(res => res).catch(err => err)
   },
+   // 修改投诉页面数据
+   EditComponent: async (event_number:any) => {
+    return await service.get(`${baseUrl}api/tsevent/edit`,{params:{event_number}}).then(res => res).catch(err => err)
+  },
+  // 修改投诉
+  editomponent: async (data:any) => {
+    return await service.post(`${baseUrl}api/tsevent/edit`,data).then(res => res).catch(err => err)
+  },
   // 获取详情
   componrdetaile: async (data: any) => {
     return await service.post(`${baseUrl}api/tsevent/details`, data).then(res => res).catch(err => err)
@@ -53,7 +61,7 @@ export default {
   },
   // 投诉驳回
   reject: async (event_number: any, examine_textone: any) => {
-    return await service.get(`${baseUrl}api/complaintprocess/complaintReturn`, { params: { event_number: event_number, examine_textone: examine_textone } }).then(res => res).catch(err => err)
+    return await service.get(`${baseUrl}api/complaintprocess/complaintReject`, { params: { event_number: event_number, examine_textone: examine_textone } }).then(res => res).catch(err => err)
   },
   // 下发科室调查
   Issuedepartment: async (data: any) => {

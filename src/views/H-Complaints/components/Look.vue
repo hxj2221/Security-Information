@@ -822,6 +822,18 @@
                       <span class="value look-texaeras" v-else>无</span>
                     </div></el-col>
                 </el-row>
+                 <el-row>
+                  <el-col :span="4"
+                    ><div class="grid-content bg-purple">
+                      <span class="label look-texaeras">联系地址：</span>
+                    </div></el-col
+                  >
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple-light">
+                      <span class="value look-texaeras" v-if="lookdata.address">{{lookdata.address}}</span>
+                      <span class="value look-texaeras" v-else>无</span>
+                    </div></el-col>
+                </el-row>
                 <div
                   style="
                     border-bottom: 0.5px solid #797979;
@@ -961,7 +973,6 @@
   </div>
 </template>
 <script>
-import service from "@/service/index";
 export default {
   props:{
     lookdata:''

@@ -175,7 +175,7 @@
           <el-col :span="14" :push="3"
             ><div class="grid-content bg-purple-light">
               <span> 联系地址<span>*</span> </span> <br />
-              <el-input v-model="address" placeholder="联系地址" maxlength="50" onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )" clearable></el-input></div
+              <el-input v-model="address" placeholder="联系地址" maxlength="50" minlength="10" onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )" clearable></el-input></div
           ></el-col>
         </el-row>
         <el-row type="flex" class="row-bg">
@@ -299,7 +299,7 @@ export default {
 inject: ["reload"],
   data() {
     return {
-      props: { multiple: true },
+      props: { multiple: true ,editdata:{}},
       agree: "", //同意要求
       pickerOptions: {
         disabledDate(time) {
@@ -420,24 +420,36 @@ inject: ["reload"],
     },
     //保存提交事件
     keepform() {
+      console.log(this.comde)
       if (this.comde !== "" && this.comde !== null&&this.comde.length!==0&&this.incidentdata !== ""&&this.comdata !== ""&&this.comname !== ""&&
       this.comgender!==''&&this.comagenumber !== ""&&this.comphone!== ""&&this.commode!== ""&&this.relation!==''&&this.consulttime!==''
-      &&this.nature!==''&&this.comtype!==''&&this.agentname!==''&&this. agentphone!=='') {
-        let one=new Array
+      &&this.nature!==''&&this.comtype!==''&&this.agentname!==''&&this. agentphone!==''&&this.address!=='') {
+       let com=''
+       let one=new Array
         let two=new Array
        for(let i in this.comde){
-        if(this.comde[i].length == 1){
+         console.log(i)
+         if(Array.isArray(this.comde[i])){
+             if(this.comde[i].length == 1){
           one.push(this.comde[i][0])
         }
         else if(this.comde[i].length == 2){
            two.push(this.comde[i][1])
         }
+          com = one.concat(two);
+         }
+         else{
+            com=this.comde
+         }
+      
         }
-         let comdes = one.concat(two);
-      let params = {
+        console.log(com)
+         let comdes = com;
+       let params = {
         event_number: this.comnumber, //业务编号
         event_type: this.comtype, //投诉类型
         cause: this.reason, //投诉原因
+        address:this.address,//联系地址
         occur_time:this.incidentdata, //事发时间
         department_id: comdes, //投诉科室
         create_time:this.comdata, //投诉日期
@@ -453,7 +465,8 @@ inject: ["reload"],
         handle_name: this.agentname, //经办人姓名
         handle_phone: this.agentphone, //经办人手机号
       };
-      service.AddComponent(params).then((res) => {
+      console.log(params)
+      service.editomponent(params).then((res) => {
         if(res.code==20010){
            this.$message({
             message: res.msg,
@@ -487,6 +500,13 @@ inject: ["reload"],
         }
         
       });
+       }
+         else if(this.address == ""|| this.address == null){
+          this.$message({
+            message:'请输入联系地址',
+            type: "error",
+            duration: 1000,
+          });
        }
        else if(this.comde == ""|| this.comde == null){
           this.$message({
@@ -601,38 +621,35 @@ inject: ["reload"],
     },
   },
   created() {
-      service.AddCom().then((res) => {
+    // this.comde='1'
+      service.EditComponent(this.$parent.editdata.event_number).then((res) => {
+        
         if (res.code == 20010) {
-          this.comnumber = res.data.event_number; // 事件编号
-          this.commodes = res.data.ComplaintType; // 事件编号
-          this.comtypelist = res.data.event_type; // 投诉方式
-          this.natures = res.data.character; // 事件性质
-          this.relationlist = res.data.inpatient_relation; // 关系
-          this.comdes = res.data.department; //投诉科室
+           console.log(res)
+            this.comde=res.data[0].department_id//投诉科室
+          this.reason= res.data[0].cause //投诉原因
+          this.comtype=res.data[0].event_type//投诉类别
+          this.commode=res.data[0].ComplaintType//投诉方式
+          this.incidentdata=res.data[0].occur_time //事发时间
+          this.comdata=res.data[0].create_time //投诉日期
+          this.comname=res.data[0].complaint_name //投诉人姓名
+          this.comphone=res.data[0].complaint_phone //投诉人电话
+          this.relation=res.data[0].inpatient_relation, //患者关系
+          this.comgender= res.data[0].sex //投诉人性别
+          this.nature=res.data[0].character//事件性质
+          this.address=res.data[0].address//联系地址
+          this.comagenumber=res.data[0].age //投诉人年龄
+          this.consulttime=res.data[0].reply_time //协商时间
+          this.agentname= res.data[0].handle_name //经办人姓名
+          this.agentphone=res.data[0].handle_phone //经办人手机号
+          this.comnumber = res.data[0].event_number; // 事件编号
+          this.commodes = res.data[1].ComplaintType; // 事件类型
+          this.comtypelist = res.data[1].event_type; // 投诉方式
+          this.natures = res.data[1].character; // 事件性质列表
+          this.relationlist = res.data[1].inpatient_relation; // 关系
+          this.comdes = res.data[1].department; //投诉科室
+
         } 
-        // else if(res.code==20401){
-        //   this.$message({
-        //     message: "请重新登陆",
-        //     type: "error",
-        //     duration: 1000,
-        //   });
-        //   this.$router.push('/login')
-        // }
-        // else if(res.code==20403){
-        //   this.$message({
-        //     message: res.msg,
-        //     type: "error",
-        //     duration: 1000,
-        //   });
-        //   this.$router.push('/dashboard')
-        // }
-        //    else{
-        //   this.$message({
-        //     message: res.msg,
-        //     type: "error",
-        //     duration: 1000,
-        //   });
-        // }
       })
  
     

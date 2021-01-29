@@ -188,7 +188,7 @@
           this.all_infor=res.data.all_infor
           this.name=res.data.user[0].name
           this.department=res.data.user[0].department[0].title
-          this.authgrouap=res.data.user[0].authgrouap[0].title
+          this.authgrouap=res.data.user[0].authgrouap.title
         }
         
       })

@@ -39,18 +39,18 @@
       <!-- 表格部分 -->
       <div class="staffIptTab">
         <el-table
-          max-height="662"
+          max-height="550"
           :data="tables"
           :header-cell-style="{ background: '#C2C5F6', color: '#000' }"
           :cell-style="{ background: '#fff' }"
         >
           <el-table-column width="50" label="序号" type="index">
           </el-table-column>
-          <el-table-column prop="job_number" label="工号"> </el-table-column>
+          <el-table-column prop="job_number" label="工号" width="120"> </el-table-column>
           <el-table-column prop="name" label="员工姓名"> </el-table-column>
           <el-table-column prop="sex.name" label="员工性别"> </el-table-column>
           <el-table-column prop="age" label="员工年龄"> </el-table-column>
-          <el-table-column prop="phone" label="手机号码"> </el-table-column>
+          <el-table-column prop="phone" label="手机号码" width="120"> </el-table-column>
           <el-table-column prop="department[0].title" label="所属科室">
           </el-table-column>
           <el-table-column
@@ -101,7 +101,8 @@
             </template>
           </el-table-column>
         </el-table>
-        <!-- 分页 -->
+      </div>
+      <!-- 分页 -->
         <div class="staffpag">
           <div class="block">
             <el-pagination
@@ -116,7 +117,6 @@
             </el-pagination>
           </div>
         </div>
-      </div>
     </div>
     <!--新增-->
     <Staff v-show="add"></Staff>
@@ -226,7 +226,7 @@ export default {
         this.staffvue = true;
       }, 3000);
     },
-    //员工状态
+   //员工状态
     changeSwitch(val, row) {
       console.log(row.id);
       this.$confirm("此操作将修改状态, 是否继续?", "提示", {

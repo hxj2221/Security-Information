@@ -109,7 +109,52 @@ const asyncRoutes = [
         // meta: {
         //     roles: ['admin','admin1','admin2','admin3']
         // }
-      }
+      },
+      {
+        name: '被投诉医护人员统计',
+        iconCls: 'el-icon-s-custom',
+        path: '/Statistics',
+        component: () => import('../views/H-Statistics/index.vue'),
+        // meta: {
+        //     roles: ['admin','admin1','admin2','admin3']
+        // }
+      },
+      {
+        name: '患者基本信息统计',
+        iconCls: 'el-icon-document',
+        path: '/Basic',
+        component: () => import('../views/H-Basic/index.vue'),
+        // meta: {
+        //     roles: ['admin','admin1','admin2','admin3']
+        // }
+      },
+      {
+        name: '患者疾病信息统计',
+        iconCls: 'el-icon-document-add',
+        path: '/Patient',
+        component: () => import('../views/H-Patient/index.vue'),
+        // meta: {
+        //     roles: ['admin','admin1','admin2','admin3']
+        // }
+      },
+      {
+        name: '科室及投诉类别词云统计',
+        iconCls: 'el-icon-chat-line-square',
+        path: '/Word',
+        component: () => import('../views/H-Word/index.vue'),
+        // meta: {
+        //     roles: ['admin','admin1','admin2','admin3']
+        // }
+      },
+      {
+        name: '投诉处理周期统计',
+        iconCls: 'el-icon-aim',
+        path: '/Cycle',
+        component: () => import('../views/H-Cycle/index.vue'),
+        // meta: {
+        //     roles: ['admin','admin1','admin2','admin3']
+        // }
+      },
     ]
   },
   {

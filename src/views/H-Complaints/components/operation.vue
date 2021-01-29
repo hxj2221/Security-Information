@@ -249,7 +249,7 @@
                        </el-table-column>
                         <el-table-column
                           prop="file_size"
-                          label="文件大小/kb"
+                          label="文件大小"
                           width="width"
                         >
                         </el-table-column>
@@ -421,7 +421,7 @@
                        </el-table-column>
                         <el-table-column
                           prop="file_size"
-                          label="文件大小/kb"
+                          label="文件大小"
                           width="width"
                         >
                         </el-table-column>
@@ -957,7 +957,7 @@
                       </el-table-column>
                       <el-table-column
                         prop="file_size"
-                        label="文件大小/kb"
+                        label="文件大小"
                         width="width"
                       >
                       </el-table-column>
@@ -1013,6 +1013,7 @@
                  maxlength="50"
                 placeholder="请输入文件描述"
                  :autosize="{ minRows: 2, maxRows: 2}"
+                 style="max-heiht:100px"
               ></el-input>
             </el-form-item>
             
@@ -1680,22 +1681,6 @@ export default {
               });
             }
           });
-          this.$router.push('/login')
-        }
-        else if(res.code==20403){
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        }
-         else{
-          this.$message({
-                  message: res.msg,
-                  type: "error",
-                  duration: 1000,
-                });
         }
       }
        else if(this.checkstate==14){//改进完成（医院）
