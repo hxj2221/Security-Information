@@ -443,7 +443,7 @@
         that.admitting_diagnosis = item.admitting_diagnosis; //入院诊断
         that.bed_number = item.bed_number; //床号
         that.hospitalized_time = item.hospitalized_time; //入院日期
-        that.department_id = item.department_id; //科室
+        that.department_id = item.department.title; //科室
         that.stakeholder = item.stakeholder; //在场相关人员
         that.Indications_uid = item.Indications_uid; //主管医师
         that.nurse_uid = item.nurse_uid; //主管护士
