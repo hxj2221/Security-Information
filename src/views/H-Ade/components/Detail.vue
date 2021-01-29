@@ -431,6 +431,7 @@
     created() {
       let that = this;
       this.bus.$on('detail', function (item) {
+        console.log(item)
         that.event_num = item.event_num //事件编号
         that.patient_name = item.patient_name; //患者姓名
         that.sex = item.sex; //性别
@@ -449,7 +450,7 @@
         that.admission_id = item.admission_id; //住院号
         that.create_time = item.create_time; //不良报告时间
         that.occur_time = item.occur_time; //不良发生时间
-        that.occur_scene = item.department.title; //事发地点
+        that.occur_scene = item.occurscene.title; //事发地点
         that.event_type = item.eventtype.title; //不良类型
         that.create_uid = item.create_uid //上报人
       })
