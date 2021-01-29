@@ -151,10 +151,7 @@
               <el-select
                 type="input"
                 autosize
-<<<<<<< HEAD
-=======
                 multiple
->>>>>>> 5cbdadc21e9ec1697080c41839beb7f0285eccf2
                 v-model="addStaff.auth_grouap"
                 placeholder="请选择"
                 @change="departsel"
@@ -163,7 +160,7 @@
                   v-for="item in optionrole"
                   :key="item.id"
                   :label="item.title"
-                  :value="item.id"
+                  :value="item.id.toString()"
                 >
                 </el-option>
               </el-select>
@@ -277,12 +274,10 @@ export default {
       id: "",
     };
   },
-<<<<<<< HEAD
   watch: {
     childed(res) {
-      console.log(res.role_id);
       console.log(res);
-      // console.log(res.address); //数据已经拿到
+      console.log(res.address); //数据已经拿到
       this.id = res.id;
       this.addStaff.job_number = res.job_number;
       this.addStaff.name = res.name;
@@ -300,7 +295,7 @@ export default {
       this.addStaff.status = res.status;
       // this.addStaff.head_department = res.head_department;
       this.addStaff.position = res.position;
-      this.addStaff.auth_grouap = res.auth_grouap[0].id;
+      this.addStaff.auth_grouap = res.role_id;
       this.role_id = res.role_id;
       this.addStaff.status = res.status;
     },
@@ -331,12 +326,6 @@ export default {
       };
       console.log(params);
       service.staffEdit(params).then((res) => {
-=======
-
-    watch: {
-      childed(res) {
-        console.log(res.role_id);
->>>>>>> 5cbdadc21e9ec1697080c41839beb7f0285eccf2
         console.log(res);
         if (res.code == 20010) {
           this.$message({

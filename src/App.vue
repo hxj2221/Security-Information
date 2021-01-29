@@ -9,23 +9,23 @@
 export default {
   data() {
     return {
-        alive: true
-    }
+      alive: true,
+    };
   },
   provide() {
     return {
-      reload: this.reload
-    }
+      reload: this.reload,
+    };
   },
   methods: {
     reload() {
-      this.alive= false
+      this.alive = false;
       this.$nextTick(() => {
-        this.alive = true
-      })
-    }
-  }
-}
+        this.alive = true;
+      });
+    },
+  },
+};
 </script>
 <style lang="less">
 #app {
