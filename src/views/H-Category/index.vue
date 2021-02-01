@@ -3,7 +3,7 @@
     <!-- 头部 -->
     <div class="category_top">
       <div class="category_top_left">
-        <h6>投诉类别与科室统计</h6>
+        <h5>投诉类别与科室统计</h5>
       </div>
       <!-- 头部下拉框 -->
       <div class="category_top_right">
@@ -73,9 +73,7 @@
           </el-date-picker>
         </div>
       </div>
-      <el-button type="primary" icon="el-icon-search" size="small"
-        >查询</el-button
-      >
+      <el-button type="primary" icon="el-icon-search"></el-button>
     </div>
     <!-- 图部分 -->
     <div class="category_chart">
