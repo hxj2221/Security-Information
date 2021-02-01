@@ -6,7 +6,7 @@
         <h5>文章详情</h5>
       </div>
       <div class="details_top_right">
-        <el-button type="primary" style="border-color: #666ee8 ;background:none;color: #666ee8; " icon="iconfont el-icon-hospital-passwordai207" @click="myreturn">返回
+        <el-button type="primary" size="medium" style="border-color: #666ee8 ;background:none;color: #666ee8; " icon="iconfont el-icon-hospital-passwordai207" @click="myreturn">返回
           </el-button>
       </div>
     </div>

@@ -226,9 +226,9 @@ import service from '@/service/index';
     </div>
     <!-- 底部按钮 -->
     <div class="root">
-      <el-button type="primary" class="AdeSure" icon="iconfont el-icon-hospital-passwordbaocun" @click="sure">提交
+      <el-button type="primary" size="medium" class="AdeSure" icon="iconfont el-icon-hospital-passwordbaocun" @click="sure">提交
       </el-button>
-      <el-button type="primary" class="AdeBack" icon="iconfont el-icon-hospital-passwordai207" @click="back">返回
+      <el-button type="primary" size="medium" class="AdeBack" icon="iconfont el-icon-hospital-passwordai207" @click="back">返回
       </el-button>
     </div>
   </div>

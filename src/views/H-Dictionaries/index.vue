@@ -7,7 +7,7 @@
           <li class="list" v-for="(item,index) in Nav" :key="item.index" v-bind:class="{bgColor:index==nowIndex}"
             @click="change(index)">{{item.name}}</li>
         </ul>
-        <el-button type="primary" icon="el-icon-circle-plus" @click="increase()">新增
+        <el-button type="primary" size="medium" icon="el-icon-circle-plus" @click="increase()">新增
         </el-button>
       </div>
       <!-- 内容 -->

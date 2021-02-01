@@ -8,6 +8,7 @@
       <div class="columnList_top_right">
         <el-button
           type="primary"
+          size="medium"
           style="border: 3px solid #666ee8"
           icon="el-icon-circle-plus"
           @click="dialogVisible = true"
@@ -15,7 +16,8 @@
         >
         <el-button
           type="primary"
-          style="border: 1px solid #666ee8; padding: 14px"
+          size="medium"
+          style="border: 1px solid #666ee8; padding: 11.5px "
           @click="articleList"
           >返回文章列表</el-button
         >
@@ -41,9 +43,10 @@
             placeholder="请输入分类标题"
           ></el-input>
         </el-form-item>
-        <el-form-item label="分类状态" :label-width="formLabelWidth">
+        <el-form-item label="分类状态" style="text-align:left;" :label-width="formLabelWidth">
           <template>
             <el-switch
+            style="margin-left:35px"
               v-model="form.state"
               :active-value="1"
               :inactive-value="0"
@@ -133,9 +136,10 @@
             placeholder="请输入分类标题"
           ></el-input>
         </el-form-item>
-        <el-form-item label="分类状态" :label-width="formLabelWidth">
+        <el-form-item label="分类状态" style="text-align:left;" :label-width="formLabelWidth">
           <template>
             <el-switch
+            style="margin-left:35px"
               v-model="form.state"
               :active-value="1"
               :inactive-value="0"

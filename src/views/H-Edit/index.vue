@@ -87,7 +87,7 @@
             :close-on-click-modal="false"
           >
             <el-form label-width="80px" ref="editForm">
-              <el-form-item prop="staffName" label="上级" width="120">
+              <el-form-item style="text-align: left;" prop="staffName" label="上级" width="120">
                 <el-select
                   v-model="selvalue"
                   @change="selchang"
@@ -118,7 +118,7 @@
                   placeholder="数字越大，排序越小"
                 ></el-input>
               </el-form-item>
-              <el-form-item label="状态" width="100">
+              <el-form-item style="text-align: left;" label="状态" width="100">
                 <template>
                   <el-switch
                     v-model="powstatu"
@@ -158,7 +158,7 @@
             :before-close="dialogBeforeCl"
           >
             <el-form label-width="80px" ref="editForm">
-              <el-form-item label="上级" width="120">
+              <el-form-item style="text-align: left;" label="上级" width="120">
                 <el-select
                   v-model="editselvalue"
                   @change="selchang"
@@ -187,7 +187,7 @@
               <el-form-item label="排序" width="100" required>
                 <el-input v-model="editpowpx" auto-complete="off"></el-input>
               </el-form-item>
-              <el-form-item label="状态" width="100">
+              <el-form-item style="text-align: left;" label="状态" width="100">
                 <template>
                   <el-switch
                     v-model="editpowstatu"

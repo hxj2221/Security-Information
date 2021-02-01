@@ -7,8 +7,8 @@
             <span>医院沟通记录</span>
           </div>
           <div class="lookForm_top_button_right">
-            <el-button type="primary" icon="iconfont el-icon-hospital-passworddayin">打印记录表</el-button>
-            <el-button type="primary" icon="iconfont el-icon-hospital-passwordai207" @click="upper">返回
+            <el-button type="primary" icon="iconfont el-icon-hospital-passworddayin" size="medium">打印记录表</el-button>
+            <el-button type="primary" icon="iconfont el-icon-hospital-passwordai207" size="medium" @click="upper">返回
             </el-button>
           </div>
         </div>

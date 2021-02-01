@@ -6,6 +6,7 @@
       <div>
         <el-button
           type="primary"
+          size="medium"
           class="staffgr"
           icon="iconfont el-icon-hospital-passwordbaocun"
           @click="staffaddvueyes"
@@ -13,6 +14,7 @@
         </el-button>
         <el-button
           type="primary"
+          size="medium"
           class="staffback"
           icon="iconfont el-icon-hospital-passwordai207"
           @click="staffaddvueno"

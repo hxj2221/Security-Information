@@ -271,12 +271,14 @@
       <div class="button_stlye">
         <el-button
           type="primary"
+          size="medium"
           icon="iconfont el-icon-hospital-passwordbaocun"
           @click="mysubmit"
           >提交
         </el-button>
         <el-button
           type="primary"
+          size="medium"
           icon="iconfont el-icon-hospital-passwordai207"
           @click="mySubmit"
           >返回

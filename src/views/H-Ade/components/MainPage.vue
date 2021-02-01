@@ -4,9 +4,9 @@
     <div class="header">
       <h4>不良事件</h4>
       <div class="btn">
-        <el-button type="primary" icon="el-icon-circle-plus" class="addAde" @click="Add()">新增
+        <el-button type="primary" size="medium" icon="el-icon-circle-plus" class="addAde" @click="Add()">新增
         </el-button>
-        <el-button type="primary" icon="iconfont el-icon-hospital-passwordexport" class="exportAde">导出</el-button>
+        <el-button type="primary" size="medium" icon="iconfont el-icon-hospital-passwordexport" class="exportAde">导出</el-button>
       </div>
     </div>
     <!-- 检索 -->

@@ -7,12 +7,14 @@
         <div class="push_btn">
           <el-button
             type="primary"
+            size="medium"
             icon="el-icon-circle-plus"
             @click="uploadclassify()"
             >上传文件
           </el-button>
           <el-button
             type="primary"
+            size="medium"
             class="newflie"
             icon="el-icon-circle-plus"
             @click="newclassify()"

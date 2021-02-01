@@ -4,8 +4,8 @@
       <div class="top">
         <span class="left">投诉案件调查表</span>
         <div class="right">
-          <el-button type="primary" icon="iconfont el-icon-hospital-passworddayin" class="print">打印记录表</el-button>
-          <el-button type="primary" icon="iconfont el-icon-hospital-passwordai207" class="back" @click="back">返回
+          <el-button type="primary" size="medium" icon="iconfont el-icon-hospital-passworddayin" class="print">打印记录表</el-button>
+          <el-button type="primary" size="medium" icon="iconfont el-icon-hospital-passwordai207" class="back" @click="back">返回
           </el-button>
         </div>
       </div>
