@@ -14,6 +14,7 @@
 
 .lookForm_top_button {
     overflow: hidden;
+    display: flex;
     height: 91px;
     border-bottom: 2px solid #f2f2f2;
     display: flex;
@@ -125,12 +126,28 @@
     font-size: 14px;
     text-align: left;
     margin: 0 auto;
-    border: 1px solid #797979;
     border-left: none;
     border-bottom: none;
     line-height: 30px;
+    border: 1px solid #797979;
+    display: flex;
 }
-.lookForm_bottom_form .tab{
+.lookForm_bottom_form_div{
+    width: 33.33%;
+    border-right: 1px solid #797979;
+}
+.lookForm_bottom_form_div>span{
+    display: inline-block;
+    width: 42%;
+    padding-left: 15px;
+}
+.lookForm_bottom_form_div>span:first-child{
+    background-color: #f2f2f2;
+}
+.lookForm_bottom_form_div>span:last-child{
+    color: #666EE8;
+}
+/* .lookForm_bottom_form .tab{
     border-bottom: 1px solid #797979;
 }
 .lookForm_bottom_form .tab .grid-content .tit{
@@ -142,4 +159,4 @@
 .lookForm_bottom_form .tab .grid-content .con{
     padding-left: 10px;
     color: #666ee8;
-}
+} */

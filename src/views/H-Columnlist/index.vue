@@ -11,7 +11,7 @@
           size="medium"
           style="border: 3px solid #666ee8"
           icon="el-icon-circle-plus"
-          @click="dialogVisible = true"
+          @click="hhh"
           >新增记录</el-button
         >
         <el-button
@@ -24,11 +24,15 @@
       </div>
     </div>
     <!-- 弹框 -->
-    <el-dialog title="添加分类" :visible.sync="dialogVisible" style="width:60%;margin:0 auto">
+    <el-dialog
+      title="添加分类"
+      :visible.sync="dialogVisible"
+      style="width: 60%; margin: 0 auto"
+    >
       <el-form :model="form">
         <el-form-item label="上级分类" :label-width="formLabelWidth">
           <el-cascader
-          style="width:80%"
+            style="width: 80%"
             ref="unitAreacode"
             v-model="form.id"
             :options="options"
@@ -38,7 +42,7 @@
         </el-form-item>
         <el-form-item label="活动区域" :label-width="formLabelWidth">
           <el-input
-           style="width:80%"
+            style="width: 80%"
             v-model="form.title"
             placeholder="请输入分类标题"
           ></el-input>
@@ -57,7 +61,7 @@
         </el-form-item>
         <el-form-item label="分类权重" :label-width="formLabelWidth">
           <el-input
-           style="width:80%"
+            style="width: 80%"
             v-model="form.order"
             placeholder="默认0，越大越靠前"
             type="number"
@@ -72,16 +76,16 @@
     <!-- table -->
     <div class="columnList_table">
       <el-table
-      max-height="590"
-      style="width: 94%;
-    margin: 0 auto;"
+        max-height="590"
+        style="width: 94%; margin: 0 auto"
         :data="tableData"
         row-key="id"
         border
         default-expand-all
         :tree-props="{ children: '_child', hasChildren: 'hasChildren' }"
       >
-        <el-table-column type="index" label="编号" width="50"> </el-table-column>
+        <el-table-column type="index" label="编号" width="50">
+        </el-table-column>
 
         <el-table-column prop="id" label="权重"> </el-table-column>
         <el-table-column prop="title" label="分类名称"> </el-table-column>
@@ -116,12 +120,16 @@
         </el-table-column>
       </el-table>
     </div>
-    <!-- 编辑r弹框 -->
-    <el-dialog title="编辑分类" :visible.sync="dialogVisibles"  style="width:60%;margin:0 auto">
+    <!-- 编辑弹框 -->
+    <el-dialog
+      title="编辑分类"
+      :visible.sync="dialogVisibles"
+      style="width: 60%; margin: 0 auto"
+    >
       <el-form :model="form">
         <el-form-item label="上级分类" :label-width="formLabelWidth">
           <el-cascader
-            style="width:80%"
+            style="width: 80%"
             ref="unitAreacode"
             v-model="form.id"
             :options="options"
@@ -129,9 +137,9 @@
             @change="handleChange"
           ></el-cascader>
         </el-form-item>
-        <el-form-item label="活动区域" :label-width="formLabelWidth" >
+        <el-form-item label="活动区域" :label-width="formLabelWidth">
           <el-input
-          style="width:80%"
+            style="width: 80%"
             v-model="form.title"
             placeholder="请输入分类标题"
           ></el-input>
@@ -151,7 +159,7 @@
         <el-form-item label="分类权重" :label-width="formLabelWidth">
           <el-input
             v-model="form.order"
-            style="width:80%"
+            style="width: 80%"
             placeholder="默认0，越大越靠前"
             type="number"
           ></el-input>
@@ -188,8 +196,8 @@ export default {
   data() {
     return {
       tableData: [],
-      dialogVisible: false,//添加
-      dialogVisibles: false,//编辑
+      dialogVisible: false, //添加
+      dialogVisibles: false, //编辑
       //
       form: {
         id: "", //上级分类
@@ -205,6 +213,45 @@ export default {
   },
 
   methods: {
+    hhh() {
+      this.dialogVisible=true
+      service.Ariadd().then((res) => {
+        //console.log(res.data)
+
+        let batchdata = res.data;
+        //valueBatch
+        let dataValueBatch = (batchdata) =>
+          batchdata.map(({ id, title, pid, _child }) =>
+            _child
+              ? {
+                  value: {
+                    id: id,
+                    value: id,
+                    pid: pid,
+                  },
+                  label: title,
+                  children: dataValueBatch(_child),
+                }
+              : {
+                  value: {
+                    id: id,
+                    value: id,
+                    pid: pid,
+                  },
+                  label: title,
+                }
+          );
+
+        this.options = dataValueBatch(batchdata);
+        let one = {
+          id: 0,
+          value: 0,
+          pid: 0,
+          label: "默认值",
+        };
+        this.options.unshift(one);
+      });
+    },
     // 更改状态
     changeSwitch(val, row) {
       console.log(val, row.id);
@@ -269,13 +316,11 @@ export default {
     },
     // 添加中级选择器
     handleChange(val) {
-      // console.log(val);
-      // console.log(this.$refs["unitAreacode"].getCheckedNodes()[0].value.pid)
-      this.pid=this.$refs["unitAreacode"].getCheckedNodes()[0].value.pid
-      // this.pid = val[0].pid;
-      // console.log(this.pid);
-      // console.log(val[val.length - 1]);
-      // console.log(this.$refs.unitAreacode.getCheckedNodes()[0].pathLabels);
+      if (this.$refs["unitAreacode"].getCheckedNodes()[0].label == "默认值") {
+        this.pid = 0;
+      } else {
+        this.pid = this.$refs["unitAreacode"].getCheckedNodes()[0].value.id;
+      }
     },
     //添加
     AddList() {
@@ -428,32 +473,6 @@ export default {
   created() {
     service.AriList().then((res) => {
       this.tableData = res.data;
-    });
-    service.Ariadd().then((res) => {
-      //console.log(res.data)
-      let batchdata = res.data;
-      //valueBatch
-      let dataValueBatch = (batchdata) =>
-        batchdata.map(({ id, title, pid, _child }) =>
-          _child
-            ? {
-                value: {
-                  value: id,
-                  pid: pid,
-                },
-                label: title,
-
-                children: dataValueBatch(_child),
-              }
-            : {
-                value: {
-                  value: id,
-                  pid: pid,
-                },
-                label: title,
-              }
-        );
-      this.options = dataValueBatch(batchdata);
     });
   },
 };
