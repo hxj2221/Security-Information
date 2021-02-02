@@ -2,10 +2,10 @@
   <div>
     <div class="operation" style="min-height: 800px" v-if="operationdata!=''&&opdata!=''">
       <div class="operation-top">
-        <span>投诉详情-{{opdata[0].state.title}}</span>
+        <span>操作</span>
         <div>
           <slot name="records">
-            <el-button type="primary" icon="el-icon-edit" class="records"
+            <el-button type="primary" icon="el-icon-edit" class="records" @click="records"
               >医患记录</el-button
             >
           </slot>
@@ -31,7 +31,7 @@
         </div>
       </div>
       <slot name='drawerss'>
-            <el-drawer title="快捷查看" :visible.sync="drawer" :with-header="false" size="59%">
+            <el-drawer title="快捷查看" :visible.sync="drawer" :with-header="false" size="60%">
         <ul
           class="infinite-list"
           style="overflow: auto; height: 870px; texr-aligin: center"
@@ -143,7 +143,7 @@
                 <el-col :span="6" :push="1"
                   ><div class="grid-content bg-purple">
                     <span class="label">当事员工:</span>
-                    <el-select v-model="peopel" multiple placeholder="请选择">
+                    <el-select v-model="peopel" multiple placeholder="请选择" clearable>
                       <el-option
                         v-for="item in opdata[1].user"
                         :key="item.id"
@@ -278,7 +278,7 @@
                   <el-col :span="6" :push="1"
                     ><div class="grid-content bg-purple">
                       <span class="label">选择责任人:</span>
-                       <el-select v-model="peopel" multiple placeholder="请选择">
+                       <el-select v-model="peopel" multiple placeholder="请选择" clearable>
                       <el-option
                         v-for="item in opdata[1].user"
                         :key="item.id"
@@ -328,31 +328,7 @@
                       ></el-input></div
                   ></el-col>
                 </el-row>
-                <!-- 附件 -->
-            <div>
-              <el-row
-                type="flex"
-                class="row-bg"
-                justify="space-between"
-                style="margin: 20px 0"
-              >
-                <el-col :span="15" :push="1"
-                  ><div class="grid-content bg-purple">
-                    <span class="label">附件信息:</span>
-                  </div></el-col
-                >
-                <el-col :span="2" :pull="1"
-                  ><div class="grid-content bg-purple">
-                    <el-button
-                      type="primary"
-                      icon="el-icon-circle-plus"
-                      @click="upfile()"
-                      style="background-color: #666ee8; border: none"
-                      >上传附件</el-button
-                    >
-                  </div></el-col
-                >
-              </el-row>
+             
               <!-- 附件 -->
               <div>
                 <el-row
@@ -441,9 +417,9 @@
                     </div></el-col
                   >
                 </el-row>
-              </div>
+              
             </div>
-              </div>
+            </div>
           </div>
         </div>
         <!-- 审批操作 -->
@@ -1116,7 +1092,7 @@ export default {
       responsibility: "", //责任意见
       measures: "", //整改措施
       preliminary: "", //初步意见
-      checkstate: "请选择", //选中状态
+      checkstate: "", //选中状态
       statelist: [], //状态列表
       drawer: false,
       uploadfile: "", //上传附件
@@ -1142,6 +1118,13 @@ export default {
     };
   },
   methods: {
+     records() {
+      //跳转到医患记录
+      this.$router.push({
+            path:'/Connect',
+            query:{event_number:this.$parent.opdata[0].event_number}
+           })
+    },
     //关闭上传文件弹窗
      Close() {
         this.listsss=[]
@@ -1247,7 +1230,8 @@ export default {
         event_number:this.$parent.opdata[0].event_number,//编号
         base64_file:res,
         file_name:this.filetitle,
-        represent:this.filedescribe
+        represent:this.filedescribe,
+        adress:'Complaintprocess/event_base64_uploadfiles',
       }
       service.uploadfilebase(params).then(res=>{
          if(res.code==20010){
@@ -1257,7 +1241,7 @@ export default {
                   duration: 1000,
                 });
                  
-                             let params={
+             let params={
         event_number:this.$parent.opdata[0].event_number,//编号
         state:2
       }
@@ -1290,7 +1274,7 @@ export default {
         }
          else{
           this.$message({
-                  message: '上传失败',
+                  message: res.msg,
                   type: "error",
                   duration: 1000,
                 });
@@ -1347,7 +1331,7 @@ export default {
         }
          else{
           this.$message({
-                  message: '上传失败',
+                  message:res.msg,
                   type: "error",
                   duration: 1000,
                 });
@@ -1469,10 +1453,18 @@ export default {
      },
     //下发
     issuesss() {
-     
-      if (this.checkstate == 1) {
+     console.log(this.comde)
+     if(this.comde !== "" && this.comde !== null && this.needtime !== ""){
+       if(this.comde.length>3){
+         this.$message({
+                message: "最多下发四个科室",
+                type: "error",
+                duration: 1000,
+              });
+       }
+       else{
+          if (this.checkstate == 1) {
         //下发科室调查
-        if (this.comde !== "" && this.comde !== null && this.needtime !== "") {
         let one=new Array
         let two=new Array
        for(let i in this.comde){
@@ -1488,6 +1480,8 @@ export default {
             event_number: this.$parent.opdata[0].event_number, //编号
             department_ids: comdes, //下发科室
             reply_time: this.needtime, // 输入天数
+            handle_name:this.agentname,//经办人
+            handle_phone:this.agentphone
           };
           service.Issuedepartment(data).then((res) => {
             if (res.code == 20010) {
@@ -1519,24 +1513,7 @@ export default {
               });
             }
           });
-        } else if (this.comde == "" || this.comde == null) {
-          this.$message({
-            message: "请重新登陆",
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/login')
-        }
-        else if(res.code==20403){
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        }
       } else if (this.checkstate == 11) {
-        if (this.comde !== "" && this.comde !== null) {
           let one=new Array
         let two=new Array
        for(let i in this.comde){
@@ -1582,8 +1559,25 @@ export default {
               });
             }
           });
-        }
+       
       }
+       }
+     }
+     else if (this.comde == "" || this.comde == null) {
+          this.$message({
+            message: "请选择下发科室",
+            type: "error",
+            duration: 1000,
+          });
+        }
+         else if (this.needtime == "" || this.needtime == null) {
+          this.$message({
+            message: "请选择截止日期",
+            type: "error",
+            duration: 1000,
+          });
+        }
+     
       },
    
     //提交
@@ -1626,7 +1620,7 @@ export default {
             });
           }
         });
-      } else if (this.checkstate == 3) {
+      }else if (this.checkstate == 3) {
         //院内讨论
         if (
           this.comde !== "" &&
@@ -1682,8 +1676,14 @@ export default {
             }
           });
         }
-      }
-       else if(this.checkstate==14){//改进完成（医院）
+        else {
+           this.$message({
+                message:'请完善信息',
+                type: "error",
+                duration: 1000,
+              });
+        }
+      }else if(this.checkstate==14){//改进完成（医院）
         let params={
         event_number:this.$parent.opdata[0].event_number,//编号
         examine_textone:this.preliminary,//处理意见
@@ -1754,7 +1754,14 @@ export default {
         });
       } else if (this.checkstate == 5) {
         //人民调解
-        let params = {
+        if(this.date==''||this.date==null){
+           this.$message({
+              message: '请选择约定时间',
+              type: "error",
+              duration: 1000,
+            });
+        }else{
+            let params = {
           event_number: this.$parent.opdata[0].event_number, //编号
           appointment_time: this.date, //约定时间
         };
@@ -1788,9 +1795,19 @@ export default {
             });
           }
         });
+        }
+      
       } else if (this.checkstate == 6) {
         //责任鉴定中
-        let params = {
+        if(this.date==''||this.date==null){
+           this.$message({
+              message: '请选择约定时间',
+              type: "error",
+              duration: 1000,
+            });
+        }
+        else{
+           let params = {
           event_number: this.$parent.opdata[0].event_number, //编号
           examine_textone: this.preliminary, //情况说明
           appointment_time: this.date, //约定时间
@@ -1825,9 +1842,19 @@ export default {
             });
           }
         });
+        }
+       
       } else if (this.checkstate == 7) {
         //患方推迟
-        let params = {
+         if(this.date==''||this.date==null){
+           this.$message({
+              message: '请选择约定时间',
+              type: "error",
+              duration: 1000,
+            });
+        }
+        else{
+          let params = {
           event_number: this.$parent.opdata[0].event_number, //编号
           examine_textone: this.preliminary, //处理意见
           appointment_time: this.date, //约定时间
@@ -1862,9 +1889,18 @@ export default {
             });
           }
         });
+        }
+        
       } else if (this.checkstate == 8) {
         //中止调节
-        let params = {
+          if(this.date==''||this.date==null){
+           this.$message({
+              message: '请选择约定时间',
+              type: "error",
+              duration: 1000,
+            });
+        }else{
+           let params = {
           event_number: this.$parent.opdata[0].event_number, //编号
           examine_textone: this.preliminary, //事实及理由
           appointment_time: this.date, //约定时间
@@ -1899,9 +1935,19 @@ export default {
             });
           }
         });
+        }
+       
       } else if (this.checkstate == 9) {
         //终止调节
-        let params = {
+         if(this.date==''||this.date==null){
+           this.$message({
+              message: '请选择约定时间',
+              type: "error",
+              duration: 1000,
+            });
+        }
+        else{
+           let params = {
           event_number: this.$parent.opdata[0].event_number, //编号
           examine_textone: this.preliminary, //事实及理由
           appointment_time: this.date, //约定时间
@@ -1936,9 +1982,19 @@ export default {
             });
           }
         });
+        }
+       
       } else if (this.checkstate == 10) {
         //司法诉讼
-        let params = {
+         if(this.date==''||this.date==null){
+           this.$message({
+              message: '请选择约定时间',
+              type: "error",
+              duration: 1000,
+            });
+        }
+        else{
+            let params = {
           event_number: this.$parent.opdata[0].event_number, //编号
           examine_textone: this.preliminary, //情况说明
           appointment_time: this.date, //约定时间
@@ -1973,9 +2029,19 @@ export default {
             });
           }
         });
+        }
+      
       } else if (this.$parent.opdata[0].state.state_val == 11) {
         //改进完成（科室）
-        let params = {
+        if(this.peopel==''||this.analysis==''||this.responsibility==''||this.measures==''){
+          this.$message({
+              message: "请完善信息",
+              type: "error",
+              duration: 1000,
+            });
+        }
+        else{
+            let params = {
           event_number: this.$parent.opdata[0].event_number, //编号
           investigator_ids: this.peopel, //当事员工
           examine_textone: this.analysis, //根因分析
@@ -2012,6 +2078,8 @@ export default {
             });
           }
         });
+        }
+      
       } else if (this.checkstate == 13) {
         //持续改进（医院）
         let params = {
@@ -2058,7 +2126,15 @@ export default {
           });
       } else if (this.checkstate == 14) {
         //改进完成（医院）
-        let params = {
+        if(this.preliminary==''||this.management==''){
+          this.$message({
+              message: "请完善信息",
+              type: "error",
+              duration: 1000,
+            });
+        }
+        else{
+          let params = {
           event_number: this.$parent.opdata[0].event_number, //编号
           examine_textone: this.preliminary, //处理意见
           examine_texttwo: this.management, //管理措施
@@ -2093,6 +2169,8 @@ export default {
             });
           }
         });
+        }
+        
       } else if (this.checkstate == 20) {
         //已结束
         if (
@@ -2159,13 +2237,28 @@ export default {
             }
           });
         }
+        else{
+           this.$message({
+                message:'请完善信息',
+                type: "error",
+                duration: 1000,
+              });
+        }
       }
     },
     // 退回
     send() {
       if (this.checkstate == -2) {
-        service
-          .send(this.$parent.opdata[0].event_number, this.preliminary)
+        if(this.preliminary==''){
+          this.$message({
+                message: "请输入退回原因",
+                type: "error",
+                duration: 1000,
+              });
+        }
+        else{
+           service
+          .send(this.$parent.opdata[0].event_number, this.preliminary,this.agentname,this.agentphone)
           .then((res) => {
             if (res.code === 20010) {
               this.$message({
@@ -2197,12 +2290,22 @@ export default {
             }
           });
         }
+       
+        }
     },
     // 驳回
     reject() {
       if (this.checkstate == -1) {
-        service
-          .reject(this.$parent.opdata[0].event_number, this.preliminary)
+        if(this.preliminary==''){
+          this.$message({
+                message: "请输入驳回原因",
+                type: "error",
+                duration: 1000,
+              });
+        }
+        else{
+           service
+          .reject(this.$parent.opdata[0].event_number, this.preliminary,this.agentname,this.agentphone)
           .then((res) => {
             if (res.code == 20010) {
               this.$message({
@@ -2233,6 +2336,8 @@ export default {
               });
             }
           });
+        }
+       
         }
     },
     handleClose() {

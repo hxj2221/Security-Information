@@ -140,6 +140,7 @@ export default {
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
+           sessionStorage.setItem('tableData', JSON.stringify(this.tableData))
         }
         else if(res.code==20401){
           this.$message({
@@ -173,6 +174,7 @@ export default {
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
+           sessionStorage.setItem('tableData', JSON.stringify(this.tableData))
         }
          else if(res.code==20401){
           this.$message({
@@ -206,6 +208,7 @@ export default {
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
+           sessionStorage.setItem('tableData', JSON.stringify(this.tableData))
         }  else if(res.code==20401){
           this.$message({
             message: "请重新登陆",
@@ -246,6 +249,7 @@ export default {
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
+          sessionStorage.setItem('tableData', JSON.stringify(this.tableData))
         }
          else if(res.code==20401){
           this.$message({
@@ -279,6 +283,7 @@ export default {
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
+          sessionStorage.setItem('tableData', JSON.stringify(this.tableData))
         }
         else if(res.code==20401){
           this.$message({
@@ -312,6 +317,7 @@ export default {
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
+          sessionStorage.setItem('tableData', JSON.stringify(this.tableData))
         } else if(res.code==20401){
           this.$message({
             message: "请重新登陆",
@@ -352,6 +358,7 @@ export default {
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
+          sessionStorage.setItem('tableData', JSON.stringify(this.tableData))
         }
          else if(res.code==20401){
           this.$message({
@@ -385,6 +392,7 @@ export default {
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
+          sessionStorage.setItem('tableData', JSON.stringify(this.tableData))
         }
          else if(res.code==20401){
           this.$message({
@@ -419,6 +427,7 @@ export default {
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
+          sessionStorage.setItem('tableData', JSON.stringify(this.tableData))
         }  else if(res.code==20401){
           this.$message({
             message: "请重新登陆",
@@ -465,6 +474,7 @@ export default {
         this.currentPage4 = res.data[1].current;
         this.options=res.data[2].ComplaintType
         this.option=res.data[2].state
+        sessionStorage.setItem('tableData', JSON.stringify(this.tableData))
       }
         else if(res.code==20403){
           this.$message({

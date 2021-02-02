@@ -8,7 +8,11 @@
       <div class="connent_top_right">
         <el-button type="primary" size="medium" icon="el-icon-circle-plus" @click="addRecord()">新增
         </el-button>
+<<<<<<< HEAD
+        <el-button type="primary" icon="iconfont el-icon-hospital-passwordexport" @click="exportcom">导出</el-button>
+=======
         <el-button type="primary" size="medium" icon="iconfont el-icon-hospital-passwordexport">导出</el-button>
+>>>>>>> 9e0afb894141bbc5e0e1ce6f50738ec36f19be9b
       </div>
     </div>
     <hr class="connent_hr" />
@@ -125,6 +129,45 @@
       }
     },
     methods: {
+        formatDate(date) {
+        var date = new Date(date)*1000;
+        return date;
+      },
+   initTime(t) {
+      let d=new Date(t).getTime(new Date(t));
+      let time= new Date(d + 8 * 3600 * 1000).toJSON().substr(0, 19).replace('T', ' ').replace(/\./g, '-');
+      return time;
+    },
+         // 导出事件
+    exportcom() {  
+      let dataA =this.tableData
+       let dataB=new Array()
+      for(let i =0;i<dataA.length;i++){
+            let data=this.formatDate(dataA[i].communicate_time)
+              dataA[i].communicate_tim=this.initTime(data)
+              dataB.push(dataA[i])
+      }
+      console.log(dataB)
+      import('@/vendor/Export2Excel').then(excel => {
+      const tHeader = ['记录编号', '患者姓名', '主持人', '记录人','沟通日期','关联投诉编号','主要沟通事项']
+      const filterVal = ['number', 'patient_name', 'hosp_name', 'note_taker', 'communicate_tim', 'event_number', 'record_of_communication']
+      const list = dataB
+      const data = this.formatJson(filterVal, list)
+      excel.export_json_to_excel({
+        header: tHeader,
+        data,
+        filename: '业务列表',
+        autoWidth: true,
+        bookType: 'xlsx'
+      })
+    })
+      
+    },
+   formatJson(filterVal, jsonData) {
+    return jsonData.map(v => filterVal.map(j => {
+      return v[j]
+    }))
+   },
       // 设置表头颜色
       getRowClass({
         rowIndex

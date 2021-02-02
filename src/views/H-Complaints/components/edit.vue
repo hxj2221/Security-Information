@@ -383,7 +383,7 @@ inject: ["reload"],
         },
         {
           value: "2",
-          lable: "未知",
+          lable: "保密",
         },
       ],
       commodes: [], // 投诉方式列表
@@ -623,38 +623,28 @@ inject: ["reload"],
     },
   },
   created() {
-    // this.comde='1'
-      service.EditComponent(this.$parent.editdata.event_number).then((res) => {
-        
-        if (res.code == 20010) {
-           console.log(res)
-            this.comde=res.data[0].department_id//投诉科室
-          this.reason= res.data[0].cause //投诉原因
-          this.comtype=res.data[0].event_type//投诉类别
-          this.commode=res.data[0].ComplaintType//投诉方式
-          this.incidentdata=res.data[0].occur_time //事发时间
-          this.comdata=res.data[0].create_time //投诉日期
-          this.comname=res.data[0].complaint_name //投诉人姓名
-          this.comphone=res.data[0].complaint_phone //投诉人电话
-          this.relation=res.data[0].inpatient_relation, //患者关系
-          this.comgender= res.data[0].sex //投诉人性别
-          this.nature=res.data[0].character//事件性质
-          this.address=res.data[0].address//联系地址
-          this.comagenumber=res.data[0].age //投诉人年龄
-          this.consulttime=res.data[0].reply_time //协商时间
-          this.agentname= res.data[0].handle_name //经办人姓名
-          this.agentphone=res.data[0].handle_phone //经办人手机号
-          this.comnumber = res.data[0].event_number; // 事件编号
-          this.commodes = res.data[1].ComplaintType; // 事件类型
-          this.comtypelist = res.data[1].event_type; // 投诉方式
-          this.natures = res.data[1].character; // 事件性质列表
-          this.relationlist = res.data[1].inpatient_relation; // 关系
-          this.comdes = res.data[1].department; //投诉科室
-
-        } 
-      })
- 
-    
+          this.comde=this.$parent.editdatas[0].department_id//投诉科室
+          this.reason=  this.$parent.editdatas[0].cause //投诉原因
+          this.comtype= this.$parent.editdatas[0].event_type//投诉类别
+          this.commode= this.$parent.editdatas[0].ComplaintType//投诉方式
+          this.incidentdata= this.$parent.editdatas[0].occur_time //事发时间
+          this.comdata= this.$parent.editdatas[0].create_time //投诉日期
+          this.comname= this.$parent.editdatas[0].complaint_name //投诉人姓名
+          this.comphone= this.$parent.editdatas[0].complaint_phone //投诉人电话
+          this.relation= this.$parent.editdatas[0].inpatient_relation, //患者关系
+          this.comgender=  this.$parent.editdatas[0].sex //投诉人性别
+          this.nature= this.$parent.editdatas[0].character//事件性质
+          this.address= this.$parent.editdatas[0].address//联系地址
+          this.comagenumber= this.$parent.editdatas[0].age //投诉人年龄
+          this.consulttime= this.$parent.editdatas[0].reply_time //协商时间
+          this.agentname=  this.$parent.editdatas[0].handle_name //经办人姓名
+          this.agentphone= this.$parent.editdatas[0].handle_phone //经办人手机号
+          this.comnumber =  this.$parent.editdatas[0].event_number; // 事件编号
+          this.commodes = this.$parent. editdatas[1].ComplaintType; // 事件类型
+          this.comtypelist = this.$parent. editdatas[1].event_type; // 投诉方式
+          this.natures =  this.$parent.editdatas[1].character; // 事件性质列表
+          this.relationlist =  this.$parent.editdatas[1].inpatient_relation; // 关系
+          this.comdes =  this.$parent.editdatas[1].department; //投诉科室
     }
 };
 </script>

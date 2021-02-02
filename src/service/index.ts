@@ -56,12 +56,12 @@ export default {
     return await service.get(`${baseUrl}api/tsevent/issue`, { params: { event_number: event_number } }).then(res => res).catch(err => err)
   },
   // 投诉退回
-  send: async (event_number: any, examine_textone: any) => {
-    return await service.get(`${baseUrl}api/complaintprocess/complaintReturn`, { params: { event_number: event_number, examine_textone: examine_textone } }).then(res => res).catch(err => err)
+  send: async (event_number: any, examine_textone: any,handle_name:any,handle_phone:any) => {
+    return await service.get(`${baseUrl}api/complaintprocess/complaintReturn`, { params: { event_number: event_number, examine_textone: examine_textone,handle_name:handle_name ,handle_phone:handle_phone } }).then(res => res).catch(err => err)
   },
   // 投诉驳回
-  reject: async (event_number: any, examine_textone: any) => {
-    return await service.get(`${baseUrl}api/complaintprocess/complaintReject`, { params: { event_number: event_number, examine_textone: examine_textone } }).then(res => res).catch(err => err)
+  reject: async (event_number: any, examine_textone: any,handle_name:any,handle_phone:any) => {
+    return await service.get(`${baseUrl}api/complaintprocess/complaintReject`, { params: { event_number: event_number, examine_textone: examine_textone,handle_name:handle_name ,handle_phone:handle_phone} }).then(res => res).catch(err => err)
   },
   // 下发科室调查
   Issuedepartment: async (data: any) => {
@@ -263,6 +263,10 @@ export default {
   // 更改状态
   departstatus: async (data: object) => {
     return await service.post(`${baseUrl}api/Department/status`, data).then(res => res).catch(err => err)
+  },
+  //获取权限菜单
+  getmenus: async (data: Object) => {
+    return await service.post(`${baseUrl}api/Communal/get_menus`, data).then(res => res).catch(err => err)
   },
   //权限列表
   rulelist: async () => {

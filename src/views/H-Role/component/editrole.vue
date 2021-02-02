@@ -3,10 +3,9 @@
     <div class="roleaddThre">
       <span class="roleaddSpan">编辑角色信息</span>
       <div>
-        <el-button class="roleaddgr" size="medium" icon="iconfont el-icon-hospital-passwordbaocun" @click="roleaddvueyes">保存</el-button>
+        <el-button class="roleaddgr" icon="iconfont el-icon-hospital-passwordbaocun" @click="roleaddvueyes">保存</el-button>
         <el-button
           class="roleaddb"
-          size="medium"
           icon="iconfont el-icon-hospital-passwordai207"
           @click="roleaddvueno"
           >返回</el-button
