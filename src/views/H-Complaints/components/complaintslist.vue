@@ -9,7 +9,7 @@
         >
         </slot>
          <slot name="export">
-        <el-button icon="iconfont el-icon-hospital-passwordexport" class="exportcomplaint"
+        <el-button icon="iconfont el-icon-hospital-passwordexport" class="exportcomplaint"   @click="exportcom()"
           >导出</el-button
         >
         </slot>

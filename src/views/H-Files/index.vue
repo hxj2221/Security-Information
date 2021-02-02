@@ -355,7 +355,7 @@ export default {
         const a = document.createElement("a"); //创建a标签
         a.style.display = "none";
         a.href = "http://bt1.wlqqlp.com:8082/" + res.data.fileurl; // 指定下载链接
-        // a.download = "ds"; //指定下载文件名
+        a.download = "ds"; //指定下载文件名
         a.click(); //触发下载
         // URL.revokeObjectURL(a.href); //释放URL对象
         // const link = document.createElement("a"); // 生成一个a标签。

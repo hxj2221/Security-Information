@@ -3,8 +3,9 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
-
-
+import Print from 'vue-print-nb'
+import htmlToPdf from '@/network/htmlToPdf.js'
+Vue.use(htmlToPdf)
 // 引入样式
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -36,7 +37,7 @@ Vue.prototype.bus = bus
 
 import jsPlumb from 'jsplumb'
 Vue.prototype.$jsPlumb = jsPlumb.jsPlumb
-
+Vue.use(Print);
 Vue.use(ElementUI)
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false

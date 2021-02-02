@@ -40,6 +40,7 @@
           <el-col :span="6">
             <el-form-item label="上级科室">
               <el-select v-model="editdepartsel" placeholder="请选择" @change="departsel">
+                <el-option label="顶级科室" :value="0"></el-option>
                 <el-option v-for="item in options" :key="item.id" :label="item.title" :value="item.id">
                 </el-option>
               </el-select>
@@ -89,10 +90,12 @@
         this.departNameipt = newValue.data.info.title;
         this.valuestatus = newValue.data.info.status;
         this.departpxipt = newValue.data.info.sort;
-        this.id = newValue.data.info.id;
-        this.pid = newValue.data.info.pid;
+        // this.id = newValue.data.info.id;
+        // this.pid = newValue.data.info.pid;
         this.charge = newValue.data.userlist;
         this.ksnum = newValue.data.info.number;
+        this.editdepartsel=newValue.data.info.pid
+        this.editchargetsel=newValue.data.info.head_department
         //console.log(this.charge);
       },
     },
