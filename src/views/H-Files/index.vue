@@ -352,15 +352,6 @@ export default {
       };
       service.filedown(param).then((res) => {
         console.log(res);
-<<<<<<< HEAD
-        var filename = res.data.file_name;
-        console.log(filename);
-        const a = document.createElement("a"); //创建a标签
-        a.style.display = "none";
-        a.href = "http://bt1.wlqqlp.com:8082/" + res.data.fileurl; // 指定下载链接
-        a.download = "ds"; //指定下载文件名
-        a.click(); //触发下载
-=======
         // let url = window.URL.createObjectURL(new Blob([res]));
         // let link = document.createElement("a");
         // link.style.display = "none";
@@ -386,7 +377,6 @@ export default {
         // document.body.appendChild(a); //a标签插至页面中;
         // a.click(); //触发下载
 
->>>>>>> 9e0afb894141bbc5e0e1ce6f50738ec36f19be9b
         // URL.revokeObjectURL(a.href); //释放URL对象
         // const link = document.createElement("a"); // 生成一个a标签。
         // link.download = "res.data.file_name"; // dowload属性指定文件名
