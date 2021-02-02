@@ -6,9 +6,13 @@
         <h6>医患沟通记录</h6>
       </div>
       <div class="connent_top_right">
-        <el-button type="primary" icon="el-icon-circle-plus" @click="addRecord()">新增
+        <el-button type="primary" size="medium" icon="el-icon-circle-plus" @click="addRecord()">新增
         </el-button>
+<<<<<<< HEAD
         <el-button type="primary" icon="iconfont el-icon-hospital-passwordexport" @click="exportcom">导出</el-button>
+=======
+        <el-button type="primary" size="medium" icon="iconfont el-icon-hospital-passwordexport">导出</el-button>
+>>>>>>> 9e0afb894141bbc5e0e1ce6f50738ec36f19be9b
       </div>
     </div>
     <hr class="connent_hr" />
@@ -31,7 +35,7 @@
         <el-table :data="tableData" max-height="545" :header-cell-style="getRowClass">
           <el-table-column label="序号" type="index" width="50"> </el-table-column>
 
-          <el-table-column label="记录编号" prop="number"> </el-table-column>
+          <el-table-column label="记录编号" prop="number" width="150"> </el-table-column>
 
           <el-table-column label="患者姓名" prop="patient_name">
           </el-table-column>

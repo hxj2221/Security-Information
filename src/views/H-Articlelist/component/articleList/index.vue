@@ -6,7 +6,7 @@
         <h5>文章列表</h5>
       </div>
       <div class="articleList_top_right">
-        <el-button type="primary" icon="el-icon-circle-plus" @click="myAdd"
+        <el-button type="primary" size="medium" icon="el-icon-circle-plus" @click="myAdd"
           >添加文章</el-button
         >
       </div>
@@ -25,6 +25,18 @@
           <el-button slot="append" icon="el-icon-search"></el-button>
         </el-input>
       </div>
+      <!-- 选择器 -->
+        <div class="articleList_table_table_select">
+          <el-select v-model="value5" placeholder="请选择" @change="dilog">
+            <el-option
+              v-for="item in name"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+        </div>
       <!-- 表格部分 -->
       <div class="articleList_table_table">
         <div style="min-height:590px">
@@ -63,18 +75,7 @@
             </template>
           </el-table-column>
         </el-table>
-        <!-- 选择器 -->
-        <div class="articleList_table_table_select">
-          <el-select v-model="value5" placeholder="请选择" @change="dilog">
-            <el-option
-              v-for="item in name"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            >
-            </el-option>
-          </el-select>
-        </div>
+        
         </div>
        
         <!-- 弹框 -->

@@ -52,8 +52,9 @@
 
 
 .addmain {
-    margin: 20px 60px;
-    margin-bottom: 20px;
+   
+    width: 95%;
+    margin: 20px auto;
 }
 
 .addmain .el-form-item .el-select{

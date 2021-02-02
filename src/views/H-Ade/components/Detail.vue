@@ -4,8 +4,8 @@
       <div class="top">
         <span class="left">投诉案件调查表</span>
         <div class="right">
-          <el-button type="primary" icon="iconfont el-icon-hospital-passworddayin" class="print">打印记录表</el-button>
-          <el-button type="primary" icon="iconfont el-icon-hospital-passwordai207" class="back" @click="back">返回
+          <el-button type="primary" size="medium" icon="iconfont el-icon-hospital-passworddayin" class="print">打印记录表</el-button>
+          <el-button type="primary" size="medium" icon="iconfont el-icon-hospital-passwordai207" class="back" @click="back">返回
           </el-button>
         </div>
       </div>
@@ -431,6 +431,7 @@
     created() {
       let that = this;
       this.bus.$on('detail', function (item) {
+        console.log(item)
         that.event_num = item.event_num //事件编号
         that.patient_name = item.patient_name; //患者姓名
         that.sex = item.sex; //性别
@@ -442,14 +443,14 @@
         that.admitting_diagnosis = item.admitting_diagnosis; //入院诊断
         that.bed_number = item.bed_number; //床号
         that.hospitalized_time = item.hospitalized_time; //入院日期
-        that.department_id = item.department_id; //科室
+        that.department_id = item.department.title; //科室
         that.stakeholder = item.stakeholder; //在场相关人员
         that.Indications_uid = item.Indications_uid; //主管医师
         that.nurse_uid = item.nurse_uid; //主管护士
         that.admission_id = item.admission_id; //住院号
         that.create_time = item.create_time; //不良报告时间
         that.occur_time = item.occur_time; //不良发生时间
-        that.occur_scene = item.department.title; //事发地点
+        that.occur_scene = item.occurscene.title; //事发地点
         that.event_type = item.eventtype.title; //不良类型
         that.create_uid = item.create_uid //上报人
       })

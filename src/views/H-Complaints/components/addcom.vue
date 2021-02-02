@@ -267,6 +267,7 @@
       <Conserve>
         <el-button
           type="primary"
+          size="medium"
           icon="iconfont el-icon-hospital-passwordbaocun"
           class="keep"
           slot="keep"
@@ -275,6 +276,7 @@
         >
         <el-button
           type="primary"
+          size="medium"
           icon="iconfont el-icon-hospital-passwordai207"
           class="return"
           style="border: 1px solid #949aef"

@@ -7,8 +7,8 @@
             <span>医院沟通记录</span>
           </div>
           <div class="lookForm_top_button_right">
-            <el-button type="primary" icon="iconfont el-icon-hospital-passworddayin">打印记录表</el-button>
-            <el-button type="primary" icon="iconfont el-icon-hospital-passwordai207" @click="upper">返回
+            <el-button type="primary" icon="iconfont el-icon-hospital-passworddayin" size="medium">打印记录表</el-button>
+            <el-button type="primary" icon="iconfont el-icon-hospital-passwordai207" size="medium" @click="upper">返回
             </el-button>
           </div>
         </div>
@@ -18,7 +18,9 @@
             <el-row type="flex" class="row-bg" justify="center">
               <el-col :span="6">
                 <div class="grid-content bg-purple">
-                  <span><span>医院名称：</span>{{connent.communication}}</span>
+                  <span
+                    ><span>医院名称：</span>{{ connent.communication }}</span
+                  >
                 </div>
               </el-col>
               <el-col :span="6">
@@ -26,8 +28,9 @@
               </el-col>
               <el-col :span="6">
                 <div class="grid-content bg-purple">
-                  <span><span>记录编号：</span>
-                    {{connent.number}}
+                  <span
+                    ><span>记录编号：</span>
+                    {{ connent.number }}
                   </span>
                 </div>
               </el-col>
@@ -35,8 +38,9 @@
             <el-row type="flex" class="row-bg" justify="center">
               <el-col :span="6">
                 <div class="grid-content bg-purple">
-                  <span><span>沟通日期：</span>
-                    {{ connent.communicate_time}}
+                  <span
+                    ><span>沟通日期：</span>
+                    {{ connent.communicate_time }}
                   </span>
                 </div>
               </el-col>
@@ -45,8 +49,9 @@
               </el-col>
               <el-col :span="6">
                 <div class="grid-content bg-purple">
-                  <span><span>沟通地点：</span>
-                    {{ connent.communication}}
+                  <span
+                    ><span>沟通地点：</span>
+                    {{ connent.communication }}
                   </span>
                 </div>
               </el-col>
@@ -54,8 +59,9 @@
             <el-row type="flex" class="row-bg" justify="center">
               <el-col :span="6">
                 <div class="grid-content bg-purple">
-                  <span><span>患者姓名：</span>
-                    {{connent.note_taker }}
+                  <span
+                    ><span>患者姓名：</span>
+                    {{ connent.note_taker }}
                   </span>
                 </div>
               </el-col>
@@ -63,8 +69,7 @@
                 <div class="grid-content bg-purple-light"></div>
               </el-col>
               <el-col :span="6">
-                <div class="grid-content bg-purple">
-                </div>
+                <div class="grid-content bg-purple"></div>
               </el-col>
             </el-row>
           </el-form>
@@ -99,7 +104,7 @@
             </el-col>
             <el-col :span="20">
               <div class="grid-content bg-purple-light">
-                <span class="value">{{hosp_name}}</span>
+                <span class="value">{{ hosp_name }}</span>
               </div>
             </el-col>
           </el-row>
@@ -111,7 +116,7 @@
             </el-col>
             <el-col :span="20">
               <div class="grid-content bg-purple-light">
-                <span class="value">{{patient_name}}</span>
+                <span class="value">{{ patient_name }}</span>
               </div>
             </el-col>
           </el-row>
@@ -123,7 +128,7 @@
             </el-col>
             <el-col :span="20">
               <div class="grid-content bg-purple-light">
-                <span class="value">{{communicate_time}}</span>
+                <span class="value">{{ communicate_time }}</span>
               </div>
             </el-col>
           </el-row>
@@ -135,7 +140,7 @@
             </el-col>
             <el-col :span="20">
               <div class="grid-content bg-purple-light">
-                <span class="value">{{communication}}</span>
+                <span class="value">{{ communication }}</span>
               </div>
             </el-col>
           </el-row>
@@ -147,7 +152,7 @@
             </el-col>
             <el-col :span="20">
               <div class="grid-content bg-purple-light">
-                <span class="value">{{record_of_communication}}</span>
+                <span class="value">{{ record_of_communication }}</span>
               </div>
             </el-col>
           </el-row>
@@ -160,6 +165,12 @@
           <h6>附件信息</h6>
         </div>
         <div class="lookForm_bottom_form">
+          <div class="lookForm_bottom_form_div" v-for="(item,i) in con" :key="i">
+            <span>{{item.file_name}}</span>
+            <span>查看</span>
+          </div>
+        </div>
+        <!-- <div class="lookForm_bottom_form">
           <el-row class="tab">
             <el-col :span="4">
               <div class="grid-content bg-purple">
@@ -224,55 +235,49 @@
               </div>
             </el-col>
           </el-row>
-          <!-- <table border="1" cellspacing="0">
-            <tr v-for="(item,i) in con" :key="i">
-              <th>{{item.file_name}}</th>
-              <td>查看</td>
-            </tr>
-          </table> -->
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
 </template>
 <script>
-  import "@/views/H-Connect/component/lookForm/css.css";
-  export default {
-    components: {},
-    props: {},
-    data() {
-      return {
-        connent: {},
-        // 沟通记录
-        communication: "",
-        hosp_name: "",
-        record_of_communication: "",
-        patient_name: "",
-        communicate_time: "",
-        //
-        con: [],
-      };
+import "@/views/H-Connect/component/lookForm/css.css";
+export default {
+  components: {},
+  props: {},
+  data() {
+    return {
+      connent: {},
+      // 沟通记录
+      communication: "",
+      hosp_name: "",
+      record_of_communication: "",
+      patient_name: "",
+      communicate_time: "",
+      //
+      con: [],
+    };
+  },
+  methods: {
+    upper() {
+      this.$emit("upper");
     },
-    methods: {
-      upper() {
-        this.$emit("upper");
-      },
-    },
-    created() {
-      this.bus.$on("details", (item) => {
-        console.log(item.info);
-        this.connent = item.data;
-        // 沟通记录
-        this.hosp_name = item.data.hosp_name;
-        this.patient_name = item.data.hosp_name;
-        this.communicate_time = item.data.communicate_time;
-        this.communication = item.data.communication;
-        this.record_of_communication = item.data.record_of_communication;
-        //
-        this.con = item.info;
-      });
-    },
-  };
+  },
+  created() {
+    this.bus.$on("details", (item) => {
+      console.log(item.info);
+      this.connent = item.data;
+      // 沟通记录
+      this.hosp_name = item.data.hosp_name;
+      this.patient_name = item.data.hosp_name;
+      this.communicate_time = item.data.communicate_time;
+      this.communication = item.data.communication;
+      this.record_of_communication = item.data.record_of_communication;
+      //
+      this.con = item.info;
+    });
+  },
+};
 </script>
 <style scoped>
 </style>

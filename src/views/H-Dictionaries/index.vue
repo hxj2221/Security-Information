@@ -7,7 +7,7 @@
           <li class="list" v-for="(item,index) in Nav" :key="item.index" v-bind:class="{bgColor:index==nowIndex}"
             @click="change(index)">{{item.name}}</li>
         </ul>
-        <el-button type="primary" icon="el-icon-circle-plus" @click="increase()">新增
+        <el-button type="primary" size="medium" icon="el-icon-circle-plus" @click="increase()">新增
         </el-button>
       </div>
       <!-- 内容 -->
@@ -110,6 +110,28 @@
         service.DicList(param).then(res => {
           // console.log(res)
           this.ade = res.data
+          // if (res.code == 20401) {
+          //   this.$message({
+          //     message: "请重新登陆",
+          //     type: "error",
+          //     duration: 1000,
+          //   });
+          //   this.$router.push('/login')
+          // } else if (res.code == 20403) {
+          //   this.$message({
+          //     message: res.msg,
+          //     type: "error",
+          //     duration: 1000,
+          //   });
+          //   this.$router.push('/dashboard')
+          // } else {
+          //   this.$message({
+          //     message: res.msg,
+          //     type: "error",
+          //     duration: 1000,
+          //   });
+          // }
+          
         })
       },
       // 患者信息
@@ -139,7 +161,7 @@
         }
         console.log(params)
         service.DicAdd(params).then(res => {
-          console.log(res)
+          // console.log(res)
           if (res.code == 20010) {
             this.reload();
             this.$message({
@@ -148,7 +170,7 @@
               duration: 1000,
             });
             this.dialogFormVisible = false
-          } else if (res.code == 20401) {
+          }else if (res.code == 20401) {
             this.$message({
               message: "请重新登陆",
               type: "error",

@@ -5,6 +5,7 @@
       <Complaintslist v-if="list">
         <el-button
           type="primary"
+          size="medium"
           icon="el-icon-circle-plus"
           class="addcomplaint"
           @click="addcomsss()"
@@ -12,6 +13,7 @@
           >新增</el-button
         >
         <el-button
+        size="medium"
           icon="iconfont el-icon-hospital-passwordexport"
           class="exportcomplaint"
           slot="export"
@@ -103,6 +105,7 @@
       
         <el-button
           type="primary"
+          size="medium"
           icon="iconfont el-icon-hospital-passwordai207"
           class="return"
           style="border: 1px solid #949aef"
@@ -112,7 +115,15 @@
         >
       </Look>
       <Operation v-if="operations==true" :operationdata="operationdata" :opdata="opdata" :filelist='filelisttrue'>
+<<<<<<< HEAD
       
+=======
+        <div slot="records">
+          <el-button type="primary"  icon="el-icon-edit" class="records" @click="records()"
+            >医患记录</el-button
+          >
+        </div>
+>>>>>>> 9e0afb894141bbc5e0e1ce6f50738ec36f19be9b
         <div slot="detail">
             <el-button
               type="primary"
@@ -125,6 +136,7 @@
           </div>
         <div slot="back">
           <el-button
+          size="medium"
             type="primary"
             icon="iconfont el-icon-hospital-passwordai207"
             class="return"

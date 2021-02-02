@@ -8,6 +8,7 @@
       <div>
         <el-button
           type="primary"
+          size="medium"
           class="staffgr"
           icon="iconfont el-icon-hospital-passwordbaocun"
           @click="staffaddvueyes"
@@ -16,6 +17,7 @@
 
         <el-button
           type="primary"
+          size="medium"
           class="staffback"
           icon="iconfont el-icon-hospital-passwordai207"
           @click="staffaddvueno"
@@ -324,9 +326,13 @@ export default {
   watch: {
     childed(res) {
       console.log(res);
+<<<<<<< HEAD
 
       console.log(res.address); //数据已经拿到
 
+=======
+      console.log(res.address); //数据已经拿到
+>>>>>>> 9e0afb894141bbc5e0e1ce6f50738ec36f19be9b
       this.id = res.id;
 
       this.addStaff.job_number = res.job_number;
@@ -360,9 +366,13 @@ export default {
       // this.addStaff.head_department = res.head_department;
 
       this.addStaff.position = res.position;
+<<<<<<< HEAD
 
       this.addStaff.auth_grouap = res.role_id;
 
+=======
+      this.addStaff.auth_grouap = res.role_id;
+>>>>>>> 9e0afb894141bbc5e0e1ce6f50738ec36f19be9b
       this.role_id = res.role_id;
 
       this.addStaff.status = res.status;

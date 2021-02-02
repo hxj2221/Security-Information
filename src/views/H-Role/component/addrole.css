@@ -13,7 +13,7 @@
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
 }
 
-.addrole .roleaddThre{
+.addrole .roleaddThre {
     display: flex;
     justify-content: space-between;
     height: 91px;
@@ -22,18 +22,21 @@
     padding: 0 30px;
     border-bottom: 2px solid #f2f2f2;
 }
-.addrole .roleaddThre .roleaddSpan{
+
+.addrole .roleaddThre .roleaddSpan {
     font-size: 24px;
     font-weight: normal;
     padding-left: 5px;
     border-left: 5px solid #666ee8;
 }
-.addrole .roleaddThre .roleaddgr{
+
+.addrole .roleaddThre .roleaddgr {
     background: #666ee8;
     border-color: #666ee8;
     color: #fff;
 }
-.addrole .roleaddThre .roleaddb{
+
+.addrole .roleaddThre .roleaddb {
     background: none;
     border-color: #666ee8;
     color: #666ee8;
@@ -76,10 +79,11 @@
     top: 67%
 }
 
-.role_div{
+.role_div {
     width: 19%;
     padding: 10px 0;
 }
+
 
 /*  */
 
@@ -131,11 +135,11 @@
 
 .H-edit {
     background-color: rgb(255, 255, 255);
-    width: 95%;
+    width: 100%;
     min-height: 150px;
     padding-top: 30px;
     border-radius: 5px;
-    box-shadow: 1px 0 10px rgb(204, 204, 204);
+    box-shadow: 1px 0 10px rgb(204 204 204);
     text-align: left;
     padding-bottom: 100px;
 }
@@ -160,7 +164,7 @@
 .H-edit .content .title {
     border-bottom: 1px solid #e0e0e0;
     background-color: #f8f8f8;
-    padding-left: 10px;
+    padding-left: 10px
 }
 
 .H-edit .content .power {
@@ -183,8 +187,33 @@
 }
 
 .H-edit .content .power .el-checkbox-group {
+    border-left: 1px solid #ccc;
     padding-left: 20px;
+    width: 75%;
+    display: flex;
+    flex-wrap: wrap;
 }
+
+.el-checkbox {
+    color: #606266;
+    width: 150px;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-right: 30px;
+}
+
+.el-checkbox,
+.el-checkbox__input {
+    display: inline-block;
+    position: relative;
+    white-space: nowrap;
+}
+
 
 /* .dialog-input-text .el-input__inner {
     -webkit-appearance: none;
@@ -204,4 +233,3 @@
     transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
     width: 100%;
 } */
-

@@ -5,9 +5,17 @@ import service from '@/service/index';
     <div class="head">
       <h4 class="title">编辑分类</h4>
       <div class="push_btn">
-        <el-button type="primary" class="newclassify" icon="el-icon-circle-plus" @click="dialogFormVisible = true" >新建分类
+        <el-button
+          type="primary"
+          size="medium"
+          class="newclassify"
+          icon="el-icon-circle-plus"
+          @click="dialogFormVisible = true"
+          >新建分类
         </el-button>
-        <el-button class="back" type="primary" size="default" @click="back">返回文件列表</el-button>
+        <el-button class="back" size="medium" type="primary" @click="back"
+          >返回文件列表</el-button
+        >
       </div>
     </div>
     <!-- 内容 -->
@@ -68,12 +76,12 @@ import service from '@/service/index';
       </div>
     </div>
     <!-- 分页 -->
-    <div class="pagenum">
+    <!-- <div class="pagenum">
      <el-pagination @size-change="handleSizeChange" @current-change="currentChage"
           :current-page="currentPage4" :page-sizes="pageNumList" :page-size="100"
           layout="total, sizes, prev, pager, next, jumper" :total="pageCount">
         </el-pagination>
-    </div>
+    </div> -->
     <!-- 新增分类 -->
     <el-dialog
       class="newlyClassify"
@@ -224,12 +232,11 @@ export default {
       edittitle: "",
       editweight: "",
       editid: "",
-      currentPage4:1,//分页
-      pageNumList:[8,10,20],//页数
-      pageCount:0,//总数量
-      pageSize:8,//默认条数
+      // currentPage4: 1, //分页
+      // pageNumList: [8, 10, 20], //页数
+      // pageCount: 0, //总数量
+      // pageSize: 8, //默认条数
     };
-    
   },
   created() {
     service.doclist().then((res) => {
@@ -238,10 +245,10 @@ export default {
     });
     service.docaddtree().then((res) => {
       console.log(res);
-      if(res.code==20010){
+      if (res.code == 20010) {
         this.editseldata = res.data;
       }
-       //else if (res.code == 20401) {
+      //else if (res.code == 20401) {
       //       this.$message({
       //         message: "请重新登陆",
       //         type: "error",
@@ -260,14 +267,14 @@ export default {
   },
   methods: {
     // 分页
-      // 每页显示条数
-      handleSizeChange(val){
-        console.log(val)
-      },
-      // 页面跳转
-      currentChage(val){
-        console.log(val)
-      },
+    // 每页显示条数
+    // handleSizeChange(val) {
+    //   console.log(val);
+    // },
+    // 页面跳转
+    // currentChage(val) {
+    //   console.log(val);
+    // },
     selchang() {
       console.log(this.editselvalue);
     },

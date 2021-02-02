@@ -6,6 +6,7 @@
       <div>
         <el-button
           type="primary"
+          size="medium"
           class="staffgr"
           icon="iconfont el-icon-hospital-passwordbaocun"
           @click="staffaddvueyes"
@@ -13,6 +14,7 @@
         </el-button>
         <el-button
           type="primary"
+          size="medium"
           class="staffback"
           icon="iconfont el-icon-hospital-passwordai207"
           @click="staffaddvueno"
@@ -113,7 +115,7 @@
                 ref="cascader"
                 :options="options"
                 v-model="addStaff.address"
-                :props='props'
+                :props="props"
                 @change="handleChange"
               >
               </el-cascader>
@@ -235,12 +237,12 @@ export default {
   data() {
     return {
       options: regionData,
-       props: {
-    value: 'id',//设置每个menu的ID值
-    label: 'name',//设置每个menu的name值
-    children: 'children',//子级
-    checkStrictly: true//遵守父子节点不互相关联--可以选择级联面板的任何一级
-  },
+      props: {
+        value: "id", //设置每个menu的ID值
+        label: "name", //设置每个menu的name值
+        children: "children", //子级
+        checkStrictly: true, //遵守父子节点不互相关联--可以选择级联面板的任何一级
+      },
       // props: {
       //   value: "id", //设置每个menu的ID值
       //   label: "name", //设置每个menu的name值
@@ -268,7 +270,7 @@ export default {
         password: "", //密码
         address: [], //地址
       },
-      department_id:'',
+      department_id: "",
       addressC: [],
       staffroleselC: [],
       department_id: "",
@@ -337,7 +339,6 @@ export default {
           setTimeout(() => {
             this.reload();
           }, 2000);
-          
         } else {
           this.$message({
             message: res.msg,
@@ -348,24 +349,24 @@ export default {
       });
     },
     // 返回
-    staffaddvueno(){
+    staffaddvueno() {
       this.$parent.fathstaffno();
     },
     handleChange(cityvalue) {
-       let options = this.options;
+      let options = this.options;
       let nameArray = [];
       for (let i = 0; i < id.length; i++) {
-        let index = options.findIndex(item => {
+        let index = options.findIndex((item) => {
           return item[this.props.value] == id[i];
         });
         nameArray.push(options[index][this.props.label]);
         if (i < id.length - 1 && options[index].children == undefined) {
-          let list = new Promise(resolve => {
-            this.props.lazyLoad(id[i], list => {
+          let list = new Promise((resolve) => {
+            this.props.lazyLoad(id[i], (list) => {
               resolve(list);
             });
           });
-          this.$set(options[index], "children",  list);
+          this.$set(options[index], "children", list);
           options = options[index].children;
         } else {
           options = options[index].children;

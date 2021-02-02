@@ -1,0 +1,122 @@
+.Basic_all {
+    width: 100%;
+    min-height: 680px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgb(184, 183, 183);
+    padding-bottom: 50px;
+    color: #606266;
+}
+
+/* 头部样式 */
+.Basic_top {
+    padding: 20px 15px;
+    overflow: hidden;
+}
+
+.Basic_top_left {
+    float: left;
+}
+
+.Basic_hr {
+    margin: 0 15px 20px;
+    font-weight: 400;
+    background-color: #e6e0e0;
+    border: none;
+    height: 2px;
+}
+
+/* 搜索部分 */
+
+.Basic_seach {
+    overflow: hidden;
+    margin: 15px 20px;
+}
+
+.Basic_seach_one {
+    float: left;
+}
+
+.Basic_seach_one>p {
+    font-size: 12px;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.Basic_seach_one>.el-input {
+    width: 300px;
+    margin-right: 30px;
+}
+
+.Basic_seach_two {
+    float: left;
+}
+
+.Basic_seach_two>p {
+    font-size: 12px;
+    display: inline-block;
+    margin-right: 15px;
+}
+.Basic_seach_two>.el-select{
+    margin-right:30px;
+}
+.Basic_seach>.el-button{
+    float: left;
+    border: 3px solid #666ee8;
+    background: #666ee8;
+}
+/* 图 */
+.Basic_screen{
+    margin-bottom: 20px;
+    margin: 0 20px;
+    margin-bottom: 20px;
+    /* background: #f00; */
+    overflow: hidden;
+    display: flex;
+    justify-content: space-around;
+}
+
+#main1{
+    width: 50%;
+    height: 450px;
+    background-color: #fff;
+    box-shadow: 0 0 2px rgb(184, 183, 183);
+    border-radius: 5px;
+    float: left;
+    margin: 10px;
+}
+#main2{
+    width: 45%;
+    height: 450px;
+    background-color: #fff;
+    box-shadow: 0 0 2px rgb(184, 183, 183);
+    border-radius: 5px;
+    float: right;
+    margin: 10px;
+}
+/* 表格 */
+.Basic_table{
+    margin-bottom: 35px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgb(184, 183, 183);
+    margin: 0 30px;
+    margin-bottom: 50px;
+}
+.Basic_table>.el-table th{
+    background-color: #c2c5f6;
+    color: #000;
+}
+.Basic_table .el-table td,
+.el-table th {
+    text-align: center;
+
+}
+.Basic_paging{
+    overflow: hidden;
+}
+.Basic_paging>.block{
+    float: right;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
