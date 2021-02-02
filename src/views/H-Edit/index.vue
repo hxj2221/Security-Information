@@ -33,13 +33,8 @@
           <el-table-column prop="level" label="等级" width="180">
           </el-table-column>
           <el-table-column label="左侧图标">
-<<<<<<< HEAD
-             <template slot-scope="scope">
-            <i  :class="scope.row.icon"></i>
-=======
             <template slot-scope="scope">
               <i :class="scope.row.icon"></i>
->>>>>>> 9e0afb894141bbc5e0e1ce6f50738ec36f19be9b
             </template>
           </el-table-column>
           <el-table-column prop="name" label="接口地址"></el-table-column>
