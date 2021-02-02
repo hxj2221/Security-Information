@@ -6,11 +6,7 @@
       <div class="btn">
         <el-button type="primary" size="medium" icon="el-icon-circle-plus" class="addAde" @click="Add()">新增
         </el-button>
-<<<<<<< HEAD
         <el-button type="primary" icon="iconfont el-icon-hospital-passwordexport" class="exportAde" @click="exportcom">导出</el-button>
-=======
-        <el-button type="primary" size="medium" icon="iconfont el-icon-hospital-passwordexport" class="exportAde">导出</el-button>
->>>>>>> 9e0afb894141bbc5e0e1ce6f50738ec36f19be9b
       </div>
     </div>
     <!-- 检索 -->
