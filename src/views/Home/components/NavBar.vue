@@ -17,7 +17,7 @@
           <span slot="title">{{item.title}}</span>
         </template>
         <template v-for="child in item._child">
-          <el-menu-item :index="child.url" :key="child.id" v-if="!child.hidden" :class="{subMenu: true}">
+          <el-menu-item :index="child.url" :key="child.id" :class="{subMenu: true}">
             <i :class="child.icon"></i>
             <span slot="title">{{child.title}}</span>
           </el-menu-item>
