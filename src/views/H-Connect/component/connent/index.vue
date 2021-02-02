@@ -11,7 +11,7 @@
         <el-button type="primary" size="medium" icon="iconfont el-icon-hospital-passwordexport" @click="exportcom">导出</el-button>
       </div>
     </div>
-    <hr class="connent_hr" />
+    <!-- <hr class="connent_hr" /> -->
     <!-- 表单部分 -->
     <div class="connent_Tableall">
       <!-- 表单搜素部分 -->
