@@ -19,7 +19,7 @@
         <el-button type="primary" icon="el-icon-search"></el-button>
       </div>
     </div>
-    <hr class="Statistics_hr" />
+    <!-- <hr class="Statistics_hr" /> -->
     <!-- 筛选部分 -->
     <div class="Statistics_screen">
       <div class="Statistics_screen_one">

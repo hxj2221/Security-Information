@@ -62,8 +62,8 @@ export default class NavBar extends Vue {
 
 <style scoped lang="less">
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 230px;
-  min-width: 200px;
+  width: 235px;
+  min-width: 235px;
   min-height: 400px;
   text-align: left;
   background: #001529;
