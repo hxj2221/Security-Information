@@ -567,8 +567,8 @@
     },
     mounted() {
       const bs = new BScroll('.wrapper', {
-        pullUpLoad: true,
-        pullDownRefresh: true,
+        // pullUpLoad: true,
+        // pullDownRefresh: true,
         probeType:3,
         mouseWheel: true
         

@@ -1,7 +1,9 @@
 import service from '@/service/index';
 <template>
   <div class="addAll">
-    <!-- 新增 -->
+    <div class="wrapper" ref="wrapper">
+      <div class="content">
+        <!-- 新增 -->
     <div class="formBasics">
       <h2>基本信息</h2>
       <el-form class="form_con" ref="addAde" :model="addAde">
@@ -224,6 +226,9 @@ import service from '@/service/index';
         <i class="el-icon-circle-plus-outline"><span>添加患者信息</span></i>
       </div>
     </div>
+      </div>
+    </div>
+    
     <!-- 底部按钮 -->
     <div class="root">
       <el-button type="primary" size="medium" class="AdeSure" icon="iconfont el-icon-hospital-passwordbaocun" @click="sure">提交
@@ -238,6 +243,7 @@ import service from '@/service/index';
 <script>
   import service from '@/service/index'
   import qs from 'qs'
+   import BScroll from 'better-scroll'
   export default {
     components: {},
     inject: ["reload"],
@@ -406,9 +412,24 @@ import service from '@/service/index';
         console.log(item)
         that.addAde.event_num = item
       })
+    },
+    mounted() {
+      const bs = new BScroll('.wrapper', {
+        // pullUpLoad: true,
+        // pullDownRefresh: true,
+        probeType:3,
+        mouseWheel: true
+        
+      })
     }
   }
 </script>
-<style>
-
+<style scoped>
+.wrapper{
+  height: 750px;
+  overflow: hidden;
+}
+.content{
+  padding-bottom: 100px;
+}
 </style>

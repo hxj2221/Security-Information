@@ -2,7 +2,7 @@ body{
   position: relative;
 }
 .conserve{
-  position: absolute;
+  /* position: absolute; */
   width: 100%;
   text-align: right;
   background-color: rgb(255, 255, 255);
