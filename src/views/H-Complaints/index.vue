@@ -115,15 +115,11 @@
         >
       </Look>
       <Operation v-if="operations==true" :operationdata="operationdata" :opdata="opdata" :filelist='filelisttrue'>
-<<<<<<< HEAD
-      
-=======
         <div slot="records">
           <el-button type="primary"  icon="el-icon-edit" class="records" @click="records()"
             >医患记录</el-button
           >
         </div>
->>>>>>> 9e0afb894141bbc5e0e1ce6f50738ec36f19be9b
         <div slot="detail">
             <el-button
               type="primary"
@@ -187,8 +183,8 @@ export default {
       operationdata: "",
       opdata: "", //操作详情
       lookdata: "", //详情数据
-      list: true,
-      add: false,
+      list: false,
+      add: true,
       look: false,
       dialogVisible: false, //弹窗显示
       agree: "",
