@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-.departalBg {
+ .H-Department .departalBg {
     width: 95%;
     margin: 0 auto;
     min-height: 100%;
@@ -13,7 +13,7 @@
     min-height: 805px;
 }
 
-.departheadThre {
+.H-Department .departheadThre {
     display: flex;
     font-size: 14px;
     color: #cccccc;
@@ -22,7 +22,7 @@
 }
 
 
-.departStaf {
+.H-Department .departStaf {
     border-left: 2px solid #ccc;
     border-top: 2px solid #ccc;
     border-bottom: 2px solid #ccc;
@@ -30,20 +30,20 @@
 }
 
 
-.departList {
+.H-Department .departList {
     border: 2px solid #ccc;
     border-radius: 5px;
 }
 
 
-.departRole {
+.H-Department .departRole {
     border-right: 2px solid #ccc;
     border-top: 2px solid #ccc;
     border-bottom: 2px solid #ccc;
     border-radius: 5px;
 }
 
-.departAdd {
+.H-Department .departAdd {
     color: #fff;
     background: #666ee8;
     border-radius: 5px;
@@ -53,7 +53,7 @@
 
 
 
-.departIptsech {
+.H-Department .departIptsech {
     /* float: left; */
     /* display: flex; */
     /* justify-content: center; */
@@ -61,22 +61,22 @@
     margin-bottom: 20px;
 }
 
-.departIptsech_div {
+.H-Department .departIptsech_div {
     width: 50%;
     text-align: left;
 }
 
-.departIptsech_div>.el-input {
+.H-Department .departIptsech_div>.el-input {
     margin-right: 10px;
 }
 
-.departTable .el-table tr,
+.H-Department > .departalBg > .departTable >.el-table tr,
 .el-table th,
 .el-table td {
     text-align: center !important;
 }
 
-.departtable {
+.H-Department .departtable {
     table-layout: fixed;
     /* margin: auto; */
     margin: 0 auto;
@@ -85,13 +85,13 @@
     width: 94%;
 }
 
-.departNameipt {
+.H-Department .departNameipt {
     width: 18vw;
     border-radius: 5px;
     margin-left: 4%;
 }
 
-.departNamesch {
+.H-Department .departNamesch {
     font-size: 14px;
     color: #fff;
     background-color: #666ee8;
@@ -100,34 +100,34 @@
     margin-top: 20px;
 }
 
-.departEdit {
+.H-Department .departEdit {
     color: #666ee8;
 }
 
-.departEdit span {
+.H-Department .departEdit span {
     margin-left: -30%;
 }
 
-.departDel span {
+.H-Department .departDel span {
     margin-left: -30%;
 }
 
-.departDel {
+.H-Department .departDel {
     color: #ff0000;
 }
 
-.el-table::before {
+.H-Department .el-table::before {
     height: 0px;
 }
 
-.departaddalBg {
+.H-Department .departaddalBg {
     background-color: #fff;
     height: 65%;
     margin-left: -20px;
     width: 81%;
 }
 
-.departaddThre {
+.H-Department .departaddThre {
     display: flex;
     justify-content: space-between;
     font-size: 14px;
@@ -135,26 +135,26 @@
    
 }
 
-.departaddSpan {
+.H-Department .departaddSpan {
     color: #000;
     font-size: 20px;
     font-weight: 700;
 }
 
 
-.departaddalBg>.departaddgr {
+.H-Department .departaddalBg>.departaddgr {
     border-radius: 5px;
     width: 92px;
     height: 40px;
 }
 
 
-.departaddb {
+.H-Department .departaddb {
     border-color: #666ee8;
     border-radius: 5px;
 }
 
-.departaddWidhr {
+.H-Department .departaddWidhr {
     margin-top: 15px;
     margin-bottom: 12px;
     background-color: #ccc;
@@ -162,32 +162,32 @@
     border: none;
 }
 
-.departaddF {
+.H-Department .departaddF {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     width: 100%;
 }
 
-.departaddFlex {
+.H-Department .departaddFlex {
     display: flex;
     flex-wrap: wrap;
     width: 270px;
     height: 100px
 }
 
-.departaddP {
+.H-Department .departaddP {
     font-size: 16px;
 }
 
-.departadda {
+.H-Department .departadda {
     width: 250px;
     border: 2px solid #ccc;
     border-radius: 5px;
     height: 40px;
 }
 
-.departaddFlex2 {
+.H-Department .departaddFlex2 {
     display: flex;
     flex-wrap: wrap;
     width: 270px;
@@ -197,12 +197,12 @@
 
 /* 分页 */
 
-.departpag {
+.H-Department .departpag {
     padding: 25px 25px;
     overflow: hidden;
 }
 
-.departpag>.block {
+.H-Department .departpag>.block {
     text-align: right;
 }
 

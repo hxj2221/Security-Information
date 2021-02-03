@@ -5,6 +5,7 @@
       <headpow></headpow>
       <div class="jurisdiction">
         <el-table
+         style="text-align: center "
           :data="tableData"
           :header-cell-style="getRowClass"
           max-height="625"
@@ -28,9 +29,9 @@
             prop="sort"
             label="排序"
           ></el-table-column>
-          <el-table-column prop="title" label="名称" width="180">
+          <el-table-column prop="title" label="名称" width="180" class="aa" style="text-align: left!important;">
           </el-table-column>
-          <el-table-column prop="level" label="等级" width="180">
+          <el-table-column prop="level" label="等级" width="180" >
           </el-table-column>
           <el-table-column label="左侧图标">
             <template slot-scope="scope">
@@ -132,8 +133,9 @@
               <el-form-item label="标题" width="150">
                 <el-input v-model="powlab" auto-complete="off"></el-input>
               </el-form-item>
-              <el-form-item label="图标" width="120">
-                <el-input v-model="powicon" auto-complete="off"></el-input>
+              <el-form-item label="图标" width="120" style="text-align:left">
+                <el-input v-model="powicon" auto-complete="off" ></el-input>
+                 <a href="https://element.eleme.cn/#/zh-CN/component/icon"  target="_blank" style="color: #666ee8;text-decoration: none;font-size:10px;">不了解？<span >点此查看图标库</span></a>
               </el-form-item>
               <el-form-item label="后端接口" width="120">
                 <el-input v-model="powaps" auto-complete="off"></el-input>
@@ -202,8 +204,9 @@
               <el-form-item label="标题" width="150" required>
                 <el-input v-model="editpowlab" auto-complete="off"></el-input>
               </el-form-item>
-              <el-form-item label="图标" width="120" required>
-                <el-input v-model="editpowicon" auto-complete="off"></el-input>
+              <el-form-item label="图标" width="120" required style="text-align:left">
+                <el-input v-model="editpowicon" auto-complete="off" ></el-input>
+                 <a href="https://element.eleme.cn/#/zh-CN/component/icon"  target="_blank" style="color: #666ee8;text-decoration: none;font-size:10px;">不了解？<span >点此查看图标库</span></a>
               </el-form-item>
               <el-form-item label="后端接口" width="120" required>
                 <el-input v-model="editpowaps" auto-complete="off"></el-input>
@@ -302,7 +305,7 @@ export default {
             type: "success",
             duration: 1000,
           });
-          this.reload();
+         this.$router.go(0)
         }
       });
     },
@@ -331,7 +334,7 @@ export default {
               message: res.msg,
               duration: 1000,
             });
-            this.reload();
+            this.$router.go(0)
           });
         })
         .catch(() => {
@@ -389,7 +392,7 @@ export default {
             duration: 2000,
           });
           setTimeout(() => {
-            this.reload();
+            this.$router.go(0)
           }, 1000);
         }
       });
@@ -445,14 +448,14 @@ export default {
             type: "success",
             duration: 1000,
           });
-          this.reload();
+           this.$router.go(0)
         } else {
           this.$message({
             message: res.msg,
             type: "error",
             duration: 1000,
           });
-          this.reload();
+          this.$router.go(0)
         }
       });
     },
@@ -522,9 +525,8 @@ export default {
               message: res.msg,
               duration: 1500,
             });
-            this.reload();
             setTimeout(() => {
-              this.reload();
+           this.$router.go(0)
             }, 2000);
           });
         })
@@ -535,7 +537,6 @@ export default {
             duration: 1300,
           });
         });
-      console.log(id);
     },
     // 表头颜色
     getRowClass({ rowIndex }) {

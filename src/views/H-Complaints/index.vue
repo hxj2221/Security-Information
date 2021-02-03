@@ -183,8 +183,8 @@ export default {
       operationdata: "",
       opdata: "", //操作详情
       lookdata: "", //详情数据
-      list: false,
-      add: true,
+      list: true,
+      add: false,
       look: false,
       dialogVisible: false, //弹窗显示
       agree: "",

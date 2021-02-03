@@ -2,33 +2,29 @@
   <div class="ctn">
     <!-- 头部 -->
     <div class="ctnHead">
-      <head-bar></head-bar> 
+      <head-bar :isCollapse='isCollapse'>
+         <div slot="fold" v-if="isCollapse==false">
+           <div class="headStartFold" @click="handleFold">
+             <i class="el-icon-s-fold"></i> 
+             </div>
+             </div>
+          <div slot="fold" v-else>
+            <div class="headStartFold" @click="handleFold">
+              <i class="el-icon-s-unfold"></i>
+              
+              
+              </div>
+              </div>
+        </head-bar> 
     </div>
 
     <!-- 内容主体 -->
     <div class="ctnBody">
       <!-- 侧边栏 -->
-      <nav-bar></nav-bar>
+      <nav-bar :isCollapse='isCollapse'></nav-bar>
       <!-- 内容 -->
       <div class="ctnBodyContent">
-        <!-- <div :class="['ctnBodyContentTitle', {'ctnBodyContentTitleFold': isFold}, 'easeInOut']">    
-          <el-breadcrumb separator="/" class="breadCrumb">
-            <el-breadcrumb-item><strong>{{$route.name}}</strong></el-breadcrumb-item>
-          </el-breadcrumb>   
-          <el-tag
-            id="routerTag"
-            :key="tag.path"
-            v-for="tag in dynamicTags"
-            closable
-            :disable-transitions="false"
-            style="cursor:pointer"
-            type='warning'
-            size="small"
-            @click="handleClick(tag)"
-            @close="handleClose(tag)">
-            {{tag.name}}
-          </el-tag>        
-        </div> -->
+        
         <!-- 该部分为主要数据展示 -->
         <div class="childContent">
           <router-view v-if="isRouterAlive"></router-view>
@@ -48,7 +44,6 @@ export default {
     HeadBar,
     NavBar
   },
-
   // 点击页面侧边栏实现重载页面（尽量减少这种写法，不利于后面项目维护）
   provide() {
     return {
@@ -71,11 +66,16 @@ export default {
 
   data() {
     return {
-      isRouterAlive: true
+      isRouterAlive: true,
+      isCollapse:false
     }
   },
 
   methods: {
+      handleFold(){
+      this.isCollapse=!this.isCollapse;
+    },
+  
     // 页面重载函数
     reload () {
       this.isRouterAlive = false
@@ -108,7 +108,7 @@ export default {
   overflow-x: auto;
   overflow-y: hidden;
   &Head {
-    height: 50px;
+    height: 60px;
   }
   &Body {
     flex: 1 0 auto;
