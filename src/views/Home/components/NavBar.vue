@@ -1,69 +1,86 @@
 <template>
   <!-- 导航栏 -->
+  
   <el-menu
     :default-active="$route.path"
     class="el-menu-vertical-demo"
-    @open="handleOpen"
-    @close="handleClose"
     @select="handleSelect"
     background-color="#001529"
     text-color="#CCCCCC"
     active-text-color="#0079fe"
     unique-opened
-    :collapse="isFold"
+    @open="handleOpen" 
+    @close="handleClose" 
+    :collapse="isCollapse"
     router>
-    <template v-for="(item, index) in $router.options.routes">
+    <template v-for="(item, index) in menus">
       <!-- 二级菜单渲染 -->
-      <el-submenu :index="index+''" v-if="!item.hidden && !item.leaf" :key="index">
+      <el-submenu :index="index+''" v-if="!item.hidden && !item.leaf" :key="index" >
         <template slot="title">
-          <i :class="item.iconCls"></i>
-          <span slot="title">{{item.name}}</span>
+          <i :class="item.icon"></i>
+          <span slot="title">{{item.title}}</span>
         </template>
-        <template v-for="child in item.children">
-          <el-menu-item :index="child.path" :key="child.path" v-if="!child.hidden" :class="{subMenu: true}">
-            <i :class="child.iconCls"></i>
-            <span slot="title">{{child.name}}</span>
+        <template v-for="child in item._child">
+          <el-menu-item :index="child.url" :key="child.id" :class="{subMenu: true}">
+            <i :class="child.icon"></i>
+            <span slot="title">{{child.title}}</span>
           </el-menu-item>
         </template>
       </el-submenu>
       <!-- 一级菜单渲染 -->
-      <el-menu-item v-if="!item.hidden && item.leaf && item.children.length>0" :index="item.children[0].path" :key="item.children[0].path">
-        <i :class="item.iconCls"></i>
-        <span slot="title">{{item.children[0].name}}</span>
+      <el-menu-item v-if="!item.hidden && item.leaf && item._child.length>0" :index="item._child[0].path" :key="item._child[0].path">
+        <i :class="item.icon"></i>
+        <span slot="title">{{item._child[0].name}}</span>
       </el-menu-item>
     </template>
+    
   </el-menu>
+
 </template>
 
-<script lang="ts">
-import { Component, Prop, Vue, Inject } from 'vue-property-decorator'
-import { State } from 'vuex-class'
-
-@Component
-export default class NavBar extends Vue {
-  @State(state => state.app.isFold) isFold!: boolean
-
-  @Inject()  reload // 注入重载的功能
-
-  public handleOpen() {
-
-  }
-
-  public handleClose() {
-
-  }
-
-  public handleSelect() {
+<script>
+import service from "@/service/index";
+export default {
+   inject: ["reload"],
+  Component:{},
+  data(){
+    return{
+      menus:[],
+    }
+  },
+  
+  props:{
+    isCollapse:Boolean
+  },
+  methods:{
+   handleSelect() {
     this.reload()  // 点击侧边栏页面重载
+  },
+   handleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleClose(key, keyPath) {
+        console.log(key, keyPath);
+      }
+  },
+  created(){
+    console.log(this.$router.options.routes)
+    service.getmenus().then(res=>{
+      console.log(res.data)
+      this.menus=res.data
+    })
   }
 }
-
+// @State(state => state.app.isFold) isFold!: boolean
 </script>
+  
+
+
 
 <style scoped lang="less">
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 230px;
-  min-width: 200px;
+  width: 235px;
+  min-width: 235px;
   min-height: 400px;
   text-align: left;
   background: #001529;
@@ -77,7 +94,7 @@ export default class NavBar extends Vue {
 .subMenu {
   background-color: #000c17 !important;
   &:hover {
-     background-color: #000c17 !important;
+     background-color: #024380 !important;
   }
 }
 

@@ -142,6 +142,7 @@
     <div class="person_button">
       <el-button
         type="primary"
+        size="medium"
         class="persongr"
         icon="iconfont el-icon-hospital-passwordbaocun"
         @click="personsave"
@@ -149,6 +150,7 @@
       </el-button>
       <el-button
         type="primary"
+        size="medium"
         class="personb"
         icon="iconfont el-icon-hospital-passwordai207"
         @click="personback"

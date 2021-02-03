@@ -14,6 +14,7 @@
                 type="primary"
                 icon="iconfont el-icon-hospital-passworddayin"
                 class="printing"
+               @click="stamp"
                 >打印调查表</el-button
               >
             </slot>
@@ -34,6 +35,7 @@
          <br/> <br/> <br/> <br/> <br/> <br/>
       </slot>
       <!-- 打印内容 -->
+      <div  id="aa">
       <slot name="content">
        
           <div class="look-content-title">
@@ -218,13 +220,13 @@
                     </div></el-col
                   >
                 </el-row>
-                <div
-                  style="
-                    border-bottom: 0.5px solid #797979;
-                    width: 100%;
-                    margin-bottom: 20px;
-                  "
-                ></div>
+               <div style="border-bottom: 0.5px solid #797979; width: 100%"></div>
+                  <div class="file clearfix" >
+                    <div v-for="itemsss in item.enclosure" :key="itemsss.file_name">
+                      <span class="filename">{{itemsss.file_name}}</span>
+                      <span class="filedetaile" @click="downfile(itemsss)"><a href="#" class="downfile" style="text-decoration: none;color: #6f77e9;">下载</a></span>
+                    </div>
+                  </div>
               </div>
             </div>
             </div>
@@ -362,7 +364,7 @@
                   <div class="file clearfix" v-if="items.enclosure" >
                     <div v-for="itemsss in items.enclosure" :key="itemsss.file_name">
                       <span class="filename">{{itemsss.file_name}}</span>
-                      <span class="filedetaile">查看</span>
+                      <span class="filedetaile" @click="downfile(itemsss)"><a href="#" class="downfile" style="text-decoration: none;color: #6f77e9;">下载</a></span>
                     </div>
                   </div>
                 </div>
@@ -686,7 +688,7 @@
                   <div class="file clearfix" v-if="itemssss.enclosure" >
                     <div v-for="itemsssss in itemssss.enclosure" :key="itemsssss.file_name">
                       <span class="filename">{{itemsssss.file_name}}</span>
-                      <span class="filedetaile">查看</span>
+                      <span class="filedetaile" @click="downfile(itemsssss)"><a href="#" class="downfile" style="text-decoration: none;color: #6f77e9;">下载</a></span>
                     </div>
                   </div>
                
@@ -968,11 +970,13 @@
           </div>
       
       </slot>
+       </div>
         </div>
     </div>
   </div>
 </template>
 <script>
+import service from "@/service/index";
 export default {
   props:{
     lookdata:''
@@ -983,7 +987,28 @@ export default {
      
     };
   },
-  methods: {},
+  methods: {
+    // 打印
+    stamp() {
+    this.getPdf('aa','投诉事件调查表')
+    },
+    downfile(index){
+      console.log(index)
+      let param = {
+        id: index.id,
+      };
+      service.filedown(param).then((res) => {
+        console.log(res);
+        var filename = res.data.file_name;
+        console.log(filename);
+        const a = document.createElement("a"); //创建a标签
+        a.style.display = "none";
+        a.href = "http://bt1.wlqqlp.com:8082/" + res.data.fileurl; // 指定下载链接
+        // a.download = "ds"; //指定下载文件名
+        a.click(); //触发下载
+    })
+    }
+  },
   created() {
  
   },

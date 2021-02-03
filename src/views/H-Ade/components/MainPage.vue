@@ -4,9 +4,9 @@
     <div class="header">
       <h4>不良事件</h4>
       <div class="btn">
-        <el-button type="primary" icon="el-icon-circle-plus" class="addAde" @click="Add()">新增
+        <el-button type="primary" size="medium" icon="el-icon-circle-plus" class="addAde" @click="Add()">新增
         </el-button>
-        <el-button type="primary" icon="iconfont el-icon-hospital-passwordexport" class="exportAde">导出</el-button>
+        <el-button type="primary" size="medium" icon="iconfont el-icon-hospital-passwordexport" class="exportAde" @click="exportcom">导出</el-button>
       </div>
     </div>
     <!-- 检索 -->
@@ -157,6 +157,58 @@
       },
     },
     methods: {
+      formatDate(date) {
+        var date = new Date(date)*1000;
+        return date;
+      },
+   initTime(t) {
+      let d=new Date(t).getTime(new Date(t));
+      let time= new Date(d + 8 * 3600 * 1000).toJSON().substr(0, 19).replace('T', ' ').replace(/\./g, '-');
+      return time;
+    },
+       // 导出事件
+    exportcom() {  
+      let dataA =this.tableData
+      console.log(this.tableData)
+      let dataB=new Array()
+      for(let i =0;i<dataA.length;i++){
+        dataA[i].occurscen=dataA[i].occurscene.title
+           dataA[i].degreeweigh=dataA[i].degreeweight.title
+            dataA[i].departmen=dataA[i].department.title
+            let data=this.formatDate(dataA[i].occur_time)
+              dataA[i].occur_tim=this.initTime(data)
+              dataB.push(dataA[i])
+      }
+      console.log(dataB)
+      //   dataA.forEach(element => {
+      //      element.occurscene=element.occurscene.title
+      //      element.degreeweight=element.degreeweight.title
+      //       element.department=element.department.title
+      //       let data=this.formatDate(element.occur_time)
+      //         element.occur_time=this.initTime(data)
+      // });
+      // console.log(dataA)
+      // console.log(this.tableData)
+      import('@/vendor/Export2Excel').then(excel => {
+      const tHeader = ['事件编号', '患者姓名', '性别', '年龄/岁','事发日期','发生场所','轻重程度','上报时间','患者科室','上报人' ]
+      const filterVal = ['event_num', 'patient_name', 'sex', 'age', 'occur_tim', 'occurscen', 'degreeweigh', 'create_time', 'departmen', 'create_uid' ]
+      const list = dataB
+      const data = this.formatJson(filterVal, list)
+      excel.export_json_to_excel({
+        header: tHeader,
+        data,
+        filename: '业务列表',
+        autoWidth: true,
+        bookType: 'xlsx'
+      })
+    })
+      
+    },
+   formatJson(filterVal, jsonData) {
+    return jsonData.map(v => filterVal.map(j => {
+      return v[j]
+    }))
+   },
       // 设置表头颜色
       getRowClass({
         rowIndex

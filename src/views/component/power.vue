@@ -7,7 +7,7 @@
         <li class="rolelist" @click="role">角色列表</li>
         <li class="editpowlist" @click="editpow">编辑权限</li>
       </ul>
-      <el-button type="primary" icon="el-icon-circle-plus" class="powerAdd" @click="staffadd">新增
+      <el-button type="primary" size="medium" icon="el-icon-circle-plus" class="powerAdd" @click="staffadd">新增
         </el-button>
     </div>
   </div>

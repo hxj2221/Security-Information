@@ -6,12 +6,14 @@
       <div>
         <el-button
           class="departaddgr"
+          size="medium"
           icon="iconfont el-icon-hospital-passwordbaocun"
           @click="departeditvueyes"
           >保存
         </el-button>
         <el-button
           class="departaddb"
+          size="medium"
           icon="iconfont el-icon-hospital-passwordai207"
           @click="departeditvueno"
           >返回

@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="H-Department">
+
+   
     <div class="departalBg" v-if="departvue">
       <!-- 头部 -->
       <headpow></headpow>
@@ -86,6 +89,7 @@
     <!-- 编辑 -->
     <editdep v-show="editdep" :editchild="departchildedit"></editdep>
   </div>
+ </div>
 </template>
 
 <script>

@@ -5,6 +5,7 @@
       <Complaintslist v-if="list">
         <el-button
           type="primary"
+          size="medium"
           icon="el-icon-circle-plus"
           class="addcomplaint"
           @click="addcomsss()"
@@ -12,6 +13,7 @@
           >新增</el-button
         >
         <el-button
+        size="medium"
           icon="iconfont el-icon-hospital-passwordexport"
           class="exportcomplaint"
           slot="export"
@@ -100,16 +102,10 @@
       </Addcom>
       <!-- 查看 -->
       <Look v-if="look==true" :lookdata="lookdata">
+      
         <el-button
           type="primary"
-          icon="el-icon-printer"
-          class="printing"
-          slot="stamp"
-          @click="stamp()"
-          >打印调查表</el-button
-        >
-        <el-button
-          type="primary"
+          size="medium"
           icon="iconfont el-icon-hospital-passwordai207"
           class="return"
           style="border: 1px solid #949aef"
@@ -120,7 +116,7 @@
       </Look>
       <Operation v-if="operations==true" :operationdata="operationdata" :opdata="opdata" :filelist='filelisttrue'>
         <div slot="records">
-          <el-button type="primary" icon="el-icon-edit" class="records" @click="records()"
+          <el-button type="primary"  icon="el-icon-edit" class="records" @click="records()"
             >医患记录</el-button
           >
         </div>
@@ -136,6 +132,7 @@
           </div>
         <div slot="back">
           <el-button
+          size="medium"
             type="primary"
             icon="iconfont el-icon-hospital-passwordai207"
             class="return"
@@ -145,7 +142,7 @@
           >
         </div>
          <div slot='drawerss'>
-            <el-drawer title="快捷查看" :visible.sync="drawer" :with-header="false" size="59%">
+            <el-drawer title=" " :visible.sync="drawer" :withHeader="false" size="60%">
         <ul
           class="infinite-list"
           style="overflow: auto; height: 870px; texr-aligin: center"
@@ -157,7 +154,7 @@
       </el-drawer>
       </div>
       </Operation>
-       <Edit v-if="editshows==true" :editdata='editdata'>
+       <Edit v-if="editshows==true" :editdata='editdata' :editdatas='editdatas'>
         <div slot="conserve"></div>
       </Edit>
     </div>
@@ -182,6 +179,7 @@ export default {
   data() {
     return {
       editdata:'',//修改页面数据
+       editdatas:'',//修改页面数据
       operationdata: "",
       opdata: "", //操作详情
       lookdata: "", //详情数据
@@ -201,11 +199,12 @@ export default {
   methods: {
     detail(){
       this.drawer = true
+      console.log(this.event_number)
        //详情数据接口
        let params = {
            event_number:this.event_number,
           };
-          service.componrdetaile(qs.stringify(params)).then((res) => {
+          service.componrdetaile(params).then((res) => {
           if(res.code==20010){
               this.lookdata = res.data;
           }
@@ -237,13 +236,28 @@ export default {
     // 操作页面
     handle(index) {
       console.log(index)
+      this.event_number=index.event_number
       if(index.state.state_val==-1){
-          this.list = false;
+       service.EditComponent(index.event_number).then((res) => {
+        console.log(res)
+        if (res.code == 20010) {
+            this.list = false;
           this.add = false;
           this.look = false;
           this.operations = false;
           this.editshows=true
           this.editdata=index
+         this.editdatas=res.data
+        } 
+        else{
+           this.$message({
+            message:res.msg,
+            type: "error",
+            duration: 2000,
+          })
+       
+        }
+      })
       }
       else if(index.state.state_val==-2){
         this.$message({
@@ -374,9 +388,31 @@ export default {
       this.operations = false;
     },
     // 导出事件
-    exportcom() {
-      console.log(2);
+    exportcom() {  
+      const dataB = JSON.parse(sessionStorage.getItem('tableData'))
+      dataB.forEach(element => {
+           element.complaint_type=element.complaint_type.title
+           element.state=element.state.title
+      });
+    import('@/vendor/Export2Excel').then(excel => {
+      const tHeader = ['事件编号', '投诉人姓名', '性别', '年龄/岁','手机号码','投诉科室','投诉方式','投诉时间','流转部门','事件状态' ]
+      const filterVal = ['event_number', 'complaint_name', 'sex', 'age', 'complaint_phone', 'department', 'complaint_type', 'create_time', 'pass_names', 'state' ]
+      const list = dataB
+      const data = this.formatJson(filterVal, list)
+      excel.export_json_to_excel({
+        header: tHeader,
+        data,
+        filename: '业务列表',
+        autoWidth: true,
+        bookType: 'xlsx'
+      })
+    })
     },
+   formatJson(filterVal, jsonData) {
+    return jsonData.map(v => filterVal.map(j => {
+      return v[j]
+    }))
+   },
      // 设置表头颜色
     getRowClass( rowIndex) {
       if (rowIndex == 0) {

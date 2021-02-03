@@ -4,12 +4,14 @@
 }
 
 .H-editAll {
-    width: 95%;
+    /* width: 95%; */
     margin: 0 auto;
     min-height: 805px;
     background: #fff;
     border-radius: 5px;
+    
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+    
 }
 
 .H-editAll .jurisdiction {
@@ -67,4 +69,12 @@
 
 .roleDel {
     color: #ff0000;
+}
+.el-table tr,
+.el-table th,
+.el-table td {
+    text-align: center ;
+}
+.el-table .aa {
+    text-align: left !important ;
 }

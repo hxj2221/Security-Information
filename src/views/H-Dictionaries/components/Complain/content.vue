@@ -3,7 +3,7 @@
     <div class="allManage_cont">
       <el-row type="flex" class="row-bg" justify="space-around">
         <!-- 侧边导航 -->
-        <el-col :span="4">
+        <el-col :span="5">
           <div class="grid-content bg-purple">
             <div class="left">
               <ul class="side_nav">
@@ -14,7 +14,7 @@
           </div>
         </el-col>
         <!-- 右边内容 -->
-        <el-col :span="18">
+        <el-col :span="19">
           <div class="grid-content bg-purple-light">
             <div class="right">
               <el-input placeholder="请输入内容" v-model="search" class="input-with-select search">

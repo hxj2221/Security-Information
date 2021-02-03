@@ -6,7 +6,7 @@
         <h5>文章列表</h5>
       </div>
       <div class="articleList_top_right">
-        <el-button type="primary" icon="el-icon-circle-plus" @click="myAdd"
+        <el-button type="primary" size="medium" icon="el-icon-circle-plus" @click="myAdd"
           >添加文章</el-button
         >
       </div>

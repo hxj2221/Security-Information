@@ -95,6 +95,7 @@
           </el-form-item>
           <el-form-item label="图标" width="120">
             <el-input v-model="powicon" auto-complete="off"></el-input>
+            <a href="https://element.eleme.cn/#/zh-CN/component/iconl"  target="_blank" >不了解？<span style="color: #36a9ff;">点此查看图标库</span></a>
           </el-form-item>
           <el-form-item label="后端接口" width="120">
             <el-input v-model="powaps" auto-complete="off"></el-input>

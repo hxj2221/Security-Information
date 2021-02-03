@@ -3,7 +3,7 @@
     <!-- 头部 -->
     <div class="category_top">
       <div class="category_top_left">
-        <h5>投诉类别与科室统计</h5>
+        <h6>投诉类别与科室统计</h6>
       </div>
       <!-- 头部下拉框 -->
       <div class="category_top_right">
@@ -16,10 +16,10 @@
           >
           </el-option>
         </el-select>
-        <el-button type="primary" size="small">查询</el-button>
+        <el-button type="primary" icon="el-icon-search"></el-button>
       </div>
     </div>
-    <hr class="category_hr" />
+    <!-- <hr class="category_hr" /> -->
     <!-- 选择筛选部分 -->
     <div class="category_screen">
       <!-- 筛选投诉类别 -->
@@ -49,6 +49,8 @@
       </div>
       <div class="category_screen_three">
         <el-select v-model="datthree" placeholder="请选择">
+          <el-option label="投诉日期" value=""></el-option>
+          
           <el-option
             v-for="item in date"
             :key="item.value"
@@ -73,12 +75,14 @@
           </el-date-picker>
         </div>
       </div>
-      <el-button type="primary" icon="el-icon-search"></el-button>
+      <el-button type="primary" icon="el-icon-search" 
+        ></el-button
+      >
     </div>
     <!-- 图部分 -->
     <div class="category_chart">
-      <div id="main1"></div>
-      <div id="main2"></div>
+      <div id="main1" class="main1"></div>
+      <div id="main2" class="main2"></div>
     </div>
     <!-- 统计表格部分 -->
     <div class="category_statistics">
@@ -86,8 +90,8 @@
         <h6>科室投诉类别统计</h6>
       </div>
       <div class="category_statistics_table">
-        <el-table :data="tableData" style="width: 100%">
-          <el-table-column prop="id" label="序号"> </el-table-column>
+        <el-table :data="tableData" max-height="440" style="width: 100%">
+          <el-table-column prop="id" label="序号" width="50"> </el-table-column>
           <el-table-column prop="name" label="科室名称"> </el-table-column>
           <el-table-column prop="service" label="服务态度"> </el-table-column>
           <el-table-column prop="patient" label="医患沟通"> </el-table-column>
@@ -186,18 +190,21 @@ export default {
       deptwo: "",
       // three
       date: [
+        // {
+        //   value: "选项1",
+        //   label: "投诉日期",
+        // },
         {
           value: "选项1",
-          label: "投诉日期",
-        },
-        {
-          value: "选项2",
           label: "事发日期",
         },
       ],
       datthree: "",
       // 日期
       pickerOptions: {
+        disabledDate(time) {
+            return time.getTime() > Date.now();
+          },
         shortcuts: [
           {
             text: "最近一周",
@@ -280,6 +287,7 @@ export default {
           reason: "12",
           other: "12",
         },
+        
       ],
       currentPage: 1,
       
@@ -322,7 +330,7 @@ export default {
             // color: '#c1dafc',
             // fontSize: '12'
           },
-          right: "40%",
+          right: "50%",
           top: "4%",
         },
         //控制x轴

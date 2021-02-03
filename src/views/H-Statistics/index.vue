@@ -19,7 +19,7 @@
         <el-button type="primary" icon="el-icon-search"></el-button>
       </div>
     </div>
-    <hr class="Statistics_hr" />
+    <!-- <hr class="Statistics_hr" /> -->
     <!-- 筛选部分 -->
     <div class="Statistics_screen">
       <div class="Statistics_screen_one">
@@ -32,32 +32,35 @@
     <div class="Statistics_chart">
       <div id="main1" style="margin: 0 auto"></div>
     </div>
-    <!-- 表格 -->
-    <div class="Statistics_table">
-      <el-table :data="tableData" style="width: 100%">
-        <el-table-column type="index" label="序号"> </el-table-column>
-        <el-table-column prop="name" label="姓名"> </el-table-column>
-        <el-table-column prop="date" label="日期"> </el-table-column>
-        <el-table-column prop="age" label="年龄"> </el-table-column>
-        <el-table-column prop="phone" label="联系方式"> </el-table-column>
-        <el-table-column prop="position" label="职称"> </el-table-column>
-        <el-table-column prop="positions" label="职务"> </el-table-column>
-        <el-table-column prop="number" label="被投诉次数"> </el-table-column>
-      </el-table>
-    </div>
-    <!-- 分页 -->
-    <div class="Statistics_paging">
-      <div class="block">
-        <el-pagination
-          :current-page="currentPage"
-          :page-sizes="[8, 10, 20]"
-          :page-size="8"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="tableData.length"
-        >
-        </el-pagination>
+    <div class="Statistics_content">
+      <!-- 表格 -->
+      <div class="Statistics_table">
+        <el-table :data="tableData" style="width: 100%">
+          <el-table-column type="index" label="序号"> </el-table-column>
+          <el-table-column prop="name" label="姓名"> </el-table-column>
+          <el-table-column prop="date" label="日期"> </el-table-column>
+          <el-table-column prop="age" label="年龄"> </el-table-column>
+          <el-table-column prop="phone" label="联系方式"> </el-table-column>
+          <el-table-column prop="position" label="职称"> </el-table-column>
+          <el-table-column prop="positions" label="职务"> </el-table-column>
+          <el-table-column prop="number" label="被投诉次数"> </el-table-column>
+        </el-table>
+      </div>
+      <!-- 分页 -->
+      <div class="Statistics_paging">
+        <div class="block">
+          <el-pagination
+            :current-page="currentPage"
+            :page-sizes="[8, 10, 20]"
+            :page-size="8"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="tableData.length"
+          >
+          </el-pagination>
+        </div>
       </div>
     </div>
+    
   </div>
 </template>
 
@@ -157,7 +160,7 @@ export default {
             // color: '#c1dafc',
             // fontSize: '12'
           },
-          right: "40%",
+          // right: "40%",
           top: "4%",
         },
         //控制x轴
