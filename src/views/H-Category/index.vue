@@ -81,8 +81,8 @@
     </div>
     <!-- 图部分 -->
     <div class="category_chart">
-      <div id="main1"></div>
-      <div id="main2"></div>
+      <div id="main1" class="main1"></div>
+      <div id="main2" class="main2"></div>
     </div>
     <!-- 统计表格部分 -->
     <div class="category_statistics">
@@ -330,7 +330,7 @@ export default {
             // color: '#c1dafc',
             // fontSize: '12'
           },
-          right: "40%",
+          right: "50%",
           top: "4%",
         },
         //控制x轴
