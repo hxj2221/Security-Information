@@ -8,6 +8,7 @@
       class="tinyEditor"
       :value="msg"
       :disabled="disabled"
+      @onClick="onClick"
     >
     </tinymce-editor>
     <!-- 功能按钮 -->
@@ -34,11 +35,10 @@ export default {
   },
   methods: {
     // 鼠标单击的事件
-    // onClick(e, editor) {
-    //   // console.log("Element clicked");
-    //   // console.log(e);
-    //   // console.log(editor);
-    // },
+    onClick(e) {
+      console.log(e);
+      this.$emit('onClick',e)
+    },
     // 清空内容
   },
 };

@@ -1,0 +1,144 @@
+.addArticle_all {
+    width: 95%;
+    background: #fff;
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+    padding-bottom: 50px;
+    margin: 0 auto;
+}
+
+
+/* top */
+
+.addArticle_top {
+    margin-bottom: 20px;
+}
+
+.addArticle_top_div {
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    height: 91px;
+    align-items: center;
+    background: #fff;
+    border-radius: 5px;
+    border-bottom: 1px solid #f2f2f2;
+    /* box-shadow: 0 0 3px rgb(184, 183, 183); */
+}
+
+.addArticle_top_div>h5 {
+    text-align: left;
+    font-size: 24px;
+    margin-left: 30px;
+    font-weight: normal;
+    border-left: 5px solid #666ee8;
+    padding-left: 5px;
+}
+
+
+/* 内容 */
+
+.addArticle_content {
+    margin: 0 20px;
+}
+
+.addArticle_content>.el-form {
+    overflow: hidden;
+}
+
+.addArticle_content>.el-form>.el-form-item {
+    overflow: hidden;
+}
+
+.addArticle_content>.el-form .el-form-item__label {
+    margin-right: 40px;
+}
+
+.addArticle_content {
+    padding-bottom: 100px;
+}
+
+.addArticle_content .el-input {
+    width: 30%;
+    text-align: left;
+    float: left;
+}
+
+.addArticle_content .el-textarea {
+    width: 50%;
+    float: left;
+}
+
+.addArticle_content .el-textarea .el-textarea__inner {
+    width: 100%;
+}
+
+.addArticle_content .el-cascader {
+    width: 30%;
+    float: left;
+}
+
+.addArticle_content .el-cascader>.el-input {
+    width: 100%;
+}
+
+.addArticle_content .el-textarea__inner {
+    width: 40%;
+}
+
+.addArticle_content .el-radio-group {
+    float: left;
+    line-height: 50px;
+}
+
+.addArticle_content .upload-demo {
+    float: left;
+}
+
+.addArticle_content>.el-form .el-button {
+    background: #fff;
+    color: #515A6E;
+    border-color: rgba(220, 222, 226, 1);
+}
+
+.addArticle_content .el-switch {
+    float: left;
+    display: block;
+    line-height: 40px;
+}
+
+
+/* 底部 */
+
+.addArticle_bottom {
+    width: 100%;
+    height: 40px;
+    bottom: 20px;
+    /* position: absolute; */
+    display: block;
+}
+
+.addArticle_bottom_stlye {
+    width: 79.7%;
+    height: 91px;
+    background: #fff;
+    box-shadow: 0px 5px 30px rgb(204 204 204);
+    position: fixed;
+    bottom: 0;
+    text-align: right;
+    line-height: 91px;
+}
+.addArticle_bottom_stlye>.el-button{
+    width: 92px;
+    height: 40px;
+}
+
+.addArticle_bottom_stlye>button:last-child {
+    border-color:#666ee8;
+    color: #666ee8;
+    background: none;
+    margin: 0 30px;
+}
+.addArticle_bottom_stlye>button:first-child {
+    background:#666ee8;
+    border-color:#666ee8;
+}

@@ -243,7 +243,7 @@ export default {
           id: 0,
           value: 0,
           pid: 0,
-          label: "默认值",
+          label: "默认为一级分类",
         };
         this.options.unshift(one);
       });
@@ -385,85 +385,7 @@ export default {
             duration: 1500,
           });
         });
-      // row[0]._child.map(res=>{
-      //   console.log(res)
-      // })
-      // console.log(val,row)
-      // this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-      //   confirmButtonText: "确定",
-      //   cancelButtonText: "取消",
-      //   type: "warning",
-      // })
-      //   .then(() => {
-      //     let params = {
-      //       id: val,
-      //     };
-      //     service.AriDel(params).then((res) => {
-      //       console.log(res)
-      //       this.$message({
-      //         type: "success",
-      //         message: "删除成功!",
-      //         delete: row.splice(val, 1),
-      //         duration: 1500,
-      //       });
-      //       this.reload();
-      //     });
-      //   })
-      //   .catch(() => {
-      //     this.$message({
-      //       type: "info",
-      //       message: "已取消删除",
-      //       duration: 1500,
-      //     });
-      //   });
-      // let params = {
-      //   id: index,
-      // };
-      // service.AriDel(params).then((res) => {
-      //   console.log(res);
-      //   this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-      //     confirmButtonText: "确定",
-      //     cancelButtonText: "取消",
-      //     type: "warning",
-      //   })
-      //     .then(() => {
-      //       if (res.code == 20010) {
-      //         this.$message({
-      //           type: "success",
-      //           message: "删除成功!",
-      //           delete: row.splice(index, 1),
-      //           duration: 1000,
-      //         });
-      //       }
-      //     })
-      //     .catch(() => {
-      //       this.$message({
-      //         type: "info",
-      //         message: "已取消删除",
-      //         duration: 1000,
-      //       });
-      //     });
-      // });
-      // this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-      //   confirmButtonText: "确定",
-      //   cancelButtonText: "取消",
-      //   type: "warning",
-      // })
-      //   .then(() => {
-      //     this.$message({
-      //       type: "success",
-      //       message: "删除成功!",
-      //       delete: row.splice(i, 1),
-      //       duration: 1000,
-      //     });
-      //   })
-      //   .catch(() => {
-      //     this.$message({
-      //       type: "info",
-      //       message: "已取消删除",
-      //       duration: 1000,
-      //     });
-      //   });
+     
     },
   },
   created() {

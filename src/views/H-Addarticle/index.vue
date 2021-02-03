@@ -15,36 +15,41 @@
         label-width="100px"
         class="demo-ruleForm"
       >
-        <el-form-item label="文章标题" prop="name">
-          <el-input v-model="ruleForm.name"></el-input>
+        <el-form-item label="文章标题">
+          <el-input v-model="ruleForm.title"></el-input>
         </el-form-item>
-        <el-form-item label="文章栏目" prop="region">
+        <el-form-item label="文章栏目">
           <el-cascader
-            v-model="ruleForm.value"
+            ref="unitAreacode"
             :options="rules.options"
             :props="{ expandTrigger: 'hover' }"
+            @change="handleChange"
           ></el-cascader>
         </el-form-item>
 
-        <el-form-item label="文章摘要" prop="desc">
+        <el-form-item label="文章摘要">
           <el-input
             type="textarea"
             :rows="5"
             v-model="ruleForm.abstract"
           ></el-input>
         </el-form-item>
-        <el-form-item label="文章详情" prop="desc">
+        <el-form-item label="文章详情">
           <!-- <el-input
             type="textarea"
             :rows="5"
             v-model="ruleForm.details"
           ></el-input> -->
-          <Tinymce></Tinymce>
+          <Tinymce @onClick="onClick"></Tinymce>
         </el-form-item>
         <el-form-item label="是否置顶" prop="resource">
-          <el-radio-group v-model="ruleForm.resource">
-            <el-radio label="是"></el-radio>
-            <el-radio label="否"></el-radio>
+          <el-radio-group v-model="ruleForm.elRadio">
+            <el-radio
+              v-for="(item, index) in elRadio"
+              :key="index"
+              :label="item.value"
+              >{{ item.label }}</el-radio
+            >
           </el-radio-group>
         </el-form-item>
         <el-form-item label="排序" prop="name">
@@ -56,9 +61,10 @@
         <el-form-item label="文章封面" prop="name">
           <el-upload
             class="upload-demo"
-            action=""
+            action="imgUrl"
             :on-preview="handlePreview"
             :on-remove="handleRemove"
+            :on-change="handleChange"
             :file-list="rules.fileList"
             list-type="picture"
           >
@@ -68,35 +74,12 @@
             </div>
           </el-upload>
         </el-form-item>
-        <el-form-item label="发布时间" required>
-          <el-date-picker
-            v-model="ruleForm.value1"
-            type="datetime"
-            placeholder="选择日期时间"
-          >
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="附件下载" prop="name">
-          <el-upload
-            class="upload-demo"
-            action=""
-            :on-preview="handlePreview"
-            :on-remove="handleRemove"
-            :before-remove="beforeRemove"
-            multiple
-            :limit="3"
-            :on-exceed="handleExceed"
-            :file-list="rules.fileList1"
-          >
-            <el-button size="small" type="primary">上传附件</el-button>
-            <div slot="tip" class="el-upload__tip">
-              只能上传jpg/png文件，且不超过500kb
-            </div>
-          </el-upload>
-        </el-form-item>
+
         <el-form-item label="是否可见" prop="delivery">
           <el-switch
             v-model="ruleForm.delivery"
+            :active-value="0"
+            :inactive-value="1"
             active-color="#13ce66"
             inactive-color="#ff4949"
           ></el-switch>
@@ -106,10 +89,18 @@
     <!-- 底部 -->
     <div class="addArticle_bottom">
       <div class="addArticle_bottom_stlye">
-        <el-button type="primary"  icon="iconfont el-icon-hospital-passwordbaocun" @click="mysubmit">确定
-      </el-button>
-      <el-button type="primary" icon="iconfont el-icon-hospital-passwordai207" @click="myreturn">返回
-      </el-button>        
+        <el-button
+          type="primary"
+          icon="iconfont el-icon-hospital-passwordbaocun"
+          @click="mysubmit"
+          >确定
+        </el-button>
+        <el-button
+          type="primary"
+          icon="iconfont el-icon-hospital-passwordai207"
+          @click="myreturn"
+          >返回
+        </el-button>
       </div>
     </div>
   </div>
@@ -125,308 +116,23 @@ export default {
   components: {
     Tinymce,
   },
-
   data() {
     return {
+      imgUrl: "http://bt1.wlqqlp.com:8082/api/article/article_eit",
+      // radio
+      elRadio: [
+        { label: "是", value: 1 },
+        { label: "否", value: 0 },
+      ],
+      id: "",
       ruleForm: {
-        name: "",
-        value1: "",
-        value: [],
-        abstract: "",
-        region: "",
-        details: "",
-        sort: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: "",
+        elRadio: 1,
       },
       rules: {
-        fileList1: [
-          {
-            name: "food.jpeg",
-            url: "",
-          },
-          {
-            name: "food2.jpeg",
-            url: "",
-          },
-        ],
-        fileList: [
-          {
-            name: "food.jpeg",
-            url:
-              "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100",
-          },
-        ],
-        options: [
-          {
-            value: "zhinan",
-            label: "指南",
-            children: [
-              {
-                value: "shejiyuanze",
-                label: "设计原则",
-                children: [
-                  {
-                    value: "yizhi",
-                    label: "一致",
-                  },
-                  {
-                    value: "fankui",
-                    label: "反馈",
-                  },
-                  {
-                    value: "xiaolv",
-                    label: "效率",
-                  },
-                  {
-                    value: "kekong",
-                    label: "可控",
-                  },
-                ],
-              },
-              {
-                value: "daohang",
-                label: "导航",
-                children: [
-                  {
-                    value: "cexiangdaohang",
-                    label: "侧向导航",
-                  },
-                  {
-                    value: "dingbudaohang",
-                    label: "顶部导航",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            value: "zujian",
-            label: "组件",
-            children: [
-              {
-                value: "basic",
-                label: "Basic",
-                children: [
-                  {
-                    value: "layout",
-                    label: "Layout 布局",
-                  },
-                  {
-                    value: "color",
-                    label: "Color 色彩",
-                  },
-                  {
-                    value: "typography",
-                    label: "Typography 字体",
-                  },
-                  {
-                    value: "icon",
-                    label: "Icon 图标",
-                  },
-                  {
-                    value: "button",
-                    label: "Button 按钮",
-                  },
-                ],
-              },
-              {
-                value: "form",
-                label: "Form",
-                children: [
-                  {
-                    value: "radio",
-                    label: "Radio 单选框",
-                  },
-                  {
-                    value: "checkbox",
-                    label: "Checkbox 多选框",
-                  },
-                  {
-                    value: "input",
-                    label: "Input 输入框",
-                  },
-                  {
-                    value: "input-number",
-                    label: "InputNumber 计数器",
-                  },
-                  {
-                    value: "select",
-                    label: "Select 选择器",
-                  },
-                  {
-                    value: "cascader",
-                    label: "Cascader 级联选择器",
-                  },
-                  {
-                    value: "switch",
-                    label: "Switch 开关",
-                  },
-                  {
-                    value: "slider",
-                    label: "Slider 滑块",
-                  },
-                  {
-                    value: "time-picker",
-                    label: "TimePicker 时间选择器",
-                  },
-                  {
-                    value: "date-picker",
-                    label: "DatePicker 日期选择器",
-                  },
-                  {
-                    value: "datetime-picker",
-                    label: "DateTimePicker 日期时间选择器",
-                  },
-                  {
-                    value: "upload",
-                    label: "Upload 上传",
-                  },
-                  {
-                    value: "rate",
-                    label: "Rate 评分",
-                  },
-                  {
-                    value: "form",
-                    label: "Form 表单",
-                  },
-                ],
-              },
-              {
-                value: "data",
-                label: "Data",
-                children: [
-                  {
-                    value: "table",
-                    label: "Table 表格",
-                  },
-                  {
-                    value: "tag",
-                    label: "Tag 标签",
-                  },
-                  {
-                    value: "progress",
-                    label: "Progress 进度条",
-                  },
-                  {
-                    value: "tree",
-                    label: "Tree 树形控件",
-                  },
-                  {
-                    value: "pagination",
-                    label: "Pagination 分页",
-                  },
-                  {
-                    value: "badge",
-                    label: "Badge 标记",
-                  },
-                ],
-              },
-              {
-                value: "notice",
-                label: "Notice",
-                children: [
-                  {
-                    value: "alert",
-                    label: "Alert 警告",
-                  },
-                  {
-                    value: "loading",
-                    label: "Loading 加载",
-                  },
-                  {
-                    value: "message",
-                    label: "Message 消息提示",
-                  },
-                  {
-                    value: "message-box",
-                    label: "MessageBox 弹框",
-                  },
-                  {
-                    value: "notification",
-                    label: "Notification 通知",
-                  },
-                ],
-              },
-              {
-                value: "navigation",
-                label: "Navigation",
-                children: [
-                  {
-                    value: "menu",
-                    label: "NavMenu 导航菜单",
-                  },
-                  {
-                    value: "tabs",
-                    label: "Tabs 标签页",
-                  },
-                  {
-                    value: "breadcrumb",
-                    label: "Breadcrumb 面包屑",
-                  },
-                  {
-                    value: "dropdown",
-                    label: "Dropdown 下拉菜单",
-                  },
-                  {
-                    value: "steps",
-                    label: "Steps 步骤条",
-                  },
-                ],
-              },
-              {
-                value: "others",
-                label: "Others",
-                children: [
-                  {
-                    value: "dialog",
-                    label: "Dialog 对话框",
-                  },
-                  {
-                    value: "tooltip",
-                    label: "Tooltip 文字提示",
-                  },
-                  {
-                    value: "popover",
-                    label: "Popover 弹出框",
-                  },
-                  {
-                    value: "card",
-                    label: "Card 卡片",
-                  },
-                  {
-                    value: "carousel",
-                    label: "Carousel 走马灯",
-                  },
-                  {
-                    value: "collapse",
-                    label: "Collapse 折叠面板",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            value: "ziyuan",
-            label: "资源",
-            children: [
-              {
-                value: "axure",
-                label: "Axure Components",
-              },
-              {
-                value: "sketch",
-                label: "Sketch Templates",
-              },
-              {
-                value: "jiaohu",
-                label: "组件交互文档",
-              },
-            ],
-          },
-        ],
+        options: [],
+
+        fileList: [],
+
         name: [
           { required: true, message: "请输入活动名称", trigger: "blur" },
           { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
@@ -465,13 +171,18 @@ export default {
       },
     };
   },
-
   methods: {
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
+    handleChange(e) {
+      console.log(e);
+      this.rules.fileList.push(e);
     },
-    handlePreview(file) {
-      console.log(file);
+    // 获取到文章详情的内容
+    onClick(e) {
+      this.ruleForm.details = e;
+    },
+    handleChange(val) {
+      console.log(val);
+      this.id = this.$refs["unitAreacode"].getCheckedNodes()[0].value.id;
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);
@@ -490,19 +201,70 @@ export default {
       return this.$confirm(`确定移除 ${file.name}？`);
     },
     myreturn() {
-      this.$router.go(-1);
+      this.$router.push("/Articlelist");
+      // this.$router.go(-1);
     },
     mysubmit() {
-      service.Arilist().then(res=>{
-        console.log(res)
-      })
+      let data = {
+        title: this.ruleForm.title, //标题
+        cid: this.id, //分类ID
+        abstract: this.ruleForm.abstract, //摘要
+        content: this.ruleForm.details, //详情
+        sort: this.ruleForm.sort, //排序
+        is_top: this.ruleForm.elRadio, //是否置顶
+        state: this.ruleForm.delivery, //状态
+        img_url: this.rules.fileList, //封面
+      };
+      console.log(data);
+      service.detailadd(data).then((res) => {
+        console.log(res);
+        if (res.code == 20010) {
+          this.$message({
+            type: "success",
+            message: res.msg,
+            duration: 1500,
+          });
+          this.$router.push('Articlelist')
+        } else {
+          this.$message({
+            type: "error",
+            message: res.msg,
+            duration: 1500,
+          });
+        }
+      });
     },
   },
-  created(){
-    service.AriList().then(res=>{
-      console.log(res)
-    })
-  }
+  created() {
+    service.detailAdd().then((res) => {
+      console.log(res.data);
+      let batchdata = res.data;
+      let dataValueBatch = (batchdata) =>
+        batchdata.map(({ id, title, pid, _child }) =>
+          _child
+            ? {
+                value: {
+                  id: id,
+                  value: id,
+                  pid: pid,
+                },
+                label: title,
+                children: dataValueBatch(_child),
+              }
+            : {
+                value: {
+                  id: id,
+                  value: id,
+                  pid: pid,
+                },
+                label: title,
+              }
+        );
+
+      this.rules.options = dataValueBatch(batchdata);
+      
+    });
+  },
 };
 </script>
 
