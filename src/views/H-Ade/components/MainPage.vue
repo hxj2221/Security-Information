@@ -91,6 +91,7 @@
 <script>
   import service from "@/service/index";
   import moment from 'moment'
+  import BScroll from 'better-scroll'
   export default {
     components: {},
     props: {},

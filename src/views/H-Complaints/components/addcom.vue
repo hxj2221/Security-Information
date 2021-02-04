@@ -1,8 +1,7 @@
 <template>
   <div>
-    <div class="addcom wrapper" ref="wrapper">
-      
-        <div class="content">
+    <div class="addcom">
+        <bscroll>
           <div class="addcom-top">
             <h4>基本信息</h4>
           </div>
@@ -201,7 +200,7 @@
               <el-button type="primary" icon="el-icon-circle-plus" class="addrelevance">添加患者信息</el-button>
             </div>
           </div>
-      </div>
+      </bscroll>
 
       <!-- 弹窗 -->
       <div class="requirement">
@@ -224,11 +223,12 @@
   // 获取列表
   import service from "@/service/index";
 
-  import BScroll from 'better-scroll'
+  import bscroll from '@/components/better-scroll/bscroll'
 
   export default {
     components: {
       Conserve,
+      bscroll
     },
     inject: ["reload"],
     data() {
@@ -565,23 +565,9 @@
 
 
     },
-    mounted() {
-      const bs = new BScroll('.wrapper', {
-        // pullUpLoad: true,
-        // pullDownRefresh: true,
-        probeType:3,
-        mouseWheel: true
-        
-      })
-    }
   };
 </script>
 
 <style scoped>
   @import "../css/addcom.css";
-
-  .wrapper {
-    height: 750px;
-    overflow: hidden;
-  }
 </style>
