@@ -469,7 +469,7 @@ export default {
             duration: 2000,
           });
           setTimeout(() => {
-            this.reload();
+            this.$router.go(0)
           }, 1000);
         }
       });

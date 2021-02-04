@@ -8,12 +8,14 @@
       <div class="connent_top_right">
         <el-button
           type="primary"
+          size="medium"
           icon="el-icon-circle-plus"
           @click="addRecord()"
           >新增
         </el-button>
         <el-button
           type="primary"
+          size="medium"
           icon="iconfont el-icon-hospital-passwordexport"
           >导出</el-button
         >
