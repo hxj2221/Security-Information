@@ -186,20 +186,15 @@ export default {
       this.ruleForm.details = e;
     },
     handleChange(val) {
-      console.log(val);
       this.id = this.$refs["unitAreacode"].getCheckedNodes()[0].value.id;
     },
     handleRemove(file, fileList) {
-      console.log(file, fileList);
     },
     handlePreview(file) {
-      console.log(file);
     },
     handleRemove(file, fileList) {
-      console.log(file, fileList);
     },
     handlePreview(file) {
-      console.log(file);
     },
     handleExceed(files, fileList) {
       this.$message.warning(
@@ -212,7 +207,6 @@ export default {
       return this.$confirm(`确定移除 ${file.name}？`);
     },
     myreturn() {
-      // this.$router.go(-1);
       this.$router.push('Articlelist')
     },
     mysubmit() {
@@ -227,7 +221,6 @@ export default {
         // img_url:this.ruleForm.img_url//封面
       };
       service.detailadd(data).then((res) => {
-        console.log(res);
         if (res.code == 20010) {
           this.$message({
             type: "success",
@@ -235,19 +228,12 @@ export default {
             duration: 1500,
           });
           this.$router.push('Articlelist')
-        } else {
-          this.$message({
-            type: "error",
-            message: res.msg,
-            duration: 1500,
-          });
-        }
+        } 
       });
     },
   },
   created() {
     this.bus.$on("ariEdit", (item) => {
-      console.log(item);
       this.ruleForm = item.info;
       this.ruleForm.elRadio=item.info.is_top
       this.parentVal=item.info.content

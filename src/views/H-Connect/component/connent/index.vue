@@ -205,7 +205,6 @@ export default {
               dataA[i].communicate_tim=this.initTime(data)
               dataB.push(dataA[i])
       }
-      console.log(dataB)
       import('@/vendor/Export2Excel').then(excel => {
       const tHeader = ['记录编号', '患者姓名', '主持人', '记录人','沟通日期','关联投诉编号','主要沟通事项']
       const filterVal = ['number', 'patient_name', 'hosp_name', 'note_taker', 'communicate_tim', 'event_number', 'record_of_communication']
@@ -238,7 +237,6 @@ export default {
       },
       // 时间戳转为日期格式
       getDate: function (row, column, cellValue, index) {
-        // console.log(new Date(cellValue * 1000))
         var date = new Date(cellValue * 1000);
         var y = date.getFullYear();
         var m = date.getMonth() + 1;
@@ -260,7 +258,6 @@ export default {
           id: row[val].id,
         };
         service.patientDel(params).then((res) => {
-          console.log(res)
           if (res.code == 20010) {
             this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
                 confirmButtonText: "确定",

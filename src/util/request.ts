@@ -8,7 +8,6 @@ export interface AjaxResponse {
   message: string;
   data: any
 }
-console.log(location)
 // baseURL根据实际进行定义
 const baseURL = 'http://bt1.wlqqlp.com:8082/';
 // 创建axios实例
@@ -48,38 +47,36 @@ service.interceptors.response.use((response: AxiosResponse) => {
     return { code: 100 }
   } else{
     let res = response.data;
-    console.log(res)
-    if(res.code==20401){
-      MessageBox.alert(res.msg, {
+    if(res.code==20010){
+       
+      }
+    else if(res.code==20401){
+    //token失效
+      MessageBox.alert('此账号已在其他网页登录，请重新登录', {
             confirmButtonText: '重新登录',
             type: 'warning'
           }).then(() => {
-           location.href="http://192.168.0.81:8080/"
-            // location.href('http://192.168.0.81:8081')
-            // 为了重新实例化vue-router对象 避免bug
+            sessionStorage.clear()
+            location.href="http://192.168.0.81:8080/"
           })
+     
     }
-    // if (response.data.token) {
-      
-    //   // sessionStorage.setItem('token', response.data.token)
-    // }
-    // if (code === -1) {
-    //   MessageBox.alert(msg, {
-    //     confirmButtonText: '重新登录',
-    //     type: 'warning'
-    //   }).then(() => {
-    //       sessionStorage.removeItem('token');
-    //       sessionStorage.removeItem('user');
-    //       location.reload() // 为了重新实例化vue-router对象 避免bug
-    //   })
-    //   return Promise.reject('error')
-    // } else if (code !== 0) {
-    //   Message({
-    //     message: msg || '服务器返回数据有误',
-    //     type: 'warning',
-    //     duration: 2 * 1000
-    //   });
-    // }   
+    else if(res.code==20403){
+       //无权限
+       Message({
+        message: '您没权限进行此操作',
+        type: 'warning',
+        duration: 3 * 1000
+      });
+     
+    }
+    else{
+      Message({
+        message:res.msg,
+        type: 'error',
+        duration: 3 * 1000
+      });
+    }
     return res
   }
 }, (err: any) => {

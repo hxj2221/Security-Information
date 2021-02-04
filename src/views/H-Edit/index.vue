@@ -270,22 +270,12 @@ export default {
   // 加载数据
   created() {
     service.rulelist().then((res) => {
-      console.log(res);
-      if (res.code == 20403) {
-        this.$message({
-          type: "error",
-          message: res.msg,
-          duration: 1000,
-        });
-        this.$router.push("/dashboard");
-      }
       this.tableData = res.data;
     });
   },
   methods: {
     // 编辑/添加权限下拉值
     selchang() {
-      console.log(this.editselvalue);
     },
     // 权限确认
     dialog() {
@@ -315,7 +305,6 @@ export default {
     },
     // switch开关
     changeSwitch(val, row, id) {
-      console.log(row.status);
       this.$confirm("此操作将修改状态, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -326,9 +315,7 @@ export default {
             id: id,
             status: row.status,
           };
-          console.log(data);
           service.powstatus(data).then((res) => {
-            console.log(res);
             this.$message({
               type: "success",
               message: res.msg,
@@ -353,12 +340,10 @@ export default {
     // 编辑
     handleEdit(id) {
       this.dialogedit = true;
-      console.log(id);
       let param = {
         id: id,
       };
       service.getpowid(param).then((res) => {
-        console.log(res.data);
         this.editseldata = res.data.lists;
         this.editselvalue = res.data.info.pid;
         this.editpowpx = res.data.info.sort;
@@ -382,9 +367,7 @@ export default {
         id: this.editid,
         url: this.editpowweb,
       };
-      console.log(data);
       service.editsavepower(data).then((res) => {
-        console.log(res);
         if (res.code == 20010) {
           this.$message({
             message: "保存成功！",
@@ -403,7 +386,6 @@ export default {
       this.dialogVisible = true;
       this.selvalue = "0";
       service.addpower().then((res) => {
-        console.log(res);
         this.seldata = res.data;
       });
     },
@@ -414,16 +396,13 @@ export default {
     // 添加下级
     handleClick(id) {
       this.dialogVisible = true;
-      console.log(id);
       let param = {
         id: id,
       };
       service.addpower().then((res) => {
-        console.log(res);
         this.seldata = res.data;
       });
       service.getpowid(param).then((res) => {
-        console.log(res.data);
         this.addsonseldata = res.data.lists;
         this.addsonselvalue = res.data.info.pid;
         this.selvalue = res.data.info.id;
@@ -449,25 +428,16 @@ export default {
             duration: 1000,
           });
            this.$router.go(0)
-        } else {
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.go(0)
         }
       });
     },
     // 编辑
     handleEdit(id) {
       this.dialogedit = true;
-      console.log(id);
       let param = {
         id: id,
       };
       service.getpowid(param).then((res) => {
-        console.log(res.data);
         this.editseldata = res.data.lists;
         this.editselvalue = res.data.info.pid;
         this.editpowpx = res.data.info.sort;
@@ -491,9 +461,7 @@ export default {
         id: this.editid,
         url: this.editpowweb,
       };
-      console.log(data);
       service.editsavepower(data).then((res) => {
-        console.log(res);
         if (res.code == 20010) {
           this.$message({
             message: "保存成功！",
@@ -517,9 +485,7 @@ export default {
           let data = {
             id: id,
           };
-          console.log(data);
           service.delpow(data).then((res) => {
-            console.log(res);
             this.$message({
               type: "success",
               message: res.msg,

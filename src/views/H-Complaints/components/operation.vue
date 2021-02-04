@@ -1187,27 +1187,7 @@ export default {
        this.fileList=res.data
      })
         }
-      } else if (res.code == 20401) {
-              this.$message({
-                message: "请重新登陆",
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push("/login");
-            } else if (res.code == 20403) {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push("/dashboard");
-            } else {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-            }
+      } 
        })
         }).catch(() => {
           this.$message({
@@ -1255,32 +1235,9 @@ export default {
                   this.file={}
            
      })
-        }
-         else if(res.code==20401){
-          this.$message({
-            message: "请重新登陆",
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/login')
-        }
-        else if(res.code==20403){
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        }
-         else{
-          this.$message({
-                  message: res.msg,
-                  type: "error",
-                  duration: 1000,
-                });
-        }
-      })
-        }
+    }
+    })
+  }
         //科室改进完成
         else{
           let params={
@@ -1312,29 +1269,6 @@ export default {
                service.truefilelist(params).then(res=>{
                  this.fileList=res.data
                })
-                  }
-         else if(res.code==20401){
-          this.$message({
-            message: "请重新登陆",
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/login')
-        }
-        else if(res.code==20403){
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        }
-         else{
-          this.$message({
-                  message:res.msg,
-                  type: "error",
-                  duration: 1000,
-                });
         }
       })
         }
@@ -1371,29 +1305,6 @@ export default {
      service.truefilelist(params).then(res=>{
        this.fileList=res.data
      })
-        }
-          else if(res.code==20401){
-          this.$message({
-            message: "请重新登陆",
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/login')
-        }
-        else if(res.code==20403){
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        }
-         else{
-          this.$message({
-                  message: res.msg,
-                  type: "error",
-                  duration: 1000,
-                });
         }
       })
        }
@@ -1453,7 +1364,6 @@ export default {
      },
     //下发
     issuesss() {
-     console.log(this.comde)
      if(this.comde !== "" && this.comde !== null && this.needtime !== ""){
        if(this.comde.length>3){
          this.$message({
@@ -1491,27 +1401,7 @@ export default {
                 duration: 1000,
               });
               this.reload();
-            } else if (res.code == 20401) {
-              this.$message({
-                message: "请重新登陆",
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push("/login");
-            } else if (res.code == 20403) {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push("/dashboard");
-            } else {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-            }
+            } 
           });
       } else if (this.checkstate == 11) {
           let one=new Array
@@ -1537,27 +1427,7 @@ export default {
                 duration: 1000,
               });
               this.reload();
-            } else if (res.code == 20401) {
-              this.$message({
-                message: "请重新登陆",
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push("/login");
-            } else if (res.code == 20403) {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push("/dashboard");
-            } else {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-            }
+            } 
           });
        
       }
@@ -1598,27 +1468,7 @@ export default {
               duration: 1000,
             });
             this.reload();
-          } else if (res.code == 20401) {
-            this.$message({
-              message: "请重新登陆",
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push("/login");
-          } else if (res.code == 20403) {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push("/dashboard");
-          } else {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-          }
+          } 
         });
       }else if (this.checkstate == 3) {
         //院内讨论
@@ -1653,27 +1503,7 @@ export default {
                 duration: 1000,
               });
               this.reload();
-            } else if (res.code == 20401) {
-              this.$message({
-                message: "请重新登陆",
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push("/login");
-            } else if (res.code == 20403) {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push("/dashboard");
-            } else {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-            }
+            } 
           });
         }
         else {
@@ -1690,30 +1520,13 @@ export default {
         examine_texttwo:this.management//管理措施
       }
          service.ImprovementEnd(params).then(res=>{
-        console.log(res)
-           if(res.code==20010){
+          if(res.code==20010){
           this.$message({
                   message: res.msg,
                   type: "success",
                   duration: 1000,
                 });
                      this.$router.go(0)
-        }
-          else if(res.code==20401){
-          this.$message({
-            message: "请重新登陆",
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/login')
-        }
-        else if(res.code==20403){
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
         }
          })
       } else if (this.checkstate == 4) {
@@ -1730,27 +1543,7 @@ export default {
               duration: 1000,
             });
             this.reload();
-          } else if (res.code == 20401) {
-            this.$message({
-              message: "请重新登陆",
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push("/login");
-          } else if (res.code == 20403) {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push("/dashboard");
-          } else {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-          }
+          } 
         });
       } else if (this.checkstate == 5) {
         //人民调解
@@ -1773,27 +1566,7 @@ export default {
               duration: 1000,
             });
             this.reload();
-          } else if (res.code == 20401) {
-            this.$message({
-              message: "请重新登陆",
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push("/login");
-          } else if (res.code == 20403) {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push("/dashboard");
-          } else {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-          }
+          } 
         });
         }
       
@@ -1820,27 +1593,7 @@ export default {
               duration: 1000,
             });
             this.reload();
-          } else if (res.code == 20401) {
-            this.$message({
-              message: "请重新登陆",
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push("/login");
-          } else if (res.code == 20403) {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push("/dashboard");
-          } else {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-          }
+          } 
         });
         }
        
@@ -1867,26 +1620,6 @@ export default {
               duration: 1000,
             });
             this.reload();
-          } else if (res.code == 20401) {
-            this.$message({
-              message: "请重新登陆",
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push("/login");
-          } else if (res.code == 20403) {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push("/dashboard");
-          } else {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
           }
         });
         }
@@ -1913,27 +1646,7 @@ export default {
               duration: 1000,
             });
             this.reload();
-          } else if (res.code == 20401) {
-            this.$message({
-              message: "请重新登陆",
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push("/login");
-          } else if (res.code == 20403) {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push("/dashboard");
-          } else {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-          }
+          } 
         });
         }
        
@@ -1960,27 +1673,7 @@ export default {
               duration: 1000,
             });
             this.reload();
-          } else if (res.code == 20401) {
-            this.$message({
-              message: "请重新登陆",
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push("/login");
-          } else if (res.code == 20403) {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push("/dashboard");
-          } else {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-          }
+          } 
         });
         }
        
@@ -2007,26 +1700,6 @@ export default {
               duration: 1000,
             });
             this.reload();
-          } else if (res.code == 20401) {
-            this.$message({
-              message: "请重新登陆",
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push("/login");
-          } else if (res.code == 20403) {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push("/dashboard");
-          } else {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
           }
         });
         }
@@ -2056,26 +1729,6 @@ export default {
               duration: 1000,
             });
             this.reload();
-          } else if (res.code == 20401) {
-            this.$message({
-              message: "请重新登陆",
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push("/login");
-          } else if (res.code == 20403) {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push("/dashboard");
-          } else {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
           }
         });
         }
@@ -2095,27 +1748,7 @@ export default {
                 duration: 1000,
               });
               this.reload();
-            } else if (res.code == 20401) {
-              this.$message({
-                message: "请重新登陆",
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push("/login");
-            } else if (res.code == 20403) {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push("/dashboard");
-            } else {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-            }
+            } 
           })
           .catch((err) => {
             this.$message({
@@ -2147,27 +1780,7 @@ export default {
               duration: 1000,
             });
             this.reload();
-          } else if (res.code == 20401) {
-            this.$message({
-              message: "请重新登陆",
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push("/login");
-          } else if (res.code == 20403) {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push("/dashboard");
-          } else {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-          }
+          } 
         });
         }
         
@@ -2214,27 +1827,7 @@ export default {
                 duration: 1000,
               });
               this.reload();
-            } else if (res.code == 20401) {
-              this.$message({
-                message: "请重新登陆",
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push("/login");
-            } else if (res.code == 20403) {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push("/dashboard");
-            } else {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-            }
+            } 
           });
         }
         else{
@@ -2267,30 +1860,9 @@ export default {
                 duration: 1000,
               });
               this.reload();
-            } else if (res.code == 20401) {
-              this.$message({
-                message: "请重新登陆",
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push("/login");
-            } else if (res.code == 20403) {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push("/dashboard");
-            } else {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
             }
           });
         }
-       
         }
     },
     // 驳回
@@ -2314,27 +1886,7 @@ export default {
                 duration: 1000,
               });
               this.reload();
-            } else if (res.code == 20401) {
-              this.$message({
-                message: "请重新登陆",
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push("/login");
-            } else if (res.code == 20403) {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push("/dashboard");
-            } else {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-            }
+            } 
           });
         }
        
@@ -2374,30 +1926,9 @@ export default {
             state:12
           }
          service.truefilelist(params).then(res=>{
-      
         if (res.code == 20010) {
               this.fileList=res.data
-            } else if (res.code == 20401) {
-              this.$message({
-                message: "请重新登陆",
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push("/login");
-            } else if (res.code == 20403) {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push("/dashboard");
-            } else {
-              this.$message({
-                message: '获取附件列表错误，请刷新重试',
-                type: "error",
-                duration: 1000,
-              });
-            }
+            } 
      })
       }
       else if(this.$parent.opdata[0].state.state_val==1){
@@ -2408,26 +1939,6 @@ export default {
      service.truefilelist(params).then(res=>{
       if (res.code == 20010) {
               this.fileList=res.data
-            } else if (res.code == 20401) {
-              this.$message({
-                message: "请重新登陆",
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push("/login");
-            } else if (res.code == 20403) {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push("/dashboard");
-            } else {
-              this.$message({
-                message: '获取附件列表错误，请刷新重试',
-                type: "error",
-                duration: 1000,
-              });
             }
      })
       }

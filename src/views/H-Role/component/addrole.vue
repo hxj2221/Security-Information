@@ -188,25 +188,20 @@ export default {
   },
   // 查看权限
   radiochange() {
-    console.log(this.radio);
   },
   watch: {
     listaddchild(res) {
-      console.log(res);
       this.powlist = res.data;
     },
   },
   methods: {
     checkchange() {
-      console.log(event.target.checked, this.checkList);
       if (event.target.checked == true) {
       }
     },
     vcheckchange() {
-      console.log(event.target.checked, this.vcheck);
     },
     fcheckchange() {
-      console.log(event.target.checked, this.fcheck);
     },
     //   保存
     roleaddvueyes() {
@@ -219,7 +214,6 @@ export default {
         data_rule: this.radio,
       };
       service.roleadd(data).then((res) => {
-        console.log(res);
         if (res.code == "20010") {
           const loading = this.$loading({
             lock: true,
@@ -237,14 +231,12 @@ export default {
     },
     // 查看权限
     radiochange() {
-      console.log(this.radio);
     },
     // 取消
     roleaddvueno() {
       this.$parent.fathroleno();
     },
     changesonc(e) {
-      console.log(e);
     },
   },
 };

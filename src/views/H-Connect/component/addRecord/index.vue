@@ -265,19 +265,16 @@
       addevent() {
         this.dialogTableVisible = true;
         service.Related().then((res) => {
-          console.log(res);
           this.gridData = res.event;
         });
       },
       // 弹框
       event() {
         //保存
-        console.log(this.val);
         let data = {
           event_number: this.val[0].event_number,
         };
         service.related(data).then((res) => {
-          console.log(res);
           this.tableData1 = res.event;
           this.tableData = res.recordEnclosure;
           this.event_number = res.event[0].event_number;
@@ -299,11 +296,6 @@
           selection.length = 1;
         }
       },
-      // handleSelectionChange(val,row) {
-      //   console.log(val,row);
-      //   this.radioSelected = val.name; //选中行的name
-      //   this.multipleSelection = val; //选中的一行数据
-      // },
       getFile(item) {
         this.file = item;
       },
@@ -318,9 +310,7 @@
         }
       },
       getFile(item) {
-        // console.log(item.file);
         this.file = item;
-        console.log(this.file);
       },
       // 编辑
       handleEdit(index, row) {},
@@ -348,13 +338,10 @@
       },
       // 分页
       handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
       },
       handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
       },
       handleSee(index, row) {
-        console.log(index, row);
       },
       // 返回
       mySubmit() {
@@ -373,7 +360,6 @@
           record_of_communication: this.form.record_of_communication,
         };
         service.patientAdd(data).then((res) => {
-          console.log(res);
           if (res.code == 20010) {
             const loading = this.$loading({
               lock: true,
@@ -401,9 +387,7 @@
         let params = {
           event_number: this.event_number,
         };
-        console.log(params);
         service.upLode(params).then((res) => {
-          console.log(res);
           this.dialogVisible = true;
         });
       },
@@ -438,7 +422,6 @@
       //上传附件 确定
       define() {
         this.getBase64(this.file.raw).then((res) => {
-          console.log(res)
           //接口参数
           let data = {
             event_number: this.event_number, //编号
@@ -446,9 +429,7 @@
             file_name: this.dialogForm.file_name,
             file_describe: this.dialogForm.file_describe,
           };
-          console.log(data)
           service.uplode(data).then((res) => {
-            console.log(res);
             if (res.code == 20010) {
               this.$message({
                 message: "上传附件成功",
@@ -456,27 +437,7 @@
                 duration: 1000,
               });
               this.dialogVisible = false
-            } else if (res.code == 20401) {
-              this.$message({
-                message: "请重新登陆",
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push("/login");
-            } else if (res.code == 20403) {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push("/dashboard");
-            } else {
-              this.$message({
-                message: "上传失败",
-                type: "error",
-                duration: 1000,
-              });
-            }
+            } 
           });
         });
       },
@@ -492,7 +453,6 @@
     },
     created() {
       this.bus.$on("selDep", (item) => {
-        console.log(item);
         this.form.number = item.number;
         this.depList = item.department;
         this.tableData1 = item.event;

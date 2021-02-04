@@ -191,13 +191,8 @@ export default {
   methods: {
     // 多选
     handleSelectionChange(val) {
-      console.log(val);
       val.forEach((e) => {
-        console.log(e.id);
         this.ids.push(e.id);
-        console.log(this.ids);
-        // console.log(this.ids.unshift(e))
-        // this.ids.unshift(e.id);
       });
     },
     // 搜索
@@ -207,13 +202,11 @@ export default {
         title: this.input3,
       };
       service.detailSeach(params).then((res) => {
-        console.log(res);
         this.tableData = res.data.lists;
       });
     },
     // 分页
     handleSizeChange(val) {
-      console.log(val + "每页多少条");
       this.num = val;
       let params = {
         pNum: this.num,
@@ -221,11 +214,9 @@ export default {
       };
       service.detailSeach(params).then((res) => {
         this.tableData = res.data.lists;
-        console.log(res);
       });
     },
     handleCurrentChange(val) {
-      console.log(val + "第几页");
       this.currentPage = val;
       let params = {
         pNum: this.num,
@@ -233,7 +224,6 @@ export default {
       };
       service.detailSeach(params).then((res) => {
         this.tableData = res.data.lists;
-        console.log(res);
       });
     },
     // 删除
@@ -247,7 +237,6 @@ export default {
           let params = {
             id: e.id,
           };
-          console.log(params);
           service.detailDel(params).then((res) => {
             this.$message({
               type: "success",
@@ -267,11 +256,9 @@ export default {
     },
     //级选择器
     handleChange(val) {
-      console.log(val);
       this.id = this.$refs["unitAreacode"].getCheckedNodes()[0].value.id;
     },
     handledig(val) {
-      console.log(val);
       this.cid = this.$refs["cascaderDig"].getCheckedNodes()[0].value.id;
     },
     //点击查看
@@ -280,7 +267,6 @@ export default {
         id: e.id,
       };
       service.detailinfo(params).then((res) => {
-        console.log(res);
         if (res.code == 20010) {
           this.$emit("myRe");
           this.bus.$emit("info", res.data);
@@ -289,12 +275,10 @@ export default {
     },
     // 编辑
     myEdit(e) {
-      console.log(e);
       let params = {
         id: e.id,
       };
       service.detailEdit(params).then((res) => {
-        console.log(res);
         // this.$emit("abcClick");
         this.$parent.abcClick();
         this.bus.$emit("ariEdit", res.data);
@@ -311,9 +295,7 @@ export default {
           cid: this.cid,
           ids: this.ids,
         };
-        console.log(data);
         service.detailalls(data).then((res) => {
-          console.log(res);
           if (res.code == 20010) {
             this.$message({
               type: "success",
@@ -321,21 +303,13 @@ export default {
               duration: 1500,
             });
             this.reload();
-          } else {
-            this.$message({
-              type: "error",
-              message: res.msg,
-              duration: 1500,
-            });
           }
         });
       } else {
         let params = {
           ids: this.ids,
         };
-        console.log(params);
         service.detailDels(params).then((res) => {
-          console.log(res);
           this.$message({
             type: "success",
             message: res.msg,
@@ -354,7 +328,6 @@ export default {
         .catch((_) => {});
     },
     dilog(e) {
-      console.log(this.ids);
       if (this.ids.length !== 0) {
         this.dialogVisible = !this.dialogVisible;
         if (e == 1) {
@@ -362,7 +335,6 @@ export default {
           this.dlog = this.name[0].label;
           this.isShow = false;
           service.detailAlls().then((res) => {
-            console.log(res);
             this.dialogVisible = !this.dialogVisible;
             let batchdata = res.data;
             let dataValueBatch = (batchdata) =>
@@ -394,7 +366,6 @@ export default {
           this.isShow = true;
         }
       } else {
-        console.log("空");
         this.$message({
           type: "error",
           message: "未选中内容",
@@ -409,9 +380,7 @@ export default {
       pNum: 8,
       p: 1,
     };
-    console.log(data);
     service.detailList(data).then((res) => {
-      console.log(res);
       this.tableData = res.data.lists;
       this.total = res.data.page.count;
       // 搜索下拉框内容

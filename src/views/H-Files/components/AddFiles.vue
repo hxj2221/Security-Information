@@ -240,43 +240,17 @@ export default {
   },
   created() {
     service.doclist().then((res) => {
-      console.log(res);
       this.tableData = res.data;
     });
     service.docaddtree().then((res) => {
-      console.log(res);
       if (res.code == 20010) {
         this.editseldata = res.data;
       }
-      //else if (res.code == 20401) {
-      //       this.$message({
-      //         message: "请重新登陆",
-      //         type: "error",
-      //         duration: 1000,
-      //       });
-      //       this.$router.push('/login')
-      //     } else if (res.code == 20403) {
-      //       this.$message({
-      //         message: res.msg,
-      //         type: "error",
-      //         duration: 1000,
-      //       });
-      //       this.$router.push('/dashboard')
-      //     }
+     
     });
   },
   methods: {
-    // 分页
-    // 每页显示条数
-    // handleSizeChange(val) {
-    //   console.log(val);
-    // },
-    // 页面跳转
-    // currentChage(val) {
-    //   console.log(val);
-    // },
     selchang() {
-      console.log(this.editselvalue);
     },
     dialogForm() {
       let data = {
@@ -285,24 +259,17 @@ export default {
         pid: this.editselvalue,
       };
       service.docadd(data).then((res) => {
-        console.log(res);
         if (res.code == "20010") {
           this.reload();
-        } else {
-          alert(res.msg);
-        }
+        } 
       });
     },
     changeSwitch(val, row, id) {
       let data = {
         id: id,
-        // status: row.status,
       };
-      console.log(data);
       service.docstatu(data).then((res) => {
-        console.log(res);
       });
-      console.log(row.status);
       if (row.status == 1) {
         this.$message({
           type: "success",
@@ -318,25 +285,20 @@ export default {
     },
     // 删除
     deleteRow(id) {
-      console.log(id);
       let data = {
         id: id,
       };
-      console.log(data);
       service.docdel(data).then((res) => {
-        console.log(res);
         this.reload();
       });
     },
     // 编辑
     handleClick(id) {
-      console.log(id);
       this.dialogVisible = !this.dialogVisible;
       let param = {
         id: id,
       };
       service.docedit(param).then((res) => {
-        console.log(res);
         this.edittitle = res.data[0].class_name;
         this.editweight = res.data[0].weight;
         this.editselvalue = res.data[0].pid;
@@ -351,7 +313,6 @@ export default {
         id: this.editid,
       };
       service.doceditsave(data).then((res) => {
-        console.log(res);
         if (res.code == "20010") {
           this.reload();
         }

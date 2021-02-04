@@ -389,7 +389,6 @@
             handle_name: this.agentname, //经办人姓名
             handle_phone: this.agentphone, //经办人手机号
           };
-          console.log(params)
           service.AddComponent(params).then((res) => {
             if (res.code == 20010) {
               this.$message({
@@ -398,27 +397,7 @@
                 duration: 1000,
               });
               this.reload()
-            } else if (res.code == 20401) {
-              this.$message({
-                message: "请重新登陆",
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push('/login')
-            } else if (res.code == 20403) {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push('/dashboard')
-            } else {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-            }
+            } 
 
           });
         } else if (this.address == "" || this.address == null) {
@@ -538,29 +517,6 @@
           this.relationlist = res.data.inpatient_relation; // 关系
           this.comdes = res.data.department; //投诉科室
         }
-        // else if(res.code==20401){
-        //   this.$message({
-        //     message: "请重新登陆",
-        //     type: "error",
-        //     duration: 1000,
-        //   });
-        //   this.$router.push('/login')
-        // }
-        // else if(res.code==20403){
-        //   this.$message({
-        //     message: res.msg,
-        //     type: "error",
-        //     duration: 1000,
-        //   });
-        //   this.$router.push('/dashboard')
-        // }
-        //    else{
-        //   this.$message({
-        //     message: res.msg,
-        //     type: "error",
-        //     duration: 1000,
-        //   });
-        // }
       })
 
 

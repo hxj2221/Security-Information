@@ -46,7 +46,6 @@ export default {
       this.$router.go(0)
     },
      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
       },
     handleFold(){
       this.isFold=!this.isFold;
@@ -55,14 +54,12 @@ export default {
       this.$router.push({ name: "login" });
     },
     toMine(){
-      console.log(1)
       this.$router.push('Personal')
     },
     newaa(){
       this.$router.push('Notify')
     },
     edit(){
-      console.log(1)
       this.$router.push('/Account')
     }
   }
