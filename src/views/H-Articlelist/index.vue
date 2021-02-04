@@ -1,32 +1,36 @@
 <template>
   <div>
-    <AList v-if="isshow" @myRe="myRe"></AList>
-    <Det v-else @returnAdd="returnAdd"></Det>
+    <AList v-show="isshow" @myRe="myRe"></AList>
+    <Det v-show="ishow" @returnAdd="returnAdd"></Det>
+    <AriEd v-show="showEdit"></AriEd>
   </div>
 </template>
-
 <script>
-// import AdminHead from './components/AdminHead'
 import AList from "@/views/H-Articlelist/component/articleList/index.vue";
 import Det from "@/views/H-Articlelist/component/details/index.vue";
-export default {
-  components: {
-    AList,
-    Det,
-  },
+import AriEd from "@/views/H-Articlelist/component/ariEdit/index.vue";
 
+export default {
+  components: { AList, Det, AriEd },
   data() {
     return {
       isshow: true,
+      ishow: false,
+      showEdit: false, //编辑
     };
   },
-
   methods: {
     myRe() {
       this.isshow = !this.isshow;
+      this.ishow = !this.ishow;
     },
     returnAdd() {
       this.isshow = !this.isshow;
+      this.ishow = !this.ishow;
+    },
+    abcClick() {
+      this.isshow = !this.isshow;
+      this.showEdit = !this.showEdit;
     },
   },
 };

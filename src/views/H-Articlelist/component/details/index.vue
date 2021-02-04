@@ -6,19 +6,32 @@
         <h5>文章详情</h5>
       </div>
       <div class="details_top_right">
+<<<<<<< HEAD
+        <el-button
+          type="primary"
+          style="border-color: #666ee8; background: none; color: #666ee8"
+          icon="iconfont el-icon-hospital-passwordai207"
+          @click="myreturn"
+          >返回
+        </el-button>
+=======
         <el-button type="primary" size="medium" style="border-color: #666ee8 ;background:none;color: #666ee8; " icon="iconfont el-icon-hospital-passwordai207" @click="myreturn">返回
           </el-button>
+>>>>>>> 3833de9f53eaadec27fddabc290a6de4d377e39f
       </div>
     </div>
     <!-- content -->
-    <div class="details_content">
-      <p>新闻标题</p>
-      <p><span>2020-12-25 17:33:06</span></p>
+    <div class="details_content" :model="content">
+      <p>{{ content.title }}</p>
       <p>
+        <span>{{ content.create_time }}</span>
+      </p>
+      <p>
+        {{ content.content }}
+        <!-- hufhahjfhjashfjkfhdsjkfhkjds hufhahjfhjashfjkfhdsjkfhkjds
         hufhahjfhjashfjkfhdsjkfhkjds hufhahjfhjashfjkfhdsjkfhkjds
         hufhahjfhjashfjkfhdsjkfhkjds hufhahjfhjashfjkfhdsjkfhkjds
-        hufhahjfhjashfjkfhdsjkfhkjds hufhahjfhjashfjkfhdsjkfhkjds
-        hufhahjfhjashfjkfhdsjkfhkjds hufhahjfhjashfjkfhdsjkfhkjds
+        hufhahjfhjashfjkfhdsjkfhkjds hufhahjfhjashfjkfhdsjkfhkjds -->
       </p>
     </div>
   </div>
@@ -30,12 +43,28 @@ export default {
   components: {},
   props: {},
   data() {
-    return {};
+    return {
+      content: {},
+    };
   },
   methods: {
-      myreturn(){
-          this.$emit('returnAdd')
-      }
+    myreturn() {
+      this.$emit("returnAdd");
+    },
+  },
+  created() {
+    // this.bus.$on("info", function (item) {
+    //   console.log(item)
+
+    //   this.content.title=item.title,
+    //   this.content.create_time=item.create_time,
+    //   this.content.content=item.content
+    // });
+
+    this.bus.$on("info", (item) => {
+      this.content = item;
+     this.content.content = item.content.replace(/<\/?.+?>/g, "");
+    });
   },
 };
 </script>
