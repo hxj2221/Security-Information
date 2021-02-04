@@ -7,14 +7,12 @@
         <div class="push_btn">
           <el-button
             type="primary"
-            size="medium"
             icon="el-icon-circle-plus"
             @click="uploadclassify()"
             >上传文件
           </el-button>
           <el-button
             type="primary"
-            size="medium"
             class="newflie"
             icon="el-icon-circle-plus"
             @click="newclassify()"
@@ -107,23 +105,27 @@
         </el-table>
       </div>
       <!-- 分页 -->
-        <div class="staffpag">
-          <div class="block">
-            <el-pagination
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              :current-page="currentPage"
-              :page-sizes="nums"
-              :page-size="num"
-              layout="total, sizes, prev, pager, next, jumper"
-              :total="total"
-            >
-            </el-pagination>
-          </div>
+      <div class="staffpag">
+        <div class="block">
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="nums"
+            :page-size="num"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total"
+          >
+          </el-pagination>
         </div>
+      </div>
     </div>
     <!-- 新增分类 -->
-    <add-files v-show="addIsShow" @newly="newclassify()"></add-files>
+    <add-files
+      v-show="addIsShow"
+      :newly="newfilelist"
+      @addfileback="newclassify()"
+    ></add-files>
     <!-- 上传 -->
     <el-dialog title="上传文件" :visible.sync="dialogVisible">
       <el-form label-width="100px" class="demo-ruleForm">
@@ -178,7 +180,7 @@
             <el-button slot="trigger" size="small" type="primary"
               >选取文件</el-button
             >
-            <div slot="tip">未知</div>
+            <div slot="tip" style="color: red">文件最大不能超过20MB</div>
           </el-upload>
         </el-form-item>
       </el-form>
@@ -223,6 +225,7 @@ export default {
       pageSize: 1, //每页显示多少数据
       nums: [8, 10, 20],
       num: 8,
+      newfilelist: [],
     };
   },
   created() {
@@ -232,9 +235,7 @@ export default {
       this.total = res.allNews;
     });
     let token = sessionStorage.getItem("token");
-    service.filetree().then((res) => {
-      this.editseldata = res.data;
-    });
+    console.log(token);
   },
   methods: {
     // 设置表头颜色
@@ -256,11 +257,14 @@ export default {
         this.total = res.allNews;
       });
     },
-    searchselchang() {
-    },
+    searchselchang() {},
     // 上传文件显示
     uploadclassify() {
       this.dialogVisible = true;
+      service.filetree().then((res) => {
+        console.log(res);
+        this.editseldata = res.data;
+      });
     },
     // 上传文件取消
     Close() {
@@ -315,8 +319,7 @@ export default {
         };
       });
     },
-    selchang() {
-    },
+    selchang() {},
     // 删除
     deleteRow(id) {
       let data = {
@@ -387,6 +390,10 @@ export default {
     newclassify() {
       this.filesIsShow = !this.filesIsShow;
       this.addIsShow = !this.addIsShow;
+      service.doclist().then((res) => {
+        console.log(res);
+        this.newfilelist = res.data;
+      });
     },
     // 分页
     handleSizeChange(val) {

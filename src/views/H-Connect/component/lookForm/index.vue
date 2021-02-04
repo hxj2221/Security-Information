@@ -244,6 +244,7 @@
 import "@/views/H-Connect/component/lookForm/css.css";
 export default {
   components: {},
+    inject: ["reload"],
   props: {},
   data() {
     return {
@@ -260,7 +261,8 @@ export default {
   },
   methods: {
     upper() {
-      this.$emit("upper");
+      // this.$emit("upper");
+      this.reload()
     },
   },
   created() {

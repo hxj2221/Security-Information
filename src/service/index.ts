@@ -420,9 +420,13 @@ detailalls: async (data: any) => {
   seachpag: async (data: any) => {
     return await service.post(`${baseUrl}api/record/record`, data).then(res => res).catch(err => err)
   },
-  // 医患添加
+  // 医患删除
   patientDel: async (params: any) => {
     return await service.get(`${baseUrl}api/record/delrecord`, { params }).then(res => res).catch(err => err)
+  },
+   // 医患添加
+   patientadd: async (params: any) => {
+    return await service.get(`${baseUrl}api/record/addrecord`, { params }).then(res => res).catch(err => err)
   },
   // 医患添加
   patientAdd: async (data: any) => {

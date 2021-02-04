@@ -7,20 +7,19 @@ import service from '@/service/index';
       <div class="push_btn">
         <el-button
           type="primary"
-          size="medium"
           class="newclassify"
           icon="el-icon-circle-plus"
-          @click="dialogFormVisible = true"
+          @click="createdlist"
           >新建分类
         </el-button>
-        <el-button class="back" size="medium" type="primary" @click="back"
+        <el-button class="back" type="primary" size="default" @click="back"
           >返回文件列表</el-button
         >
       </div>
     </div>
     <!-- 内容 -->
     <div class="newlyContent">
-      <div class="TableContent" style="max-height:600px">
+      <div class="TableContent" style="max-height: 600px">
         <el-table
           max-height="600"
           :data="tableData"
@@ -214,7 +213,7 @@ import service from "@/service/index";
 export default {
   inject: ["reload"],
   components: {},
-  props: {},
+  props: ["newly"],
   data() {
     return {
       // 新增弹框
@@ -239,19 +238,52 @@ export default {
     };
   },
   created() {
-    service.doclist().then((res) => {
-      this.tableData = res.data;
-    });
-    service.docaddtree().then((res) => {
-      if (res.code == 20010) {
-        this.editseldata = res.data;
-      }
-     
-    });
+    // service.doclist().then((res) => {
+    //   console.log(res);
+    //   this.tableData = res.data;
+    // });
   },
-  methods: {
-    selchang() {
+  watch: {
+    newly(res) {
+      console.log(res);
+      this.tableData = res;
     },
+  },
+
+  methods: {
+    createdlist() {
+      this.dialogFormVisible = true;
+      service.docaddtree().then((res) => {
+        console.log(res);
+        if (res.code == 20010) {
+          this.editseldata = res.data;
+        } else if (res.code == 20401) {
+          this.$message({
+            message: "请重新登陆",
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push("/login");
+        } else if (res.code == 20403) {
+          this.$message({
+            message: res.msg,
+            type: "error",
+            duration: 1000,
+          });
+          this.$router.push("/dashboard");
+        }
+      });
+    },
+    // 分页
+    // 每页显示条数
+    // handleSizeChange(val) {
+    //   console.log(val);
+    // },
+    // 页面跳转
+    // currentChage(val) {
+    //   console.log(val);
+    // },
+    selchang() {},
     dialogForm() {
       let data = {
         class_name: this.form.title,
@@ -260,16 +292,26 @@ export default {
       };
       service.docadd(data).then((res) => {
         if (res.code == "20010") {
+          this.$message({
+            type: "success",
+            message: res.msg,
+            duration: 1300,
+          });
           this.reload();
-        } 
+        } else {
+          this.$message({
+            type: "error",
+            message: res.msg,
+            duration: 1300,
+          });
+        }
       });
     },
     changeSwitch(val, row, id) {
       let data = {
         id: id,
       };
-      service.docstatu(data).then((res) => {
-      });
+      service.docstatu(data).then((res) => {});
       if (row.status == 1) {
         this.$message({
           type: "success",
@@ -281,7 +323,7 @@ export default {
     },
     // 返回
     back() {
-      this.$emit("newly");
+      this.$emit("addfileback");
     },
     // 删除
     deleteRow(id) {

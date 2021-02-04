@@ -144,24 +144,9 @@ export default {
              
               } 
               else {
-                if(res.msg=='验证码不正确'){
-                   this.$message({
-                  message: res.msg,
-                  type: "error",
-                  duration: 1000,
-                });
-                this.logining = false;
-                }
-                else{
-                     this.$message({
-                  message: res.msg,
-                  type: "error",
-                  duration: 1000,
-                });
-                  this.logining = false;
+               this.logining = false;
                   this.reloadcode()
                   this.ruleForm.captcha=''
-                }
                
                 
               }
