@@ -211,11 +211,10 @@
     </div>
   </div>
 </template>
-
 <script>
-  var token = sessionStorage.getItem("token"); // 要保证取到
+ 
   // 引入css
-  import "@/views/H-Connect/component/addRecord/css.css";
+ import "@/views/H-Connect/component/addRecord/css.css";
   // 引用service
   import service from "@/service/index";
 
@@ -225,12 +224,12 @@
     inject: ["reload"],
     props: {},
     data() {
+       var token = sessionStorage.getItem("token"); // 要保证取到
       return {
         val: {},
         event_number: "",
         gridData: [],
         dialogTableVisible: false,
-
         imgUrl: "http://bt1.wlqqlp.com:8082/api/record/event_base64_uploadfiles",
         myHeaders: {
           Authorization: token,
@@ -452,11 +451,11 @@
       },
     },
     created() {
-      this.bus.$on("selDep", (item) => {
-        this.form.number = item.number;
-        this.depList = item.department;
-        this.tableData1 = item.event;
-      });
+      // this.bus.$on("selDep", (item) => {
+      //   this.form.number = item.number;
+      //   this.depList = item.department;
+      //   this.tableData1 = item.event;
+      // });
     },
     mounted() {
       const bs = new BScroll('.wrapper', {
@@ -476,4 +475,5 @@
 .content{
   padding-bottom: 100px;
 }
+
 </style>

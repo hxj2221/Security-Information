@@ -186,8 +186,16 @@ export default {
       num: 8,
     };
   },
-    methods: {
-        formatDate(date) {
+  methods: {
+    // 设置表头颜色
+    getRowClass({ rowIndex }) {
+      if (rowIndex == 0) {
+        return "background:#c2c5f6;color:#000";
+      } else {
+        return "";
+      }
+    },
+    formatDate(date) {
         var date = new Date(date)*1000;
         return date;
       },
@@ -205,6 +213,7 @@ export default {
               dataA[i].communicate_tim=this.initTime(data)
               dataB.push(dataA[i])
       }
+      console.log(dataB)
       import('@/vendor/Export2Excel').then(excel => {
       const tHeader = ['记录编号', '患者姓名', '主持人', '记录人','沟通日期','关联投诉编号','主要沟通事项']
       const filterVal = ['number', 'patient_name', 'hosp_name', 'note_taker', 'communicate_tim', 'event_number', 'record_of_communication']
@@ -225,18 +234,9 @@ export default {
       return v[j]
     }))
    },
-      // 设置表头颜色
-      getRowClass({
-        rowIndex
-      }) {
-        if (rowIndex == 0) {
-          return "background:#c2c5f6;color:#000";
-        } else {
-          return "";
-        }
-      },
       // 时间戳转为日期格式
       getDate: function (row, column, cellValue, index) {
+        // console.log(new Date(cellValue * 1000))
         var date = new Date(cellValue * 1000);
         var y = date.getFullYear();
         var m = date.getMonth() + 1;
@@ -258,6 +258,7 @@ export default {
           id: row[val].id,
         };
         service.patientDel(params).then((res) => {
+          console.log(res)
           if (res.code == 20010) {
             this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
                 confirmButtonText: "确定",
@@ -280,20 +281,6 @@ export default {
                 });
               });
           }
-        });
-      },
-      // 搜索
-      searchBtn() {
-        let data = {
-          starttime: this.beginDate,
-          endtime: this.endDate,
-          patient_name: this.input,
-          pageNum: this.currentPage,
-          pageSize: this.number,
-        };
-        service.seachpag(data).then((res) => {
-          this.tableData = this.tableDatas = res.data;
-          this.total = res.allNews;
         });
       },
       //  分页
@@ -320,8 +307,42 @@ export default {
           this.total = res.allNews;
         });
       },
-
-    
+    // 搜索
+    searchBtn() {
+      let data = {
+        starttime: this.beginDate,
+        endtime: this.endDate,
+        patient_name: this.input,
+        pageNum: this.currentPage,
+        pageSize: this.number,
+      };
+      service.seachpag(data).then((res) => {
+        this.tableData = this.tableDatas = res.data;
+        this.total = res.allNews;
+      });
+    },
+    // 新增记录
+    addRecord() {
+      service.selDep().then((res) => {
+        this.bus.$emit("selDep", res);
+        this.$emit("abcClick");
+      });
+    },
+    // 记录详情
+    details(val, row) {
+      let data = {
+        id: row.id,
+      };
+      service.details(data).then((res) => {
+        this.bus.$emit("details", res);
+        this.$emit("abClick");
+      });
+      // this.$emit("abClick");
+    },
+    //投诉详情
+    complaint() {
+      this.$router.push("/Complaints");
+    },
   },
   watch: {
     seachTime: function (val, oldVal) {
