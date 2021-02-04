@@ -17,7 +17,7 @@
         <el-button
           type="primary"
           size="medium"
-          style="border: 1px solid #666ee8; padding: 11.5px "
+          style="border: 1px solid #666ee8; padding: 11.5px"
           @click="articleList"
           >返回文章列表</el-button
         >
@@ -47,10 +47,14 @@
             placeholder="请输入分类标题"
           ></el-input>
         </el-form-item>
-        <el-form-item label="分类状态" style="text-align:left;" :label-width="formLabelWidth">
+        <el-form-item
+          label="分类状态"
+          style="text-align: left"
+          :label-width="formLabelWidth"
+        >
           <template>
             <el-switch
-            style="margin-left:35px"
+              style="margin-left: 35px"
               v-model="form.state"
               :active-value="1"
               :inactive-value="0"
@@ -126,12 +130,12 @@
       :visible.sync="dialogVisibles"
       style="width: 60%; margin: 0 auto"
     >
-      <el-form :model="form">
+      <el-form :model="forms">
         <el-form-item label="上级分类" :label-width="formLabelWidth">
           <el-cascader
             style="width: 80%"
             ref="unitAreacode"
-            v-model="form.id"
+            v-model="forms.id"
             :options="options"
             :props="{ expandTrigger: 'hover' }"
             @change="handleChange"
@@ -140,15 +144,19 @@
         <el-form-item label="活动区域" :label-width="formLabelWidth">
           <el-input
             style="width: 80%"
-            v-model="form.title"
+            v-model="forms.title"
             placeholder="请输入分类标题"
           ></el-input>
         </el-form-item>
-        <el-form-item label="分类状态" style="text-align:left;" :label-width="formLabelWidth">
+        <el-form-item
+          label="分类状态"
+          style="text-align: left"
+          :label-width="formLabelWidth"
+        >
           <template>
             <el-switch
-            style="margin-left:35px"
-              v-model="form.state"
+              style="margin-left: 35px"
+              v-model="forms.state"
               :active-value="1"
               :inactive-value="0"
               active-color="#13ce66"
@@ -158,7 +166,7 @@
         </el-form-item>
         <el-form-item label="分类权重" :label-width="formLabelWidth">
           <el-input
-            v-model="form.order"
+            v-model="forms.order"
             style="width: 80%"
             placeholder="默认0，越大越靠前"
             type="number"
@@ -195,6 +203,7 @@ export default {
   inject: ["reload"],
   data() {
     return {
+      id:'',
       tableData: [],
       dialogVisible: false, //添加
       dialogVisibles: false, //编辑
@@ -205,6 +214,7 @@ export default {
         state: 1, //分类状态
         order: "", //分类权重
       },
+      forms: {},
       options: [],
       pid: "",
       currentPage: 1,
@@ -213,10 +223,11 @@ export default {
   },
 
   methods: {
+    // 新增
     hhh() {
-      this.dialogVisible=true
+      this.dialogVisible = true;
       service.Ariadd().then((res) => {
-
+        console.log(res)
         let batchdata = res.data;
         //valueBatch
         let dataValueBatch = (batchdata) =>
@@ -263,29 +274,66 @@ export default {
             type: "success",
             duration: 1500,
           });
-        } 
+        }
       });
     },
     // 编辑
     edit(index, row, id) {
+      this.id=id
       this.dialogVisibles = true;
       let params = {
-        id: id,
+        id: this.id,
       };
       service.AriEdit(params).then((res) => {
-        this.form = res.data.info;
+        console.log(res)
+        this.forms = res.data.info;
+        console.log(res);
+        let batchdata = res.data.cate;
+        //valueBatch
+        let dataValueBatch = (batchdata) =>
+          batchdata.map(({ id, title, pid, _child }) =>
+            _child
+              ? {
+                  value: {
+                    id: id,
+                    value: id,
+                    pid: pid,
+                  },
+                  label: title,
+                  children: dataValueBatch(_child),
+                }
+              : {
+                  value: {
+                    id: id,
+                    value: id,
+                    pid: pid,
+                  },
+                  label: title,
+                }
+          );
+
+        this.options = dataValueBatch(batchdata);
+        let one = {
+          id: 0,
+          value: 0,
+          pid: 0,
+          label: "默认为一级分类",
+        };
+        this.options.unshift(one);
       });
     },
     // 编辑确定
     AddEdit() {
       let data = {
-        id: this.form.id,
-        pid: this.form.pid,
-        title: this.form.title,
-        state: this.form.state,
-        order: this.form.order,
+        id:this.id,
+        pid: this.pid,
+        // pid: this.form.pid,
+        title: this.forms.title,
+        state: this.forms.state,
+        order: this.forms.order,
       };
       service.Ariedit(data).then((res) => {
+        console.log(res)
         if (res.code == 20010) {
           this.$message({
             message: res.msg,
@@ -294,16 +342,26 @@ export default {
           });
           this.dialogVisibles = false;
           this.reload();
-        } 
+        }
       });
     },
     // 添加中级选择器
     handleChange(val) {
-      if (this.$refs["unitAreacode"].getCheckedNodes()[0].label == "默认值") {
+      // console.log(this.$refs["unitAreacode"].getCheckedNodes()[0]);
+      if (this.$refs["unitAreacode"].getCheckedNodes()[0].value == 0) {
         this.pid = 0;
       } else {
         this.pid = this.$refs["unitAreacode"].getCheckedNodes()[0].value.id;
       }
+      console.log(this.pid);
+      // if (this.$refs["unitAreacode"].getCheckedNodes()[0]) {
+      //   // this.pid = 0;
+      //   console.log(this.pid)
+
+      // } else {
+      //   this.pid = this.$refs["unitAreacode"].getCheckedNodes()[0].value.id;
+      //   console.log(this.pid)
+      // }
     },
     //添加
     AddList() {
@@ -321,6 +379,7 @@ export default {
             type: "success",
             duration: 1500,
           });
+          this.form = {};
           this.dialogVisible = false;
           this.reload();
         }
@@ -363,11 +422,11 @@ export default {
             duration: 1500,
           });
         });
-     
     },
   },
   created() {
     service.AriList().then((res) => {
+      console.log(res);
       this.tableData = res.data;
     });
   },
