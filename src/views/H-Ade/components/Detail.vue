@@ -10,8 +10,10 @@
         </el-button>
       </div>
     </div>
-    <bscroll>
-      <div class="head-txt">
+    <!-- <bscroll> -->
+      <div class="wrapper" ref="wrapper">
+        <div class="content">
+          <div class="head-txt">
         <div class="txt">
           <el-row type="flex" class="row-bg" justify="center">
             <el-col :span="6">
@@ -368,16 +370,22 @@
           </el-row>
         </div>
       </div>
-    </bscroll>
+        </div>
+      </div>
+      
+    <!-- </bscroll> -->
   </div>
 </template>
 
 <script>
-  import bscroll from '@/components/better-scroll/bscroll'
+  // import BScroll from 'better-scroll'
+import bscroll from '@/components/better-scroll/bscroll';
+import BScroll from 'better-scroll'
   export default {
     components: {
       bscroll
     },
+    inject: ["reload"],
     props: {},
     data() {
       return {
@@ -457,11 +465,32 @@
         that.create_uid = item.create_uid //上报人
       })
     },
-    
+    mounted() {
+      this.$nextTick(() => {
+        if (!this.scroll) {
+          this.scroll = new BScroll(this.$refs.wrapper, {
+            click:true,
+            probeType:3,
+            mouseWheel: true,
+          })
+          console.log(this.scroll)
+        }
+      })
+    },
+    updated(){
+      const bs = new BScroll('.wrapper', {
+        click:true,
+        probeType:3,
+        mouseWheel: true,
+        scrollY:true,
+      })
+      this.scroll.refresh();
+    }
   }
 </script>
 <style scoped>
-.content{
-  padding-bottom: 200px;
+.wrapper{
+  height: 750px;
+  overflow: hidden;
 }
 </style>

@@ -22,6 +22,7 @@
     background: #fff;
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
     z-index: 9;
+    margin-bottom: 60px;
 }
 
 .AdeDetail .top .left {
@@ -48,8 +49,11 @@
 
 
 .AdeDetail .head-txt {
-    margin: 60px 3% 0;
+    /* margin: 60px 3% 0; */
+    margin: 0 3%;
     font-size: 16px;
+    /* height: 1000px; */
+    padding-bottom: 100px;
 }
 
 .AdeDetail .head-txt .txt {
