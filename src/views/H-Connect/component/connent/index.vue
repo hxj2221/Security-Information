@@ -13,6 +13,7 @@
           type="primary"
           size="medium"
           icon="iconfont el-icon-hospital-passwordexport"
+          @click="exportcom"
           >导出</el-button
         >
       </div>
