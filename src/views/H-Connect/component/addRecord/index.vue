@@ -1,7 +1,6 @@
 <template>
   <div class="addRecord_all">
-    <div class="wrapper" ref="wrapper">
-      <div class="content">
+      <bscroll>
         <!-- top -->
         <div class="addRecord_top">
           <h4>基本信息</h4>
@@ -197,9 +196,7 @@
             </el-dialog>
           </div>
         </div>
-      </div>
-    </div>
-
+      </bscroll>
     <!-- 固定定位按钮 -->
     <div class="addRecord_button">
       <div class="button_stlye">
@@ -219,9 +216,12 @@
   // 引用service
   import service from "@/service/index";
 
-  import BScroll from 'better-scroll'
+
+import bscroll from '@/components/better-scroll/bscroll';
   export default {
-    components: {},
+    components: {
+      bscroll
+    },
     inject: ["reload"],
     props: {},
     data() {
@@ -458,22 +458,8 @@
         this.tableData1 = item.event;
       });
     },
-    mounted() {
-      const bs = new BScroll('.wrapper', {
-        // pullUpLoad: true,
-        // pullDownRefresh: true,
-        probeType:3,
-        mouseWheel: true
-      })
-    }
   };
 </script>
 <style scoped>
-.wrapper{
-  height: 750px;
-  overflow: hidden;
-}
-.content{
-  padding-bottom: 100px;
-}
+
 </style>

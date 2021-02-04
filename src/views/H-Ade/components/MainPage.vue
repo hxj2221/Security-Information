@@ -374,11 +374,8 @@
         pageSize: this.pageSize
       }
       service.AdeList(params).then(res => {
-        
           this.tableData = res.data
           this.pageCount = res.allnews
-      
-
       })
       // 下拉框内容
       service.AdeSel().then(res => {

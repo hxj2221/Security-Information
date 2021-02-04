@@ -24,12 +24,22 @@ export default {
      
    },
    mounted() {
-      const bs = new BScroll('.wrapper', {
-        click:true,
-        probeType:3,
-        mouseWheel: true,
-        scrollY:true,
+     this.$nextTick(() => {
+        if (!this.scroll) {
+          this.scroll = new BScroll(this.$refs.wrapper, {
+            click:true,
+            probeType:3,
+            mouseWheel: true,
+          })
+          // console.log(this.scroll)
+        }
       })
+      // const bs = new BScroll('.wrapper', {
+      //   click:true,
+      //   probeType:3,
+      //   mouseWheel: true,
+      //   // scrollY:true,
+      // })
   },
     updated(){
       const bs = new BScroll('.wrapper', {
@@ -38,6 +48,7 @@ export default {
         mouseWheel: true,
         scrollY:true,
       })
+      // this.scroll.refresh();
     }
 }
 
