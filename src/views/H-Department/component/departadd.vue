@@ -34,7 +34,6 @@
                 type="input"
                 autosize
                 v-model="numb"
-                placeholder="10001"
               >
               </el-input>
             </el-form-item>
@@ -132,6 +131,7 @@
 <script>
 import service from "@/service/index";
 export default {
+  props: ["departadd"],
   inject: ["reload"],
   data() {
     return {
@@ -143,12 +143,13 @@ export default {
       numb: "",
     };
   },
-  created() {
-    service.departadd().then((res) => {
-      // console.log(res.data);
-      this.options = res.data.lists;
-      this.numb = res.data.number;
-    });
+  created() {},
+  watch: {
+    departadd(res) {
+      console.log(res);
+      this.options = res.lists;
+      this.numb = res.number;
+    },
   },
   methods: {
     // sel

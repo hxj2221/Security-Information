@@ -7,14 +7,12 @@
         <div class="push_btn">
           <el-button
             type="primary"
-            size="medium"
             icon="el-icon-circle-plus"
             @click="uploadclassify()"
             >上传文件
           </el-button>
           <el-button
             type="primary"
-            size="medium"
             class="newflie"
             icon="el-icon-circle-plus"
             @click="newclassify()"
@@ -107,23 +105,27 @@
         </el-table>
       </div>
       <!-- 分页 -->
-        <div class="staffpag">
-          <div class="block">
-            <el-pagination
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              :current-page="currentPage"
-              :page-sizes="nums"
-              :page-size="num"
-              layout="total, sizes, prev, pager, next, jumper"
-              :total="total"
-            >
-            </el-pagination>
-          </div>
+      <div class="staffpag">
+        <div class="block">
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="nums"
+            :page-size="num"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total"
+          >
+          </el-pagination>
         </div>
+      </div>
     </div>
     <!-- 新增分类 -->
-    <add-files v-show="addIsShow" @newly="newclassify()"></add-files>
+    <add-files
+      v-show="addIsShow"
+      :newly="newfilelist"
+      @addfileback="newclassify()"
+    ></add-files>
     <!-- 上传 -->
     <el-dialog title="上传文件" :visible.sync="dialogVisible">
       <el-form label-width="100px" class="demo-ruleForm">
@@ -223,6 +225,7 @@ export default {
       pageSize: 1, //每页显示多少数据
       nums: [8, 10, 20],
       num: 8,
+      newfilelist: [],
     };
   },
   created() {
@@ -234,10 +237,6 @@ export default {
     });
     let token = sessionStorage.getItem("token");
     console.log(token);
-    service.filetree().then((res) => {
-      console.log(res);
-      this.editseldata = res.data;
-    });
   },
   methods: {
     // 设置表头颜色
@@ -267,6 +266,10 @@ export default {
     // 上传文件显示
     uploadclassify() {
       this.dialogVisible = true;
+      service.filetree().then((res) => {
+        console.log(res);
+        this.editseldata = res.data;
+      });
     },
     // 上传文件取消
     Close() {
@@ -402,6 +405,10 @@ export default {
     newclassify() {
       this.filesIsShow = !this.filesIsShow;
       this.addIsShow = !this.addIsShow;
+      service.doclist().then((res) => {
+        console.log(res);
+        this.newfilelist = res.data;
+      });
     },
     // 分页
     handleSizeChange(val) {

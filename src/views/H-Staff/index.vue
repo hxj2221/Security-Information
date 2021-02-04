@@ -46,11 +46,13 @@
         >
           <el-table-column width="50" label="序号" type="index">
           </el-table-column>
-          <el-table-column prop="job_number" label="工号" width="120"> </el-table-column>
+          <el-table-column prop="job_number" label="工号" width="120">
+          </el-table-column>
           <el-table-column prop="name" label="员工姓名"> </el-table-column>
           <el-table-column prop="sex.name" label="员工性别"> </el-table-column>
           <el-table-column prop="age" label="员工年龄"> </el-table-column>
-          <el-table-column prop="phone" label="手机号码" width="120"> </el-table-column>
+          <el-table-column prop="phone" label="手机号码" width="120">
+          </el-table-column>
           <el-table-column prop="department[0].title" label="所属科室">
           </el-table-column>
           <el-table-column
@@ -103,23 +105,23 @@
         </el-table>
       </div>
       <!-- 分页 -->
-        <div class="staffpag">
-          <div class="block">
-            <el-pagination
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              :current-page="currentPage"
-              :page-sizes="nums"
-              :page-size="num"
-              layout="total, sizes, prev, pager, next, jumper"
-              :total="total"
-            >
-            </el-pagination>
-          </div>
+      <div class="staffpag">
+        <div class="block">
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="nums"
+            :page-size="num"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total"
+          >
+          </el-pagination>
         </div>
+      </div>
     </div>
     <!--新增-->
-    <Staff v-show="add"></Staff>
+    <Staff v-show="add" :addstaffprop="addstaff"></Staff>
     <!-- edit（编辑） -->
     <Edit v-show="edit" :childed="childedit"></Edit>
   </div>
@@ -163,20 +165,22 @@ export default {
       search: "",
       id: "",
       childedit: [],
+      addstaff: [],
     };
   },
   created() {
-    // 搜索下拉框内容
-    service.staffList().then((res) => {
-      console.log(res);
-      this.optionbeldepart = res.data;
-    });
+    // // 搜索下拉框内容
+    // service.staffList().then((res) => {
+    //   console.log(res);
+    //   this.optionbeldepart = res.data;
+    // });
     // 获取员工列表
     service.stafflist().then((res) => {
-      console.log(res.data[0]);
+      // console.log(res.data[0]);
       if (res.code == 20010) {
-        this.tables = res.data[0];
-        this.total = res.data[1].count;
+        this.tables = res.data.user;
+        this.optionbeldepart = res.data.department;
+        this.total = res.data.page.count;
       }
       if (res.code == 20403) {
         this.$message({
@@ -204,8 +208,9 @@ export default {
       console.log(data);
       service.stafflist(data).then((res) => {
         // console.log(res.data);
-        this.tables1 = this.tables = res.data[0];
-        this.total = res.data[1].count;
+        this.tables = res.data.user;
+        this.optionbeldepart = res.data.department;
+        this.total = res.data.page.count;
       });
     },
     // 新增
@@ -213,6 +218,13 @@ export default {
       this.staffvue = false;
       this.add = true;
       this.edit = false;
+      service.getrole().then((res) => {
+        console.log(res);
+        this.addstaff = res.data;
+        // this.all = res.data;
+        //  this.job_number = res.data.job_number;
+        // this.bus.$emit("ReceiveMessage", this.all);
+      });
     },
     // 子的
     fathstaffno() {
@@ -226,7 +238,7 @@ export default {
         this.staffvue = true;
       }, 3000);
     },
-   //员工状态
+    //员工状态
     changeSwitch(val, row) {
       console.log(row.id);
       this.$confirm("此操作将修改状态, 是否继续?", "提示", {
@@ -330,8 +342,9 @@ export default {
       };
       service.stafflist(data).then((res) => {
         console.log(res);
-        this.tables = res.data[0];
-        this.total = res.data[1].count;
+        this.tables = res.data.user;
+        // this.optionbeldepart = res.data.department;
+        this.total = res.data.page.count;
       });
     },
     handleCurrentChange(val) {
@@ -346,7 +359,9 @@ export default {
       };
       service.stafflist(data).then((res) => {
         console.log(res);
-        this.tables = res.data[0];
+        this.tables = res.data.user;
+        // this.optionbeldepart = res.data.department;
+        // this.total = res.data.page.count;
       });
     },
     // 清空搜索框时事件
@@ -360,8 +375,8 @@ export default {
       console.log(data);
       service.stafflist(data).then((res) => {
         console.log(res.data);
-        this.tables1 = this.tables = res.data[0];
-        this.total = res.data[1].count;
+        this.tables1 = this.tables = res.data.user;
+        this.total = res.data.page.count;
       });
     },
   },

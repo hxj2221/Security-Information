@@ -33,8 +33,10 @@
       >
         <el-table-column width="50" label="序号" type="index">
         </el-table-column>
-        <el-table-column prop="title" label="科室名称" width="160"> </el-table-column>
-        <el-table-column prop="number" label="科室编号" width="150"> </el-table-column>
+        <el-table-column prop="title" label="科室名称" width="160">
+        </el-table-column>
+        <el-table-column prop="number" label="科室编号" width="150">
+        </el-table-column>
         <el-table-column prop="usernumber" label="员工数量"> </el-table-column>
         <el-table-column prop="head_department.name" label="负责人">
         </el-table-column>
@@ -82,7 +84,7 @@
     </div>
 
     <!-- 新增 -->
-    <adddep v-show="adddep"></adddep>
+    <adddep v-show="adddep" :departadd="adddepart"></adddep>
     <!-- 编辑 -->
     <editdep v-show="editdep" :editchild="departchildedit"></editdep>
   </div>
@@ -115,6 +117,7 @@ export default {
       search: "",
       departchildedit: [],
       tables1: [],
+      adddepart: [],
     };
   },
   created() {
@@ -136,6 +139,10 @@ export default {
     fathpowadd() {
       this.departvue = !this.departvue;
       this.adddep = !this.adddep;
+      service.departadd().then((res) => {
+        console.log(res.data);
+        this.adddepart = res.data;
+      });
     },
     // 搜索
     departsearch() {

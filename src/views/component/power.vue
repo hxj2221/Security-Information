@@ -7,8 +7,14 @@
         <li class="rolelist" @click="role">角色列表</li>
         <li class="editpowlist" @click="editpow">编辑权限</li>
       </ul>
-      <el-button type="primary" size="medium" icon="el-icon-circle-plus" class="powerAdd" @click="staffadd">新增
-        </el-button>
+      <el-button
+        type="primary"
+        size="medium"
+        icon="el-icon-circle-plus"
+        class="powerAdd"
+        @click="staffadd"
+        >新增
+      </el-button>
     </div>
   </div>
 </template>
@@ -24,13 +30,7 @@ export default {
   },
   methods: {
     staffadd() {
-      service.getrole().then((res) => {
-        console.log(res);
-        this.all = res.data;
-        // this.job_number = res.data.job_number;
-        this.bus.$emit("ReceiveMessage", this.all);
-        this.$parent.fathpowadd();
-      });
+      this.$parent.fathpowadd();
     },
     staff() {
       this.$router.push("/Staff");

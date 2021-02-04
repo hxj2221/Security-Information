@@ -115,7 +115,6 @@
                 ref="cascader"
                 :options="options"
                 v-model="addStaff.address"
-                :props="props"
                 @change="handleChange"
               >
               </el-cascader>
@@ -138,8 +137,9 @@
               <el-select
                 type="input"
                 autosize
-                v-model="department_id"
+                v-model="addStaff.staffdepart"
                 placeholder="请选择"
+                @change="departsel"
               >
                 <el-option
                   v-for="item in optiondepart"
@@ -159,7 +159,7 @@
                 multiple
                 v-model="addStaff.auth_grouap"
                 placeholder="请选择"
-                @change="departsel"
+                @change="rolesel"
               >
                 <el-option
                   v-for="item in optionrole"
@@ -231,26 +231,11 @@ import {
   TextToCode,
 } from "element-china-area-data";
 export default {
-  components: {},
   inject: ["reload"],
-  props: {},
+  props: ["addstaffprop"],
   data() {
     return {
       options: regionData,
-      props: {
-        value: "id", //设置每个menu的ID值
-        label: "name", //设置每个menu的name值
-        children: "children", //子级
-        checkStrictly: true, //遵守父子节点不互相关联--可以选择级联面板的任何一级
-      },
-      // props: {
-      //   value: "id", //设置每个menu的ID值
-      //   label: "name", //设置每个menu的name值
-      //   children: "children", //子级
-      //   checkStrictly: true, //遵守父子节点不互相关联--可以选择级联面板的任何一级
-      // },
-      // label: "",
-      // code: "",
       addStaff: {
         job_number: "", // 员工编号
         // staffNumInput: "",
@@ -295,18 +280,32 @@ export default {
       optionrole: [],
     };
   },
-  methods: {
-    stffaddrolesel(val) {
-      // for (let i = 0; i <= val.length - 1; i++) {
-      //   let a = val[i];
-      //   this.staffroleselC = a;
-      // }
-      console.log(this.addStaff.staffrolesel);
+  watch: {
+    addstaffprop(res) {
+      console.log(res);
+      // this.all = res;
+      this.addStaff.job_number = res.job_number;
+      this.optiondepart = res.department;
+      this.optionrole = res.auth_grouap;
+      // this.bus.$emit("ReceiveMessage", this.all);
     },
+  },
+  methods: {
+    // stffaddrolesel(val) {
+    //   // for (let i = 0; i <= val.length - 1; i++) {
+    //   //   let a = val[i];
+    //   //   this.staffroleselC = a;
+    //   // }
+    //   console.log(this.addStaff.staffrolesel);
+    // },
 
-    // 保存
-    departsel() {
+    // 角色选中
+    rolesel() {
       console.log(this.addStaff.auth_grouap);
+    },
+    // 科室选中
+    departsel() {
+      console.log(this.addStaff.staffdepart);
     },
     staffaddvueyes() {
       //1  正常   0 禁用
@@ -325,7 +324,7 @@ export default {
         cardnumber: this.addStaff.cardnumber,
         head_department: this.addStaff.head_department,
         status: this.addStaff.status,
-        role_id: this.addStaff.staffrolesel,
+        role_id: this.addStaff.auth_grouap,
         department_id: this.addStaff.staffdepart,
       };
       console.log(data);
@@ -353,36 +352,15 @@ export default {
       this.$parent.fathstaffno();
     },
     handleChange(cityvalue) {
-      let options = this.options;
-      let nameArray = [];
-      for (let i = 0; i < id.length; i++) {
-        let index = options.findIndex((item) => {
-          return item[this.props.value] == id[i];
-        });
-        nameArray.push(options[index][this.props.label]);
-        if (i < id.length - 1 && options[index].children == undefined) {
-          let list = new Promise((resolve) => {
-            this.props.lazyLoad(id[i], (list) => {
-              resolve(list);
-            });
-          });
-          this.$set(options[index], "children", list);
-          options = options[index].children;
-        } else {
-          options = options[index].children;
-        }
-      }
-      return { value: id, label: nameArray };
-
-      // console.log(cityvalue)
-      //       this.addressC =
-      //         CodeToText[cityvalue[0]] +
-      //         "/" +
-      //         CodeToText[cityvalue[1]] +
-      //         "/" +
-      //         CodeToText[cityvalue[2]];
-      // console.log(this.addressC)
-      //       console.log(this.addStaff.address);
+      console.log(cityvalue);
+      this.addressC =
+        CodeToText[cityvalue[0]] +
+        "/" +
+        CodeToText[cityvalue[1]] +
+        "/" +
+        CodeToText[cityvalue[2]];
+      console.log(this.addressC);
+      console.log(this.addStaff.address);
     },
     // 子调用父
     staffaddvueno() {
