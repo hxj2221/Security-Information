@@ -1,18 +1,16 @@
 import * as axios from 'axios';
-
+import router from '../router'
 // 这里可根据具体使用的ui组件库进行替换
 import { Message, MessageBox } from 'element-ui';
 import { AxiosResponse, AxiosRequestConfig } from 'axios';
-
 export interface AjaxResponse {
   code: number;
   message: string;
   data: any
 }
-
+console.log(location)
 // baseURL根据实际进行定义
 const baseURL = 'http://bt1.wlqqlp.com:8082/';
-
 // 创建axios实例
 const service = axios.default.create({
   baseURL,
@@ -40,6 +38,7 @@ service.interceptors.request.use((config: AxiosRequestConfig) => {
 });
 
 service.interceptors.response.use((response: AxiosResponse) => {
+  
   if (response.status !== 200) {
     Message({
       message: `请求错误`,
@@ -49,10 +48,21 @@ service.interceptors.response.use((response: AxiosResponse) => {
     return { code: 100 }
   } else{
     let res = response.data;
-    if (response.data.token) {
-      
-      // sessionStorage.setItem('token', response.data.token)
+    console.log(res)
+    if(res.code==20401){
+      MessageBox.alert(res.msg, {
+            confirmButtonText: '重新登录',
+            type: 'warning'
+          }).then(() => {
+           location.href="http://192.168.0.81:8080/"
+            // location.href('http://192.168.0.81:8081')
+            // 为了重新实例化vue-router对象 避免bug
+          })
     }
+    // if (response.data.token) {
+      
+    //   // sessionStorage.setItem('token', response.data.token)
+    // }
     // if (code === -1) {
     //   MessageBox.alert(msg, {
     //     confirmButtonText: '重新登录',

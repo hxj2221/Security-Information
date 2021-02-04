@@ -21,7 +21,7 @@ export default {
   },
   // 工作台
   dashboard: async () => {
-    return await service.get(`${baseUrl}api/home/Lz_workbench`).then(res => res).catch(err => err)
+    return await service.get(`${baseUrl}api/Communal/Lz_workbench`).then(res => res).catch(err => err)
   },
   // 投诉列表
   ComList: async (pNum: number, current: number) => {

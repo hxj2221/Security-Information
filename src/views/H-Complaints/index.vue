@@ -115,11 +115,7 @@
         >
       </Look>
       <Operation v-if="operations==true" :operationdata="operationdata" :opdata="opdata" :filelist='filelisttrue'>
-        <div slot="records">
-          <el-button type="primary"  icon="el-icon-edit" class="records" @click="records()"
-            >医患记录</el-button
-          >
-        </div>
+        
         <div slot="detail">
             <el-button
               type="primary"

@@ -70,27 +70,21 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Complaints',
         component: () => import('../views/H-Complaints/index.vue'),
-        // meta: {
-        //   roles: ['admin','admin1','admin2','admin3']
-        // }
+        
       },
       {
         name: '不良事件',
         iconCls: 'el-icon-bicycle',
         path: '/Ade',
         component: () => import('../views/H-Ade/index.vue'),
-        // meta: {
-        //   roles: ['admin','admin1','admin2','admin3']
-        // }
+       
       },
       {
         name: '医患沟通记录',
         iconCls: 'el-icon-bicycle',
         path: '/Connect',
         component: () => import('../views/H-Connect/index.vue'),
-        // meta: {
-        //     roles: ['admin','admin1','admin2','admin3']
-        // }
+      
       }
     ]
   },
@@ -106,54 +100,42 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Category',
         component: () => import('../views/H-Category/index.vue'),
-        // meta: {
-        //     roles: ['admin','admin1','admin2','admin3']
-        // }
+        
       },
       {
         name: '被投诉医护人员统计',
         iconCls: 'el-icon-s-custom',
         path: '/Statistics',
         component: () => import('../views/H-Statistics/index.vue'),
-        // meta: {
-        //     roles: ['admin','admin1','admin2','admin3']
-        // }
+        
       },
       {
         name: '患者基本信息统计',
         iconCls: 'el-icon-document',
         path: '/Basic',
         component: () => import('../views/H-Basic/index.vue'),
-        // meta: {
-        //     roles: ['admin','admin1','admin2','admin3']
-        // }
+       
       },
       {
         name: '患者疾病信息统计',
         iconCls: 'el-icon-document-add',
         path: '/Patient',
         component: () => import('../views/H-Patient/index.vue'),
-        // meta: {
-        //     roles: ['admin','admin1','admin2','admin3']
-        // }
+      
       },
       {
         name: '科室及投诉类别词云统计',
         iconCls: 'el-icon-chat-line-square',
         path: '/Word',
         component: () => import('../views/H-Word/index.vue'),
-        // meta: {
-        //     roles: ['admin','admin1','admin2','admin3']
-        // }
+       
       },
       {
         name: '投诉处理周期统计',
         iconCls: 'el-icon-aim',
         path: '/Cycle',
         component: () => import('../views/H-Cycle/index.vue'),
-        // meta: {
-        //     roles: ['admin','admin1','admin2','admin3']
-        // }
+        
       },
     ]
   },
@@ -169,27 +151,21 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Articlelist',
         component: () => import('../views/H-Articlelist/index.vue'),
-        // meta: {
-        //     roles: ['admin','admin1','admin2','admin3']
-        // }
+       
       },
       {
         name: '添加文章',
         iconCls: 'el-icon-help',
         path: '/Addarticle',
         component: () => import('../views/H-Addarticle/index.vue'),
-        // meta: {
-        //     roles: ['admin','admin1','admin2','admin3']
-        // }
+      
       },
       {
         name: '栏目列表',
         iconCls: 'el-icon-help',
         path: '/Columnlist',
         component: () => import('../views/H-Columnlist/index.vue'),
-        // meta: {
-        //     roles: ['admin','admin1','admin2','admin3']
-        // }
+       
       }
     ]
   },
@@ -205,9 +181,7 @@ const asyncRoutes = [
         name: '文件列表',
         path: '/form',
         component: () => import('../views/H-Files/index.vue'),
-        // meta: {
-        //     roles: ['admin','admin1','admin2','admin3']
-        // }
+       
       }
     ]
   },
@@ -223,45 +197,35 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Staff',
         component: () => import('../views/H-Staff/index.vue'),
-        // meta: {
-        //     roles: ['admin','admin1','admin2','admin3']
-        // }
+       
       },
       {
         name: '科室管理',
         iconCls: 'el-icon-help',
         path: '/Department',
         component: () => import('../views/H-Department/index.vue'),
-        // meta: {
-        //     roles: ['admin','admin1','admin2','admin3']
-        // }
+        
       },
       {
         name: '角色管理',
         iconCls: 'el-icon-help',
         path: '/Role',
         component: () => import('../views/H-Role/index.vue'),
-        // meta: {
-        //     roles: ['admin','admin1','admin2','admin3']
-        // }
+        
       },
       {
         name: '权限管理',
         iconCls: 'el-icon-help',
         path: '/Edit',
         component: () => import('../views/H-Edit/index.vue'),
-        // meta: {
-        //     roles: ['admin','admin1','admin2','admin3']
-        // }
+       
       },
       // {
       //   name: '测试',
       //   iconCls: 'el-icon-help',
       //   path: '/a',
       //   component: () => import('../views/H-Files/a.vue'),
-      //   // meta: {
-      //   //     roles: ['admin','admin1','admin2','admin3']
-      //   // }
+     
       // }
     ]
   },
@@ -277,27 +241,21 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Personal',
         component: () => import('../views/H-Personal/index.vue'),
-        // meta: {
-        //     roles: ['admin','admin1','admin2','admin3']
-        // }
+      
       },
       {
         name: '账户管理',
         iconCls: 'el-icon-help',
         path: '/Account',
         component: () => import('../views/H-Account/index.vue'),
-        // meta: {
-        //     roles: ['admin','admin1','admin2','admin3']
-        // }
+      
       },
       {
         name: '消息通知',
         iconCls: 'el-icon-help',
         path: '/Notify',
         component: () => import('../views/H-Notify/index.vue'),
-        // meta: {
-        //     roles: ['admin','admin1','admin2','admin3']
-        // }
+      
       }
     ]
   },
@@ -313,18 +271,14 @@ const asyncRoutes = [
         iconCls: 'el-icon-help',
         path: '/Dictionaries',
         component: () => import('../views/H-Dictionaries/index.vue'),
-        // meta: {
-        //     roles: ['admin','admin1','admin2','admin3']
-        // }
+        
       },
       {
         name: '基本设置',
         iconCls: 'el-icon-help',
         path: '/Technological',
         component: () => import('../views/H-Technological/index.vue'),
-        // meta: {
-        //     roles: ['admin','admin1','admin2','admin3']
-        // }
+        
       }
     ]
   },
