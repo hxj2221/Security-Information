@@ -210,7 +210,13 @@ export default {
     },
     // 新增
     addRecord() {
-      this.$emit("abcClick");
+      // this.$emit("abcClick");
+      service.patientadd().then((res) => {
+        console.log(res);
+          this.$emit("abcClick");
+          this.bus.$emit('selDep',res)
+
+      });
     },
     formatDate(date) {
       var date = new Date(date) * 1000;
