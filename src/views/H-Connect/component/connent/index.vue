@@ -186,15 +186,6 @@ export default {
       num: 8,
     };
   },
-  methods: {
-    // 设置表头颜色
-    getRowClass({ rowIndex }) {
-      if (rowIndex == 0) {
-        return "background:#c2c5f6;color:#000";
-      } else {
-        return "";
-      }
-    },
     methods: {
         formatDate(date) {
         var date = new Date(date)*1000;
@@ -333,97 +324,7 @@ export default {
         });
       },
 
-      // return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
-    },
-    // 删除
-    handleDel(val, row) {
-      this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-      })
-        .then(() => {
-          let params = {
-            id: row[val].id,
-          };
-          service.patientDel(params).then((res) => {
-            this.$message({
-              type: "success",
-              message: "删除成功!",
-              duration: 1500,
-            });
-            this.reload();
-          });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除",
-            duration: 1500,
-          });
-        });
-    },
-    // 搜索
-    searchBtn() {
-      let data = {
-        starttime: this.beginDate,
-        endtime: this.endDate,
-        patient_name: this.input,
-        pageNum: this.currentPage,
-        pageSize: this.number,
-      };
-      service.seachpag(data).then((res) => {
-        this.tableData = this.tableDatas = res.data;
-        this.total = res.allNews;
-      });
-    },
-    //  分页
-    handleSizeChange(val) {
-      this.num = val;
-      let data = {
-        pageSize: val, //每页几条
-        pageNum: this.currentPage, //第几页
-      };
-      service.patientList(data).then((res) => {
-        this.tableData = res.data;
-        this.total = res.allNews;
-      });
-    },
-    //
-    handleCurrentChange(val) {
-      this.currentPage = val;
-      let data = {
-        pageSize: this.num,
-        pageNum: this.currentPage,
-      };
-      service.patientList(data).then((res) => {
-        this.tableData = res.data;
-        this.total = res.allNews;
-      });
-    },
-
-    // 新增记录
-    addRecord() {
-      service.selDep().then((res) => {
-        this.bus.$emit("selDep", res);
-        this.$emit("abcClick");
-      });
-    },
-    // 记录详情
-    details(val, row) {
-      let data = {
-        id: row.id,
-      };
-      service.details(data).then((res) => {
-        this.bus.$emit("details", res);
-        this.$emit("abClick");
-      });
-      // this.$emit("abClick");
-    },
-    //投诉详情
-    complaint() {
-      this.$router.push("/Complaints");
-    },
+    
   },
   watch: {
     seachTime: function (val, oldVal) {
