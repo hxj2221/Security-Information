@@ -25,8 +25,14 @@ export default {
    },
    mounted() {
       const bs = new BScroll('.wrapper', {
-        // pullUpLoad: true,
-        // pullDownRefresh: true,
+        click:true,
+        probeType:3,
+        mouseWheel: true,
+        scrollY:true,
+      })
+  },
+    updated(){
+      const bs = new BScroll('.wrapper', {
         click:true,
         probeType:3,
         mouseWheel: true,
