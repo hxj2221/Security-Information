@@ -16,7 +16,7 @@
     overflow: hidden;
     display: flex;
     height: 91px;
-    border-bottom: 2px solid #f2f2f2;
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -46,7 +46,7 @@
 .lookForm_top_content {
     font-size: 16px;
     text-align: left;
-    margin: 30px 0;
+    margin: 30px 22px;
 }
 .lookForm_top_content .grid-content>span{
     display: flex;
@@ -59,7 +59,7 @@
 .lookForm_all hr {
     border: none;
     width: 77%;
-    height: 1px;
+    height: 2px;
     margin: 0 auto;
     background-color: #e0e2fa;
     margin-bottom: 15px;
@@ -130,6 +130,7 @@
     border-bottom: none;
     line-height: 30px;
     border: 1px solid #797979;
+    border-right: none;
     display: flex;
 }
 .lookForm_bottom_form_div{
@@ -143,6 +144,7 @@
 }
 .lookForm_bottom_form_div>span:first-child{
     background-color: #f2f2f2;
+    border-right: 1px solid #797979;
 }
 .lookForm_bottom_form_div>span:last-child{
     color: #666EE8;

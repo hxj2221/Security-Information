@@ -7,12 +7,13 @@ import service from '@/service/index';
       <div class="push_btn">
         <el-button
           type="primary"
+          size="medium"
           class="newclassify"
           icon="el-icon-circle-plus"
           @click="createdlist"
           >新建分类
         </el-button>
-        <el-button class="back" type="primary" size="default" @click="back"
+        <el-button class="back" size="medium" type="primary" @click="back"
           >返回文件列表</el-button
         >
       </div>

@@ -20,7 +20,7 @@
               <el-input placeholder="请输入内容" v-model="search" class="input-with-select search">
                 <el-button slot="append" icon="el-icon-search" @click="searchCon"></el-button>
               </el-input>
-              <el-table class="right_con" ref="singleTable" max-height="550" :header-cell-style="getRowClass"
+              <el-table class="right_con" ref="singleTable" max-height="548" :header-cell-style="getRowClass"
                 :data="tableData">
                 <el-table-column type="index" label="序号" width="50">
                 </el-table-column>

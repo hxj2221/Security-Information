@@ -12,7 +12,9 @@
             </el-button>
           </div>
         </div>
-        <!-- top -->
+      </div>
+      <bscroll>
+      <!-- top -->
         <div class="lookForm_top_content">
           <el-form ref="form" :model="connent">
             <el-row type="flex" class="row-bg" justify="center">
@@ -74,7 +76,6 @@
             </el-row>
           </el-form>
         </div>
-      </div>
       <hr />
       <!-- center -->
       <div class="lookForm_center">
@@ -237,13 +238,17 @@
           </el-row>
         </div> -->
       </div>
+      </bscroll>
     </div>
   </div>
 </template>
 <script>
 import "@/views/H-Connect/component/lookForm/css.css";
+import bscroll from '@/components/better-scroll/bscroll';
 export default {
-  components: {},
+  components: {
+    bscroll
+  },
     inject: ["reload"],
   props: {},
   data() {
