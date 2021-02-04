@@ -6,7 +6,7 @@
       @abClick="mydetails"
     ></Connent>
     <Add @abcClick="myClick" v-show="isShows"></Add>
-    <Form v-show="isdetails" @upper="one"></Form>
+    <Form v-show="isdetails"></Form>
   </div>
 </template>
 
@@ -41,9 +41,9 @@ export default {
       this.isShow = false;
       this.isdetails = !this.isdetails;
     },
-    one() {
-      this.isdetails = !this.isdetails;
-      this.isShow = !this.isShow;
+    upper() {
+      this.isdetails = true;
+      this.isShow = false;
     },
   },
 };

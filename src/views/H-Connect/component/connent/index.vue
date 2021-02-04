@@ -6,16 +6,11 @@
         <h6>医患沟通记录</h6>
       </div>
       <div class="connent_top_right">
-        <el-button
-          type="primary"
-          size="medium"
-          icon="el-icon-circle-plus"
-          @click="addRecord()"
+        <el-button type="primary" icon="el-icon-circle-plus" @click="addRecord"
           >新增
         </el-button>
         <el-button
           type="primary"
-          size="medium"
           icon="iconfont el-icon-hospital-passwordexport"
           >导出</el-button
         >
@@ -189,6 +184,94 @@ export default {
     };
   },
   methods: {
+    // 投诉详情
+    complaint() {
+      this.$router.push("Complaints");
+    },
+    // 记录详情
+    details(e, val) {
+      let data = {
+        id: val.id,
+      };
+      service.details(data).then((res) => {
+        console.log(res);
+        if (res.code == 20010) {
+          this.$parent.upper();
+          this.bus.$emit("details", res);
+        } else {
+          this.$message({
+            type: "error",
+            msg: res.msg,
+            duration: 1500,
+          });
+        }
+      });
+      //   console.log(e,val)
+    },
+    // 新增
+    addRecord() {
+      this.$emit("abcClick");
+    },
+    formatDate(date) {
+      var date = new Date(date) * 1000;
+      return date;
+    },
+    initTime(t) {
+      let d = new Date(t).getTime(new Date(t));
+      let time = new Date(d + 8 * 3600 * 1000)
+        .toJSON()
+        .substr(0, 19)
+        .replace("T", " ")
+        .replace(/\./g, "-");
+      return time;
+    },
+    // 导出事件
+    exportcom() {
+      let dataA = this.tableData;
+      let dataB = new Array();
+      for (let i = 0; i < dataA.length; i++) {
+        let data = this.formatDate(dataA[i].communicate_time);
+        dataA[i].communicate_tim = this.initTime(data);
+        dataB.push(dataA[i]);
+      }
+      console.log(dataB);
+      import("@/vendor/Export2Excel").then((excel) => {
+        const tHeader = [
+          "记录编号",
+          "患者姓名",
+          "主持人",
+          "记录人",
+          "沟通日期",
+          "关联投诉编号",
+          "主要沟通事项",
+        ];
+        const filterVal = [
+          "number",
+          "patient_name",
+          "hosp_name",
+          "note_taker",
+          "communicate_tim",
+          "event_number",
+          "record_of_communication",
+        ];
+        const list = dataB;
+        const data = this.formatJson(filterVal, list);
+        excel.export_json_to_excel({
+          header: tHeader,
+          data,
+          filename: "业务列表",
+          autoWidth: true,
+          bookType: "xlsx",
+        });
+      });
+    },
+    formatJson(filterVal, jsonData) {
+      return jsonData.map((v) =>
+        filterVal.map((j) => {
+          return v[j];
+        })
+      );
+    },
     // 设置表头颜色
     getRowClass({ rowIndex }) {
       if (rowIndex == 0) {
@@ -197,118 +280,55 @@ export default {
         return "";
       }
     },
-    formatDate(date) {
-        var date = new Date(date)*1000;
-        return date;
-      },
-   initTime(t) {
-      let d=new Date(t).getTime(new Date(t));
-      let time= new Date(d + 8 * 3600 * 1000).toJSON().substr(0, 19).replace('T', ' ').replace(/\./g, '-');
-      return time;
-    },
-         // 导出事件
-    exportcom() {  
-      let dataA =this.tableData
-       let dataB=new Array()
-      for(let i =0;i<dataA.length;i++){
-            let data=this.formatDate(dataA[i].communicate_time)
-              dataA[i].communicate_tim=this.initTime(data)
-              dataB.push(dataA[i])
-      }
-      console.log(dataB)
-      import('@/vendor/Export2Excel').then(excel => {
-      const tHeader = ['记录编号', '患者姓名', '主持人', '记录人','沟通日期','关联投诉编号','主要沟通事项']
-      const filterVal = ['number', 'patient_name', 'hosp_name', 'note_taker', 'communicate_tim', 'event_number', 'record_of_communication']
-      const list = dataB
-      const data = this.formatJson(filterVal, list)
-      excel.export_json_to_excel({
-        header: tHeader,
-        data,
-        filename: '业务列表',
-        autoWidth: true,
-        bookType: 'xlsx'
-      })
-    })
-      
-    },
-   formatJson(filterVal, jsonData) {
-    return jsonData.map(v => filterVal.map(j => {
-      return v[j]
-    }))
-   },
-      // 时间戳转为日期格式
-      getDate: function (row, column, cellValue, index) {
-        // console.log(new Date(cellValue * 1000))
-        var date = new Date(cellValue * 1000);
-        var y = date.getFullYear();
-        var m = date.getMonth() + 1;
-        m = m < 10 ? ('0' + m) : m;
-        var d = date.getDate();
-        d = d < 10 ? ('0' + d) : d;
-        // var h = date.getHours();
-        // var minute = date.getMinutes();
-        // minute = minute < 10 ? ('0' + minute) : minute;
-        // var second = date.getSeconds();
-        // second = minute < 10 ? ('0' + second) : second;
-        return y + '-' + m + '-' + d ;
+    // 时间戳转为日期格式
+    getDate: function (row, column, cellValue, index) {
+      // console.log(new Date(cellValue * 1000))
+      var date = new Date(cellValue * 1000);
+      var y = date.getFullYear();
+      var m = date.getMonth() + 1;
+      m = m < 10 ? "0" + m : m;
+      var d = date.getDate();
+      d = d < 10 ? "0" + d : d;
+      // var h = date.getHours();
+      // var minute = date.getMinutes();
+      // minute = minute < 10 ? ('0' + minute) : minute;
+      // var second = date.getSeconds();
+      // second = minute < 10 ? ('0' + second) : second;
+      return y + "-" + m + "-" + d;
 
-        // return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
-      },
-      // 删除
-      handleDel(val, row) {
-        let params = {
-          id: row[val].id,
-        };
-        service.patientDel(params).then((res) => {
-          console.log(res)
-          if (res.code == 20010) {
-            this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-                confirmButtonText: "确定",
-                cancelButtonText: "取消",
-                type: "warning",
-              })
-              .then(() => {
-                this.$message({
-                  type: "success",
-                  message: "删除成功!",
-                  delete: row.splice(val, 1),
-                  duration: 1000,
-                });
-              })
-              .catch(() => {
-                this.$message({
-                  type: "info",
-                  message: "已取消删除",
-                  duration: 1000,
-                });
+      // return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+    },
+    // 删除
+    handleDel(val, row) {
+      let params = {
+        id: row[val].id,
+      };
+      service.patientDel(params).then((res) => {
+        console.log(res);
+        if (res.code == 20010) {
+          this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+            confirmButtonText: "确定",
+            cancelButtonText: "取消",
+            type: "warning",
+          })
+            .then(() => {
+              this.$message({
+                type: "success",
+                message: "删除成功!",
+                delete: row.splice(val, 1),
+                duration: 1000,
               });
-          }
-        });
-      },
-      //  分页
-      handleSizeChange(val) {
-        this.num = val;
-        let data = {
-          pageSize: val, //每页几条
-          pageNum: this.currentPage, //第几页
-        };
-        service.patientList(data).then((res) => {
-          this.tableData = res.data;
-          this.total = res.allNews;
-        });
-      },
-      //
-      handleCurrentChange(val) {
-        this.currentPage = val;
-        let data = {
-          pageSize: this.num,
-          pageNum: this.currentPage,
-        };
-        service.patientList(data).then((res) => {
-          this.tableData = res.data;
-          this.total = res.allNews;
-        });
-      },
+            })
+            .catch(() => {
+              this.$message({
+                type: "info",
+                message: "已取消删除",
+                duration: 1000,
+              });
+            });
+        }
+      });
+    },
     // 搜索
     searchBtn() {
       let data = {
@@ -323,27 +343,29 @@ export default {
         this.total = res.allNews;
       });
     },
-    // 新增记录
-    addRecord() {
-      service.selDep().then((res) => {
-        this.bus.$emit("selDep", res);
-        this.$emit("abcClick");
-      });
-    },
-    // 记录详情
-    details(val, row) {
+    //  分页
+    handleSizeChange(val) {
+      this.num = val;
       let data = {
-        id: row.id,
+        pageSize: val, //每页几条
+        pageNum: this.currentPage, //第几页
       };
-      service.details(data).then((res) => {
-        this.bus.$emit("details", res);
-        this.$emit("abClick");
+      service.patientList(data).then((res) => {
+        this.tableData = res.data;
+        this.total = res.allNews;
       });
-      // this.$emit("abClick");
     },
-    //投诉详情
-    complaint() {
-      this.$router.push("/Complaints");
+    //
+    handleCurrentChange(val) {
+      this.currentPage = val;
+      let data = {
+        pageSize: this.num,
+        pageNum: this.currentPage,
+      };
+      service.patientList(data).then((res) => {
+        this.tableData = res.data;
+        this.total = res.allNews;
+      });
     },
   },
   watch: {
