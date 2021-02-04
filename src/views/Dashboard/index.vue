@@ -200,7 +200,7 @@
 
 <style lang="less" scoped>
   .dash {
-    width: 95%;
+    // width: 95%;
     margin: 0 auto;
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
     border-radius: 5px;
