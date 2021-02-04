@@ -1,8 +1,7 @@
 <template>
   <div>
-    <div class="addcom wrapper" ref="wrapper">
-      
-        <div class="content">
+    <div class="addcom">
+        <bscroll>
           <div class="addcom-top">
             <h4>基本信息</h4>
           </div>
@@ -201,7 +200,7 @@
               <el-button type="primary" icon="el-icon-circle-plus" class="addrelevance">添加患者信息</el-button>
             </div>
           </div>
-      </div>
+      </bscroll>
 
       <!-- 弹窗 -->
       <div class="requirement">
@@ -224,11 +223,12 @@
   // 获取列表
   import service from "@/service/index";
 
-  import BScroll from 'better-scroll'
+  import bscroll from '@/components/better-scroll/bscroll'
 
   export default {
     components: {
       Conserve,
+      bscroll
     },
     inject: ["reload"],
     data() {
@@ -389,7 +389,6 @@
             handle_name: this.agentname, //经办人姓名
             handle_phone: this.agentphone, //经办人手机号
           };
-          console.log(params)
           service.AddComponent(params).then((res) => {
             if (res.code == 20010) {
               this.$message({
@@ -398,27 +397,7 @@
                 duration: 1000,
               });
               this.reload()
-            } else if (res.code == 20401) {
-              this.$message({
-                message: "请重新登陆",
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push('/login')
-            } else if (res.code == 20403) {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push('/dashboard')
-            } else {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-            }
+            } 
 
           });
         } else if (this.address == "" || this.address == null) {
@@ -538,50 +517,13 @@
           this.relationlist = res.data.inpatient_relation; // 关系
           this.comdes = res.data.department; //投诉科室
         }
-        // else if(res.code==20401){
-        //   this.$message({
-        //     message: "请重新登陆",
-        //     type: "error",
-        //     duration: 1000,
-        //   });
-        //   this.$router.push('/login')
-        // }
-        // else if(res.code==20403){
-        //   this.$message({
-        //     message: res.msg,
-        //     type: "error",
-        //     duration: 1000,
-        //   });
-        //   this.$router.push('/dashboard')
-        // }
-        //    else{
-        //   this.$message({
-        //     message: res.msg,
-        //     type: "error",
-        //     duration: 1000,
-        //   });
-        // }
       })
 
 
     },
-    mounted() {
-      const bs = new BScroll('.wrapper', {
-        // pullUpLoad: true,
-        // pullDownRefresh: true,
-        probeType:3,
-        mouseWheel: true
-        
-      })
-    }
   };
 </script>
 
 <style scoped>
   @import "../css/addcom.css";
-
-  .wrapper {
-    height: 750px;
-    overflow: hidden;
-  }
 </style>

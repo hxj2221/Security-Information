@@ -167,25 +167,14 @@ export default {
   },
   created() {
     addpower().then((res) => {
-      console.log(res.data.data);
       this.seldata = res.data.data;
     });
   },
   methods: {
     selchang() {
-      console.log(this.selvalue);
     },
     //   保存
     addpowyes() {
-      console.log(
-        this.selvalue,
-        this.powpx,
-        this.powstatu,
-        this.powlab,
-        this.powicon,
-        this.powaps,
-        this.powweb
-      );
       let data = {
         sort: this.powpx,
         status: this.powstatu,
@@ -196,28 +185,13 @@ export default {
         url: this.powweb,
       };
       savepower(data).then((res) => {
-        alert(res.data.msg);
-        console.log(res);
       });
-      // const loading = this.$loading({
-      //   lock: true,
-      //   text: "保存中",
-      //   spinner: "el-icon-loading",
-      //   background: "rgba(0, 0, 0, 0.7)",
-      // });
-      // setTimeout(() => {
-      //   loading.close();
-      // }, 2000);
-      // console.log();
-      //跳转
-      //this.$parent.fathroleyes();
     },
     // 取消
     addpowno() {
       this.$parent.fathroleno();
     },
     changesonc(e) {
-      console.log(e);
     },
   },
 };

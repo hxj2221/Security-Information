@@ -185,30 +185,28 @@ export default {
   },
   methods: {
     // 投诉详情
-    complaint(){
-this.$router.push('/Complaints')
+    complaint() {
+      this.$router.push("Complaints");
     },
     // 记录详情
-    details(e,val) {
-      let data={
-        id:val.id
-      }
-      service.details(data).then(res=>{
-        console.log(res)
-        if(res.code==20010){
-            this.$parent.upper()
-     this.bus.$emit('details',res)
-        }
-        else{
+    details(e, val) {
+      let data = {
+        id: val.id,
+      };
+      service.details(data).then((res) => {
+        console.log(res);
+        if (res.code == 20010) {
+          this.$parent.upper();
+          this.bus.$emit("details", res);
+        } else {
           this.$message({
-            type:'error',
-            msg:res.msg,
-            duration:1500
-          })
+            type: "error",
+            msg: res.msg,
+            duration: 1500,
+          });
         }
-      })
-    //   console.log(e,val)
-   
+      });
+      //   console.log(e,val)
     },
     // 新增
     addRecord() {

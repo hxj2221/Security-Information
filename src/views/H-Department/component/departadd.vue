@@ -145,7 +145,6 @@ export default {
   },
   created() {
     service.departadd().then((res) => {
-      // console.log(res.data);
       this.options = res.data.lists;
       this.numb = res.data.number;
     });
@@ -153,7 +152,6 @@ export default {
   methods: {
     // sel
     departsel() {
-      console.log(this.adddepartsel);
     },
     //
     departaddvueyes() {
@@ -164,14 +162,7 @@ export default {
         sort: this.departpxipt,
       };
       service.departsave(data).then((res) => {
-        // console.log(res);
         if (res.code == 20010) {
-          // const loading = this.$loading({
-          //   lock: true,
-          //   text: "保存中",
-          //   spinner: "el-icon-loading",
-          //   background: "rgba(0, 0, 0, 0.7)",
-          // });
           this.$message({
             type: "success",
             message: res.msg,
@@ -180,15 +171,8 @@ export default {
           setTimeout(() => {
             this.reload();
           }, 2000);
-        } else {
-          this.$message({
-            type: "error",
-            message: res.msg,
-            duration: 1000,
-          });
-        }
+        } 
       });
-      // this.$parent.fathdepartyes();
     },
     departaddvueno() {
       this.$parent.fathdepartno();

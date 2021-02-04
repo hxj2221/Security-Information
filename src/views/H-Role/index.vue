@@ -131,15 +131,6 @@ export default {
   },
   created() {
     service.rolelist().then((res) => {
-      console.log(res);
-      if (res.code == 20403) {
-        this.$message({
-          type: "error",
-          message: res.msg,
-          duration: 1000,
-        });
-        this.$router.push("/dashboard");
-      }
       this.tables = res.data;
       this.total = res.allNews;
     });
@@ -151,7 +142,6 @@ export default {
       this.rolevue = false;
       this.addrole = true;
       service.rolepowlist().then((res) => {
-        console.log(res);
         this.addchild = res;
       });
     },
@@ -178,13 +168,11 @@ export default {
       };
       service.roleserch(data).then((res) => {
         this.tables = this.tables1 = res.data;
-        console.log(res);
         this.total = res.allNews;
       });
     },
     // switch开关
     changeSwitch(val, row, id) {
-      console.log(row.status);
       this.$confirm("此操作将修改状态, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -195,9 +183,7 @@ export default {
             id: id,
             status: row.status,
           };
-          console.log(data);
           service.rolestatus(data).then((res) => {
-            console.log(res);
             this.$message({
               type: "success",
               message: res.msg,
@@ -223,15 +209,11 @@ export default {
     handleEdit(id) {
       this.rolevue = false;
       this.editshow = true;
-      console.log(id);
       let param = {
         id: id,
       };
-      console.log(param);
       service.roleedit(param).then((res) => {
-        console.log(res);
         this.childedit = res;
-        console.log(this.childedit);
       });
     },
     // 删除角色
@@ -245,9 +227,7 @@ export default {
           let data = {
             id: id,
           };
-          console.log(data);
           service.roledel(data).then((res) => {
-            console.log(res);
             this.$message({
               type: "success",
               message: res.msg,
@@ -268,17 +248,13 @@ export default {
     },
     // 分页
     handleSizeChange(val) {
-      //this.search = "";
-      console.log(`每页 ${val}条`);
       this.num = val;
       let data = {
         pageSize: this.num,
         pageNum: this.currentPage,
         title: this.search,
       };
-      console.log(data);
       service.rolelist(data).then((res) => {
-        console.log(res);
         this.tables = res.data;
         this.total = res.allNews;
       });
@@ -286,15 +262,12 @@ export default {
     handleCurrentChange(val) {
       //this.search = "";
       this.currentPage = val;
-      console.log(`当前页:${val}`);
       let data = {
         pageSize: this.num,
         pageNum: this.currentPage,
         title: this.search,
       };
-      console.log(data);
       service.rolelist(data).then((res) => {
-        console.log(res);
         this.tables = res.data;
       });
     },
@@ -307,7 +280,6 @@ export default {
       };
       service.roleserch(data).then((res) => {
         this.tables = this.tables1 = res.data;
-        console.log(res);
         this.total = res.allNews;
       });
     },

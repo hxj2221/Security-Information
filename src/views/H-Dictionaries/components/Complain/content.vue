@@ -103,30 +103,9 @@
         type:this.SideNav[0].type
       }
       service.DicList(params).then(res=>{
-        // console.log(res)
         if(res.code==20010){
           this.tableData=res.data
-        }else if (res.code == 20401) {
-            this.$message({
-              message: "请重新登陆",
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push('/login')
-          } else if (res.code == 20403) {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push('/dashboard')
-          } else {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-          }
+        }
       });
     },
     methods: {
@@ -146,21 +125,17 @@
       },
       // 导航
       change(index,item) {
-        // console.log(index)
         this.nowIndex = index;
-        console.log(item.type)
         let params={
           type:item.type
         }
         service.DicList(params).then(res=>{
-          // console.log(res)
           this.tableData=res.data
         })
       },
       // 编辑
       edit(index, row) {
         this.dialogVisible = !this.dialogVisible
-        console.log(row)
         this.form = row
       },
       // 确认更改
@@ -170,9 +145,7 @@
           type: this.form.type,
           id: this.form.id
         }
-        console.log(params)
         service.DicEdit(params).then(res => {
-          console.log(res)
           if (res.code == 20010) {
             this.$message({
               message: '编辑成功',
@@ -180,38 +153,15 @@
               duration: 1000,
             });
             this.dialogVisible = false
-          } else if (res.code == 20401) {
-            this.$message({
-              message: "请重新登陆",
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push('/login')
-          } else if (res.code == 20403) {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push('/dashboard')
-          } else {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-          }
+          } 
         })
       },
       // 删除
       deleteRow(val, row) {
-        console.log(row[val].id)
         let params = {
           id: row[val].id
         }
-        console.log(params)
         service.DicDel(params).then(res => {
-          console.log(res)
           if (res.code == 20010) {
             this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
                 confirmButtonText: "确定",
@@ -233,26 +183,6 @@
                   duration: 1000,
                 });
               });
-          }else if(res.code==20401){
-            this.$message({
-              message: "请重新登陆",
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push('/login')
-          }else if (res.code == 20403) {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push('/dashboard')
-          } else {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
           }
         })
       },

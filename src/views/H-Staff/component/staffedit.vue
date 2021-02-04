@@ -325,8 +325,6 @@ export default {
 
   watch: {
     childed(res) {
-      console.log(res);
-      console.log(res.address); //数据已经拿到
       this.id = res.id;
 
       this.addStaff.job_number = res.job_number;
@@ -369,7 +367,6 @@ export default {
 
   methods: {
     departsel() {
-      console.log(this.addStaff.auth_grouap);
     },
 
     // 保存
@@ -409,10 +406,7 @@ export default {
         // head_department: this.addStaff.head_department,
       };
 
-      console.log(params);
-
       service.staffEdit(params).then((res) => {
-        console.log(res);
 
         if (res.code == 20010) {
           this.$message({
@@ -426,14 +420,6 @@ export default {
           setTimeout(() => {
             this.reload();
           }, 2000);
-        } else {
-          this.$message({
-            message: "请注意" + res.msg,
-
-            type: "error",
-
-            duration: 1300,
-          });
         }
       });
     },
@@ -451,7 +437,6 @@ export default {
     let self = this;
 
     this.bus.$on("ReceiveMessage", function (item) {
-      console.log(item);
 
       self.optionrole = item.auth_grouap;
 

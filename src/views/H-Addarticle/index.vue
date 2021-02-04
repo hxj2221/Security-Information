@@ -173,7 +173,6 @@ export default {
   },
   methods: {
     handleChange(e) {
-      console.log(e);
       this.rules.fileList.push(e);
     },
     // 获取到文章详情的内容
@@ -181,14 +180,11 @@ export default {
       this.ruleForm.details = e;
     },
     handleChange(val) {
-      console.log(val);
       this.id = this.$refs["unitAreacode"].getCheckedNodes()[0].value.id;
     },
     handleRemove(file, fileList) {
-      console.log(file, fileList);
     },
     handlePreview(file) {
-      console.log(file);
     },
     handleExceed(files, fileList) {
       this.$message.warning(
@@ -215,9 +211,7 @@ export default {
         state: this.ruleForm.delivery, //状态
         img_url: this.rules.fileList, //封面
       };
-      console.log(data);
       service.detailadd(data).then((res) => {
-        console.log(res);
         if (res.code == 20010) {
           this.$message({
             type: "success",
@@ -225,19 +219,12 @@ export default {
             duration: 1500,
           });
           this.$router.push('Articlelist')
-        } else {
-          this.$message({
-            type: "error",
-            message: res.msg,
-            duration: 1500,
-          });
         }
       });
     },
   },
   created() {
     service.detailAdd().then((res) => {
-      console.log(res.data);
       let batchdata = res.data;
       let dataValueBatch = (batchdata) =>
         batchdata.map(({ id, title, pid, _child }) =>
