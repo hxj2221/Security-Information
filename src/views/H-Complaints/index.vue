@@ -267,17 +267,18 @@ export default {
     },
     // 查看详情
     looks(index) {
-      this.list = false;
-      this.add = false;
-      this.look = true;
-      this.editshows=false
-      this.operations = false;
+      
       let params = {
         event_number: index.event_number,
       };
       service.componrdetaile(qs.stringify(params)).then((res) => {
          if(res.code==20010){
               this.lookdata = res.data;
+              this.list = false;
+      this.add = false;
+      this.look = true;
+      this.editshows=false
+      this.operations = false;
           }
       });
     },
