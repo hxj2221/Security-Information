@@ -130,7 +130,6 @@ export default {
 
   watch: {
     editchild(newValue) {
-      console.log(newValue);
       this.options = newValue.data.list;
       this.departNameipt = newValue.data.info.title;
       this.valuestatus = newValue.data.info.status;
@@ -141,15 +140,12 @@ export default {
       this.ksnum = newValue.data.info.number;
       this.editdepartsel = newValue.data.info.pid;
       this.editchargetsel = newValue.data.info.head_department;
-      //console.log(this.charge);
     },
   },
   methods: {
     departsel() {
-      console.log(this.editdepartsel);
     },
     chargesel() {
-      console.log(this.editchargetsel);
     },
     departeditvueyes() {
       let data = {
@@ -160,9 +156,7 @@ export default {
         pid: this.editdepartsel,
         head_department: this.editchargetsel,
       };
-      console.log(data);
       service.departeditsave(data).then((res) => {
-        console.log(res);
         if (res.code == 20010) {
           this.$message({
             message: "保存成功！",
@@ -172,13 +166,7 @@ export default {
           setTimeout(() => {
             this.reload();
           }, 2000);
-        } else {
-          this.$message({
-            message: "请注意" + res.msg,
-            type: "error",
-            duration: 1300,
-          });
-        }
+        } 
       });
     },
     departeditvueno() {

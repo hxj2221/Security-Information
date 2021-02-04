@@ -168,28 +168,16 @@ export default {
   created() {
     // 搜索下拉框内容
     service.staffList().then((res) => {
-      console.log(res);
       this.optionbeldepart = res.data;
     });
     // 获取员工列表
     service.stafflist().then((res) => {
-      console.log(res.data[0]);
       if (res.code == 20010) {
         this.tables = res.data[0];
         this.total = res.data[1].count;
       }
-      if (res.code == 20403) {
-        this.$message({
-          type: "error",
-          message: res.msg,
-          duration: 1500,
-        });
-        this.$router.push("/dashboard");
-      }
 
-      // for (let i = 1; i < res.data.length; i++) {
-      //   this.id = res.data[i].id;
-      // }
+   
     });
   },
   methods: {
@@ -201,9 +189,7 @@ export default {
         pNum: this.num, //每页显示数量
         count: this.pageSize, //每页显示的数量
       };
-      console.log(data);
       service.stafflist(data).then((res) => {
-        // console.log(res.data);
         this.tables1 = this.tables = res.data[0];
         this.total = res.data[1].count;
       });
@@ -228,7 +214,6 @@ export default {
     },
    //员工状态
     changeSwitch(val, row) {
-      console.log(row.id);
       this.$confirm("此操作将修改状态, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -239,9 +224,7 @@ export default {
             id: row.id,
             status: row.status,
           };
-          console.log(data);
           service.staffState(data).then((res) => {
-            console.log(res);
             this.$message({
               type: "success",
               message: res.msg,
@@ -271,7 +254,6 @@ export default {
         id: id,
       };
       service.staffedits(params).then((res) => {
-        console.log(res);
         this.childedit = res.data.user;
         if (res.data.user.sex.name == "女") {
           this.childedit.sex = "0";
@@ -282,7 +264,6 @@ export default {
         }
       });
       service.getrole().then((res) => {
-        console.log(res);
         this.all = res.data;
         this.bus.$emit("ReceiveMessage", this.all);
         // this.$parent.fathpowadd();
@@ -329,7 +310,6 @@ export default {
         department_id: this.staffbeldepart,
       };
       service.stafflist(data).then((res) => {
-        console.log(res);
         this.tables = res.data[0];
         this.total = res.data[1].count;
       });
@@ -337,7 +317,6 @@ export default {
     handleCurrentChange(val) {
       //this.staffbeldepart = "";
       this.currentPage = val;
-      console.log(`当前页: ${val}`);
       let data = {
         pNum: this.num,
         current: this.currentPage,
@@ -345,7 +324,6 @@ export default {
         department_id: this.staffbeldepart,
       };
       service.stafflist(data).then((res) => {
-        console.log(res);
         this.tables = res.data[0];
       });
     },
@@ -357,9 +335,7 @@ export default {
         pNum: this.num, //每页显示数量
         count: this.pageSize, //每页显示的数量
       };
-      console.log(data);
       service.stafflist(data).then((res) => {
-        console.log(res.data);
         this.tables1 = this.tables = res.data[0];
         this.total = res.data[1].count;
       });

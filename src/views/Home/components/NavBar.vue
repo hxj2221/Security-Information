@@ -57,16 +57,12 @@ export default {
     this.reload()  // 点击侧边栏页面重载
   },
    handleOpen(key, keyPath) {
-        console.log(key, keyPath);
       },
       handleClose(key, keyPath) {
-        console.log(key, keyPath);
       }
   },
   created(){
-    console.log(this.$router.options.routes)
     service.getmenus().then(res=>{
-      console.log(res.data)
       this.menus=res.data
     })
   }

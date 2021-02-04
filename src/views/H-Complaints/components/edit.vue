@@ -422,7 +422,6 @@ inject: ["reload"],
     },
     //保存提交事件
     keepform() {
-      console.log(this.comde)
       if (this.comde !== "" && this.comde !== null&&this.comde.length!==0&&this.incidentdata !== ""&&this.comdata !== ""&&this.comname !== ""&&
       this.comgender!==''&&this.comagenumber !== ""&&this.comphone!== ""&&this.commode!== ""&&this.relation!==''&&this.consulttime!==''
       &&this.nature!==''&&this.comtype!==''&&this.agentname!==''&&this. agentphone!==''&&this.address!=='') {
@@ -430,7 +429,6 @@ inject: ["reload"],
        let one=new Array
         let two=new Array
        for(let i in this.comde){
-         console.log(i)
          if(Array.isArray(this.comde[i])){
              if(this.comde[i].length == 1){
           one.push(this.comde[i][0])
@@ -445,7 +443,6 @@ inject: ["reload"],
          }
       
         }
-        console.log(com)
          let comdes = com;
        let params = {
         event_number: this.comnumber, //业务编号
@@ -467,7 +464,6 @@ inject: ["reload"],
         handle_name: this.agentname, //经办人姓名
         handle_phone: this.agentphone, //经办人手机号
       };
-      console.log(params)
       service.editomponent(params).then((res) => {
         if(res.code==20010){
            this.$message({
@@ -476,29 +472,6 @@ inject: ["reload"],
             duration: 1000,
           });
           this.reload()
-        }
-         else if(res.code==20401){
-          this.$message({
-            message: "请重新登陆",
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/login')
-        }
-        else if(res.code==20403){
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        }
-        else{
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
         }
         
       });

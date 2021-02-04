@@ -212,7 +212,6 @@ export default {
   // 个人信息数据
   created() {
     service.personxq().then((res) => {
-      console.log(res);
       this.personNameipt = res.data.name;
       this.personAgeipt = res.data.age;
       this.personPhoneipt = res.data.phone;
@@ -224,12 +223,10 @@ export default {
       this.persongensel = res.data.sex.number;
       this.selectedOptions = res.data.address;
       this.jobnum = res.data.job_number;
-      console.log(this.persongensel);
     });
   },
   methods: {
     changesex() {
-      console.log(this.persongense);
       this.persongensel = this.persongense;
     },
     personsave() {
@@ -241,7 +238,6 @@ export default {
         eraddress: this.personaddreiPt,
         address: this.selectedOptions,
       };
-      console.log(data);
       service.changeinfor(data).then((res) => {
         if (res.code == 20010) {
           this.$message({
@@ -250,22 +246,10 @@ export default {
             duration: 1000,
           });
           this.reload();
-        } else {
-          this.$message({
-            type: "warning",
-            message: res.msg,
-            duration: 1000,
-          });
         }
-        console.log(res);
       });
     },
     handleChange(cityvalue) {
-      console.log(
-        CodeToText[cityvalue[0]],
-        CodeToText[cityvalue[1]],
-        CodeToText[cityvalue[2]]
-      );
       let a =
         CodeToText[cityvalue[0]] +
         " " +
@@ -273,7 +257,6 @@ export default {
         " " +
         CodeToText[cityvalue[2]];
       this.address = a;
-      console.log(this.address);
     },
     personback() {
       this.$router.push("/dashboard");

@@ -123,15 +123,6 @@ export default {
   },
   created() {
     service.departlist().then((res) => {
-      console.log(res);
-      if (res.code == 20403) {
-        this.$message({
-          type: "error",
-          message: res.msg,
-          duration: 1000,
-        });
-        this.$router.push("/dashboard");
-      }
       this.dormitory = res.data;
     });
   },
@@ -148,7 +139,6 @@ export default {
       };
       service.departserc(param).then((res) => {
         this.dormitory = this.tables1 = res.data;
-        console.log(res);
       });
     },
     // 子
@@ -166,7 +156,6 @@ export default {
     },
     // switch开关
     changeSwitch(val, row) {
-      console.log(row.status);
       this.$confirm("此操作将修改状态, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -177,9 +166,7 @@ export default {
             id: row.id,
             status: row.status,
           };
-          console.log(data);
           service.departstatus(data).then((res) => {
-            console.log(res);
             this.$message({
               type: "success",
               message: res.msg,
@@ -212,14 +199,11 @@ export default {
     handleEdit(id) {
       this.editdep = true;
       this.departvue = false;
-      // console.log(id);
       let param = {
         id: id,
       };
       service.departedit(param).then((res) => {
-        // console.log(res);
         this.departchildedit = res;
-        //this.departchildedit = res.user.sex;
       });
     },
     //删除：
@@ -233,9 +217,7 @@ export default {
           let data = {
             id: id,
           };
-          // console.log(data);
           service.departdel(data).then((res) => {
-            // console.log(res);
             this.$message({
               type: "success",
               message: res.msg,

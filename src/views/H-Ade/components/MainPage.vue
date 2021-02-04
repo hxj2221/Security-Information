@@ -170,7 +170,6 @@
        // 导出事件
     exportcom() {  
       let dataA =this.tableData
-      console.log(this.tableData)
       let dataB=new Array()
       for(let i =0;i<dataA.length;i++){
         dataA[i].occurscen=dataA[i].occurscene.title
@@ -180,16 +179,6 @@
               dataA[i].occur_tim=this.initTime(data)
               dataB.push(dataA[i])
       }
-      console.log(dataB)
-      //   dataA.forEach(element => {
-      //      element.occurscene=element.occurscene.title
-      //      element.degreeweight=element.degreeweight.title
-      //       element.department=element.department.title
-      //       let data=this.formatDate(element.occur_time)
-      //         element.occur_time=this.initTime(data)
-      // });
-      // console.log(dataA)
-      // console.log(this.tableData)
       import('@/vendor/Export2Excel').then(excel => {
       const tHeader = ['事件编号', '患者姓名', '性别', '年龄/岁','事发日期','发生场所','轻重程度','上报时间','患者科室','上报人' ]
       const filterVal = ['event_num', 'patient_name', 'sex', 'age', 'occur_tim', 'occurscen', 'degreeweigh', 'create_time', 'departmen', 'create_uid' ]
@@ -222,7 +211,6 @@
       },
       // 时间戳转为日期格式
       getDate: function (row, column, cellValue, index) {
-        // console.log(new Date(cellValue * 1000))
         var date = new Date(cellValue * 1000);
         var y = date.getFullYear();
         var m = date.getMonth() + 1;
@@ -240,23 +228,8 @@
       Add() {
         this.$emit('pageAdd')
         service.AdeSel().then(res => {
-          // console.log(res)
           if (res.code == 20010) {
             this.bus.$emit("eventNum", res.event_num)
-          } else if (res.code == 20401) {
-            this.$message({
-              message: "请重新登陆",
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push('/login')
-          } else if (res.code == 20403) {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push('/dashboard')
           }
         })
       },
@@ -266,33 +239,17 @@
           id: index.id
         }
         service.badSee(params).then(res => {
-          // console.log(res)
           if (res.code == 20010) {
             this.$emit('pageDetail')
             this.details = res.data
             this.bus.$emit('detail', this.details)
-          } else if (res.code == 20401) {
-            this.$message({
-              message: "请重新登陆",
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push('/login')
-          } else if (res.code == 20403) {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push('/dashboard')
-          }
+          } 
         })
       },
       // 搜索事件
       screen() {
         if ((this.occur_time !== '' && this.occur_time !== null) || this
           .patient_name !== '' || this.occur_scene !== '' || this.degree_weight_id !== '') {
-          // console.log(this.occur_time)
           let params = {
             patient_name: this.patient_name,
             starttime: this.starttime,
@@ -302,26 +259,10 @@
             pageNum: this.currentPage4,
             pageSize: this.pageSize
           }
-          // console.log(params)
           service.AdeSearch(params).then(res => {
-            console.log(res)
             if (res.code == 20010) {
               this.tableData = res.data
               this.pageCount = res.allnews
-            } else if (res.code == 20401) {
-              this.$message({
-                message: "请重新登陆",
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push('/login')
-            } else if (res.code == 20403) {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push('/dashboard')
             }
           })
         } else {
@@ -330,24 +271,9 @@
             pageSize: this.pageSize
           }
           service.AdeList(params).then(res => {
-            // console.log(res)
             if (res.code == 20010) {
               this.tableData = res.data
               this.pageCount = res.allnews
-            } else if (res.code == 20401) {
-              this.$message({
-                message: "请重新登陆",
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push('/login')
-            } else if (res.code == 20403) {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push('/dashboard')
             }
           })
         }
@@ -363,26 +289,10 @@
           pageNum: this.currentPage4,
           pageSize: this.pageSize
         }
-        console.log(params)
         service.AdeSearch(params).then(res => {
-          // console.log(res)
           if (res.code == 20010) {
             this.tableData = res.data
             this.pageCount = res.allnews
-          } else if (res.code == 20401) {
-            this.$message({
-              message: "请重新登陆",
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push('/login')
-          } else if (res.code == 20403) {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push('/dashboard')
           }
         })      
       },
@@ -390,7 +300,6 @@
       // 分页
       // 当前页
       currentChage(val) {
-        // console.log(val)
         this.currentPage4 = val
         if ((this.occur_time !== '' && this.occur_time !== null) || this
           .patient_name !== '' || this.occur_scene !== '' || this.degree_weight_id !== '') {
@@ -404,25 +313,10 @@
             pageSize: this.pageSize
           }
           service.AdeSearch(params).then(res => {
-            // console.log(res)
             if (res.code == 20010) {
               this.tableData = res.data
               this.pageCount = res.allnews
-            } else if (res.code == 20401) {
-              this.$message({
-                message: "请重新登陆",
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push('/login')
-            } else if (res.code == 20403) {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push('/dashboard')
-            }
+            } 
           })
         } else {
           let params = {
@@ -430,31 +324,15 @@
             pageSize: this.pageSize
           }
           service.AdeList(params).then(res => {
-            // console.log(res)
             if (res.code == 20010) {
               this.tableData = res.data
               this.pageCount = res.allnews
-            } else if (res.code == 20401) {
-              this.$message({
-                message: "请重新登陆",
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push('/login')
-            } else if (res.code == 20403) {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push('/dashboard')
             }
           })
         }
       },
       // 每页条数
       handleSizeChange(val) {
-        // console.log(val)
         this.pageSize = val
         if ((this.occur_time !== '' && this.occur_time !== null) || this
           .patient_name !== '' || this.occur_scene !== '' || this.degree_weight_id !== '') {
@@ -471,20 +349,6 @@
             if (res.code == 20010) {
               this.tableData = res.data
               this.pageCount = res.allnews
-            } else if (res.code == 20401) {
-              this.$message({
-                message: "请重新登陆",
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push('/login')
-            } else if (res.code == 20403) {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push('/dashboard')
             }
 
           })
@@ -497,22 +361,7 @@
             if (res.code == 20010) {
               this.tableData = res.data
               this.pageCount = res.allnews
-            } else if (res.code == 20401) {
-              this.$message({
-                message: "请重新登陆",
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push('/login')
-            } else if (res.code == 20403) {
-              this.$message({
-                message: res.msg,
-                type: "error",
-                duration: 1000,
-              });
-              this.$router.push('/dashboard')
-            }
-            // console.log(res)
+            } 
 
           })
         }
@@ -526,30 +375,14 @@
         pageSize: this.pageSize
       }
       service.AdeList(params).then(res => {
-        // console.log(res)
-        if (res.cede == 20401) {
-          this.$message({
-            message: "请重新登陆",
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/login')
-        } else if (res.code == 20403) {
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        } else {
+        
           this.tableData = res.data
           this.pageCount = res.allnews
-        }
+      
 
       })
       // 下拉框内容
       service.AdeSel().then(res => {
-        // console.log(res)
         this.options = res.address
         this.options1 = res.degree_weight
       })

@@ -386,7 +386,6 @@ export default {
   },
   created() {
     service.accountman().then((res) => {
-      console.log(res);
       this.phone = res.data.phone;
       this.email = res.data.email;
     });
@@ -398,19 +397,12 @@ export default {
         phone: this.phone,
       };
       service.phoneyz(data).then((res) => {
-        console.log(res);
         this.$message({
           type: "success",
           message: res.msg,
           duration: 1000,
         });
-        if (res.code == 20020) {
-          this.$message({
-            type: "error",
-            message: res.msg,
-            duration: 1000,
-          });
-        } else if (res.code == 20010) {
+         if (res.code == 20010) {
           let timer = setInterval(() => {
             this.isCodeIng = true;
             this.disablbtn = true;
@@ -436,7 +428,6 @@ export default {
         pcaptcha: this.phonecode,
       };
       service.phonechange(data).then((res) => {
-        console.log(res);
         this.$message({
           type: "success",
           message: res.msg,
@@ -454,14 +445,7 @@ export default {
         phone: this.changephone,
       };
       service.phoneyz(data).then((res) => {
-        console.log(res);
-        if (res.code == 20020) {
-          this.$message({
-            type: "error",
-            message: res.msg,
-            duration: 1000,
-          });
-        } else if (res.code == 20010) {
+         if (res.code == 20010) {
           let timer = setInterval(() => {
             this.isCodeIng = true;
             this.changedisablbtn = true;
@@ -492,7 +476,6 @@ export default {
         pcaptcha: this.changephonecode,
       };
       service.phonehb(data).then((res) => {
-        console.log(res);
         this.$message({
           type: "success",
           message: res.msg,
@@ -514,7 +497,6 @@ export default {
         phone: this.phone,
       };
       service.phoneyz(data).then((res) => {
-        console.log(res);
         if (res.code == 20020) {
           alert(res.msg);
         } else if (res.code == 20010) {
@@ -542,7 +524,6 @@ export default {
         pcaptcha: this.emailphonecode,
       };
       service.phonechange(data).then((res) => {
-        console.log(res);
         if (res.msg == "身份验证通过!") {
           this.emailyz = false;
           this.emailnew = true;
@@ -558,7 +539,6 @@ export default {
         email: this.newemail,
       };
       service.emailcode(data).then((res) => {
-        console.log(res);
         if (res.code == 20020) {
           alert(res.msg);
         } else if (res.info.code == 20010) {
@@ -586,7 +566,6 @@ export default {
         Ecaptcha: this.newemailcode,
       };
       service.emailhb(data).then((res) => {
-        console.log(res);
         if (res.msg == "20010") {
           this.emailnew = false;
           this.reload();

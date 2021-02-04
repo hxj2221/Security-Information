@@ -183,7 +183,6 @@ export default {
   },
   watch: {
     editchid(newValue) {
-      console.log(newValue.info); //数据已经拿到
       this.roleNameipt = newValue.info.title;
       this.rolems = newValue.info.describe;
       this.px = newValue.info.sort;
@@ -191,18 +190,14 @@ export default {
       this.jkid = newValue.info.id;
       this.powlist = newValue.rule;
       this.radio = newValue.info.data_rule;
-      console.log(this.powlist);
     },
   },
   methods: {
     checkchange() {
-      console.log(this.checkList);
     },
     vcheckchange() {
-      console.log(this.vcheck);
     },
     fcheckchange() {
-      console.log(this.fcheck);
     },
     //   保存
     roleaddvueyes() {
@@ -215,9 +210,7 @@ export default {
         data_rule: this.radio,
         sort: this.px,
       };
-      console.log(data);
       service.roleeditsqve(data).then((res) => {
-        console.log(res);
         if (res.code == 20010) {
           this.$message({
             message: "保存成功！",
@@ -227,25 +220,17 @@ export default {
           setTimeout(() => {
             this.reload();
           }, 2000);
-        } else {
-          this.$message({
-            message: "请注意" + res.msg,
-            type: "error",
-            duration: 1300,
-          });
-        }
+        } 
       });
     },
     // 查看权限
     radiochange() {
-      console.log(this.radio);
     },
     // 取消
     roleaddvueno() {
       this.$parent.fathroleno();
     },
     changesonc(e) {
-      console.log(e);
     },
   },
 };

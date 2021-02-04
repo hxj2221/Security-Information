@@ -297,16 +297,10 @@ export default {
   },
   methods: {
     stffaddrolesel(val) {
-      // for (let i = 0; i <= val.length - 1; i++) {
-      //   let a = val[i];
-      //   this.staffroleselC = a;
-      // }
-      console.log(this.addStaff.staffrolesel);
     },
 
     // 保存
     departsel() {
-      console.log(this.addStaff.auth_grouap);
     },
     staffaddvueyes() {
       //1  正常   0 禁用
@@ -328,7 +322,6 @@ export default {
         role_id: this.addStaff.staffrolesel,
         department_id: this.addStaff.staffdepart,
       };
-      console.log(data);
       service.staffAdd(data).then((res) => {
         if (res.code == "20010") {
           this.$message({
@@ -339,13 +332,7 @@ export default {
           setTimeout(() => {
             this.reload();
           }, 2000);
-        } else {
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-        }
+        } 
       });
     },
     // 返回
@@ -374,15 +361,6 @@ export default {
       }
       return { value: id, label: nameArray };
 
-      // console.log(cityvalue)
-      //       this.addressC =
-      //         CodeToText[cityvalue[0]] +
-      //         "/" +
-      //         CodeToText[cityvalue[1]] +
-      //         "/" +
-      //         CodeToText[cityvalue[2]];
-      // console.log(this.addressC)
-      //       console.log(this.addStaff.address);
     },
     // 子调用父
     staffaddvueno() {
