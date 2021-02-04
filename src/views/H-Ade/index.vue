@@ -31,11 +31,11 @@
     data() {
       return {
         // 主页面
-        MainShow: false,
+        MainShow: true,
         // 增加
         adeAdd: false,
         // 详情
-        detailShow: true
+        detailShow: false
       };
     },
 
