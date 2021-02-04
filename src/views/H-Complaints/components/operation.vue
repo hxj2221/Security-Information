@@ -512,11 +512,36 @@
                           label: 'title',
                           children: '_child',
                           multiple: 'true',
-                        }" :show-all-levels="false" v-model="comde" collapse-tags clearable style="margin-left: 10px">
-                        </el-cascader>
-                      </div>
-                    </el-col>
-                  </el-row>
+                        }"
+                        :show-all-levels="false"
+                        v-model="comde"
+                        collapse-tags
+                        clearable
+                        style="margin-left: 10px"
+                      ></el-cascader></div
+                  ></el-col>
+                </el-row>
+                 <el-row type="flex" class="row-bg" justify="space-between">
+                  <el-col :span="6" :push="1"
+                    ><div class="grid-content bg-purple">
+                      <span class="label">责任人:</span>
+                      <br/>
+                       <el-cascader
+                        ref="cascader"
+                         placeholder="请选择责任人"
+                        :options="opdata[1].event_type"
+                        :props="{
+                          value: 'id',
+                          label: 'title',
+                          multiple: 'true'}"
+                          :show-all-levels="false"
+                          v-model="eventtype"
+                          clearabl
+                           style="margin-left:10px"
+                        ></el-cascader>
+                      </div
+                  ></el-col>
+                </el-row>
                   <el-row type="flex" class="row-bg" justify="space-between">
                     <el-col :span="6" :push="1">
                       <div class="grid-content bg-purple">
