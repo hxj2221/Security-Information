@@ -1,18 +1,15 @@
 import * as axios from 'axios';
-
+import router from '../router'
 // 这里可根据具体使用的ui组件库进行替换
 import { Message, MessageBox } from 'element-ui';
 import { AxiosResponse, AxiosRequestConfig } from 'axios';
-
 export interface AjaxResponse {
   code: number;
   message: string;
   data: any
 }
-
 // baseURL根据实际进行定义
 const baseURL = 'http://bt1.wlqqlp.com:8082/';
-
 // 创建axios实例
 const service = axios.default.create({
   baseURL,
@@ -40,6 +37,7 @@ service.interceptors.request.use((config: AxiosRequestConfig) => {
 });
 
 service.interceptors.response.use((response: AxiosResponse) => {
+  
   if (response.status !== 200) {
     Message({
       message: `请求错误`,
@@ -49,27 +47,36 @@ service.interceptors.response.use((response: AxiosResponse) => {
     return { code: 100 }
   } else{
     let res = response.data;
-    if (response.data.token) {
-      
-      // sessionStorage.setItem('token', response.data.token)
+    if(res.code==20010){
+       
+      }
+    else if(res.code==20401){
+    //token失效
+      MessageBox.alert('此账号已在其他网页登录，请重新登录', {
+            confirmButtonText: '重新登录',
+            type: 'warning'
+          }).then(() => {
+            sessionStorage.clear()
+            location.href="http://192.168.0.81:8080/"
+          })
+     
     }
-    // if (code === -1) {
-    //   MessageBox.alert(msg, {
-    //     confirmButtonText: '重新登录',
-    //     type: 'warning'
-    //   }).then(() => {
-    //       sessionStorage.removeItem('token');
-    //       sessionStorage.removeItem('user');
-    //       location.reload() // 为了重新实例化vue-router对象 避免bug
-    //   })
-    //   return Promise.reject('error')
-    // } else if (code !== 0) {
-    //   Message({
-    //     message: msg || '服务器返回数据有误',
-    //     type: 'warning',
-    //     duration: 2 * 1000
-    //   });
-    // }   
+    else if(res.code==20403){
+       //无权限
+       Message({
+        message: '您没权限进行此操作',
+        type: 'warning',
+        duration: 3 * 1000
+      });
+     
+    }
+    else{
+      Message({
+        message:res.msg,
+        type: 'error',
+        duration: 3 * 1000
+      });
+    }
     return res
   }
 }, (err: any) => {

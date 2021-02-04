@@ -1,7 +1,7 @@
 /* 查看不良事件详情 */
 
 .AdeDetail {
-    width: 95%;
+    /* width: 95%; */
     font-size: 14px;
     margin: 0 auto 100px;
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
@@ -22,7 +22,7 @@
     font-weight: 700;
     padding: 0 43px;
     background: #fff;
-    border-bottom: 3px solid #f2f2f2;
+    border-bottom: 2px solid #f2f2f2;
     
 }
 

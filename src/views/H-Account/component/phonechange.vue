@@ -119,7 +119,6 @@ export default {
         pcaptcha: this.phonecode,
       };
       service.phonechange(data).then((res) => {
-        console.log(res);
         if (res.msg == "身份验证通过!") {
           this.phonenew = true;
           this.phoneyz = false;
@@ -131,10 +130,7 @@ export default {
         phone: this.phone,
       };
       service.phoneyz(data).then((res) => {
-        console.log(res);
-        if (res.code == 20020) {
-          alert(res.msg);
-        } else if (res.code == 20010) {
+         if (res.code == 20010) {
           let timer = setInterval(() => {
             this.isCodeIng = true;
             this.disablbtn = true;
@@ -157,11 +153,8 @@ export default {
       let data = {
         phone: this.changephone,
       };
-      service.phoneyz(data).then((res) => {
-        console.log(res);
-        if (res.code == 20020) {
-          alert(res.msg);
-        } else if (res.code == 20010) {
+      service.phoneyz(data).then((res) => { 
+        if (res.code == 20010) {
           let timer = setInterval(() => {
             this.isCodeIng = true;
             this.disablbtn = true;
@@ -190,7 +183,6 @@ export default {
         pcaptcha: this.changephonecode,
       };
       service.phonehb(data).then((res) => {
-        console.log(res);
         if (res.code == "20010") {
           this.phonenew = false;
         }

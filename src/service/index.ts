@@ -21,7 +21,7 @@ export default {
   },
   // 工作台
   dashboard: async () => {
-    return await service.get(`${baseUrl}api/home/Lz_workbench`).then(res => res).catch(err => err)
+    return await service.get(`${baseUrl}api/Communal/Lz_workbench`).then(res => res).catch(err => err)
   },
   // 投诉列表
   ComList: async (pNum: number, current: number) => {
@@ -39,13 +39,13 @@ export default {
   AddComponent: async (params: any) => {
     return await service.post(`${baseUrl}api/tsevent/add`, params).then(res => res).catch(err => err)
   },
-   // 修改投诉页面数据
-   EditComponent: async (event_number:any) => {
-    return await service.get(`${baseUrl}api/tsevent/edit`,{params:{event_number}}).then(res => res).catch(err => err)
+  // 修改投诉页面数据
+  EditComponent: async (event_number: any) => {
+    return await service.get(`${baseUrl}api/tsevent/edit`, { params: { event_number } }).then(res => res).catch(err => err)
   },
   // 修改投诉
-  editomponent: async (data:any) => {
-    return await service.post(`${baseUrl}api/tsevent/edit`,data).then(res => res).catch(err => err)
+  editomponent: async (data: any) => {
+    return await service.post(`${baseUrl}api/tsevent/edit`, data).then(res => res).catch(err => err)
   },
   // 获取详情
   componrdetaile: async (data: any) => {
@@ -329,10 +329,52 @@ export default {
   accountman: async () => {
     return await service.get(`${baseUrl}api/home/user_home`).then(res => res).catch(err => err)
   },
-  // 文章列表 (post)
-  detailList: async () => {
-    return await service.post(`${baseUrl}api/article/article`).then(res => res).catch(err => err)
+  // 文章列表 搜索/分页
+  detailSeach: async (params: any) => {
+    return await service.get(`${baseUrl}api/article/article`, { params }).then(res => res).catch(err => err)
   },
+  // 文章列表 (post)
+  detailList: async (data:any) => {
+    return await service.post(`${baseUrl}api/article/article`,data).then(res => res).catch(err => err)
+  },
+  // 文章添加（get）
+  detailAdd: async (params: any) => {
+    return await service.get(`${baseUrl}api/article/article_add`, { params }).then(res => res).catch(err => err)
+  },
+  // 文章添加（post）
+  detailadd: async (data: any) => {
+    return await service.post(`${baseUrl}api/article/article_add`, data).then(res => res).catch(err => err)
+  },
+  // 文章编辑（get）
+  detailEdit: async (params: any) => {
+    return await service.get(`${baseUrl}api/article/article_eit`, { params }).then(res => res).catch(err => err)
+  },
+  // 文章编辑（post）
+  detailedit: async (data: any) => {
+    return await service.post(`${baseUrl}api/article/article_eit`, data).then(res => res).catch(err => err)
+  },
+  // 文章详情
+  detailinfo: async (params: any) => {
+    return await service.get(`${baseUrl}api/article/article_info`, {params}).then(res => res).catch(err => err)
+  },
+ // 文章删除
+ detailDel: async (params: any) => {
+  return await service.get(`${baseUrl}api/article/article_del`, {params}).then(res => res).catch(err => err)
+},
+// 批量文章删除
+detailDels: async (params: any) => {
+  return await service.get(`${baseUrl}api/article/article_alldel`, {params}).then(res => res).catch(err => err)
+},
+// 批量移至栏目(get)
+detailAlls: async (params: any) => {
+  return await service.get(`${baseUrl}api/article/article_allc`, {params}).then(res => res).catch(err => err)
+},
+// 批量移至栏目(post)
+detailalls: async (data: any) => {
+  return await service.post(`${baseUrl}api/article/article_allc`, data).then(res => res).catch(err => err)
+},
+
+
 
   // 文章分类
   AriList: async (params: any) => {

@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "5434086",
+      "name": "医院管理",
+      "font_class": "yiyuanguanli",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
       "icon_id": "9874468",
       "name": "KHCFDC_打印",
       "font_class": "dayin",

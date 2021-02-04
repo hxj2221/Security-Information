@@ -180,7 +180,7 @@
             <el-button slot="trigger" size="small" type="primary"
               >选取文件</el-button
             >
-            <div slot="tip">未知</div>
+            <div slot="tip" style="color: red">文件最大不能超过20MB</div>
           </el-upload>
         </el-form-item>
       </el-form>
@@ -230,7 +230,6 @@ export default {
   },
   created() {
     service.filelist().then((res) => {
-      console.log(res);
       this.tableData = res.data;
       this.options = res.tree;
       this.total = res.allNews;
@@ -253,16 +252,12 @@ export default {
         file_name: this.searchipt,
         class_id: this.selregion,
       };
-      console.log(data);
       service.filelist(data).then((res) => {
-        console.log(res);
         this.tables1 = this.tableData = res.data;
         this.total = res.allNews;
       });
     },
-    searchselchang() {
-      console.log(this.selregion);
-    },
+    searchselchang() {},
     // 上传文件显示
     uploadclassify() {
       this.dialogVisible = true;
@@ -295,9 +290,7 @@ export default {
           class_id: this.editselvalue,
           base64_file: res,
         };
-        console.log(data);
         service.fileupload(data).then((res) => {
-          console.log(res);
           if (res.code == 20010) {
             this.$message({
               message: res.msg,
@@ -320,25 +313,19 @@ export default {
         }; //转 失败
         reader.onerror = function (error) {
           reject(error);
-          console.log(reject);
         }; //转 结束  咱就 resolve 出去
         reader.onloadend = function () {
           resolve(fileResult);
-          console.log(fileResult);
         };
       });
     },
-    selchang() {
-      console.log(this.editselvalue);
-    },
+    selchang() {},
     // 删除
     deleteRow(id) {
-      console.log(id);
       let data = {
         id: id,
       };
       service.filedel(data).then((res) => {
-        console.log(res);
         this.$message({
           type: "success",
           message: res.msg,
@@ -349,12 +336,10 @@ export default {
     },
     // 下载
     handleClick(id) {
-      console.log(id);
       let param = {
         id: id,
       };
       service.filedown(param).then((res) => {
-        console.log(res);
         // let url = window.URL.createObjectURL(new Blob([res]));
         // let link = document.createElement("a");
         // link.style.display = "none";

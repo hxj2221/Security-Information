@@ -1,14 +1,13 @@
 /* 新增 */
 .addAll {
   width: 95%;
-  padding-bottom: 114px;
+  padding-bottom: 58px;
   position: relative;
   background-color: #fff;
   text-align: left;
   margin: 0 auto;
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
   border-radius: 5px;
-  min-height: 805px;
 }
 
 .addAll .formBasics {
@@ -80,14 +79,13 @@
 
 /* 新增不良底部固定按钮 */
 .addAll .root{
-  width: 79.7%;
-  height: 91px;
-  position: fixed;
+  width: 100%;
+  position: absolute;
   bottom: 0;
   background-color: #fff;
   box-shadow: 0px 5px 30px rgba(204, 204, 204, 1);
   text-align: right;
-  line-height: 91px;
+  line-height: 62px;
   cursor: pointer;
   z-index: 9999;
 }

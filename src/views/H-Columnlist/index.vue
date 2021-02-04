@@ -216,7 +216,6 @@ export default {
     hhh() {
       this.dialogVisible=true
       service.Ariadd().then((res) => {
-        //console.log(res.data)
 
         let batchdata = res.data;
         //valueBatch
@@ -247,38 +246,29 @@ export default {
           id: 0,
           value: 0,
           pid: 0,
-          label: "默认值",
+          label: "默认为一级分类",
         };
         this.options.unshift(one);
       });
     },
     // 更改状态
     changeSwitch(val, row) {
-      console.log(val, row.id);
       let data = {
         id: row.id,
       };
       service.AriStatus(data).then((res) => {
-        console.log(res);
         if (res.code == 20010) {
           this.$message({
             message: res.msg,
             type: "success",
             duration: 1500,
           });
-        } else {
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1500,
-          });
-        }
+        } 
       });
     },
     // 编辑
     edit(index, row, id) {
       this.dialogVisibles = true;
-      console.log(index, row, id);
       let params = {
         id: id,
       };
@@ -296,7 +286,6 @@ export default {
         order: this.form.order,
       };
       service.Ariedit(data).then((res) => {
-        console.log(res);
         if (res.code == 20010) {
           this.$message({
             message: res.msg,
@@ -305,13 +294,7 @@ export default {
           });
           this.dialogVisibles = false;
           this.reload();
-        } else {
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1500,
-          });
-        }
+        } 
       });
     },
     // 添加中级选择器
@@ -332,7 +315,6 @@ export default {
         order: this.form.order,
       };
       service.AriAdd(data).then((res) => {
-        console.log(res);
         if (res.code == 20010) {
           this.$message({
             message: res.msg,
@@ -341,12 +323,6 @@ export default {
           });
           this.dialogVisible = false;
           this.reload();
-        } else {
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1500,
-          });
         }
       });
     },
@@ -362,7 +338,6 @@ export default {
     },
     // 删除
     handDel(row) {
-      console.log(row);
       this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -373,7 +348,6 @@ export default {
             id: row.id,
           };
           service.AriDel(params).then((res) => {
-            console.log(res);
             this.$message({
               type: "success",
               message: "删除成功!",
@@ -389,85 +363,7 @@ export default {
             duration: 1500,
           });
         });
-      // row[0]._child.map(res=>{
-      //   console.log(res)
-      // })
-      // console.log(val,row)
-      // this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-      //   confirmButtonText: "确定",
-      //   cancelButtonText: "取消",
-      //   type: "warning",
-      // })
-      //   .then(() => {
-      //     let params = {
-      //       id: val,
-      //     };
-      //     service.AriDel(params).then((res) => {
-      //       console.log(res)
-      //       this.$message({
-      //         type: "success",
-      //         message: "删除成功!",
-      //         delete: row.splice(val, 1),
-      //         duration: 1500,
-      //       });
-      //       this.reload();
-      //     });
-      //   })
-      //   .catch(() => {
-      //     this.$message({
-      //       type: "info",
-      //       message: "已取消删除",
-      //       duration: 1500,
-      //     });
-      //   });
-      // let params = {
-      //   id: index,
-      // };
-      // service.AriDel(params).then((res) => {
-      //   console.log(res);
-      //   this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-      //     confirmButtonText: "确定",
-      //     cancelButtonText: "取消",
-      //     type: "warning",
-      //   })
-      //     .then(() => {
-      //       if (res.code == 20010) {
-      //         this.$message({
-      //           type: "success",
-      //           message: "删除成功!",
-      //           delete: row.splice(index, 1),
-      //           duration: 1000,
-      //         });
-      //       }
-      //     })
-      //     .catch(() => {
-      //       this.$message({
-      //         type: "info",
-      //         message: "已取消删除",
-      //         duration: 1000,
-      //       });
-      //     });
-      // });
-      // this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-      //   confirmButtonText: "确定",
-      //   cancelButtonText: "取消",
-      //   type: "warning",
-      // })
-      //   .then(() => {
-      //     this.$message({
-      //       type: "success",
-      //       message: "删除成功!",
-      //       delete: row.splice(i, 1),
-      //       duration: 1000,
-      //     });
-      //   })
-      //   .catch(() => {
-      //     this.$message({
-      //       type: "info",
-      //       message: "已取消删除",
-      //       duration: 1000,
-      //     });
-      //   });
+     
     },
   },
   created() {

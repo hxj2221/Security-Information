@@ -5,6 +5,7 @@
       <headpow></headpow>
       <div class="jurisdiction">
         <el-table
+         style="text-align: center "
           :data="tableData"
           :header-cell-style="getRowClass"
           max-height="625"
@@ -28,9 +29,9 @@
             prop="sort"
             label="排序"
           ></el-table-column>
-          <el-table-column prop="title" label="名称" width="180">
+          <el-table-column prop="title" label="名称" width="180" class="aa" style="text-align: left!important;">
           </el-table-column>
-          <el-table-column prop="level" label="等级" width="180">
+          <el-table-column prop="level" label="等级" width="180" >
           </el-table-column>
           <el-table-column label="左侧图标">
             <template slot-scope="scope">
@@ -132,8 +133,9 @@
               <el-form-item label="标题" width="150">
                 <el-input v-model="powlab" auto-complete="off"></el-input>
               </el-form-item>
-              <el-form-item label="图标" width="120">
-                <el-input v-model="powicon" auto-complete="off"></el-input>
+              <el-form-item label="图标" width="120" style="text-align:left">
+                <el-input v-model="powicon" auto-complete="off" ></el-input>
+                 <a href="https://element.eleme.cn/#/zh-CN/component/icon"  target="_blank" style="color: #666ee8;text-decoration: none;font-size:10px;">不了解？<span >点此查看图标库</span></a>
               </el-form-item>
               <el-form-item label="后端接口" width="120">
                 <el-input v-model="powaps" auto-complete="off"></el-input>
@@ -202,8 +204,9 @@
               <el-form-item label="标题" width="150" required>
                 <el-input v-model="editpowlab" auto-complete="off"></el-input>
               </el-form-item>
-              <el-form-item label="图标" width="120" required>
-                <el-input v-model="editpowicon" auto-complete="off"></el-input>
+              <el-form-item label="图标" width="120" required style="text-align:left">
+                <el-input v-model="editpowicon" auto-complete="off" ></el-input>
+                 <a href="https://element.eleme.cn/#/zh-CN/component/icon"  target="_blank" style="color: #666ee8;text-decoration: none;font-size:10px;">不了解？<span >点此查看图标库</span></a>
               </el-form-item>
               <el-form-item label="后端接口" width="120" required>
                 <el-input v-model="editpowaps" auto-complete="off"></el-input>
@@ -267,22 +270,12 @@ export default {
   // 加载数据
   created() {
     service.rulelist().then((res) => {
-      console.log(res);
-      if (res.code == 20403) {
-        this.$message({
-          type: "error",
-          message: res.msg,
-          duration: 1000,
-        });
-        this.$router.push("/dashboard");
-      }
       this.tableData = res.data;
     });
   },
   methods: {
     // 编辑/添加权限下拉值
     selchang() {
-      console.log(this.editselvalue);
     },
     // 权限确认
     dialog() {
@@ -302,7 +295,7 @@ export default {
             type: "success",
             duration: 1000,
           });
-          this.reload();
+         this.$router.go(0)
         }
       });
     },
@@ -312,7 +305,6 @@ export default {
     },
     // switch开关
     changeSwitch(val, row, id) {
-      console.log(row.status);
       this.$confirm("此操作将修改状态, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -323,15 +315,13 @@ export default {
             id: id,
             status: row.status,
           };
-          console.log(data);
           service.powstatus(data).then((res) => {
-            console.log(res);
             this.$message({
               type: "success",
               message: res.msg,
               duration: 1000,
             });
-            this.reload();
+            this.$router.go(0)
           });
         })
         .catch(() => {
@@ -350,12 +340,10 @@ export default {
     // 编辑
     handleEdit(id) {
       this.dialogedit = true;
-      console.log(id);
       let param = {
         id: id,
       };
       service.getpowid(param).then((res) => {
-        console.log(res.data);
         this.editseldata = res.data.lists;
         this.editselvalue = res.data.info.pid;
         this.editpowpx = res.data.info.sort;
@@ -379,9 +367,7 @@ export default {
         id: this.editid,
         url: this.editpowweb,
       };
-      console.log(data);
       service.editsavepower(data).then((res) => {
-        console.log(res);
         if (res.code == 20010) {
           this.$message({
             message: "保存成功！",
@@ -389,7 +375,7 @@ export default {
             duration: 2000,
           });
           setTimeout(() => {
-            this.reload();
+            this.$router.go(0)
           }, 1000);
         }
       });
@@ -400,7 +386,6 @@ export default {
       this.dialogVisible = true;
       this.selvalue = "0";
       service.addpower().then((res) => {
-        console.log(res);
         this.seldata = res.data;
       });
     },
@@ -411,16 +396,13 @@ export default {
     // 添加下级
     handleClick(id) {
       this.dialogVisible = true;
-      console.log(id);
       let param = {
         id: id,
       };
       service.addpower().then((res) => {
-        console.log(res);
         this.seldata = res.data;
       });
       service.getpowid(param).then((res) => {
-        console.log(res.data);
         this.addsonseldata = res.data.lists;
         this.addsonselvalue = res.data.info.pid;
         this.selvalue = res.data.info.id;
@@ -445,26 +427,17 @@ export default {
             type: "success",
             duration: 1000,
           });
-          this.reload();
-        } else {
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.reload();
+           this.$router.go(0)
         }
       });
     },
     // 编辑
     handleEdit(id) {
       this.dialogedit = true;
-      console.log(id);
       let param = {
         id: id,
       };
       service.getpowid(param).then((res) => {
-        console.log(res.data);
         this.editseldata = res.data.lists;
         this.editselvalue = res.data.info.pid;
         this.editpowpx = res.data.info.sort;
@@ -488,9 +461,7 @@ export default {
         id: this.editid,
         url: this.editpowweb,
       };
-      console.log(data);
       service.editsavepower(data).then((res) => {
-        console.log(res);
         if (res.code == 20010) {
           this.$message({
             message: "保存成功！",
@@ -514,17 +485,14 @@ export default {
           let data = {
             id: id,
           };
-          console.log(data);
           service.delpow(data).then((res) => {
-            console.log(res);
             this.$message({
               type: "success",
               message: res.msg,
               duration: 1500,
             });
-            this.reload();
             setTimeout(() => {
-              this.reload();
+           this.$router.go(0)
             }, 2000);
           });
         })
@@ -535,7 +503,6 @@ export default {
             duration: 1300,
           });
         });
-      console.log(id);
     },
     // 表头颜色
     getRowClass({ rowIndex }) {

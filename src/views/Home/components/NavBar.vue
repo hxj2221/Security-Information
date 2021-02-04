@@ -1,5 +1,6 @@
 <template>
   <!-- 导航栏 -->
+  
   <el-menu
     :default-active="$route.path"
     class="el-menu-vertical-demo"
@@ -8,10 +9,13 @@
     text-color="#CCCCCC"
     active-text-color="#0079fe"
     unique-opened
+    @open="handleOpen" 
+    @close="handleClose" 
+    :collapse="isCollapse"
     router>
     <template v-for="(item, index) in menus">
       <!-- 二级菜单渲染 -->
-      <el-submenu :index="index+''" v-if="!item.hidden && !item.leaf" :key="index">
+      <el-submenu :index="index+''" v-if="!item.hidden && !item.leaf" :key="index" >
         <template slot="title">
           <i :class="item.icon"></i>
           <span slot="title">{{item.title}}</span>
@@ -29,7 +33,9 @@
         <span slot="title">{{item._child[0].name}}</span>
       </el-menu-item>
     </template>
+    
   </el-menu>
+
 </template>
 
 <script>
@@ -39,21 +45,24 @@ export default {
   Component:{},
   data(){
     return{
-      menus:[]
+      menus:[],
     }
   },
-  state: {
-    
+  
+  props:{
+    isCollapse:Boolean
   },
   methods:{
    handleSelect() {
     this.reload()  // 点击侧边栏页面重载
-  }
+  },
+   handleOpen(key, keyPath) {
+      },
+      handleClose(key, keyPath) {
+      }
   },
   created(){
-    console.log(this.$router.options.routes)
     service.getmenus().then(res=>{
-      console.log(res.data)
       this.menus=res.data
     })
   }

@@ -431,7 +431,6 @@
     created() {
       let that = this;
       this.bus.$on('detail', function (item) {
-        console.log(item)
         that.event_num = item.event_num //事件编号
         that.patient_name = item.patient_name; //患者姓名
         that.sex = item.sex; //性别

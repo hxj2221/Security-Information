@@ -192,15 +192,12 @@
             //    console.log("click", conn);
             //    _this.editLine(conn);
             //}, 300); // 延迟300ms执行单击事件,区分双击事件
-            console.log("click", conn);
             _this.editLine(conn);
-            console.log(conn.getOverlay("label-1"));
             //conn.getOverlay("label-1").setLabel('大肥肚'); //初始化label
           })
           // 双击连接线（删除）,
           _this.jsPlumb.bind('dblclick', function (conn, originalEvent) {
              clearTimeout(this.timer);
-             console.log("dblclick", conn)
 
              _this.$confirm('确定删除所点击的线吗?', '提示', {
                  confirmButtonText: '确定',

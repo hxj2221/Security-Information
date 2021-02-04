@@ -60,7 +60,7 @@ export default class TinymceEditor extends Vue{
   myValue = this.value
 
   public onClick(e) {
-    this.$emit('onClick', e, tinymce)
+    this.$emit('onClick',this.myValue)
   }
 
   public clear() {

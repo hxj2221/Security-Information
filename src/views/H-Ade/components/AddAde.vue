@@ -1,7 +1,9 @@
 import service from '@/service/index';
 <template>
   <div class="addAll">
-    <!-- 新增 -->
+    <div class="wrapper" ref="wrapper">
+      <div class="content">
+        <!-- 新增 -->
     <div class="formBasics">
       <h2>基本信息</h2>
       <el-form class="form_con" ref="addAde" :model="addAde">
@@ -224,6 +226,9 @@ import service from '@/service/index';
         <i class="el-icon-circle-plus-outline"><span>添加患者信息</span></i>
       </div>
     </div>
+      </div>
+    </div>
+    
     <!-- 底部按钮 -->
     <div class="root">
       <el-button type="primary" size="medium" class="AdeSure" icon="iconfont el-icon-hospital-passwordbaocun" @click="sure">提交
@@ -238,6 +243,7 @@ import service from '@/service/index';
 <script>
   import service from '@/service/index'
   import qs from 'qs'
+   import BScroll from 'better-scroll'
   export default {
     components: {},
     inject: ["reload"],
@@ -308,9 +314,7 @@ import service from '@/service/index';
       // 提交
       sure() {
         let params = this.addAde
-        console.log(params)
         service.badAdd(params).then(res => {
-          console.log(res)
           if (res.code == 20010) {
             this.$emit('pageAdd')
             this.reload();
@@ -319,27 +323,7 @@ import service from '@/service/index';
               type: 'success',
               duration: 1000,
             });
-          } else if (res.code == 20401) {
-            this.$message({
-              message: "请重新登陆",
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push('/login')
-          } else if (res.code == 20403) {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-            this.$router.push('/dashboard')
-          } else {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
-          }
+          } 
         });
       },
       // 返回列表页
@@ -371,44 +355,42 @@ import service from '@/service/index';
       // 取消关联
       // 查看
       handleClick(row) {
-        console.log(row);
       },
 
     },
     created() {
       // 下拉框
       service.AdeSel().then(res => {
-        // console.log(res)
         if (res.cede == 20010) {
           this.options = res.choice_type //不良类型
           this.options1 = res.address //发生场所
           this.options4 = res.degree_weight //轻重程度
           this.department = res.department //科室
-        } else if (res.code == 20401) {
-          this.$message({
-            message: "请重新登陆",
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/login')
-        } else if (res.code == 20403) {
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        }
+        } 
 
       })
       let that = this
       this.bus.$on('eventNum', function (item) {
-        console.log(item)
         that.addAde.event_num = item
+      })
+    },
+    mounted() {
+      const bs = new BScroll('.wrapper', {
+        // pullUpLoad: true,
+        // pullDownRefresh: true,
+        probeType:3,
+        mouseWheel: true
+        
       })
     }
   }
 </script>
-<style>
-
+<style scoped>
+.wrapper{
+  height: 750px;
+  overflow: hidden;
+}
+.content{
+  padding-bottom: 100px;
+}
 </style>

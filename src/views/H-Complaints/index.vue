@@ -115,15 +115,7 @@
         >
       </Look>
       <Operation v-if="operations==true" :operationdata="operationdata" :opdata="opdata" :filelist='filelisttrue'>
-<<<<<<< HEAD
-      
-=======
-        <div slot="records">
-          <el-button type="primary"  icon="el-icon-edit" class="records" @click="records()"
-            >医患记录</el-button
-          >
-        </div>
->>>>>>> 9e0afb894141bbc5e0e1ce6f50738ec36f19be9b
+        
         <div slot="detail">
             <el-button
               type="primary"
@@ -203,7 +195,6 @@ export default {
   methods: {
     detail(){
       this.drawer = true
-      console.log(this.event_number)
        //详情数据接口
        let params = {
            event_number:this.event_number,
@@ -212,38 +203,13 @@ export default {
           if(res.code==20010){
               this.lookdata = res.data;
           }
-           else if(res.code==20401){
-          this.$message({
-            message: "请重新登陆",
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/login')
-        }
-        else if(res.code==20403){
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        }
-         else{
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-        }
         });
     },
     // 操作页面
     handle(index) {
-      console.log(index)
       this.event_number=index.event_number
       if(index.state.state_val==-1){
        service.EditComponent(index.event_number).then((res) => {
-        console.log(res)
         if (res.code == 20010) {
             this.list = false;
           this.add = false;
@@ -253,14 +219,6 @@ export default {
           this.editdata=index
          this.editdatas=res.data
         } 
-        else{
-           this.$message({
-            message:res.msg,
-            type: "error",
-            duration: 2000,
-          })
-       
-        }
       })
       }
       else if(index.state.state_val==-2){
@@ -282,29 +240,7 @@ export default {
           this.operationdata = index;
           this.opdata = res.data;
         }
-       else if(res.code=20401){
-          this.$message({
-            message: "请重新登陆",
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/login')
-        }
-        else if(res.code=20403){
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        }
-         else{
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-        }
+      
       
       });
       }
@@ -331,46 +267,23 @@ export default {
     },
     // 查看详情
     looks(index) {
-      this.list = false;
-      this.add = false;
-      this.look = true;
-      this.editshows=false
-      this.operations = false;
+      
       let params = {
         event_number: index.event_number,
       };
       service.componrdetaile(qs.stringify(params)).then((res) => {
          if(res.code==20010){
               this.lookdata = res.data;
+              this.list = false;
+      this.add = false;
+      this.look = true;
+      this.editshows=false
+      this.operations = false;
           }
-           else if(res.code==20401){
-          this.$message({
-            message: "请重新登陆",
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/login')
-        }
-        else if(res.code==20403){
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        }
-         else{
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-        }
       });
     },
     // 打印
     stamp() {
-      console.log(1);
     },
     // 返回
     backss() {

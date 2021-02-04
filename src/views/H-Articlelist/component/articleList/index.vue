@@ -13,19 +13,77 @@
     </div>
     <!-- table -->
     <!-- <div class="articleList_table"> -->
-      <!-- 搜索部门 -->
-      <div class="articleList_table_search">
-        <el-cascader
-          v-model="value"
-          :options="options"
-          :props="{ expandTrigger: 'hover' }"
-          @change="handleChange"
-        ></el-cascader>
-        <el-input placeholder="请输入文章名称" v-model="input3">
-          <el-button slot="append" icon="el-icon-search"></el-button>
-        </el-input>
-      </div>
-      <!-- 选择器 -->
+    <!-- 搜索部门 -->
+    <div class="articleList_table_search">
+      <el-cascader
+        v-model="value"
+        :options="options"
+        ref="unitAreacode"
+        :props="{ expandTrigger: 'hover' }"
+        @change="handleChange"
+      ></el-cascader>
+      <el-input placeholder="请输入文章名称" v-model="input3">
+        <el-button
+          slot="append"
+          icon="el-icon-search"
+          @click="detailSeach"
+        ></el-button>
+      </el-input>
+    </div>
+    <!-- 表格部分 -->
+    <div class="articleList_table_table">
+      <div style="min-height: 590px">
+        <!-- 表格 -->
+        <el-table
+          max-height="595"
+          ref="multipleTable"
+          :data="tableData"
+          tooltip-effect="dark"
+          @selection-change="handleSelectionChange"
+        >
+          <el-table-column type="selection" width="55"> </el-table-column>
+          <el-table-column label="编号" type="index"> </el-table-column>
+          <el-table-column label="标题" prop="title"> </el-table-column>
+          <el-table-column prop="classification.title" label="栏目">
+          </el-table-column>
+          <el-table-column
+            prop="create_time"
+            label="发布时间"
+            show-overflow-tooltip
+          >
+          </el-table-column>
+          <el-table-column
+            prop="user.name"
+            label="发布人"
+            show-overflow-tooltip
+          >
+          </el-table-column>
+          <el-table-column label="操作" width="150" fixed="right">
+            <template slot-scope="scope">
+              <el-button
+                @click="handleClick(scope.row)"
+                type="text"
+                size="small"
+                >查看</el-button
+              >
+              <el-button
+                type="text"
+                size="small"
+                @click="myEdit(scope.row)"
+                id="UserLogout"
+                >编辑</el-button
+              >
+              <el-button
+                type="text"
+                size="small"
+                style="color: red"
+                @click="handleDelete(scope.row)"
+                >删除</el-button
+              >
+            </template>
+          </el-table-column>
+        </el-table>
+        <!-- 选择器 -->
         <div class="articleList_table_table_select">
           <el-select v-model="value5" placeholder="请选择" @change="dilog">
             <el-option
@@ -37,87 +95,48 @@
             </el-option>
           </el-select>
         </div>
-      <!-- 表格部分 -->
-      <div class="articleList_table_table">
-        <div style="min-height:590px">
-           <!-- 表格 -->
-        <el-table
-        max-height="595"
-          ref="multipleTable"
-          :data="tableData"
-          tooltip-effect="dark"
+      </div>
+
+      <!-- 弹框 -->
+      <div class="articleList_table_table_select">
+        <el-dialog
+          :title="dlog"
+          :visible.sync="dialogVisible"
+          width="30%"
+          :before-close="handleClose"
         >
-          <el-table-column type="selection" width="55"> </el-table-column>
-           <el-table-column label="编号" type="index">
-          </el-table-column>
-          <el-table-column label="标题" prop="title">
-          </el-table-column>
-          <el-table-column prop="classification.title" label="栏目"> </el-table-column>
-          <el-table-column prop="create_time" label="发布时间" show-overflow-tooltip>
-          </el-table-column>
-          <el-table-column prop="user.name" label="发布人" show-overflow-tooltip>
-          </el-table-column>
-          <el-table-column label="操作" width="150"   fixed="right">
-            <template slot-scope="scope">
-              <el-button @click="handleClick" type="text" size="small"
-                >查看</el-button
-              >
-              <el-button type="text" size="small" @click="edit"
-                >编辑</el-button
-              >
-              <el-button
-                type="text"
-                size="small"
-                style="color: red"
-                @click="handleDelete(scope.$index, tableData)"
-                >删除</el-button
-              >
-            </template>
-          </el-table-column>
-        </el-table>
-        
-        </div>
-       
-        <!-- 弹框 -->
-        <div class="articleList_table_table_select">
-          <el-dialog
-            :title="dlog"
-            :visible.sync="dialogVisible"
-            width="30%"
-            :before-close="handleClose"
-          >
-            <!-- <span>这是一段信息</span> -->
-            <div>
-              <p v-if="isShow">确定删除所选文章</p>
-              <div class="block" v-else>
-                <el-cascader
-                  v-model="valueHover"
-                  :options="optionsHover"
-                  :props="{ expandTrigger: 'hover' }"
-                ></el-cascader>
-              </div>
+          <div>
+            <p v-if="isShow">确定删除所选文章</p>
+            <div class="block" v-else>
+              <el-cascader
+                ref="cascaderDig"
+                :options="optionsHover"
+                :props="{ expandTrigger: 'hover' }"
+                @change="handledig"
+              ></el-cascader>
             </div>
-            <span slot="footer" class="dialog-footer">
-              <el-button @click="dialogVisible = false">取 消</el-button>
-              <el-button type="primary" @click="dialogVisible = false"
-                >确 定</el-button
-              >
-            </span>
-          </el-dialog>
-        </div>
-        <!-- 分页 -->
-        <div class="articleList_table_table_paging">
-          <el-pagination
-            :current-page="currentPage"
-            :page-sizes="[8, 10, 20]"
-            :page-size="8"
-            layout="total, sizes, prev, pager, next, jumper"
-            :total="tableData.length"
-          >
-          </el-pagination>
-        </div>
+          </div>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="dialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="istrue">确 定</el-button>
+          </span>
+        </el-dialog>
+      </div>
+      <!-- 分页 -->
+      <div class="articleList_table_table_paging">
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="currentPage"
+          :page-sizes="numberlist"
+          :page-size="num"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total"
+        >
+        </el-pagination>
       </div>
     </div>
+  </div>
   <!-- </div> -->
 </template>
 
@@ -129,309 +148,21 @@ import service from "@/service/index";
 export default {
   components: {},
   props: {},
+  inject: ["reload"],
   data() {
     return {
       //弹框部分
       dialogVisible: false,
+      ids: [],
       // 搜索部分
-      value: [],
-      options: [
-        {
-          value: "zhinan",
-          label: "指南",
-          children: [
-            {
-              value: "shejiyuanze",
-              label: "设计原则",
-              children: [
-                {
-                  value: "yizhi",
-                  label: "一致",
-                },
-                {
-                  value: "fankui",
-                  label: "反馈",
-                },
-                {
-                  value: "xiaolv",
-                  label: "效率",
-                },
-                {
-                  value: "kekong",
-                  label: "可控",
-                },
-              ],
-            },
-            {
-              value: "daohang",
-              label: "导航",
-              children: [
-                {
-                  value: "cexiangdaohang",
-                  label: "侧向导航",
-                },
-                {
-                  value: "dingbudaohang",
-                  label: "顶部导航",
-                },
-              ],
-            },
-          ],
-        },
-        {
-          value: "zujian",
-          label: "组件",
-          children: [
-            {
-              value: "basic",
-              label: "Basic",
-              children: [
-                {
-                  value: "layout",
-                  label: "Layout 布局",
-                },
-                {
-                  value: "color",
-                  label: "Color 色彩",
-                },
-                {
-                  value: "typography",
-                  label: "Typography 字体",
-                },
-                {
-                  value: "icon",
-                  label: "Icon 图标",
-                },
-                {
-                  value: "button",
-                  label: "Button 按钮",
-                },
-              ],
-            },
-            {
-              value: "form",
-              label: "Form",
-              children: [
-                {
-                  value: "radio",
-                  label: "Radio 单选框",
-                },
-                {
-                  value: "checkbox",
-                  label: "Checkbox 多选框",
-                },
-                {
-                  value: "input",
-                  label: "Input 输入框",
-                },
-                {
-                  value: "input-number",
-                  label: "InputNumber 计数器",
-                },
-                {
-                  value: "select",
-                  label: "Select 选择器",
-                },
-                {
-                  value: "cascader",
-                  label: "Cascader 级联选择器",
-                },
-                {
-                  value: "switch",
-                  label: "Switch 开关",
-                },
-                {
-                  value: "slider",
-                  label: "Slider 滑块",
-                },
-                {
-                  value: "time-picker",
-                  label: "TimePicker 时间选择器",
-                },
-                {
-                  value: "date-picker",
-                  label: "DatePicker 日期选择器",
-                },
-                {
-                  value: "datetime-picker",
-                  label: "DateTimePicker 日期时间选择器",
-                },
-                {
-                  value: "upload",
-                  label: "Upload 上传",
-                },
-                {
-                  value: "rate",
-                  label: "Rate 评分",
-                },
-                {
-                  value: "form",
-                  label: "Form 表单",
-                },
-              ],
-            },
-            {
-              value: "data",
-              label: "Data",
-              children: [
-                {
-                  value: "table",
-                  label: "Table 表格",
-                },
-                {
-                  value: "tag",
-                  label: "Tag 标签",
-                },
-                {
-                  value: "progress",
-                  label: "Progress 进度条",
-                },
-                {
-                  value: "tree",
-                  label: "Tree 树形控件",
-                },
-                {
-                  value: "pagination",
-                  label: "Pagination 分页",
-                },
-                {
-                  value: "badge",
-                  label: "Badge 标记",
-                },
-              ],
-            },
-            {
-              value: "notice",
-              label: "Notice",
-              children: [
-                {
-                  value: "alert",
-                  label: "Alert 警告",
-                },
-                {
-                  value: "loading",
-                  label: "Loading 加载",
-                },
-                {
-                  value: "message",
-                  label: "Message 消息提示",
-                },
-                {
-                  value: "message-box",
-                  label: "MessageBox 弹框",
-                },
-                {
-                  value: "notification",
-                  label: "Notification 通知",
-                },
-              ],
-            },
-            {
-              value: "navigation",
-              label: "Navigation",
-              children: [
-                {
-                  value: "menu",
-                  label: "NavMenu 导航菜单",
-                },
-                {
-                  value: "tabs",
-                  label: "Tabs 标签页",
-                },
-                {
-                  value: "breadcrumb",
-                  label: "Breadcrumb 面包屑",
-                },
-                {
-                  value: "dropdown",
-                  label: "Dropdown 下拉菜单",
-                },
-                {
-                  value: "steps",
-                  label: "Steps 步骤条",
-                },
-              ],
-            },
-            {
-              value: "others",
-              label: "Others",
-              children: [
-                {
-                  value: "dialog",
-                  label: "Dialog 对话框",
-                },
-                {
-                  value: "tooltip",
-                  label: "Tooltip 文字提示",
-                },
-                {
-                  value: "popover",
-                  label: "Popover 弹出框",
-                },
-                {
-                  value: "card",
-                  label: "Card 卡片",
-                },
-                {
-                  value: "carousel",
-                  label: "Carousel 走马灯",
-                },
-                {
-                  value: "collapse",
-                  label: "Collapse 折叠面板",
-                },
-              ],
-            },
-          ],
-        },
-        {
-          value: "ziyuan",
-          label: "资源",
-          children: [
-            {
-              value: "axure",
-              label: "Axure Components",
-            },
-            {
-              value: "sketch",
-              label: "Sketch Templates",
-            },
-            {
-              value: "jiaohu",
-              label: "组件交互文档",
-            },
-          ],
-        },
-      ],
+      // value: [],
+      id: "",
+      cid: "",
+      options: [],
       value: "",
       input3: "",
       //   表格部分
-      tableData: [
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          title: "文章标题",
-          column: "一级栏目1",
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          title: "文章标题",
-          column: "一级栏目1",
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          title: "文章标题",
-          column: "一级栏目1",
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          title: "文章标题",
-          column: "一级栏目1",
-        },
-      ],
+      tableData: [],
       multipleSelection: [],
       //处理
       value5: "",
@@ -445,167 +176,149 @@ export default {
           label: "删除",
         },
       ],
+      // 分页
+      numberlist: [8, 10, 20],
       currentPage: 1,
+      total: 0,
+      num: 8,
       // 弹框
       dlog: "",
       valueHover: [],
-      optionsHover: [
-        {
-          value: "zhinan",
-          label: "指南",
-          children: [
-            {
-              value: "shejiyuanze",
-              label: "设计原则",
-              children: [
-                {
-                  value: "yizhi",
-                  label: "一致",
-                },
-                {
-                  value: "kekong",
-                  label: "可控",
-                },
-              ],
-            },
-            {
-              value: "daohang",
-              label: "导航",
-              children: [
-                {
-                  value: "cexiangdaohang",
-                  label: "侧向导航",
-                },
-              ],
-            },
-          ],
-        },
-        {
-          value: "zujian",
-          label: "组件",
-          children: [
-            {
-              value: "basic",
-              label: "Basic",
-              children: [
-                {
-                  value: "layout",
-                  label: "Layout 布局",
-                },
-                {
-                  value: "color",
-                  label: "Color 色彩",
-                },
-              ],
-            },
-            {
-              value: "form",
-              label: "Form",
-              children: [
-                {
-                  value: "radio",
-                  label: "Radio 单选框",
-                },
-                {
-                  value: "checkbox",
-                  label: "Checkbox 多选框",
-                },
-                {
-                  value: "time-picker",
-                  label: "TimePicker 时间选择器",
-                },
-                {
-                  value: "date-picker",
-                  label: "DatePicker 日期选择器",
-                },
-              ],
-            },
-            {
-              value: "data",
-              label: "Data",
-              children: [
-                {
-                  value: "table",
-                  label: "Table 表格",
-                },
-                {
-                  value: "tag",
-                  label: "Tag 标签",
-                },
-              ],
-            },
-            {
-              value: "notice",
-              label: "Notice",
-              children: [
-                {
-                  value: "alert",
-                  label: "Alert 警告",
-                },
-              ],
-            },
-            {
-              value: "navigation",
-              label: "Navigation",
-              children: [
-                {
-                  value: "menu",
-                  label: "NavMenu 导航菜单",
-                },
-              ],
-            },
-            {
-              value: "others",
-              label: "Others",
-            },
-          ],
-        },
-        {
-          value: "ziyuan",
-          label: "资源",
-        },
-      ],
+      optionsHover: [],
       isShow: false,
     };
   },
   methods: {
-    handleDelete(index, item) {
-     
-       this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-            confirmButtonText: "确定",
-            cancelButtonText: "取消",
-            type: "warning",
-          })
-            .then(() => {
-              this.$message({
-                type: "success",
-                message: "删除成功!",
-                delete: item.splice(index, 1),
-                duration:1000
-              });
-            })
-            .catch(() => {
-              this.$message({
-                type: "info",
-                message: "已取消删除",
-                duration:1000
-              });
-            })
+    // 多选
+    handleSelectionChange(val) {
+      val.forEach((e) => {
+        this.ids.push(e.id);
+      });
+    },
+    // 搜索
+    detailSeach() {
+      let params = {
+        cid: this.id,
+        title: this.input3,
+      };
+      service.detailSeach(params).then((res) => {
+        this.tableData = res.data.lists;
+      });
+    },
+    // 分页
+    handleSizeChange(val) {
+      this.num = val;
+      let params = {
+        pNum: this.num,
+        p: this.currentPage,
+      };
+      service.detailSeach(params).then((res) => {
+        this.tableData = res.data.lists;
+      });
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val;
+      let params = {
+        pNum: this.num,
+        p: this.currentPage,
+      };
+      service.detailSeach(params).then((res) => {
+        this.tableData = res.data.lists;
+      });
+    },
+    // 删除
+    handleDelete(e) {
+      this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          let params = {
+            id: e.id,
+          };
+          service.detailDel(params).then((res) => {
+            this.$message({
+              type: "success",
+              message: "删除成功!",
+              duration: 1500,
+            });
+            this.reload();
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+            duration: 1500,
+          });
+        });
     },
     //级选择器
-    handleChange() {},
-    //   点击查看
-    handleClick() {
-      this.$emit("myRe");
+    handleChange(val) {
+      this.id = this.$refs["unitAreacode"].getCheckedNodes()[0].value.id;
+    },
+    handledig(val) {
+      this.cid = this.$refs["cascaderDig"].getCheckedNodes()[0].value.id;
+    },
+    //点击查看
+    handleClick(e) {
+      let params = {
+        id: e.id,
+      };
+      service.detailinfo(params).then((res) => {
+        if (res.code == 20010) {
+          this.$emit("myRe");
+          this.bus.$emit("info", res.data);
+        }
+      });
     },
     // 编辑
-    edit() {
-      this.$router.push("/Addarticle");
+    myEdit(e) {
+      let params = {
+        id: e.id,
+      };
+      service.detailEdit(params).then((res) => {
+        // this.$emit("abcClick");
+        this.$parent.abcClick();
+        this.bus.$emit("ariEdit", res.data);
+      });
     },
     myAdd() {
       this.$router.push("/Addarticle");
     },
-
+    // 分批    确定
+    istrue() {
+      this.dialogVisible = false;
+      if (this.isShow == false) {
+        let data = {
+          cid: this.cid,
+          ids: this.ids,
+        };
+        service.detailalls(data).then((res) => {
+          if (res.code == 20010) {
+            this.$message({
+              type: "success",
+              message: res.msg,
+              duration: 1500,
+            });
+            this.reload();
+          }
+        });
+      } else {
+        let params = {
+          ids: this.ids,
+        };
+        service.detailDels(params).then((res) => {
+          this.$message({
+            type: "success",
+            message: res.msg,
+            duration: 1500,
+          });
+          this.reload();
+        });
+      }
+    },
     // 弹框
     handleClose(done) {
       this.$confirm("确认关闭？")
@@ -615,23 +328,88 @@ export default {
         .catch((_) => {});
     },
     dilog(e) {
-      this.dialogVisible = !this.dialogVisible;
-      if (e == 1) {
-        this.dlog = this.name[0].label;
-        this.isShow = false;
+      if (this.ids.length !== 0) {
+        this.dialogVisible = !this.dialogVisible;
+        if (e == 1) {
+          this.dialogVisible = !this.dialogVisible;
+          this.dlog = this.name[0].label;
+          this.isShow = false;
+          service.detailAlls().then((res) => {
+            this.dialogVisible = !this.dialogVisible;
+            let batchdata = res.data;
+            let dataValueBatch = (batchdata) =>
+              batchdata.map(({ id, title, pid, _child }) =>
+                _child
+                  ? {
+                      value: {
+                        id: id,
+                        value: id,
+                        pid: pid,
+                      },
+                      label: title,
+                      children: dataValueBatch(_child),
+                    }
+                  : {
+                      value: {
+                        id: id,
+                        value: id,
+                        pid: pid,
+                      },
+                      label: title,
+                    }
+              );
+
+            this.optionsHover = dataValueBatch(batchdata);
+          });
+        } else {
+          this.dlog = this.name[1].label;
+          this.isShow = true;
+        }
       } else {
-        this.dlog = this.name[1].label;
-        this.isShow = true;
+        this.$message({
+          type: "error",
+          message: "未选中内容",
+          duration: 1500,
+        });
+        this.reload();
       }
     },
   },
-  created(){
-    service.detailList().then(res=>{
-      console.log(res)
-      this.tableData=res.data.lists
-    })
-   
-  }
+  created() {
+    let data = {
+      pNum: 8,
+      p: 1,
+    };
+    service.detailList(data).then((res) => {
+      this.tableData = res.data.lists;
+      this.total = res.data.page.count;
+      // 搜索下拉框内容
+      let batchdata = res.data.classification;
+      let dataValueBatch = (batchdata) =>
+        batchdata.map(({ id, title, pid, _child }) =>
+          _child
+            ? {
+                value: {
+                  id: id,
+                  value: id,
+                  pid: pid,
+                },
+                label: title,
+                children: dataValueBatch(_child),
+              }
+            : {
+                value: {
+                  id: id,
+                  value: id,
+                  pid: pid,
+                },
+                label: title,
+              }
+        );
+
+      this.options = dataValueBatch(batchdata);
+    });
+  },
 };
 </script>
 <style scoped>

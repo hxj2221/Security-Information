@@ -128,76 +128,27 @@ export default {
   methods: {
     // 查询
     search(){
-      console.log(this.number, this.currentPage4,this.complaintname,this.complainttype,this.complaintstatus,this.complaintsate)
       if((this.complaintsate!==''&&this.complaintsate!==null)||this.complaintname!==''||this.complainttype!==''||this.complaintstatus!==''){
       // 将标准时间转为时间戳
       if(this.complaintsate!==''&&this.complaintsate!==null){
       let starttime= new Date(this.complaintsate[0]).getTime()
       let endtiem= new Date(this.complaintsate[1]).getTime()
       service.search(this.number, this.currentPage4,this.complaintname,this.complainttype,this.complaintstatus,starttime,endtiem).then(res=>{
-        console.log(res)
         if(res.code==20010){
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
            sessionStorage.setItem('tableData', JSON.stringify(this.tableData))
-        }
-        else if(res.code==20401){
-          this.$message({
-            message: "请重新登陆",
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/login')
-        }
-        else if(res.code==20403){
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        }
-         else{
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
         }
       })
        }
       else{
       service.search(this.number, this.currentPage4,this.complaintname,this.complainttype,this.complaintstatus,'','').then(res=>{
-        console.log(res)
         if(res.code==20010){
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
            sessionStorage.setItem('tableData', JSON.stringify(this.tableData))
-        }
-         else if(res.code==20401){
-          this.$message({
-            message: "请重新登陆",
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/login')
-        }
-        else if(res.code==20403){
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        }
-         else{
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
         }
       })
      }
@@ -209,29 +160,7 @@ export default {
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
            sessionStorage.setItem('tableData', JSON.stringify(this.tableData))
-        }  else if(res.code==20401){
-          this.$message({
-            message: "请重新登陆",
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/login')
-        }
-        else if(res.code==20403){
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        }
-         else{
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-        }
+        }  
       });
     }
     
@@ -244,70 +173,23 @@ export default {
       let starttime= new Date(this.complaintsate[0]).getTime()
       let endtiem= new Date(this.complaintsate[1]).getTime()
       service.search(this.number, this.currentPage4,this.complaintname,this.complainttype,this.complaintstatus,starttime,endtiem).then(res=>{
-        console.log(res)
         if(res.code==20010){
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
           sessionStorage.setItem('tableData', JSON.stringify(this.tableData))
-        }
-         else if(res.code==20401){
-          this.$message({
-            message: "请重新登陆",
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/login')
-        }
-        else if(res.code==20403){
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        }
-         else{
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
         }
       })
        }
       else{
       service.search(this.number, this.currentPage4,this.complaintname,this.complainttype,this.complaintstatus,'','').then(res=>{
-        console.log(res)
         if(res.code==20010){
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
           sessionStorage.setItem('tableData', JSON.stringify(this.tableData))
         }
-        else if(res.code==20401){
-          this.$message({
-            message: "请重新登陆",
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/login')
-        }
-        else if(res.code==20403){
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        }
-         else{
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-        }
+      
       })
      }
     }
@@ -318,29 +200,7 @@ export default {
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
           sessionStorage.setItem('tableData', JSON.stringify(this.tableData))
-        } else if(res.code==20401){
-          this.$message({
-            message: "请重新登陆",
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/login')
-        }
-        else if(res.code==20403){
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        }
-         else{
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-        }
+        } 
       });
     }
     
@@ -353,109 +213,38 @@ export default {
       let starttime= new Date(this.complaintsate[0]).getTime()
       let endtiem= new Date(this.complaintsate[1]).getTime()
       service.search(this.number, this.currentPage4,this.complaintname,this.complainttype,this.complaintstatus,starttime,endtiem).then(res=>{
-        console.log(res)
         if(res.code==20010){
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
           sessionStorage.setItem('tableData', JSON.stringify(this.tableData))
         }
-         else if(res.code==20401){
-          this.$message({
-            message: "请重新登陆",
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/login')
-        }
-        else if(res.code==20403){
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        }
-         else{
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-        }
       })
        }
       else{
       service.search(this.number, this.currentPage4,this.complaintname,this.complainttype,this.complaintstatus,'','').then(res=>{
-        console.log(res)
         if(res.code=20010){
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
           sessionStorage.setItem('tableData', JSON.stringify(this.tableData))
         }
-         else if(res.code==20401){
-          this.$message({
-            message: "请重新登陆",
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/login')
-        }
-        else if(res.code==20403){
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        }
-         else{
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-        }
+        
       })
      }
     }
       else{
       service.ComList(this.number, this.currentPage4).then((res) => {
-        console.log(res);
         if (res.code == 20010) {
           this.tableData = res.data[0];
           this.total = res.data[1].count;
           this.currentPage4 = res.data[1].current;
           sessionStorage.setItem('tableData', JSON.stringify(this.tableData))
-        }  else if(res.code==20401){
-          this.$message({
-            message: "请重新登陆",
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/login')
-        }
-        else if(res.code==20403){
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        }
-         else{
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-        }
+        } 
       });
       }
     },
     handle(row) {
-      console.log(row);
     },
     // 设置表头颜色
     getRowClass({ rowIndex }) {
@@ -476,30 +265,6 @@ export default {
         this.option=res.data[2].state
         sessionStorage.setItem('tableData', JSON.stringify(this.tableData))
       }
-        else if(res.code==20403){
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        }
-        else if(res.code==20401){
-          this.$message({
-            message: "请重新登陆",
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/login')
-        }
-      
-         else{
-          this.$message({
-            message: "请求错误",
-            type: "error",
-            duration: 1000,
-          });
-        }
     })
   },
 };

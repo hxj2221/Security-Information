@@ -327,7 +327,6 @@ export default {
         role_id: this.addStaff.auth_grouap,
         department_id: this.addStaff.staffdepart,
       };
-      console.log(data);
       service.staffAdd(data).then((res) => {
         if (res.code == "20010") {
           this.$message({
@@ -338,12 +337,6 @@ export default {
           setTimeout(() => {
             this.reload();
           }, 2000);
-        } else {
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
         }
       });
     },

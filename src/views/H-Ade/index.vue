@@ -53,22 +53,7 @@
     },
     created() {
       service.AdeList().then(res => {
-        // console.log(res)
-        if (res.cede == 20401) {
-          this.$message({
-            message: "请重新登陆",
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/login')
-        } else if (res.code == 20403) {
-          this.$message({
-            message: res.msg,
-            type: "error",
-            duration: 1000,
-          });
-          this.$router.push('/dashboard')
-        }
+       
       })
     }
   };

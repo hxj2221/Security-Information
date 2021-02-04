@@ -993,14 +993,11 @@ export default {
     this.getPdf('aa','投诉事件调查表')
     },
     downfile(index){
-      console.log(index)
       let param = {
         id: index.id,
       };
       service.filedown(param).then((res) => {
-        console.log(res);
         var filename = res.data.file_name;
-        console.log(filename);
         const a = document.createElement("a"); //创建a标签
         a.style.display = "none";
         a.href = "http://bt1.wlqqlp.com:8082/" + res.data.fileurl; // 指定下载链接
