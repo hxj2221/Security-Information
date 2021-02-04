@@ -473,7 +473,7 @@ import BScroll from 'better-scroll'
             probeType:3,
             mouseWheel: true,
           })
-          console.log(this.scroll)
+          // console.log(this.scroll)
         }
       })
     },
