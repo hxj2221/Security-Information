@@ -62,3 +62,6 @@
 .ConfigureAll .postbox .el-form .el-form-item{
   text-align: left;
 }
+.ConfigureAll .smsbox{
+  width: 30%;
+}

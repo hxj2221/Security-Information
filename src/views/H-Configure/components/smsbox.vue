@@ -2,16 +2,16 @@
   <div>
     <div class="postbox smsbox">
       <el-form ref="form" :model="note">
-        <el-form-item label="短信Key" label-width="80px" required>
+        <el-form-item label="短信Key" label-width="80px" style="width:90%" required>
           <el-input v-model="note.keyid"></el-input>
         </el-form-item>
-        <el-form-item label="授权码" label-width="80px" required>
+        <el-form-item label="授权码" label-width="80px" style="width:90%" required>
           <el-input v-model="note.keysecret"></el-input>
         </el-form-item>
-        <el-form-item label="签名" label-width="80px" required>
+        <el-form-item label="签名" label-width="80px" style="width:90%" required>
           <el-input v-model="note.signname"></el-input>
         </el-form-item>
-        <el-form-item label="短信验证" label-width="80px" required>
+        <el-form-item label="短信验证" label-width="80px" style="width:90%" required>
           <el-input v-model="note.tempcode"></el-input>
         </el-form-item>
         <el-form-item>
