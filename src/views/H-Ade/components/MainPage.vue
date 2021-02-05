@@ -6,7 +6,8 @@
       <div class="btn">
         <el-button type="primary" size="medium" icon="el-icon-circle-plus" class="addAde" @click="Add()">新增
         </el-button>
-        <el-button type="primary" size="medium" icon="iconfont el-icon-hospital-passwordexport" class="exportAde" @click="exportcom">导出</el-button>
+        <el-button type="primary" size="medium" icon="iconfont el-icon-hospital-passwordexport" class="exportAde"
+          @click="exportcom">导出</el-button>
       </div>
     </div>
     <!-- 检索 -->
@@ -99,8 +100,8 @@
         // 检索
         patient_name: '', //患者姓名
         occur_time: [], // 事发日期
-        starttime:'',//开始日期
-        endtime:'',//结束日期
+        starttime: '', //开始日期
+        endtime: '', //结束日期
         occur_scene: '', //发生地点
         degree_weight_id: '', //轻重程度      
         pickerOptions: {
@@ -142,10 +143,10 @@
         pageNumList: [8, 10, 20], //显示个数选择器
         pageSize: 8,
         eventNum: '', // 事件编码
-        address:[],//发生场所
-        choice_type:[],//不良类型
-        degree_weight:[],//轻重程度
-        department:[],//科室
+        address: [], //发生场所
+        choice_type: [], //不良类型
+        degree_weight: [], //轻重程度
+        department: [], //科室
       };
     },
     watch: {
@@ -161,46 +162,48 @@
     },
     methods: {
       formatDate(date) {
-        var date = new Date(date)*1000;
+        var date = new Date(date) * 1000;
         return date;
       },
-   initTime(t) {
-      let d=new Date(t).getTime(new Date(t));
-      let time= new Date(d + 8 * 3600 * 1000).toJSON().substr(0, 19).replace('T', ' ').replace(/\./g, '-');
-      return time;
-    },
-       // 导出事件
-    exportcom() {  
-      let dataA =this.tableData
-      let dataB=new Array()
-      for(let i =0;i<dataA.length;i++){
-        dataA[i].occurscen=dataA[i].occurscene.title
-           dataA[i].degreeweigh=dataA[i].degreeweight.title
-            dataA[i].departmen=dataA[i].department.title
-            let data=this.formatDate(dataA[i].occur_time)
-              dataA[i].occur_tim=this.initTime(data)
-              dataB.push(dataA[i])
-      }
-      import('@/vendor/Export2Excel').then(excel => {
-      const tHeader = ['事件编号', '患者姓名', '性别', '年龄/岁','事发日期','发生场所','轻重程度','上报时间','患者科室','上报人' ]
-      const filterVal = ['event_num', 'patient_name', 'sex', 'age', 'occur_tim', 'occurscen', 'degreeweigh', 'create_time', 'departmen', 'create_uid' ]
-      const list = dataB
-      const data = this.formatJson(filterVal, list)
-      excel.export_json_to_excel({
-        header: tHeader,
-        data,
-        filename: '业务列表',
-        autoWidth: true,
-        bookType: 'xlsx'
-      })
-    })
-      
-    },
-   formatJson(filterVal, jsonData) {
-    return jsonData.map(v => filterVal.map(j => {
-      return v[j]
-    }))
-   },
+      initTime(t) {
+        let d = new Date(t).getTime(new Date(t));
+        let time = new Date(d + 8 * 3600 * 1000).toJSON().substr(0, 19).replace('T', ' ').replace(/\./g, '-');
+        return time;
+      },
+      // 导出事件
+      exportcom() {
+        let dataA = this.tableData
+        let dataB = new Array()
+        for (let i = 0; i < dataA.length; i++) {
+          dataA[i].occurscen = dataA[i].occurscene.title
+          dataA[i].degreeweigh = dataA[i].degreeweight.title
+          dataA[i].departmen = dataA[i].department.title
+          let data = this.formatDate(dataA[i].occur_time)
+          dataA[i].occur_tim = this.initTime(data)
+          dataB.push(dataA[i])
+        }
+        import('@/vendor/Export2Excel').then(excel => {
+          const tHeader = ['事件编号', '患者姓名', '性别', '年龄/岁', '事发日期', '发生场所', '轻重程度', '上报时间', '患者科室', '上报人']
+          const filterVal = ['event_num', 'patient_name', 'sex', 'age', 'occur_tim', 'occurscen', 'degreeweigh',
+            'create_time', 'departmen', 'create_uid'
+          ]
+          const list = dataB
+          const data = this.formatJson(filterVal, list)
+          excel.export_json_to_excel({
+            header: tHeader,
+            data,
+            filename: '业务列表',
+            autoWidth: true,
+            bookType: 'xlsx'
+          })
+        })
+
+      },
+      formatJson(filterVal, jsonData) {
+        return jsonData.map(v => filterVal.map(j => {
+          return v[j]
+        }))
+      },
       // 设置表头颜色
       getRowClass({
         rowIndex
@@ -229,13 +232,13 @@
       // 新增
       Add() {
         service.AdeSel().then(res => {
-          console.log(res)
+          // console.log(res)
           if (res.code == 20010) {
-            this.bus.$emit("eventNum", res.event_num)//编号
-            this.bus.$emit("address",res.address)//发生场所
-            this.bus.$emit("choice_type",res.choice_type)//不良类型
-            this.bus.$emit("degree_weight",res.degree_weight)//轻重程度
-            this.bus.$emit("department",res.department)//科室
+            this.bus.$emit("eventNum", res.event_num) //编号
+            this.bus.$emit("address", res.address) //发生场所
+            this.bus.$emit("choice_type", res.choice_type) //不良类型
+            this.bus.$emit("degree_weight", res.degree_weight) //轻重程度
+            this.bus.$emit("department", res.department) //科室
             this.$emit('pageAdd')
           }
         })
@@ -250,7 +253,7 @@
             this.$emit('pageDetail')
             this.details = res.data
             this.bus.$emit('detail', this.details)
-          } 
+          }
         })
       },
       // 搜索事件
@@ -301,7 +304,7 @@
             this.tableData = res.data
             this.pageCount = res.allnews
           }
-        })      
+        })
       },
 
       // 分页
@@ -323,7 +326,7 @@
             if (res.code == 20010) {
               this.tableData = res.data
               this.pageCount = res.allnews
-            } 
+            }
           })
         } else {
           let params = {
@@ -368,7 +371,7 @@
             if (res.code == 20010) {
               this.tableData = res.data
               this.pageCount = res.allnews
-            } 
+            }
 
           })
         }
@@ -383,10 +386,10 @@
       }
       service.AdeList(params).then(res => {
         // console.log(res)
-          this.tableData = res.data
-          this.pageCount = res.allnews
-          this.options=res.address//不良发生地点
-          this.options1=res.degree_weight//不良轻重程度
+        this.tableData = res.data
+        this.pageCount = res.allnews
+        this.options = res.address //不良发生地点
+        this.options1 = res.degree_weight //不良轻重程度
       })
     }
   }
