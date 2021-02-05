@@ -373,9 +373,6 @@ detailAlls: async (params: any) => {
 detailalls: async (data: any) => {
   return await service.post(`${baseUrl}api/article/article_allc`, data).then(res => res).catch(err => err)
 },
-
-
-
   // 文章分类
   AriList: async (params: any) => {
     return await service.get(`${baseUrl}api/article/article_cate`, { params }).then(res => res).catch(err => err)
@@ -521,5 +518,22 @@ detailalls: async (data: any) => {
   // 删除
   DicDel: async (params: any) => {
     return await service.post(`${baseUrl}api/Dictionary/del`, params).then(res => res).catch(err => err)
+  },
+  // 邮箱及短信配置
+  // 邮箱配置
+  ConfigMail: async (params: any) => {
+    return await service.get(`${baseUrl}api/config/emi_edit`, {params}).then(res => res).catch(err => err)
+  },
+  // 编辑邮箱配置
+  ConfigMailEdit: async (params: any) => {
+    return await service.post(`${baseUrl}api/config/emi_edit`, params).then(res => res).catch(err => err)
+  },
+  // 短信配置
+  ConfigNote: async (params: any) => {
+    return await service.get(`${baseUrl}api/config/pho_edit`, {params}).then(res => res).catch(err => err)
+  },
+  // 编辑短信配置
+  ConfigNoteEdit: async (params: any) => {
+    return await service.post(`${baseUrl}api/config/pho_edit`, params).then(res => res).catch(err => err)
   },
 }
