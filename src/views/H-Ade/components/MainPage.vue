@@ -374,13 +374,11 @@
         pageSize: this.pageSize
       }
       service.AdeList(params).then(res => {
+        // console.log(res)
           this.tableData = res.data
           this.pageCount = res.allnews
-      })
-      // 下拉框内容
-      service.AdeSel().then(res => {
-        this.options = res.address
-        this.options1 = res.degree_weight
+          this.options=res.address//不良发生地点
+          this.options1=res.degree_weight//不良轻重程度
       })
     }
   }
