@@ -151,10 +151,6 @@ export default {
   AdeSearch: async (params: any) => {
     return await service.get(`${baseUrl}api/bad/lists`, { params }).then(res => res).catch(err => err)
   },
-  // 事件编号
-  badNum: async () => {
-    return await service.get(`${baseUrl}api/bad/bad_add`).then(res => res).catch(err => err)
-  },
   // 确认不良新增
   badAdd: async (params: any) => {
     return await service.post(`${baseUrl}api/bad/bad_add`, params).then(res => res).catch(err => err)

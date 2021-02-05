@@ -137,12 +137,15 @@
         options1: [], //轻重程度
         tableData: [], //表格内容
         details: {}, //查看
-        addcon: [], //新增里面的
         currentPage4: 1, //分页
         pageCount: 0, //总数量
         pageNumList: [8, 10, 20], //显示个数选择器
         pageSize: 8,
         eventNum: '', // 事件编码
+        address:[],//发生场所
+        choice_type:[],//不良类型
+        degree_weight:[],//轻重程度
+        department:[],//科室
       };
     },
     watch: {
@@ -225,10 +228,15 @@
       },
       // 新增
       Add() {
-        this.$emit('pageAdd')
         service.AdeSel().then(res => {
+          console.log(res)
           if (res.code == 20010) {
-            this.bus.$emit("eventNum", res.event_num)
+            this.bus.$emit("eventNum", res.event_num)//编号
+            this.bus.$emit("address",res.address)//发生场所
+            this.bus.$emit("choice_type",res.choice_type)//不良类型
+            this.bus.$emit("degree_weight",res.degree_weight)//轻重程度
+            this.bus.$emit("department",res.department)//科室
+            this.$emit('pageAdd')
           }
         })
       },
