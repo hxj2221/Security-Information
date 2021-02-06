@@ -128,7 +128,6 @@
         total: 0,
         num: 8,
       };
-<<<<<<< HEAD
       service.details(data).then((res) => {
         console.log(res);
         if (res.code == 20010) {
@@ -137,8 +136,6 @@
         } 
       });
       //   console.log(e,val)
-=======
->>>>>>> 0f8eb73d5e0886400f7fca5c7fe6307da5a31ddd
     },
     methods: {
       // 投诉详情
