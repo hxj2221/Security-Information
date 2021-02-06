@@ -11,6 +11,7 @@
       </div>
     </div>
     <!-- <bscroll> -->
+<<<<<<< HEAD
       <div class="wrapper" ref="wrapper">
         <div class="content"  >
           <div id="aa">
@@ -76,124 +77,189 @@
           <div style="padding-bottom:10px;padding-left:21px">
             <el-row type="flex" class="row-bg">
               <el-col :span="3">
+=======
+    <div class="wrapper" ref="wrapper">
+      <div class="content">
+        <div class="head-txt">
+          <div class="txt">
+            <el-row type="flex" class="row-bg" justify="center">
+              <el-col :span="6">
                 <div class="grid-content bg-purple">
-                  <span><b>基本信息</b></span>
+                  <span>
+                    <span>医院名称：</span>第二人民医院
+                  </span>
+                </div>
+              </el-col>
+              <el-col :span="6">
+                <div class="grid-content bg-purple-light"></div>
+              </el-col>
+              <el-col :span="6">
+>>>>>>> 0f8eb73d5e0886400f7fca5c7fe6307da5a31ddd
+                <div class="grid-content bg-purple">
+                  <span>
+                    <span>事件编号：</span>{{event_num}}
+                  </span>
+                </div>
+              </el-col>
+            </el-row>
+            <el-row type="flex" class="row-bg" justify="center">
+              <el-col :span="6">
+                <div class="grid-content bg-purple">
+                  <span><span>事发时间：</span>{{occur_time |Date }}</span>
+                </div>
+              </el-col>
+              <el-col :span="6">
+                <div class="grid-content bg-purple-light"></div>
+              </el-col>
+              <el-col :span="6">
+                <div class="grid-content bg-purple">
+                  <span>
+                    <span>事发地点：</span>{{occur_scene}}
+                  </span>
+                </div>
+              </el-col>
+            </el-row>
+            <el-row type="flex" class="row-bg" justify="center">
+              <el-col :span="6">
+                <div class="grid-content bg-purple"><span><span>不良类型：</span>{{event_type}}</span>
+                </div>
+              </el-col>
+              <el-col :span="6">
+                <div class="grid-content bg-purple-light"></div>
+              </el-col>
+              <el-col :span="6">
+                <div class="grid-content bg-purple">
+                  <span>
+                    <span>上报人：</span>{{create_uid}}
+                  </span>
                 </div>
               </el-col>
             </el-row>
           </div>
+          <!-- 基本信息 -->
+          <div class="cent_info">
+            <div style="padding-bottom:10px;padding-left:21px">
+              <el-row type="flex" class="row-bg">
+                <el-col :span="3">
+                  <div class="grid-content bg-purple">
+                    <span><b>基本信息</b></span>
+                  </div>
+                </el-col>
+              </el-row>
+            </div>
 
-          <el-row class="tab">
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="tit">患者姓名</p>
-              </div>
-            </el-col>
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="con">{{patient_name}}</p>
-              </div>
-            </el-col>
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="tit">性别/年龄</p>
-              </div>
-            </el-col>
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="con">{{sex}}/{{age}}{{specific_age}}</p>
-              </div>
-            </el-col>
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="tit">住院号</p>
-              </div>
-            </el-col>
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="con">{{admission_id}}</p>
-              </div>
-            </el-col>
-          </el-row>
-          <el-row class="tab">
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="tit">入院日期</p>
-              </div>
-            </el-col>
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="con">{{hospitalized_time |date}}</p>
-              </div>
-            </el-col>
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="tit">科室</p>
-              </div>
-            </el-col>
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="con">{{department_id}}</p>
-              </div>
-            </el-col>
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="tit">床号</p>
-              </div>
-            </el-col>
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="con">{{bed_number}}</p>
-              </div>
-            </el-col>
-          </el-row>
-          <el-row class="tab">
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="tit">不良发生时间</p>
-              </div>
-            </el-col>
-            <el-col :span="20">
-              <div class="grid-content bg-purple">
-                <p class="con">{{occur_time | Date }}</p>
+            <el-row class="tab">
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="tit">患者姓名</p>
+                </div>
+              </el-col>
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="con">{{patient_name}}</p>
+                </div>
+              </el-col>
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="tit">性别/年龄</p>
+                </div>
+              </el-col>
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="con">{{sex}}/{{age}}{{specific_age}}</p>
+                </div>
+              </el-col>
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="tit">住院号</p>
+                </div>
+              </el-col>
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="con">{{admission_id}}</p>
+                </div>
+              </el-col>
+            </el-row>
+            <el-row class="tab">
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="tit">入院日期</p>
+                </div>
+              </el-col>
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="con">{{hospitalized_time |date}}</p>
+                </div>
+              </el-col>
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="tit">科室</p>
+                </div>
+              </el-col>
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="con">{{department_id}}</p>
+                </div>
+              </el-col>
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="tit">床号</p>
+                </div>
+              </el-col>
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="con">{{bed_number}}</p>
+                </div>
+              </el-col>
+            </el-row>
+            <el-row class="tab">
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="tit">不良发生时间</p>
+                </div>
+              </el-col>
+              <el-col :span="20">
+                <div class="grid-content bg-purple">
+                  <p class="con">{{occur_time | Date }}</p>
 
-              </div>
-            </el-col>
-          </el-row>
-          <el-row class="tab">
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="tit">不良报告时间</p>
-              </div>
-            </el-col>
-            <el-col :span="20">
-              <div class="grid-content bg-purple">
-                <p class="con">{{create_time |formatDate}}</p>
-              </div>
-            </el-col>
-          </el-row>
-          <el-row class="tab">
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="tit">主管医师</p>
-              </div>
-            </el-col>
-            <el-col :span="20">
-              <div class="grid-content bg-purple">
-                <p class="con">{{Indications_uid}}</p>
-              </div>
-            </el-col>
-          </el-row>
-          <el-row class="tab">
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="tit">主管护士</p>
-              </div>
-            </el-col>
-            <el-col :span="20">
-              <div class="grid-content bg-purple">
-                <p class="con">{{nurse_uid}}</p>
+                </div>
+              </el-col>
+            </el-row>
+            <el-row class="tab">
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="tit">不良报告时间</p>
+                </div>
+              </el-col>
+              <el-col :span="20">
+                <div class="grid-content bg-purple">
+                  <p class="con">{{create_time |formatDate}}</p>
+                </div>
+              </el-col>
+            </el-row>
+            <el-row class="tab">
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="tit">主管医师</p>
+                </div>
+              </el-col>
+              <el-col :span="20">
+                <div class="grid-content bg-purple">
+                  <p class="con">{{Indications_uid}}</p>
+                </div>
+              </el-col>
+            </el-row>
+            <el-row class="tab">
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="tit">主管护士</p>
+                </div>
+              </el-col>
+              <el-col :span="20">
+                <div class="grid-content bg-purple">
+                  <p class="con">{{nurse_uid}}</p>
 
+<<<<<<< HEAD
               </div>
             </el-col>
           </el-row>
@@ -263,87 +329,159 @@
           <div style="padding-bottom:10px;padding-left:21px">
             <el-row type="flex" class="row-bg">
               <el-col :span="3">
+=======
+                </div>
+              </el-col>
+            </el-row>
+            <el-row class="tab">
+              <el-col :span="4">
+>>>>>>> 0f8eb73d5e0886400f7fca5c7fe6307da5a31ddd
                 <div class="grid-content bg-purple">
-                  <span><b>关联患者信息</b></span>
+                  <p class="tit">在场相关人员</p>
+                </div>
+              </el-col>
+              <el-col :span="20">
+                <div class="grid-content bg-purple">
+                  <p class="con">{{stakeholder}}</p>
+                </div>
+              </el-col>
+            </el-row>
+            <el-row class="tab">
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="tit">入院诊断</p>
+                </div>
+              </el-col>
+              <el-col :span="20">
+                <div class="grid-content bg-purple">
+                  <p class="con">{{admitting_diagnosis}}</p>
+                </div>
+              </el-col>
+            </el-row>
+            <el-row class="tab">
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="tit">诊疗经过</p>
+                </div>
+              </el-col>
+              <el-col :span="20">
+                <div class="grid-content bg-purple">
+                  <p class="con">{{diagnosis_process}}</p>
+                </div>
+              </el-col>
+            </el-row>
+            <el-row class="tab">
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="tit">患者目前情况</p>
+                </div>
+              </el-col>
+              <el-col :span="20">
+                <div class="grid-content bg-purple">
+                  <p class="con">{{patient_situation}}</p>
+                </div>
+              </el-col>
+            </el-row>
+            <el-row class="tab">
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="tit">不良事件描述</p>
+                </div>
+              </el-col>
+              <el-col :span="20">
+                <div class="grid-content bg-purple">
+                  <p class="con">{{event_describe}}</p>
                 </div>
               </el-col>
             </el-row>
           </div>
+          <!-- 关联患者信息 -->
+          <div class="cent_info">
+            <div style="padding-bottom:10px;padding-left:21px">
+              <el-row type="flex" class="row-bg">
+                <el-col :span="3">
+                  <div class="grid-content bg-purple">
+                    <span><b>关联患者信息</b></span>
+                  </div>
+                </el-col>
+              </el-row>
+            </div>
 
-          <el-row class="tab">
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="tit">患者姓名</p>
-              </div>
-            </el-col>
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="con"></p>
-              </div>
-            </el-col>
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="tit">性别</p>
-              </div>
-            </el-col>
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="con"></p>
-              </div>
-            </el-col>
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="tit">年龄</p>
-              </div>
-            </el-col>
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="con"></p>
-              </div>
-            </el-col>
-          </el-row>
-          <el-row class="tab">
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="tit">医保类型</p>
-              </div>
-            </el-col>
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="con"></p>
-              </div>
-            </el-col>
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="tit">手机</p>
-              </div>
-            </el-col>
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="con"></p>
-              </div>
-            </el-col>
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="tit">最新就诊日期</p>
-              </div>
-            </el-col>
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="con"></p>
-              </div>
-            </el-col>
-          </el-row>
-          <el-row class="tab">
-            <el-col :span="4">
-              <div class="grid-content bg-purple">
-                <p class="tit">所在病区</p>
-              </div>
-            </el-col>
-            <el-col :span="20">
-              <div class="grid-content bg-purple">
-                <p class="con"></p>
+            <el-row class="tab">
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="tit">患者姓名</p>
+                </div>
+              </el-col>
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="con"></p>
+                </div>
+              </el-col>
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="tit">性别</p>
+                </div>
+              </el-col>
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="con"></p>
+                </div>
+              </el-col>
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="tit">年龄</p>
+                </div>
+              </el-col>
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="con"></p>
+                </div>
+              </el-col>
+            </el-row>
+            <el-row class="tab">
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="tit">医保类型</p>
+                </div>
+              </el-col>
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="con"></p>
+                </div>
+              </el-col>
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="tit">手机</p>
+                </div>
+              </el-col>
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="con"></p>
+                </div>
+              </el-col>
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="tit">最新就诊日期</p>
+                </div>
+              </el-col>
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="con"></p>
+                </div>
+              </el-col>
+            </el-row>
+            <el-row class="tab">
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="tit">所在病区</p>
+                </div>
+              </el-col>
+              <el-col :span="20">
+                <div class="grid-content bg-purple">
+                  <p class="con"></p>
 
+<<<<<<< HEAD
               </div>
             </el-col>
           </el-row>
@@ -373,17 +511,52 @@
           </el-row>
         </div> -->
       </div>
+=======
+                </div>
+              </el-col>
+            </el-row>
+            <el-row class="tab">
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="tit">所在病房</p>
+                </div>
+              </el-col>
+              <el-col :span="20">
+                <div class="grid-content bg-purple">
+                  <p class="con"></p>
+                </div>
+              </el-col>
+            </el-row>
+            <el-row class="tab">
+              <el-col :span="4">
+                <div class="grid-content bg-purple">
+                  <p class="tit">诊断信息</p>
+                </div>
+              </el-col>
+              <el-col :span="20">
+                <div class="grid-content bg-purple">
+                  <p class="con"></p>
+                </div>
+              </el-col>
+            </el-row>
+          </div>
+>>>>>>> 0f8eb73d5e0886400f7fca5c7fe6307da5a31ddd
         </div>
         </div>
       </div>
+<<<<<<< HEAD
+=======
+    </div>
+
+>>>>>>> 0f8eb73d5e0886400f7fca5c7fe6307da5a31ddd
     <!-- </bscroll> -->
   </div>
 </template>
 
 <script>
   // import BScroll from 'better-scroll'
-import bscroll from '@/components/better-scroll/bscroll';
-import BScroll from 'better-scroll'
+  import bscroll from '@/components/better-scroll/bscroll';
+  import BScroll from 'better-scroll'
   export default {
     components: {
       bscroll
@@ -476,28 +649,28 @@ import BScroll from 'better-scroll'
       this.$nextTick(() => {
         if (!this.scroll) {
           this.scroll = new BScroll(this.$refs.wrapper, {
-            click:true,
-            probeType:3,
+            click: true,
+            probeType: 3,
             mouseWheel: true,
           })
           // console.log(this.scroll)
         }
       })
     },
-    updated(){
+    updated() {
       const bs = new BScroll('.wrapper', {
-        click:true,
-        probeType:3,
+        click: true,
+        probeType: 3,
         mouseWheel: true,
-        scrollY:true,
+        scrollY: true,
       })
       this.scroll.refresh();
     }
   }
 </script>
 <style scoped>
-.wrapper{
-  height: 750px;
-  overflow: hidden;
-}
+  .wrapper {
+    height: 750px;
+    overflow: hidden;
+  }
 </style>

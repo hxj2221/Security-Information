@@ -515,6 +515,26 @@ detailalls: async (data: any) => {
   DicDel: async (params: any) => {
     return await service.post(`${baseUrl}api/Dictionary/del`, params).then(res => res).catch(err => err)
   },
+   // 统计分析  投诉类别(get)
+   CensusCate: async (params: any) => {
+    return await service.get(`${baseUrl}api/Analyse/complain`, {params}).then(res => res).catch(err => err)
+  },
+  // 统计分析  投诉类别(post)
+  Censuscate: async (data: any) => {
+    return await service.post(`${baseUrl}api/Analyse/complain`, data).then(res => res).catch(err => err)
+  },
+   // 统计分析  科室(get)
+   CensusDep: async (params: any) => {
+    return await service.get(`${baseUrl}api/Analyse/complaint_dep`, {params}).then(res => res).catch(err => err)
+  },
+  // 统计分析  科室(post)
+  Censusdep: async (data: any) => {
+    return await service.post(`${baseUrl}api/Analyse/complaint_dep`, data).then(res => res).catch(err => err)
+  },
+   // 统计分析  医护人员(post)
+   CensusPer: async () => {
+    return await service.get(`${baseUrl}api/Analyse/personnel`).then(res => res).catch(err => err)
+   },
   // 邮箱及短信配置
   // 邮箱配置
   ConfigMail: async (params: any) => {
