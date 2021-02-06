@@ -3,203 +3,203 @@
     <div class="addcom">
       <bscroll>
         <div class="addcom-top">
-        <h4>基本信息</h4>
-      </div>
-      <div class="addcom-form-basic">
-        <el-row type="flex" class="row-bg" justify="space-around">
-          <el-col :span="6">
-            <div class="grid-content bg-purple">
-              <span> 业务编号 </span>
-              <el-input v-model="comnumber" disabled></el-input>
-            </div>
-          </el-col>
-          <el-col :span="6">
-            <div class="grid-content bg-purple-light">
-              <span> 投诉日期<span>*</span> </span> <br />
-              <el-date-picker v-model="comdata" type="date" format="yyyy 年 MM 月 dd 日" value-format="timestamp"
-                placeholder="选择日期" :picker-options="pickerOptions"></el-date-picker>
-            </div>
-          </el-col>
-          <el-col :span="6">
-            <div class="grid-content bg-purple-light">
-              <span> 事发日期<span>*</span> </span> <br />
-              <el-date-picker v-model="incidentdata" type="date" placeholder="选择日期" format="yyyy 年 MM 月 dd 日"
-                value-format="timestamp" :picker-options="pickerOption">
-              </el-date-picker>
-            </div>
-          </el-col>
-        </el-row>
-        <el-row type="flex" class="row-bg" justify="space-around">
-          <el-col :span="6">
-            <div class="grid-content bg-purple">
-              <span> 投诉人姓名 <span>*</span></span>
-              <el-input v-model="comname" placeholder="请输入投诉人姓名" maxlength="10"
-                onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )" clearable></el-input>
-            </div>
-          </el-col>
-          <el-col :span="6">
-            <div class="grid-content bg-purple-light">
-              <span> 性别<span>*</span> </span> <br />
-              <el-select v-model="comgender" placeholder="请选择">
-                <el-option v-for="item in comgenders" :key="item.value" :label="item.lable" :value="item.value"
-                  clearable>
-                </el-option>
-              </el-select>
-            </div>
-          </el-col>
-          <el-col :span="6">
-            <div class="grid-content bg-purple-light">
-              <span> 年龄<span>*</span></span> <br />
-              <el-input placeholder="请输入" v-model="comagenumber" class="input-with-select" clearable maxlength="3"
-                max='3' type='number' oninput="value=value.replace(/[^\d]/g,'')"
-                onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )">
-                <template slot="append">
-                  <el-select v-model="comage" slot="prepend" style="width: 80px">
-                    <el-option label="岁" value="1"></el-option>
-                  </el-select>
-                </template>
-              </el-input>
-            </div>
-          </el-col>
-        </el-row>
-        <el-row type="flex" class="row-bg" justify="space-around">
-          <el-col :span="6">
-            <div class="grid-content bg-purple">
-              <span> 手机号码 <span>*</span></span>
-              <el-input v-model="comphone" placeholder="请输入投诉人手机号码" type="input" maxlength="11" max="11"
-                oninput="value=value.replace(/[^\d]/g,'')" clearable @onkeyup='formatPhoneOnkeyUp'
-                onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )"></el-input>
-            </div>
-          </el-col>
-          <el-col :span="6">
-            <div class="grid-content bg-purple-light">
-              <span> 投诉方式<span>*</span> </span> <br />
-              <el-select v-model="commode" placeholder="请选择" clearable>
-                <el-option v-for="item in commodes" :key="item.id" :label="item.title" :value="item.id">
-                </el-option>
-              </el-select>
-            </div>
-          </el-col>
-          <el-col :span="6">
-            <div class="grid-content bg-purple-light">
-              <span> 投诉科室<span>*</span> </span> <br />
-              <el-cascader ref="cascader" :options="comdes" collapse-tags :props="{
+          <h4>基本信息</h4>
+        </div>
+        <div class="addcom-form-basic">
+          <el-row type="flex" class="row-bg" justify="space-around">
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <span> 业务编号 </span>
+                <el-input v-model="comnumber" disabled></el-input>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content bg-purple-light">
+                <span> 投诉日期<span>*</span> </span> <br />
+                <el-date-picker v-model="comdata" type="date" format="yyyy 年 MM 月 dd 日" value-format="timestamp"
+                  placeholder="选择日期" :picker-options="pickerOptions"></el-date-picker>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content bg-purple-light">
+                <span> 事发日期<span>*</span> </span> <br />
+                <el-date-picker v-model="incidentdata" type="date" placeholder="选择日期" format="yyyy 年 MM 月 dd 日"
+                  value-format="timestamp" :picker-options="pickerOption">
+                </el-date-picker>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row type="flex" class="row-bg" justify="space-around">
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <span> 投诉人姓名 <span>*</span></span>
+                <el-input v-model="comname" placeholder="请输入投诉人姓名" maxlength="10"
+                  onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )" clearable></el-input>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content bg-purple-light">
+                <span> 性别<span>*</span> </span> <br />
+                <el-select v-model="comgender" placeholder="请选择">
+                  <el-option v-for="item in comgenders" :key="item.value" :label="item.lable" :value="item.value"
+                    clearable>
+                  </el-option>
+                </el-select>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content bg-purple-light">
+                <span> 年龄<span>*</span></span> <br />
+                <el-input placeholder="请输入" v-model="comagenumber" class="input-with-select" clearable maxlength="3"
+                  max='3' type='number' oninput="value=value.replace(/[^\d]/g,'')"
+                  onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )">
+                  <template slot="append">
+                    <el-select v-model="comage" slot="prepend" style="width: 80px">
+                      <el-option label="岁" value="1"></el-option>
+                    </el-select>
+                  </template>
+                </el-input>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row type="flex" class="row-bg" justify="space-around">
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <span> 手机号码 <span>*</span></span>
+                <el-input v-model="comphone" placeholder="请输入投诉人手机号码" type="input" maxlength="11" max="11"
+                  oninput="value=value.replace(/[^\d]/g,'')" clearable @onkeyup='formatPhoneOnkeyUp'
+                  onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )"></el-input>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content bg-purple-light">
+                <span> 投诉方式<span>*</span> </span> <br />
+                <el-select v-model="commode" placeholder="请选择" clearable>
+                  <el-option v-for="item in commodes" :key="item.id" :label="item.title" :value="item.id">
+                  </el-option>
+                </el-select>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content bg-purple-light">
+                <span> 投诉科室<span>*</span> </span> <br />
+                <el-cascader ref="cascader" :options="comdes" collapse-tags :props="{
                   value: 'id',
                   label: 'title',
                   children: '_child',
                   multiple: 'true',
                 }" :show-all-levels="false" v-model="comde" clearable @change="getCascaderObj"></el-cascader>
-            </div>
-          </el-col>
-        </el-row>
-        <el-row type="flex" class="row-bg" justify="space-around">
-          <el-col :span="6">
-            <div class="grid-content bg-purple">
-              <span> 投诉人与患者关系 <span>*</span></span><br />
-              <el-select v-model="relation" placeholder="请选择" clearable>
-                <el-option v-for="item in relationlist" :key="item.id" :label="item.title" :value="item.id">
-                </el-option>
-              </el-select>
-            </div>
-          </el-col>
-          <el-col :span="6">
-            <div class="grid-content bg-purple-light">
-              <span> 答复协商时间</span> <br />
-              <el-input placeholder="请输入" v-model="consulttime" type="input" maxlength="3" max="3"
-                oninput="value=value.replace(/[^\d]/g,'')" clearable
-                onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )">
-                <template slot="append">天</template>
-              </el-input>
-            </div>
-          </el-col>
-          <el-col :span="6">
-            <div class="grid-content bg-purple-light">
-              <span> 投诉类别(多选)</span> <br />
-              <el-select v-model="comtype" multiple placeholder="请选择" clearable>
-                <el-option v-for="item in comtypelist" :key="item.id" :label="item.title" :value="item.id">
-                </el-option>
-              </el-select>
-            </div>
-          </el-col>
-        </el-row>
-        <el-row type="flex" class="row-bg">
-          <el-col :span="6" :push="1">
-            <div class="grid-content bg-purple">
-              <span> 事件性质 </span><br />
-              <el-select v-model="nature" placeholder="请选择" clearable>
-                <el-option v-for="item in natures" :key="item.state_val" :label="item.title" :value="item.state_val">
-                </el-option>
-              </el-select>
-            </div>
-          </el-col>
-          <el-col :span="14" :push="3">
-            <div class="grid-content bg-purple-light">
-              <span> 联系地址<span>*</span> </span> <br />
-              <el-input v-model="address" placeholder="联系地址" maxlength="50" minlength="10"
-                onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )" clearable></el-input>
-            </div>
-          </el-col>
-        </el-row>
-        <el-row type="flex" class="row-bg">
-          <el-col :span="22" :push="1">
-            <div class="grid-content bg-purple">
-              <span> 投诉原因</span>
-              <el-input type="textarea" v-model="reason"
-                onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )" placeholder="请输入投诉原因" clearable
-                maxlength="100"></el-input>
-            </div>
-          </el-col>
-        </el-row>
-      </div>
-      <!-- 经办人 -->
-      <div class="Addcom-agent">
-        <h4>经办人信息</h4>
-        <div>
-          <el-row type="flex" class="row-bg" justify="space-around">
-            <el-col :span="6" :pull="2">
-              <div class="grid-content bg-purple">
-                <span> 经办人姓名<span>*</span> </span>
-                <el-input v-model="agentname" onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )"
-                  placeholder="请输入姓名" clearable type="input" maxlength="20"></el-input>
               </div>
             </el-col>
-            <el-col :span="6" :pull="6">
+          </el-row>
+          <el-row type="flex" class="row-bg" justify="space-around">
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <span> 投诉人与患者关系 <span>*</span></span><br />
+                <el-select v-model="relation" placeholder="请选择" clearable>
+                  <el-option v-for="item in relationlist" :key="item.id" :label="item.title" :value="item.id">
+                  </el-option>
+                </el-select>
+              </div>
+            </el-col>
+            <el-col :span="6">
               <div class="grid-content bg-purple-light">
-                <span>经办人手机<span>*</span> </span> <br />
-                <el-input v-model="agentphone" placeholder="请输入手机号码" clearable type="input" maxlength="11" max="11"
-                  oninput="value=value.replace(/[^\d]/g,'')"
-                  onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )"></el-input>
+                <span> 答复协商时间</span> <br />
+                <el-input placeholder="请输入" v-model="consulttime" type="input" maxlength="3" max="3"
+                  oninput="value=value.replace(/[^\d]/g,'')" clearable
+                  onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )">
+                  <template slot="append">天</template>
+                </el-input>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content bg-purple-light">
+                <span> 投诉类别(多选)</span> <br />
+                <el-select v-model="comtype" multiple placeholder="请选择" clearable>
+                  <el-option v-for="item in comtypelist" :key="item.id" :label="item.title" :value="item.id">
+                  </el-option>
+                </el-select>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row type="flex" class="row-bg">
+            <el-col :span="6" :push="1">
+              <div class="grid-content bg-purple">
+                <span> 事件性质 </span><br />
+                <el-select v-model="nature" placeholder="请选择" clearable>
+                  <el-option v-for="item in natures" :key="item.state_val" :label="item.title" :value="item.state_val">
+                  </el-option>
+                </el-select>
+              </div>
+            </el-col>
+            <el-col :span="14" :push="3">
+              <div class="grid-content bg-purple-light">
+                <span> 联系地址<span>*</span> </span> <br />
+                <el-input v-model="address" placeholder="联系地址" maxlength="50" minlength="10"
+                  onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )" clearable></el-input>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row type="flex" class="row-bg">
+            <el-col :span="22" :push="1">
+              <div class="grid-content bg-purple">
+                <span> 投诉原因</span>
+                <el-input type="textarea" v-model="reason"
+                  onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )" placeholder="请输入投诉原因"
+                  clearable maxlength="100"></el-input>
               </div>
             </el-col>
           </el-row>
         </div>
-      </div>
-      <!-- 患者信息 -->
-      <div class="addcom-relevance" v-show="false">
-        <h4>关联患者信息(调用HIS)</h4>
-        <el-table :data="data" style="width: 94%; margin-left: 3%; margin-top: 20px; margin-bottom: 20px"
-          :header-cell-style="getRowClass">
-          <el-table-column type="index" width="50" label="序号"> </el-table-column>
-          <el-table-column prop="name" label="姓名"> </el-table-column>
-          <el-table-column prop="name" label="性别"> </el-table-column>
-          <el-table-column prop="name" label="出生日期"> </el-table-column>
-          <el-table-column prop="name" label="联系方式"> </el-table-column>
-          <el-table-column prop="name" label="地址"> </el-table-column>
-          <el-table-column prop="name" label="科室"> </el-table-column>
-          <el-table-column prop="name" label="诊断"> </el-table-column>
-          <el-table-column fixed="right" label="操作" width="100%" style="border-bottom: none">
-            <template slot-scope="scope">
-              <el-button type="text" size="small" @click="handleClick(scope.row)" style="border-bottom: none">取消关联
-              </el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-        <div align="center">
-          <el-button type="primary" icon="el-icon-circle-plus" class="addrelevance">添加患者信息</el-button>
+        <!-- 经办人 -->
+        <div class="Addcom-agent">
+          <h4>经办人信息</h4>
+          <div>
+            <el-row type="flex" class="row-bg" justify="space-around">
+              <el-col :span="6" :pull="2">
+                <div class="grid-content bg-purple">
+                  <span> 经办人姓名<span>*</span> </span>
+                  <el-input v-model="agentname" onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )"
+                    placeholder="请输入姓名" clearable type="input" maxlength="20"></el-input>
+                </div>
+              </el-col>
+              <el-col :span="6" :pull="6">
+                <div class="grid-content bg-purple-light">
+                  <span>经办人手机<span>*</span> </span> <br />
+                  <el-input v-model="agentphone" placeholder="请输入手机号码" clearable type="input" maxlength="11" max="11"
+                    oninput="value=value.replace(/[^\d]/g,'')"
+                    onkeypress="return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )"></el-input>
+                </div>
+              </el-col>
+            </el-row>
+          </div>
         </div>
-      </div>
+        <!-- 患者信息 -->
+        <div class="addcom-relevance" v-show="false">
+          <h4>关联患者信息(调用HIS)</h4>
+          <el-table :data="data" style="width: 94%; margin-left: 3%; margin-top: 20px; margin-bottom: 20px"
+            :header-cell-style="getRowClass">
+            <el-table-column type="index" width="50" label="序号"> </el-table-column>
+            <el-table-column prop="name" label="姓名"> </el-table-column>
+            <el-table-column prop="name" label="性别"> </el-table-column>
+            <el-table-column prop="name" label="出生日期"> </el-table-column>
+            <el-table-column prop="name" label="联系方式"> </el-table-column>
+            <el-table-column prop="name" label="地址"> </el-table-column>
+            <el-table-column prop="name" label="科室"> </el-table-column>
+            <el-table-column prop="name" label="诊断"> </el-table-column>
+            <el-table-column fixed="right" label="操作" width="100%" style="border-bottom: none">
+              <template slot-scope="scope">
+                <el-button type="text" size="small" @click="handleClick(scope.row)" style="border-bottom: none">取消关联
+                </el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+          <div align="center">
+            <el-button type="primary" icon="el-icon-circle-plus" class="addrelevance">添加患者信息</el-button>
+          </div>
+        </div>
       </bscroll>
-      
+
       <!-- 弹窗 -->
       <div class="requirement">
         <slot name="dialog"> </slot>
