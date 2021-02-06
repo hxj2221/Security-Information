@@ -360,19 +360,26 @@ import bscroll from '@/components/better-scroll/bscroll'
 
     },
     created() {
-      // 下拉框
-      service.AdeSel().then(res => {
-        if (res.cede == 20010) {
-          this.options = res.choice_type //不良类型
-          this.options1 = res.address //发生场所
-          this.options4 = res.degree_weight //轻重程度
-          this.department = res.department //科室
-        } 
-
-      })
       let that = this
+      // 事件编号
       this.bus.$on('eventNum', function (item) {
         that.addAde.event_num = item
+      })
+      // 发生场所
+      this.bus.$on('address', function (item) {
+        that.options1 = item
+      })
+      // 不良类型
+      this.bus.$on('choice_type', function (item) {
+        that.options = item
+      })
+      // 轻重程度
+      this.bus.$on('degree_weight', function (item) {
+        that.options4 = item
+      })
+      // 科室
+      this.bus.$on('department', function (item) {
+        that.department = item
       })
     },
     

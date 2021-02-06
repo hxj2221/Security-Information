@@ -176,6 +176,7 @@ export default {
     // });
     // 获取员工列表
     service.stafflist().then((res) => {
+      console.log(res)
       // console.log(res.data[0]);
       if (res.code == 20010) {
         this.tables = res.data.user;

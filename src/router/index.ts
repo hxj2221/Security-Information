@@ -274,6 +274,12 @@ const asyncRoutes = [
         
       },
       {
+        name: '邮箱及短信配置',
+        iconCls: 'el-icon-help',
+        path: '/Configure',
+        component: () => import('../views/H-Configure/index.vue'),
+      },
+      {
         name: '基本设置',
         iconCls: 'el-icon-help',
         path: '/Technological',
