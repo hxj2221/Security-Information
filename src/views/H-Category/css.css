@@ -92,7 +92,7 @@
     width: 55%;
     height: 450px;
     background-color: #fff;
-    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);;
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
     border-radius: 5px;
     float: left;
     margin: 10px;
@@ -108,7 +108,7 @@
 }
 /* 统计表格部分 */
 .category_statistics {
-    width: 93%;
+    width: 94%;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);;
