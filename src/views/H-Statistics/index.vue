@@ -30,7 +30,7 @@
     </div>
     <!-- 图 -->
     <div class="Statistics_chart">
-      <div id="main1" style="margin: 0 auto"></div>
+      <div id="MTous" style="margin: 0 auto"></div>
     </div>
     <div class="Statistics_content">
       <!-- 表格 -->
@@ -43,7 +43,7 @@
           <el-table-column prop="phone" label="联系方式"> </el-table-column>
           <el-table-column prop="position" label="职称"> </el-table-column>
           <el-table-column prop="positions" label="职务"> </el-table-column>
-          <el-table-column prop="number" label="被投诉次数"> </el-table-column>
+          <el-table-column prop="emps" label="被投诉次数"> </el-table-column>
         </el-table>
       </div>
       <!-- 分页 -->
@@ -60,12 +60,13 @@
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 
 <script>
 import "@/views/H-Statistics/index.css";
+// 引入service
+import service from "@/service/index";
 export default {
   components: {},
   props: {},
@@ -90,45 +91,16 @@ export default {
       // 筛选
       name: "",
       // 表格
-      tableData: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          number: "12",
-          positions: "hahah",
-          position: "heheh",
-          phone: "123000000",
-          age: "12",
-        },
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          number: "12",
-          positions: "hahah",
-          position: "heheh",
-          phone: "123000000",
-          age: "12",
-        },
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          number: "12",
-          positions: "hahah",
-          position: "heheh",
-          phone: "123000000",
-          age: "12",
-        },
-      ],
+      tableData: [],
       // 分页
-      currentPage:1,
-
+      currentPage: 1,
     };
   },
   methods: {
     // 柱状图
     drawChart() {
       //基于准备好的dom，初始化echarts实例
-      let myChart = this.$echarts.init(document.getElementById("main1"));
+      let myChart = this.$echarts.init(document.getElementById("MTous"));
       // 指定图表的配置项和数据
       let option = {
         tooltip: {
@@ -213,6 +185,12 @@ export default {
   },
   mounted() {
     this.drawChart();
+  },
+  created() {
+    service.CensusPer().then((res) => {
+      console.log(res);
+      this.tableData = res.data;
+    });
   },
 };
 </script>
