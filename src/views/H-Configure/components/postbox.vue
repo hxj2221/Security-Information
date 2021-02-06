@@ -20,7 +20,7 @@
         </el-form-item>
         <el-form-item>
           <el-button class="sumbit" size="medium" type="primary" @click="submit">立即提交</el-button>
-          <el-button class="cancel" size="medium">重置</el-button>
+          <!-- <el-button class="cancel" size="medium">重置</el-button> -->
         </el-form-item>
       </el-form>
     </div>

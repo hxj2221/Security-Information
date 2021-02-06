@@ -497,9 +497,7 @@ export default {
         phone: this.phone,
       };
       service.phoneyz(data).then((res) => {
-        if (res.code == 20020) {
-          alert(res.msg);
-        } else if (res.code == 20010) {
+       if (res.code == 20010) {
           let timer = setInterval(() => {
             this.isCodeIng = true;
             this.emaildisabl = true;
@@ -539,9 +537,7 @@ export default {
         email: this.newemail,
       };
       service.emailcode(data).then((res) => {
-        if (res.code == 20020) {
-          alert(res.msg);
-        } else if (res.info.code == 20010) {
+        if (res.info.code == 20010) {
           let timer = setInterval(() => {
             this.isCodeIng = true;
             this.changeemaildisabl = true;
@@ -569,11 +565,7 @@ export default {
         if (res.msg == "20010") {
           this.emailnew = false;
           this.reload();
-        } else if (res.msg == "此邮箱已被绑定!") {
-          alert(res.msg);
-        } else {
-          alert(res.msg);
-        }
+        } 
       });
     },
 

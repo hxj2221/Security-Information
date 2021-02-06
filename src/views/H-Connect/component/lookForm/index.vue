@@ -7,15 +7,18 @@
             <span>医院沟通记录</span>
           </div>
           <div class="lookForm_top_button_right">
-            <el-button type="primary" icon="iconfont el-icon-hospital-passworddayin" size="medium">打印记录表</el-button>
+            <el-button type="primary" icon="iconfont el-icon-hospital-passworddayin" size="medium" @click="stamp">打印记录表</el-button>
             <el-button type="primary" icon="iconfont el-icon-hospital-passwordai207" size="medium" @click="upper">返回
             </el-button>
           </div>
         </div>
       </div>
       <bscroll>
+        <div id="aa">
+
+      
       <!-- top -->
-        <div class="lookForm_top_content">
+        <div class="lookForm_top_content" >
           <el-form ref="form" :model="connent">
             <el-row type="flex" class="row-bg" justify="center">
               <el-col :span="6">
@@ -238,6 +241,7 @@
           </el-row>
         </div> -->
       </div>
+        </div>
       </bscroll>
     </div>
   </div>
@@ -265,6 +269,10 @@ export default {
     };
   },
   methods: {
+     // 打印
+    stamp() {
+    this.getPdf('aa','投诉事件调查表')
+    },
     upper() {
       // this.$emit("upper");
       this.reload()

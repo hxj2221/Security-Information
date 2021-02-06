@@ -1,6 +1,6 @@
 <template>
   <div class="addRecord_all">
-      <bscroll>
+  
         <!-- top -->
         <div class="addRecord_top">
           <h4>基本信息</h4>
@@ -65,7 +65,7 @@
           </el-form>
         </div>
         <!-- 表格  附件信息 -->
-        <div class="addRecord_enclosure">
+        <!-- <div class="addRecord_enclosure">
           <div class="addRecord_enclosure_top">
             <div class="addRecord_enclosure_top_left">
               <h5>附件信息</h5>
@@ -73,9 +73,9 @@
             <div class="addRecord_enclosure_top_right">
               <el-button type="primary" icon="el-icon-circle-plus" @click="upLode_define">上传附件</el-button>
             </div>
-          </div>
+          </div> -->
           <!-- 弹框 -->
-          <div class="addRecord_enclosure_dialog">
+          <!-- <div class="addRecord_enclosure_dialog">
             <el-dialog title="上传文件" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
               <div class="addRecord_enclosure_dialog_div">
                 <el-form ref="form" :model="dialogForm">
@@ -105,9 +105,9 @@
                   :disabled='(dialogForm.file_name==""||dialogForm.file_describe=="")?true:false'>确 定</el-button>
               </span>
             </el-dialog>
-          </div>
+          </div> -->
           <!--主要表格 -->
-          <div class="addRecord_enclosure_content">
+          <!-- <div class="addRecord_enclosure_content">
             <el-table :data="tableData" :header-cell-style="getRowClass">
               <el-table-column type="index" label="ID" width="50">
               </el-table-column>
@@ -127,9 +127,9 @@
                 </template>
               </el-table-column>
             </el-table>
-          </div>
+          </div> -->
           <!-- 分页 -->
-          <div class="addRecord_enclosure_paging">
+          <!-- <div class="addRecord_enclosure_paging">
             <div class="block">
               <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
                 :current-page="currentPage" :page-sizes="[8, 10, 20]" :page-size="8"
@@ -137,7 +137,7 @@
               </el-pagination>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- 表格  关联投诉信息 -->
         <div class="addRecord_relation">
           <div class="addRecord_relation_top">
@@ -196,7 +196,7 @@
             </el-dialog>
           </div>
         </div>
-      </bscroll>
+   
     <!-- 固定定位按钮 -->
     <div class="addRecord_button">
       <div class="button_stlye">
@@ -372,12 +372,6 @@ import bscroll from '@/components/better-scroll/bscroll';
               this.$emit("abcClick");
               this.reload();
             }, 2000);
-          } else {
-            this.$message({
-              message: res.msg,
-              type: "error",
-              duration: 1000,
-            });
           }
         });
         // this.$emit("abcClick");

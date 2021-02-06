@@ -195,7 +195,7 @@
           </el-form>
         </div>
         <!-- 关联 -->
-        <div class="table_info">
+        <!-- <div class="table_info">
           <h2>关联患者信息（调用HIS）</h2>
           <el-table class="info" :data="tableData" :header-cell-style="getRowClass">
             <el-table-column type="index" label="序号" width="100">
@@ -224,7 +224,7 @@
           <div class="add">
             <i class="el-icon-circle-plus-outline"><span>添加患者信息</span></i>
           </div>
-        </div>
+        </div> -->
       </bscroll>
     <!-- 底部按钮 -->
     <div class="root">

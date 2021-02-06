@@ -1,6 +1,7 @@
 .addRecord_all {
     /* width: 95%; */
     margin: 0 auto;
+    min-height: 800px;
     background: #fff;
     border-radius: 5px;
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
@@ -181,7 +182,7 @@
     border-color: #666EE8;
 }
 /* 固定定位按钮 样式*/
-.addRecord_button {
+/* .addRecord_button {
     width: 100%;
     background-color: #fff;
     box-shadow: 0px 5px 30px rgb(204 204 204);
@@ -201,18 +202,17 @@
     background: none;
     border-color: #666ee8;
     color: #666ee8;
-}
+} */
 
-/* .addRecord_button >.button_stlye {
-    width: 70%;
+.addRecord_button >.button_stlye {
+    width: 82.5%;
     height: 50px;
     border-radius: 5px;
     background: #fff;
     box-shadow: 0 -1px 4px #b2b3b6;
     padding: 15px;
     position: fixed;
-    margin-left: 50px;
-    margin-bottom: 0;
+    bottom: 15px;
 }
 
 .addRecord_button >.button_stlye>button {
@@ -221,11 +221,12 @@
    
 }
 .addRecord_button >.button_stlye>button:last-child{
-    border: 3px solid #666ee8;
-    background: #666ee8;
+    background: none;
+    border-color: #666ee8;
+    color: #666ee8;
 }
 .addRecord_button >.button_stlye>button:first-child{
-    border: 1px solid #666ee8;   
-    color: #666ee8;
-    background:none;
-} */
+    margin-right: 30px;
+    background-color: #666ee8;
+    border-color: #666EE8;
+}

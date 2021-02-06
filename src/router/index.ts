@@ -118,7 +118,7 @@ const asyncRoutes = [
       },
       {
         name: '患者疾病信息统计',
-        iconCls: 'el-icon-document-add',
+        iconCls: 'el-icon-s-marketing',
         path: '/Patient',
         component: () => import('../views/H-Patient/index.vue'),
       

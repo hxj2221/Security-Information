@@ -20,6 +20,7 @@
         :options="options"
         ref="unitAreacode"
         :props="{ expandTrigger: 'hover' }"
+        clearable
         @change="handleChange"
       ></el-cascader>
       <el-input placeholder="请输入文章名称" v-model="input3">
@@ -256,6 +257,7 @@ export default {
     },
     //级选择器
     handleChange(val) {
+      console.log(val)
       this.id = this.$refs["unitAreacode"].getCheckedNodes()[0].value.id;
     },
     handledig(val) {

@@ -200,13 +200,7 @@ export default {
         if (res.code == 20010) {
           this.$parent.upper();
           this.bus.$emit("details", res);
-        } else {
-          this.$message({
-            type: "error",
-            msg: res.msg,
-            duration: 1500,
-          });
-        }
+        } 
       });
       //   console.log(e,val)
     },

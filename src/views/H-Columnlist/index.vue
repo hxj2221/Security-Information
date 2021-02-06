@@ -12,7 +12,7 @@
           style="border: 3px solid #666ee8"
           icon="el-icon-circle-plus"
           @click="hhh"
-          >新增记录</el-button
+          >新增分类</el-button
         >
         <el-button
           type="primary"
@@ -40,7 +40,7 @@
             @change="handleChange"
           ></el-cascader>
         </el-form-item>
-        <el-form-item label="活动区域" :label-width="formLabelWidth">
+        <el-form-item label="分类名称" :label-width="formLabelWidth">
           <el-input
             style="width: 80%"
             v-model="form.title"
@@ -141,7 +141,7 @@
             @change="handleChange"
           ></el-cascader>
         </el-form-item>
-        <el-form-item label="活动区域" :label-width="formLabelWidth">
+        <el-form-item label="分类名称" :label-width="formLabelWidth">
           <el-input
             style="width: 80%"
             v-model="forms.title"

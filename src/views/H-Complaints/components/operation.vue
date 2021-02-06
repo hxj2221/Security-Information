@@ -515,6 +515,7 @@
                         }"
                         :show-all-levels="false"
                         v-model="comde"
+                        @change="changess"
                         collapse-tags
                         clearable
                         style="margin-left: 10px"
@@ -529,13 +530,13 @@
                        <el-cascader
                         ref="cascader"
                          placeholder="请选择责任人"
-                        :options="opdata[1].event_type"
+                        :options="userlist"
                         :props="{
                           value: 'id',
-                          label: 'title',
+                          label: 'name',
                           multiple: 'true'}"
                           :show-all-levels="false"
-                          v-model="eventtype"
+                          v-model="peoplesss"
                           clearabl
                            style="margin-left:10px"
                         ></el-cascader>
@@ -774,6 +775,7 @@
             }
           ]
         },
+        peoplesss:'',//责任人
         dis: false,
         upfiledatas: {},
         upfilesss: false,
@@ -837,6 +839,42 @@
       };
     },
     methods: {
+      changess(){
+         this.userlist=this.$parent.opdata[1].department_user
+              let one = new Array
+              let two = new Array
+              for (let i in this.comde) {
+                if (this.comde[i].length == 1) {
+                  one.push(this.comde[i][0])
+                } else if (this.comde[i].length == 2) {
+                  two.push(this.comde[i][1])
+                }
+              }
+              let comdes = one.concat(two);
+              let userlists=new Array
+              //  console.log(comdes)
+              //  for(let i in this.userlist){
+              //   //  console.log(this.userlist[i].department_id)
+              //   for(let s in this.comdes){
+              //     console.log(this.comdes[s])
+              //     // if(this.userlist[i].department_id==this.comdes[s]){
+              //     //   console.log(this.userlist[i])
+              //     // }
+              //   }
+              //  }
+               for(let i=0;i<this.userlist.length;i++){
+                    // console.log(this.userlist[i].department_id)
+                     for(let s=0;s<comdes.length;s++){
+                    // console.log(comdes[s])
+                    if(this.userlist[i].department_id==comdes[s]){
+                      // console.log(this.userlist[i])
+                      userlists.push(this.userlist[i])
+                    }
+               }
+               }
+               console.log(userlists)
+               this.userlist=userlists
+      },
       records() {
         //跳转到医患记录
         this.$router.push({
@@ -1075,7 +1113,7 @@
           }; //转 失败
           reader.onerror = function (error) {
             reject(error);
-          }; //转 结束  咱就 resolve 出去
+          }; // 咱就 resolve 出去
           reader.onloadend = function () {
             resolve(fileResult);
           };
@@ -1494,6 +1532,7 @@
           }
 
         } else if (this.checkstate == 20) {
+          console.log(this.peoplesss)
           //已结束
           if (
             this.comde !== "" &&
@@ -1501,8 +1540,10 @@
             this.accountability !== "" &&
             this.accountability !== null &&
             this.eventtype !== "" &&
-            this.eventtype !== null
+            this.eventtype !== null&&
+            this.peoplesss!==''
           ) {
+            console.log(this.peoplesss)
             let one = new Array
             let two = new Array
             for (let i in this.comde) {
@@ -1522,11 +1563,13 @@
             let params = {
               event_number: this.$parent.opdata[0].event_number, //编号
               responsibility_did: comdes, //责任科室
+              responsibility_uid:this.peoplesss,//责任人
               event_type: eventtype, //投诉类型
               responsibility_how: accountability, //责任度
               examine_textone: this.economic, //直接经济损失
               examine_texttwo: this.preliminary, //处理意见
             };
+            console.log(params)
             service.end(params).then((res) => {
               if (res.code == 20010) {
                 this.$message({
@@ -1626,6 +1669,7 @@
       }
     },
     created() {
+      this.userlist=this.$parent.opdata[1].department_user
       if (this.$parent.opdata !== '') {
         if (this.$parent.opdata[0].state.state_val == 11) {
           let params = {

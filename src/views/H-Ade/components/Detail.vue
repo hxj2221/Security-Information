@@ -3,7 +3,7 @@
     <div class="top">
       <span class="left">投诉案件调查表</span>
       <div class="right">
-        <el-button type="primary" size="medium" icon="iconfont el-icon-hospital-passworddayin" class="print">打印记录表
+        <el-button type="primary" size="medium" icon="iconfont el-icon-hospital-passworddayin" class="print" @click="stamp">打印记录表
         </el-button>
         <el-button type="primary" size="medium" icon="iconfont el-icon-hospital-passwordai207" class="back"
           @click="back">返回
@@ -12,7 +12,10 @@
     </div>
     <!-- <bscroll> -->
       <div class="wrapper" ref="wrapper">
-        <div class="content">
+        <div class="content"  >
+          <div id="aa">
+
+        
           <div class="head-txt">
         <div class="txt">
           <el-row type="flex" class="row-bg" justify="center">
@@ -256,7 +259,7 @@
           </el-row>
         </div>
         <!-- 关联患者信息 -->
-        <div class="cent_info">
+        <!-- <div class="cent_info">
           <div style="padding-bottom:10px;padding-left:21px">
             <el-row type="flex" class="row-bg">
               <el-col :span="3">
@@ -368,11 +371,11 @@
               </div>
             </el-col>
           </el-row>
-        </div>
+        </div> -->
       </div>
         </div>
+        </div>
       </div>
-      
     <!-- </bscroll> -->
   </div>
 </template>
@@ -413,6 +416,10 @@ import BScroll from 'better-scroll'
       };
     },
     methods: {
+      // 打印
+    stamp() {
+    this.getPdf('aa','投诉事件调查表')
+    },
       // 返回列表页
       back() {
         this.$emit("pageDetail")

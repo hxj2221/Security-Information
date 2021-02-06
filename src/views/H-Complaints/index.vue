@@ -12,14 +12,7 @@
           slot="buttom"
           >新增</el-button
         >
-        <el-button
-        size="medium"
-          icon="iconfont el-icon-hospital-passwordexport"
-          class="exportcomplaint"
-          slot="export"
-          @click="exportcom()"
-          >导出</el-button
-        >
+       
         <div slot="table">
           <Table>
             <div slot="column">
@@ -228,15 +221,23 @@ export default {
             duration: 1000,
           });
       }
+        else if(index.state.state_val==20){
+        this.$message({
+            message: "事件已结束！无法操作",
+            type: "error",
+            duration: 1000,
+          });
+      }
       else{
             //操作页面数据接口
       service.Issue(index.event_number).then((res) => {
+        console.log(res)
         if (res.code == 20010) {
           this.list = false;
           this.add = false;
           this.look = false;
           this.operations = true;
-            this.editshows=false
+          this.editshows=false
           this.operationdata = index;
           this.opdata = res.data;
         }

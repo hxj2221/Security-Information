@@ -2,7 +2,7 @@
   <div>
     <AList v-show="isshow" @myRe="myRe"></AList>
     <Det v-show="ishow" @returnAdd="returnAdd"></Det>
-    <AriEd v-show="showEdit"></AriEd>
+    <AriEd v-show="showEdit" @returnAdd="returnAdd"></AriEd>
   </div>
 </template>
 <script>
@@ -25,8 +25,9 @@ export default {
       this.ishow = !this.ishow;
     },
     returnAdd() {
-      this.isshow = !this.isshow;
-      this.ishow = !this.ishow;
+      this.isshow = true;
+      this.ishow =false;
+      this.showEdit=false
     },
     abcClick() {
       this.isshow = !this.isshow;
