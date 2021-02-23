@@ -130,7 +130,7 @@
   import PieChart from './components/PieChart.vue'
   import BarChart from './components/BarChart.vue'
   import SwiperImg from './components/SwiperImg.vue'
-  import TodoList from './components/TodoList.vue'
+  // import TodoList from './components/TodoList.vue'
   import CoolClock from './components/CoolClock.vue'
   import service from '@/service/index';
   export default {
@@ -140,7 +140,6 @@
       PieChart,
       BarChart,
       SwiperImg,
-      TodoList,
       CoolClock
     },
     props: {},

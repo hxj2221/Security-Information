@@ -57,7 +57,7 @@ service.interceptors.response.use((response: AxiosResponse) => {
             type: 'warning'
           }).then(() => {
             sessionStorage.clear()
-            location.href=" http://192.168.0.81:8080"
+            location.href="http://bt1.wlqqlp.com:8084/"
           })
      
     }

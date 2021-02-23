@@ -85,7 +85,7 @@
           </el-table-column>
         </el-table>
         <!-- 选择器 -->
-        <div class="articleList_table_table_select">
+        <!-- <div class="articleList_table_table_select">
           <el-select v-model="value5" placeholder="请选择" @change="dilog">
             <el-option
               v-for="item in name"
@@ -95,7 +95,7 @@
             >
             </el-option>
           </el-select>
-        </div>
+        </div> -->
       </div>
 
       <!-- 弹框 -->

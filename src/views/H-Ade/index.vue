@@ -1,11 +1,11 @@
 <template>
   <div>
     <!-- 主页面 -->
-    <main-page v-show="MainShow" @pageAdd="add()" @pageDetail="Details()"></main-page>
+    <main-page v-if="MainShow" @pageAdd="add()" @pageDetail="Details()"></main-page>
     <!-- 增加 -->
-    <add-ade @pageAdd="add()" v-show="adeAdd"></add-ade>
+    <add-ade @pageAdd="add()" v-if="adeAdd"></add-ade>
     <!-- 详情 -->
-    <detail @pageDetail="Details()" v-show="detailShow"></detail>
+    <detail @pageDetail="Details()" v-if="detailShow"></detail>
   </div>
 </template>
 
