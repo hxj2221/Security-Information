@@ -53,6 +53,7 @@
         title="身份验证"
         :close-on-click-modal="false"
         :visible.sync="phoneyz"
+        :width="'30%'"
       >
         <div>
           <p class="account-change-bindphone2">
@@ -94,7 +95,7 @@
         </div>
         <el-dialog
           :close-on-click-modal="false"
-          width="30%"
+          :width="'30%'"
           title="更改手机号码"
           :visible.sync="phonenew"
           append-to-body
@@ -139,6 +140,7 @@
         title="身份验证"
         :close-on-click-modal="false"
         :visible.sync="emailyz"
+        :width="'30%'"
       >
         <div>
           <p class="account-change-bindphone2">
@@ -181,7 +183,7 @@
         <!-- 新邮箱 -->
         <el-dialog
           :close-on-click-modal="false"
-          width="30%"
+          :width="'30%'"
           title="更改邮箱"
           append-to-body
           :visible.sync="emailnew"
@@ -224,6 +226,7 @@
         title="身份验证"
         :close-on-click-modal="false"
         :visible.sync="pwdyz"
+        :width="'30%'"
       >
         <div>
           <p class="account-change-bindphone2">
@@ -235,7 +238,8 @@
               type="text"
               placeholder="请输入手机号"
               maxlength="11"
-              v-model="pwdphone"
+              v-model="phone"
+              disabled
             />
           </div>
           <div>
@@ -261,7 +265,7 @@
         <!-- 新密码 -->
         <el-dialog
           :close-on-click-modal="false"
-          width="30%"
+          :width="'30%'"
           title="修改密码"
           :visible.sync="pwdnew"
           append-to-body
@@ -295,6 +299,7 @@
         title="身份验证"
         :close-on-click-modal="false"
         :visible.sync="wxbtn"
+        :width="'30%'"
       >
         <div>
           <p class="account-change-bindphone2">
@@ -402,7 +407,7 @@ export default {
           message: res.msg,
           duration: 1000,
         });
-         if (res.code == 20010) {
+        if (res.code == 20010) {
           let timer = setInterval(() => {
             this.isCodeIng = true;
             this.disablbtn = true;
@@ -428,11 +433,6 @@ export default {
         pcaptcha: this.phonecode,
       };
       service.phonechange(data).then((res) => {
-        this.$message({
-          type: "success",
-          message: res.msg,
-          duration: 1000,
-        });
         if (res.msg == "身份验证通过!") {
           this.phonenew = true;
           this.phoneyz = false;
@@ -445,7 +445,7 @@ export default {
         phone: this.changephone,
       };
       service.phoneyz(data).then((res) => {
-         if (res.code == 20010) {
+        if (res.code == 20010) {
           let timer = setInterval(() => {
             this.isCodeIng = true;
             this.changedisablbtn = true;
@@ -497,7 +497,9 @@ export default {
         phone: this.phone,
       };
       service.phoneyz(data).then((res) => {
-       if (res.code == 20010) {
+        if (res.code == 20020) {
+          alert(res.msg);
+        } else if (res.code == 20010) {
           let timer = setInterval(() => {
             this.isCodeIng = true;
             this.emaildisabl = true;
@@ -537,7 +539,9 @@ export default {
         email: this.newemail,
       };
       service.emailcode(data).then((res) => {
-        if (res.info.code == 20010) {
+        if (res.code == 20020) {
+          alert(res.msg);
+        } else if (res.info.code == 20010) {
           let timer = setInterval(() => {
             this.isCodeIng = true;
             this.changeemaildisabl = true;
@@ -565,14 +569,26 @@ export default {
         if (res.msg == "20010") {
           this.emailnew = false;
           this.reload();
-        } 
+        } else if (res.msg == "此邮箱已被绑定!") {
+          alert(res.msg);
+        } else {
+          alert(res.msg);
+        }
       });
     },
 
     // 密码
     pwdyes() {
-      this.pwdyz = false;
-      this.pwdnew = true;
+      let data = {
+        phone: this.phone,
+        pcaptcha: this.emailphonecode,
+      };
+      service.phonechange(data).then((res) => {
+        if (res.msg == "身份验证通过!") {
+          this.pwdyz = false;
+          this.pwdnew = true;
+        }
+      });
     },
     pwdno() {
       this.pwdyz = false;

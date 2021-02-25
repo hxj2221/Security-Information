@@ -130,7 +130,7 @@ export default {
         phone: this.phone,
       };
       service.phoneyz(data).then((res) => {
-         if (res.code == 20010) {
+        if (res.code == 20010) {
           let timer = setInterval(() => {
             this.isCodeIng = true;
             this.disablbtn = true;
@@ -153,7 +153,7 @@ export default {
       let data = {
         phone: this.changephone,
       };
-      service.phoneyz(data).then((res) => { 
+      service.phoneyz(data).then((res) => {
         if (res.code == 20010) {
           let timer = setInterval(() => {
             this.isCodeIng = true;
